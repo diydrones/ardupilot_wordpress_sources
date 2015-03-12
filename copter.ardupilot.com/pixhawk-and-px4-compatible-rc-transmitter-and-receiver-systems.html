@@ -1,0 +1,90 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems 
+title: Pixhawk and PX4 Compatible RC Transmitter and Receiver Systems 
+id: 11127 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h3>PX4FMU plus PX4IO with 3DR 8 channel encoder and 3DR telemetry radio</h3>
+<ul>
+	<li>The 3DR PPM Encoder will allow you to use any Conventional RC receiver but there are some downsides.</li>
+	<li>The 3DR PPM Encoder does require quite a bit of additional wiring to the receiver.</li>
+	<li>It uses quite a bit of power making it likely you will need to plug in your battery while doing radio setup with USB cable in Mission Planner.</li>
+	<li>The 3DR encoder also costs as much or more than several of the available PPM-Sum receivers including the FRSky Delta 8 below.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc.jpg"><img class="alignnone size-large wp-image-11128" alt="PPMEncoderDesc" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc-1024x501.jpg" width="584" height="285" /></a>
+
+
+
+<h4>Using the 3DR 8 channel PPM Sum encoder in a system:</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg"><img class="alignnone size-full wp-image-9918" alt="PX4FMU_PX4IO_Wire_3DRradio2" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg" width="1035" height="755" /></a>
+
+
+
+<h4>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h4>
+<ul>
+<ul>
+	<li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>
+<ul>
+	<li>An 8 Channel PPM Encoder is available from 3DRobotics <a href="http://store.3drobotics.com/products/8-channel-ppm-encoder-version-2"> (Here!)</a></li>
+	<li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>
+	<li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>
+</ul>
+</li>
+	<li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>
+<ul>
+	<li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>
+</ul>
+</li>
+	<li><strong>Note! If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.</strong></li>
+</ul>
+</ul>
+
+
+
+<h3>There are several radio systems that support PPM-Sum or S-Bus directly</h3>
+
+
+
+<h4>FRSky Delta 8 MultiProtocol PPM-Sum Receiver</h4>
+This PPM-Sum compatible<strong> <a title="&quot;" href="http://www.valuehobby.com/frysky-delta-8.html">FRSky Delta 8 Receiver</a></strong> is multi-platform capable including Hitec Aurora and Futaba RC transmitters.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/1372056090.jpg"><img class="alignnone size-full wp-image-11129" alt="1372056090" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/1372056090.jpg" width="534" height="400" /></a>
+
+
+
+<h4>FRSKY Taranis PPM-SUM COMPATIBLE TRANSMITTER (Highly Recommended!)</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" alt="FRSkyTaranis" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" width="560" height="372" /></a>
+
+
+
+<h4>TURNIGY TRANSMITTER COMPATIBLE WITH FRSKY TRANSMITTER MODULE</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg"><img class="alignnone size-full wp-image-11142" alt="Turnigy9XR" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg" width="565" height="414" /></a>
+<h4>FRSKY TRANSMITTER ADAPTER MODULE AND PPM-SUM RECEIVER</h4>
+The FR-Sky PPM Sum Receiver and conversion module below will work with Turnigy 9x, 9XR (above) and other RC transmitters.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkySystem.jpg"><img alt="FRSkySystem" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkySystem.jpg" width="565" height="414" /></a>
+
+
+
+<h4>FUTABA TRANSMITTER COMPATIBLE WITH FUTABA S-BUS RECEIVERS</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FutabaT8FG.jpg"><img class="alignnone size-full wp-image-11143" alt="FutabaT8FG" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FutabaT8FG.jpg" width="350" height="437" /></a>
+
+
+
+<h3>Spektrum Satellite Receivers Operate on PPM-Sum</h3>
+Although Spektrum main receivers do not communicate by PPM-Sum their range extending "satellite" receivers do.
+So it is feasible to use a single <a href="http://www.amainhobbies.com/product_info.php/cPath/61_435/products_id/199408/n/Spektrum-DSMX-Remote-Receiver">Spektrum Satellite Receiver"</a>to act as a PPM-Sum receiver with PX4 and Pixhawk.
+You simply pre-bind the Spektrum Satellite to your transmitter using a conventional Spektrum receiver.
+Then you connect the tiny Spektrum receiver to the special "Spektrum" connector on either the PX4IO or Pixhawk.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg"><img class="alignnone size-full wp-image-11149" alt="spm9645" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg" width="200" height="160" /></a>
+
+Being a satellite, range is limited compared to normal receivers and you are normally better off using the FRSky Delta 8 listed above.
+
+
+
+<strong>You can also go to the PixHawk Link for even more options <a href="http://pixhawk.org/peripherals/radio-control/start#recommended_systems"> (Here!)</a></strong>

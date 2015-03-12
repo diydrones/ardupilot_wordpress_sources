@@ -1,0 +1,50 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-ublox-gps 
+title: common-UBlox GPS Configuration 
+id: 317 
+menu_order: 0 
+post_parent_id: 333 
+post_parent_stub: common-installing-3dr-ublox-gps-compass-module 
+post_parent_title: common-3DR UBlox GPS + Compass Module 
+END METADATA 
+-->
+<a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass" target="_blank">3DR uBlox</a> modules are shipped with a custom configuration that is compatible with ArduCopter, ArduRover and ArduPlane.  This article explains how you can reprogram the custom configuration if needed (this is not expected to be necessary for normal users).
+<!--more-->
+
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3DR-ublox.jpg" />
+
+<strong>Connection Option #1 - FTDI cable</strong>
+<ul>
+	<li>You will need an <a href="http://store.3drobotics.com/FTDI_Cable_3_3V_p/ttl-232r-3v3.htm" target="_blank">FTDI cable</a> and a <a href="http://store.3drobotics.com/FTDI_GPS_Adapter_cable_15_cm_p/ca-0001-09.htm" target="_blank">GPS adapter cable</a> to connect the GPS to your computer. If you have never plugged an FTDI device into your computer, you may need to download and install the <a href="http://www.ftdichip.com/Drivers/VCP.htm" target="_blank">Virtual COM port driver</a>.</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/IMG_0276.jpg"><img class="alignnone size-medium wp-image-583" alt="IMG_0276" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/IMG_0276-300x168.jpg" width="300" height="168" /></a>
+
+
+
+<strong>Connection Option #2 - using the APM2 as a passthrough</strong>
+<ul>
+	<li>Download the <a href="http://ardupilot.com/downloads/?did=93" target="_blank">APM / UBlox passthrough</a> binary to your computer</li>
+	<li>Load the binary onto your APM2 using the Mission Planner's Initial Setup &gt; Install Firmware &gt; Load custom firmware link</li>
+</ul>
+
+http://www.youtube.com/watch?v=JIgs3UCLfd0
+
+<strong>Installing and Uploading the config using U-Center</strong>
+<ul>
+	<li>Download and install <a href="http://www.u-blox.com/en/evaluation-tools-a-software/u-center/u-center.html" target="_blank">uBlox's u-center software</a>   Note that this is Windows only.</li>
+	<li>Get the 3DR-Ublox.txt configuration file found <a href="https://raw.github.com/diydrones/ardupilot/master/libraries/AP_GPS/config/3DR-Ublox.txt" target="_blank">here</a>.</li>
+	<li>Run u-center and connect your uBlox to your computer.</li>
+	<li>Click the magic wand button to enable auto-bauding, then select your appropriate COM port by clicking the down arrow next to the Connect button. If the uBlox is connected to the port you selected, you should see the serial activity indicator blinking in the program's status bar in the lower right-hand corner of the window, it also shows the current baud rate.</li>
+</ul>
+<p style="padding-left: 30px"><img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/COM-port-selection.png" /></p>
+
+<ul>
+	<li>To load the configuration file, In u-center go to the Tools menu, then GPS Configuration. A small window should appear. Add the path to the 3DR-Ublox.txt configuration file, enable the <strong>Store configuration into BBR/Flash (non-volatile memory) </strong>option, and click the <strong>File &gt;&gt; GPS </strong>button.</li>
+</ul>
+<img class="alignleft" alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/GPS-configuration.png" width="366" height="239" /><img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/configuration-window.png" width="324" height="254" />
+<p style="padding-left: 30px">You may get a <strong>Configuration Version Check </strong>alert telling you there is a version mismatch between the configuration file and the GPS.  This is because the configuration file was written for the GPS software version 7.03 so if you have a module with an older version (i.e. 7.01) it will complain but will likely still work. Click yes to continue.</p>
+<p style="padding-left: 30px">You should see a window with a log of the configuration file upload, if the upload is successful the window should close automatically and the GPS module should now be connected to u-center at 38400 baud. You can confirm this by checking the connection status in u-center's status bar.</p>
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/connection-status.png" />
+
+The uBlox module is now ready to be used with APM:Copter, Rover or Plane on the APM2, PX4/Pixhawks.

@@ -1,0 +1,231 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: mission-command-list 
+title: ArduCopter Mission Command List 
+id: 11907 
+menu_order: 10 
+post_parent_id: 1555 
+post_parent_stub: mission-planning-and-analysis 
+post_parent_title: Mission Planning and Analysis 
+END METADATA 
+-->
+This page provides details of all the mission commands (i.e. <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink commands</a>) supported by ArduCopter that can be run as part of a mission (i.e. <a href="wiki/auto-mode/">AUTO flight mode</a>).
+
+Each of the commands below is either a "Navigation" command or a "Do" command.  Navigation commands (i.e. "TakeOff" and "Waypoint") affect the location of the vehicle while "Do" commands (i.e. "Do-Set-Servo" and "Do-Cam-Trigg-Dist") are for auxiliary functions and do not affect the vehicle's position.  During a mission at most one "Navigation" command and one "Do" command can be running at one time.  The "Do" commands will be run in order as soon as the preceeding navigation command before them starts.  For more information on setting up missions please refer to the <a href="wiki/common-planning-a-mission-with-waypoints-and-events/">Planning a Mission with Waypoints and Events</a> page.
+
+
+<h3>Takeoff</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/TakeOff.png"><img class="alignnone size-full wp-image-11914" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/TakeOff.png" alt="TakeOff" width="1025" height="575" /></a>
+The vehicle will climb straight up from it's current location to the altitude specified (in meters). This should be the first command of nearly all missions. If the mission is begun while the copter is already flying, the vehicle will climb straight up to the specified altitude, if the vehicle is already above the specified altitude the takeoff command will be ignored and the mission will move onto the next command immediately.
+
+
+
+<h3>Waypoint</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/WayPoint.png"><img class="alignnone size-full wp-image-11919" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/WayPoint.png" alt="WayPoint" width="1024" height="575" /></a>
+The vehicle will fly a straight line to the location specified as a lat, lon and altitude (in meters).
+<p style="padding-left: 30px"><strong>Delay</strong> - the amount of time to wait (in seconds) at the waypoint before proceeding to the next command
+<strong>Hit Rad</strong> - not supported - meant to hold the distance (in meters) from the target point that will qualify the waypoint as complete. This command is not supported. Instead the WPNAV_RADIUS parameter should be used (see "WP Radius" field in above screen shot or adjust through the Standard Parameters List).  Even the WPNAV_RADIUS is only used when the waypoint has a Delay. With no delay specified the waypoint will be considered complete when the virtual point that the vehicle is chasing reaches the waypoint. This can be 10m (or more) ahead of the vehicle meaning that the vehicle will turn towards the following waypoint long before it actually reaches the current waypoint
+<strong>Yaw Ang</strong> - not supported - meant to hold the resulting yaw angle in degrees (0=north, 90 = east). Instead use a <a href="#Condition-Yaw">CONDITION_YAW</a> command.
+<strong> Lat, Lon</strong> - the latitude and longitude targets.  If left as zero it will hold the current location.
+<strong> Alt</strong> - the target altitude above home in meters.  If left as zero it will hold the current altitude.</p>
+
+
+
+
+<h3>Spline Waypoint</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_SplineWaypoint.png"><img class="alignnone size-full wp-image-12426" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_SplineWaypoint.png" alt="MissionList_SplineWaypoint" width="1024" height="825" /></a>
+From AC3.2 (and higher), <a href="http://en.wikipedia.org/wiki/Spline_%28mathematics%29" target="_blank">Spline</a> waypoints are supported.  The Spline commands take all the same arguments are regular waypoints (lat, lon, alt, delay) but when executed the vehicle will fly smooth paths (both vertically and horizontally) instead of straight lines.  Spline waypoints can be mixed with regular straight line waypoints as shown in the image above.
+
+The Mission Planner shows the path the vehicle will take.  The image above shows some characteristics of the spline
+<ul>
+	<li>The 1 second delay at the end of Waypoint #1 causes the vehicle to stop so Spline command #2 begins by taking a sharp 90degree turn</li>
+	<li>The direction of travel as the vehicle passes through Spline Waypoint #3 is parallel to an imaginary line drawn between waypoints #2 and #4</li>
+	<li>Waypoint #5 is a straight line so the vehicle lines itself up to point towards waypoint #5 even before reaching waypoint #4.</li>
+</ul>
+
+[note]As of AC3.2-rc4, there is a slight twitch as the vehicle passes through each spline waypoint.  This is a technical issue that we hope to resolve in an upcoming release.[/note]
+
+
+
+<h3>Loiter_Time</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTime.png"><img class="alignnone size-full wp-image-11925" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTime.png" alt="MissionList_LoiterTime" width="1024" height="146" /></a>
+
+The vehicle will fly to and then wait at the specified location for the specified number of seconds.  This is the mission equivalent of the <a href="wiki/loiter-mode/">Loiter flight mode</a>.
+<p style="padding-left: 30px"><strong>Times</strong> - the number of seconds to remain at the location.
+<strong>Lat, Lon</strong> - the latitude and longitude targets. If left as zero it will hold at the current location.
+<strong> Alt</strong> - the target altitude above home in meters. If left as zero it will hold at the current altitude.</p>
+
+
+
+
+<h3>Loiter_Turns</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTurns.png"><img class="alignnone size-full wp-image-11926" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTurns.png" alt="MissionList_LoiterTurns" width="1024" height="145" /></a>
+The mission equivalent of the <a href="wiki/circle-mode/">Circle flight mode</a>.  The vehicle will fly a circle around the specified lat, lon and altitude (in meters).  The radius of the circle is controlled by the CIRCLE_RADIUS parameter (i.e. cannot be set as part of the mission).
+<p style="padding-left: 30px"><strong>Turn</strong> - the number of full rotations to complete around the point.
+<strong>Dir 1=CW</strong> - the direction to turn around the point. -1 = counter clockwise, +1 = clockwise.
+<strong>Lat, Lon</strong> - the latitude and longitude targets.  If left as zero it will circle around the current location.
+<strong> Alt</strong> - the target altitude above home in meters.  If left as zero it will circle at the current altitude.</p>
+
+
+
+
+<h3>Loiter_Unlimited</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterUnlimited.png"><img class="alignnone size-full wp-image-11928" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterUnlimited.png" alt="MissionList_LoiterUnlimited" width="1025" height="147" /></a>
+The vehicle will fly to and then wait at the specified location indefinitely.  The mission will not proceed past this command.
+<p style="padding-left: 30px"><strong>Lat, Lon</strong> - the latitude and longitude targets. If left as zero it will circle around the current location.
+<strong> Alt</strong> - the target altitude above home in meters. If left as zero it will circle at the current altitude.</p>
+
+
+
+
+<h3>Return-To-Launch</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_RTL.png"><img class="alignnone size-full wp-image-11930" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_RTL.png" alt="MissionList_RTL" width="1025" height="147" /></a>
+
+Mission equivalent of the <a href="wiki/rtl-mode/">RTL flight mode</a>.  As described on the RTL flight mode wiki page, the vehicle will first climb to the RTL_ALT parameter's specified altitude (default is 15m) before returning home.  The home location is where the vehicle was last armed.
+This command takes no parameters and generally should be the last command in the mission.
+
+
+
+<h3>Land</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_Land.png"><img class="alignnone size-full wp-image-11931" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_Land.png" alt="MissionList_Land" width="1025" height="147" /></a>
+
+Vehicle will land at it's current location or at the lat/lon coordinates provided.  This is the mission equivalent of the <a href="wiki/land-mode/">LAND flight mode</a>.
+<p style="padding-left: 30px"><strong>Lat, Lon</strong> - the latitude and longitude targets. If left as zero it will land at the current location.</p>
+
+
+
+
+<h3>Do-Set-ROI</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetRoi.png"><img class="alignnone size-full wp-image-11934" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetRoi.png" alt="MissionList_DoSetRoi" width="1024" height="634" /></a>
+
+Points the nose of the vehicle and <a href="wiki/common-cameras-and-gimbals/">camera gimbal</a> at the "region of interest".  In the example above the nose and camera would be pointed at the red marker.
+
+If using AC3.1.5: The nose would point at the marker for only the period that the vehicle is flying from Waypoint #1 to Waypoint #3.  If you wanted the nose/camera to continue to point at the red marker as it flies from #3 to #4, a second DO_SET_ROI command would need to be entered after Waypoint #3.
+
+If using AC3.2: The nose would continue to point at the red marker until the end of the mission.  To "clear" the do-set-roi and cause the vehicle to return to it's default behaviour (i.e. pointing at the next waypoint) a second DO_SET_ROI command should be placed later in the mission with all zero for Lat, Lon and Alt.
+<p style="padding-left: 30px"><strong>Lat, Lon</strong> - the latitude and longitude targets.
+<strong> Alt</strong> - the target altitude above home in meters.</p>
+https://www.youtube.com/watch?v=W8NCFHrEjfU
+
+
+
+<h3>Condition-Delay</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionDelay.png"><img class="alignnone size-full wp-image-11936" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionDelay.png" alt="MissionList_ConditionDelay" width="1024" height="216" /></a>
+Delays the start of the next "Do" command for the specified number of seconds. In the example above, Command #4 (Do-Set-Roi) is delayed so that it only starts 5 seconds after the vehicle has passed Waypoint #2. Note: this command does not stop the vehicle. Also note that the delay timer is only active until the next waypoint is reached, so if the "Do" command hasn't been triggered by then it never will be.
+<p style="padding-left: 30px"><strong>Time (sec)</strong> - the time to delay the next "Do" command in seconds.</p>
+
+
+
+
+<h3>Condition-Distance</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionDistance.png"><img class="alignnone size-full wp-image-11937" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionDistance.png" alt="MissionList_ConditionDistance" width="1024" height="212" /></a>
+Delays the start of the next "Do" command until the vehicle is within the specified number of meters of the next waypoint. In the example above, Command #4 (Do-Set-Roi) is delayed so that it only starts once the vehicle is within 50m of waypoint #5. Note: this command does not cause the vehicle to stop or pause during the mission, it only affects "Do" commands.
+<p style="padding-left: 30px"><strong>Dist (m)</strong> - how close the vehicle should be to the next waypoint (in meters) before beginning the next "Do" command.</p>
+
+
+
+
+<h3>Condition-Yaw</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionYaw.png"><img class="alignnone size-full wp-image-11939" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionYaw.png" alt="MissionList_ConditionYaw" width="1024" height="170" /></a>
+Point the nose of the vehicle to the specified heading by a specified amount.
+<p style="padding-left: 30px"><strong>Deg</strong> - the desired heading in degrees (0 = North, 90 = East, etc) when "rel/abs" field is "0" (meaning absolute)
+OR the change in heading (in degrees) when "rel/abs" field is "1" (meaning relative)
+<strong>Sec</strong> - not supported.  meant to limit the rotation speed (in deg/sec) as the vehicle turns to the desired heading
+<strong>Dir (1=CW, -1=CCW)</strong> - Used only when relative heading is specified (i.e. "rel/abs" = "1") denotes whether the flight controller should add (CW) or subtract (CCW) the degrees (Deg) from the current heading to calculate the target heading. The vehicle will always turn in direction that most quickly gets it to the new target heading regardless if CW or CCW are used.
+<strong>rel/abs</strong> - allows specifying the heading (i.e "Deg" field) as an absolute heading (if "0") or relative to the current heading (if "1")</p>
+
+
+
+
+<h3>Do-Jump</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoJump.png"><img class="alignnone size-full wp-image-11942" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoJump.png" alt="MissionList_DoJump" width="1024" height="194" /></a>
+Jump to the specified mission command the specified number of times before continuing with the mission.  In the example above the vehicle would fly back-and-forth between waypoints #1 and #2 a total of 3 times before flying on to waypoint #4.
+<p style="padding-left: 30px"><strong>WP #</strong> - the mission command to jump to.
+<strong>Repeat</strong> - the maximum number of times we should perform the jump. -1 means always jump</p>
+Despite the name, Do-Jump is really a "Nav" command rather than a "Do" command, so conditional commands like CONDITION_DELAY won't affect Do-Jump, it will always perform the jump as soon as it hits that command.
+
+[warning]No more that three (3) Do-Jump commands can be used in a mission, the fourth and subsequent Do-Jumps will be ignored.[/warning]
+[warning]This command should not be used with ArduCotper 3.1.5 or earlier (it works properly in AC3.2).[/warning]
+
+
+
+<h3>Do-Change-Speed</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoChangeSpeed.png"><img class="alignnone size-full wp-image-11949" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoChangeSpeed.png" alt="MissionList_DoChangeSpeed" width="1020" height="143" /></a>
+Change the target horizontal speed (in meters/sec) of the vehicle.
+<p style="padding-left: 30px"><strong>speed m/s</strong> - the desired maximum speed in meters/second.</p>
+[note]In AC3.1.5 (and earlier) versions the speed change will only take effect after the current navigation command (i.e. waypoint command) completes. From AC3.2 onwards the vehicle speed will change immediately. Also note that in AC3.2 the speed parameter will be in the SECOND COLUMN, not the first column as in previous releases as shown in the screenshot above (this is to match the official MAVLINK protocol)[/note]
+
+
+
+<h3>Do-Set-Home</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetHome.png"><img class="alignnone size-full wp-image-11951" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetHome.png" alt="MissionList_DoSetHome" width="1020" height="143" /></a>
+
+<span style="color: #ff0000"><strong>This command should not be used because of <a href="https://github.com/diydrones/ardupilot/issues/1677" target="_blank">an issue found in AC3.2</a></strong></span>.  Instead <a href="wiki/common-rally-points/">Rally Points</a> can be used to control the position used for Return-To-Launch ("Home" is also used internally as the "origin" for all navigation calculations).
+<p style="padding-left: 30px"><strong>Current(1)/Spec(0)</strong> - if "1" use the current location as the new home, if "0" use the specified Lat and Lon coordinate (not labelled yet!)
+<strong>Lat, Lon</strong> - the latitude and longitude targets.</p>
+
+
+
+
+<h3>Do-Set-Cam-Trigg-Dist</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetCamTriggDist.png"><img class="alignnone size-full wp-image-11952" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetCamTriggDist.png" alt="MissionList_DoSetCamTriggDist" width="1021" height="145" /></a>
+Trigger the <a href="wiki/common-camera-shutter-with-servo/">camera shutter</a> at regular distance intervals. For example the command above will cause the camera shutter to trigger after every 5m that the vehicle travels.
+<p style="padding-left: 30px"><strong>Dist (m)</strong> - distance interval in meters.</p>
+<span style="color: #ff0000"><strong>Note: In AC3.1.5 (and earlier) versions this command cannot be shut-off. The camera will continue to be triggered repeatedly even after the mission has been ended. In AC3.2 (and higher) providing a distance of zero will stop the camera shutter from being triggered</strong></span>
+
+
+
+<h3>Do-Set-Relay</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetRelay.png"><img class="alignnone size-full wp-image-12940" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetRelay.png" alt="MissionList_DoSetRelay" width="1020" height="135" /></a>
+Set a <a href="wiki/common-relay/">Relay</a> pin's voltage high or low.  The columns are mislabelled in the Mission Planner (issue here).
+<p style="padding-left: 30px"><strong>First column is Relay number</strong> : 0 = First Relay, 1 = Second Relay
+<strong>Second column is On/Off</strong> : 0 = Off (i.e. 0V), 1 = On (i.e. 3.3V on Pixhawk, 5V on APM)</p>
+
+
+
+
+<h3>Do-Repeat-Relay</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatRelay.png"><img class="alignnone size-full wp-image-11955" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatRelay.png" alt="MissionList_DoRepeatRelay" width="1022" height="137" /></a>
+
+Toggle the <a href="wiki/common-using-the-relay-switch/">Relay</a> pin's voltage a specified number of times. In the example above, assuming the relay was off to begin with, it would be set high and then after 3 seconds it would be toggled low again.
+<p style="padding-left: 30px"><strong>First column is Relay number</strong> : 0 = First Relay, 1 = Second Relay
+<strong>Repeat #</strong> : how many times the relay should be toggled
+<strong>Delay(s)</strong> - Number of seconds between each toggle.</p>
+
+
+
+
+<h3>Do-Set-Servo</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetServo.png"><img class="alignnone size-full wp-image-11956" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoSetServo.png" alt="MissionList_DoSetServo" width="1022" height="136" /></a>
+Move a <a href="wiki/common-servo/">servo</a> to a particular pwm value. In the example above, the servo attached to output channel 8 would be moved to pwm 1700 (servo's generally accept pwm values between 1000 and 2000).
+<p style="padding-left: 30px"><strong>Ser No</strong> : the output channel the servo is attached to
+<strong>PWM</strong> : PWM value to output to the servo</p>
+
+
+
+
+<h3>Do-Repeat-Servo</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatServo.png"><img class="alignnone size-full wp-image-11958" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatServo.png" alt="MissionList_DoRepeatServo" width="1022" height="135" /></a>
+
+Repeatedly move a <a href="wiki/common-servo/">servo</a> back and forth between it's mid position and a specified PWM value. In the example above, the servo attached to output channel 8 would be moved to PWM 1700, then after 4 second, back to mid (default is 1500 which is held in the RC8_TRIM parameter), after another 4 seconds it would be moved to 1700 again, then finally after 4 more seconds it would be moved back to mid.
+<p style="padding-left: 30px"><strong>Ser No</strong> : the output channel the servo is attached to
+<strong>PWM</strong> : PWM value to output to the servo
+<strong>Repeat #</strong> : Number of times to move the servo to the specified PWM value
+<strong>Delay (s)</strong> : the delay in seconds between each servo movement</p>
+
+
+
+
+<h3>Do-Digicam-Control</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoDigicamControl.png"><img class="alignnone size-full wp-image-11960" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoDigicamControl.png" alt="MissionList_DoDigicamControl" width="1024" height="135" /></a>
+
+Trigger the <a href="wiki/common-camera-shutter-with-servo/">camera shutter</a> once. This command takes no additional arguments.
+
+
+
+<h3>Do-Mount-Control</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoMountControl.png"><img class="alignnone size-full wp-image-11961" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoMountControl.png" alt="MissionList_DoMountControl" width="1021" height="137" /></a>
+
+<strong><span style="color: #ff0000">Not Supported</span></strong>. This command does nothing and takes no arguments.
+
+In a future version of this command will allow specifying a roll, pitch and yaw angle which will be sent to the <a href="wiki/common-cameras-and-gimbals/">camera gimbal</a>. This could be useful for pointing the camera in specific directions at various times in the mission.

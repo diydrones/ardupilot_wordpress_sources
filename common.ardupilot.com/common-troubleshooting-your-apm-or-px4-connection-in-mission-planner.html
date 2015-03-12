@@ -1,0 +1,48 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-troubleshooting-your-apm-or-px4-connection-in-mission-planner 
+title: common-Troubleshooting your APM or PX4 Connection in Mission Planner 
+id: 39 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<span style="color: #ff0000"><strong>You have been directed to this page because you have experienced problems connecting in Mission Planner or another GCS.</strong></span>
+
+&nbsp;
+
+Open Windows Device Manager to check COM port.
+
+Check the Baud Rate, it Should be: 115200 on USB or 57600 on Radio/Telemetry.
+
+&nbsp;
+
+<strong>Troubleshooting PX4 connection problems</strong>
+<ol>
+	<li>check that you have the ArduCopter, ArduPlane or ArduRover firmware installed.  If installed correction the following should be visible:</li>
+	<li>check that the COM port for the PX4 appears in the Windows Device Manager serial ports.</li>
+	<li>check that you have a microSD card fully inserted into the PX4 Micro SD card socket.</li>
+	<li>check that the driver version is at least 1.6.2 or later.</li>
+	<li>try a different physical USB port if necessary.</li>
+</ol>
+&nbsp;
+
+<strong>Check if the PX4 has booted properly:</strong>
+<ol>
+	<li>remove the SD card from PX4 and insert into your regular computer</li>
+	<li>open the APM/boot.log file and check that it contains the following lines
+<ol>
+	<li>Starting APM sensors</li>
+	<li>Trying PX4IO board</li>
+	<li>PX4IO board OK</li>
+	<li>Starting ArduPilot</li>
+	<li><em id="__mceDel"><em id="__mceDel"><em id="__mceDel">rc.APM finished</em></em></em></li>
+</ol>
+</li>
+	<li>If the file does not exist or the contents are different from above reinstall the ArduCopter/ArduPlane/ArduRover firmware in the PX4FMU board and the PX4IO firmware into the PX4IO board.</li>
+</ol>
+&nbsp;
+
+Editors: Add Tunes page with .wav file with the various tunes that

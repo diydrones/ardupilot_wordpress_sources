@@ -1,0 +1,246 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-ppm-encoder 
+title: common-PPM Encoder 
+id: 341 
+menu_order: 100 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+The PPM encoder allows to encode up to 8 PWM (pulse width modulated) signals into one PPM (pulse position modulation) signal.
+
+The 3DR PPM Encoder (v2) now uses the ArduPPM firmware, replacing the previously used Paparazzi PPM Encoder firmware. The new ArduPPM firmware has been designed from scratch to enhance performance and robustness, and to better accommodate our product needs now and in the future.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FailsafeDiagram.png"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FailsafeDiagram.png" alt="FailsafeDiagram" width="934" height="542" /></a>
+
+
+
+<h1>Failsafe output values:</h1>
+
+<ul>
+	<li>New interrupt system that handles certain Futaba receivers better (simultaneous changes on groups of R/C channels in fast intervals) (this was already present in v2.3.13)</li>
+	<li>Adapted behaviour in case of channel loss: If one channel is lost, it will be set according to the following table. The other channels will continue working.
+<table>
+<tbody>
+<tr>
+<td>Channel 1</td>
+<td>Roll</td>
+<td>Set to center (1500 μs)</td>
+</tr>
+<tr>
+<td>Channel 2</td>
+<td>Pitch</td>
+<td>Set to center (1500 μs)</td>
+</tr>
+<tr>
+<td>Channel 3</td>
+<td>Throttle</td>
+<td>Set to low (900 μs)</td>
+</tr>
+<tr>
+<td>Channel 4</td>
+<td>Yaw</td>
+<td>Set to center (1500 μs)</td>
+</tr>
+<tr>
+<td>Channel 5</td>
+<td>...</td>
+<td>Remain at last value</td>
+</tr>
+<tr>
+<td>Channel 6</td>
+<td>...</td>
+<td>Remain at last value</td>
+</tr>
+<tr>
+<td>Channel 7</td>
+<td>...</td>
+<td>Remain at last value</td>
+</tr>
+<tr>
+<td>Channel 8</td>
+<td>...</td>
+<td>Remain at last value</td>
+</tr>
+</tbody>
+</table>
+In ArduCopter and ArduPlane a fail-safe action can be triggered by the throttle low signal.
+This should be carefully configured as explained in the wiki for <a href="http://copter.ardupilot.com/wiki/throttle-failsafe/" target="_blank">APM Copter</a> and <a href="http://plane.ardupilot.com/wiki/arduplane-setup/apms-failsafe-function/" target="_blank">APM Plane</a>
+
+Also note that this has nothing to do with losing the radio connection between the transmitter and the receiver. The receiver's behaviour when it gets out of range depends on the transmitter/receiver hardware and setup. So make sure to go through all the scenarios before flying</li>
+</ul>
+
+
+
+<h1>Setup Manual</h1>
+
+
+The <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PPM-Encoder-3DR-Manual.pdf">PPM Encoder 3DR Manual</a> shows how to solder and wire the PPM Encoder and explains the different failsafe modes.
+
+
+
+
+<h1>Re-Programming the Atmega328p PPM encoder</h1>
+
+[note]The PPM Encoder comes with the PPM encoder firmware pre-programmed, and most users will never need or want to modify it.[/note]
+
+
+However, some users may want to get into the code to change the way the PPM Encoder interprets RC signals or may want to update to the latest version. Some rare users did report receiver compatility problems with the old version (before ArduPPM). For most cases, ArduPPM did solve them.
+
+
+ArduPPM is the official name for the newer generation firmwares. It has been designed from scratch with reliability as a top priority. The official release of the encoder firmware is in the Downloads section as ArduPPM_Vx.x.xx_ATMega328p.hex. The official source code is in the Git repository: <a href="http://code.google.com/p/ardupilot-mega/source/browse/#git/Tools/ArduPPM/ATMega328p.html">http://code.google.com/p/ardupilot-mega/source/browse/#git/Tools/ArduPPM/ATMega328p</a>. The standalone PPM Encoder needs the ATMega328p version.
+
+
+To flash, connect the PPM Encoder to an AVR programmer such as the AVRISP mkII:
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/reprogramming_the_standalone_ppm_encoder1.jpg" />
+
+When flashing, make sure the PPM Encoder is powered using any of the 5V and Ground pins.
+
+<h1>Re-Programming instructions for Windows</h1>
+
+Download and install the latest <a href="http://sourceforge.net/projects/winavr/">WinAVR</a>.
+
+
+Plug in the AVRISP mkII and Install the drivers for AVRISP mkII as follows:
+
+
+Open the device manager and select the AVRISP mkII, choose "Update Driver Software..."
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_11.png" />
+
+Choose "Browse my Computer for driver software"
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_21.png" />
+
+Browse to the folder where WinAVR is installed (e.g. C:WinAVR-20100110)
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_31.png" />
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_41.png" />
+
+Choose "Install this driver software anyway"
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_51.png" />
+
+This should finish successful:
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_install_avrispmkii_driver_61.png" />
+
+Now start the command line: Press "Start" and type cmd and enter.
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_start_cmd1.png" />
+
+Change Directory using cd to the folder where your Hex file is located: e.g. cd Downloads if it is in Downloads
+
+
+Then type the command: avrdude -P usb -c avrispmkii -p atmega328p -U flash:w:ArduPPM_Vx.x.x_PPM_Encoder.hex (substitute x.x.x with the your version number)
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_cmd_avrdude_11.png" />
+
+If it all went well, the following output should appear:
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/windows_cmd_avrdude_21.png" />
+<h1>
+Re-Programming instructions for Mac OS X
+</h1>
+
+Todo: add content on how to flash the hex file here
+
+
+
+
+<h1>Re-Programming instructions for Linux</h1>
+
+Install avrdude:
+
+
+For Ubuntu: 
+<pre>sudo apt-get install avrdude</pre>
+
+
+Program instructions for the AVRISP mkII: 
+<pre>
+avrdude -p atmega328p -P usb -c avrispmkii -U flash:w:ArduPPM_Vx.x.x_ATMega328p.hex
+</pre>
+
+
+This should output:
+
+<pre>
+avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.00s
+
+
+avrdude: Device signature = 0x1e950f avrdude: NOTE: FLASH memory has been specified, an erase cycle will be performed          To disable this feature, specify the -D option. avrdude: erasing chip avrdude: reading input file "ArduPPM_V2.3.0_ATMega328p.hex" avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex auto detected as Intel Hex avrdude: writing flash (1952 bytes):
+
+
+Writing | ################################################## | 100% 0.61s
+
+
+avrdude: 1952 bytes of flash written avrdude: verifying flash memory against ArduPPM_V2.3.0_ATMega328p.hex: avrdude: load data flash data from input file ArduPPM_V2.3.0_ATMega328p.hex: avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex auto detected as Intel Hex avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex contains 1952 bytes avrdude: reading on-chip flash data:
+
+
+Reading | ################################################## | 100% 0.56s
+
+
+avrdude: verifying ... avrdude: 1952 bytes of flash verified
+
+
+avrdude: safemode: Fuses OK
+
+
+avrdude done.  Thank you.
+</pre>
+
+
+If you get permission errors, try using sudo.
+
+<h1>Re-Compiling Options</h1>
+
+By default negative pulse PPM is encoded. In order to change to positive pulse PPM, the line 158 in Tools/ArduPPM/Libraries/PPM_Encoder.h needs to be uncommented from:
+
+<pre>
+// #define _POSITIVE_PPM_FRAME_	// Switch to positive pulse PPM
+</pre>
+to
+<pre>
+#define _POSITIVE_PPM_FRAME_	// Switch to positive pulse PPM
+</pre>
+<h1>
+Re-Compiling using Linux
+</h1>
+
+These instructions are tested using Ubuntu:
+
+<pre>
+sudo apt-get install build-essential git-core gcc-avr avrdude
+git clone http://code.google.com/p/ardupilot-mega
+cd ardupilot-mega/Tools/ArduPPM/
+</pre>
+
+edit ATMega328p/Encoder-PPM.c or Libraries/PPM_Encoder.h now
+
+<pre>
+cd ATMega328p/
+make clean
+make
+</pre>
+
+and you should have your custom hex-file to program using:
+
+<pre>
+avrdude -p atmega328p -P usb -c avrispmkii -U flash:w:Encoder-PPM.hex
+</pre>

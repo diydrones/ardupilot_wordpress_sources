@@ -1,0 +1,38 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-apm-usb-driver 
+title: common-APM USB Driver 
+id: 322 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to install the USB driver for Auto-Pilot-Multiplatform Controller.
+
+<h3>Step One: Installing the APM 2 USB driver</h3>
+When you plug an APM controller into your PC for the first time, if you have not used Arduino before, you'll need to load a driver.
+You'll know this because a few seconds after you plug in APM2 for the first time, Windows will give you this complaint:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver3.png"><img class="alignnone size-full wp-image-651" alt="driver3" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver3.png" width="549" height="171" /></a>
+
+No problem! Just download the USB driver <a href="http://ardupilot.com/downloads/?did=19">here</a> and save to a folder on your PC. (Make sure Windows hasn't renamed it with a .txt extension. Sometimes Windows 7 does that; if it has, just rename it back so it has an .inf extension.)
+
+Now go to your Windows Control Panel Device Manager (in "Hardware and Sound"/"Devices and Printers"). You'll see the board listed under "Other Devices" as an "Arduino Mega 2560". Right-click on it and select "Update driver software"
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver5.png"><img class="alignnone size-full wp-image-652" alt="driver5" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver5.png" width="793" height="624" /></a>
+
+Then select "Browse my computer for driver software", and navigate to the folder that you saved the driver you downloaded to. You can also try selecting the drivers stored by Mission Planner by navigating to C:\Program Files\Mission Planner\Drivers.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver2.png"><img class="alignnone size-full wp-image-653" alt="driver2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver2.png" width="468" height="326" /></a>
+
+Once you've told Windows to load that driver, it will give you this warning. Select "Install this driver software anyway".
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver1.png"><img class="alignnone size-full wp-image-654" alt="driver1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver1.png" width="516" height="310" /></a>
+
+Once the driver is loaded correctly, you should see APM2 show up in the Ports section like this (the Com number assigned to it depends on how many other serial ports you've already assigned in Windows; your number will probably be different than the one shown here):
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver4.png"><img class="alignnone size-full wp-image-655" alt="driver4" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/driver4.png" width="458" height="520" /></a>
+
+<i>(Note that if you're also using an Xbee wireless module on this computer for in-flight telemetry and mission planning, Windows will assign that module a different port, which you can also see from the Control Panel.)</i>

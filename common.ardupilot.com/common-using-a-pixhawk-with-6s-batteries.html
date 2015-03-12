@@ -1,0 +1,262 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-using-a-pixhawk-with-6s-batteries 
+title: common-Using a Pixhawk with 6S Batteries 
+id: 1912 
+menu_order: 20 
+post_parent_id: 2633 
+post_parent_stub: common-powermodule-landingpage 
+post_parent_title: common-Power Modules (landing page) 
+END METADATA 
+-->
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Pixhawk6Sintroimage.jpg"><img class="size-full wp-image-1913 aligncenter" alt="Pixhawk6Sintroimage" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Pixhawk6Sintroimage.jpg" width="453" height="250" /></a>
+
+
+
+<h1>Introduction:</h1>
+
+<span style="font-family: Calibri">Pixhawk 3DR kit is delivered by default with a 4S maximum power module. For those wanting to use 5S or 6S or higher voltage batteries there is currently, to my best knowledge, no “how-to” guide for the Pixhawk board. I therefore decided to document it for others who might need it too.</span>
+
+<span style="font-family: Calibri">For those who would like the same “how-to guide” for APM 2.x , here is a link I wrote a while ago:</span>
+
+<a href="http://www.diydrones.com/profiles/blogs/powering-your-apm-drone-or-how-not-to-shutdown-apm-like-the-us" rel="nofollow"><span style="color: #0000ff;font-family: Calibri">http://www.diydrones.com/profiles/blogs/powering-your-apm-drone-or-how-not-to-shutdown-apm-like-the-us</span></a>
+
+<span style="font-family: Calibri">Pixhawk comes standard with three (redundant) ways to powered it up:</span>
+
+<span style="font-family: Calibri">1-USB : not used to fly obviously; just useful on the ground for connection on a ground station software.</span>
+
+<span style="font-family: Calibri">2-The power module port accepting a maximum input voltage of 5.7volts (and will not get destroyed up to 20 Volts input)</span>
+
+<span style="font-family: Calibri">3-The RC input pins. Will accept a maximum voltage of 5.7volts also (and is also protected up to 20 Volts)</span>
+
+<span style="font-family: Calibri">This guide assumes a use of Pixhawk’s power module port which provides not only a way to power the board but also the pins to measure current and voltage values of the main battery.</span>
+
+<span style="font-family: Calibri">This guide assumes a use of a 6S battery in combination with a Attopilot current &amp; Voltage sensor board. This Attopilot “power module” replaces the 3DR 4S limited power module. The Attopilot board comes in three flavors: 45 amps, 90 amps or 180 amps.</span>
+
+<span style="font-family: Calibri"><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/attopilot90A.jpg"><img class="size-full wp-image-1914 aligncenter" alt="attopilot90A" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/attopilot90A.jpg" width="600" height="600" /></a>The choice of the right Attopilot board (45A, 90A or 180 A) will depend on your motor/props combination: take the Attopilot version that has the smallest amps capacity above your max multicopter current consumption. However we will introduce in this guide a way to use the 90 amps Attopilot board to measure up to 150 amps, still using Pixhawk’s power module port.</span>
+
+
+
+<h1>Attopilot description:</h1>
+
+<span style="font-family: Calibri">An Attopilot board provides three wire soldering pads to solder : a current measurement wire, a voltage measurement wire and a ground wire. See picture below:</span>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/attopilot90Apixhawk.jpg"><img class="size-full wp-image-1915 aligncenter" alt="attopilot90Apixhawk" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/attopilot90Apixhawk.jpg" width="600" height="600" /></a>
+
+<span style="font-family: Calibri">Attopilot 90A support up to 50Volts for a maximum of 90A. However the resistor specifications exceed the 90A limitation which makes it possible to use it for measuring 150 amps (we will take this as a assumed max current as our example for the rest of the explanation).</span>
+
+<span style="font-family: Calibri">The datasheet of Attopilot specifies that the Voltage measurement wire outputs an analog voltage of 63,69 milliVolt per Volt. Similarly the current measurement wire outputs an analog voltage of 36,60 milliVolt per Volt.</span>
+
+<span style="font-family: Calibri">So for a 6S battery the maximum analog voltage values will be:</span>
+
+<span style="font-family: Calibri">-For voltage measurement: [min 0V -  max 1.6V]</span>
+
+<span style="font-family: Calibri">-For current measurement: [min 0V – max 3,3 V]</span>
+
+
+
+<h1>Pixhawk power port description (pinout):</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/pixhawkpowerport.jpg"><img class="size-full wp-image-1916 aligncenter" alt="pixhawkpowerport" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/pixhawkpowerport.jpg" width="358" height="547" /></a>
+
+<span style="font-family: Calibri">Reusing the excellent pixhawk infographics published in the wiki, the image shows circled in yellow where the power port is on the pixhawk board.</span>
+
+<span style="font-family: Calibri">The power port is a so-called DF13 connector with 6 pins.</span>
+
+<span style="font-family: Calibri">The six pins of this connector are assigned in the following order, starting by the red wire on the leftmost pin:</span>
+
+<strong>Power Port Pinout Description:</strong>
+<ul>
+	<li><span style="font-family: Calibri">1- Vcc (5V input)</span></li>
+	<li><span style="font-family: Calibri">2- Vcc (5V input)</span></li>
+	<li><span style="font-family: Calibri">3- I (Battery current measurement analog voltage input)</span></li>
+	<li><span style="font-family: Calibri">4- V (Battery voltage measurement analog voltage input)</span></li>
+	<li><span style="font-family: Calibri">5- Ground</span></li>
+	<li><span style="font-family: Calibri">6- Ground</span></li>
+</ul>
+
+
+
+<h1>Wiring Case 1 : to measure up to a maximum of 90 amps</h1>
+
+<span style="font-family: Calibri">The connections between Attopilot and Pixhawk are shown in the illustration below:</span>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/ConnexionsAttopilotPixhawk.jpg"><img class="size-full wp-image-1917 aligncenter" alt="ConnexionsAttopilotPixhawk" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/ConnexionsAttopilotPixhawk.jpg" width="613" height="309" /></a>
+
+<span style="font-family: Calibri">We have added an optional BEC in the illustration that would be connected to the Vcc and Ground wires of the power module. It is optional as Pixhawk could alternatively be powered via the RC inputs.</span>
+
+
+
+<h1>Wiring Case 2 : to measure up to a maximum of 150 amps</h1>
+<span style="font-family: Calibri">The connections between Attopilot and Pixhawk will integrate resistors to be able to measure up to 150 amps.</span>
+
+<span style="font-family: Calibri">Indeed the ADC of this power port on Pixhawk has a range of 0-3.3V. This means that for the maximum true current of 150 amps, we want the current analog wire of Attopilot to output maximum 3.3Volts (as it is the case in case1 for 90 amps max without additional resistors).</span>
+
+<span style="font-family: Calibri">So we will build a small resistors divider on wire 3 (current measurement) &amp; wire 5 or 6 (Ground) as follows:</span>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/ConnexionsAttopilotPixhawkcase2.jpg"><img class="size-full wp-image-1918 aligncenter" alt="ConnexionsAttopilotPixhawkcase2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/ConnexionsAttopilotPixhawkcase2.jpg" width="613" height="309" /></a>
+
+<span style="font-family: Calibri">The equation that gives the value of Vout in function of the resistors R1 and R2 is:</span>
+
+<a href="http://api.ning.com/files/z7xKGPrSF9ALuKpsawpKXgsZJecsj9i44beTFgiWfJ8ZfFZM95bWANBqqgHS6*rVU*QD4KezXquMhc8i4TdsNwtu7zyTZc4W/Eq1.jpg" target="_self"><img alt="" src="http://api.ning.com/files/z7xKGPrSF9ALuKpsawpKXgsZJecsj9i44beTFgiWfJ8ZfFZM95bWANBqqgHS6*rVU*QD4KezXquMhc8i4TdsNwtu7zyTZc4W/Eq1.jpg" width="270" /></a>
+
+<span style="font-family: Calibri">What we want is to get Vout = 3,3 when Current =150 amps or a Vout of :</span>
+
+<a href="http://api.ning.com/files/z7xKGPrSF9CngK1Px1tRb5wUmJzNodG6ltmqiHSo5mb3hy-Cu3Esyd0lumQf9nH8p9XipMfGIuxwBlnjeFJspgYshW0Czfzw/Sanstitre12.jpg" target="_self"><img alt="" src="http://api.ning.com/files/z7xKGPrSF9CngK1Px1tRb5wUmJzNodG6ltmqiHSo5mb3hy-Cu3Esyd0lumQf9nH8p9XipMfGIuxwBlnjeFJspgYshW0Czfzw/Sanstitre12.jpg" width="166" /></a>
+
+<span style="font-family: Calibri">When current is 90 amps versus 150 amps, it requires</span><span style="font-family: Calibri"> a reduction in voltage of :</span>
+
+<a href="http://api.ning.com/files/z7xKGPrSF9C85cog5VJvnSPXrG0mvjmvlspYQXZqnzK4e*SLmyVCDOrvJQbQN6A3cEDqi9-6cVhgzT6RVQ3ULFCF0rv9B0AV/Sanstitre13.jpg" target="_self"><img alt="" src="http://api.ning.com/files/z7xKGPrSF9C85cog5VJvnSPXrG0mvjmvlspYQXZqnzK4e*SLmyVCDOrvJQbQN6A3cEDqi9-6cVhgzT6RVQ3ULFCF0rv9B0AV/Sanstitre13.jpg" width="298" /></a>
+
+<span style="font-family: Calibri">So using the above equation :</span>
+
+<a href="http://api.ning.com/files/z7xKGPrSF9BszylLqSuIr9mRXhtr698iU8st1gZ5AvHq3dv31PUVQvXKHXHfBI9Hap4FK*hMP5VYVD82farf5z*wC*TimPpH/Sanstitre14.jpg" target="_self"><img alt="" src="http://api.ning.com/files/z7xKGPrSF9BszylLqSuIr9mRXhtr698iU8st1gZ5AvHq3dv31PUVQvXKHXHfBI9Hap4FK*hMP5VYVD82farf5z*wC*TimPpH/Sanstitre14.jpg" width="147" /></a>
+
+<span style="font-family: Calibri">For R1=10kOhms,</span>
+
+<a href="http://api.ning.com/files/z7xKGPrSF9D7WnGGQ5FEaHB9bJfbDVd0cBUXfGtnbwP9-XQ8a6SURludpEvf3hvW51iu6xKA9GmOgvv4UZLzT5Gdsjmas5d-/Sanstitre15.jpg" target="_self"><img alt="" src="http://api.ning.com/files/z7xKGPrSF9D7WnGGQ5FEaHB9bJfbDVd0cBUXfGtnbwP9-XQ8a6SURludpEvf3hvW51iu6xKA9GmOgvv4UZLzT5Gdsjmas5d-/Sanstitre15.jpg" width="253" /></a>
+
+<span style="font-family: Calibri">So, for R1=10kOhms, R2 =15kOhms.</span>
+
+<span style="font-family: Calibri">You can choose other values of R1 and calculate the resulting R2 resistor value. You can choose also another max amp output (but I would not advise higher than 150 amps with the 90 amps Attopilot, otherwise use the 180 amps version instead) and calculate the resulting R1, R2 resistors.</span>
+
+<span style="font-family: Calibri">As a result, when the current is 150amps, Vout will have value of 3.3Volts.</span>
+
+
+
+<h1>Mission planner / parameters configuration in battery monitor screen:</h1>
+<span style="font-family: Calibri">In the battery monitor parameters screen, you can manually select which current and voltage sensor you are using. In the present case, you will select the power module and modify the following parameters to make the mission planner voltage and current display match the real values (measured using a wattmeter for example). The explanation below is an extract from the Arducopter parameters list.</span>
+
+
+
+<h2>Battery monitoring (BATT_MONITOR)</h2>
+<span style="font-family: Calibri">Controls enabling monitoring of the battery’s voltage and current</span>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<p align="center"><span style="font-family: Calibri">Value</span></p>
+</td>
+<td>
+<p align="center"><span style="font-family: Calibri">Meaning</span></p>
+</td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">0</span></td>
+<td><span style="font-family: Calibri">Disabled</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">3</span></td>
+<td><span style="font-family: Calibri">Voltage Only</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">4</span></td>
+<td><span style="font-family: Calibri">Voltage and Current</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>Battery Voltage sensing pin (BATT_VOLT_PIN)</h2>
+
+<span style="font-family: Calibri">Setting this to 0 ~ 13 will enable battery current sensing on pins A0 ~ A13. For the 3DR power brick on APM2.5 it should be set to 13. On the PX4 it should be set to 100. <b>On the Pixhawk powered from the PM connector it should be set to 2</b>.</span>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<p align="center"><span style="font-family: Calibri">Value</span></p>
+</td>
+<td width="83">
+<p align="center"><span style="font-family: Calibri">Meaning</span></p>
+</td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">-1</span></td>
+<td width="83"><span style="font-family: Calibri">Disabled</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">0</span></td>
+<td width="83"><span style="font-family: Calibri">A0</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">1</span></td>
+<td width="83"><span style="font-family: Calibri">A1</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">2</span></td>
+<td width="83"><span style="font-family: Calibri">Pixhawk</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">13</span></td>
+<td width="83"><span style="font-family: Calibri">A13</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">100</span></td>
+<td width="83"><span style="font-family: Calibri">PX4</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>Battery Current sensing pin (BATT_CURR_PIN)</h2>
+<span style="font-family: Calibri">Setting this to 0 ~ 13 will enable battery current sensing on pins A0 ~ A13. For the 3DR power brick on APM2.5 it should be set to 12. On the PX4 it should be set to 101. <b>On the Pixhawk powered from the PM connector it should be set to 3</b>.</span>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<p align="center"><span style="font-family: Calibri">Value</span></p>
+</td>
+<td>
+<p align="center"><span style="font-family: Calibri">Meaning</span></p>
+</td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">-1</span></td>
+<td><span style="font-family: Calibri">Disabled</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">1</span></td>
+<td><span style="font-family: Calibri">A1</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">2</span></td>
+<td><span style="font-family: Calibri">A2</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">3</span></td>
+<td><span style="font-family: Calibri">Pixhawk</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">12</span></td>
+<td><span style="font-family: Calibri">A12</span></td>
+</tr>
+<tr>
+<td><span style="font-family: Calibri">101</span></td>
+<td><span style="font-family: Calibri">PX4</span></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>Voltage Multiplier (BATT_VOLT_MULT)</h2>
+
+<span style="font-family: Calibri">Used to convert the voltage of the voltage sensing pin (BATT_VOLT_PIN) to the actual battery’s voltage (pin_voltage * VOLT_MULT). For the 3DR Power brick on APM2 or Pixhawk, this should be set to 10.1. For the Pixhawk with the 3DR 4in1 ESC this should be 12.02. For the PX4 using the PX4IO power supply this should be set to 1.</span>
+
+<b><i>This is a parameter to adjust to match the real Voltage value with the displayed mission planner value.</i></b>
+
+
+
+<h2>Amps per volt (BATT_AMP_PERVOLT)</h2>
+
+<span style="font-family: Calibri">Number of amps that a 1V reading on the current sensor corresponds to. On the APM2 or Pixhawk using the 3DR Power brick this should be set to 17. For the Pixhawk with the 3DR 4in1 ESC this should be 17. Units: A/V.</span>
+
+<span style="font-family: Calibri"><b><i>This is a parameter to adjust to match the real Voltage value with the displayed mission planner value</i></b>.</span>
+
+<span style="font-family: Calibri">There you go! I hope this will help you configure your pixhawk with higher than 4S batteries.</span>
+
+<span style="font-family: Calibri">Cheers,</span>
+
+<span style="font-family: Calibri">Hugues</span>

@@ -1,0 +1,47 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: arming_the_motorskorean 
+title: Arming_the_motors(Korean) 
+id: 12215 
+menu_order: 1100 
+post_parent_id: 13872 
+post_parent_stub: common-archived-topics 
+post_parent_title: common-Archived Topics 
+END METADATA 
+-->
+[archived]This does not conform with current translation process (via Transposh).[/archived]
+
+<h3>모터 시동걸기</h3>
+
+모터의 시동을 걸기전에 반드시 프로펠러 주변에 물체나 사람이 있는지 확인하십시오:
+<ol>
+	<li>조종기를 켭니다.</li>
+	<li>배터리를 연결합니다. 자이로 캘리브레이션을 진행하는동안 빨간색과 파란색 LED가 점멸합니다(콥터를 움직이지 마십시오)</li>
+	<li>자동적으로 시동전 점검을 수행한 후 이상이 발견되면 APM2.x 는 빨간 LED를 2회 점멸합니다.Pixhawk의 경우 RGB LED가 노란색으로 점멸합니다.<a title="Prearm Safety checks" href="wiki/prearm_safety_check/"> 이 페이지</a>를 확인하십시오</li>
+	<li>비행 모드가 다음 모드로 선택되었는지 확인하십시오(Stabilize, ACRO, AltHold or Loiter).</li>
+	<li>PX4를 사용중이라면 불빛이 계속 점등될때까지 안전 버튼을 누르십시오.</li>
+	<li>자동비행(Autopilot)을 사용할 계획이라면(i.e. Loiter, RTL, Drift, Auto or Guided modes) GPS가 3차원 고정될때까지 30초가량 기다려야합니다. 이 시간동안 GPS위치가 안정화됩니다. APM2의 경우 GPS 고정은 파란색 LED가 지속점등될때 이루어집니다. Pixhawk에서는 RGB LED는 녹색불이 점멸합니다.</li>
+	<li>시동을 걸때는 쓰로틀을 아래로, 러더를 우측으로 약 5초간 둡니다.콥터가 자이로와 바로미터를 다시 초기화하는데 약 5초가 걸립니다. 너무 오랫동안 러더키를 우측으로 두면(약 15초 이상)  <a href="wiki/autotrim/">자동 트림</a> 기능이 활성화됩니다.</li>
+	<li>시동이 걸리면 빨간색 시동 불빛이 지속 점등되고 프로펠러가 천천히 돌기 시작합니다. 프로펠러가 회전하는 속도는MOT_SPIN_ARMED 파라미터로 조정할 수 있습니다.</li>
+	<li>쓰로틀을 올려 이륙합니다.</li>
+</ol>
+&nbsp;
+
+주의: 시동/시동 정지는 Stabilize, ACRO, AltHold 그리고 Loiter 모드에서만 가능합니다.
+
+주의: 위 모드중 쓰로틀을 최소로 고정한 상태로 15초간 두면 자동적으로 시동이 꺼집니다.
+
+<strong> </strong>
+<h3>모터 시동 정지</h3>
+
+
+
+모터의 시동을 끄기위해서는 다음을 수행합니다:
+<ol>
+	<li>비행모드가 Stabilize, ACRO, AltHold 또는 Loiter 모드인지 확인합니다.</li>
+	<li>쓰로틀을 최소로, 러더를 왼쪽으로 2초간 둡니다.</li>
+	<li>APM2에서는 빨간색 LED가 점멸하기 시작합니다. Pixhawk의 경우 RGB LED의 녹색불이 점멸합니다..</li>
+	<li>PX4를 사용하는 경우 안전버튼을 LED가 점멸하기 시작할때까지 누르면 됩니다.</li>
+	<li>배터리를 제거합니다.</li>
+	<li>조종기를 끕니다.</li>
+</ol>

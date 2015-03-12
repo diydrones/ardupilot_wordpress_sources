@@ -1,0 +1,58 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: drift-mode 
+title: Drift Mode 
+id: 10066 
+menu_order: 50 
+post_parent_id: 1556 
+post_parent_stub: flight-modes 
+post_parent_title: Flight Modes 
+END METADATA 
+-->
+This page provides tips for flying in Drift Mode and methods for tuning your copter to fly optimally in Drift Mode.
+
+<h3>Overview</h3>
+<ul>
+	<li>Drift Mode allows the user to fly a multi-copter as if it were a plane with built in automatic coordinated turns.</li>
+	<li>The user has direct control of Yaw and Pitch, but Roll is controlled by the autopilot.  This allows the copter to be controlled very intuitively with a single control stick if using a Mode 2 transmitter</li>
+	<li>The user has completely manual control over the throttle as in <a href="wiki/stabilize-mode/">Stabilize mode</a>.</li>
+	<li><strong>Drift Mode is available as of release 3.1 of the APM:Copter firmware.</strong></li>
+</ul>
+http://www.youtube.com/watch?v=0mdk2-sNXmg
+
+
+
+<h3>How Drift Mode works:</h3>
+<ul>
+	<li>You "fly" the MultiCopter with the right stick (on Mode 2 controllers) controls Pitch and Yaw.</li>
+	<li>You use the left stick primarily for altitude control but not for yaw directly.</li>
+	<li>When you push the right stick forward or back the copter will pitch (and accelerate) in the appropriate direction.</li>
+	<li>When you push the right stick towards one side or the other the right or to the left the copter will turn in the direction specified.</li>
+	<li>The copter will also bank at the same time so as to make a coordinated turn in that direction.</li>
+	<li>When turning with the right stick yaw is automatically applied and sufficient roll is added to cancel the copters velocity in the roll axis.</li>
+	<li>This allows you to maintain a coordinated (non-skidding) turn.</li>
+	<li>Letting go of the sticks effectively turns on a speed brake in the Pitch axis that slows the copter to a stop over a two second period.</li>
+	<li>A copter in Drift Mode with the right stick in the center will loosely hold horizontal position (It will slowly drift in the wind.)</li>
+	<li>Pilot’s throttle input controls the average motor speed meaning that constant adjustment of the throttle is required to maintain altitude.  If the pilot puts the throttle completely down the motors will go to their minimum rate (MOT_SPIN_ARMED) and if the vehicle is flying it will lose attitude control and tumble.</li>
+	<li>Drift Mode relies on your GPS for control.</li>
+	<li>If you lose your GPS signal in flight while in Drift Mode, your copter will either land or enter altitude hold based on your failsafe_gps_enabled setting.</li>
+	<li>You should also be prepared to switch back to Stabilize Mode for manual recovery if necessary.</li>
+</ul>
+
+
+
+<h3>Whats it Useful For:</h3>
+<ul>
+	<li>FPV flyers who are looking for a dynamic, plane like flight as well as loiter-like position hold.</li>
+	<li>New flyers who want to try a more intuitive and easy to learn flight mode.</li>
+	<li>Anybody who would like to try an easy to fly and easy to learn and very fun mode.</li>
+	<li>Photographers and especially videographers who want a smoother and more coordinated filming result.</li>
+</ul>
+
+
+
+<h3>Setting up Drift Mode:</h3>
+<ul>
+	<li>In the Mission Planner Configuration Section under flight modes select Drift Mode to to apply to an appropriate switch setting.</li>
+	<li>More information on tuning Drift mode is expected to be forthcoming shortly as are additional enhancements to Drift Mode itself.</li>
+</ul>

@@ -1,0 +1,48 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: pitfalls 
+title: Common Issues/Pitfalls Checklist 
+id: 5328 
+menu_order: 0 
+post_parent_id: 13587 
+post_parent_stub: common-appendix 
+post_parent_title: common-Appendix 
+END METADATA 
+-->
+<h3>Introduction</h3>
+This page is intended to be a checklist of things to be sure you do at each stage of getting your copter into the air. These things will not prevent you from flying but could cause crashes, so it is important to list them all in one place for easy reading and maintenance.
+
+Please describe the issue in as succinct a manner as possible below, and add a link for further information if necessary.
+
+
+
+<h3>Assembly</h3>
+<ul>
+	<li>Twist all your power wires to help minimize electromagnetic interference with your compass: <a href="http://www.diydrones.com/forum/topics/compass-mag-field-hard-interference-solved">More Information!</a></li>
+	<li>Check your APM is mounted in the middle of your copter, with the FORWARD arrow pointing straight toward the front in the intended direction of forward flight</li>
+	<li>NEVER power camera gimbal servos from the analog output pins, you risk a brownout condition and your APM board rebooting <a href="http://copter.ardupilot.com/wiki/camera-mount/#Connecting_the_servos_with_APM2">More Information!</a></li>
+	<li>Check each prop is secure before flying: hold the prop in one hand, the arm in the other and try to twist the prop loose. Don't fly unless the props are secure.</li>
+</ul>
+
+
+
+<h3>Configuration</h3>
+<ul>
+	<li>Spin up the propellers on the ground and check they are all moving in the correct orientation <a href="http://copter.ardupilot.com/wiki/ac2_props_2/">More Information!</a></li>
+	<li>Check that your motors are connected in the right order.</li>
+	<li>Hold the copter firmly, safely above your head, then spin up the propellers to 1/3rd throttle and test that the copter is trying to keep itself level. It should push back when you tip it over in any direction. Give it some left/right/up/down stick inputs and feel whether the copter is reacting in the correct sense to these inputs</li>
+	<li>Check that your copter knows what level is. With the copter on a flat surface connect to Mission Planner and ensure the artificial horizon display shows level</li>
+	<li>You should configure Failsafe, otherwise the default behavior is for your copter to shut down and fall to the ground if it loses connection with your radio transmitter. Test this by connecting to Mission Planner, arming your copter (with no battery connected) and turning off your transmitter. You should see it switch to RTL mode when the transmitter is turned off (link required)</li>
+</ul>
+
+
+
+<h3>Flying</h3>
+<ul>
+	<li>Make sure you have a GPS lock before flying if you intend to use any auto modes. Even if you're only flying in Stabilized mode this is a good idea so you can invoke Return To Launch if you get into trouble</li>
+	<li>Test RTL before sending your copter off on an auto waypoint flight. This is to check that the compass and GPS are working, and that it knows where home is before heading off on a more complex flight</li>
+	<li>Ensure that flight in Stabilize works well before you attempt any more complex flight modes. Ensure loiter works before trying RTL. Ensure RTL works before trying auto.</li>
+	<li>Once armed stand 3m-6m away from the arming point as when in RTL the copter will be returning to this point.</li>
+	<li>When testing more complex flight modes, be ready to switch back to Stabilize mode at any moment if it does anything strange. Stabilize or Acro are the only modes which can save you from a problem with the software or sensors. RTL is a good mode to save you from human error, but relies on the copter being able to locate and fly itself, so this should not be used as an emergency mode if other auto flight modes go wrong</li>
+	<li>Be sure you have a way of knowing when your battery is getting low, and land before you have used more than 80% of your battery capacity.</li>
+</ul>

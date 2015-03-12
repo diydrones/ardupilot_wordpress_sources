@@ -1,0 +1,126 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-tarot-gimbal 
+title: common-Tarot Gimbal 
+id: 1760 
+menu_order: 10 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
+END METADATA 
+-->
+The <a href="http://store.3drobotics.com/products/tarot-t-2d-brushless-gimbal-kit-for-3dr-quad-y6-x8" target="_blank">Tarot 2-Axis Gimbal</a> is the recommended gimbal for the <a href="http://store.3drobotics.com/products/apm-2-6-kit-1" target="_blank">APM2</a> and <a href="https://store.3drobotics.com/products/3dr-pixhawk" target="_blank">Pixhawk</a> due to its low cost and good performance. ArduCopter, ArduPlane, ArduRover currently only support passing through a pilot desired roll or pitch angle but future releases will support more advanced automated aiming of the camera (i.e. ROI - region-of-interest).
+<!--more-->
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_OnX8.jpg"><img class="alignnone wp-image-1761" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_OnX8.jpg" alt="Tarot_OnX8" width="300" height="200" /></a>
+
+
+
+<h1>Gimbal Assembly instructions</h1>
+
+Paper instructions are normally provided with the gimbal but a short user manual can also be found in the "User Manual" directory of the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file which is available in the downloads area.
+
+
+
+<h1>Connecting the gimbal to the Pixhawk</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Pixhawk_Tarot.png"><img class="alignnone size-full wp-image-1766" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Pixhawk_Tarot.png" alt="Gimbal_Pixhawk_Tarot" width="1318" height="673" /></a>
+The Tarot gimbal's red and black power wires should be connected directly to a 2S or 3S battery. If you plan to use 4S, please use a voltage regulator to ensure the voltage stays within safe operating limits: DC 7.4 V - 14.8 V (recommended 12 V). 3DR RTF Quad, Y6, and X8 include a voltage regular to allow use of 4S batteries with the Tarot gimbal.
+
+The "T" pin should be connected to the Pixhawk's AUX1 signal pin.
+One of the two "-" pins should be connected to the Pixhawk's AUX1 ground pin.
+
+
+
+<h1>Operation</h1>
+
+Upon powering your vehicle, the gimbal will display a solid yellow light while it is starting and calibrating. Do not touch the gimbal while it is starting up. When the gimbal displays a blinking blue light, it is ready for flight. If the gimbal is not connected to the autopilot, it will perform basic stabilization without autopilot control, indicated by a solid blue light.
+
+<strong>LED meanings</strong>
+Solid yellow <span style="background-color: #ffff00;">   </span>  = calibrating
+Blinking blue <span style="background-color: #0000ff;"> </span> <span style="background-color: #0000ff;"> </span> <span style="background-color: #0000ff;"> </span>= ready, connected to autopilot
+Solid blue <span style="background-color: #0000ff;">   <span style="background-color: #ffffff;"> </span></span>= ready, not connected to autopilot
+
+
+
+<h1>Configuring the gimbal</h1>
+
+Tarot gimbals purchased from 3DR should come pre-configured to work with ArduCopter but if you have purchased from another source or just wish to change the configuration you should:
+<ol>
+	<li>Use the provided USB dongle to connect the Gimbal board to your computer (Windows only).  If this is the first time you have plugged in the dongle you will likely see a USB device installation window.  After successful installation of the driver a new COM port named "Prolific USB-to-Serial Comm Port" should appear in the Device Manager as shown below.  If drivers cannot be found you may be able to install Windows 7 or Windows XP drivers using one of the .exe files found in the "driver" directory of the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file.
+<img class="alignnone size-full wp-image-1769" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_DeviceManager2.png" alt="Gimbal_Tarot_DeviceManager2" width="453" height="580" /></li>
+	<li>Download and unzip the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file to a convenient place on your computer.</li>
+	<li>Double click on the <strong>ZYX-BMGC-EN_V1.5.exe</strong> file (found in the above zip) and the configuration UI shown below should appear
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_Gimbal_Config.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_Gimbal_Config.png" alt="Tarot_Gimbal_Config" width="892" height="656" /></a></li>
+	<li>Power the Gimbal by plugging in the battery.</li>
+	<li>In the configuration UI, select the COM port and press the <strong>Open COM Port</strong> button.  After a few seconds the image of the camera should begin moving as the gimbal is moved.</li>
+	<li>The most important setting is to set the <strong>Default Mode</strong> (just above COM port drop-down) to <strong>Default Mode: stick position mode</strong>.  Select this and press <strong>Write Settings To Flash</strong>.  Alternatively to load all the 3DR recommended configuration:
+<ol>
+	<li>First right-click on <a href="https://raw.github.com/diydrones/ardupilot/master/Tools/Frame_params/3DR_Tarot.bgsc" target="_blank">this link to the 3DR_Tarot.bgsc file</a> and save to somewhere on your computer.</li>
+	<li>Press the <strong>Load Config</strong> button on the configuration UI and select the <em>3DR_Tarot.bgsc file</em> downloaded above.</li>
+	<li>Press Write <strong>Settings To Flash</strong> button</li>
+</ol>
+</li>
+</ol>
+
+
+
+<h1>Set-up through the mission planner</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/02/Tarot_MP_CameraGimbal_setup.png"><img class="alignnone size-full wp-image-12159" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/02/Tarot_MP_CameraGimbal_setup.png" alt="Tarot_MP_CameraGimbal_setup" width="1026" height="691" /></a>
+
+The channel 6 tuning knob's output can be used to control the pitch angle of the gimbal by:
+<ul>
+	<li>Connect the Pixhawk to the mission planner</li>
+	<li>Open the <strong>Initial Setup | Optional Hardware | Camera Gimbal</strong> screen set:
+<ul>
+<ul>
+	<li>Tilt drop-down to RC9 (equivalent to the Pixhawk's AUX OUT1)</li>
+	<li>Input Ch drop-down to RC6</li>
+	<li>The "Stabilize Tilt" checkbox should not be checked</li>
+</ul>
+</ul>
+</li>
+</ul>
+<a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-ROI">Do-Set-ROI</a> mission commands and the MP's "Point Camera Here" feature should work if the Tilt Servo Limits and Angle Limits Min and Max values as set as shown above.
+The "Servo Limits" holds the minimum and maximum PWM values that will be sent from the APM/Pixhawk to the gimbal (i.e. on RC9 if set-up like above).
+
+The "Angle Limits" are the earth-frame angles (in degrees) that the gimbal can achieve. "0" degrees is straight ahead, "90" degrees is straight up, "-90" degrees is straight down. The Tarot gimbal is capable of pointing straight down (i.e. "-90") to straight ahead (i.e. "0").
+
+
+
+<h1>Testing the gimbal moves correctly</h1>
+
+<strong>Testing the pilot's control of pitch</strong>
+
+Once powered the gimbal should point to it's Tilt Angle Min (i.e. straight down) when your transmitter's channel 6 tuning knob is at it's minimum pwm value (perhaps around 1000) and the camera should point to it's maximum tilt angle (i.e. straight forward) when the tuning knob is at it's maximum (perhaps around 2000). The mission planner's Radio calibration page can be used to check the Ch6's current input pwm value.
+
+<strong>Testing ROI</strong>
+
+<b>You must have GPS lock to test ROI.</b> The ROI feature points the vehicle and/or camera to point at a target. The instructions above describe setting up the APM/Pixhawk so that it only controls the Tilt (i.e. pitch) of the Tarot gimbal so when a <a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-ROI">Do-Set-ROI</a> command is received ArduCopter will attempt to turn the vehicle's nose to point in the direction of the target and tilt camera depending upon the vehicle's distance and altitude. You can test the gimbal tilt moves correctly by connecting with the mission planner, then on the Flight Data screen's map, right-mouse-button-click on a point about 50m ahead of the vehicle (the <span style="color: #ff6600;">orange</span> and <span style="color: #ff0000;">red</span> lines show the vehicle's current heading), select "Point Camera Here" and input an altitude of -50 (meters). This should cause the gimbal to point down at about 45 degrees.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_BenchTestROI.png"><img class="alignnone size-full wp-image-2299" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_BenchTestROI.png" alt="Tarot_BenchTestROI" width="1192" height="830" /></a>
+
+
+
+<h1>Updating the gimbal software</h1>
+
+The gimbal must be running firmware version 1.4 or higher. Follow the instructions below to update both the controller and motor firmwares.
+<ol>
+	<li>Connect the gimbal to your computer using the USB dongle. Ensure that the gimbal end is plugged into the "Gimbal Controller Connector" (see diagram in the Connecting the Gimbal to the Pixhawk section above). Leave the gimbal unpowered for now.</li>
+	<li>Start the "ZYX-BMGC-EN_V1.5" configuration application</li>
+	<li>Select <strong>Open Firmware</strong> and select the <em><strong>../Firmware_V1.5/Gimbal Controller Firmware V1.5.bgsf</strong></em> file from the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip.</a></li>
+	<li>Select the COM Port that has been assigned to the gimbal, then select "Open COM Port."</li>
+	<li>Select <strong>Start Upgrade</strong>.</li>
+	<li>Connect the battery to power the gimbal. You will see a green progress bar on the screen indicating the status of the update.</li>
+	<li>To verify that the firmware has updated successfully, disconnect and reconnect the battery. Select <strong>Open COM Port</strong>, and check that the version firmware number now displays the updated version.</li>
+	<li>Now you'll need to update the motor firmware. Disconnect the battery from the gimbal so that it is not powered. Disconnect the USB dongle from the "Gimbal Controller Connector" and reconnect to the "Motor Driver Connector" on the other side of the board.</li>
+	<li>Select <strong>Motor Configuration</strong>.</li>
+	<li>Select <strong>Open COM Port</strong>. Ensure that the same COM port as before is selected (the gimbal controller and motor controller use the same COM port)</li>
+	<li>Now select "Open Firmware," but this time select the <em><strong>../Firmware_V1.5/</strong><strong>Motor Driver Firmware V1.5.bmcf</strong></em> file.</li>
+	<li>Select <strong>Start Upgrade</strong>.</li>
+	<li>Connect the battery to power the gimbal. There will be another progress bar indicating the status of the upgrade.</li>
+	<li>Disconnect and reconnect the battery from the gimbal to complete the upgrade process.</li>
+	<li>You may need to check/set the configuration settings again, as above. In particular, check that the manual control mode is "Stick Position Mode" and remember to write your settings when you're done!</li>
+</ol>
+https://www.youtube.com/watch?v=A2WXguD2Ghs

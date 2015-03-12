@@ -1,0 +1,130 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: ac_compasssetupupadvanced 
+title: Advanced Compass Setup 
+id: 8591 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page covers how to setup and calibrate the compass.  Most users will only need to select the Orientation and perform the <a href="#Live_Calibration_of_compass_offsets">Live Calibration</a> but details are also given on the lesser used CompassMot and Manual Declination.  All this configuration can be performed from the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Compass screen.  Other ground stations likely have similar features.
+
+Accurately setting up the compass is critical because it is the primary source of heading information. Without an accurate heading the vehicle will not move in the correct direction in autopilot modes (i.e. Loiter, PosHold, RTL, Auto, etc). This can lead to circling (aka "toiletbowling") or fly-aways.
+
+
+<h3>Set the Orientation</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_Orientation.png"><img class="alignnone size-large wp-image-12917" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_Orientation-1024x574.png" alt="CompassCalibration_Orientation" width="584" height="327" /></a>
+From the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Compass screen's Orientation area select the flight controller you are using (i.e. "Pixhawk" or "APM") which will set the compass orientation to the default for that board:
+<p style="padding-left: 30px"><strong>Pixhawk/PX4</strong> : select this if you are using a Pixhawk or PX4 board.  Internal and External compasses will be detected.  If an external compass is detected it will be assumed to be a 3DR GPS/Compass module (or compatible) placed so it's white arrow points forward on the vehicle frame.  If you are not using a 3DR GPS/Compass module you may need to set the orientation manually (see below).</p>
+<p style="padding-left: 30px"><strong>APM with OnBoard Compass:</strong> select this if you are using an APM with only an onboard compass (i.e. APM2.5 or earlier)</p>
+<p style="padding-left: 30px"><strong>APM with External Compass</strong> : select this if you are using an APM with no internal compass (i.e. APM2.6) with a 3DR GPS/Compass module placed so that it's white arrow points forward on the frame.  If you are not using a 3DR GPS/Compass module you may need to set the orientation manuall (see below)</p>
+<p style="padding-left: 30px"><strong>Manual</strong> : if using a non-standard external compass or if using a 3DR GPS/Compass module in a non-standard orientation.  all orientations in 45 degree increments and even upside down can be accommodated.  Use a hand-held compass and the following procedure to determine the correct setting.</p>
+<p style="padding-left: 60px">Set the vehicle on a flat surface and compare the heading the Flight Data screen's HUD to the known heading</p>
+<p style="padding-left: 60px">From the drop-down select one of the first 8 option (i.e. "ROTATION_NONE" to "ROTATION_YAW_315") that leads to the vehicle's heading (shown in the HUD) agreeing with the actual heading.</p>
+<p style="padding-left: 60px">Now turn your air frame right or left and if the heading in the HUD correctly follows you are done.</p>
+<p style="padding-left: 60px">If the heading turned in the opposite direction from the vehicle set the Manual rotation to include "_ROLL_180_".  I.e. ROTATION_YAW_45 would become ROTATION_ROLL_180_YAW_45.</p>
+
+
+
+<h3>Live Calibration of offsets</h3>
+<div>Calculates offsets to compensate for "hard iron" distortions by chasing the white dots.</div>
+<ul>
+	<li>Push the "Live Calibration" button to start the calibration.</li>
+	<li>A window will appear that shows a sphere (or two if your flight controller has two compasses) with a <span style="color: #ff0000"><strong>red</strong> <strong>dot</strong></span> showing where the compass is pointing.  As you rotate the vehicle you will notice the red dot moves and (perhaps confusingly) the sphere itself also rotates.  A colored trail is left behind wherever the compass has already been.</li>
+	<li>On the sphere are six targets shown as <strong>white dots</strong>.</li>
+	<li>Rotate the vehicle so that the red dot reaches each white dot and causes it to disappear.</li>
+	<li>When all white dots are gone you can push <strong>Done</strong> to complete the calibration and save the offsets.</li>
+	<li>The final offsets will be displayed (3 numbers for each compass), if all these numbers are below 250 then you can assume they are good.  If you missed the numbers they can be seen as <a href="wiki/arducopter-parameters/#Compass_offsets_on_the_X_axis_COMPASS_OFS_X">COMPASS_OFS_X, Y and Z</a> in the Advanced Parmaeters list.  If the numbers are very high it may indicate there is some metal near the compasses.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_LiveCalibration.png"><img class="alignnone size-large wp-image-12920" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_LiveCalibration-1024x736.png" alt="CompassCalibration_LiveCalibration" width="584" height="419" /></a>
+
+One strategy for capturing all the white dots is to rotate the vehicle slowly so that each side (front, back, left, right, top and bottom) points down toward the ground for a few seconds (Note: the image below shows only 4 of the 6 recommended positions)
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg" rel="fancybox"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg" alt="When calibrating the compass, move copter into each position shown." width="400" height="134" /></a>
+
+The video below is from earlier versions of the calibration routine but may still produce good offsets.
+
+https://www.youtube.com/watch?v=DmsueBS0J3E
+
+Some members of the development team recommend performing the calibration outdoors away from metal objects using wireless telemetry (primarily so you don't get tangled in the cable) although no tests have been performed to confirm this is necessary.
+
+
+
+<h3>CompassMot - compensation for interference from the power wires, ESCs and motors</h3>
+This is recommended for vehicles that have only an internal compass and on vehicles where there is significant interference on the compass from the motors, power wires, etc. CompassMot only works well if you have a <a href="wiki/common-powermodule-landingpage/">battery current monitor</a> because the magnetic interference is linear with current drawn.  It is technically possible to set-up CompassMot using throttle but this is not recommended.
+
+Please follow these instructions:
+<ul>
+	<li>Enable the current monitor (aka <a href="wiki/common-powermodule-landingpage/">Power Module</a>)</li>
+	<li>Disconnect your props, flip them over and rotate them one position around the frame.  In this configuration they should push the copter down into the ground when the throttle is raised</li>
+	<li>Secure the copter (perhaps with tape) so that it does not move</li>
+	<li>Turn on your transmitter and keep throttle at zero</li>
+	<li>Connect your vehicle's Lipo battery</li>
+	<li>Connect your flight controller to your computer with the usb cable</li>
+	<li><strong>If using AC3.2:</strong>
+<ul>
+	<li>Open the Initial Setup &gt;&gt; Optional Hardware &gt;&gt; Compass/Motor Calib screen</li>
+	<li>Press the Start button</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_CompassMot.png"><img class="alignnone size-large wp-image-12925" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_CompassMot-1024x627.png" alt="CompassCalibration_CompassMot" width="584" height="357" /></a></p>
+
+<ul>
+	<li><strong>If using AC3.1.5:</strong>
+<ul>
+	<li>open the Terminal screen, press the "Connect APM" or "Connect PX4" button</li>
+	<li>At the prompt type <em><strong>setup</strong></em> and then <em><strong>compassmot</strong>.</em></li>
+	<li>If the PowerModule/Current monitor is enabled you should see "measuring compass vs CURRENT"</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassMot1.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassMot1.png" alt="CompassMot1" width="483" height="319" /></a></p>
+
+<ul>
+	<li>You should hear your ESCs arming beep</li>
+	<li>Raise the throttle slowly to between 50% ~ 75% (the props will spin!) for 5 ~ 10 seconds</li>
+	<li>Quickly bring the throttle back down to zero</li>
+	<li>Press the Finish button (AC3.2) or Press enter (AC3.1.5) to complete the calibration</li>
+	<li>Check the % of interference displayed.  If it is less than 30% then your compass interference is acceptable and you should see good Loiter, RTL and AUTO performance.  If it is 31% ~ 60% then the interference is in the "grey zone" where it may be ok (some users are fine, some are not).  If it is higher than 60% you should try moving your APM/PX further up and away from the sources of interference or consider purchasing an <a href="http://store.3drobotics.com/products/hmc5883l-triple-axis-magnetometer">external compass</a> or <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">GPS+compass module.</a></li>
+</ul>
+Here is a video of the procedure based on AC3.1.5:
+
+https://www.youtube.com/watch?v=0vZoPZjqMI4
+
+
+
+<h3>Manual Declination</h3>
+By default the declination is looked up in a compressed table when the vehicle first achieves GPS lock. This method is accurate to within 1 degree (which should be sufficient) but if you wish to use the uncompressed declination:<strong>
+</strong>
+<ul>
+	<li>Open the <a href="http://magnetic-declination.com/" target="_blank">Declination Website</a>.</li>
+	<li>It should automatically figure out your location based on you IP address or you can enter your location</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/declination.png" alt="" />
+<ul>
+	<li>Uncheck the Auto Dec checkbox and manually enter the declination (highlighted in red in the image above) into the mission planner's declination field. In this example, we would enter "14" Degrees and "13" Minutes.</li>
+	<li>As soon as your cursor exits the field (i.e by pressing Tab) the value will be converted to decimal radians and saved to the COMPASS_DEC parameter.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_ManualDec.png"><img class="alignnone size-large wp-image-12923" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_ManualDec-1024x574.png" alt="CompassCalibration_ManualDec" width="584" height="327" /></a>
+
+
+
+<h3>Tuning Declination in-flight</h3>
+Although we do not believe this is ever necessary, you can manually tune the declination in flight using the Channel 6 tuning knob on your transmitter by following these steps:
+<ol>
+	<li>Connect your APM/PX4 to the Mission Planner</li>
+	<li>Go to the Software &gt; ArduCopter Pids screen</li>
+	<li>Set the Ch6 Opt to "Declination", Min to "0.0" and Max to "3.0".  This will give a tunable range of -30 to +30 degrees.  Set Max to "2.0" to tune from -20 to +20 degrees, etc.</li>
+</ol>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_TuneDec.png"><img class="alignnone size-large wp-image-12927" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_TuneDec-1024x574.png" alt="CompassCalibration_TuneDec" width="584" height="327" /></a>
+<ul>
+	<li>Check the declination is updating correctly when turning the channel 6 tuning knob to it's maximum position, go to <strong>Config/Tuning &gt;&gt; Standard Params</strong> screen, press the "Refresh Params" button and ensuring that COMPASS_DEC is 0.523 (this is 30 degrees expressed in radians)</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_TuneDecCheck.png"><img class="alignnone size-large wp-image-12928" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/CompassCalibration_TuneDecCheck-1024x574.png" alt="CompassCalibration_TuneDecCheck" width="584" height="327" /></a>
+<ul>
+	<li> Fly your copter in Loiter mode in at least two directions and ensure that after a fast forward flight you do not see any circling (also known as "toilet bowling").</li>
+	<li>If you find it's impossible to tune away the circling then it's likely your compass interference is will require an <a href="http://store.3drobotics.com/products/hmc5883l-triple-axis-magnetometer">external compass</a> or <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">GPS+compass module.</a></li>
+</ul>

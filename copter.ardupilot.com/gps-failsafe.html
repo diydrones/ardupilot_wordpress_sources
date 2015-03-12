@@ -1,0 +1,82 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: gps-failsafe 
+title: GPS Failsafe and Glitch Protection 
+id: 6323 
+menu_order: 10 
+post_parent_id: 10180 
+post_parent_stub: gps-and-gcs-failsafes 
+post_parent_title: GPS and GCS Failsafes 
+END METADATA 
+-->
+As mentioned on the main <a href="wiki/battery-gps-and-gcs-failsafes/#GPS_Failsafe">GPS failsafe page</a>, a GPS failsafe event will occur if GPS 3D lock or the position "Glitches" for at least 5 seconds while the copter is in a mode that requires the GPS (RTL, Auto, Loiter, Circle, Position, Guided or Drift).  The GPS failsafe response can be set to Land or switch to AltHold mode (in AC3.1 and higher) so that you can retake manual control.
+
+Without GPS updates, the inertial sensors allow approximately 10 seconds of accurate position information but after this the horizontal position drift becomes so large that the horizontal position cannot be maintained at all.  At this point if you still have RC radio control it is recommended to take back control using Stabilize, Acro or AltHold as soon as possible.
+
+
+
+<h3>Glitch Protection - Default</h3>
+This section describes the GPS glitch logic that is used by the default navigation algorithm for AC3.1 and 3.2. For the faster boards using 32 bit micros, AC3.2 provides an Extended Kalman Filter (EKF) option  for navigation which can be selected by setting AHRS_EKF_USE = 1. This has a different GPS glitch protection logic which is described in the next section.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/GPSGlitchDetection.png"><img class="alignnone size-large wp-image-10310" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/GPSGlitchDetection-1024x559.png" alt="GPSGlitchDetection" width="584" height="318" /></a>
+
+AC3.1 and higher include GPS glitch protection which can help alert the pilot to a bad GPS position, trigger a failsafe and reduce the incidents of fly-aways.  Glitches are detected by comparing the each new position update received from the GPS with a position projected out from the previous update's position and velocity.  The new position is accepted as "good" if:
+<blockquote>
+<ol>
+	<li><em> the two positions are within the GPSGLITCH_RADIUS (defaults to 5m).</em></li>
+	<li><em>the new position is within a radius that is 10m/s/s (GPSGLITCH_ACCEL) * dt * dt.  Where "dt" is the time difference between the two samples.</em></li>
+</ol>
+</blockquote>
+During a glitch, "<span style="color: #ff0000">Bad Position</span>" will be written on the ground station's HUD
+
+
+
+<h3>Glitch Protection - EKF</h3>
+The EKF (Extended Kalman Filter) inertial naigation option can be selected by setting AHRS_EKF_USE = 1 and is described in more detail in <a title="Navigation Extended Kalman Filter Overview" href="http://planner.ardupilot.com/?p=2127">http://copter.ardupilot.com/?p=11874.</a> Glitch protection for the EKF works as follows:
+
+1) When new GPS position measurements are received, they are compared to a position predicted using IMU measurements.
+
+2) If the difference exceeds a statistical confidence level set by EKF_POS_GATE, then the measurement won't be used.
+
+3) While GPS measurements aren't being used, a circle defined by an uncertainty radius grows around the predicted position. The rate at which this radius grows is controlled by EKF_GLITCH_ACCEL. This is similar to the circle defined by GPSGLITCH_ACCEL, the difference being it is centered around the trajectory predicted by the IMU rather than previous GPS measurements. Because this allows for deviations in trajectory due to maneouvres, the default value for EKF_GLTCH ACCEL is smaller at 1.5 m/s/s. The acceleration growth of the circle is also increased when the vehicle is accelerating or turning to allow for the increase in IMU errors during manoevres.
+
+4) If subsequent GPS measurements fall inside the circle, they will be accepted and the circle is reset back to the minimum radius controlled by EKF_POS_GATE.
+
+5) If the GPS glitch is large enough and lasts long enough, the GPS measurements will continue to be rejected until the circle radius exceeds a value set by EKF_GLITCH_RAD. When this happens, an offset is applied to the GPS position so that it matches the estimated vehicle position and the GPS positions are used again. The GPS offset is then reduced to zero at 1 m/s. This means that large long duration glitches will cause the vehicle to drift at a 1 m/s rate. This is slow enough to give the operator plenty of time to react.
+
+&nbsp;
+
+
+
+<strong>Technical background and safety recommendations:</strong>
+
+The GPS system is not designed to be used as a primary navigation system and signal dropouts or inaccurate positions (aka "glitches") occur from time to time even under clear skies.
+
+It is particularly important to avoid flying auto missions inside canyons, between buildings or mountains, or inside backyards because of heavy multipathing producing large GPS errors. More fix probability will drop dramatically in those conditions from about 99% to 38 % and position errors can rise to 100 meters or more. <em>Only a clear sky view will give good results.</em>
+
+For better results and safety, it is recommended that you check for GPS signal quality and GPS advisories for your region before flying using GPS prediction. Check out these sites for location-specific GPS information:
+
+<strong><a href="http://satpredictor.navcomtech.com/">NavComTech Satellite Position Predictor</a></strong>
+
+<strong><a href="http://www.navcen.uscg.gov/">US Coast Guard Navigation Site</a></strong>
+
+<strong>SBAS (Satellite-based augmentation system):</strong>
+
+If one or more SBAS satellites can be received in your location and you are in a covered region (WAAS, EGNOS, MSAS...) then your GPS receiver will get more precision, typically around one meter in good conditions, with a guaranteed precision of 7.6 meters. Another function of SBAS is integrity reporting: your GPS receiver should be warned about a GPS system integrity defect within 6.2 seconds. For this to work the SBAS integrity detection needs to be enabled in your GPS receiver.
+
+Getting SBAS acquisition completed (DGPS fix) needs a few minutes after getting a 3D fix. So if you want to get the benefit of it (better precision and integrity detection), you should wait between 3 to 10 minutes before flying. GPS Hotstart function (get a fast fix in a couple seconds) does not work for SBAS corrections. So you'll need to wait minutes after each GPS power off to get a 3D + DGPS fix where a 3D fix only will typically ask only for a couple seconds.
+
+SBAS geostationary satellites are often low on the horizon, so they are not always visible before take off. This can explain why RTL precision can be affected by a SBAS correction (DGPS fix) applied only a few minutes after take off.
+
+In locations where SBAS satellites are not available or very distant, it is better to fully disable SBAS corrections. This will save GPS CPU resources, save a couple correlators, and avoid eventual position jumps when trying to receive weak or conflicting SBAS satellites.
+
+SBAS will not help for :
+<ul>
+	<li>very localized atmospheric perturbations causing localized signal delays</li>
+	<li>multipathing causing signal delays by reflection against mountains or buildings.</li>
+</ul>
+<div>
+
+<strong><a href="http://www.iguassu.cz/sbas-sim/">Click here for a nice SBAS (EGNOS) simulator tool.</a></strong>
+
+</div>

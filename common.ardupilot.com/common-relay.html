@@ -1,0 +1,51 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-relay 
+title: common-Relay Switch 
+id: 321 
+menu_order: 150 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+A "Relay" is an digital output pin on the APM or Pixhawk that can be switched between 0 volts and either 3.3V (Pixhawk) or 5V (APM2).  Similar to a servo it allows the flight controller to invoke some action from another device on the vehicle.  In ArduCopter, Plane and Rover, up to 4 pins can be defined as relays.
+
+<!--more-->
+
+
+<h1>Relay pins on the Pixhawk</h1>
+
+On the Pixhawk AUX OUT 5 (pin 54) and AUX OUT 6 (pin 55) are setup as the "First" (or #0) and "Second" (or #1) Relays respectively.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_Pixhawk.png"><img class="alignnone size-medium wp-image-2964" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_Pixhawk-300x216.png" alt="Relay_Pixhawk" width="300" height="216" /></a>
+The number of available Relays can be increased to a maximum of 6 by reducing the number of AUX pins used as <a href="wiki/common-servo/">Servo</a> outputs.  This can be accomplished by reducing the BRD_PWM_COUNT from 4 to 2 or 0.
+
+
+
+<h1>Relay pins on the APM2</h1>
+
+On the APM2, A9 (pin 9) is the pin that is recommended to be used as a relay.  In fact any of the pins from A0 ~ A8 may also be used as relays but to use these you must manually set the RELAY_PIN parameter (to "0" ~ "8") through the Mission Planner's full parameter list.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_APM2.png"><img class="alignnone size-medium wp-image-2650" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_APM2-300x279.png" alt="Relay_APM2" width="300" height="279" /></a>
+
+
+
+<h1>Defining the relay pins through the Mission Planner</h1>
+
+The First ~ Fourth relay pins can be defined most easily using the Mission Planner's Config/Tuning screen's Standard Params list as shown below.  Alternatively if you know the exactly pin number to use, the RELAY_PIN parameter can be set directly through the mission planner's Full Parameters List.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_SetupWithMP.png"><img class="alignnone size-full wp-image-2648" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_SetupWithMP.png" alt="Relay_SetupWithMP" width="1024" height="575" /></a>
+
+
+
+<h1>Pilot control of the relay</h1>
+
+On ArduCopter 3.2 (and higher) the "First" relay can be controlled with the Ch7/Ch8 switches.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_SetupCh7WithMP.png"><img class="alignnone size-medium wp-image-2651" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Relay_SetupCh7WithMP-300x210.png" alt="Relay_SetupCh7WithMP" width="300" height="210" /></a>
+
+
+
+<h1>Mission control of the relay</h1>
+
+Similar to a servo, the Relays can be activated during a mission using the Do-Set-Relay mission command.  This is described on the <a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-Relay">ArduCopter Mission Command List wiki page</a>.

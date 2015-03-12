@@ -1,0 +1,110 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-mission-planner-telemetry-logs 
+title: common-Mission Planner Telemetry Logs 
+id: 27 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h3>Log Types (Dataflash vs tlogs)</h3>
+There are two ways to record your flight data with ArduCopter. With some exceptions, the two methods record very similar data but in different ways:
+<ul>
+	<li><strong>dataflash logs</strong> use the APM's onboard 16Mb dataflash memory, which you can download after use. See table of contents.</li>
+	<li><strong>telemetry logs</strong> (also known as "tlogs" and the subject of this page) are recorded by the mission planner when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link or USB.</li>
+</ul>
+
+
+
+<h3>When and where tlogs are created</h3>
+Tlogs are recordings of the MAVLink telemetry messages sent between the APM/PX and the groundstation and are automatically created the moment you press the connect button on the mission planner.  Files of the format YYYY-MM-DD hh-mm-ss.tlog appear in the "logs" subfolder in your Mission Planner installation folder or to the location you select in the Planner options [Config/Tuning] [Planner].
+
+Besides the ".tlog" files, ".rlog" files are also created.  These contain all the .tlog data plus additional debug output from the mission planner.  but cannot be parsed or played back so they should be ignored.
+
+
+
+<h3>Setting the datarate</h3>
+The desired rate at which data is sent from the APM/PX to the ground station can be controlled through the mission planner's Software &gt; Planner screen's Telemetry drop-downs.  Because all data sent over the telemetry link is also recorded in the tlog, this also controls the rate of data saved to the tlogs.
+
+Note that especially on ArduCopter, due to CPU resource limitations, the actual rate of the data sent and saved may be lower than the rate requested.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png"><img class="alignnone size-full wp-image-2210" alt="MissionPlanner_TelemetryRate" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png" width="1024" height="575" /></a>
+
+
+
+<h3>Playing back missions</h3>
+If you are using wireless telemetry and have connected to to APM via the Mission Planner, your flight data will automatically recorded.  You can play back these logs by doing the following:
+<ul>
+	<li>Open the mission planner's Flight Data screen</li>
+	<li>click on the Telemetry Logs tab</li>
+	<li>Press "Load Log" and find the flight's tlog file</li>
+	<li>Press "Play"</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TlogPlayBack.png"><img class="alignnone size-full wp-image-2211" alt="MissionPlanner_TlogPlayBack" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TlogPlayBack.png" width="1024" height="588" /></a>
+
+You can also jump to the point of interest in the log using the slider and control the speed of the playback with the predefined Speed buttons.
+
+While the log is replaying, the HUD will move and the vehicles location on the map will update as it did during the flight.  Individual data values can be seen through the Status tab and you can even display them in a graph by clicking on the "Tuning" checkbox under the map and then double clicking on the data legend to bring up a box from which you can choose exactly which data fields are graphed as shown below.  This will show the recorded data changing as the flight progresses.
+
+<img alt="" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/mptlog1.png" />
+
+
+
+<h3>Creating 3d images of the flight path</h3>
+You can create KMZ files by doing this:
+<ul>
+	<li>Open the mission planner's Flight Data screen</li>
+	<li>Click on the Telemetry Logs tab</li>
+	<li>Press the "Tlog &gt; Kml or Graph" button</li>
+	<li>Press the "Create KML + GPX" button</li>
+	<li>select the flight tlog</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CreateKMZfromTLOG2.png"><img class="alignnone size-full wp-image-2214" alt="MissionPlanner_CreateKMZfromTLOG2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CreateKMZfromTLOG2.png" width="1142" height="686" /></a>
+
+A .kmz and .kml file will be created along side the original .tlog and this can be opened in google earth to interactively view the 3d flight path. You can open the kmz file in Google Earth to view the flight or path. Just double click the file or drag it and drop into Google Earth.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FlightPath_KMZ2.png"><img class="alignnone size-full wp-image-2216" alt="FlightPath_KMZ2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FlightPath_KMZ2.png" width="819" height="664" /></a>
+
+The different flight modes used during the flight will appear as different colored tracks.  You can change some details about how the flight paths are displayed including their color and whether the paths extend to the ground by doing this:
+<ul>
+	<li>Find the log file’s name in the “Places” pane on the left.  It should appear in a “Temporary Places” folder.</li>
+	<li>Right click on an individual path and select “Properties” to open the Edit Path window.</li>
+	<li>The color can be changed on the “Style, Color” tab</li>
+	<li>The area below the path can be removed (added) on the “Altitude” tab by un-checking (checking) “Extend path to ground”</li>
+</ul>
+
+
+
+<h3>Extracting parameters and Waypoints</h3>
+You can extract the parameters and waypoints from the tlog by following the same steps as for creating the KML file except that at the last step select "Extract Params" or "Extract WPs".
+
+Extract Params will cause a .param file to be created along side the tlog.  This file is tab separated and contains a full list of parameters (in the same order as they appear in the eeprom) along with their values during the flight.  This can be opened in excel or a text editor.
+
+Extract WPs will create one or more .txt files containing any missions uploaded to the APM/PX4.  These files can be opened in the Mission Planner by switching to the Flight Plan screen, right-mouse-button clicking on the map and selecting "File Load/Save", "Load WP File".
+
+
+
+<h3>Graphing data from a flight</h3>
+Data from the flight can be graphed by doing the following:
+<ul>
+	<li>Open the mission planner's Flight Data screen</li>
+	<li>Click on the Telemetry Logs tab</li>
+	<li>Press the "Tlog &gt; Kml or Graph" button</li>
+	<li>Press the "Graph Log" button</li>
+	<li>select the flight tlog</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_GraphData1.png"><img class="alignnone size-full wp-image-2227" alt="MissionPlanner_GraphData1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_GraphData1.png" width="1032" height="623" /></a>
+<ul>
+	<li>When the "Graph This" screen appears, use the left or right mouse button to click on the checkboxes beside the items you wish to graph.  Note that the items are grouped into categories like "RC_CHANNELS" and "RAW_IMU" although it's still often difficult to find exactly the item you wish to graph</li>
+	<li>If you use the left mouse button the scale for the item will appear on the left of the graph.  If you use the right mouse button it will appear on the right</li>
+	<li>Click the checkbox multiple times to cycle through all the possible colours</li>
+	<li>Change the zoom of the graph with your mouse's middle wheel, by select an area of the graph with the left mouse button held down or by right-mouse-button clicking on the graph and selecting "Set Scale To Default"</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_GraphData2.png"><img class="alignnone size-full wp-image-2226" alt="MissionPlanner_GraphData2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_GraphData2.png" width="1590" height="524" /></a>
+
+
+
+<h3>Video overview of tlogs</h3>
+http://www.youtube.com/watch?feature=player_embedded&amp;v=4IRRN5YMHJA

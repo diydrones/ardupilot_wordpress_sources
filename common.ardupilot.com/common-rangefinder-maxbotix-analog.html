@@ -1,0 +1,50 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rangefinder-maxbotix-analog 
+title: common-Maxbotic Analog Sonar - ArduCopter3.2 
+id: 2608 
+menu_order: 20 
+post_parent_id: 2537 
+post_parent_stub: common-rangefinder-landingpage 
+post_parent_title: common-Rangefinders (landing page) 
+END METADATA 
+-->
+<a href="http://www.maxbotix.com/Ultrasonic_Sensors/I2C_Sensors.htm" target="_blank">XL-Maxbotic-EZ</a> line of analog sonars (XL-MaxSonar-EZ0, EZ4 and EZL0) are relatively inexpensive, short range (7m to 10m) range finder primarily designed for indoor use but which has been successfully used outdoors on ArduCopter and ArduRover.  These are the predecessors to <a href="wiki/common-rangefinder-maxbotixi2c/">I2C sonar</a>.
+
+[site_ArduCopter]These instructions are for ArduCopter 3.2 and recent versions of ArduPlane, ArduRover.  Setup instrructions for ArduCopter-3.1.5 (and earlier) <a href="http://copter.ardupilot.com/wiki/sonar/" target="_blank">can be found here</a>.[/site_ArduCopter]
+
+The <a href="http://store.3drobotics.com/products/MB1240-XL-MaxSonar-EZ4" target="_blank">EZ4</a> (recommended) has the narrowest beam providing the best noise resistance while the <a href="http://www.maxbotix.com/Ultrasonic_Sensors/MB1200.htm" target="_blank">EZ0</a> has the widest beam and higher sensitivity.  The long range <a href="http://www.maxbotix.com/Ultrasonic_Sensors/MB1260.htm" target="_blank">EZL0</a> has the same sensitivity as the EZ0 but a 10m range (as opposed to 7m).
+
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+The sonar should be conneted to the Pixhawk's ADC 3.3V port as shown below. The Pixhawk will provide the regulated 5V power supply the sonar requires.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_Pixhawk.png"><img class="alignnone size-full wp-image-2609" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_Pixhawk.png" alt="RangeFinder_MaxbotixAnalog_Pixhawk" width="686" height="581" /></a>
+
+
+
+<h1>Connecting to the APM2.x</h1>
+
+The sonar should be conneted to the APM's A0 port as shown below. The APM will provide the regulated 5V power supply the sonar requires.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_APM2.jpg"><img class="alignnone size-full wp-image-2621" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_APM2.jpg" alt="RangeFinder_MaxbotixAnalog_APM2" width="700" height="531" /></a>
+
+
+
+<h1>Setup through the mission planner</h1>
+
+please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parmeter List page and set the following parameters:
+<ul>
+	<li>RNGFND_PIN = "14" for Pixhawk's ADC 3.3v pin #2 <strong>OR </strong>"0" for APM2.x</li>
+	<li>RNGFND_MAX_CM = "700" (i.e. 7m max range) if using EZ0 or EZ4, "1000" if using EZL0</li>
+	<li>RNGFND_SCALING = "2.04" (i.e. 7m / 5v) if using EZ0 or EZ4, "4.08" (i.e. 10m / 5v) if using EZL0</li>
+	<li>RNGFND_TYPE = “1" (Analog)</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_Pixhawk_MPSetup.png"><img class="alignnone size-full wp-image-2899" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixAnalog_Pixhawk_MPSetup.png" alt="RangeFinder_MaxbotixAnalog_Pixhawk_MPSetup" width="1287" height="638" /></a>
+
+
+
+<h1>Testing the sensor</h1>
+
+Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab. Look closely for "sonarrange".
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>

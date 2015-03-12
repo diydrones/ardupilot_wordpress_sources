@@ -1,0 +1,40 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rangefinder-maxbotixi2c 
+title: common-Maxbotic I2C Sonar Rangefinder 
+id: 2562 
+menu_order: 30 
+post_parent_id: 2537 
+post_parent_stub: common-rangefinder-landingpage 
+post_parent_title: common-Rangefinders (landing page) 
+END METADATA 
+-->
+<a href="http://www.maxbotix.com/Ultrasonic_Sensors/I2C_Sensors.htm" target="_blank">Maxbotic I2C EZ4</a> sonar (also known as the I2CXL-MaxSonar-EZ4 or MB1242) is a relatively inexpensive, short range (up to 7m) range finder primarily designed for indoor use but which has been successfully used outdoors on ArduCopter.
+<!-- more -->
+The EZ4 (recommended) has the narrowest beam providing the best noise resistance while the EZ0 has the widest beam and highest sensitivity.  <a href="http://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf" target="_blank">The datasheet can be found here</a>.  Additional information on the similar <a href="http://copter.ardupilot.com/wiki/sonar/" target="_blank">analog version of this sonar can be found here</a>.
+[note]This rangefinder is only supported on the Pixhawk running AC3.2 or higher or recent versions of ArduPlane and ArduRover.[/note]
+
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+The sonar should be conneted to the Pixhawk's I2C port as shown below or alternatively through an I2C expansion board. The Pixhawk will provide the regulated 5V power supply the sensor requires.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxBotixI2C_Pixhawk.png"><img class="alignnone size-full wp-image-2565" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxBotixI2C_Pixhawk.png" alt="RangeFinder_MaxBotixI2C_Pixhawk" width="683" height="587" /></a>
+
+
+
+<h1>Setup through the mission planner</h1>
+
+To configure ArduCopter, ArduPlane or ArduRover to use the Maxbotix I2C, please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parmeter List page and set the following parameters:
+<ul>
+	<li>RNGFND_MAX_CM = "700" (i.e. 7m max range)</li>
+	<li>RNGFND_TYPE = “4" (PX4-MaxbotixI2C sonar)</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixI2C_MPSetup.png"><img class="alignnone size-full wp-image-2896" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_MaxbotixI2C_MPSetup.png" alt="RangeFinder_MaxbotixI2C_MPSetup" width="1250" height="636" /></a>
+
+
+
+<h1>Testing the sensor</h1>
+
+Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab. Look closely for "sonarrange".
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>

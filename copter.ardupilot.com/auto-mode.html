@@ -1,0 +1,63 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: auto-mode 
+title: Auto Mode 
+id: 1527 
+menu_order: 30 
+post_parent_id: 1556 
+post_parent_stub: flight-modes 
+post_parent_title: Flight Modes 
+END METADATA 
+-->
+In Auto mode the copter will follow a pre-programmed mission script stored in the autopilot which is made up of navigation commands (i.e. waypoints) and "do" commands (i.e. commands that do not affect the location of the copter including triggering a camera shutter). This page provides an overview of  Auto mode.  
+
+<!--more-->
+
+Information on creating a mission script, can be found on the <strong><a title="Planning a mission with waypoints and events" href="http://copter.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/">Planning a mission with waypoints and events</a> </strong>page.  A full list of supported commands can be found on the <strong><a href="wiki/mission-command-list/">Mission Command List</a></strong> page.
+
+
+<h1>Overview</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/auto.png"><img class="alignnone wp-image-9352" alt="auto" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/auto.png" width="560" height="420" /></a>
+
+AUTO mode incorporates the altitude control from <a href="wiki/altholdmode/">AltHold mode</a> and position control from <a href="wiki/loiter-mode/">Loiter mode</a> and should not be attempted before these modes are flying well.  All the same requirements apply including ensuring that vibration levels and compass interference levels are acceptable and that the GPS is functioning well including returning an HDOP of under 2.0.
+
+
+
+<h1>Controls</h1>
+
+AUTO should be set-up as one of the <a href="wiki/flight-modes/">Flight Modes</a> on the flight mode switch.
+
+If starting the mission while the copter is on the ground the pilot should ensure the throttle is down, then switch to the Auto flight mode, then raise the throttle.  The moment that the throttle is raised above zero, the copter will begin the mission.
+
+If starting the mission from the air the mission will begin from the first command the moment that the flight mode switch is moved to Auto.  If the first command in the mission is a take-off command but the vehicle is already above the take-off command's altitude the take-off command will be considered completed and the vehicle will move onto the next waypoint.
+
+At any time the pilot can retake control from the autopilot by returning the flight mode switch to another flight mode such as Stabilize or Loiter.  If the pilot then switches to AUTO again, the mission will restart from the first command.
+
+During the mission the pilot's roll, pitch and throttle inputs are ignored but the yaw can be overridden with the yaw stick.  This allows the pilot to for example aim the nose of the copter (which might have a hard mounted camera on it) as the copter flies the mission.  The autopilot will attempt to retake yaw control as the vehicle passes the next waypoint.
+
+Missions can be entered, amended through the Mission Planner's Flight Plan screen.  Please refer to the <a href="wiki/mission-command-list/">Mission Command List wiki page</a> for a full list of supported commands along with a short description of each.
+
+
+
+<h1>Ending a Mission</h1>
+
+Missions should normally have an RTL as their final command to ensure the copter will return after the mission completes.  Alternatively the final command could be a LAND with a different location.  Without a final RTL or LAND command the copter will simply stop at the final waypoint and the pilot will need to retake control with the transmitter.
+
+Remember that when using RTL, the copter will return to the "home" position which is the location where the copter was armed.<strong></strong>
+
+As the copter touches down at the end of the mission the pilot should move the throttle to zero at which point the autopilot will disarm the motors if it also believes that it has landed.
+
+
+
+<h1>Tuning</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Auto_Tuning.png"><img class="alignnone size-full wp-image-11197" alt="Auto_Tuning" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Auto_Tuning.png" width="1024" height="575" /></a>
+
+AUTO mode incorporates the altitude control from <a href="wiki/altholdmode/">AltHold mode</a> and position control from <a href="wiki/loiter-mode/">Loiter mode</a>.
+
+The maximum horizontal speed of the copter can be adjusted with the <strong>Speed</strong> (aka WPNAV_SPEED) parameter from the Mission Planner's Config/Tuning &gt;&gt; APM:Copter Pids screen (see blue box above).  The default is 500 meaning 5m/s.  A typical copter can reach top speeds of 10m/s ~ 13m/s (i.e. 1000 ~ 1300) before it becomes unable to both maintain altitude and horizontal speed.
+
+The vertical speeds up and down can similar be adjusted with the <strong>Speed Up</strong> (WPNAV_SPEED_UP) and <strong>Speed Dn</strong> (WPNAV_SPEED_DN) parameters.
+
+The <strong>Radius</strong> allows you to control how close the copter must come to the exact waypoint position before the waypoint is considered "complete" and the copter moves onto the next waypoint.  This only applies when the waypoint command includes a delay of 1 second or more.  Without a delay the waypoint is considered a "fast waypoint" and the copter will begin towards the next waypoint once the intermediate target that it is chasing has reached the waypoint.  This intermediate target can be 10m or more ahead of the copter (it's distance ahead of the copter increases with the Speed parameter).

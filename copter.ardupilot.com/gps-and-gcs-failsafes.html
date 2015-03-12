@@ -1,0 +1,54 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: gps-and-gcs-failsafes 
+title: GPS and GCS Failsafes 
+id: 10180 
+menu_order: 40 
+post_parent_id: 1539 
+post_parent_stub: configuration 
+post_parent_title: Advanced Configuration 
+END METADATA 
+-->
+This pages covers the set-up and testing of the GPS and Ground Station Control (GCS) failsafes. Note that ArduCopter has 2 other failsafes : <a href="wiki/throttle-failsafe/">Radio</a> and <a href="wiki/failsafe-battery/">Battery</a>.
+
+
+<h3>GPS Failsafe</h3>
+<ul>
+	<li>The GPS Failsafe is enabled by default but you can enable or disable it on the Mission Planner's Standard Parameter List, by set the FS_GPS_ENABLE parameter to 0 (Disable) or 1 (Land) or 2 (switch to AltHold).  It is highly recommended to leave it enabled and no known reason why it should ever be disabled.</li>
+	<li>If you lose GPS lock or experience a GPS Glitch for 5 seconds while in a mode that requires the GPS (Auto, Guided, Loiter, RTL, Circle, Position or Drift) mode it will initiate a Land (or AltHold if FS_GPS_ENABLE is set to 2).</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/GPSFailsafeAltHold2.png"><img class="alignnone size-full wp-image-10258" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/GPSFailsafeAltHold2.png" alt="GPSFailsafeAltHold" width="1023" height="500" /></a>
+<ul>
+	<li>Below is a video of a simulated GPS Failure resulting in the copter Landing.</li>
+</ul>
+http://www.youtube.com/watch?v=sqofSFd0MuU
+
+Additional information on the GPS failsafe and Glitch protection can be found <a href="wiki/gps-failsafe/">here</a>.
+
+
+<h3>Ground Control Station Failsafe</h3>
+<ul>
+	<li>In Mission Planner's Advanced Parameter List, set the FS_GCS_ENABLE parameter to:
+<ul>
+<ul>
+	<li>0 to disable the GCS failsafe</li>
+	<li>1 to enable and always RTL in event of loss of contact</li>
+	<li>2 to RTL unless in AUTO mode in which case we should continue with the mission</li>
+</ul>
+</ul>
+</li>
+	<li>If you have been using the ground station to control the copter (i.e. using a joystick) and then lose Ground Control Station contact for at least 5 seconds the following will happen:
+<ul>
+	<li>Disarm motors - if you are in stabilize or acro mode and your throttle is zero</li>
+	<li>RTL - if you have a GPS lock and are more than 2 meters from your home position</li>
+	<li>LAND - if you have no GPS lock or are within 2 meters of home</li>
+	<li>Continue with the mission - if you are in AUTO mode and have set the GCS Failsafe Options to 2 (Enabled_continue_in_auto_mode).</li>
+</ul>
+</li>
+</ul>
+<ul>
+	<li>If the failsafe clears (contact with the ground station is restored) the copter will remain in it's current flight mode. It will <strong>not</strong> automatically return to the flight mode that was active before the failsafe was triggered. This means that if, for example, you are flying in stabilize mode when the failsafe is triggered, and this causes the flight mode to change to RTL or LAND, if you wish to re-take control of the copter you will need to set your flight mode again back to stabilize.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/FailsafeAdvPar801.png"><img class="alignnone size-full wp-image-7680" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/FailsafeAdvPar801.png" alt="FailsafeAdvPar80" width="984" height="294" /></a>
+
+[note]All Failsafe Parameters can also be observed or set from the Advanced Parameter List.[/note]

@@ -1,0 +1,180 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-mission-planner-bluetooth-connectivity 
+title: common-Mission Planner Bluetooth Connectivity 
+id: 2422 
+menu_order: 15 
+post_parent_id: 2447 
+post_parent_stub: common-telemetry-landingpage 
+post_parent_title: common-Telemetry (landing page) 
+END METADATA 
+-->
+The <a href="http://store.3drobotics.com/products/bluetooth-data-link" target="_blank">3DR Bluetooth Data Link</a> can be used to connect your APM2 or Pixhawk to your bluetooth enabled PC or Android Ground station at distances up to 50m.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Bluetooth.jpg"><img class="alignnone  wp-image-2423" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Bluetooth-1024x682.jpg" alt="Bluetooth" width="528" height="352" /></a>
+
+
+<h1>Connecting to the Pixhawk or APM2.x</h1>
+
+The 3DR blue tooth data link comes with both a DF13 6 pin and 6-to-5 pin connector which make it easy to connect to the Pixhawk Telem1 or APM2.x's Telem ports.  Note that for the Pixhawk, although Telem1 is the recommendation, Telem2 or even Serial 4/5 will work.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Telemetry_Bluetooth_PixhawkAPM2.png"><img class="alignnone size-full wp-image-2588" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Telemetry_Bluetooth_PixhawkAPM2.png" alt="Telemetry_Bluetooth_PixhawkAPM2" width="1646" height="586" /></a>
+Once you have connected the Bluetooth data link you can power up the board.  It is OK to use USB connected power while using the Bluetooth module connected to the Ardupilot or PixHawk the USB connection can supply enough power BUT YOU MUST USE A WALL WART with Micro or Mini USB).
+
+Bluetooth data link's LEDs:
+<ul>
+	<li>Red LED blinks at 1hz : device is working, not connected</li>
+	<li>Red LED blinks at 0.5z : pairing</li>
+	<li>Red LED solid : connected</li>
+</ul>
+
+
+
+<h1>Quick Start connecting with Mission Planner</h1>
+
+If you are familiar with Bluetooth, search for Bluetooth Device HC-05 or 6 (some may have Linvor as well) , Pair with device (code 1234 or 0000) check it's properties and look at the services tab. Make sure SPP com port box is checked (only there if your Bluetooth device is active) Look in Device Manager (Windows) and make sure there is a Com Port for the Bluetooth and in the com port properties set the baud rate to 57600 (note the Com Port number).
+
+For use with Mission Planner on the Configure/Tuning tab make sure and UNCHECK the box "Reset on USB Connect"
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/mp.jpg"><img class="alignnone  wp-image-2431" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/mp-300x227.jpg" alt="mp" width="559" height="510" /></a>
+
+The default Baud Rate for the 3DR Bluetooth Module is 57600 (most other modules are 9600) Be sure when you connect it is at 57600 and for the new Com Port you saw in Device Manager.
+
+When you power up the PixHawk or APM with the Bluetooth the module will flash at 1hz the red LED when not connected. When Paring it will flash at .5 Hz and when connected it will be steady on.
+
+And your done! You can now use your Bluetooth telemetry for up to about 50m range. (your range may vary depending on back ground noise and conditions in your area)
+
+If you have problems connecting or you don't know Bluetooth very well or you want to change the default Baud Rate or Device Name, read on for the step by step process.
+
+
+
+<h1>Step-by-Step connecting with Mission Planner</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Mini_Bluetooth_Dongle.jpg"><img class="alignnone  wp-image-2424" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/Mini_Bluetooth_Dongle.jpg" alt="Mini_Bluetooth_Dongle" width="202" height="202" /></a>
+
+Many PCs and Laptops have bluetooth adapters built in but if not then you can use a generic USB Bluetooth dongle (pic above) or use an additional <a href="http://store.3drobotics.com/products/bluetooth-data-link" target="_blank">3DR Bluetooth Data Link</a> connected via an <a href="http://store.3drobotics.com/products/ftdi-cable-3-3v" target="_blank">FTDI Cable</a>.
+
+After first making sure your Pixhawk/APM2 is powered on, and your PC's bluetooth dongle is plugged in and installed, click on the Windows task bar's little up triangle (aka "show hidden icons") which should be on the bottom right of the screen.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/task-bar.jpg"><img class="alignnone size-medium wp-image-2432" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/task-bar-300x77.jpg" alt="task bar" width="300" height="77" /></a>
+The "hidden icons box" should appear.  Right-mouse-button-click on the BlueTooth icon and select "show Bluetooth devices"
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT.jpg"><img class="alignnone size-medium wp-image-2433" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT-300x219.jpg" alt="BT" width="300" height="219" /></a><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT-1.jpg"><img class="alignnone size-medium wp-image-2434" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT-1-300x264.jpg" alt="BT-1" width="300" height="264" /></a>
+Windows should bring up the devices box. Any devices you may already have connected by Bluetooth will be in this box. If you have not connected any BT devices before this box will be empty. Select "Add a device".
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT-3.jpg"><img class="alignnone size-medium wp-image-2435" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/BT-3-300x200.jpg" alt="BT-3" width="300" height="200" /></a>
+Windows will search for BT devices for you. If you have any BT devices turned on they will show up here (like perhaps your cell phone) ignore any other devices and select the HC-05 or HC-06 (or Linvor) .
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/discovery.png"><img class="alignnone size-medium wp-image-2468" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/discovery-300x159.png" alt="discovery" width="300" height="159" /></a>
+Select Paring using device code.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/pairing.png"><img class="alignnone size-medium wp-image-2465" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/pairing-300x159.png" alt="pairing" width="300" height="159" /></a>
+
+Enter the device code (1234 or 0000) this is the default code.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/pin.png"><img class="alignnone size-medium wp-image-2467" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/pin-300x211.png" alt="pin" width="300" height="211" /></a>
+Once paired right click the device and select "properties" The check box for Comm Port SPP should be checked (also note the com port number).
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/properties.png"><img class="alignnone size-medium wp-image-2466" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/properties-300x159.png" alt="properties" width="300" height="159" /></a>
+In device manager select Com Ports
+Choose the comm port you noted in the above step.
+Right click and select "properties"
+Change baud rate to 57600
+Once again start Mission Planner and go to the Configure/Tuning tab and make sure you UNCHECK the box "Reset on USB connect"
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/mp.jpg"><img class="alignnone size-medium wp-image-2431" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/mp-300x227.jpg" alt="mp" width="300" height="227" /></a>
+
+Your Bluetooth device should now be ready and you can connect to the proper port at the proper baud rate of 57600 (red LED steady on and not flashing)
+
+
+
+<h1>Connecting From your Android ground station</h1>
+
+<p style="text-align: left">These instructions will show you how to connect to your vehicle from AndroPilot or DroidPlanner 2 running on  NExus 7 tablet using the Bluetooth module.</p>
+Open the Android device's settings application and turn Bluetooth connectivity ON (usually by sliding a slider to the right).  In the same settings screen click on "Bluetooth" which should cause a list of AVAILABLE DEVICES to appear
+
+Power the vehicle and the "HC-06" device should appear.  Click on it and enter "1234" or "0000" as the PIN to pair with the device, then select OK.
+
+The device will appear under "PAIRED DEVICES"
+
+If using DroidPlanner:
+<blockquote>
+<ul>
+	<li><em>open the Droid Planner settings, and select Telemetry Connection Type, Bluetooth.</em></li>
+	<li><em>In the main DroidPlanner interface, select Connect, and select the paired Bluetooth device.</em></li>
+</ul>
+</blockquote>
+If using AndroPilot:
+<blockquote>
+<ul>
+	<li><em> a "bluetooth" button should appear on the screen, click it</em></li>
+</ul>
+</blockquote>
+When live data appears on the screen, you’re ready to start mission planning.
+
+
+
+<h1>How to Change Baud Rate, Device Name and Device PIN</h1>
+
+You will need a FTDI to USB cable to change any of the configurations of the device (not supplied) It is not necessary to change anything in order for your BT device to function properly it will function quite well as supplied. This is for reference and your convenience only!
+
+To change the above you need a "Terminal" emulator program. You can not use "Putty" (a popular serial port tool)  because it will not accept "line" commands. The Bluetooth Modules read the input at a rate of once per second therefore you must use an emulator that will allow you to input an entire line before hitting "send". You can use the Arduino IDE to send commands to the com port if you are familiar with that. I use  "Advanced Serial Port Terminal" but any terminal emulator that allows you to type in a line of text before hitting send will work just a good.
+<h4>Change the Baud Rate:</h4>
+<span style="font-size: medium;font-family: verdana,geneva">The index  after the command AT+BAUD corresponds to the following baud rate:</span>
+
+<span style="font-size: medium;font-family: verdana,geneva">1----1200bps
+2----2400bps
+3----4800bps
+4----9600bps
+5----19200bps
+6----38400bps
+7----57600bps
+8----115200bps</span>
+
+There are additional baud rates. Warning! do not set these baud rates unless you have a special fast UART chip. If you don't know do not use these rates they are beyond the standard PC UART speed and once set you will loose communication with the device and the only way to contact the device after that will be with a high speed UART.  (these are for reference only)
+
+<span style="font-size: medium;font-family: verdana,geneva">9----230400bps
+A----460800bps
+B----921600bps
+C----1382400bps</span>
+
+<span style="font-size: medium;font-family: verdana,geneva">The change of Baud rate takes effect immediately after the command is sent. So if you want to keep configuring the Bluetooth module, you need to set the Baud rate of your terminal program to the new Baud rate the Bluetooth is using. To test it, send AT again, you should receive 'OK'</span>
+<h4>Change the Device Name</h4>
+<span style="font-size: medium;font-family: verdana,geneva">This example show you how to change the name of the Bluetooth module to Ardupilot: In the terminal program, send the command (case sensitive):</span>
+
+<span style="font-family: verdana,geneva;font-size: medium">AT+NAMEArdupilot</span>
+
+<span style="font-size: medium;font-family: verdana,geneva">The Bluetooth should reply:</span>
+
+<span style="font-family: verdana,geneva;font-size: medium">OKsetname</span>
+<h4>Change the Device PIN</h4>
+<span style="font-size: medium;font-family: verdana,geneva">The following example shows how to change the pairing code to 5566 In the terminal program, send the command (case sensitive):</span>
+
+<span style="font-family: verdana,geneva;font-size: medium">AT+PIN5566</span>
+
+<span style="font-size: medium;font-family: verdana,geneva">The Bluetooth should reply:</span>
+
+<span style="font-family: verdana,geneva;font-size: medium">OKsetPIN</span>
+
+
+
+<h1>Troubleshooting</h1>
+
+You can test the device by making a loopback from TX to RX.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/bluetooth-loopback.jpg"><img class="alignnone size-medium wp-image-2459" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/07/bluetooth-loopback-300x184.jpg" alt="bluetooth-loopback" width="300" height="184" /></a>
+
+Open your terminal program select the correct comm port and in terminal type anything you like. If you see the test displayed then your device is working properly. If you do not see the text you typed and you have selected the correct comm port and your device is paired and connected (red LED solid on not flashing) then you may have a problem with your device.
+
+
+
+<h1>Specs</h1>
+
+Dimensions : 1.4” x 0.6” x 0.17”
+Weight 9.6 g (0.3 oz)
+Operation voltage: 3.6 to 6 V
+I/O level: 3.3 V
+Typical -80dBm sensitivity
+Up to +4dBm RF transmit power
+UART interface with programmable baud rate
+Default baud rate: 57600
+
+Supported baud rates: 1200, 2400, 4800, 9600, 19200,38400, 57600, 115200, 230400, 460800
+Pairing code: 1234 or 0000
+Auto-connect to the last device on power as default
+Permit pairing device to connect as default
+Integrated antenna
+Range: 50 m

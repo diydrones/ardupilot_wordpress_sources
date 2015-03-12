@@ -1,0 +1,289 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-camera-control-board 
+title: common-3DR Camera Control Board 
+id: 2825 
+menu_order: 100 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
+END METADATA 
+-->
+The 3DR Camera Control Board (3DR CCB) is a camera remote control interface for aerial photography. It has <a href="#port_mapping">many features</a>, including: FTDI USB/UART adapter, USB HOST, Digital IO, Analog IO, Optocoupled IO, etc.
+
+[note]<em>The 3DR CCB is not yet commercially available.</em> Before it can be released we need some smart programmers to add some cool new features into the flight code — if you want to help please contact <em>CraigElder@uniserve</em>.[/note]
+
+
+
+<h1>Overview</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Persp_sml.jpg"><img class="alignnone wp-image-2829 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Persp_sml.jpg" alt="Persp_sml" width="835" height="534" /></a>
+
+The main camera control protocol used is known as PTP (Picture Transfer Protocol), which was originally standardized as PIMA 15740:2000, ISO 15740:2005(V1.0), and ISO 15740:2008(V1.1).
+
+The PTP has been supported by almost all cameras since 2005, but often in a limited fashion. Only few cameras have the "PTP Remote Control" feature. Canon, for example, removed the remote control feature from their compact line (PowerShot models) in the last PS SDK in 2009 (PS-ReCSDK 1.1.0e).
+
+Fortunately the PTP hacking extension in the <a title="CHDK Project" href="http://chdk.wikia.com/wiki/PTP_Extension" target="_blank">CHDK project</a> allows us to extend the PTP control to newer, smaller and lighter Canon PowerShot models.
+
+The CHDK PTP interface is described below:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Diagram_MAVPTP.jpg"><img class="size-full wp-image-2908 aligncenter" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Diagram_MAVPTP.jpg" alt="Diagram_MAVPTP" width="500" height="222" /></a>
+
+
+
+<h1>Port Mapping</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Ports.jpg"><img class="alignnone size-full wp-image-2830" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Ports.jpg" alt="Ports" width="974" height="306" /></a>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px;">
+<tbody>
+<tr>
+<th colspan="6">Telemetry UART (Auto Pilot)</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: center;">5V</td>
+<td style="text-align: center;">TX</td>
+<td style="text-align: center;">RX</td>
+<td style="text-align: center;">CTS</td>
+<td style="text-align: center;">RTS</td>
+<td style="text-align: center;">GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px" cellspacing="0">
+<tbody>
+<tr>
+<th colspan="4">I2C (3V3)</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;">GND</td>
+<td style="text-align: center;">SCA</td>
+<td style="text-align: center;">SCL</td>
+<td style="text-align: center;">3V3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px" cellspacing="0">
+<tbody>
+<tr>
+<th colspan="4">Digital IO</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;">GND</td>
+<td style="text-align: center;">D2</td>
+<td style="text-align: center;">D8</td>
+<td style="text-align: center;">D7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px" cellspacing="0">
+<tbody>
+<tr>
+<th colspan="4">Analog IO</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;">GND</td>
+<td style="text-align: center;">A1</td>
+<td style="text-align: center;">A2</td>
+<td style="text-align: center;">A3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px" cellspacing="0">
+<tbody>
+<tr>
+<th colspan="3">Optocoupled IO (LANC-C Control)</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">V+ LAN-C(5-9V)</td>
+<td style="text-align: center;">LAN-C Line</td>
+<td style="text-align: center;">GND LAN-C</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="float: left; margin-right: 5px;">
+<table style="height: 80px;" width="200px" cellspacing="0">
+<tbody>
+<tr>
+<th colspan="3">Optocoupled IO (Contact Closure Triggering)</th>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">NC</td>
+<td style="text-align: center;">Shutter</td>
+<td style="text-align: center;">Ground</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<h1>USB Connector Types</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/USB_plugs.jpg"><img class="size-full wp-image-2861 aligncenter" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/USB_plugs.jpg" alt="USB_plugs" width="546" height="425" /></a>
+
+
+
+<h1>Computer Wiring - Table Tests and Firmware Uploading</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/TableTestWiring.jpg"><img class="aligncenter size-full wp-image-2874" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/TableTestWiring.jpg" alt="TableTestWiring" width="720" height="480" /></a>
+
+
+<h1>Flight Control Wiring - Aerial Photography</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/BasicWiring.jpg"><img class="size-full wp-image-2863 aligncenter" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/BasicWiring.jpg" alt="BasicWiring" width="720" height="480" /></a>
+
+The firmware can be found <a href="https://github.com/sandrobenigno/3dr-camera-ctrl">here on GitHub</a>.
+
+There is also a <a href="https://github.com/sandrobenigno/3dr-camera-ctrl/archive/master.zip">zip file</a> of the repository.
+
+After getting the source code, just follow the steps below:
+Step 1: Set your Arduino SketchBook path to the main folder
+Step 2: Select the sketch "ArduCAMPTP_CHDK_APM26"
+
+[note]If you want the camera showing lenses when connected, you need to change the file __defines.h by setting AUTOSTART to 1, like here:
+<pre>#define AUTOSTART 1 //Expose lens on start (Start on Record Mode)</pre>[/note]
+
+Step 3: Compile and upload it to CCB board
+Step 4: Copy the file geoshot.lua to camera's SD card (folder: /CHDK/SCRIPTS/)
+
+Step 5: While the Flight Control board is connected to MissionPlanner, do set the shutter just like here:
+
+<img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Shutter_Setup.jpg" alt="Shutter_Setup" width="569" height="146" class="aligncenter size-full wp-image-3463" />
+
+Step 6: Test shooting
+
+<img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/maps.jpg" alt="maps" width="537" height="432" class="aligncenter size-full wp-image-3462" />
+
+After that... any other command should work... because it acts just like a servo.
+
+
+
+<h1>Contact Closure - Example: Canon XTi</h1>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/ContactClosureWiring.jpg"><img class="aligncenter size-full wp-image-2894" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/ContactClosureWiring.jpg" alt="ContactClosureWiring" width="720" height="480" /></a>
+
+
+
+
+<h1>MAVLink Detailed</h1>
+
+Currently, the code is using RC Channels from MAVLink. It does work like a virtual servo, i.e. those messages do reflect the status of every single output channel from the Flight Control.
+
+Take a look at the most important piece of code from the file "<a href="https://github.com/sandrobenigno/3dr-camera-ctrl/blob/master/ArduCAMPTP_CHDK_APM26/MAVcomm.h" target="_blank">MAVcomm.h</a>":
+
+<pre>        case MAVLINK_MSG_ID_RC_CHANNELS_RAW: //RC INPUT BYPASSED BY APM:
+        {
+          drone_chan[0] = mavlink_msg_rc_channels_raw_get_chan5_raw(&msg);
+          drone_chan[1] = mavlink_msg_rc_channels_raw_get_chan6_raw(&msg);
+          drone_chan[2] = mavlink_msg_rc_channels_raw_get_chan7_raw(&msg);
+          drone_chan[3] = mavlink_msg_rc_channels_raw_get_chan8_raw(&msg);
+        }</pre>
+
+The triggering is flagged by this small piece of code from the same file:
+
+<pre>#ifdef DRONE_OUT
+          if(cam_ctrl_state.shot <= 0 && (drone_servo[DRONE_OUT] > 1500)) cam_ctrl_state.shot = 1;
+#endif</pre>
+
+The flag "cam_ctrl_state.shot" is set to "1" so the board can shot and set it back to "0".
+
+By default, the code above is using the RC8 from the Flight Control. It is defined on the file "<a href="https://github.com/sandrobenigno/3dr-camera-ctrl/blob/master/ArduCAMPTP_CHDK_APM26/__defines.h" target="_blank">__defines.h</a>" like shown here:
+<code><small>//Define what FC OUT channel is the trigger
+#define DRONE_OUT 1 //Shutter RC8</small></code>
+
+The shooting function uses some Attitude data as well:
+
+<pre>        case MAVLINK_MSG_ID_ATTITUDE:
+        {
+          drone_pitch = ToDeg(mavlink_msg_attitude_get_pitch(&msg));
+          drone_roll = ToDeg(mavlink_msg_attitude_get_roll(&msg));
+          drone_yaw = ToDeg(mavlink_msg_attitude_get_yaw(&msg));
+        }
+        break;
+
+        case MAVLINK_MSG_ID_GPS_RAW_INT:
+        {
+          drone_lat = mavlink_msg_gps_raw_int_get_lat(&msg) / 10000000.0f;
+          drone_lon = mavlink_msg_gps_raw_int_get_lon(&msg) / 10000000.0f;
+          drone_fix_type = mavlink_msg_gps_raw_int_get_fix_type(&msg);
+          drone_satellites_visible = mavlink_msg_gps_raw_int_get_satellites_visible(&msg);
+        }
+        break;
+
+        case MAVLINK_MSG_ID_VFR_HUD:
+        {
+            drone_heading = mavlink_msg_vfr_hud_get_heading(&msg); // 0..360 deg, 0=north
+            drone_alt_asl = mavlink_msg_vfr_hud_get_alt(&msg);
+        }
+        break;</pre>
+
+That function does send attitude and GPS data to a file on the camera's SD card. It does call and communicate with the camera through a local <a href="https://github.com/sandrobenigno/3dr-camera-ctrl/tree/master/CHDK/SCRIPTS" target="_blank">CHDK script</a>.
+
+In order to make it work fully, the Flight Control should implement specific messages for the whole set of functions that the board will translate into setup and triggering. You can see here the suggested entries, though it could be expressed in many other ways on a future implementation:
+
+<pre>        case MAVLINK_MSG_ID_DIGICAM_CONTROL: //MAV_CMD_DO_DIGICAM_CONTROL:
+        {
+          cam_ctrl_state.session     = mavlink_msg_digicam_control_get_session(&msg);
+          cam_ctrl_state.zoom_pos    = mavlink_msg_digicam_control_get_zoom_pos(&msg);
+          cam_ctrl_state.focus_lock  = mavlink_msg_digicam_control_get_focus_lock(&msg);
+          cam_ctrl_state.shot        = mavlink_msg_digicam_control_get_shot(&msg);
+          cam_ctrl_state.command_id  = mavlink_msg_digicam_control_get_command_id(&msg);
+          cam_ctrl_state.extra_param = mavlink_msg_digicam_control_get_extra_param(&msg);
+          cam_ctrl_state.extra_value = mavlink_msg_digicam_control_get_extra_value(&msg);
+        }
+        break; </pre>
+
+The main control points are these ones:
+
+<ul>
+	<li>cam_ctrl_state.session: show's or retract the lenses</li>
+	<li>cam_ctrl_state.zoom_pos: does control the focal length</li>
+	<li>cam_ctrl_state.focus_lock: does lock or unlock the focus</li>
+	<li>cam_ctrl_state.shot: does shot the camera</li>
+</ul>
+

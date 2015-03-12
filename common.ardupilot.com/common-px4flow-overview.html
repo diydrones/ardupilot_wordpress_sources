@@ -1,0 +1,52 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-px4flow-overview 
+title: common-PX4-FLOW Optical Flow Camera Board Overview 
+id: 325 
+menu_order: 20 
+post_parent_id: 3767 
+post_parent_stub: common-optical-flow-sensors-landingpage 
+post_parent_title: common-Optical Flow Sensors (landingpage) 
+END METADATA 
+-->
+The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4-FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features plus the built-in Maxbotix LZ-EZ4 sonar to determine aircraft ground velocity.  The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
+
+[warning]The PX4Flow is not supported in the current stable releases of ArduCopter, ArduPlane or ArduRover software. Support will be added for the Pixhawk in ArduCopter 3.3 but it is unlikely that it will ever be supported for use with the APM2.[/warning]
+
+https://www.youtube.com/watch?v=LP8kl4hGfMw
+
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk.png"><img class="alignnone size-large wp-image-2973" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk-1024x567.png" alt="OptFlow_Pixhawk" width="584" height="323" /></a>
+
+The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
+
+
+
+<h1>Setup through the Mission Planner</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup.png"><img class="alignnone size-large wp-image-2974" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup-1024x575.png" alt="OptFlow_MPSetup" width="584" height="327" /></a>
+
+The sensor can be enabled by connecting with the Mission Planner and then on the Initial Setup &gt;&gt; Optional Hardware &gt;&gt; Optical Flow page check the "Enable checkbox".  Alternatively the FLOW_ENABLE parameter should be set to "1" through the full parameters list.  The sensor will be initialised once the Pixhawk board is rebooted.
+
+
+
+<h1>Testing the sensor</h1>
+
+The raw data from the sensor will eventually be visible on the Mission Planner's Flight Data screen's Status tab (<a href="https://github.com/diydrones/MissionPlanner/issues/745" target="_blank">issue raised here</a>).  Until then you can perform the following test in a well lit room:
+<ul>
+	<li>Remove the lens cap from the sensor</li>
+	<li>If using ArduCopter, arm the vehicle  to allow logging to start (no need to connect the flight battery)</li>
+	<li>Move the sensor around</li>
+	<li>Download the dataflash logs and graph the OF message's data including "Qual", flowX and flowY values.</li>
+</ul>
+
+
+
+<h1>Additional Information</h1>
+
+We recommend using <a href="http://ardupilot.com/downloads/?did=118" target="_blank">this modified px4flow sensor firmware</a>.
+
+More information on this sensor including how to upgrade the sensor's firmware using QGroundControl can be found on the <a href="http://pixhawk.org/modules/px4flow" target="_blank">ETH's PX4Flow wiki page</a>.

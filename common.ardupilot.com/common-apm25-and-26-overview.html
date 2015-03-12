@@ -1,0 +1,398 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-apm25-and-26-overview 
+title: common-APM 2.5 and 2.6 Overview 
+id: 312 
+menu_order: 20 
+post_parent_id: 301 
+post_parent_stub: common-autopilots 
+post_parent_title: common-Autopilot Hardware Options 
+END METADATA 
+-->
+<h1>APM 2.5</h1>
+
+The APM 2.5 board requires no assembly, and is ready for firmware. You have a choice of side or top entry pin configuration, in order to accommodate a variety of installations. You'll see this option when you order.
+
+[iframe src="http://www.ardupilot.com/wp-content/uploads/spin-images/apm_25_vert_spin.htm" with="960" height="800"]
+
+<strong>***Click and drag the image above to spin it!</strong>
+
+This page gives you a look under the hood, and goes into more detail about the design of this board.
+
+The APM 2.5 has some improvements over the APM 2.0, but they both have a very similar layout and function.
+
+
+
+<h1>APM 2.6</h1>
+<ul>
+	<li><strong>APM 2.6</strong> is a revision of the APM that makes use of an external magnetometer (compass).</li>
+	<li>The APM 2.6 has no on board compass, and is optimized for vehicles where the compass should be placed as far from power and motor sources as possible to avoid magnetic interference.</li>
+	<li>APM 2.6 is designed to be used with the 3DR GPS uBlox LEA-6 with Compass module.</li>
+	<li>The GPS/Compass module may be mounted further from noise sources than the APM itself.</li>
+	<li>APM 2.6 requires a GPS unit with an on board compass for full autonomy.</li>
+	<li>For information on installing a 3DR GPS uBlox LEA-6 with Compass, visit <a href="/wiki/common-installing-3dr-ublox-gps-compass-module/" title="common-Installing 3DR UBlox GPS + Compass Module"></a>.</li>
+</ul>
+
+
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/apm25.3.jpg"><img class="alignnone size-full wp-image-621" alt="apm25.3" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/apm25.3.jpg" width="1091" height="739" /></a>
+
+
+
+<h1>Using the APM 2.5/2.6 Enclosure</h1>
+The APM 2.5/2.6 board is shipped in an enclosure with foam protecting the barometric pressure sensor, as shown here.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/APM25encl1.jpg"><img class="size-full wp-image-1930 alignnone" alt="APM25encl1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/APM25encl1.jpg" width="490" height="348" /></a>
+
+
+
+<h1>Or Not</h1>
+If you aren't using the enclosure, make sure to cover the barometric sensor with some open cell foam, cotton padding or tissue to protect it from prop wash, wind and turbulence. Also, the barometric sensor is sensitive to light and readings can change by several meters from direct sunlight to shade. Some type of light shield (on top of the foam) will minimize the effects of light changes.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_54001.jpg"><img class="alignnone size-full wp-image-1931" alt="IMG_54001" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_54001.jpg" width="800" height="552" /></a>
+
+
+
+<h1>Powering the APM 2.5/2.6 Board</h1>
+Like any computer, the APM needs a power supply with a steady clean voltage and sufficient current.
+
+3DR provides an <a href="/wiki/common-measuring-battery-voltage-and-current-consumption-with-apm/">APM power module</a> that supplies 2.25A at 5.37V. The module is designed to convert power from the main flight battery (18 volt maximum).  That module will supply sufficient power for your APM, and low power radios including your RC receiver (without servos). Your RC receiver can be powered from any APM Input (+5V and ground). This is normally done by connecting a 2 or 3 wire cable between an APM Input and one of the output channels on the RC radio.
+
+If you are using any servos such as are required with a traditional helicopter or a camera gimbal, you will need to provide an additional dedicated power supply for the servos. The APM is intended to <strong>control</strong> servos, not power them.
+
+In order to design a power supply for your APM, or provide additional power, you'll need a basic understanding of the power circuit in the APM.
+
+<img class="alignnone size-full wp-image-3790" alt="POwerRails" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/POwerRails.png" width="490" height="348" />
+
+There are two "sides" to the positive circuit in the board. Each side has positive-rails available for inputing power or distributing it to peripheral devices. The center row of pins in the three groups of pins (Outputs, Inputs, Analog) labeled "+" are referred to as a "positive-rail". This means that the base of all the + pins are connected so they represent a single electrical path. The positive-rails of the Input and Analog group are connected together. So we have two separate positive circuits, one in the Outputs and the other made up of the Input/Analog.
+
+All of the components on the board take power from various points on these rails, so it is necessary for both "sides" to be receiving +5V (within the specs below) for the board to function.
+
+These positive-rails can be joined together by placing JP1 in it's position on the board. This connects all the positive-rails ands provides power to both sides of the board, so that low-level power can be distributed to peripheral sensors and devices: 3DR Radios, sonar, RC Rx, etc. via the power-rails.
+
+When using the power module, the circuit path is as follows:
+
+From the power module connection the negative wire is connected to a negative-rail shared by the entire board regardless of JP1.
+
+Positive voltage comes in to a T-junction. to the left is a path through the JP1 to the positive-rail of the Outputs. To the right it flows through an over-voltage, over-current, reverse-polarity protection(500mA fuse and 6V Zener diode). A side effect of passing through the Zener diode is a .37V loss, therefore input voltage should be bumped up by .37V to account for this. From here the positive voltage runs to the positive-rails of the Inputs and Analog. Inputs should not be used to power anything except your RC receiver.
+
+Higher current loads such as servos should be powered from the power-rails (positive-negative) of the Output side. You must use an adequate voltage-regulator to provide power directly to the Output power-rails, all servo power leads will attach to these same rails (the signal wires can connect on the Analog "S" pins in the case of a camera gimbal). Since JP1 is removed in this scenario, the other "side" of the board will need power provided to it's power-rails directly.
+
+
+
+<h1>Alternative ways to power your board</h1>
+<strong>3DR Power Module
+</strong>
+
+If you are using the 3DR Power Module please find instructions here: <a href="http://copter.ardupilot.com/wiki/common-measuring-battery-voltage-and-current-consumption-with-apm/">Using the 3DR Power Module</a>
+<ul>
+	<li><span style="color: #ff0000"><strong>Warning!</strong></span> Under no circumstances should you ever attempt to draw servo power from the analog input connector.</li>
+	<li><span style="color: #ff0000"><strong>Warning:</strong></span> You may "control" servos from A9, A10 and A11 from the A0 - A11 I/O connector, but you must run servo power separately.
+<ul>
+	<li>The A0 - A11 I/O connector cannot supply sufficient power for servos.</li>
+	<li>A9, A10 and A11 of the I/O connector come pre-wired to correct digital out for use as servo control lines.</li>
+	<li>For servo use, it is imperative that they have not been reassigned to analog use with the pads on the back of the APM board.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h1>A Non technical Description of the Power Supply Requirements</h1>
+The description below simply supplements and provides an alternate view of the information above.
+<ol>
+	<li>The APM 2.5/2.6 board has two separate power circuits which make it very easy to power by a variety of methods.
+<ol>
+	<li>A fused power circuit provides primary board and general I/O power: (It cannot provide power for servos).</li>
+	<li>The Other power circuit is for the OUTPUT connector power rail: (it can provide power for servos).</li>
+</ol>
+</li>
+	<li>The jumper JP 1 determines whether the two power circuits are connected or separate.
+<ol>
+	<li>If JP1 is removed, the power rail on the OUTPUT connector "Floats" and may be used to distribute power.</li>
+	<li>Although if JP1 is removed the OUTPUT connector cannot be used to supply power to the APM board.</li>
+</ol>
+</li>
+	<li>It is possible to power the APM board from the Power Module connector or the OUTPUT or INPUT connectors.</li>
+	<li>Normally the APM 2.5/2.6 "Power Module" is used to provide primary APM 2.5 board and general I/O power.</li>
+	<li>Alternatively primary board power can be supplied by a BEC either from one of the ESCs or from an external BEC.</li>
+	<li>If servos are used, supplementary power is required.
+<ol>
+	<li>Generally one power supply is provided for the board and one or more additional power supplies for the servos.</li>
+	<li>But if a sufficiently large external BEC is used it can supply power for both via the OUTPUT connector.</li>
+</ol>
+</li>
+	<li>Only the OUTPUT connector can provide power for servos as the other circuit is fused.
+<ol>
+	<li>The address connector is sometimes used provide servo signals, but the servos power must come from elsewhere.</li>
+</ol>
+</li>
+	<li>How you are powering your APM board and or servos determines whether JP1 is  installed or not.
+<ol>
+	<li>(Whether the two power circuits are separated or connected).</li>
+	<li>All possible configurations are detailed Below.</li>
+</ol>
+</li>
+	<li>The type of use will determine which options are available.
+<ol>
+	<li>APM:Copter can power the APM from a power module or a UBEC or a BEC from one of the ESCs and can power servos from a UBEC or from the other ESC's BECs.</li>
+	<li>APM:Plane can power the APM from the power module,  the BEC from the flight motors ESC or a  separate UBEC and can power servos from a separate UBEC or the flight motors BEC if it is large enough.</li>
+	<li>APM:Rover  can power the APM from the power module,  the BEC from the drive motor's ESC or a  separate UBEC and can power the steering servo from a separate UBEC or the drive motors BEC if it is large enough.</li>
+</ol>
+</li>
+</ol>
+
+
+
+<h1>Power Supply Rails Connected Requirements (JP1 Installed)</h1>
+
+<strong style="color: #404042"><span style="color: #ff0000">Warning:</span> </strong>Do not exceed Abs MAX input voltages when connecting the power supply or you will damage your board.
+<strong><span style="color: #ff0000">Warning:</span></strong> Connecting USB when you have input voltages at the high end of the range (near Abs Max) can damage the board. Disconnect battery before connecting USB or test input voltages so they are within the specified range.
+<table>
+<tbody>
+<tr>
+<td>Power Options</td>
+<td>Nominal</td>
+<td>Abs MAX</td>
+<td>JP1 status</td>
+</tr>
+<tr>
+<td>Power on Output PWM connector</td>
+<td>5.37V +-0.5</td>
+<td>6V</td>
+<td>JP1 connected</td>
+</tr>
+<tr>
+<td>Power on Input PWM connector</td>
+<td>5.00V +-0.25</td>
+<td>5.5V</td>
+<td>JP1 connected</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>No Power Module and No Servos and Power provided by BEC from ESC</h2>
+
+
+<ul>
+	<li>If you do not have a power module and you are not using servos.</li>
+	<li>Ensure JP1 is installed and provide the necessary power via the BEC from one of your ESC's.</li>
+	<li>Connect one ESC's BEC power and ground wires to one pair of the APM OUTPUT connectors power and ground pins.</li>
+	<li>Clip the BEC power leads on the remaining 3 wire connectors.</li>
+	<li>Ensure that the ESC's signal wires are connected to the appropriate APM OUTPUT connector signal pins.</li>
+	<li>You must ensure that your ESC's BEC has a sufficient power capability (at least 2 amps).
+<ul>
+	<li>Most 20 amp or higher ESCs have 2 amp BECs.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>No Power Module but using Servos and a high power External BEC</h2>
+<ul>
+	<li>If you do not have a power module and are using servos you can use a high power external BEC.</li>
+	<li>Ensure JP1 is installed and provide the necessary power via a high power external BEC (5 to 10 amps or more).</li>
+	<li>The BEC power <strong>must</strong> be provided to one pair of the APM OUTPUT connector pins.</li>
+	<li><strong>Warning!</strong> Clip all power leads on the ESC's BECs (they would conflict with the external BEC).</li>
+	<li>Your servos will determine the size of the BEC required.</li>
+	<li>You should allow at least 2 or 3 amps extra to power the APM, receiver and to prevent (brown outs).</li>
+	<li>All of the positive power for driving each servo must come from the OUTPUT connector.
+<ul>
+	<li>This is true even if the servo(s) signal wires are connected to the ADDRESS connector.</li>
+</ul>
+</li>
+	<li>This option requires you to take responsibility for providing sufficient power to prevent brownout.</li>
+</ul>
+
+
+<h2>No Power Module but using Servos and multiple BECs from ESC's (A BEC for each Servo)</h2>
+<ul>
+	<li>If you do not have a power module and are using servos you can use multiple BECs from your ESC's.</li>
+	<li>Ensure JP1 is installed and plug one of your ESC's signal cables with power leads into the OUTPUT connector.</li>
+	<li>Remove the power and ground leads from the remaining ESCs signal cable connectors.</li>
+	<li>Plug the signal wire connector from each ESC onto the appropriate pin on the OUTPUT connector.
+<ul>
+	<li>You can heat shrink these or plug them into a multi-wire connector appropriate for your copter.</li>
+</ul>
+</li>
+	<li>Connect one pair of each of the remaining BEC power and ground lines to the power and ground of each individual servo.</li>
+	<li>Clip or heat shrink any remaining excess BEC power and ground leads.</li>
+	<li>The BEC power from one ESC <strong>must</strong> be provided to one pair of the APM output connector pins.</li>
+	<li>Plug only the signal input wire from your servos into the appropriate OUTPUT or ADDRESS connector pin.</li>
+	<li>Your ESC's BECs should be at least 2 amps.</li>
+	<li>The ESC's BEC grounds are in common with battery and internal signal ground so grounding the servos this way is OK.</li>
+</ul>
+
+
+
+<h1>Power Supply Rails Not Connected Requirements (JP1 Not Installed)</h1>
+
+<strong style="color: #404042"><span style="color: #ff0000">Warning:</span> </strong>Do not exceed Abs MAX input voltages when connecting the power supply or you will damage your board.
+<strong><span style="color: #ff0000">Warning:</span></strong> Connecting USB when you have input voltages at the high end of the range (near Abs Max) can damage the board. Disconnect battery before connecting USB or test input voltages so they are within the specified range.
+<table>
+<tbody>
+<tr>
+<td>Power Options</td>
+<td>Nominal</td>
+<td>Abs MAX</td>
+<td>JP1 status</td>
+</tr>
+<tr>
+<td>Power on Output PWM connector</td>
+<td>5.00V +-0.5</td>
+<td>6V</td>
+<td>JP1 open</td>
+</tr>
+<tr>
+<td>Power on Input PWM connector</td>
+<td>5.00V +-0.25</td>
+<td>5.5V</td>
+<td>JP1 open</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Power Module and No Servos</h2>
+
+<ul>
+	<li>If you have a power module and you are not using servos.</li>
+	<li>Ensure JP1 is not installed.</li>
+	<li>Provide the necessary power via the power module connected to the APM's power module connector.</li>
+	<li>When connecting your ESCs to the OUTPUT connector clip the BEC power leads on each ESC's 3 wire connector.
+<ul>
+	<li>Or connect only the ESC's signal wires to the OUTPUT connector.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Power Module and using Servos with External BEC power</h2>
+<ul>
+	<li>If you have a power module and an external BEC and you are using servos.</li>
+	<li>Ensure JP1 is Not installed</li>
+	<li>Provide APM board and receiver power via the power module connected to the power module connector.</li>
+	<li>Connect an external BEC with sufficient power for your servos to one pair of the OUTPUT connector power pins.</li>
+	<li>When connecting your ESCs to the OUTPUT connector clip the BEC power leads on each ESC's 3 wire connector.
+<ul>
+	<li>Or connect only the ESC signal wires to the OUTPUT connector.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Power Module and using Servos with BEC power from one ESC</h2>
+
+<ul>
+	<li>If you have a power module and you are using servos Remove JP1.</li>
+	<li>Provide APM and receiver power via the power module connected to the APM's power module connector.</li>
+	<li>The BEC of a single ESC must provide sufficient power for all your servos.</li>
+	<li>When connecting your ESCs to the OUTPUT connector clip the BEC power leads on all but one of the ESC's connectors.</li>
+	<li>Or connect only the ESC signal wires to the OUTPUT connector for all except one ESC.
+<ul>
+	<li>And on that ESC connect all 3 wires to the OUTPUT connector.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>No Power Module and using Servos with BEC power from two ESCs</h2>
+
+<ul>
+	<li>If you do not have a power module and you are using servos remove JP1.</li>
+	<li>Provide APM and receiver power via 1 pair of ESC-BEC power wires connected to the APM INPUT connector power pins.</li>
+	<li>Also connect another of the ESCs power wire pair to the OUTPUT connector.</li>
+	<li>The BEC of a single ESC must provide sufficient power for all your servos.</li>
+	<li>Clip the signal power leads on your remaining ESC's.</li>
+	<li>Connect all ESC signal wires to the appropriate OUTPUT connector pins.</li>
+</ul>
+
+
+
+<h1>APM Power Wiring Example</h1>
+
+<strong style="color: #404042"><span style="color: #ff0000">Warning:</span> </strong>Do not exceed Abs MAX input voltages when connecting power supply or you will damage your board.
+<strong><span style="color: #ff0000">Warning:</span> </strong>Connecting USB when you have input voltages at the high end of the range (near Abs Max) can damage the board. Disconnect battery before connecting USB or test input voltages so they are within the specified range.
+
+On the bench, you'll probably be powering the board via your USB cable while you set it up and test it. But in your aircraft, you'll need to power it with your on board power system, which is usually your LiPo battery going through an ESC or the Power Module. In the case of a multicopter, this can come through your Power Distribution Board (PDB), which will break out the 5V output from the one of the electronic speed controls (ESCs) or the Power module which is wored directly to the battery.
+
+In the picture below, the red and black wires are the 5b    m hV power cable coming from a PDB. You can plug them into any two pins along the 5V and Ground (middle and outer) rows of pins on APM 2.5's Output side. The other cable, which in this case is a four-wire cable with orange and white wires for a quadcopter, is the signal cable to the PDB, which are the wires that APM 2.5 will use to command each of the ESCs.
+
+The picture below is of APM 2; but the concept is applicable to APM 2.5.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/pdbpower.jpg"><img class="alignnone size-full wp-image-624" alt="pdbpower" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/pdbpower.jpg" width="800" height="628" /></a>
+
+It's also possible to power APM 2.5 from two separate sources, one powering the RC system on the input side, and the other powering the output side (servos or ESCs). This is determined by a jumper on the JP1 pins (see below). If the jumper is on, which is the factory default, the board is powered from the OUTPUT rail or the USB. If the jumper is off, the board is powered from the INPUT rail, but the OUTPUT rail will need its own power source. This configuration is used if you want to have two separate power sources in your aircraft, one powering the servos and the other powering the electronics. The ideal input voltage is 5.37v +/-0.0v and may not be provided by a typical ESC.
+
+<strong>Warning: Do not exceed Abs MAX input voltages when connecting power supply or you will damage your board.
+</strong>
+
+In some cases it may be a good idea to set the input voltage slightly above the median (but below the maximum) to account for possible voltage drops during momentary high current events.
+
+The APM2.5 by itself draws relatively little current (200ma range) and a power source capable of providing 300 - 500ma will provide plenty of margin. However, if servos or other power consuming devices are being driven by the same power source you must consider the power requirements for those devices as well and provide plenty of margin to prevent disastrous "brown-outs". For instance, a single digital servo can easily draw 1-5 amps depending on it's size and performance. (Note: ESCs do not consume power from the APM) If you experience spurious resets or other odd behavior it is most likely due to noisy or insufficient power to the APM. As with all logic boards, electrical noise from the motors, servos, or other high current devices on the power source can cause unpredictable behavior.
+
+It is recommend that a <a href="http://www.dpcav.com/xcart/Power-Supply-Filter-L-C-Type.html">power filter</a> be used in such conditions.
+
+
+
+Too short or long power wires, bad or old connectors, or insufficient current capability of the APM power source can result in a "brown-out" situation resulting in unpredictable operation. This is particularly true in traditional helicopters where the collective servos can draw 3-20 amps in short bursts. The power source must be able to accommodate this without voltage droop or voltage spikes. A quality switching type BEC such as one of
+<a href="http://www.castlecreations.com/products/ccbec.html">these
+</a>
+or one of
+<a href="http://www.readyheli.com/WRL-HBECM2-Western-Robotics-Hercules-Super-Mini-BEC-G2-_p_36453.html">these
+</a>
+can be a solution depending on overall current requirements. Many of these type of regulators are programmable so remember to program them with in the safe operating range of the APM2. Linear voltage regulators are not recommended as they are inefficient and prone to overheating and heat induced failures. APM2 should never be connected directly to a battery of any type.
+
+Power source problems are common and can be insidious and frustrating. Be meticulous. Any autopilot or flight controller is useless and potentially dangerous without good clean power source.
+
+The picture below is of APM 2; but the concept is applicable to APM 2.5/2.6.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/APM2_JP1.jpg"><img class="alignnone size-full wp-image-625" alt="APM2_JP1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/APM2_JP1.jpg" width="700" height="634" /></a>
+
+
+
+<h1>Explanation of solder jumper options on the bottom of the board</h1>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/apm25-explained.jpg"><img class="alignnone size-full wp-image-626" alt="apm25-explained" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/apm25-explained.jpg" width="1000" height="1000" /></a>
+
+
+
+<h2>APM 2.5 Board Features</h2>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/apm.jpg"><img class="alignnone size-full wp-image-1872" alt="apm" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/apm.jpg" width="880" height="544" /></a>
+
+
+
+<h2>APM 2.5 Board Assembly Options</h2>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/Assembly_APM25.jpg"><img class="alignnone size-full wp-image-628" alt="Assembly_APM25" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/Assembly_APM25.jpg" width="889" height="421" /></a>
+
+
+<ul>
+	<li><span style="line-height: 15px">Quadzimodo has produced a really nice editable 3D model of the APM 2.5 board in SketchUp 8: <strong><a href="http://api.ning.com/files/z*snRdi7rtEVMDL6zeTTD678X-*SIqNkeiepEP-wb-0A5OFmvQtg033sq9pqhoTVdRIYs9ti10ygSpGNk-hhNnRNbQd8kV78/APM2.5SketchupFile.zip" target="_self">APM 2.5 Google Sketchup File</a></strong></span></li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/APM2.5frontquarter.jpg"><img class="alignnone size-full wp-image-777" alt="APM2.5frontquarter" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/APM2.5frontquarter.jpg" width="750" height="562" /></a>
+
+
+<h1>Analog input pins</h1>
+Pin 0 to 8: The APM2 has a row of analog input pins down one side, labelled A0 to A8 on the underside of the board. These are available as pin numbers 0 to 8 inclusive in PIN variables.
+
+All these pins can take up to 5V and may be used for any general analog input. They are commonly used for airspeed and sonar inputs.
+
+Pin 12: power management connector current pin, accepts up to 5V, usually attached to 3DR power brick with 17:1 scaling
+
+Pin 13: power management connector voltage pin, accepts up to 5V, usually attached to 3DR power brick with 10.1:1 scaling
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/apm-analog-pins2.jpg"><img class="alignnone wp-image-1722" alt="apm analog pins2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/apm-analog-pins2-300x270.jpg" width="300" height="270" /></a>
+
+
+
+<h1>Digital output pins</h1>
+
+The APM2 uses the same set of 9 analog input pins as digital output pins. They are configured as digital output pins automatically when you start to use them as digital outputs.
+
+Pin 54 to 62: You need to add 54 to the pin number to convert from an analog pin number to a digital pin number. So pin 54 is digital output pin on the A0 connector. Pin 58 is A4 etc.
+
+These pins are usually used with the RELAY_PIN to RELAY_PIN4 parameters, allowing you to control things like camera shutter, bottle drop etc. They are also used as sonar "stop" pins allowing you to have multiple sonars and not have them interfere with each other.

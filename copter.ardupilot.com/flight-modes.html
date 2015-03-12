@@ -1,0 +1,69 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: flight-modes 
+title: Flight Modes 
+id: 1556 
+menu_order: 10 
+post_parent_id: 1540 
+post_parent_stub: flying-arducopter 
+post_parent_title: First Flight with ArduCopter 
+END METADATA 
+-->
+There are 14 flight modes available in APM:Copter, 10 of which are regularly used.  You can set these up by doing the following:
+<ul>
+	<li>Turn on your RC transmitter</li>
+	<li>Connect the APM/PX4 to the Mission Planner</li>
+	<li>Go to the Initial Setup &gt; Mandatory Hardware &gt; Flight Modes screen</li>
+	<li>Note as you move your transmitter's flight mode switch (channel 5) the green highlight bar will move to a different position.</li>
+	<li>Use the drop-down on each line to select the flight mode for that switch position ensuring that at least one switch position is left assigned to Stabilize</li>
+	<li>Optionally check the <a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/#Simple_Mode">Simple Mode</a> check-box for that switch position.  If using AC3.1 or higher you can optionally set <a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/#Super_Simple_Mode">Super Simple mode</a>.  If both Simple mode and Super Simple mode checkboxes are checked Super Simple will be used.</li>
+	<li>When finished press the "Save Modes" button.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png"><img class="alignnone size-full wp-image-10283" alt="MP_SetupFlightMode" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png" width="1023" height="401" /></a>
+
+In general when first starting to use APM:Copter you should progress through the flight modes in the order listed below, being sure that you are comfortable with each before progressing to the next.  Click on any of the flight modes below for more details.
+<ul>
+	<li><a href="wiki/stabilize-mode/">Stabilize</a></li>
+	<li><a href="wiki/altholdmode/">Alt Hold</a></li>
+	<li><a href="wiki/loiter-mode/">Loiter </a><a href="wiki/loiter-mode/">(&amp; OF_loiter)</a></li>
+	<li><a href="wiki/rtl-mode/">RTL (Return-to-Launch)</a></li>
+	<li><a href="wiki/auto-mode/">Auto</a></li>
+</ul>
+Additional flight modes
+<ul>
+	<li><a href="wiki/acro-mode/">Acro</a></li>
+	<li><a title="Sport" href="wiki/sport-mode/">Sport</a></li>
+	<li><a href="http://copter.ardupilot.com/wiki/drift-mode/">Drift</a></li>
+	<li><a href="wiki/ac2_guidedmode/">Guided</a></li>
+	<li><a href="wiki/circle-mode/">Circle</a></li>
+	<li><a href="wiki/ac2_positionmode/">Position</a></li>
+	<li><a title="Land mode" href="wiki/land-mode/">Land</a></li>
+	<li><a href="http://copter.ardupilot.com/wiki/ac2_followme/">Follow Me</a></li>
+	<li><a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/">Simple and Super Simple </a></li>
+</ul>
+Most transmitters provide a 3 position switch but you can find instructions <a href="wiki/common-six-modes/">here for setting up a 6-position flight mode switch</a>.
+
+With some small code modifications you can set-up custom flight modes which are combinations of existing flight modes as described in the developer section <a href="http://dev.ardupilot.com/wiki/user-definable-flight-modes/">(Here!)</a>
+
+
+<h1>GPS Dependency</h1>
+
+Flight modes that use GPS-positioning data require an active GPS lock prior to takeoff. To see if your autopilot has acquired GPS lock, connect to a ground station or consult your autopilot's hardware overview page to see the LED indication for GPS lock. Below is a summary of GPS dependency for APM:Copter flight modes.
+
+Requires GPS lock prior to takeoff:
+<ul><li><a href="wiki/loiter-mode/">Loiter </a><a href="wiki/loiter-mode/">(&amp; OF_loiter)</a></li>
+<li><a href="wiki/rtl-mode/">RTL (Return-to-Launch)</a></li>
+	<li><a href="wiki/auto-mode/">Auto</a></li>
+<li><a href="wiki/ac2_guidedmode/">Guided</a></li>
+<li><a href="http://copter.ardupilot.com/wiki/drift-mode/">Drift</a></li>
+<li><a href="wiki/ac2_positionmode/">Position</a></li>
+<li><a href="http://copter.ardupilot.com/wiki/ac2_followme/">Follow Me</a></li>
+<li><a href="wiki/circle-mode/">Circle</a></li></ul>
+	
+
+Does not require GPS lock:
+<ul><li><a href="wiki/stabilize-mode/">Stabilize</a></li>
+	<li><a href="wiki/altholdmode/">Alt Hold</a></li>
+<li><a href="wiki/acro-mode/">Acro</a></li>
+	<li><a title="Sport" href="wiki/sport-mode/">Sport</a></li>
+	<li><a title="Land mode" href="wiki/land-mode/">Land</a></li></ul>

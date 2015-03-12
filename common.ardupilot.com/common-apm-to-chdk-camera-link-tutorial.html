@@ -1,0 +1,71 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-apm-to-chdk-camera-link-tutorial 
+title: common-APM to CHDK Camera Link Tutorial 
+id: 633 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h3>Use the Canon CHDK Camera Link to connect Your Canon Camera to the APM</h3>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg"><img class="alignnone size-full wp-image-634" alt="APM_CHDK-600x260" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg" width="600" height="260" /></a>
+
+This tutorial will show you how to get your CHDK-enabled camera connected to your ArduPilot Mega (APM) without buying any extra hardware or decoding PWM outputs. You might want to make this connection to take advantage of the camera trigger function based on distance covered, to ensure a certain overlap and to avoid excessively high overlap. This modification is not necessary, if you have a CHDK camera and want to keep it simple, you won’t gain much by switching to this method right away.
+
+
+
+<h3>Modify a USB Cable to connect Between the Camera and the APM</h3>
+For this tutorial, I’ll use an SX260 HS but this should work equally well on any CHDK-supported Canon Powershot camera. You’ll need just the supplies below to make the cable. The SX260 uses a USB Mini-B connector. Most Powershot cameras come with a USB cable, you can just use that one to be safe.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682.jpg"><img class="alignnone size-full wp-image-635" alt="Supplies-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682.jpg" width="1024" height="682" /></a>
+
+If you don’t have a crimp tool to attach the servo connector, just take a spare servo wire and solder the wires together instead.
+
+We’ll only be using the Mini-B side of this cable, so measure whatever length you need from that end depending on how your camera and autopilot mount in your airframe. I’ve measured out about 14″ and cut the cable completely through. Inside are four wires, we only need the red and black wire so cut away the green and white wires. Strip the ends of the red and black wires.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682.jpg"><img class="alignnone size-full wp-image-636" alt="USB_StrippedWires-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682.jpg" width="1024" height="682" /></a>
+
+If you have the crimp tool, crimp and insert the wires into the first and third positions of a 3-position header. If you don’t have the crimp tool, solder these two wires to the ground and signal wires of a spare servo wire. Insert the ground wire into the side with an arrow so you can tell which wire is which later on.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682.jpg"><img class="alignnone size-full wp-image-637" alt="Connector_Attached-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682.jpg" width="1024" height="682" /></a>
+
+Cover the connector with heatshrink. Be careful with the hot air near the connector as it can cause the locking plastic pieces in the receptacle to deform.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg"><img class="alignnone size-full wp-image-638" alt="Connector_Heatshrink-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg" width="1024" height="682" /></a>
+
+
+
+<h3>Connect the APM and your Camera</h3>
+Now plug this cable into pin A9 on the side row of APM. The text doesn’t line up exactly so be sure to count rows. SPI takes two rows, then A11 and A10 are two more so there should be 4 rows of free pins, then our new connector.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_Connect.jpg"><img class="alignnone size-full wp-image-639" alt="SAMSUNG CSC" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_Connect.jpg" width="733" height="575" /></a>
+
+
+
+<h3>Install the CHDK software into your Canon Camera</h3>
+If you already have CHDK installed, just install <a href="http://www.event38.com/v/vspfiles/downloadables/E38_APM.bas" rel="nofollow">the script file</a> (right click, save link as) into the scripts directory on your SD card. If not, follow instructions for installing CHDK from the page corresponding to your camera at <a href="http://chdk.wikia.com/wiki/CHDK" rel="nofollow">the CHDK wiki</a>. Load up CHDK and go into the menu then navigate to Miscellaneous Stuff -&gt; Remote Parameters and make sure the Enable Remote setting is checked.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/CHDK_Remote-1024x682.jpg"><img class="alignnone size-full wp-image-640" alt="CHDK_Remote-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/CHDK_Remote-1024x682.jpg" width="1024" height="682" /></a>
+
+
+
+<h3>Set up the APM parameters for use with CHDK</h3>
+If not already connected, connect your camera to the APM with the modified cable and open the Full Parameters List in the Config/Tuning tab. Set the parameters as following:
+<ul>
+	<li>CAM_DURATION: 1</li>
+	<li>CAM_TRIGG_DIST: Depending on overlap required.. be sure to keep in mind the normal downwind speed of your plane as well as the maximum rate at which the camera can take pictures. For the SX260 and the E382 that’s once every 2.7 seconds and about 18m/s. I plan to operate below those condition in most cases but I do like to get as many pictures as possible, so I set my distance to 49 (meters).</li>
+	<li>CAM_TRIGG_TYPE: 1</li>
+	<li>RELAY_PIN: 13</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_CAM-1024x554.png"><img class="alignnone size-full wp-image-641" alt="Params_CAM-1024x554" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_CAM-1024x554.png" width="1024" height="554" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_Relay-1024x553.png"><img class="alignnone size-full wp-image-642" alt="Params_Relay-1024x553" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_Relay-1024x553.png" width="1024" height="553" /></a>
+
+
+
+<h3>Ensure that everything is working properly</h3>
+All that’s left is to test it out. Load the E38_APM.bas script file like any normal CHDK script and start running it. If you can get a 3d fix inside, you can test it on your lab bench just using USB power. Just set the CAM_TRIGG_DIST to 1 or 2 meters and let your plane sit on the desk. Small movements between GPS readings will cause the distance value to count up slowly and it should trigger the shutter every few seconds.
+
+If your camera lens closes and opens instead of taking a picture, make sure the CHDK remote enable setting saved properly. If nothing happens at all, take your APM outside and walk around to make sure you are getting some distance covered.

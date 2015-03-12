@@ -1,0 +1,34 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: using-a-magnetometer 
+title: Traditional Helicopter – Using a Magnetometer 
+id: 1701 
+menu_order: 40 
+post_parent_id: 1620 
+post_parent_stub: traditional-helicopters 
+post_parent_title: Traditional Helicopters 
+END METADATA 
+-->
+<h1>Remote Mounted Magnetometer</h1>
+
+If you have your APM located on the bottom of the heli frame near to the motor you may well have a problem with your compass. On most helis its worth using an external magnetometer with APM2.5+. It costs an extra $40 but it's worth it. So locate both the GPS and magnetometer together either on top of the boom mount or ideally half-way back on the boom.
+
+On a 450 it is best located on the boom mount because the heli is so small that the weight of the GPS on the tail will be significant and cause CG issues. However, on a 600 this is less of an issue so have both mounted on the boom, halfway back. You still have to consider the CG, but it's manageable. This sets the magnetometer quite far away from all the interference from the motor and works very well.
+
+A good thing to test your compass is to use the Mission Planer and have a GPS fix. Then go to the Google map and verify if the red line of the Quad symbol fits the physical orientation of your Heli. If not adjust the Declination in the hardware Compass setup. There is also a website to show the Declination of your location.
+
+
+
+<h1>Using a magnetometer</h1>
+
+<img class="alignnone" alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/BR-HMC5843-01-2.jpg" width="401" height="259" />
+
+In order to correct for yaw gyro drift and to allow GPS position hold to function, it is highly recommended that you use a <a href="https://store.3drobotics.com/ProductDetails.asp?ProductCodeBR-HMC5883-01.html">HMC5883L magnometer</a>. You can follow<a href="AC2_Magnetos.html">"Method Two: Using a cable" in the instructions for Quads.</a>
+
+The best way to mount the magnetometer is to modify a <a href="http://store.3drobotics.com/product_p/ca-0001-04.htm">GPS cable </a>, cutting off the connector on one side and soldering the wires to the pads on the magnetometer board. The pins are even in the correct order but if there is any doubt, you can look at the bottom of the shield where you should see "SCL", "SDA", "+5V", "GND" written. These should be matched up to the pins on the magnometer. You will need to make the cable approximately 55cm long to reach from the APM to the magnetometer on the tail.
+
+When mounting the magnetometer, try to keep it as far away from any magnetic, ferro-metallic (ie: steel), or electro-magnetic sources (ie: servos, motors) as you can. In particular, do not use steel screws to mount the board. Aluminum screws have been tested and do work, and of course nylon screws would be an excellent choice.
+
+The best place to mount the magnetometer is on the tail boom close to the body with components down and pins forward.
+
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/TradHeli_Compass.jpg" />

@@ -1,0 +1,181 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: improving-the-capabilities-of-your-multicopter 
+title: Improving the Capabilities of Your Multicopter 
+id: 10005 
+menu_order: 30 
+post_parent_id: 12591 
+post_parent_stub: choosing-a-frame 
+post_parent_title: Choosing a MultiCopter Frame 
+END METADATA 
+-->
+This page describes one of our members (Euan Ramasy's) highly advanced photographic quadcopter. It illustrates the incremental improvements he has been and is making to better optimize it's performance and usefulness and serves as an excellent example for how to properly undertake development and improvement of your own copter for your own uses.
+
+[note]If you are just starting and this is your first MulitiCopter you are in the wrong place, go here:</span> <a href="http://copter.ardupilot.com/wiki/build-your-own-multicopter/">Build Your Own Multicopter</a>.[/note]
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/intro.jpg"><img class="alignnone size-full wp-image-10007" alt="intro" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/intro.jpg" width="750" height="562" /></a>
+
+
+<h1>Copter Upgrading Goals</h1>
+<ul>
+	<li>Well it's been a year since I built my first quad (selecting APM, naturally), and I've decided to do a bit of an upgrade in the off season.</li>
+	<li>There were four objectives to the exercise:
+<ul>
+	<li>better reliability</li>
+	<li>simplify</li>
+	<li>reduce weight</li>
+	<li>improve performance</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h2>Better reliability</h2>
+<ul>
+	<li>Added 40A ESC's, giving me 15A overhead (formally 30A on a 25A max draw)</li>
+	<li>Replaced 5V BEC with a 5.5V, after getting occasion chirp from spektrum telemetry about low volts.</li>
+	<li>Re-wired the PDB and the ESC's for better RF</li>
+	<li>Replaced 1 motor that sounded less than optimal</li>
+	<li>ESC's now uprated (if you can "uprate "to HobbyKing...:-)) and outboard for cooling and better security.</li>
+</ul>
+
+<h2>Simplicity</h2>
+<ul>
+	<li>Number of battery circuits reduced from 3 to one.</li>
+	<li>New 5.5V and 12V BEC's used</li>
+	<li>Unnecessary LED's dumped.
+<ul>
+	<li>Only retained 4 for orientation on the odd occasion I don't FPV.</li>
+	<li>But they are Braincube's and are <strong>very</strong> bright!</li>
+	<li>Labeled everything.</li>
+	<li>Here is the controller:</li>
+</ul>
+</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/lights.jpg"><img class="alignnone size-full wp-image-10008" alt="lights" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/lights.jpg" width="750" height="562" /></a>
+
+
+
+<h2>Reduce weight</h2>
+<ul>
+	<li>Reduced battery circuits from 3 to 1.</li>
+	<li>EzOSD replaced with minimOSD.</li>
+	<li>Also in picture: an FPV camera switcher and the Telemetry junction box.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/minimOSD.jpg"><img class="alignnone size-full wp-image-10010" alt="minimOSD" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/minimOSD.jpg" width="750" height="562" /></a>- LED circuits dumped
+<ul>
+	<li>Spektrum telemetry TM1000 dumped</li>
+	<li>GPS finder dumped</li>
+	<li>Leg components replaced with Carbon Fibre</li>
+	<li>And did it work?
+<ul>
+	<li>Starting weight: 3.65kg -&gt; Final weight: 3.62kg - so savings mostly consumed by improved brushless gimbal.</li>
+	<li>If I'd stayed with the quadframe brushless (refused to tune with Martinez board!) and dumped the Braincube as well, I would have saved over 200g.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h2>Performance</h2>
+<ul>
+	<li>Moongel replaced with zeal. Unfortunately vibes actually went up! I now hit the +/-5 "safe" limits in high power flight and maneuvers.
+<ul>
+	<li>However, it does seem to respond to very small commands much better.</li>
+	<li>The zeal is firmer than moongel so I might expect that.</li>
+</ul>
+</li>
+	<li>PID's retuned after 3.0.1, to increase YAW control, and to decrease pitch/roll (only by 7%) to improve video footage.
+<ul>
+	<li>It still handles well, but it's now more "Transit" than "Cosworth" .</li>
+	<li>For our american cousins, this translates to: "it's more light truck than corvette").</li>
+</ul>
+</li>
+	<li>6S Current sensor added. Means
+<ul>
+	<li>Compassmot can now be run in CURRENT not THROTTLE.</li>
+	<li>Flight is noticeably more accurate, especially in RTL, Loiter.</li>
+</ul>
+</li>
+	<li>Higher GPS pole added.
+<ul>
+	<li>Compassmot reduced from 4% to 1%.</li>
+</ul>
+</li>
+	<li>Quadframe gimbal replaced with RCTimer.
+<ul>
+	<li>Video quality immediately improved.</li>
+	<li>The original Quadframe brushless gimbal just refused to take a tune, and never performed well.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h1>Receiver with 2 Satellites</h1>
+<ul>
+	<li>Radio diversity added via Orangerx 800 (DSMX) + 2 satellites.</li>
+	<li>Each satellite has a 30cm cable, one mounted far out under one arm, one as far down on the leg as possible.</li>
+	<li>It's not perfect, but better than before. Radio now much more reliable regardless of orientation. No more scary moments...</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/diversity.jpg"><img class="alignnone size-full wp-image-10011" alt="diversity" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/diversity.jpg" width="750" height="562" /></a>
+
+
+
+<h1>FPV Transmitter Improvements:</h1>
+<ul>
+	<li>Video TX moved to as far down the legs as possible.</li>
+	<li>Range has improved from 350m to well over 600 with 600mw tx + ibcrazy omni's.
+<ul>
+	<li>Will be pushing out further, as I now have an ibcrazy 5 turn helical antenna to play with as well.</li>
+</ul>
+</li>
+	<li>Also to come: 1/4 wavelength 433mhz antenna's for long range telemetry.
+<ul>
+	<li>How bad is it? It cuts out before the video does...</li>
+</ul>
+</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/videotx.jpg"><img class="alignnone size-full wp-image-10012" alt="videotx" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/videotx.jpg" width="750" height="562" /></a>
+
+
+
+<h1>Camera Gimbal Mount</h1>
+<ul>
+	<li>The Camera Gimbal Mount has had 3 upgrades.</li>
+	<li>Quadframe brushless gimbals motors replaced with RCTimer.</li>
+	<li>I replaced the battery plate with my own design, and I'm happy with that.</li>
+	<li>So happy I'm selling it to anyone who wants one.</li>
+	<li>I Also replaced the ball bearings with stiffer ones.</li>
+	<li>I still get a tiny bit of jitter in pitch, but I might need to look at my rx feed into the martinez; it might be noisy.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/balls.jpg"><img class="alignnone size-full wp-image-10013" alt="balls" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/balls.jpg" width="750" height="562" /></a>
+
+
+
+<h1>FPV Camera Improvements</h1>
+<ul>
+	<li>Finally, I dumped the 420 line FPV camera, and went with the 650 line from Security Camera 2000 (the one everyone goes for!).</li>
+	<li>I also got some  new low light lenses.</li>
+	<li>This setup just works so much better.</li>
+	<li>Just a pity I can't get minimOSD to overlay on the feed for some reason; works ok on the Gopro feed!</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/camera.jpg"><img class="alignnone size-full wp-image-10014" alt="camera" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/camera.jpg" width="750" height="562" /></a>
+
+
+
+<h1>Summary:</h1>
+<ul>
+	<li>Euan's highly developed QuadCopter had already delivered excellent service as a brushless gimbal stabilized photographic platform with highly developed FPV cpability.</li>
+	<li>And now he has added several improvements.
+<ul>
+	<li>The camera mount has been replaced with better gimbals, bearings and mounting plate.</li>
+	<li>FPV now has a better higher resolution camera with better lenses and the FPV range has been extended.</li>
+	<li>RC range has been extended with satellite receivers.</li>
+	<li>Reliability has been further enhanced by numerous upgrades.</li>
+	<li>And the copter has been simplified by removing unnecessary devices.</li>
+</ul>
+</li>
+	<li>This should give you some idea of the level of detail and effort required to build a top notch platform that can be used in a professional capacity.</li>
+</ul>

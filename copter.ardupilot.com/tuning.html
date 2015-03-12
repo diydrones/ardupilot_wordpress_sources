@@ -1,0 +1,85 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: tuning 
+title: Tuning 
+id: 1577 
+menu_order: 80 
+post_parent_id: 1539 
+post_parent_stub: configuration 
+post_parent_title: Advanced Configuration 
+END METADATA 
+-->
+<h3>Overview</h3>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Tuning_CommonThingsToChange.png"><img class="alignnone size-full wp-image-10999" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Tuning_CommonThingsToChange.png" alt="Tuning_CommonThingsToChange" width="1024" height="575" /></a>
+
+The default <a href="http://en.wikipedia.org/wiki/PID_controller" target="_blank">PID gains</a> are meant for the <a href="http://store.3drobotics.com/products/IRIS" target="_blank">3DR quad copter</a> although they work on a wide variety of frames.  Still to get optimal performance you may need to adjust them which can be done through the Mission Planner's Config/Tuning &gt;&gt; APM:Copter Pids screen.  The screen shot above shows the most important parameters for Roll/Pitch (yellow), Yaw (orange), <a href="/wiki/altholdmode/">Altitude hold</a> (green), <a href="/wiki/loiter-mode/">Loiter</a> (pink) and <a href="wiki/auto-mode/">Waypoint navigation</a> (blue).
+
+The most important parameter to get right is the Rate Roll P (and by default Rate Pitch P is locked to the same value) as discussed <a href="wiki/ac_rollpitchtuning/">here</a>.
+
+Normally it's best to start by tuning the Rate Roll/Pitch P in Stabilize mode then move onto tuning altitude hold in AltHold mode, then Loiter (which often needs no tuning) and finally the waypoint navigation performance in Auto mode.
+
+[note] <a href="http://diydrones.com/forum/topics/arducopter-tuning-guide" target="_blank">Dave C's AC2.8.1 tuning guide</a> has good information for tuning for rate roll and pitch but altitude hold, Loiter and navigation has changed dramatically since AC2.8.1 so those sections are no longer valid.[/note]
+
+
+<h3>Roll/Pitch tuning</h3>
+
+The Stabilize Roll/Pitch and Rate Roll/Pitch parameters, highlighted in yellow in the screen shot above control the roll pitch response.
+The Rate parameters which convert the desired rotation rate into a motor output are the most important.  The <a href="wiki/ac_rollpitchtuning/">Rate Roll and Pitch P tuning page</a> has the most information on tuning them.
+The Stabilize Roll/Pitch P converts the desired angle into a desired rotation rate which is then fed to the Rate controller.
+<blockquote>
+<ul>
+	<li><em>A higher value will make the copter more responsive to roll/pitch inputs, a lower value will make it smoother</em></li>
+	<li><em>If set too high, the copter will oscillate on the roll and/or pitch axis</em></li>
+	<li><em>If set too low the copter will become sluggish to inputs</em></li>
+</ul>
+</blockquote>
+More information on tuning the roll and pitch can be found on the <a href="wiki/stabilize-mode/#Tuning_Parameters">Stabilize mode page's Tuning section</a>.
+
+An objective view of the overall Roll and Pitch performance can be seen by graphing the <a href="wiki/downloading-and-analyzing-data-logs-in-mission-planner/">dataflash log's</a> ATT message's Roll-In vs Roll and Pitch-In vs Pitch. The "Roll" (i.e. actual roll) should closely follow the "Roll-In" while in Stabilize or AltHold modes. Pitch should similarly closely follow Pitch-In.
+
+Alternatively you may wish to try tuning both the rate and stabilize (i.e. angular) parameters using the <a href="wiki/autotune/">AutoTune feature</a>.
+
+
+
+<h3>Yaw tuning</h3>
+The Stabilize Yaw and Rate Yaw parameters, highlighted in orange in the screen shot above control the yaw response. It's rare that the yaw requires much tuning.
+
+Similar to roll and pitch if either Stabilize Yaw P or Rate Yaw P is too high the copter's heading will oscillate. If they are too low the copter may be unable to maintain it's heading.
+
+As mentioned on the <a href="wiki/stabilize-mode/#Tuning_Parameters">Stabilize mode's tuning section</a>, the ACRO_YAW_P parameter controls how quickly copter rotates based on a pilot’s yaw input.  The default of 4.5 commands a 200 deg/sec rate of rotation when the yaw stick is held fully left or right.  Higher values will make it rotate more quickly.
+
+
+
+<h3>Altitude Tuning</h3>
+The Altitude hold related tuning parameters are highlighted in green in the screen shot above.
+
+The Altitude Hold P is used to convert the altitude error (the difference between the desired altitude and the actual altitude) to a desired climb or descent rate.  A higher rate will make it more aggressively attempt to maintain it's altitude but if set too high leads to a jerky throttle response.
+
+The Throttle Rate (which normally requires no tuning) converts the desired climb or descent rate into a desired acceleration up or down.
+
+The Throttle Accel PID gains convert the acceleration error (i.e the difference between the desired acceleration and the actual acceleration) into a motor output.  The 1:2 ratio of P to I (i.e. I is twice the size of P) should be maintained if you modify these parameters.  These values should never be increased but for very powerful copters you may get better response by reducing both by 50% (i.e P to 0.5, I to 1.0).
+
+See the <a href="wiki/altholdmode/">Altitude Hold flight mode page</a> for more information.
+
+
+
+<h3>Loiter Tuning</h3>
+Generally if Roll and Pitch are tuned correctly,  the <a href="wiki/common-diagnosing-problems-using-logs/#GPS_glitches">GPS</a> and <a href="wiki/common-diagnosing-problems-using-logs/#Compass_interference">compass</a> are set-up and performing well and <a href="wiki/common-diagnosing-problems-using-logs/#Vibrations">vibration levels</a> are acceptable, Loiter does not require much tuning but please see the <a href="wiki/loiter-mode/#Tuning">Loiter Mode</a> page for more details on tunable parameters including the horizontal speed.
+
+
+
+<h3>In-flight tuning</h3>
+A single parameter's value can be tuned in flight using the transmitter's Ch6 tuning knob.  A specific example for tuning the Rate Roll/Pitch P values can be found on the <a href="wiki/ac_rollpitchtuning/#In-flight_tuning">Rate Roll and Pitch P tuning wiki page</a>.  Please see the Ch6 Opt drop-down on the Mission Planner's Config/Tuning &gt; APM:Copter Pids's screen for a full list of parameters that can be tuned.
+
+After setting the Ch6 Opt value, the Min and Max should also be set to reasonable values (i.e. non-zero and also not unreasonably high) and then the "Refresh screen" button should be pushed by tuning the Ch6 knob to ensure that the parameter is updating correctly.
+
+
+
+<h3>Video introduction to PIDs</h3>
+PIDs (Proportional - Integral - Derivative) are the method used by our firmware to continuously stabilize the vehicle
+<p style="padding-left: 30px">Proportional = Immediate Correction: The further off you are the bigger the correction you make.
+Integral = Over time or steady state correction: If we are failing to make progress add additional correction.
+Derivative = Take it Easy correction: Is the correction going to fast? if it is slow it down (dampen) it a bit to avoid overshoot.</p>
+http://www.youtube.com/watch?v=l03SioQ9ySg
+http://www.youtube.com/watch?v=sDd4VOpOnnA

@@ -1,0 +1,27 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-disabling-the-built-in-gps-on-apm2-to-use-an-external-gps-instead 
+title: common-Disabling the Built In GPS on APM2 to use an External GPS instead 
+id: 315 
+menu_order: 0 
+post_parent_id: 3495 
+post_parent_stub: common-archived-topics 
+post_parent_title: common-Archived Topics 
+END METADATA 
+-->
+[archived]APM2 with built-in GPS no longer produced.[/archived]
+
+If you have an APM 2 with the built-in Mediatek GPS and would like to use an external and/or different GPS module, you can do so with some simple modifications:
+
+Just solder a blob over these two pins, to short them out:
+
+<img class="align left size-full wp-image-1404" alt="disablegps" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/disablegps.jpg" width="1024" height="740" />
+
+
+<h1>Testing</h1>
+<ol>
+	<li>With no external GPS, connect to APM via the Mission Planner. The HUD should report "No GPS". That's good -- it means it can't detect a GPS module. Now disconnect and remove the power from your board/remove the USB cable</li>
+	<li>Connect your external GPS to the GPS port</li>
+	<li>Connect the USB cable and connect via the Mission Planner again</li>
+	<li>Once it connects, it should report "No Fix" (if you're indoors or don't have a fix yet) or "3D Fix" (if you've got GPS fix). Either are great -- it means your new GPS was detected!</li>
+</ol>

@@ -1,0 +1,52 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: ac_throttlemid 
+title: Setting Throttle Mid 
+id: 8567 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+If you have a slightly overpowered or underpowered copter the throttle required to keep the vehicle in a stable hover may be under 40% or over 60%.  Although this is fine while flying purely stabilize mode it can lead to a rough transition to autopilot modes (Alt Hold, Loiter) where having the throttle outside of the 40% ~ 60% deadzone will be interpreted as meaning you want the copter to climb or descend.
+
+For this reason it is a good idea to adjust the Throttle Mid parameter (also known as THR_MID) so that your mid throttle while in stabilize mode is closer to 50%.
+
+
+
+Please follow these instructions to adjust your manual throttle to so that your copter hovers at 50% throttle:
+<ul>
+	<li>Fly your copter in stabilize mode in a stable hover for at least 30 seconds</li>
+	<li>Disconnect your lipo battery and connect your APM/PX4 to the Mission Planner</li>
+	<li>Go to the Terminal screen and download your latest dataflash log file (more details on working with dataflash logs can be found <a href="wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/">here</a>)</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_DownloadLogs.png"><img class="alignnone size-full wp-image-8560" alt="Vibration_DownloadLogs" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_DownloadLogs.png" width="1024" height="662" /></a>
+<ul>
+	<li>After the download has completed, close the “Log” window and push the “Log Browse” button and open the latest file in the log directory (it’s last digit will be the Log number you downloaded so in the example above we downloaded Log #1 so the filename will end in 1.log)</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_BrowseLogs.png"><img class="alignnone size-full wp-image-8561" alt="Vibration_BrowseLogs" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_BrowseLogs.png" width="1024" height="662" /></a>
+<ul>
+	<li>When the Log Browser appears, scroll down until you find any CTUN message.  Click on the row's "ThrOut" column and push "Graph this data Left" button.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/ThrMid_DataFlash_ThrOut1.png"><img class="alignnone size-full wp-image-8577" alt="ThrMid_DataFlash_ThrOut" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/ThrMid_DataFlash_ThrOut1.png" width="1024" height="391" /></a>
+<ul>
+	<li>While referring to the scale on the left of the graph, estimate approximately what the throttle level was during the hover.  In the example above (which was an unnecessarily long flight) the mid throttle appears to be about 550.
+<ul>
+<ul>
+<ul>
+<ul>
+	<li>Note: if the average throttle is below 300 (i.e. 30%) then you have a very overpowered copter and it would be best to add a some extra weight (i.e. a bigger battery perhaps) or reduce the power in some other way (smaller motors, move from a 4S to a 3S battery, etc)</li>
+	<li>If the average throttle is above 700 (i.e. 70%) then you have a very underpowered copter.  You should consider increasing the power of the motors and ESCs or use a higher voltage battery (i.e. switch from a 3S to a 4S battery).</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</li>
+	<li>Open the Mission Planner's Software &gt; Standard Params screen and update the Throttle Mid Position (THR_MID) to the value estimated above (you'll find it near the bottom of the list)</li>
+	<li>Push the Write Params button</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/MP_SaveThrMid.png"><img class="alignnone size-full wp-image-8725" alt="MP_SaveThrMid" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/MP_SaveThrMid.png" width="1024" height="576" /></a>
+<ul>
+	<li>On your next flight you should find the throttle is closer to mid while flying in stabilize mode</li>
+</ul>

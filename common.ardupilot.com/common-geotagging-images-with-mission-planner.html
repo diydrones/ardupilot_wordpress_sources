@@ -1,0 +1,178 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-geotagging-images-with-mission-planner 
+title: common-Geotagging Images with Mission Planner 
+id: 304 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<img class="alignnone size-full wp-image-2782" alt="geo_img_wiki" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/geo_img_wiki.jpg" width="900" height="318" />
+
+Geo-tagged aerial pictures are very useful for mosaic mapping as well as the creation of accurate 3D models from a terrain.
+
+The Mission Planner has a handy feature that will inject GPS data into your photos' EXIF tags by using APM's telemetry log from a flight.
+
+This tutorial was created to show you how does it work. (Original work from Sandro Benigno and Guto Santaella updated by Jesus Alvarez)
+<h3>Overview</h3>
+One of the most important application of UAVs is photogrammetry, orthophoto generation, 3D terrain modeling etc.
+In all cases, having pictures with geographical information about the camera position at the trigger instant, is crucial.
+
+If your camera has a built-in GPS you may or may not add autopilot GPS location from its log. If you are using CAM method it may be more accurate to use it instead of the built-in GPS.
+
+Mission Planner provides two methods for geotagging your photos from a mission log
+<ol>
+<ol>
+	<li>CAM messages from dataflash log</li>
+	<li>Time offset (picture time  log time)</li>
+</ol>
+</ol>
+<h4>CAM Messages</h4>
+APM/Pixhawk can trigger a camera by using a relay output or a PWM output during preprogrammed missions or by RC activation.
+CAM messages are generated (and stored in dataflash log) every time the autopilot triggers the camera. This can happen by either DO_DIGICAM_CONTROL, by a DO_SET_CAM_TRIGG_DIST or any future command.
+When using this geotag method, Mission Planner will use the exact information recorded in the CAM Message (at the time of the trigger) to geotag a picture. 
+This is the most precise geotag method.
+
+<h4>Time offset (picture time  log time)</h4>
+This method tries to figure out the time offset between the camera internal clock time and log time. By doing this, every picture can be geotagged with GPS information stored in the telemetry or dataflash logs.
+User must tune the offset value until it finds a coherent result.
+
+This method is mainly used when there is no connection between camera and autopilot
+
+<h3>Interface</h3>
+Geotag tool interface is shown below
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_overview_explained.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_overview_explained.png" alt="geotag_overview_explained" width="965" height="729" class="alignnone size-full wp-image-2341" style="border: solid grey 1px" /></a>
+
+<h4>Files selection</h4>
+This is where the user has to select the log location and camera pictures folder
+<h4>Geotag Mode</h4>
+As explained above, there are two options. CAM Messages and Time offset.
+
+<h4>Time offset Estimation and Shutter Lag</h4>
+Time offset estimation part is only allowed if Time Offset mode has been selected.
+Time offset needs to be estimated by comparing the first picture time and the first GPS time in the log.
+Once the user click the "Estimate Offset" button, the tool will calculate time offset as said above and will print the result in the Process Messages section at the bottom of the window.
+<div style="font-family:Courier">Offset Estimation = 1st_Picture_Time - 1st_GPS_Time_Logged</div>
+
+If CAM Message is selected, the Shutter Lag option is available. Note that GPS positions are stored at 5Hz by default (if using 3DR GPS) so they are recorded every 200ms.
+If Shutter Lag is less than 100ms, then GPS position is taken from current CAM Message.
+If Shutter Lag is bigger than 100ms, the GPS position is taken from 200ms ahead in log.
+<h4>Item offsets in log</h4>
+This section allows the user to tell the tool where specific information can be found in the log.
+Item offsets are preset to the last stable APM release.
+
+There are three messages whose offsets need to be defined
+<ul><ul><ul>
+<li>CAM</li>
+<li>GPS</li>
+<li>ATT</li>
+</ul></ul></ul>
+
+<strong>Example of how to find out item offset in a message line within a log</strong>
+Lets take a look at the GPS Line Format definition at the beginning of a log:
+<div style="font-family:Courier">FMT, 130, 45, GPS, BIHBcLLeeEefI, Status,TimeMS,Week,NSats,HDop,La6t,Lng,RelAlt,Alt,Spd,GCrs,VZ,T</div>
+The field with the number <strong>1</strong> is the one after the <em>Units-definition-word</em>.
+In our case, the <em>Units-definition-word</em> is BIHBcLLeeEefI. So the field with number <strong>1</strong> is <strong>Status</strong>
+Counting from it, we should have:
+TimeMS = 2
+Week = 3
+Lat = 6
+...
+
+<h4>FOV and Altitude reference</h4>
+In this part of the UI, the user can define the Field of View related information and Camera orientation. This information is incorporated into the result files but it is not used or stored in the picture EXIF data. 
+
+AMSL Alt checkbox allows to select either AGL Altitude (Above Ground Level) or AMSL Altitude (Above Mean Sea Level).
+
+<h4>Action Buttons</h4>
+<ul><ul>
+<li>Pre-process</li>
+When this button is clicked, Geotag tool will try to extract and calculate pictures positions
+<li>Location Kml</li>
+When this button is clicked, Geotag tool will open Google Earth and show pictures position on a map so the user can check their correct positioning.
+<li>GeoTag Images</li>
+If everything was correct in previous steps and pictures are well positioned in the map, this button will write the position information in the EXIF data of every picture
+</ul></ul>
+<h4>Process Messages</h4>
+This is the place where the tool will output information
+
+<h3>Processing Instructions</h3>
+
+<h4>Common Pre-steps</h4>
+<ul><li>Very first step: Open the Mission Planner and press "Ctrl+F". It will open a hidden screen like the one shown below.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_temp_form.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_temp_form-300x208.png" alt="geotag_temp_form" width="300" height="208" class="alignnone size-medium wp-image-2342" /></a>
+</li>
+<li>Click the button "Geo ref images". It will give you access to the Geo Tagging tool
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_overview.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_overview-279x300.png" alt="geotag_overview" width="279" height="300" class="alignnone size-medium wp-image-2344" /></a>
+</li>
+<li>Click the button "Browse Log" and select the log (.tlog or .log) of the flight related to the shooting session. 
+</li>
+<li>Click the button "Browse Directory" and select the folder where your aerial pictures were downloaded from your camera.
+Notice that the camera picture folder can contain other files apart from the pictures. However in terms of pictures, it must contain just the ones belonging to the flight.
+</li>
+</ul>
+From now, it depends on the type of processing.
+
+<h4>CAM Messages</h4>
+
+In order to process CAM messages, the mission file had to be defined to use remote camera trigger by means of any of the available mission commands (CAM_TRIGG_DISTANCE, DO_DIGICAM_CONTROL, etc). 
+
+<ul>
+<li>Select the <strong>CAM Message</strong> method if it is not selected in the <em>Geotag Mode</em> section.</li>
+<li>Enter Shutter Lag value (in milliseconds) if you know it. If not leave it with 0</li>
+<li>Check that Log offsets are correct according to your log version. Most of the times they should be ok</li>
+<li>Enter FOV information if needed</li>
+<li>Select <em>Use AMSL Alt</em> checkbox if you want absolute altitude. Otherwise, uncheck it</li>
+
+<li>Click Pre-process!</li>
+</ul>
+If everything goes right, you will see <strong>Done</strong> at the end of the <em>Process Messages Area</em>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_cam_processing_1_no_shutter_AMSL_total.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_cam_processing_1_no_shutter_AMSL_total-243x300.png" alt="geotag_cam_processing_1_no_shutter_AMSL_total" width="243" height="300" class="alignnone size-medium wp-image-2345" /></a>
+
+The most common problem in this processing mode is having a discrepancy between the number of CAM messages in log and the number of pictures in the folder. If the tool finds that they are different, it will output an error message and abort.   
+
+<ul>
+<li>Check the pictures proposed location by means of <strong>Location Kml</strong> button (See Common Post-steps section)</li>
+</ul>
+<h4>Time Offset</h4>
+
+<ul>
+<li>Select the <strong>Time Offset</strong> method if it is not selected in the <em>Geotag Mode</em> section.</li>
+<li>Click on <strong>Estimate Offset</strong> button
+The tool will calculate (as explained in previous section) the time difference between the first picture and the first GPS time in the log.
+</li>
+<li>Copy the calculated offset printed in the <em>Process Messages Area</em> and paste it into the field <em>Seconds offset</em>
+Take a look at the following picture:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_offset_calculation.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_offset_calculation-279x300.png" alt="geotag_offset_calculation" width="279" height="300" class="alignnone size-medium wp-image-2346" /></a>
+</li>
+<li>Click Pre-process!</li>
+<li>Check that there is no warning or error message in the <em>Process Messages Area</em>
+Introducing a erroneous Time Offset is the most common problem when using this method.
+If this is the case, Geotag tool will output a warning as there might be some picture times that (once corrected with the given offset) are not found in the autopilot log.  See picture below:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_offset_problem.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_offset_problem-279x300.png" alt="geotag_offset_problem" width="279" height="300" class="alignnone size-medium wp-image-2347" /></a>
+Note: It must be taken into account that the estimated time offset is just a starting point.</li>
+
+<li>Check the pictures proposed location by means of <strong>Location Kml</strong> button (See Common Post-steps section)</li>
+<li>If proposed location is not correct, add or substract some seconds to the Offset Time and repeat</li>
+</ul>
+<h4>Common Post-steps</h4>
+Two things left to do, check that proposed picture locations are ok and write location information to the pictures EXIF data.
+<ul>
+<li>Click on the <strong>Location Kml</strong> button. Google Earth will open and show the proposed picture locations. See following image:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_google_earth_review.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_google_earth_review-300x191.png" alt="geotag_google_earth_review" width="300" height="191" class="alignnone size-medium wp-image-2348" /></a>
+</li>
+<li>Check that they are ok.
+If you were using CAM Message Mode, there shouldn't be any problem. If there is, just order pictures alphabetically and check that the first picture is the list is also the oldest one.
+If you were using Time Offset, just try adding or substracting seconds to time offset.</li>
+
+<li>If everything is OK, Click on <strong>GeoTag Images</strong> button and wait to see: 
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_geotag_finished.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/geotag_geotag_finished.png" alt="geotag_geotag_finished" width="134" height="17" class="alignnone size-full wp-image-2349" /></a>
+</li>
+</ul>
+Geotagged files can be found in <em>geotagged</em> folder inside the original pictures folder

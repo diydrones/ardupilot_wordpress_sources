@@ -1,0 +1,366 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-chdk-camera-control-tutorial 
+title: common-CHDK Camera Control Tutorial 
+id: 329 
+menu_order: 50 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
+END METADATA 
+-->
+<h1>Taking Pictures Automatically during Missions with the Canon Hacker Development Kit</h1>
+
+<p dir="ltr">Looking for an easy and inexpensive way to take high quality pictures during your missions? The Canon Hacker Development Kit (CHDK) allows you to turn a Canon point-and-shoot camera into a dynamic payload through some simple scripting. This tutorial will guide you through the process of implementing this solution for automatic camera control.</p>
+<p dir="ltr">First we'll introduce CHDK: what you'll need to get started and tips for installing it. The first section will cover adding scripts, running scripts, and securing the camera to your fixed-wing plane. This straightforward method is great for basic automatic camera control.</p>
+<p dir="ltr">Next we'll describe how to coordinate camera controls with autonomous missions by integrating CHDK with APM. Although more complex, this implementation provides excellent functionality for taking pictures automatically at waypoints. Finally, we'll show a fun application where you can map an area by creating a composite image of still photos.</p>
+&nbsp;
+<h1>Taking pictures automatically: What is CHDK?</h1>
+<a href="http://chdk.wikia.com/wiki/CHDK" target="_blank">Canon Hacker Development Kit (CHDK)</a> is a free, experimental development tool that allows you to temporarily hack a Canon camera. With all the features of a DSLR unlocked to your control, a hacked camera is a smart payload that can read scripted functions such as shoot, zoom, and (importantly for later on) read the power applied to its USB port.
+<p dir="ltr">To use CHDK, you will need:</p>
+<span style="font-size: medium"><strong>A supported Canon camera</strong></span>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/camera.jpg"><img class="alignnone  wp-image-2154" style="float: left;margin: 0px 30px" title="Canon point-and-shoot camera" alt="Canon point-and-shoot camera" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/camera-e1369761932378-300x196.jpg" width="126" height="83" /></a></p>
+<p dir="ltr">CHDK is made possible by the ability of Canon point-and-shoot cameras to read software off an SD flash memory card. A team of developers has created Canon Hacker Development Kit to take advantage of this capability on <em>only certain Canon cameras</em>. For this tutorial, you will need one of the Canon point-and-shoot cameras listed on the <a href="http://chdk.wikia.com/wiki/Template:Supported_Cameras" target="_blank">CHDK wiki</a> as officially supported by CHDK.</p>
+
+
+<strong><span style="font-size: medium">An SD card</span></strong>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/sd.jpeg"><img class="wp-image-2156 alignleft" style="margin: 0px 30px" title="SD card" alt="SD card" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/sd-e1369763097361-227x300.jpeg" width="66" height="86" /></a>We recommend an SD card that can be written to every two seconds and can store the amount of pictures you plan to take during your mission. You'll also need an SD card reader for your computer.</p>
+&nbsp;
+
+
+
+<strong><span style="font-size: medium">A CHDK USB cable</span></strong>
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gentled-CHDK.jpg"><img class="size-full wp-image-3705 alignleft" alt="gentled-CHDK" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gentled-CHDK.jpg" width="288" height="152" /></a> We use the gentWIRE USB with two channels, available <a href="http://www.brooxes.com/newsite/BBKK/BBKK-PARTS.html">here</a> (half way down page). This cable is necessary for integrating CHDK with APM and is not required to use the intervalometer script function.
+<h2>1. Hacking your camera</h2>
+First you'll need to install CHDK onto your camera, so naturally, you'll need <a href="http://zenoshrdlu.com/stick/stick.html" target="_blank">STICK: Simple Tool for Installing CHDK</a> (available for Windows, Mac, and Linux). (You'll also need to have <a href="http://www.java.com/en/download/manual.jsp" target="_blank">Java</a> installed on your computer.)
+<p dir="ltr">Follow this link to the <a href="http://zenoshrdlu.com/stick/stick.html" target="_blank">STICK instructions page</a>, click on “STICK zip file” under the <strong>Downloading and Installing</strong> section to download STICK. Once installed onto your computer, STICK is easy to use: take a picture with your camera, connect the SD card to your computer, and drag the picture into the STICK window. This nifty tool will download the appropriate CHDK build and prepare your SD card automatically. The <a href="http://zenoshrdlu.com/stick/stick.html" target="_blank">STICK instructions page</a> has some helpful tips for issues caused by certain operating systems.</p>
+
+<h2>2. Adding a script to the SD card</h2>
+
+<p dir="ltr">CHDK allows you to automate your camera's functionality by running scripts off an SD card. CHDK scripts can be written in both <a href="http://en.wikipedia.org/wiki/UBASIC" target="_blank">UBASIC </a>and <a href="http://en.wikipedia.org/wiki/Lua_(programming_language)" target="_blank">Lua</a>: simple, easy-to-use programming languages. For this tutorial, we'll use UBASIC scripts with file extension <strong>.bas</strong>. <em>UBASIC script files must carry the extension <strong>.bas</strong> to function.</em></p>
+<p dir="ltr">One of the easiest and most useful ways to apply CHDK to your mission is to take pictures automatically at intervals during flight. We'll do this by adding an <a href="http://en.wikipedia.org/wiki/Intervalometer" target="_blank">intervalometer</a> script to the SD card. Our friends at <a href="http://dronemapper.com/" target="_blank">Drone Mapper</a> have created a great CHDK intervalometer script that can be found in Drone Mapper's <a href="https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf" target="_blank">CHDK documentation</a> or <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/DM-Intervalometer.txt" target="_blank">viewed by clicking here</a>. Copy the intervalometer script into a text editor and save the file as <strong>DM_interval.bas</strong>.</p>
+<p dir="ltr">This script will measure time intervals for five minutes and trigger the camera shutter every two seconds. These default parameters work well for us (results in about 150 pictures), but if you would like to modify them (for example, to take a pictures every five seconds), see <a href="http://chdk.wikia.com/wiki/CHDK_scripting" target="_blank">CHDK Wiki's page</a> regarding scripting parameters for UBASIC.</p>
+<p dir="ltr">To load the script onto the camera, unlock your SD card (by sliding the switch on the slide of the SD card to the unlock position), connect it to your computer, and open the SD card's file structure. Select the <strong>CHDK</strong> folder followed by the <strong>Scripts</strong> folder. Copy the script file (<strong>DM_interval.bas</strong>) into the <strong>Scripts</strong> folder.</p>
+
+<h2>3. Flying with your camera</h2>
+
+<p dir="ltr">Before you're ready for takeoff, you'll need to pack the camera into your vehicle. For best results using plane, position the camera with the lens pointing down in the center of the plane. You may need to modify your plane's body to create a space for the camera. Be sure to set the plane's center of gravity with the camera in place, and keep in mind the safety of the camera in case of failure. Check out our setup for inspiration; we used velcro strips to secure the camera in place.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/plane-pack.jpg"><img class="alignleft  wp-image-2242" alt="Shows camera secured into plane with velcro and hole for lens" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/plane-pack.jpg" width="2585" height="1123" /></a></p>
+
+<h2>4. Activating scripts before flight</h2>
+<p dir="ltr">Prior to launching your plane, it is necessary to activate the intervalometer script on the camera. Make sure the SD card is locked and loaded into the camera and the camera is turned on. When you're ready to launch your plane (after completing the <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/Plane-Flight-Ops-Checklist-onepage-792x1024.jpg" target="_blank">pre-flight checklist</a>), enter ALT mode by pressing the <strong>Print</strong> or <strong>Play</strong> button on the camera (for more information consult the<a href="http://chdk.wikia.com/wiki/CHDK" target="_blank"> CHDK wiki</a>). Press the <strong>Menu</strong> button to access the main CHDK menu. Select <strong>Load Script from File</strong>; select<strong> <strong>DM_interval.bas</strong>.</strong> Press the <strong>shutter</strong> button to run the script. (You can also use the shutter button to stop the script.) Once you start the script, the camera will automatically begin taking pictures after a delay of five seconds, so be sure to take that into account when launching your plane.</p>
+&nbsp;
+<h1>Integrating CHDK with APM</h1>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/chdk-cable.png"><img class="alignleft  wp-image-2348" title="CHDK Cable" alt="A CHDK cable with a micro USB connecting to two signal pin connectors" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/chdk-cable.png" width="266" height="104" /></a>To integrate your CHDK setup with APM, you will need a CHDK cable (pictured across) that connects the APM's output signal pins with the camera's USB port. We used <a href="http://gentles.ltd.uk/gentwire/usb.htm" target="_blank">Gentles' gentWIRE-USB2 cable</a>. (Stay tuned for a 3DR CHDK cable.)</p>
+<p dir="ltr">CHDK cables work by translating pulse width modulation (PWM) output by the APM into USB power pulses that can be read by the camera. It does this by establishing a range of how long power is applied to the USB port (ex: 40-80 ms) and assigning that range to a PWM value corresponding to a channel switch position (ex: channel 1 middle). The table below shows the corresponding values between the switch position on the RC transmitter, the APM's PWM output, and the camera's USB power.</p>
+
+<table width="25%" border="1" cellspacing="2" cellpadding="2" align="center">
+<tbody>
+<tr>
+<td>Switch position</td>
+<td>PWM (ms)</td>
+<td>USB power (ms)</td>
+</tr>
+<tr>
+<td>Channel 1 up</td>
+<td>1,900 ms</td>
+<td>&lt;50</td>
+</tr>
+<tr>
+<td>Channel 1 mid</td>
+<td>1,500 ms</td>
+<td>&gt;40 and &lt;80</td>
+</tr>
+<tr>
+<td>Channel 1 down</td>
+<td>1,100 ms</td>
+<td>&gt;70 and &lt;110</td>
+</tr>
+<tr>
+<td>Channel 2 up</td>
+<td>1,900 ms</td>
+<td>&gt;100 and &lt;140</td>
+</tr>
+<tr>
+<td>Channel 2 mid</td>
+<td>1,500 ms</td>
+<td>&gt;130 and &lt;170</td>
+</tr>
+<tr>
+<td>Channel 2 down</td>
+<td>1,100 ms</td>
+<td>&gt;160 and &lt;120</td>
+</tr>
+</tbody>
+</table>
+<p dir="ltr">Each switch position can be assigned to a script function. This means that you can script up to six different camera controls such as triggering the shutter and setting different levels of zoom. For this tutorial, we'll show you how to set up three functions using only the first channel, but this process can be followed to utilize the full six options if you choose to.</p>
+
+<h2>1. Configuring the CHDK cable for use with APM</h2>
+<p dir="ltr">First we need to select an RC channel to assign to CHDK's channel 1. Connect your plane's APM to Mission Planner. Go to <strong>Configuration</strong> -&gt; <strong>Radio Calibration </strong>to locate an available channel and its corresponding three-position switch on your RC transmitter. For this tutorial, we'll use channel 7. (If you decide to use a different channel, substitute your channel wherever we input channel 7.) Don't disconnect your APM yet.</p>
+<p dir="ltr">Before we fly, we'll need to test the integration between this channel and the CHDK cable by manually changing the switch position and observing the result. In order to allow manual control of this channel, we need to change an important parameter in Mission Planner. Under <strong>Configuration</strong> -&gt; <strong>Standard Parameters</strong>, scroll about 4/5 of the way down to find the <strong>Servo out function</strong> parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's <strong>Servo out function (RC7_FUNCTION)</strong>.</p>
+<p dir="ltr"><em>Set this parameter to <strong>Manual</strong> whenever you want to control your camera using your RC transmitter; set to <strong>Disabled</strong> when you want the APM to control the camera automatically.</em></p>
+<p dir="ltr">Since we're using the RC transmitter to test the CHDK cable, set <strong>Servo out function</strong> to <strong>Manual</strong>. Select <strong>Write Params</strong> before disconnecting your APM.</p>
+<p dir="ltr">Once you've chosen your camera control channel, you'll need to connect your CHDK cable to the APM's output pins. Connect either of the pin connectors on the CHDK cable to the APM output pins corresponding to your camera control channel (black cable on the outside). For example, we connected our CHDK cable to the channel 7 output pins on the APM. Make sure no input pins are connected to the APM for that channel.</p>
+
+For <strong>Pixhawk</strong>, connect the CHDK cable to aux out pin 5. However, this pin outputs only 3.3V, and 5V are required to trigger CHDK. To convert to 5V, you'll need to integrate a step-up converter (<a href="https://www.sparkfun.com/products/10968" target="_blank">like the one here from Sparkfun</a>) in-line with the cable to trigger CHDK.
+
+<h2>2. Adding a script</h2>
+<p dir="ltr">Now that you've configured your CHDK cable, we'll add a script to control the camera when commanded by the APM. Let's break down a CHDK cable UBASIC script into its main parts.</p>
+<code>@param o Zoom-extended
+@default o 100
+@param i Zoom-stowed
+@default i 30
+@param s Zoom-shoot
+@default s 10</code>
+
+This section defines the parameters that will be used later by the functions. <strong>@param</strong> names the parameter with a variable and a phrase; <strong>@default</strong> specifies its value. These three parameters specify zoom levels, so if you wanted to change a zoom level, you could easily do so by entering a new value after the variable following <strong>@default</strong>.
+
+<code>while 1
+do
+k = get_usb_power
+until k&gt;0
+if k &lt; 5 then gosub "ch1up"
+if k &gt; 4 and k &lt; 8 then gosub "ch1mid"
+if k &gt; 7 and k &lt; 11 then gosub "ch1down"
+if k &gt; 10 and k &lt; 14 then gosub "ch2up"
+if k &gt; 13 and k &lt; 17 then gosub "ch2mid"
+if k &gt; 16 and k &lt; 20 then gosub "ch2down"
+if k &gt; 19 then print "error"
+wend
+end<code></code></code>
+
+This is the main body of the script. It tells CHDK to read the power pulse from the USB port (<strong>get_usb_power</strong>) and, according to what range it falls under, execute a specific function. The values here are listed in centiseconds, which is why they differ from the table shown above (5 centiseconds = 50 milliseconds).
+
+<code>:ch1up
+print "Ch1Up-Shoot"; k
+set_zoom s
+shoot
+sleep 1000
+return</code>
+
+<code>:ch1mid
+print "Ch1Mid-Stowed"; k
+set_zoom i
+sleep 1000
+return</code>
+
+<code>:ch1down
+print "Ch1Down-Extended"; k
+set_zoom o
+sleep 1000
+return</code>
+
+<code>:ch2up
+return</code>
+
+<code>:ch2mid
+return</code>
+
+<code>:ch2down
+return</code>
+<p dir="ltr">This is where the script defines what each function will do. Since we aren't utilizing the channel 2 options, <strong>ch2up</strong>, <strong>ch2mid</strong>, and <strong>ch2down</strong> functions are empty. The <strong>ch1up</strong> function will set the zoom to the value specified by the variable <strong>s</strong> using the <strong>set_zoom</strong> command and take a picture using the <strong>shoot</strong> command. The <strong>ch1mid</strong> function uses <strong>set_zoom</strong> to set the lens to its stowed position, and the <strong>ch1down</strong> function fully extends the lens. The <strong>print</strong> command will output the specified text to the camera's display along with the actual output value of the USB power pulse (<strong>k</strong>).</p>
+<p dir="ltr">In short, the above script will cause the following behaviors:</p>
+<p dir="ltr">When channel 7 is set to the up position, CHDK will set zoom to 10 and take a picture.</p>
+<p dir="ltr">When channel 7 is set to the mid position, CHDK will set zoom to 30 (stowed position).</p>
+<p dir="ltr">When channel 7 is set to the down position, CHDK will set zoom to 100 (extended position).</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank">Click here to view the above script</a>, copy into a text editor, and save as <strong>3DR_Shoot.bas</strong>. Now that you're familiar with how the script works, you can easily change the commands of each function. For example, you can add a <strong>shoot</strong> command to <strong>ch1down</strong> or change one of the zoom level parameters. If you're utilizing the channel two functions, you can easily add commands to those functions in the same format shown above.</p>
+<p dir="ltr">Add the script file to the SD card as described in the previous section.</p>
+
+<h2>3. Testing the CHDK cable</h2>
+<p dir="ltr">Testing the CHDK cable will ensure that our camera controls execute as expected and is a great opportunity to test for potential noise created by your equipment setup.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/USB_Remote_01.png"><img class="alignleft  wp-image-3266" alt="USB_Remote_01" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/USB_Remote_01.png" width="218" height="165" /></a></p>
+<p dir="ltr">To tell CHDK to listen to the cable, we need to set the Enable Remote parameter. On the camera, access the CHDK menu, select <strong>Remote Parameters,</strong> and select <strong>Enable Remote </strong>as shown. This setting must be enabled to allow communication with the CHDK cable.</p>
+<p dir="ltr">Connect the CHDK cable to the camera's USB port, and run <strong>3DR_Shoot.bas</strong>. Test the result of each switch position. The resulting behaviors should reflect those listed in the previous step. Observe the USB pulse values output to the camera display, and compare them with the ranges show in the code. If you encounter problems, see the<strong>Advanced Topics </strong>section below for additional testing and troubleshooting information.</p>
+
+<h2>4. Programing camera controls in Mission Planner</h2>
+<p dir="ltr">Mission Planner allows you to program servo outputs as events at waypoints. By using this feature, we can add a command to output a PWM value (corresponding to a switch position and function) after the plane achieves each waypoint.</p>
+<p dir="ltr">Once you have your waypoints configured in Mission Planner as shown below, select your first waypoint and click “Add Below”.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/add-command1.png"><img class="alignleft size-full wp-image-2214" alt="Screenshot of Mission Planner showing adding a new command" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/add-command1.png" width="1366" height="728" /></a></p>
+<p dir="ltr">For your new command, set<strong> Command </strong>type to<strong> DO_SET_SERVO</strong>. (This tells the APM that this command means output to a servo.) Set<strong> Ser No </strong>(servo number) to the number of your camera control channel (ex:<strong> 7</strong>). (This tells the APM where to output: for us, servo channel 7 is the CHDK cable.) And set<strong> PWM </strong>to<strong> 1900</strong>. (This value tells the APM what to output: 1,900 milliseconds of pulse width modulation corresponds to the high position under which the shoot command is located). Repeat this process for each waypoint at which you would like to take a picture. The screen below shows a shutter command correctly applied at each of three waypoints.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/configure-commands-1900.png"><img class="alignleft size-full wp-image-2624" alt="Screenshot of Mission Planner showing configured commands" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/configure-commands-1900.png" width="1366" height="728" /></a></p>
+<p dir="ltr"><em>Note: Columns in the Waypoints table accrue different meanings based on the type of command currently selected. These column definitions only become visible when the command is selected as different parameters apply to different types of commands.</em></p>
+Since we're using the APM to control the camera, we need to set the <strong>Servo out function (RC7_FUNCTION) </strong>parameter to <strong>Disabled </strong>(under <strong>Standard Parameters</strong>). Write waypoints and parameters to the APM.
+
+Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.bas </strong>prior to launch. Fly your mission according to standard practices and safety procedures.
+<h1>Creating a composite image</h1>
+One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas </strong></a>script that we used in the previous section.The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area, we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s <strong>Grid V2</strong> automatic waypoint function.
+<h2>1. Setting waypoints with GridV2</h2>
+<p dir="ltr">First locate the area you wish to map in Mission Planner. Right-click and select <strong>Draw Polygon </strong>-&gt; <strong>Add Polygon Point</strong>. Add polygon points until you have created a polygon around the area you wish to map. Once you are satisfied with your polygon, right-click and select<strong> Auto WP </strong>-&gt;<strong> GridV2 </strong>as shown below.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/draw-polygon.png"><img class="alignleft size-full wp-image-2380" alt="Screenshot of Mission Planner showing a completed polygon and path to gridV2 function" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/draw-polygon.png" width="1602" height="850" /></a></p>
+<p dir="ltr">Input a relative altitude (100 feet is fine if you are unsure). Input a distance between lines; the larger the number, the fewer waypoints you’ll end up with. When prompted, enter a distance between each waypoint; the same rationale applies here. Enter line direction; the waypoints below show a line direction of 70. When prompted to add camera triggers, input “Yes”;<em> this will create a command after each waypoint, it will not automatically set up your CHDK commands</em>. We recommend experimenting with these settings until you find the waypoint configuration that is right for your mission. You should now have a grid of waypoints mapped onto your polygon as shown below.</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png"><img class="alignleft size-full wp-image-2383" alt="Screenshot of Mission Planner showing a grid of waypoints produced with the GridV2 function" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png" width="1600" height="852" /></a></p>
+<p dir="ltr">Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type <strong>DO_SET_SERVO</strong>. For each DO_DIGICAM_CONTROL command, change command type to <strong>DO_SET_SERVO</strong>, set<strong> Ser No</strong> to <strong>7</strong> (or whichever channel you're using), and set<strong> PWM</strong> to <strong>1,100</strong> (to call the <a style="font-style: normal;line-height: 21px;text-decoration: underline" href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas </strong></a>function that takes a picture).</p>
+<p dir="ltr">When run, this mission returns a set of images that can be stitched together to create a map of the selected polygon.</p>
+
+<h2>2. Stitching images</h2>
+<a href="http://research.microsoft.com/en-us/um/redmond/groups/ivm/ice/" target="_blank">Microsoft Image Composite Editor (ICE)</a> is a great, free tool for automatically stitching images together into a composite. Just upload your images, and ICE will stitch them together. Here's an example of one of our composites:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/marina_stitch_medium.jpg"><img class="alignleft  wp-image-2384" title="Composite image made by stitching together overlapping stills" alt="Composite image made by stitching together overlapping stills" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/marina_stitch_medium.jpg" width="521" height="550" /></a>
+
+We hope this solution provides some enhanced functionality to your missions and expands your autonomous imaging capabilities. For more information, check out the Advanced Topics section below.
+<h1>Appendix</h1>
+<h2>Camera Settings</h2>
+The following settings will help ensure that you get the best results from your aerial imagery.  The picture settings should can be adjusted based on your environment, but the listed values are a good place to start. Both the Canon settings and CHDK settings will vary from camera to camera.
+
+CHDK settings have a tendency to be unintuitive and to reset themselves at random, so be sure to understand what each setting does and check to make sure they have not changed before you fly!
+<h3>Canon Settings</h3>
+<ul>
+	<li>Flash: Off</li>
+	<li>Function
+<ul>
+	<li>ISO: <strong>Auto</strong></li>
+	<li>AWB: <strong>Daylight</strong></li>
+	<li>Image Size: <strong>L</strong></li>
+	<li>Image Quality: <strong>Fine/Superfine</strong></li>
+</ul>
+</li>
+	<li>Menu
+<ul>
+	<li>AF Frame: <strong>Center</strong></li>
+	<li>Digital Zoom: <strong>Off</strong></li>
+	<li>AF-Point Zoom: <strong>Off</strong></li>
+	<li>Servo AF: <strong>Off</strong></li>
+	<li>AF assist beam: <strong>Off</strong></li>
+	<li>Flash Settings
+<ul>
+	<li>Red Eye correction: <strong>Off</strong></li>
+	<li>Red-Eye Lamp: <strong>Off</strong></li>
+</ul>
+</li>
+	<li>Date Stamp: <strong>Date &amp; Time</strong></li>
+	<li><strong></strong>Power Saving...
+<ul>
+	<li>Auto Power Down: <strong>Off</strong></li>
+	<li>Display Off: <strong>1 min</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+	<li><strong></strong>IS Settings...
+<ul>
+	<li>IS Mode: <strong>Shoot Only</strong></li>
+	<li>Powered IS: <strong>Off</strong></li>
+</ul>
+</li>
+	<li><strong></strong>GPS: <strong>On</strong></li>
+</ul>
+</li>
+</ul>
+&nbsp;
+<h3>CHDK Settings</h3>
+<ul>
+	<li>Function
+<ul>
+	<li>Autostart: On</li>
+	<li>Save Params: ON</li>
+	<li>Remote Parameters: Enable Remote</li>
+</ul>
+</li>
+</ul>
+<ul>
+	<li>Menu
+<ul>
+	<li>Extra Photo Operations...
+<ul>
+	<li>Disable Overrides: <strong>Disable</strong></li>
+	<li>Override Shutter Speed: <strong>1/1600</strong></li>
+	<li>Value Factor: <strong>1</strong></li>
+	<li>Override Subj. Dist V: <strong>65535</strong></li>
+	<li>Value Factor: <strong>1</strong></li>
+	<li>Custom Auto ISO...
+<ul>
+	<li>Enable custom auto ISO</li>
+	<li>Minimal: <strong>1/1000</strong></li>
+	<li>Clear override values @start: Disable</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+&nbsp;
+
+
+
+<h3 style="text-align: center">Advanced Topics</h3>
+
+
+
+<h1>CHDK Cable Troubleshooting and Testing</h1>
+<p dir="ltr">CHDK cables work by translating pulse width modulation (PWM) output by the APM into USB power pulses that can be read by the camera. It does this by establishing a range of how long power is applied to the USB port (ex: 40-80 ms) and assigning that range to a PWM value corresponding to a channel switch position (ex: Channel middle).The table below shows the corresponding output values between the switch position on the RC transmitter, the APM's PWM output, and the camera's USB power. In practice, our Spektrum DX 8 outputs the values shown in the rightmost column.</p>
+
+<table width="25%" border="1" cellspacing="2" cellpadding="2" align="center">
+<tbody>
+<tr>
+<td>Switch position</td>
+<td>PWM (ms)</td>
+<td>USB power (ms)</td>
+<td>Spektrum DX8 USB power readings (ms)</td>
+</tr>
+<tr>
+<td>Channel 1 up</td>
+<td>1,100 ms</td>
+<td>&lt;50</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Channel 1 mid</td>
+<td>1,500 ms</td>
+<td>&gt;40 and &lt;80</td>
+<td>50 or 60</td>
+</tr>
+<tr>
+<td>Channel 1 down</td>
+<td>1,900 ms</td>
+<td>&gt;70 and &lt;110</td>
+<td>90</td>
+</tr>
+<tr>
+<td>Channel 2 up</td>
+<td>1,100 ms</td>
+<td>&gt;100 and &lt;140</td>
+<td>130</td>
+</tr>
+<tr>
+<td>Channel 2 mid</td>
+<td>1,500 ms</td>
+<td>&gt;130 and &lt;170</td>
+<td>150 or 160</td>
+</tr>
+<tr>
+<td>Channel 2 down</td>
+<td>1,900 ms</td>
+<td>&gt;160 and &lt;120</td>
+<td>190</td>
+</tr>
+</tbody>
+</table>
+<p dir="ltr">To verify that your transmitter behaves similarly, you may want to perform a test to ensure that a valid USB power value is returned for each switch position. View the<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DRCHDKTester.txt" target="_blank"> 3DR CHDK Tester script here</a>. Copy the contents into a text editor and save as <strong>3DRCHDKTester.bas</strong>. Load into your (unlocked) SD card by copying the file into the <strong>Scripts</strong> folder (in the <strong>CHDK</strong> folder).</p>
+
+<h2>1. Configuring CHDK cable for Testing</h2>
+<p dir="ltr">Before we can test the CHDK cable, we'll need to choose a channel for camera control and configure the corresponding inputs. Connect your plane's APM to Mission Planner. Go to <strong>Configuration</strong> -&gt; <strong>Radio Calibration </strong>to locate an available channel and its corresponding switch on your RC transmitter. (We'll use channel 7.) Check the PWM outputs for the up, mid, and down positions of the channel. Compare them with the table shown above.</p>
+<p dir="ltr">Before we disconnect the APM, we need to change an important parameter that you'll be using often. Under <strong>Configuration</strong> -&gt; <strong>Standard Parameters</strong>, scroll about 4/5 of the way down to find the <strong>Servo out function</strong> parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's <strong>Servo out function (RC7_FUNCTION)</strong>.</p>
+<p dir="ltr"><em><strong>Set this parameter to Manual whenever you want to control your camera using your RC transmitter; set to Disabled when you want the APM to control the camera automatically.</strong></em></p>
+<p dir="ltr">Since we're using the RC transmitter to test the CHDK cable, set <strong>Servo out function</strong> to <strong>Manual</strong>. Select Write Params before disconnecting your APM.</p>
+<p dir="ltr">Once you've chosen your camera control channel, you'll need to connect your CHDK cable to the APM's output pins. Connect either of the pin connectors on the CHDK cable to the APM output pins corresponding to your camera control channel (black cable on the outside). For example, we connected our CHDK cable to the channel 7 output pins on the APM. Make sure no input pins are connected for that channel.</p>
+
+<h2>2. Testing the CHDK cable</h2>
+<p dir="ltr">Testing the CHDK cable will ensure that our camera controls execute as expected and is a great opportunity to test for potential noise created by your equipment setup.</p>
+<p dir="ltr">Connect the CHDK cable to the camera's USB port. Turn the camera on, load the <strong>3DRCHDKTester.bas </strong>script (by selecting<strong> Load Script from File</strong> from the main CHDK menu), and press the shutter button to run the test script.</p>
+<p dir="ltr">To perform the test, set each camera control channel position on your RC transmitter and observe the outputs on the display. Verify that these outputs are within the acceptable USB power ranges in the table above. If you encounter problems, you may need to shield your cable to prevent noise.</p>
+
+<h2>3. Shielding the cable</h2>
+<p dir="ltr">Coming soon.</p>
+
+<h1>GeoTagging Images</h1>
+<p dir="ltr">For information regarding geotagging images, more information can be found on <a href="http://www.diydrones.com/profiles/blogs/geotagging-images-with-mission-planner" target="_blank">Sandro Beningo's step-by-step guide.</a></p>
+
+<h1>Troubleshooting</h1>
+<p dir="ltr"><strong>Problem</strong>: The tester script runs but does not display any output on the camera screen.</p>
+<p dir="ltr">Cause 1: Do you have the APM parameter RC#_FUNCTION=1 for manual override of the RC channel you are using? You can see both the PWM input and output on the Configuration &gt; Failsafes screen in the mission planner</p>
+<p dir="ltr"><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM2_JP1.jpg"><img class=" wp-image-292 alignright" alt="APM2_JP1" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM2_JP1.jpg" width="151" height="137" /></a></p>
+<p dir="ltr">Cause 2: Is your output rail powered? Even if you are getting the correct PWM signal out on your camera control channel, the output needs 5V DC. You can power the output rail with a jumper on JP1 as shown, which bridges the input power to the output, or by directly running power to the output.</p>
+<p dir="ltr">Cause 3: Do you have the remote enabled in CHDK? In the CHDK menus: Remote parameters &gt; enable remote. Leave the other remote settings as is.</p>
+<p dir="ltr"></p>

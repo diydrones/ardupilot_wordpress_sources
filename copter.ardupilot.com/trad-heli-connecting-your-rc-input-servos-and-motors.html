@@ -1,0 +1,47 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: trad-heli-connecting-your-rc-input-servos-and-motors 
+title: Traditional Helicopter - Connecting RC Input, Servos and Motors 
+id: 9900 
+menu_order: 30 
+post_parent_id: 1620 
+post_parent_stub: traditional-helicopters 
+post_parent_title: Traditional Helicopters 
+END METADATA 
+-->
+<h3>Basic Configuration of your transmitter/receiver</h3>
+The basic radio set-up is very similar to the Multirotors. Although you will be flying a helicopter, you should setup your radio in normal airplane mode. Some radios call this "Acro" or "Fixed wing" mode. The ArduCopter electronics and software takes care of all needed swash plate mixing.
+
+As shown in the picture below you should connect your 8-channel receiver to the APM's inputs. Alternatively you may use an <a href="wiki/common-connecting-a-ppm-sum-receiver/">PPM-Sum receiver</a>.
+
+The APM2's input channel mapping is:
+Channel 1: Aileron (aka Roll)
+Channel 2: Elevator (aka Pitch)
+Channel 3: Collective Pitch
+Channel 4: Rudder (aka Yaw)
+Channel 5: Flight Mode
+Channel 6: In-flight tuning knob
+Channel 7: Aux function switch (i.e. Camera trigger, Sonar on/off)
+Channel 8: Main rotor speed
+
+
+<h3>Powering the APM/Pixhawk</h3>
+<ul>
+	<li>If your main  battery is a 3S or 4S (i.e. under 18V) and the total current draw will be no more than 90amps it is highly recommended that you use the <a href="http://store.3drobotics.com/products/apm-power-module-with-xt60-connectors" target="_blank">3dr Power Module</a>.  If the voltage or current is higher than this, you will need a separate 5V BEC to power the APM/Pixhawk and receiver.</li>
+	<li>On the APM, remove the JP1 jumper to separate the output pin's power from the APM's CPU.  The servos will be powered from the main rotor's ESC (see below)</li>
+</ul>
+
+
+<h3>Connecting the servos</h3>
+<ul>
+	<li>Outputs #1,#2 and #3 should be connected to the 3 swash plate servos.  The order is not critical although set-up is slightly easier later if you connect #1 to the front right servo, #2 to the front left servo and #3 to the swash plate's rear most servo.</li>
+	<li>Output 4 should be connected to the rudder servo.</li>
+	<li>Main rotor's ESC should be connected to Output #8.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/APM_RX_Serrvo_Connections.jpg"><img class="alignnone size-full wp-image-9901" alt="APM_RX_Serrvo_Connections" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/APM_RX_Serrvo_Connections.jpg" width="960" height="720" /></a>
+
+Notes:
+<ul>
+	<li>An external tail gyro is not required but if you choose to use one you should connect the gyro's gain wire to APM's output #7.  The gyro's main signal wire should connect to the APM's output #4 and of course the tail servo should be connected to the gyro itself.</li>
+	<li>If using a direct drive variable pitch tail the tail rotor's ESC should be connected to output #7</li>
+</ul>

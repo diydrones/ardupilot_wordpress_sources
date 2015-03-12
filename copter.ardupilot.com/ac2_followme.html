@@ -1,0 +1,51 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: ac2_followme 
+title: Follow Me Mode 
+id: 1541 
+menu_order: 150 
+post_parent_id: 1556 
+post_parent_stub: flight-modes 
+post_parent_title: Flight Modes 
+END METADATA 
+-->
+Follow Me mode makes it possible for you to have your copter follow you as you move, using a telemetry radio and a ground station. Mission Planner for Windows laptops, APM Planner for OS X laptops, and DroidPlanner for Android devices currently support Follow Me; however, it's easiest to use a phone or tablet as your Follow Me ground station.
+
+Follow Me mode uses the APM:Copter dynamic waypoint feature and MAVLink telemetry commands.
+
+<h3>What you'll need</h3>
+<ol>
+	<li>An APM:Copter with telemetry</li>
+	<li>A laptop</li>
+	<li>A GPS USB dongle <a href="http://www.amazon.com/ND-100S-GlobalSat-USB-GPS-Receiver/dp/B004K39QTY/refsr_1_9?ieUTF8&amp;qid1329773762&amp;sr=8-9">like this</a> or Bluetooth GPS module <a href="http://www.amazon.com/GlobalSat-BT-368i-Bluetooth-GPS-Receiver/dp/B0018YZ836/refsr_1_2?selectronics&amp;ieUTF8&amp;qid1329773963&amp;sr1-2">like this</a>.</li>
+</ol>
+
+
+<h3>Instructions for Mission Planner</h3>
+<ol>
+	<li>Set one of your flight modes to "Loiter"</li>
+	<li>Set up your APM:Copter at the field and establish a MAVLink connection over wireless telemetry</li>
+	<li>Ensure that your GPS USB dongle or Bluetooth device is plugged into to your laptop and showing up as a serial port. Using the software that came with the module, make sure that it's working and that you have GPS lock.</li>
+	<li>Take off, and once in the air switch to Loiter. (Sufficient altitude to ensure that while it is following you it isn't attacking you might be a good idea).</li>
+	<li>In the Mission Planner Flight Data screen try right-clicking on a nearby spot and select "Fly to Here". If this works, you're ready to try Follow Me mode.</li>
+	<li>In the Mission Planner, enter Control-F, which will open the following window. Click on "Follow Me"</li>
+</ol>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/followme1.png" alt="" />
+<ul>
+	<li>This will bring up this window. Select the serial port that is assigned to your GPS device and whatever baud rate it uses.</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/followme2.png" alt="" />
+<ul>
+	<li>Once you click "Connect", the Mission Planner will read the GPS data from your device and send it to your APM:Copter as "fly to here" commands every two seconds.</li>
+</ul>
+<ul>
+	<li>Now pick up your laptop and start walking around.</li>
+	<li>The APM:Copter should follow you!
+<ul>
+	<li>If you have set the altitude to 5 feet it might be a good idea to see if you can out run it.</li>
+	<li>As mentioned before, sufficient altitude to prevent injury is useful.</li>
+	<li>Seriously this is a great capability, but safety is really important when using Follow Me mode especially with an open bladed Multicopter.</li>
+</ul>
+</li>
+	<li><span style="color: #ff0000"><strong>Warning:</strong></span> Like all other modes in which the autopilot is responsible for altitude hold (Loiter, AltHold), the barometer is used in the altitude calculation meaning that it can drift over time and the copter will follow the air pressure change rather than actual altitude above ground.</li>
+</ul>

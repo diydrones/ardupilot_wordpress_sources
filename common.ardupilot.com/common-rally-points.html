@@ -1,0 +1,59 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rally-points 
+title: common-Rally Points 
+id: 2244 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Overview</h1>
+Ordinarily when a plane or copter enters <a title="RTL Documentation" href="http://plane.ardupilot.com/wiki/flying/flight-modes/#Return_To_Launch_RTL">Return to Launch (RTL)</a> mode (typically triggered by an autopilot <a title="failsafe" href="http://plane.ardupilot.com/wiki/arduplane-setup/apms-failsafe-function/">failsafe</a>), the default behaviour is to return to the <a title="Home_point" href="http://planner.ardupilot.com/wiki/planning-an-apmplane-mission-with-waypoints-and-events/#setting_the_home_position">Home point</a>, but there are often cases when that can be undesirable. For example it may be an area full of people or property and a system running in RTL mode may very likely be in a state that merits extreme caution!  It is also possible that the flight plan is large enough that should the aircraft enter RTL mode it is undesirable to traverse all the way back to the point of takeoff.
+
+For this reason we now support the creation of multiple Rally Points.  Should an aircraft enter RTL and Rally Points have been defined then it will proceed to the closest Rally Point, rather than proceeding to the Home position. APM:Plane will then loiter at that location, and APM:Copter will perform an automated landing there.
+
+[caption width="571" align="alignnone"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/threeRallyPointsAndPlan.png"><img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/threeRallyPointsAndPlan.png" width="571" height="888" alt="threeRallyPointsAndPlan." class /></a> A flight plan with Rally Points. Rally Points are denoted with Purple place markers. Mousing over a Rally Point will give its loiter altitude (as in the middle point above).[/caption]
+
+
+
+
+
+<h1>Setting Up Rally Points</h1>
+
+The following steps are for specifying Rally Points in Mission Planner:
+<ol>
+	<li>Rally Point latitude and longitude.To set a Rally Point's location, right click on the Flight Plan map, and select Rally Points &gt; Set Rally Point on the resulting pop-up menu (note that this ONLY work in the Flight Plan screen, not the Flight Data screen):
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyPointDialog.png"><img class="alignnone  wp-image-5053" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyPointDialog.png" alt="rallyPointDialog" width="398" height="435" /></a></li>
+	<li>The Rally loiter altitudes need to be specified (note that the default altitude for Rally Points is the default waypoint altitude value):
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyAltDialog.png"><img class="alignnone  wp-image-5054" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyAltDialog.png" alt="rallyAltDialog" width="401" height="568" /></a> <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/defaultAltCircled1.png"><img class="alignnone size-full wp-image-5055" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/defaultAltCircled1.png" alt="defaultAltCircled" width="693" height="240" /></a></li>
+	<li>Repeat for all desired Rally points!</li>
+	<li>Upload to the vehicle by selecting Rally Points &gt; Upload from the right-click popup menu</li>
+</ol>
+
+
+The following should be considered when using Rally Points:
+<ol>
+	<li>If using a <a title="geofence" href="http://plane.ardupilot.com/wiki/geofencing-3/">geofence</a>: ensure the Rally Points you intend to use at your event are inside the geofence.</li>
+	<li>Make sure Rally Point altitudes are high enough to clear terrain and buildings.</li>
+	<li>Because of the limited flash memory size on the APM hardware the number of Rally Points is restricted to 10 on APM:Plane and 6 on APM:Copter -- this limit may be expanded on other platforms such as PX4 and Pixhawk in the future.</li>
+	<li>On APM:Plane, loiter radius for a Rally Point is the same as all other loiter points; determined by the <a title="WP_LOITER_RAD" href="http://plane.ardupilot.com/wiki/arduplane-parameters/#Waypoint_Loiter_Radius_ArduPlaneWP_LOITER_RAD">WP_LOITER_RAD</a> parameter.</li>
+	<li>The <a title="ALT_HOLD_RTL" href="http://plane.ardupilot.com/wiki/arduplane-parameters/#RTL_altitude_ArduPlaneALT_HOLD_RTL">ALT_HOLD_RTL</a> / <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#RTL_Altitude_ArduCopterRTL_ALT">RTL_ALT</a> parameters are NOT used with Rally Points!  The aircraft will transit to the Rally Point at the altitude specified when adding that point.</li>
+</ol>
+
+
+The following MAVLink parameters control Rally Point behavior:
+<ol>
+	<li><a title="RALLY_LIMIT_KM" href="http://plane.ardupilot.com/wiki/arduplane-parameters/#Rally_Limit_ArduPlaneRALLY_LIMIT_KM">RALLY_LIMIT_KM</a> is the maximum distance a Rally Point may be from the aircraft to be considered for an RTL event.  If all Rally Points are greater than this distance from the aircraft, then the Home location is used for RTL events (at altitude <a title="ALT_HOLD_RTL" href="http://plane.ardupilot.com/wiki/arduplane-parameters/#RTL_altitude_ArduPlaneALT_HOLD_RTL">ALT_HOLD_RTL</a>) <strong>unless</strong> Home is farther away than the nearest Rally Point -- in which case the nearest Rally point is used.  This parameter is to prevent fly offs if Rally Points have been specified for multiple flying fields. This parameter can be disabled if set to 0.</li>
+	<li><a title="RALLYL_TOTAL" href="http://plane.ardupilot.com/wiki/arduplane-parameters/#Rally_Total_ArduPlaneRALLY_TOTAL">RALLY_TOTAL</a> is the number of Rally Points currently specified. This parameter will be set for you by your ground control station (e.g., Mission Planner) when you add and remove Rally Points.  <strong>IT IS HIGHLY UNLIKELY YOU WANT TO SET THIS PARAMETER MANUALLY AND IT IS PROBABLY UNSAFE TO DO SO</strong>.  RALLY_TOTAL should be 0 if you have specified no Rally Points and in this case the Home location will be used for RTL events.</li>
+</ol>
+
+
+
+<h1>Example Flight</h1>
+
+[caption id="attachment_5056" align="alignnone" width="408"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyDemo.png"><img class=" wp-image-5056" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyDemo.png" alt="rallyDemo" width="408" height="559" /></a> Flight in which RTL was commanded near waypoint 4. Plane began loitering about the southernmost Rally Point.[/caption]
+
+
+<img class="alignnone  wp-image-5053 mce-clonedresizable" style="margin: 0px;width: 368px;height: 403px" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/11/rallyPointDialog.png" alt="rallyPointDialog" width="437" height="478" />

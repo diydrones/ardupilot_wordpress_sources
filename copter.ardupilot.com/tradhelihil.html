@@ -1,0 +1,60 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: tradhelihil 
+title: Traditional Helicopter Simulator - TradHeliHIL 
+id: 1695 
+menu_order: 0 
+post_parent_id: 13872 
+post_parent_stub: common-archived-topics 
+post_parent_title: common-Archived Topics 
+END METADATA 
+-->
+[archived]This Simulator does not currently work (16 Feb 2015).[/archived]
+
+This article explains how to setup the TradHelicopter in the mission planner.
+
+<h3>What you need</h3>
+1. AeroSIM-RC 3.7 <a href="http://www.aerosimrc.com/j/index.php/en/downloads">http://www.aerosimrc.com/j/index.php/en/downloads</a>. Note: As of Feb 20th 2012, you need to use the beta version of 3.83 which can be found <a href="http://www.aerosimrc.com/downloads/AeroSIMRC_3.83-3.81.exe">here</a>.
+
+2. AP Mission Planner v 1.0.84+ <a href="http://code.google.com/p/ardupilot-mega/downloads/list">http://code.google.com/p/ardupilot-mega/downloads/list</a>
+
+3. In your AP Mission Planner installation directory you will find a file called AeroSIMRCAPMHIL.zip. Extract this to your AeroSIM-RC plug-ins directory (i.e. C:Program Files (x86)AeroSIM-RCplugin)
+
+
+<h3>How to make it work</h3>
+*1. Upload the <a href="ArduCopter.html">ArduCopter</a> firmware using the AP <a href="MissionPlanner.html">MissionPlanner</a> or Arduino.
+
+On the AP Mission Planner you can find the Heli button on the bottom left of the firmware upload screen.
+
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/TradHeli_MissonPlanner_HILUpload.png" />
+
+If you use Arduino be sure to set the following definitions in APM_Config.h:* <pre>#define HIL_MODE     HIL_MODE_ATTITUDE #define FRAME_CONFIG HELI_FRAME</pre>
+<strong>2. Start the AP Mission Planner and perform the following set-up:
+</strong>
+<ul>
+	<li>select Simulation from the Menu</li>
+	<li>check AeroSimRC</li>
+	<li>check Heli</li>
+	<li>check Reverse Rudder and Display All</li>
+	<li>set Roll gain = 4500</li>
+	<li>set Pitch gain = 4500</li>
+	<li>set Throttle gain = 4500</li>
+	<li>set Rudder gain = 300</li>
+	<li>select Save Settings so that you don't need to this next time</li>
+	<li>connect your APM to you PC through the USB port</li>
+	<li>ensure the COM port and baud is correct in the APMissionPlanner and push the Connect button</li>
+	<li>push
+<a href="SimLink.html">SimLink
+</a>
+Start/Stop button, you should see "Sim Link Started"</li>
+</ul>
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/TradHeli_APMissionPlannerSIMSetup.png" />
+
+<strong>3. Start AeroSIM-RC and perform the following setup
+</strong>
+<ul>
+	<li>select SIM, Select Model, Heli 30 from the menu</li>
+	<li>select plug-ins, APM from the menu</li>
+	<li>you should find the engines in the RC helicopter immediately start and that you are able to control the RC heli much like the real helicopter</li>
+</ul>
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/TradHeli_AeroSimSetup.png" />

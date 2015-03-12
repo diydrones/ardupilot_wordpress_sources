@@ -1,0 +1,64 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-using-a-ground-station 
+title: common-Using a Ground Station 
+id: 337 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<img class="alignnone size-full wp-image-3524" alt="HUD" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/HUD.jpg" width="900" height="734" />
+<ol>
+	<li><span style="line-height: 15px">Air speed ( Ground speed if no airspeed sensor is fitted )</span></li>
+	<li>Crosstrack error and turn rate (T)</li>
+	<li>Heading direction</li>
+	<li>Bank angle</li>
+	<li>Wireless telemetry connection (% bad packets)</li>
+	<li>GPS time</li>
+	<li>Altitude ( blue bar is rate of climb )</li>
+	<li>Air speed</li>
+	<li>Ground speed</li>
+	<li>Battery status</li>
+	<li>Artificial Horizon</li>
+	<li></li>
+</ol>
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/hud.jpg" />
+
+The above is the main Ground Station view of the Mission Planner, showing the Heads-up Display (HUD). If your APM slider switch is in flight mode (away from the RC pins) and you have connected via MAVLink (usually through the Xbee modules at 57600k, but it will work via USB on the ground, too) the dials and position on this screen will display the telemetry sent by APM.
+
+A few tips:
+<ul>
+	<li>The map will only show current position when you have GPS lock or are using a flight simulator</li>
+	<li>Remember how artificial horizons work: when the aircraft tilts to the right, the horizon tilts to the left. (Just tilt your head and you'll see what I mean). This is normal! Please don't tell us it's reversed ;-)</li>
+	<li>For APM:Copter status, the output meaning is as follows:
+<ul>
+	<li>"WPDist" : Distance to next waypoint in meters</li>
+	<li>"Bearing ERR": How far your UAV is from the perfect line to the next waypoint</li>
+	<li>"Alt ERR": How far your UAV is from the target altitude</li>
+	<li>"WP": Next waypoint to hit</li>
+	<li>"Mode": Current autopilot mode.</li>
+</ul>
+</li>
+	<li>You can issues mode changes and other action commands in the air with the Mission Planner and other GCSs, but note that you must be under autopilot control for them to take effect.</li>
+	<li>If you double-click the HUD it will popout, allowing you to run the hud full screen on a second screen.</li>
+	<li>If you double-click on the Speed Guage you can modify the max scale you want to display.</li>
+	<li>You can change the voice used in the speech synthesis in the Ease of Access center in Windows Control Panel. Go to the "Text to Speech" options.</li>
+	<li>If you enable the Tuning checkbox and double-click tuning you can graph any data that is available in the status tab. This means you can have alt, attitude, or many other options in real time.</li>
+	<li>You can use custom imagery instead of Google Maps. Press control-F. This allows you to upload your own orthophotos. Use will require Globalmapper, as this is currently one of the key steps in exporting in the required format for use in the planner.</li>
+</ul>
+
+
+
+<h3>Guided Mode</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_fly_to_here.png"><img class="alignnone  wp-image-2641" alt="Guided Mode" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_fly_to_here.png" width="1151" height="670" /></a>
+
+One of the most commonly-used features in pro UAVs is point-and-click mission control in real time. Rather than just pre-planned missions or manually flying the UAV, operators can just click on a map and say "go here now".
+
+That's now implemented in the Mission Planner. On the GCS map, you can right-click on the map and just select "Fly To Here". The UAV will fly there and loiter until you give it another command. We call this "Guided Mode". There are more commands coming in this mode soon, but the functionality is now built-in.
+
+Note: Guided is a separate flight mode. If you enter it you will remain in it until you do something to change modes. So if you tell it to "go here now", once it arrives there it will loiter at the Guided waypoint till you tell it to do something else. Something else could either be going to another Guided waypoint (staying in Guided mode) or changing to some other flight mode. If you change to Auto your mission will resume where it left off.
+
+<a href="http://copter.ardupilot.com/wiki/ac2_guidedmode/"><strong>Please go to this page for a full description of how to use Guided Mode</strong>
+</a>

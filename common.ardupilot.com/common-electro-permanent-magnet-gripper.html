@@ -1,0 +1,136 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-electro-permanent-magnet-gripper 
+title: common-Electro Permanent Magnet Gripper (EPM688) 
+id: 1495 
+menu_order: 160 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+The <a href="http://nicadrone.com/index.php?id_product=13&amp;controller=product" target="_blank">EPM688 from NicaDrone.com</a> is a small (less than 4cm x 4cm x 2cm) Electro Permanent Magnet gripper capable of 7kg of force meaning it can hold about 1kg of cargo.  The gripping and releasing of the cargo if accomplished by delivering a short pulse to an electromagnet which reverses it's field.  Objects that it grips onto should be metal or have the included <a href="http://nicadrone.com/index.php?id_product=15&amp;controller=product" target="_blank">thin steel target square</a> attached to them.
+
+The device accepts a standard PWM servo input and uses a 5V power supply.  Significant amounts of power are only required for less than 1 second when it first grips or releases the cargo.
+
+<a href="https://www.kickstarter.com/projects/412473553/opengrab-open-hardware-electro-permanent-cargo-gri/widget/video.html" target="_blank">See Kickstarter <strong>Video</strong> of the product here</a>!
+
+
+
+<h1>Connecting to a Pixhawk</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Pixhawk.jpg"><img class="alignnone size-full wp-image-2817" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Pixhawk.jpg" alt="EPM_Pixhawk" width="960" height="350" /></a>
+
+The EPM is connected to the Pixhawk in the same way as a <a href="wiki/common-servo/">servo</a>.
+<ul>
+	<li>If using ArduCopter, Connect the EPM to AUX OUT 1, 2, 3 or 4.  MAIN OUT 1 ~ 8 cannot be used because the EPM does not accept the 400hz update rate.  AUX OUT 5 an 6 cannot be used because they are reserved for <a href="wiki/common-relay/">Relays</a>.</li>
+	<li>If using ArduPlane or ArduRover where all pwm pins update at 50hz, any unused MAIN OUT or AUX OUT 1 ~ 4 may be used.</li>
+	<li>A BEC or ESC should be used that can provide 600milliamps of current at 5V for the short period that the gripper is first activated to latch onto the cargo.</li>
+</ul>
+
+
+
+<h1>Connecting to an APM2</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_APM2.png"><img class="alignnone size-full wp-image-2799" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_APM2.png" alt="EPM_APM2" width="676" height="398" /></a>
+
+The EPM is connected to the APM2 in the same way as a <a href="wiki/common-servo/">servo</a>.
+<ul>
+	<li>If using ArduCopter, connect the EPM's signal wire to either A10 or A11 on the left side of the APM.</li>
+	<li>If using ArduPlane or ArduRover A10, A11 or any available RC1 ~ RC8 connectors on the back of the APM may be used.</li>
+	<li>The EPM should be powered using the rear power rail (ensure JP1 jumper is removed) or to an external BEC (not shown).  It is absolutely critical that the power and ground wires not be connected to the + and - pins of A10 or A11 because the EPM will be sharing power with the APM2's CPU and will likely cause a brownout when it is activated.</li>
+</ul>
+
+
+
+<h1>Controlling from a transmitter using servo pass-through</h1>
+
+Unfortunately with the latest versions of ArduCopter, Plane and Rover the EPM can be controlled either from the transmitter OR during missions.  Either is possible but parameter changes are required meaning both methods are not available during a single flight.  Below are instructions for setting up manual control through a transmitter.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_SetupManualControlMP.png"><img class="alignnone  wp-image-2800" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_SetupManualControlMP.png" alt="EPM_SetupManualControlMP" width="696" height="279" /></a>
+
+Control using the transmitter is accomplished by setting up "RC Pass Through" which means the "input" channel from the transmitter is passed through to the Pixhawk/APM's "output" channel of the same number.  For ArduCopter this means you must have a transmitter capable of 9 or more channels because the EPM is connected to output ch9 (or higher).
+
+Assuming the above is possible for your set-up, connect with the mission planner.  Go to the Config/Tuning &gt;&gt; Full Parameters List and set the RC9_FUNCTION to "1" (i.e. "RCPassThru").  Note that if the EPM is connected to AUX OUT 2 then RC10_FUNCTION should be set instead, etc.
+
+On the transmitter set CH9 to be controlled from a 3-position switch and the positions set as follows:
+<blockquote>
+<ul>
+	<li><em>low position set to about <strong>1100 pwm</strong>.  This will release the cargo</em></li>
+	<li><em>mid position set to about <strong>1500 pwm</strong>.  This is the neutral position, after pulling the switch high or low to grab or release, the switch should be returned to this position</em></li>
+	<li><em>high position set to about <strong>1900 pwm</strong>.  This will activate the EPM so it grips onto the cargo.</em></li>
+</ul>
+</blockquote>
+To grab onto the cargo, bring the cargo close to the EPM and momentarily bring the switch high and then return the switch to neutral.
+To release the cargo, momentarily bring the switch low and then return it to neutral.
+
+Note: the <a href="http://copter.ardupilot.com/wiki/channel-7-and-8-options/">ArduCopter Ch7/Ch8 switch</a> includes options for the EPM but these unfortunately do not function properly.
+
+Note: it is also possible (if using an older style, non ppm-sum receiver) to directly connect one signal wire from the receiver to the EPM's PWM pin thus by passing the Pixhawk/APM2 completely.  The image below shows the power line between the receiver and EPM connected but this is not correct and is quite dangerous because power spikes could pass through the receiver to the Pixhawk/APM2.  Only PWM and Ground should be connected.  The EPM should be powered from a BEC (not shown below).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/DSC00803.jpg"><img class="alignnone" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/DSC00803-300x193.jpg" alt="DSC00803" width="300" height="193" /></a>
+
+
+
+<h1>Controlling during missions and from GCS</h1>
+
+As mentioned above, the EPM can be controlled either through a transmitter or from the ground station (including during missions, aka <a href="http://copter.ardupilot.com/wiki/common-servo/wiki/auto-mode/">AUTO mode</a>) but not both during the same flight. Below are instructions for setting up control through the ground station.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_SetupMissionControlMP.png"><img class="alignnone  wp-image-2802" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_SetupMissionControlMP.png" alt="EPM_SetupMissionControlMP" width="725" height="407" /></a>
+
+Connect with the mission planner. Go to the Config/Tuning &gt;&gt; Full Parameters List and set the RC9_FUNCTION to "0" (it's default value). Note that if the EPM is connected to Pixhawk's AUX OUT 2 then RC10_FUNCTION should be set instead, etc.  If using an APM2 it will be the RC10_FUNCTION or RC11_FUNCTION parameter.
+
+Create the mission you wish to fly and add pairs of DO_SET_SERVO commands to grip or release the cargo and then return the EPM to neutral.
+<ul>
+	<li>"Ser No" should be set according to which output the EPM is connected to (i.e. "9" = Pixhawk's AUX OUT 1, "10" = APM2's RC10).</li>
+	<li>"PWM" should be set to <strong>1100ms</strong> to release the cargo, <strong>1500ms</strong> to return to neutral, and <strong>1900ms</strong> to grip the cargo.</li>
+</ul>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Mission.png"><img class="alignnone size-full wp-image-2818" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Mission.png" alt="EPM_Mission" width="1024" height="639" /></a>
+
+In the example above the vehicle takes off to 20m, flies west 150m where it delays for 5 seconds, releases the cargo, delays another 5 seconds and then returns home.
+
+In order to pick up the cargo before the mission begins, push the round black button on the EPM to momentarily turn it on.  A cumbersome alternative is to use the Mission Planner’s Flight Data screen's Servo tab to momentarily set the output to 1900 pwm (i.e. "High" in the image below) and then back to neutral (i.e. 1500 or "Low" in the image below).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_MPFlightData_ServoTab.png"><img class="alignnone  wp-image-2806" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_MPFlightData_ServoTab.png" alt="EPM_MPFlightData_ServoTab" width="511" height="319" /></a>
+
+
+
+<h1>Specifications and more info</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/EPMV2_1.jpg"><img class="alignright" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/EPMV2_1-809x1024.jpg" alt="EPMV2_1" width="423" height="535" /></a>The EPM has an onboard PIC12F MCU with an in circuit programming header to allow easy reflashing.
+
+When first gripping or releasing the cargo it consumes 400mA for 0.4 seconds.  The majority of the energy is consumed to move the target into place and the rest realigns the magnets.  The on-board LED will blink rapidly 4 times when a switching cycle is being executed
+
+On-board tactile push button: Allows toggle testing the EPM on/off  having only the power connected
+
+Full bridge Thyrisotor drive circuit increases efficiency and reduces capacitor size .
+
+Reduced magnetic interference allows mounting within 5cm of a magnetometer (please test it with your application)
+
+
+<a href="http://opengrab.googlecode.com/files/Electropermanent_Magnets_Knaian.pdf" target="_blank">Paper by Ara Nerses Knaian</a>
+<a title="Datasheet" href="http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf">Datasheet</a>
+<a href="https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4">Schematics and PCB files</a>
+<a href="https://github.com/ctech4285/EPM_688_V2">Git repository for Parts Drawing PCB Masks Pic12F source code</a>
+<a href="https://groups.google.com/forum/#%21forum/opengrab">User Group (Help)</a>
+
+
+
+<h1>Magnetic interference and Board Voltage check</h1>
+
+The EPM can cause magnetic interference especially while gripping or releasing the cargo or if left in the "on" state with no cargo attached.  Make sure to mount the EPM at least 10cm from the flight controller's compass.
+
+The EPM's impact on the compass can be tested in real-time by connecting with the Mission Planner, go to the Flight Data screen and click on the "Tuning" checkbox at the bottom, middle.  Double click on the graph that appears on the top right and when the "Graph This" window appears select "magfield".
+
+Turning the EPM on and off and ensure the magfield length does not change by more than 10%.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/mag_field.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/mag_field-1024x534.jpg" alt="mag_field" width="584" height="304" /></a>
+
+In addition to magnetic interference, if a weak BEC is used a voltage drop may be noticed.  For example the BEC in a 3DR ESC leads to a drop of 0.4V when the EPM is activated.  This is normally not a concern because the BEC should only be powering the servo rail of the Pixhawk/APM2 and so the CPU's voltage should be unaffected.  This can be tested by graphing the "hwvoltage" field in the same way the "magfield" was checked above.  Ideally this test should be performed when connected via <a href="wiki/common-telemetry-landingpage/">Telemetry </a>because a USB cable will also provide power the CPU and may hide any voltage disturbance.
+
+
+
+<h1>User Video</h1>
+
+https://www.youtube.com/watch?feature=player_embedded&amp;v=_iyTo9H7HAk#t=190

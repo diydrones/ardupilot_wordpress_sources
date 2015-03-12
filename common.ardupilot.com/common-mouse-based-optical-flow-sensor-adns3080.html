@@ -1,0 +1,143 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-mouse-based-optical-flow-sensor-adns3080 
+title: common-Mouse-based Optical Flow Sensor (ADNS3080) 
+id: 3770 
+menu_order: 10 
+post_parent_id: 3767 
+post_parent_stub: common-optical-flow-sensors-landingpage 
+post_parent_title: common-Optical Flow Sensors (landingpage) 
+END METADATA 
+-->
+To improve position hold accuracy in GPS denied environments APM:Copter and APM:Plane support the mouse sensor based <a href="http://store.3drobotics.com/products/optical-flow-sensor">OpticalFlow sensor.</a>
+<!--more-->
+
+<a href="http://store.3drobotics.com/products/optical-flow-sensor"> <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/BR-0016-01-2T.jpg" alt="" /></a><a href="http://store.3drobotics.com/products/optical-flow-sensor"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/BR-0016-01-5T.jpg" alt="" /></a>
+
+
+<h1>Connecting the sensor to the APM2.5</h1>
+
+Note: as of 15-Sep-2012, the code to support the optical flow on the APM2.5 has not yet been released.
+<ul>
+	<li>Connect VCC, GND, MISO, MOSI, SCLK and NCS pins as shown in the diagram below</li>
+	<li>Default mounting is lens pointing down, pins forward</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_APM25.jpg" alt="" />
+<ul>
+	<li>Cut and resolder the MISOLVL jumper on the back of the board to switch the MISO pin to work on 3.3v. This is critical to ensure the optical flow sensor does not interfere with the MPU6000.</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_APM25_SolderBridge.jpg" alt="" />
+
+
+<h1>Connecting the sensor to the APM2</h1>
+
+<ul>
+	<li>Power, GND, NCS pins should be attached to A3</li>
+	<li>MISO, MOSI and SCLK pins should be directly soldered to the pins shown</li>
+	<li>Default mounting is lens pointing down, pins forward</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_APM2.jpg" alt="" />
+
+
+
+
+
+
+<h1>Connecting the sensor to the APM1</h1>
+
+<ul>
+	<li>Directly solder wires to the top of the Oilpan as shown below</li>
+	<li>Default mounting is lens pointing down, pins forward</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_v_1_0.jpg" alt="" />
+
+
+
+<h1>Testing the sensor</h1>
+
+<ul>
+	<li>Upload the test sketch to the APM:
+<ul>
+<ul>
+<ul>
+	<li>If using an APM2, you can <a href="http://ardupilot.com/downloads/?did=94" target="_blank">download the hex file from the downloads area</a> and then upload to your APM2 using the Mission Planner's INITIAL SETUP &gt; Install Firmware &gt; Load custom firmware link</li>
+	<li>If using an APM1 you must open the <a href="https://raw.github.com/diydrones/ardupilot/860f4b260552297253a28b83a7f108302b84b97e/libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde" target="_blank">AP_OpticalFlow_test.pde </a>sketch in the arduino IDE, compile and upload to your APM1</li>
+</ul>
+</ul>
+</ul>
+</li>
+</ul>
+<ul>
+	<li>Connect to your APM with the Serial Monitor or AP Mission Planner Terminal</li>
+	<li>type 'c' to ensure that the sensor is responding to the APM</li>
+	<li>type 'm' and move the camera back and forth and check that x,y values change. If they do not change, modify the focus of the lens by turning it left or right.</li>
+</ul>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/OpticalFlow_test.jpg" alt="" />
+
+
+
+<h1>Capturing an image from the sensor</h1>
+
+In order to check that you have the lens properly focused you can capture an image directly from the sensor and display it using a simpler viewer written in Python.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ADNS3080ImageGrabber.jpg" alt="" />
+<ol>
+	<li>Upload the AP_OpticalFlow_test.pde to the APM (see above)</li>
+	<li>Install Python 2.7 (or later version) from the <a href="https://www.python.org/downloads/">official python site</a><a href="http://www.python.org/getit/">
+</a>(For windows users, for compatibility with pyserial, you should install the <a href="http://www.python.org/ftp/python/2.7.2/python-2.7.2.msi">32bit version </a>even if you are running 64bit windows)</li>
+	<li>Install <a href="http://pyserial.sourceforge.net/">PySerial 2.5</a>. The Windows package is <a href="http://pypi.python.org/packages/any/p/pyserial/pyserial-2.5.win32.exe#md5ea4579b9ad39a4f0171c3ec3da0a8212">(Here!)</a></li>
+	<li>Start the Python IDLE editor</li>
+	<li>File, Open, .../arduino-0022/libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py</li>
+	<li>Run, Run Module - the Python Shell and then ADNS3080ImageGrabber applications should appear</li>
+	<li>On the ADNS3080ImageGrabber screen, change the default com port to the port connected to your APM and press Open</li>
+	<li>Push the Send button to start/stop grabbing images from the sensor (a new image should appear every 2 seconds)</li>
+</ol>
+Note 1: After capturing images, you will need to reset the sensor (i.e. plug/unplug it) to restore it to the normal motion capture mode.
+
+Note 2: you should see the the AP_OpticalFlow_ADNS3080's menu and any errors appear in the Python Shell
+
+
+
+<h1>How it works</h1>
+The mouse sensor returns the average movement (in the x and y directions) of surface features that it sees. A single pixel move will not cause the sensor to return "1". It will return a higher value around 5. This value is referred to as the <strong>scaler </strong>below. In the example below, the value returned would be about 1.6 ( (-5+5+5) / 3)
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/SurfaceFeatures.png" alt="" />
+
+<strong>Sensor's x and y values can be converted to real distances based on altitude</strong>
+
+In order to convert values from the sensor to real distances moved, we need to take into account the altitude. This is necessary because as you can see from the two pictures below, if we have two quads moving the same distance, but one at a low altitude, the other at a higher altitude, the lower quad will see surface features appear to move further and this will result in a higher optical flow values<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/AltitudesEffectOnSensorValues.png" alt="" />
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/distanceMovedFormula.png" alt="" />
+
+<strong>We compensate for vehicle roll and pitch changes
+</strong>
+
+Change in the vehicle's roll and pitch will also cause changes in the x and y values returned by the sensor. Unlike the lateral movement calculations these are not dependent upon the distance of the visible objects. In the picture below you can see that as the quad has rolled 10 degrees but both flowers have moved from the center of the camera's view in the 1st pic to the edge of the view in the 2nd pic.<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/RotationEffectOnSensorValues.png" alt="" />
+
+The expected change in sensor values can be calculated directly from the change in roll and pitch given the formula below. We subtract these expected changes from the real values returned by the sensor.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/expectedRollChangeFormula.png" alt="" />
+
+Once we have the x/y movements we can integrate these values over time with the current yaw to arrive at an estimate of position.
+
+
+
+<h1>Known issues</h1>
+
+<ul>
+	<li>The sensor only works in well lit environments</li>
+	<li>A fixed-focus lens is used meaning it cannot focus on objects closer than 30cm (1 foot).</li>
+	<li>Rotating the sensor will confuse the sensor</li>
+</ul>
+
+
+
+<h1>Acknowledgements:</h1>
+<ol>
+	<li><a href="http://www.diydrones.com/profile/MarkoKleineBerkenbusch">Marko Klein Berkenbusch's </a><a href="http://www.diydrones.com/profiles/blogs/quad-position-hold-with-mouse">position hold with mouse sensor
+</a></li>
+	<li>research paper re <a href="http://www.araa.asn.au/acra/acra2007/papers/paper181final.pdf">optical flow for position hold
+</a></li>
+	<li>research paper re <a href="http://www.mecatronica.eesc.usp.br/wiki/upload/0/0a/2006_Thesis_Remote_Terrain_Navigation_for_Unmanned_Air_Vehicles.pdf">optical flow for object avoidance
+</a></li>
+</ol>

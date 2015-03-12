@@ -1,0 +1,311 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-pixhawk-quick-start 
+title: common-Pixhawk Quick Start 
+id: 1588 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+
+<h3>Parts:</h3>
+<a href="http://store.3drobotics.com/products/3dr-pixhawk">Pixhawk</a> in enclosure with SD card:
+
+<img class="align left size-full wp-image-1459" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Intro.jpg" alt="Intro" width="400" height="400" />
+
+ <strong>Buzzer:</strong>
+
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4-buzzer.jpg"><img class="alignnone size-full wp-image-1460" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4-buzzer.jpg" alt="PX4-buzzer" width="170" height="170" /></a>
+
+<strong>Safety switch:</strong>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4-arming-button.jpg"><img class="alignnone size-full wp-image-1461" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4-arming-button.jpg" alt="PX4-arming-button" width="170" height="170" /></a>
+
+<strong>Power module</strong>
+<p style="text-align: left"><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/BR-APMPWR-2b.jpg"><img class="alignnone size-full wp-image-1463" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/BR-APMPWR-2b.jpg" alt="BR-APMPWR-2b" width="494" height="112" /></a></p>
+<strong>Also: an SD card USB adapter, a Micro-USB cable, two 6-wire cables and some anti vibration foam.</strong>
+
+<strong>You also need a <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">GPS Module</a> and it is easier to avoid interference if you get one with a built in compass.</strong>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/IMG_2120.jpg"><img class="alignnone size-full wp-image-1469" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/IMG_2120.jpg" alt="IMG_2120" width="600" height="308" /></a>
+
+
+
+<h3>Getting Started</h3>
+<ul>
+	<li>You will need a multicopter: Please see the <strong><a href="http://copter.ardupilot.com/wiki/build-your-own-multicopter/">Build Your Own Multicopter</a></strong> Wiki page.</li>
+	<li>With the help of APM firmware, Pixhawk turns any RC plane, copter, or rover into a full-featured personal drone.</li>
+	<li>Once you have a fully-assembled MultiCopter, please follow this guide to install your Pixhawk.
+<ul>
+	<li><strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Mount the Pixhawk to Your Copter</span></strong></li>
+	<li><strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Connect the wiring from the Pixhawk to Your Copter</span></strong></li>
+	<li><strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Load the firmware to the Pixhawk</span></strong></li>
+	<li><strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Calibrate Your Copter</span></strong></li>
+</ul>
+</li>
+	<li>You can also link directly to the current copy of the <strong><a href="http://3drobotics.com/wp-content/uploads/2014/03/pixhawk-manual-rev7.pdf">3DR Pixhawk Quick Start PDF</a> </strong>which parallels this document.</li>
+</ul>
+
+
+
+<h3>Mount the Pixhawk to your Copter</h3>
+<ul style="font-weight: inherit">
+	<li>Use the provided adhesive backed vibration damping foam to mount the Pixhawk to your copter.</li>
+	<li>Cut four pieces of the foam approximately 3/4 inch square and adhere 1 in each corner of the Pixhawk.</li>
+	<li>It is better to mount the Pixhawk near to your vehicles center of gravity.</li>
+	<li>Be sure to orient the Pixhawk with the arrow pointing towards the front of your copter.</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-back-4-corners-foam.jpg"><img class="alignleft size-medium wp-image-1596" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-back-4-corners-foam-192x300.jpg" alt="pixhawk back 4 corners foam" width="192" height="300" /></a>
+
+<img class="alignnone size-medium wp-image-1472" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Intro1-300x300.jpg" alt="Intro" width="300" height="300" />
+
+&nbsp;
+
+
+
+<h3>Connect the wiring from the Pixhawk to Your Copter</h3>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals.jpg"><img class="alignnone size-large wp-image-1475" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals-729x1024.jpg" alt="connect peripherals" width="584" height="820" /></a>
+
+
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PPMSUMconnect-1024x176.jpg"><img class="alignnone size-full wp-image-1617" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PPMSUMconnect-1024x176.jpg" alt="PPMSUMconnect-1024x176" width="1024" height="176" /></a>
+<ul>
+	<li>Connect your PPM-Sum or Futaba SBus PPM RC receiver wires (black ground, red power and white signal) to the left most <strong>RC</strong> pins.</li>
+	<li><strong>SB</strong> is for Futaba SBus out which is not implemented yet.</li>
+</ul>
+
+
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect.jpg"><img class="alignnone size-medium wp-image-1478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect-300x192.jpg" alt="spektrum connect" width="300" height="192" /></a>
+<ul>
+	<li>For a Spektrum DSM, DSM2 or DSM-X SAtellite RC receiver, connect to the <strong>SPKT/DSM</strong> port.</li>
+</ul>
+
+
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pdb-connect1.jpg"><img class="alignnone size-large wp-image-1480" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pdb-connect1-1024x195.jpg" alt="pdb connect" width="584" height="111" /></a>
+<ul>
+	<li>Connect the red and black two wire cable from the (3DR) power distribution board (PDB) to any pair of the Pixhawk's main ground (-, black wire) and power (+, red wire) output pins.
+<ul>
+	<li><span style="color: #ff0000"><strong>Warning!</strong></span> this power connector must have 5 volts or a voltage compatible with your servos and cannot come directly from the battery.</li>
+	<li></li>
+	<li>You can use an ESC's 5 volt BEC output or a stand alone UBEC with sufficient power for your servos.</li>
+	<li>This connection is also optional and is only necessary if you are powering external servos from the Pixhawk.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs.jpg"><img class="alignnone size-medium wp-image-1481" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs-300x221.jpg" alt="main outputs" width="300" height="221" /></a>
+<ul>
+	<li><strong>For copters</strong>, connect each signal wire from the PDB to the main output signal (S) pins by motor number.</li>
+	<li>Connect one wire for each motor to the corresponding pin.
+<ul>
+	<li>Pin 1 = Motor 1 - - Pin 5 = Motor 5</li>
+	<li>Pin 2 = Motor 2 - - Pin 6 = Motor 6</li>
+	<li>Pin 3 = Motor 3 - - Pin 7 = Motor 7</li>
+	<li>Pin 4 = Motor 4 - - Pin 8 = Motor 8</li>
+</ul>
+</li>
+	<li><strong>For planes</strong>, connect the control channel wires to the main output signal pins.
+<ul>
+	<li>Pin 1 = Aileron</li>
+	<li>Pin 2 = Elevator</li>
+	<li>Pin 3 = Throttle</li>
+	<li>Pin 4 = Rudder</li>
+</ul>
+</li>
+	<li><strong>For rovers</strong>, connect the throttle and steering wires to the main output signal pins.
+<ul>
+	<li>Pin 3 = Throttle</li>
+	<li>Pin 4 = Steering</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h3>Load the firmware to the Pixhawk</h3>
+<ul>
+	<li>APM firmware is the brains of your autopilot operation.</li>
+	<li>To load firmware onto Pixhawk, install a mission planner application on your ground station computer.</li>
+	<li>Choose either Mission Planner for Windows or APM Planner for Mac and Linux.</li>
+	<li>Both applications are available for free download from <strong><a href="http://ardupilot.com/">ardupilot.com</a></strong>.</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/install-firmware.jpg"><img class="alignnone size-large wp-image-1488" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/install-firmware-1024x494.jpg" alt="install firmware" width="584" height="281" /></a>
+<ul>
+	<li>For Windows download Mission Planner from <strong><a href="http://ardupilot.com/downloads/?did=82">(Here!)</a> </strong>and select the Orange <strong><span style="color: #ff6600">Download</span></strong> button.</li>
+	<li>For Mac or Linux download Mission Planner from <strong><a href="http://ardupilot.com/downloads/">(Here!)</a> <span style="color: #ff0000">(Warning not yet installed!)</span></strong>
+<ul>
+	<li>For Mac select <strong>APMPlanner - DMG - Latest</strong> and then select the Orange <span style="color: #ff6600"><strong>Download</strong> </span>button.</li>
+	<li>For Linux select <strong>APMPlanner - RPM - Latest</strong> and then select the Orange <span style="color: #ff6600"><strong>Download</strong> </span>button.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h3>Install Planner</h3>
+<ul>
+	<li>After selecting the correct file, read the safety information on the following page and select Download.</li>
+	<li>Open the file to run the setup wizard.</li>
+	<li>Proceed through any security warnings, and install all suggested drivers.</li>
+	<li>When the installation is complete, open the Mission Planner application.</li>
+	<li>Connect the Pixhawk to your computer using the micro-USB cable.</li>
+	<li>Your computer will automatically install the correct drivers.</li>
+	<li>Do not select the Connect button at this time; Pixhawk can only load firmware while "unconnected" to Mavlink.</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-usb-connect.jpg"><img class="alignnone size-large wp-image-1528" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-usb-connect-1024x415.jpg" alt="pixhawk usb connect" width="584" height="236" /></a>
+<ol>
+	<li><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">In the Planner program select the </span><strong style="color: #333333;font-style: normal">Initial Setup</strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal"> icon.</span></li>
+	<li><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Then select the</span><strong style="color: #333333;font-style: normal"> Install Firmware</strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal"> item in the left column.</span></li>
+	<li><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">Then select the </span><strong style="color: #333333;font-style: normal">vehicle type</strong><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal"> you wish to load the firmware for.</span></li>
+	<li><span style="color: #333333;font-family: 'Helvetica Neue', Helvetica, Arial, 'Nimbus Sans L', sans-serif;font-style: normal">When prompted confirm that is what you wish to do.</span></li>
+</ol>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/MPFirmwareLoad.jpg"><img class="alignnone size-full wp-image-1530" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/MPFirmwareLoad.jpg" alt="MPFirmwareLoad" width="1025" height="586" /></a>
+<ul>
+	<li>Once the status bar shows that the download is complete power cycle the board by disconnecting and reconnecting the USB.
+<ul>
+	<li>If you hear a musical tone, your firmware installation is complete.</li>
+	<li>If you hear a series of tones followed by three beeps, disconnect the USB and reconnect while holding down the safety button.</li>
+	<li>Upon restart, listen for a series of tones followed by two beeps indicating that your firmware has loaded successfully.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h3>Calibrate your Pixhawk</h3>
+<ul>
+	<li>Link to This <strong><a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/">Wiki Page</a> </strong> to calibrate your Pixhawk for Copter use.
+<ul>
+	<li>Then link to<strong> <a href="http://copter.ardupilot.com/wiki/initial-setup/esc-motor/">(Here!)</a></strong> to perform ESC calibration.</li>
+	<li>And then link to<strong> <a href="http://copter.ardupilot.com/wiki/motor-setup/">(Here!)</a></strong> to correctly set motor spin directions.</li>
+</ul>
+</li>
+	<li>Link to This <strong><a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/">Wiki Page</a></strong> to calibrate your Pixhawk for Plane use.
+<ul>
+	<li>Then link to <strong><a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/checking-the-sensors/">(Here!)</a></strong> to check the sensors.</li>
+	<li>Then link to <strong><a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/reversing-servos-and-setting-normalelevon-mode/">(Here!)</a></strong> to set servo direction and aileron or elevon mode.</li>
+	<li>If you have ailerons set up on 2 channels you can set them up <strong><a href="http://plane.ardupilot.com/wiki/multipleailerons-3/">(Here!)</a></strong></li>
+	<li>If you have flaps you can set up automatic flaps <strong><a href="http://plane.ardupilot.com/wiki/automatic-flaps/">(Here!)</a></strong></li>
+	<li>If you have split elevons you can set up differential spoilers <strong><a href="http://plane.ardupilot.com/wiki/differential-spoilers/">(Here!)</a></strong></li>
+</ul>
+</li>
+</ul>
+
+
+
+<h3>Pixhawk LED Meanings</h3>
+<ul>
+	<li><span style="color: #ff0000"><strong>Flashing</strong><strong> red</strong></span> <strong><span style="color: #0000ff">and</span></strong> <span style="color: #0000ff"><strong>blue</strong></span>: <strong>initializing. Please wait.</strong></li>
+	<li><span style="color: #ffcc00"><strong>Double flashing yellow:</strong></span> <strong>error. System refuses to arm.</strong></li>
+	<li><strong><span style="color: #0000ff">Flashing blue</span></strong>: <strong>disarmed, searching for GPS. Autopilot, loiter, and return-to-launch modes require GPS lock.</strong></li>
+	<li><span style="color: #008000"><strong>Flashing green</strong></span>: <strong>disarmed, GPS lock acquired. Ready to arm. <span style="background-color: #ffff00">Quick double tone</span> when disarming from the armed state.</strong></li>
+	<li><strong><span style="color: #008000">Solid green</span> plus<span style="background-color: #ffff00"><em> single long tone:</em> </span>armed with GPS lock. Ready to fly!</strong></li>
+	<li><strong><span style="color: #ffcc00">Flashing yellow:</span> RC failsafe activated.</strong></li>
+	<li><strong><span style="color: #ffcc00">Flashing yellow</span> plus<span style="background-color: #ffff00"><em> quick repeating tone:</em></span> battery failsafe activated.</strong></li>
+	<li><strong><span style="color: #ffcc00">Flashing yellow</span> <span style="color: #0000ff">and blue</span> plus<span style="background-color: #ffff00"><em> high-high-high-low tone</em>:</span> GPS glitch or GPS failsafe activated.</strong></li>
+</ul>
+
+
+
+<h3>Pixhawk Safety Switch Meanings (Red LED)</h3>
+<ul>
+	<li><strong><span style="color: #ff0000">Quick, constant blinking:</span> performing system check. Please wait.</strong></li>
+	<li><strong><span style="color: #ff0000">Intermittent blinking: </span>system ready. Press the safety button to activate.</strong></li>
+	<li><strong><span style="color: #ff0000">Solid:</span> ready to arm. Proceed to the arming procedure.</strong></li>
+</ul>
+
+
+
+<h3>Pixhawk Ports</h3>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/portsmain1.jpg"><img class="alignnone size-large wp-image-1535" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/portsmain1-771x1024.jpg" alt="portsmain" width="584" height="775" /></a>
+
+&nbsp;
+
+1 Spektrum DSM receiver
+2 Telemetry (radio telemetry)
+3 Telemetry (on-screen display)
+4 USB
+5 SPI (serial peripheral interface) bus
+6 Power module
+7 Safety switch button
+8 Buzzer
+9 Serial
+10 GPS module
+11 CAN (controller area network) bus
+12 I2C splitter or compass module
+13 Analog to digital converter 6.6 V
+14 Analog to digital converter 3.3 V
+15 LED indicator
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports1.jpg"><img class="alignnone size-medium wp-image-1536" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports1-300x68.jpg" alt="ports1" width="300" height="68" /></a><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports22.jpg"><img class="alignnone size-medium wp-image-1539" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports22-300x103.jpg" alt="ports2" width="300" height="103" /></a>
+
+&nbsp;
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports3.jpg"><img class="alignnone size-large wp-image-1540" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/ports3-1024x227.jpg" alt="ports3" width="584" height="129" /></a>
+
+&nbsp;
+
+1 Input/output reset button
+2 SD card
+3 Flight management reset button
+4 Micro-USB port
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pin-description.jpg"><img class="alignnone size-large wp-image-1542" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pin-description-1024x342.jpg" alt="pin description" width="584" height="195" /></a>
+
+1 Radio control receiver input
+2 Futaba S.Bus receiver input
+3 Main outputs
+4 Auxiliary outputs
+
+
+
+<h3>Pixhawk Specifications</h3>
+<ul>
+	<li><strong>Processor</strong>
+<ul>
+	<li>32-bit ARM Cortex M4 core with FPU</li>
+	<li>168 Mhz/256 KB RAM/2 MB Flash</li>
+	<li>32-bit failsafe co-processor</li>
+</ul>
+</li>
+	<li><strong>Sensors</strong>
+<ul>
+	<li>ST Micro 16-bit gyroscope</li>
+	<li>ST Micro 14-bit accelerometer/magnetometer</li>
+	<li>MEAS barometer</li>
+</ul>
+</li>
+	<li><strong>Power</strong>
+<ul>
+	<li>Ideal diode controller with automatic failover</li>
+	<li>Servo rail high-power (7 V) and high-current ready</li>
+	<li>All peripheral outputs over-current protected, all inputs ESC protected</li>
+</ul>
+</li>
+	<li><strong>Interfaces</strong>
+<ul>
+	<li>5x UART serial ports, 1 high-power capable, 2x with HW flow control</li>
+	<li>Spektrum DSM/DSM2/DSM-X Satellite input</li>
+	<li>Futaba S.BUS input and output</li>
+	<li>PPM sum signal</li>
+	<li>RSSI (PWM or voltage) input</li>
+	<li>I2C, SPI, 2x CAN, USB</li>
+	<li>3.3 and 6.6 ADC inputs</li>
+</ul>
+</li>
+	<li><strong>Dimensions</strong>
+<ul>
+	<li>Weight 38 g (1.3 oz)</li>
+	<li>Width 50 mm (2.0”)</li>
+	<li>Height 15.5 mm (.6”)</li>
+	<li>Length 81.5 mm (3.2”)</li>
+</ul>
+</li>
+</ul>

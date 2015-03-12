@@ -1,0 +1,38 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rangefinder-sf02 
+title: common-Lightware SF02 Rangefinder 
+id: 2551 
+menu_order: 50 
+post_parent_id: 2537 
+post_parent_stub: common-rangefinder-landingpage 
+post_parent_title: common-Rangefinders (landing page) 
+END METADATA 
+-->
+The <a href="http://www.lightware.co.za/shop/en/lrf-modules/7-sf02f.html" target="_blank">Lightware SF02</a> is lightweight laser rangefinder module that provides fast and accurate distance measurements up to 40 meters (130 feet). In <a href="http://diydrones.com/profiles/blogs/testing-laser-rangefinders-with-arduplane" target="_blank">tests by the development team</a> the sensor has produced very reliable distance measurements for long and short ranges even on fast moving vehicles.
+[warning]This rangefinder is only supported on the Pixhawk running AC3.2 or higher or recent versions of ArduPlane and ArduRover using the sensor's analog output much like an analog sonar.[/warning]
+<!--more-->
+
+<h1>Connecting to the Pixhawk</h1>
+The SF02's Analog Out pin should be conneted to the Pixhawk's 3.3V ADC (analog to digital converter) as shown below.  The Pixhawk will provide the regulated 5V power supply the sensor requires.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_SF02_Pixhawk.png"><img class="alignnone size-full wp-image-2552" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_SF02_Pixhawk.png" alt="RangeFinder_SF02_Pixhawk" width="789" height="581" /></a>
+
+
+
+<h1>Setup through the mission planner</h1>
+To configure ArduCopter, ArduPlane or ArduRover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parmeter List page and set:
+<ul>
+	<li>RNGFND_MAX_CM = "4000" (i.e. 40m max range)</li>
+	<li>RNGND_PIN = "14" (2nd pin of 3.3V ADC connector)</li>
+	<li>RNGFND_SCALING = "12.12" (ie. 40m / 3.3v = 12.12)</li>
+	<li>RNGFND_TYPE = “1" (Analog)</li>
+	<li>RNGFND_RMETRIC = "0" (non-ratiometric, shown incorrectly in the diagram below)</li>
+</ul>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_SF02_MPSetup.png"><img class="alignnone size-full wp-image-2555" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_SF02_MPSetup.png" alt="RangeFinder_SF02_MPSetup" width="1255" height="680" /></a>
+
+
+
+<h1>Testing the sensor</h1>
+Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab. Look closely for "sonarrange".
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>

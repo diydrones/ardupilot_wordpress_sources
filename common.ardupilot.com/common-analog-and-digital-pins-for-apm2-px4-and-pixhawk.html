@@ -1,0 +1,191 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-analog-and-digital-pins-for-apm2-px4-and-pixhawk 
+title: common-Analog and Digital Pins for APM2, PX4 and Pixhawk 
+id: 1664 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This is the raw info on what pins are available on APM2, PX4 and Pixhawk. This is meant to provide a guide for what pin numbers users can set in all the _PIN parameters in copter, plane and rover.
+
+If you don't want to fiddle with the code but still want to add an arbitrary analog sensor to one of the analog pins and read it via MAVLink, the easiest way is to do that is use the built-in Sonar sensor function, even though your sensor may not actually be a sonar sensor.  To do that, attach the sensor the A0 on APM 2.x and in the MAVLink param list, set SONAR_ENABLE to 1. You can then read and graph the data via MAVLink with the RANGEFINDER.voltage MAVLink message.  If you're using the Rover code, you'll still use the SONAR function, but you have more flexibility over which analog pin you're attaching your sensor to and how to read that data. See <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_pin_SONAR_PIN">this</a> for more.
+
+
+
+<h3>PIN Variables</h3>
+The following is a list of PIN variables in copter, plane and rover as of Jan 2014. Users may set any of these pins to point at any valid pin of the right type (analog or digital). More will likely be added soon as some pins are hard-coded that should have PIN variables. Most of these need to be set as "advanced parameters".
+
+
+
+<h4><strong>Plane</strong></h4>
+<ul>
+	<li>ARSPD_PIN (analog)</li>
+	<li>BATT_CURR_PIN (analog)</li>
+	<li>BATT_VOLT_PIN (analog)</li>
+	<li>RELAY_PIN (digital)</li>
+	<li>RELAY_PIN2 (digital)</li>
+	<li>RELAY_PIN3 (digital)</li>
+	<li>RELAY_PIN4 (digital)</li>
+	<li>RSSI_PIN (analog)</li>
+	<li>SONAR_PIN (analog)</li>
+	<li>SONAR_STOP_PIN (digital)</li>
+</ul>
+
+
+
+<h4>Copter</h4>
+<ul>
+	<li>BATT_VOLT_PIN (analog)</li>
+	<li>BATT_CURR_PIN (analog)</li>
+	<li>RELAY_PIN (digital)</li>
+	<li>RELAY_PIN2 (digital)</li>
+	<li>RELAY_PIN3 (digital)</li>
+	<li>RELAY_PIN4 (digital)</li>
+	<li>RSSI_PIN (analog)</li>
+</ul>
+
+
+
+<h4>Rover</h4>
+<ul>
+	<li>BATT_CURR_PIN (analog)</li>
+	<li>BATT_VOLT_PIN (analog)</li>
+	<li>RELAY_PIN (digital)</li>
+	<li>RELAY_PIN2 (digital)</li>
+	<li>RELAY_PIN3 (digital)</li>
+	<li>RELAY_PIN4 (digital)</li>
+	<li>RSSI_PIN (analog)</li>
+	<li>SONAR_PIN (analog)</li>
+	<li>SONAR_STOP_PIN (digital)</li>
+	<li>SONAR2_PIN (analog)</li>
+	<li>SONAR2_STOP_PIN (digital)</li>
+	<li>AUTO_TRIGGER_PIN (digital)</li>
+</ul>
+
+
+
+<h4>Available Pins</h4>
+Each board has a range of possible pins that may be assigned to the above pin variables. For analog pins you need to be careful that the allowed voltage input range of the pin matches the device you are attaching. For digital output pins you need to ensure the pin can provide enough current.
+
+
+
+<h3>APM2 Analog input pins</h3>
+Pin 0 to 8: The APM2 has a row of analog input pins down one side, labelled A0 to A8 on the underside of the board. These are available as pin numbers 0 to 8 inclusive in PIN variables.
+
+All these pins can take up to 5V and may be used for any general analog input. They are commonly used for airspeed and sonar inputs.
+
+Pin 12: power management connector current pin, accepts up to 5V, usually attached to 3DR power brick with 17:1 scaling
+
+Pin 13: power management connector voltage pin, accepts up to 5V, usually attached to 3DR power brick with 10.1:1 scaling
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/apm-analog-pins2.jpg"><img class="alignnone wp-image-1722" alt="apm analog pins2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/apm-analog-pins2-300x270.jpg" width="300" height="270" /></a>
+<h3>APM2 Digital output pins</h3>
+The APM2 uses the same set of 9 analog input pins as digital output pins. They are configured as digital output pins automatically when you start to use them as digital outputs.
+
+Pin 54 to 62: You need to add 54 to the pin number to convert from an analog pin number to a digital pin number. So pin 54 is digital output pin on the A0 connector. Pin 58 is A4 etc.
+
+These pins are usually used with the RELAY_PIN to RELAY_PIN4 parameters, allowing you to control things like camera shutter, bottle drop etc. They are also used as sonar "stop" pins allowing you to have multiple sonars and not have them interfere with each other.
+
+
+
+<h3>Pixhawk analog input pins (Virtual Pin = Firmware Mapped Pin ID)</h3>
+Virtual Pin 2 and Power connector Pin 4 and Virtual Pin 2: power management connector voltage pin, accepts up to 3.3V, usually attached to 3DR power brick with 10.1:1 scaling
+
+Virtual Pin 3 and Power connector Pin 3: power management connector current pin, accepts up to 3.3V, usually attached to 3DR power brick with 17:1 scaling
+
+Virtual Pin 4 and (No connector Pin): VCC 5V rail sensing. This virtual pin reads the voltage on the 5V supply rail. It is used to provide the HWSTATUS.Vcc reading that ground stations use to display 5V status
+
+Virtual Pin 13 and ADC 3.3V connector Pin 4: This takes a max of 3.3V. May be used for sonar or other analog sensor.
+
+Virtual Pin 14 and ADC 3.3V connector Pin 2: This takes a max of 3.3V. May be used for second sonar or other analog sensor.
+
+Virtual Pin 15 and ADC 6.6V connector Pin 2: analog airspeed sensor port. This has 2:1 scaling builtin, so can take up to 6.6v analog inputs. Usually used for analog airspeed, but may be used for analog sonar or other analog sensors.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk11.jpg"><img class="alignnone size-medium wp-image-1881" alt="pixhawk1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk11-212x300.jpg" width="212" height="300" /></a>
+
+Virtual Pin 102: Servo power rail voltage. This is an internal measurement of the servo rail voltage made by the IO board within the Pixhawk. It has 3:1 scaling, allowing it to measure up to 9.9V.
+
+Virtual Pin 103: RSSI (Received Signal Strength Input) input pin voltage (SBus connector output pin). This is the voltage measured by the RSSI input pin on the SBUS-out connector (the bottom pin of the 2nd last servo connector on the 14 connector servo rail). Can alternatively serve as SBus out but not yet implemented.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2.jpg"><img class="alignnone  wp-image-1718" alt="pixhawk2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2-300x161.jpg" width="300" height="161" /></a>
+
+
+
+<h3>Pixhawk digital outputs (Virtual Pins 50 - 55)</h3>
+The Pixhawk has no dedicated digital output pins on its DF13 connectors, but you can assign up to 6 of the "AUX SERVO" connectors to be digital outputs. These are the first 6 of the 14 three-pin servo connectors on the end of the board. They are marked as AUX servo pins 1 - 6 on the silkscreen as seen above.
+
+To set the number of these pins that are available as digital outputs, set the BRD_PWM_COUNT parameter. On Pixhawk this defaults to 4, which means the first 4 AUX connectors are for servos (PWM) and the last 2 are for digital outputs. If you set BRD_PWM_COUNT to 0 then you would have 6 digital outputs and still have 8 PWM outputs on the rest of the connector.
+
+The 6 possible pins are available for PIN variables as pin numbers 50 to 55 inclusive. So if you have BRD_PWM_COUNT at the default value of 4, then the two digital output pins will be pin numbers 54 and 55.
+
+In summary
+
+If BRD_PWM_CNT= 2 then
+50 = RC9
+51 = RC10
+52 = Aux 3
+53 = Aux 4
+54 = Aux 5
+55 = Aux 6
+
+If BRD_PWM_CNT= 4 then
+50 = RC9
+51 = RC10
+52 = RC11
+53 = RC12
+54 = Aux 5
+55 = Aux 6
+
+If BRD_PWM_CNT= 6 then
+50 = RC9
+51 = RC10
+52 = RC11
+53 = RC12
+54 = RC13
+55 = RC14
+
+&nbsp;
+
+
+
+<h3>Pixhawk digital inputs</h3>
+The Pixhawk digital output pins on the FMU servo rail (the "AUX" pins) can also be used as digital input pins, using the same pin numbers as are used for outputs. This can be used for options that allow for digital input pins, such as the AUTO_TRIGGER_PIN in APM:Rover.
+
+The same rules for setting up BRD_PWM_COUNT apply for digital inputs and digital outputs.
+
+
+
+<h3>PX4v1 Analog inputs</h3>
+Pin 10: FMU battery voltage measured on pin 5 of the 15 pin multi-connector on the end of the FMU board. It has 5.7:1 scaling, allowing it to measure up to 18.8V.
+
+Pin 11: Analog airspeed input pin, with 2:1 scaling, allowing measurement of up to 6.6V
+
+Pin 12: Analog 2 input, pin 3 on the SPI port. Can measure up to 3.3V
+
+Pin 13: Analog 3 input, pin 4 on the SPI port, Can measure up to 3.3V
+
+Pin 100: Battery voltage measured on the power connector on the IO board. Limit is 18V.
+
+Pin 101: Battery current measured on the pin next to the power connector on the IO board. This pin can take up to 3.3V. Note that you need to be careful to use a current sensor that will not provide over 3.3V as too high a voltage on this pin can cause the PX4IO to reset.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/px4-pins2.jpg"><img class="alignnone wp-image-1726" alt="px4 pins2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/px4-pins2-300x206.jpg" width="300" height="206" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/px4-pins.jpg"><img class="alignnone wp-image-1728" alt="px4 pins" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/px4-pins-300x225.jpg" width="200" height="150" /></a>
+<h3>PX4v1 Digital Outputs</h3>
+The PX4V1 digital output pins come in two types, one is pins that give 5V when on and 0V when off, and the other are 'relay' pins which provide low resistance when on and high resistance when off.
+
+Pin 111: FMU Relay pin 1
+
+Pin 112: FMU Relay pin 2
+
+Pin 113: IO Relay pin 1
+
+Pin 114: IO Relay pin 2
+
+Pin 115: IO digital accessory pin 1
+
+Pin 116: IO digital accessory pin 2
+
+&nbsp;

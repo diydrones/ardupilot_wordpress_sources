@@ -1,0 +1,86 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: hil-quad 
+title: HIL Quad Simulator 
+id: 1653 
+menu_order: 900 
+post_parent_id: 10253 
+post_parent_stub: common-simulation 
+post_parent_title: common-Simulation 
+END METADATA 
+-->
+[warning]HIL does not work since inertial navigation was introduced with ArduCopter 2.9.  The closest alternative we have is <a href="http://dev.ardupilot.com/wiki/setting-up-sitl-on-windows/">SITL</a>. [/warning]
+
+This article explains how to setup Quad HIL in the mission planner.
+
+<h2>What you need</h2>
+1. Download Flightgear 2.x.x <a href="http://www.flightgear.org/Downloads/">(HERE!)</a>.
+
+2. Download the latest APM Mission Planner <a href="http://ardupilot.com/downloads/#Mission_Planner_3_raquo">(Here!)</a>.
+
+3. In the Mission Planner &gt; 'Configuration tab | Adv Parameter List' save your current parameters so you can reload them after the simulation.
+
+<h2>How to make it work</h2>
+<h3>Safety First: Remove your quad's props, the motors will be live during the simulation!</h3>
+1. Upload the quad hil firmware
+
+<img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2hilfirmware.jpg" />
+
+2. Copy quadhil.xml (included with planner) to your FlightGear directory eg
+<code>C:Program Files (x86)FlightGeardataProtocol
+</code>
+
+<img alt="" src="https://ardupilot-mega.googlecode.com/svn/ArduPilotMegaImages/ac2fgprotocol.jpg" />
+
+3. Copy the whole 'arducopter' folder from
+<code>C:Program Files (x86)Mission Planneraircraft
+</code> to your FlightGear Aircraft directory eg
+<code>C:Program Files (x86)FlightGearAircraft
+</code>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2fgmodel.jpg"><img class="alignnone size-full wp-image-7138" alt="ac2fgmodel" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2fgmodel.jpg" width="525" height="198" /></a>
+
+4. Start the Mission Planner
+
+5. Connect as usual
+
+6. Setup the radio/modes as required. Setup frame to +.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2setup.jpg"><img class="alignnone size-full wp-image-7136" alt="ac2setup" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2setup.jpg" width="666" height="393" /></a>
+
+7. Goto simulation.
+
+8. Check Quad, and FlightGear.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2simulator.jpg"><img class="alignnone size-full wp-image-7137" alt="ac2simulator" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ac2simulator.jpg" width="1024" height="575" /></a>
+
+9. Click start fg quad and wait for FlightGear to start.
+
+10. Click start sim link.
+
+
+
+<h2>For those that want to start FlightGear themselves</h2>
+This is the bat file used to start FlightGear
+<pre>"C:Program Files (x86)FlightGear v20110705binWin32fgfs" ^
+  "--fg-root=C:Program Files (x86)FlightGear v20110705data" ^
+     "--geometry=400x300"  ^
+     "--aircraft=arducopter" ^
+     "--native-fdm=socket,out,50,127.0.0.1,49005,udp" ^
+	 "--generic=socket,in,50,127.0.0.1,49000,udp,quadhil" ^
+	 "--fdm=external" ^
+	 "--prop:/logging/log/filename=fg_record.csv" ^
+	 "--log-level=info" ^
+     "--roll=0"  ^
+     "--pitch=0"  ^
+     "--wind=0@0"  ^
+     "--turbulence=0.0"  ^
+     "--prop:/sim/frame-rate-throttle-hz=30"  ^
+     "--timeofday=noon"  ^
+     "--shading-flat"  ^
+     "--fog-disable"  ^
+     "--disable-specular-highlight"  ^
+     "--disable-skyblend"  ^
+     "--disable-random-objects"  ^
+     "--disable-panel"  ^
+     "--disable-horizon-effect"  ^
+     "--disable-clouds"  ^
+     "--disable-anti-alias-hud"</pre>

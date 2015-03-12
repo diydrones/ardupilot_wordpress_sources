@@ -1,0 +1,21 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-connecting-a-ppm-sum-receiver 
+title: common-Connecting a PPM Sum Receiver 
+id: 336 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h3>On FrSky receivers called CPPM</h3>
+PPM and PWM are two different protocols for radio information. The PPM has the advantage that you can get all the channels information through one port only. Also you can get extra channels. For example, the FrSky D8RSP receiver outputs 7 PWM channels, while in CPPM mode it will output 8.
+
+On APM2 you can use PPM input by putting a jumper on the RC inputs for channel 2 and 3 (just the signal pins). PPM input should be fed into channel 1.
+
+Please note that Arducopter 2.8.1 and earlier versions required you use a transmitter/receiver combination that outputs at least 8 channels of ppm information. This is resolved in version 2.9 so receivers like this should work.
+
+APM 2
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FRAMES_input_PPM2.jpg"><img class="size-full wp-image-1192" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/FRAMES_input_PPM2.jpg" alt="FRAMES_input_PPM2" width="700" height="512" /></a>

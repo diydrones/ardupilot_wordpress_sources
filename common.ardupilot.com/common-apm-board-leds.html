@@ -1,0 +1,74 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-apm-board-leds 
+title: common-LEDs (AMP 2.x) 
+id: 344 
+menu_order: 20 
+post_parent_id: 312 
+post_parent_stub: common-apm25-and-26-overview 
+post_parent_title: common-APM 2.5 and 2.6 Overview 
+END METADATA 
+-->
+<h1>APM 2.5 board</h1>
+
+<table>
+<tbody>
+<tr>
+<td><strong>LED:</strong></td>
+<td><strong>Behavior:</strong></td>
+</tr>
+<tr>
+<td>Power</td>
+<td>On when powered</td>
+</tr>
+<tr>
+<td><span style="color: #ff0000"><strong>A (red)</strong></span></td>
+<td>Solid = armed, motors will spin when throttle raisedSingle Blink = disarmed, motors will not spinDouble Blink = disarmed, motors will not spin, cannot arm because of failure in pre-arm checks</td>
+</tr>
+<tr>
+<td><strong>B (yellow)</strong></td>
+<td>Only flashes along with A and B during calibration or as part of the in-flight auto trim feature</td>
+</tr>
+<tr>
+<td><strong><span style="color: #3366ff">C (blue)</span>
+</strong></td>
+<td>Solid = GPS working, 3D lockBlinking = GPS working, no LockOFF = GPS not attached or not working</td>
+</tr>
+<tr>
+<td>PPM/Serial</td>
+<td>Flashing when data detected</td>
+</tr>
+</tbody>
+</table>
+
+<img class="alignnone size-full wp-image-1351" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/APM25leds2.png" alt="APM25leds2" width="663" height="428" />
+
+http://www.youtube.com/watch?v=IeOB4Iz4tpw
+
+
+
+<h1>APM 2.0 board</h1>
+
+
+<table>
+<tbody>
+<tr>
+<td><strong>LEDs:</strong></td>
+<td><strong>Behavior:</strong></td>
+</tr>
+<tr>
+<td>Power</td>
+<td>On when powered</td>
+</tr>
+<tr>
+<td>3D Fix</td>
+<td>Flashing while GPS is waiting for a fix; solid once it has a fix</td>
+</tr>
+<tr>
+<td>ABC</td>
+<td>See below</td>
+</tr>
+</tbody>
+</table>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/LED_and_their_meaning_APM2.jpg"><img class="alignnone size-full wp-image-1352" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/LED_and_their_meaning_APM2.jpg" alt="LED_and_their_meaning_APM2" width="700" height="628" /></a>

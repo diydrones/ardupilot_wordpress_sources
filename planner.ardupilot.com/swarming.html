@@ -1,0 +1,65 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: swarming 
+title: Swarming 
+id: 1600 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Swarming/Formation-Flying Interface (Beta)</h1>
+<img class="alignnone  wp-image-1602" style="margin-top: 0px; border-color: #bbbbbb; background-color: #eeeeee;" alt="radiohub" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/radiohub.jpg" width="450" height="433" />
+
+Mission Planner supports limited "swarming", or formation-flying with multiple UAVs.  At the moment this is in an experimental beta implementation, which is admittedly neither easy to use nor 100% reliable. However, if you're interested in multiple-UAV coordination, this is a good place to start.
+
+More sophisticated swarming/multiple-UAV control is available in QGroundControl and APM Planner 2.0, which are both built on a multiple-vehicle architecture. But Mission Planner accomplishes this in a limited way by simply opening multiple serial port MAVLink connections simultaneously (see four-UAV USB hub above) and passing GPS position information from one ("leader", flying in any mode, from manual to auto) to the other ("followers", flying in Guided mode). The GPS position of the leader is adjusted by a set offset and then sent to the followers as a series of dynamic waypoints.  In this fashion the followers will follow the leader at set X,Y and Z offset distances.
+
+This interface can be entered by pressing Control-F in the Mission Planner. That will bring up a pretty crowded box of buttons (see below), but the key ones are marked below: identifying the serial port of the "follower" UAVs, and the "swarm" button, which will bring up the second window, with a grid showing the relative position offset of the other UAVs.
+
+<a style="font-style: normal; line-height: 21px; text-decoration: underline;" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/Capture2.png"><img class="alignnone size-full wp-image-1601" style="margin-top: 0.4em; border-color: #bbbbbb; background-color: #eeeeee;" alt="Capture2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/Capture2.png" width="817" height="742" /></a><strong>Setup </strong>
+
+<strong>Setup Procedure:</strong>
+<div>
+<div dir="ltr">
+<div dir="ltr">
+<div>
+<ol>
+	<li>Plug in one 3DR radio per vehicle</li>
+	<li>Connect to the "leader" in the Mission Planner</li>
+	<li>Press Control-F and click "swarm"</li>
+	<li>Click "set leader"</li>
+	<li>Click "Connect MAVs" ("MAV" stands for "micro air vehicle"). Click it once for each MAV. As each connects via MAVLink they will appear on the grid</li>
+	<li>Drag the MAV circles around the grid to set the desired offsets. The Mission Planner assumes that "up" is North.</li>
+	<li>"Start" will start sending Guided Mode waypoints to all vehicles except the leader.</li>
+</ol>
+&nbsp;
+
+Now, as you may have guessed, getting the starting position can be the hardest. In the grid they are identified by the MAV number and COM port. It's a good idea to tape that MAV number to the physical vehicles themselves, so you can correspond the on-screen numbers and grid position with the physical layout of the vehicles on the ground.
+
+</div>
+Currently the code does no path prediction etc. A good place to start is with two quadcopters about 20 m apart to test, and work up from there.
+
+</div>
+<strong>First Flight:</strong>
+<div>
+<ol>
+	<li>Take off with the leader, sit at say 2-10 m high (loiter). The leader flight mode doesn’t matter</li>
+	<li>Click start. This should make the follower take off in guided mode (it will take 3-5 seconds to launch) and sit at the same altitude as the master (assuming you haven't changed the altitude offsets)</li>
+	<li>Manually move the leaders, and the 2nd quad (follower) should follow.</li>
+	<li>When you're done, manually land the leader. Use the "Land" button to tell the follower to land, too.</li>
+</ol>
+</div>
+<div></div>
+<div><strong>Tips</strong></div>
+<div>
+<ul>
+	<li>Don't close the swarming screen, as it will stop the swarming. (Since we use guided mode, if you do the quad will just sit at the last commanded location.)</li>
+	<li>The main map interface will show both quads.</li>
+	<li>If you drag the quad around the grid screen, while its active. the quad should actually move as well.</li>
+	<li>Increase the position stream rate in the mp. config&gt;planner&gt;position. to say 5, from the default of 3. to reduce the latency</li>
+</ul>
+</div>
+</div>
+</div>

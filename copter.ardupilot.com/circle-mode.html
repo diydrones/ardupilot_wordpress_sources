@@ -1,0 +1,26 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: circle-mode 
+title: Circle Mode 
+id: 5457 
+menu_order: 40 
+post_parent_id: 1556 
+post_parent_stub: flight-modes 
+post_parent_title: Flight Modes 
+END METADATA 
+-->
+Circle will orbit a point of interest with the nose of the vehicle pointed towards the center.
+
+The radius of the circle can be controlled by modifying the CIRCLE_RADIUS parameter.
+
+Note: The units are meters in AC 3.1 and will be centimeters in AC 3.2.  ***Mission Planner will report the units as cm for both versions of the code.
+
+Setting the CIRCLE_RADIUS to zero will cause the copter to simply stay in place and slowly rotate (useful for panorama shots).
+
+The speed of the vehicle (in deg/second) can be modifed by changing the CIRCLE_RATE parameter.  A positive value means rotate clockwise, a negative means counter clockwise.  The vehicle may not achieve the desired rate if this requires the acceleration towards the center of the circle to surpass the maximum acceleration held in the WPNAV_ACCEL parameter (units are cm/s/s).
+
+The pilot does not have any control over the roll and pitch but can change the altitude with the throttle stick as in AltHold or Loiter mode.
+
+The pilot can control the yaw of the copter, the autopilot will not retake control of the yaw until circle mode is re-engaged.
+
+The mission command LOITER_TURNS invokes Circle mode during a mission.

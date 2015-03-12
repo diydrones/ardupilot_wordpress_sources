@@ -1,0 +1,86 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-fpv-first-person-view 
+title: common-First Person View (FPV) 
+id: 657 
+menu_order: 60 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+<em>First Person View</em> provides you with a true pilot's eye view while flying by placing a video camera and transmitter on your vehicle paired with a receiver and either an LCD or goggles on the ground.  An optional OSD (On Screen Display) helps maintain orientation by providing aircraft instrument overlay on your FPV monitor.
+<!--more-->
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/fpv_titleImage.jpg"><img class="alignnone size-full wp-image-2657" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/fpv_titleImage.jpg" alt="fpv_titleImage" width="920" height="561" /></a>
+
+
+
+<h1>Recommended parts</h1>
+
+The <a href="http://store.3drobotics.com/products/3dr-fpv-osd-kit" target="_blank">3DR Video/OSD Kit</a> provides most of what you need to set-up an FPV system on your ArduCopter/ArduPlane equipped vehicle:
+<blockquote>
+<ul>
+	<li><a href="http://store.3drobotics.com/products/super-had-ccd-camera-1-3-sony-520tv-lines" target="_blank"><em>Sony CCD camera</em></a></li>
+	<li><em><a href="http://store.3drobotics.com/products/apm-minimosd-rev-1-1" target="_blank">MinimOSD</a> for On Screen Display of aircraft data</em></li>
+	<li><em>5.8Ghz 200mw video transmitter/receiver pair</em></li>
+	<li><em>Two 900mAh LiPo batteries (one for the air, one for the ground) to power the transmitter, receiver and camera</em></li>
+</ul>
+</blockquote>
+
+In addition you will need a monitor like the <a href="http://store.3drobotics.com/products/fpv-monitor-1" target="_blank">Black Pearl</a> or goggles.
+
+
+<strong>Goggle options:</strong>
+<ul>
+	<li><a href="http://www.fatshark.com/default.html" target="_blank">Fat Shark</a> has a wide range of goggles including the "Attitude" and "Dominator" that have been proven to work.  Note that some models come with a built in transmitter &amp; receiver that would replace the 3DR video kits 5.8 Ghz transmitter/receiver pair mentioned above.</li>
+	<li>Low cost 320x240 resolution goggles (<a href="http://www.youtube.com/watch?v=tG-4JNpE2fc" target="_blank">example video</a>) are not recommended because the higher resolution 640x480 (<a href="//www.youtube.com/watch?v=ywqacXyjcNw" target="_blank">example video</a>) or SVGA goggles provide a much better flying experience.</li>
+</ul>
+
+
+In addition you may wish to set-up a separate <a href="wiki/common-cameras-and-gimbals/">camera gimbal </a>(perhaps with Go-Pro attached) to record the flight in HD.
+
+
+
+<h1>Connection diagram</h1>
+
+Here is a wiring diagram <a href="http://beta.ivc.no/wiki/index.php/TBS_Discovery_graphic" target="_blank">created by IVC</a> for a TBS Discovery Quadcopter that includes an APM2 and MinimOSD:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/tbs_discovery_install_APM2.6withminimosdtbscore.jpg"><img class="alignnone size-full wp-image-673" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/tbs_discovery_install_APM2.6withminimosdtbscore.jpg" alt="tbs_discovery_install_APM2.6withminimosdtbscore" width="750" height="529" /></a>
+
+FPV equipment on the vehicle should be placed as far away as possible from GPS and RC receiver to reduce the chance of interference.
+
+
+
+<h1>Minim OSD setup through mission planner</h1>
+
+The MinimOSD set-up guide <a href="common-minim-osd-quick-installation-guide/" title="common-Minim OSD Quick Installation Guide">can be found here</a>.
+
+
+
+
+<h1>User Videos / Blogs</h1>
+
+Richard Evan's FPV flight footage (recorded from the ground station) of his ArduCopter based quadcopter including MinimOSD
+
+http://www.youtube.com/watch?feature=player_embedded&amp;v=KQOQYcf4Dbc
+
+Stefan Cenkov's FPV flight footage (recoded from the ground station) of his ArduPlane running on VrBrain including MinimOSD.
+
+http://www.youtube.com/watch?v=LxjtUl8Fw6o&amp;feature=c4-overview&amp;list=UUaT25BYqLWgAbnuZWJw9erg
+
+Robert Mcintosh's in <strong><a href="http://diydrones.com/profiles/blogs/the-best-place-to-fly">Lone Pine California</a> </strong>FPV Flight with HD video footage from GoPro camera
+http://vimeo.com/70365435
+
+Euan Ramsey's APM2 powered <a href="http://diydrones.com/profiles/blogs/tbs-disco-apm-mounting-suggestion"><strong>TBS Discovery</strong></a>.  Note the TBS frame spreads the 2 front arms apart so the blades don't interfere with the FPV and allow the camera to easily be mounted in front
+
+
+
+<h1>Safety Warnings Relating Specifically to FPV Flight</h1>
+
+<ul>
+	<li><span style="color: #ff0000"><span style="color: #ff0000">Because of the limited field-of-view of the FPV camera you may not be able to easily see obstacles near the vehicle which may be why the <span style="color: #ff0000"><a href="http://www.modelaircraft.org/" target="_blank">Academy of Model Aeronautics</a> requires that there be a second person acting as spotter for all FPV flights.</span>
+</span></span></li>
+	<li><span style="color: #ff0000">Be ready for loss of FPV video caused by flying beyond your FPV systems limits or interference from structures between you and the vehicle.</span></li>
+	<li><span style="color: #ff0000">Know and recognise the FPV signal loss warning signs and be ready to shed the FPV equipment and retake manual control at all times.</span></li>
+	<li><span style="color: #ff0000">FPV equipment can interfere with the vehicle's radio or GPS if placed too close</span></li>
+</ul>

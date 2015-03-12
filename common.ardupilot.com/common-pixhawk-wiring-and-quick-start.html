@@ -1,0 +1,42 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-pixhawk-wiring-and-quick-start 
+title: common-Pixhawk Wiring Quick Start 
+id: 1455 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to connect your RC input and other peripherals to Pixhawk.
+
+<h1>Connect buzzer and safety switch</h1>
+
+The buzzer and safety switch button are mandatory for Pixhawk. Connect to the BUZZER and SWITCH ports, respectively. <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/required-peripherals.png"><img class="alignnone wp-image-1782" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/required-peripherals-300x261.png" alt="required peripherals" width="300" height="261" /></a>
+
+
+
+<h1>Connect other peripherals</h1>
+
+<strong>3DR Power Module</strong> (pictured): Connect the power module port to the Pixhawk POWER port with the six-position DF13 cable. <strong>3DR GPS+Compass</strong> (pictured): Connect the GPS ports with the six-position DF13 cable, and connect the MAG port to the I2C port with the four-position DF13 cable. <strong>3DR u-blox GPS</strong>: To connect the GPS-only module to Pixhawk, you will need to modify the existing cable to use a 6-position DF13 connector on one end instead of the existing 6-position JST connector. When using this, or any other GPS-only module, Pixhawk will automatically use its internal compass. <strong>3DR Radio V2</strong> (pictured): Connect the air module to the TELEM 1 port with the six-position DF13 cable. <strong>3DR Radio V1</strong>: To connect Pixhawk to a 3DR Radio V1 air module, you will need to modify the existing connector cable to use a six-position DF13 connector instead of the existing five-position connector. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-optional-peripherals.png"><img class="alignnone wp-image-1783" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/pixhawk-optional-peripherals-300x236.png" alt="pixhawk optional peripherals" width="300" height="236" /></a>
+
+
+
+<h1>Connect RC inputs</h1>
+
+Pixhawk is compatible with PPM RC receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. For traditional single-wire-per-channel (PWM) receivers a <a href="http://store.3drobotics.com/products/8-channel-ppm-encoder-version-2" target="_blank">PPM encoder</a> can be used to convert the receiver outputs to ppm sum.  more details can be found on <a href="http://copter.ardupilot.com/wiki/pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems/" target="_blank">this wiki page</a>. To connect a <strong>PPM receiver</strong>, <strong>Futaba S.Bus receiver</strong>, or <strong>PPM encoder</strong>, connect the black ground, red power and white signal wires to the RC pins. Note: Futaba S.BUS2 receivers are not yet supported.  These S.BUS receivers have been tested and are known to work: R2008SB, R6008SB. For a <strong>Spektrum DSM</strong>, <strong>DSM2</strong>, or <strong>DSM-X Satellite</strong> receiver, connect to the <strong>SPKT/DSM</strong> port.
+<p style="padding-left: 60px">
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/rc-input-wiring.png"><img class="alignnone  wp-image-1786" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/rc-input-wiring-300x138.png" alt="rc input wiring" width="300" height="138" /></a>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect.jpg"><img class="alignnone  wp-image-1478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect-300x192.jpg" alt="spektrum connect" width="200" height="128" /></a></p>
+<span style="color: #ff0000">NOTE:</span> Do not connect any servos to the direct PWM outputs of your receiver. The RCIN port on the Pixhawk is designed for low power devices only, and a servo may draw a lot of current when moving rapidly. If you connect a servo directly onto your receiver while the receiver is powered from the RCIN port of your Pixhawk you may damage your Pixhawk
+
+
+
+<h1>Power Pixhawk</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img class="alignnone size-medium wp-image-2310" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port-196x300.jpg" alt="pixhawkpower port" width="196" height="300" /></a>
+
+Pixhawk should primarily be powered via its power port as shown in the picture above. The power port simultaneously powers Pixhawk and reads voltage and current analog measurements produced by an optional 3DR power module (or other voltage/current measurement devices such as an Attopilot). To power Pixhawk off the servo rail without a power module, see the <a href="wiki/common-pixhawk-overview/" title="common-Pixhawk Overview">main Pixhawk page</a> for instructions and more powering information.

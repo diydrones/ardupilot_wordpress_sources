@@ -1,0 +1,185 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-load-firmware-px4 
+title: common-Loading Firmware onto PX4 
+id: 335 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+APM firmware can be used with PX4 FMU and PX4 IO autopilot boards, allowing you to use the same advanced, community-developed APM firmware with the high performance PX4 processor. This page provides instructions for downloading the latest firmware onto PX4 using Mission Planner, either as a part of first time setup or whenever you need to update the firmware.
+
+<h3>Load firmware onto PX4 FMU</h3>
+Connect your PX4 FMU board's micro USB port (shown below) to your computer using the supplied micro USB cable. <em>Click on images to enlarge.</em>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/PX4FMU_PX4IO_USB.jpg"><img class=" wp-image-5076 alignnone" alt="PX4 FMU USB Port" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/PX4FMU_PX4IO_USB.jpg" width="304" height="159" /></a>
+
+Open Mission Planner, and use the drop-down menus in the upper-right corner of the screen (near the Connect button) to connect to your PX4. <span style="color: #333333;font-style: normal;line-height: 21px">Select the COM port listed as </span><strong style="color: #333333;font-style: normal;line-height: 21px">PX4 FMU</strong><span style="color: #333333;font-style: normal;line-height: 21px"> and set the Baud rate to </span><strong style="color: #333333;font-style: normal;line-height: 21px">115200</strong><span style="color: #333333;font-style: normal;line-height: 21px"> as shown. Don't hit </span>Connect<span style="color: #333333;font-style: normal;line-height: 21px"> just yet.</span>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/px4-corner.png"><img class=" wp-image-6583 alignnone" title="Connect to PX4 COM Port" alt="Connect to PX4 COM Port" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/px4-corner.png" width="372" height="167" /></a>
+
+Now we'll select which firmware to download to the PX4 FMU; this depends on the configuration of your copter.
+
+Select the<strong> Hardware tab</strong>. Mission Planner will display the available firmware for copters as shown below. PX4 is compatible with ArduCopter v3.0.0 and later only.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/mission-planner-firmware-download.png"><img class="alignnone wp-image-1943" alt="mission planner firmware download" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/mission-planner-firmware-download.png" width="300" height="150" /></a>
+
+Choose your copter's frame by clicking the corresponding icon: Quad, Hexa, Y6, or other. (We'll specify + or x configuration later.) Once you select your frame, Mission Planner will automatically detect the latest firmware version for your copter and prompt you to confirm the download. After selecting <strong>Yes</strong>, the progress bar will display the progress of the download,
+
+After downloading the firmware, Mission Planner will detect the PX4 FMU and initiate the installation process by prompting the following dialog:
+
+<img class=" size-full wp-image-6586" style="color: #333333;font-style: normal" alt="press reset" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/press-reset.png" width="446" height="146" />
+
+On the PX4 FMU board, press the reset button located to the right of the micro USB port. In Mission Planner, select <strong>OK</strong> within five seconds on pressing the reset button. Mission Planner will erase the contents of the PX4 FMU and program the selected firmware to the board.
+
+<img class=" wp-image-6838" alt="Reset button px4" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/Reset-button-px4.jpg" width="367" height="190" />
+
+To load the firmware, the PX4 is in upload mode, but in order to communicate with Mission Planner, the PX4 needs to be in USB MavLink mode. To perform this mode change, Mission Planner will prompt the following dialog:
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/please-unplug.png"><img class="wp-image-6590" alt="please unplug" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/please-unplug.png" width="449" height="116" /></a>
+
+Unplug the USB cable from your computer's USB port, and plug it back in. This will switch the PX4 FMU into USB MavLink mode.
+
+When the download status reads <strong>Done</strong>, your firmware download is complete.
+
+
+
+<h3>Load Firmware onto PX4 IO Board</h3>
+<ol>
+	<li>The PX4IO board requires its own firmware to be directly loaded onto it separately from the PX4 FMU board itself.</li>
+	<li>There are two methods for loading firmware onto the PX4 IO board</li>
+	<li>The old hard method using the SD card as a temporary transfer media.</li>
+	<li>And the new method loading it directly from the firmware stored on the PX4 FMU itself.</li>
+</ol>
+&nbsp;
+
+
+
+<h4>Load Firmware onto PX4 IO Board (Newer Versions)</h4>
+<strong>New Method for APM:Copter version 3.1 and later, APM:Plane version 2.75 and later and APM:Rover version 2.43 and later.</strong>
+<ol>
+	<li>After loading your vehicles appropriate firmware onto your PX4FMU using Mission Planner disconnect the USB cable.</li>
+	<li>While holding down the PX4's Safety Button Connect the vehicles battery.</li>
+	<li>You will hear several tone sequences followed by two beeps indicating successful loading of the firmware to the PX4IO board.
+<ol>
+	<li>The tone sequence for a PX4 should sound like this Wav file link:<strong> <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4_CompletedIOBoardFirmwareUpload.wav">New IO board firmware loaded successfully</a></strong></li>
+</ol>
+</li>
+	<li>Release the Safety Button and disconnect the Battery.</li>
+	<li>For complete information on PX4 Sound sequences go to this Link: <strong><a href="http://copter.ardupilot.com/wiki/common-apm-board-leds/#PX4_Sound_meaning">PX4_Sound_meaning</a></strong></li>
+</ol>
+
+
+
+<h4>Load Firmware onto PX4 IO Board (Older Versions)</h4>
+<strong>Old Method for APM:Copter prior to version 3.1, APM:Plane <strong>prior to </strong>version 2.75 and APM:Rover <strong>prior to </strong>version 2.43.</strong>
+
+The PX4 IO module requires separate firmware from the PX4 FMU module. To load the PX4 IO firmware, we will use the micro SD card and USB SD card reader supplied with the PX4 IO board.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/sd-card-stuff.jpg"><img class="wp-image-6593" title="Micro SD card and USB reader" alt="Micro SD card and USB reader" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/sd-card-stuff.jpg" width="267" height="209" /></a>
+
+Insert SD card into USB reader; connect reader to your computer's USB port. This will load the SD card as a removable storage device in your computer's file structure.
+
+In Mission Planner, select the Firmware tab and select the <strong>PX4IO Firmware</strong> button in the bottom-right corner of the screen. This will prompt Mission Planner to download the required file to the micro SD card. From the dialog shown below, select <strong>OK</strong>.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/save-file-to-px4.png"><img class="alignnone wp-image-2447" alt="save file to px4" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/save-file-to-px4.png" width="300" height="130" /></a>
+
+After selecting OK, Mission Planner will call a Save As window to allow you to save the firmware file to the SD card.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/save-as.png"><img class=" wp-image-6595" alt="save as" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/save-as.png" width="300" height="209" /></a>
+
+Select the Removable Disk drive. If there are any files already saved there, select and delete them. Save the file to the Removable Disk drive as <strong>px4io.bin</strong>. (Make sure to add the proper <strong>.bin</strong> file extension before saving.)
+
+If you receive an error message, it could be due to a file structure error and can be fixed by simply retrying to save the file to the Removable Disk drive.
+
+Once the px4io.bin file has been saved to the SD card, Mission Planner will call the following dialog with further instructions.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/eject-card.png"><img class="wp-image-6596" alt="eject card" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/eject-card.png" width="490" height="144" /></a>
+
+As the dialog instructs, right-click on the Removable Disk drive from your computer's file structure, select <strong>Eject</strong>, and remove the USB SD card reader by from the computer. Select <strong>OK</strong>.
+
+<a style="font-style: normal;line-height: 21px;text-decoration: underline" href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/px4-assembled.jpg"><img class=" wp-image-6845 " style="border-color: #bbbbbb;background-color: #eeeeee" title="PX4 SD port with buzzer and safety button" alt="PX4 SD port with buzzer and safety button" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/px4-assembled.jpg" width="573" height="253" /></a>
+
+Remove the micro SD card from the USB reader and insert it into the PX4 FMU micro SD card port. Ensure that your PX4FMU and PX4IO boards are fully connected and the cable from the safety button to the port on the PX4IO board directly under the battery connector is connected.
+
+Now we'll install the firmware to the PX4IO board from the SD card while holding down the safety button by following these steps (read them first before beginning):
+<ol>
+	<li>Hold down safety button on PX4IO board.</li>
+	<li>Connect the PX4 FMU to your computer using the micro USB cable.</li>
+	<li>Wait for the PX4 to play a sequence of three tones: a double high tone signifies success; a double low tone signifies a failure.</li>
+	<li>Release safety button after you hear the tones.</li>
+	<li>You can remove the SD card from your PX4 board, place it in your card reader in your computer.
+<ol>
+	<li>Look at the file to confirm that it was copied to the PX4IO board correctly.</li>
+	<li>The text file will also contain a message of success or failure.</li>
+	<li>When you are done, be sure to put the SD card back in the PX4 it will not work without the SD card being installed.</li>
+</ol>
+</li>
+	<li>If your PX4 system is already connected to a receiver and PPM encoder your computer may not provide sufficient USB power.</li>
+	<li>If this procedure fails, try either the <strong><span style="color: #ff0000">Alternate Instructions using Battery</span> </strong>below or the powered USB hub as follows.
+<ol>
+	<li>A <strong>Powered USB hub</strong> with a fast charge feature and sufficient current to power the PX4 system, receiver and encoder <span style="color: #ff0000"><strong>MAY</strong></span> work.</li>
+	<li>For some PX4 systems a powered USB hub with high current fast charge feature has been shown to work, but it is not guaranteed.</li>
+</ol>
+</li>
+</ol>
+<span style="font-size: medium"><strong><span style="color: #ff0000">Alternate Instructions using Battery:</span></strong></span>
+<ol>
+	<li>Remove your propellers or place a towel over them before following this procedure.</li>
+	<li>Hold down PX4's safety button.</li>
+	<li>While holding the button down plug in your vehicles battery (requires some dexterity).</li>
+	<li><strong style="color: #333333;font-style: normal">Wait for the PX4 to play a sequence of three tones: a double high tone signifies success; a double low tone signifies a failure.</strong></li>
+	<li>Release safety button after you hear the tones and disconnect battery.</li>
+	<li>You can remove the SD card from your PX4 FMU board, place it in your USB SD card reader in your computer.
+<ol>
+	<li>Explore the contents of the SD card to confirm that it was copied to the PX4 IO board correctly.</li>
+	<li>You can also open the .txt file with a text editor and it will confirm that the file was successfully written to the PX4IO board.</li>
+	<li>When you are done, be sure to put the SD card back in the PX4 FMU it will not work without the SD card being installed.</li>
+</ol>
+</li>
+	<li>PX4 IO firmware installation is now complete.</li>
+	<li>If you encounter problems when loading MavLink parameters to or from your PX4, it is possible there was an issue with the firmware installation and you should ensure these steps were completed correctly.</li>
+</ol>
+
+
+
+<h3>Load MavLink Parameters From PX4 to Mission Planner Program</h3>
+<ol>
+	<li>Connect your PX4 to your computer via the USB cable.</li>
+	<li>Ensure that the <strong>COM</strong> window on the top right is displaying your PX4's current port.
+<ol>
+	<li>Open the Com port list by selecting the down arrow to the right of the Com window.</li>
+	<li>It should display something like <strong>COM 6 PX4 FMU V1.6 (COM6)</strong> Ensure that line is selected.</li>
+</ol>
+</li>
+	<li>In Mission Planner, select the <strong>Connect</strong> icon in  the upper-right corner of the screen.</li>
+	<li>This will copy the PX4's current MavLink parameters to the Mission Planner program.</li>
+	<li>Mission Planner will display a window showing the progress of the MavLink download.</li>
+</ol>
+<img alt="Connect to MavLink" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/con-mavlink.png" width="307" height="136" />
+
+<img style="color: #333333;font-style: normal" title="Mission Planner APM Connection Status" alt="Mission Planner APM Connection Status" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/condiscon.png" width="284" height="132" />
+
+When the window displays <strong>Done</strong> and Mission Planner shows the <strong>Disconnect</strong> option in place of Connect, MavLink parameters have been successfully updated. If this process produces an error or times out, try these troubleshooting steps:
+<ul>
+	<li>Unplug and replug the PX4 USB, and try connecting again after waiting 10 seconds.</li>
+	<li>If it fails when you select the Connect icon, check that the "Com" window on the top right is displaying your PX4's com port.</li>
+	<li>Use the Flight Data screen in Mission Planner to see if you can see the HUD on the screen move when you move the board.</li>
+	<li>Select the Status tab (within the Flight Data screen) to view inputs from the PX4's sensors.
+<ul>
+	<li>This will show you that the PX4 system is working.</li>
+</ul>
+</li>
+	<li>Connect the GPS module by connecting the 5-pin-to-6-pin cable from the GPS module to the beige GPS connector on the PX4FMU board (next to the 15 pin Multi connector).
+<ul>
+	<li>Connect the white plug on the GPS adapter cable to the white connector on the GPS board.</li>
+	<li>Once connected, the GPS may be able to show your position indoors (and the blinking blue LED on the GPS will become solid on.).</li>
+	<li>This will show you that the GPS is working correctly with the PX4.</li>
+</ul>
+</li>
+</ul>
+&nbsp;
+
+<strong>Additional firmware and alternate methods may be found here:</strong> <strong><a title="setup" href="http://firmware.diydrones.com/" target="_blank">ArduPilot Firmware Builds Site</a></strong>.

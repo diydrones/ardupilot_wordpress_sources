@@ -1,0 +1,50 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rssi-received-signal-strength-indication 
+title: common-Received Signal Strength Indication (RSSI) 
+id: 830 
+menu_order: 170 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+This article shows how to get the Received Signal Strength Indication (RSSI) from an FrSky receiver to APM.
+<!--more-->
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/screenshot11.png"><img class="alignnone size-full wp-image-840" alt="screenshot1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/screenshot11.png" width="450" height="400" /></a>
+
+
+<h1>Provide RSSI from FrSky receiver to APM.</h1>
+
+<ul>
+	<li>Select the input pin with the <strong>RSSI_PIN</strong> parameter.</li>
+	<li>However some of receivers such as FrSky D8R-XP output 0 - 3.3 V.</li>
+	<li>For that reason I've added new parameter: <strong>RSSI_RANGE</strong>.</li>
+	<li>This was also a requested issue previously: <strong><a href="https://github.com/diydrones/ardupilot/issues/648" rel="nofollow">https://github.com/diydrones/ardupilot/issues/648</a></strong></li>
+	<li>When the RSSI_RANGE parameter is set to your radio's maximum RSSI voltage the RSSI <strong>rxrssi</strong> is shown in the range 0-100.</li>
+	<li>The ability to set the RSSI_RANGE  parameter has been added to Mission Planner in the Full Parameter List:</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/screenshot2.png"><img class="alignnone size-full wp-image-841" alt="screenshot2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/screenshot2.png" width="750" height="159" /></a>
+
+
+
+<h1>Complete System with RSSI addition</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo1.jpg"><img class="alignnone size-full wp-image-842" alt="photo1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo1.jpg" width="750" height="554" /></a>
+
+
+
+<h1>RSSI Filter</h1>
+
+<strong>A 4.7k resistor and 10uF capacitor are used to filter out the pulses from the receiver's RSSI output.</strong>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo2.jpg"><img class="alignnone size-full wp-image-843" alt="photo2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo2.jpg" width="750" height="466" /></a>
+
+
+
+<h1>RSSI Connections</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo3.jpg"><img class="alignnone size-full wp-image-844" alt="photo3" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/11/photo3.jpg" width="750" height="523" /></a>
+
+<strong>Developed and illustrated by Lukasz - Thank You - Hope this helps.</strong>

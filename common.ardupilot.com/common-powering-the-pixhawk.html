@@ -1,0 +1,19 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-powering-the-pixhawk 
+title: common-Powering the Pixhawk 
+id: 2785 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+For most users powering the Pixhawk is as simple as connecting the 6-pin DF13 cable from the <a href="http://store.3drobotics.com/products/apm-power-module-with-xt60-connectors" target="_blank">3DR power module</a> into the Pixhawk's "Power" port as shown above.  This will provide a steady 5V and allow the Pixhawk to measure the current and voltage of the main battery.  The power module can be used with 3S or 4S batteries (i.e. up to 18V) and 90amps of power (most multicopters draw less than 20amps when hovering and rarely consume more than 90amps at full throttle).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img class="alignnone  wp-image-2310" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg" alt="pixhawkpower port" width="294" height="449" /></a>
+
+<h3>Backup power from ESC</h3>
+If a secondary source of 5.8V or less is available (such as from an ESC) it can be connected to the rear "MAIN OUT" or "AUX OUT" pins as shown below. If the voltage provided by the power module falls too low (4V?) the secondary source will be used.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/PoweringThePixhawk_backupBEC.jpg"><img class="alignnone size-full wp-image-2790" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/PoweringThePixhawk_backupBEC.jpg" alt="PoweringThePixhawk_backupBEC" width="471" height="318" /></a>

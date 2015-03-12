@@ -1,0 +1,562 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-planning-a-mission-with-waypoints-and-events 
+title: common-Planning a Mission with Waypoints and Events 
+id: 33 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page describes generic waypoint setup for all types of vehicles. 
+
+[site_ArduRover]
+Rover users: For a simpler Rover specific guide to setting up waypoints please set <a href="http://rover.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/">this page</a>.
+[/site_ArduRover]
+
+<img class="alignnone size-full wp-image-495" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/MissionPlanning.jpg" alt="MissionPlanning" width="1029" height="760" />
+
+
+
+<h1>Setting the Home Position</h1>
+
+For <strong>APM:Copter</strong> the home position is set as the location where the copter was armed. This means if you execute an RTL in APM:Copter, it will return to the location where it was armed, so arm your copter in the location you want it to return to.
+
+For <strong>APM:Plane</strong> the home position is the location of the plane where the GPS was locked. This means if you execute an RTL in APM:Plane, it will return to the location where it first acquired the GPS lock, so only power up your plane in the location you intend it to return to when performing an RTL.
+
+
+<h1>Video: Produce and save a Multi-waypoint Mission</h1>
+[embed width=800 height=600]http://www.youtube.com/watch?v=HAjkuJdjZw4[/embed]
+
+
+<h1>Video: Load an already saved Multi-waypoint Mission</h1>
+[embed width=800 height=600]http://www.youtube.com/watch?v=nBq8YHShkVU[/embed]
+
+
+<h1>Instructions</h1>
+
+<strong>Note: When APM:Copter executes the Land command it will land from its current location. It will not fly to a location, then land like the planes do. If you want to land at a particular waypoint, you must fly to a normal WP, then the next command will be Land. The Absolute Altitude checkbox in the Mission Planner is ignored. ArduCopter only uses the default relative altitude.</strong>
+
+In the screenshot above, a mission for arducopter starts with an auto takeoff to 20 meters attitude; then goes to WP 2 rising to 100 meters altitude on the way, then waits 10 seconds; then the craft will proceed to WP 3 (descending to 50 meters altitude on the way), then returns to launch.  Since the default altitude is 100 meters, the return to launch will be at 100 meters.  After reaching the launch position, the craft will land. The mission assumes that the launch position is set at the home position.
+
+You can enter waypoints and other commands (see below for the full list). In the dropdown menus on each row, select the command you want. The column heading will change to show you what data that command requires. Lat and Lon can be entered by clicking on the map. Altitude is relative to your launch altitude, so if you set 100m, for example, it will fly 100m above you.
+
+<strong>Default Alt </strong>is the default altitude when entering new waypoints. It's also the altitude RTL (return to launch) mode will fly at if you have "Hold Default ALT" checked; if you don't have that checked, your aircraft will try to maintain the altitude it was at when you switched on RTL.
+
+<strong>Verify height </strong>means that the Mission Planner will use Google Earth topology data to adjust your desired altitude at each waypoint to reflect the height of the ground beneath. So if your waypoint is on a hill, if this option is selected the Mission Planner will increase your ALT setting by the height of the hill. This is a good way to make sure you don't crash into mountains!
+
+Once you are done with your mission, select "Write" and it will be sent to APM and saved in EEPROM. You can confirm that it's as you wanted by selecting "Read"
+
+You can save multiple mission files to your local hard drive by selecting "Save WP File" or read in files with "Load WP File" in the right-click menu:
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/savewps.png" alt="" />
+
+
+
+<h1>Tips</h1>
+<ul>
+	<li>Prefetch: You can cache map data so you don't need Internet access at the field. Click the Prefetch button, and hold down Alt to draw a box to download the selected imagery of a location.</li>
+	<li>Grid: This allows you to draw a polygon (right click) and automatically create waypoints over the selected area. Note that it does not do "island detection", which means if you have a big polygon and a little one inside of that, the little one will not be excluded from the big one (see <a href="http://wiki.openstreetmap.org/wiki/Relation:multipolygon" rel="nofollow">this</a> for more). Also, in the case of any polygon that partialy doubles backs on itself (like the letter U), the open area in the center will be included as part of the flyover.</li>
+	<li>Setting your home location to the current location is easy, just click "Home Location" above where you enter your home location, and it will set your home location to the current coordinates.</li>
+	<li>You can measure the distance between waypoints by right-clicking at one end and selecting Measure Distance. Then right-click on the other end and select Measure Distance again. A dialog box will open with the distance between the two points.</li>
+</ul>
+
+
+<h1>Auto grid</h1>
+You can also have the Mission Planner create a mission for you, which is useful for function like mapping missions, where the aircraft should just go back and forth in a "lawnmower" pattern over an area to collect photographs.
+
+To do this, in the right-click menu select Polygon and draw a box around the area you want to map. Then select Auto WP, Grid. Follow the dialog box process to select altitude and spacing. The Mission Planner will then generate a mission that looks something like this:
+
+[caption id="attachment_3901" align="alignnone" width="671"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/grid.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/grid.jpg" alt="Grid" width="671" height="426" class="size-full wp-image-3901" /></a> Mission Planner auto-generated grid[/caption]
+
+
+<h1>Basic waypoint commands</h1>
+
+
+<strong>WAYPOINT</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Delay (seconds)</td>
+<td>Altitude (meters)</td>
+<td>Latitude</td>
+<td>Longitude</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Mavlink command is NAV_WAYPOINT</li>
+	<li>Delay option is triggered after the craft reaches the waypoint radius. The Next command is loaded after the delay.</li>
+	<li>Delay time is in seconds, the default is 0</li>
+</ul>
+
+
+<strong>Waypoint Option Bitmask</strong> - not yet available in the Mission Planner
+<table>
+<tbody>
+<tr align="left" valign="middle">
+<td>bit 0</td>
+<td>Altitude is stored</td>
+<td>0: Absolute</td>
+<td>1: Relative</td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 1</td>
+<td>Change Alt between WP</td>
+<td>0: Gradually</td>
+<td>1: ASAP</td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 3</td>
+<td>Req.to hit WP.alt to continue</td>
+<td>0: No</td>
+<td>1: Yes</td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 4</td>
+<td>Relative to Home</td>
+<td>0: No</td>
+<td>1: Yes</td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr align="left" valign="middle">
+<td>bit 7</td>
+<td>Move to next Command</td>
+<td>0: YES</td>
+<td>1: Loiter until commanded</td>
+</tr>
+</tbody>
+</table>
+
+
+<strong>LOITER_UNLIM</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to begin to Loiter at the current location when the command is invoked.</li>
+</ul>
+
+<strong>LOITER_TIME</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Time in seconds</td>
+<td>Altitude (in meters)</td>
+<td>Latitude</td>
+<td>Longitude</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to begin to Loiter at the current location when the command is invoked.</li>
+	<li>Optionally give a location to loiter at that wp – The clock starts ticking after the WP is reached.</li>
+</ul>
+
+<strong>LOITER_TURNS</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Number of turns (N x 360°)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to begin to orbit the current location when the command is invoked.</li>
+</ul>
+
+<strong>RETURN_TO_LAUNCH</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Altitude (meters)</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to return to the home position set when the craft is armed (requires GPS Lock!)</li>
+	<li>If Altitude is 0, craft will return to home at the altitude specified by the Mission Planner</li>
+</ul>
+
+
+<strong>LAND</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to land at the current location when the command is invoked.</li>
+	<li>If you have Sonar, the craft will stop holding position at 3 meters and drop straight down.</li>
+	<li>The motors will not stop on their own, you must exit the AP mode to cut the engines</li>
+</ul>
+
+
+<strong>TAKEOFF</strong>
+<table>
+<tbody>
+<tr>
+<td>Pitch*</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Climb angle*</td>
+<td>Altitude (meters)**</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will cause the craft to take off and hold position until the altitude is reached.</li>
+</ul>
+<strong>*</strong> APM:Plane only. This is the <strong style="color: #000000;font-style: normal">MIN</strong> climb angle the when using an airspeed sensor, and <strong style="color: #000000;font-style: normal">MAX</strong> angle when <strong style="color: #000000;font-style: normal">not</strong> using an airspeed sensor.
+<strong>**</strong> The altitude the plane will climb to before going to the next waypoint. The plane is <em>only</em> attempting to climb at this point and can be pushed off its heading by wind.
+
+<strong>CONDITION_DELAY</strong>
+<table>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>Time in Seconds</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will delay the execution of the next conditional command.</li>
+</ul>
+
+
+<strong>CONDITION_DISTANCE</strong>
+<table>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>N/A</td>
+<td>Distance (meters)</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will override the next waypoint altitude.</li>
+	<li>Useful when used after a delay or distance conditional command</li>
+</ul>
+
+
+<strong>CONDITION_CHANGE_ALT</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Altitude (meters)</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Will override the next waypoint altitude.</li>
+	<li>Useful when used after a delay or distance conditional command</li>
+</ul>
+
+<strong>CONDITION_YAW</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Direction (1=clockwise, 0=counter)</td>
+<td>Relative: amount (degrees), Absolute: ending angle(degrees)</td>
+<td>Speed (meters/s)</td>
+<td>Relative angle change = 1, Absolute = 0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Fine grain controls of the Yaw</li>
+</ul>
+
+<strong>DO_SET_MODE</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Not Implemented</li>
+</ul>
+
+<strong>DO_JUMP</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>The desired command index</td>
+<td></td>
+<td># of Jumps</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<strong>DO_CHANGE_SPEED</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Speed (in meters/s)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+* Speed change will stick until reboot
+
+
+
+<strong>DO_SET_RELAY</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>1 = on, 0 = off, -1 = toggle</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+* Toggling the Relay will turn an off relay on and vice versa
+
+
+
+<strong>DO_REPEAT_RELAY</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td># of repetitions</td>
+<td>cycle time (in seconds)</td>
+<td>&gt;N/A</td>
+</tr>
+</tbody>
+</table>
+* Toggling the Relay will turn an off relay on and vice versa
+
+
+
+<strong>DO_SET_SERVO</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Servo channel (1-8)</td>
+<td>PWM (1000-2000)</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<strong>DO_REPEAT_SERVO</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td>Servo channel (5-8)</td>
+<td>PWM (1000-2000)</td>
+<td># of repetitions</td>
+<td>cycle time (in seconds)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<strong>DO_CONTROL_VIDEO</strong>
+<table>
+<tbody>
+<tr>
+<td>Option</td>
+<td>Alt</td>
+<td>Lat</td>
+<td>Lon</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<strong>DO_SET_ROI</strong>
+<table>
+<tbody>
+<tr>
+<td>Yaw tracking option</td>
+<td>Altitude (in meters)</td>
+<td>Latitude</td>
+<td>Longitude</td>
+</tr>
+</tbody>
+</table>
+<ul>
+	<li>Setting will persist until the next waypoint is reached.</li>
+</ul>
+
+
+
+<strong>Note: When you're using the Jump command, remember that waypoint logic can be a bit confusing. A waypoint command means "start heading to this WP", not "wait until you get to this WP." So, for example, if you put a "Jump to WP1" command in-between WP4 and WP5, the aircraft will never get to WP5. That's because once it starts heading in the direction of WP5, it then executes the next command, which is the jump, and that takes priority. So in that instance, if you want the aircraft to hit WP5, you'd create a fake WP6 and issue the Jump command after that.</strong>
+
+
+
+<strong>A full guide to MAVLink command <strong>and parameter syntax for developers can be found in the Developer section. (Click on Community, select Developer, then look in the table of contents. </strong>
+</strong>
+
+
+<h1>How to prefetch a stored Mission Map</h1>
+[embed width=800 height=600]https://www.youtube.com/watch?v=1s8gsXTdPY8[/embed]
+
+
+
+<h1>Occasionally You will see some really big Numbers</h1>
+[embed width=800 height=600]https://www.youtube.com/watch?v=J5ClTnggZKk[/embed]

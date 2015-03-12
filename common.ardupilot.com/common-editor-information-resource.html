@@ -1,0 +1,303 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-editor-information-resource 
+title: common-Wiki Editing Guide 
+id: 327 
+menu_order: 0 
+post_parent_id: 3487 
+post_parent_stub: common-appendix 
+post_parent_title: common-Appendix 
+END METADATA 
+-->
+All members of the community are welcome to join and contribute to this wiki! Any help you can offer is appreciated — from creating new articles and re-validating older articles, through to fixing broken links and spelling/grammatical errors.
+
+This guide provides an overview of how to create and edit topics on all the ArduPilot wikis.
+
+
+
+<h1>Overview for editors</h1>
+
+The wiki is a multi-site WordPress installation, with separate sites for the different vehicle platforms, ground control stations, and technologies:
+<ul>
+	<li><a title="ArduPilot" href="http://ardupilot.com">ArduPilot</a> ("umbrella" site)
+<ul>
+	<li><a title="Copter" href="http://copter.ardupilot.com">ArduCopter</a> — wiki for multicopter, traditional helicopter, and other "copter" platforms</li>
+	<li><a title="Plane" href="http://plane.ardupilot.com">ArduPlane</a> — wiki for planes</li>
+	<li><a title="Rover" href="http://rover.ardupilot.com">ArduRover</a> — wiki for rover articles</li>
+	<li><a title="Rover" href="http://planner.ardupilot.com">Mission Planner</a> — wiki for the original Mission Planner and other "common" GSCs and technologies</li>
+	<li><a title="Rover" href="http://planner.ardupilot.com">APM Planner 2</a> — wiki for the new Mission Planner 2.</li>
+</ul>
+</li>
+</ul>
+Topics that are specific to a particular platform are created in the corresponding site. Topics that are common to all the platforms are created in the <a href="http://planner.ardupilot.com">Mission Planner Wiki</a> (with title prefix <em>common-</em>), and then automatically copied to plane, copter and rover wikis.
+
+[warning]<a href="#working_with_common_pages">Common topics</a> must be created and edited <strong>only</strong> in the <a href="http://planner.ardupilot.com">Mission Planner</a> wiki — any changes you make in the other wikis will be overwritten when the master version is updated![/warning]
+
+Wiki articles are <a title="Creating a a new wiki page" href="#creating_a_new_wiki_page">created and edited</a> through the <em>WordPress Dashboard</em>, which becomes available <a href="#how_to_log_into_the_wiki">when you log in</a>. <em>Wiki Approvers</em> are automatically contacted to review and publish articles and changes, as discussed in <a title="How to get articles approved" href="#how_to_get_articles_approved">How to get articles approved</a>.
+
+See the brief <a title="Style guidelines" href="#style_guidelines">style guide</a> and other help topics below to get started.
+<h1>How to become a wiki editor</h1>
+To join, simply email <em>hamish@3drobotics.com</em> with your name, and a brief overview of what sort of vehicles and articles you're interested in.
+
+We will then set you up with editor access to the wikis and membership of the <a href="https://groups.google.com/forum/#!forum/ardu-wiki-editors">Wiki Editors Discussion Group</a> (where we discuss all matters related to the wikis).
+
+
+
+<h1>How to log into the wiki</h1>
+
+To edit or create wiki pages you need to be logged in:
+<ol>
+	<li>Navigate to a wiki you're authorised to access (e.g. <a href="http://planner.ardupilot.com">planner.ardupilot.com</a>)</li>
+	<li>Select the <strong>Log in</strong> link in the sidebar, or append <em>/wp-admin</em> to the site URL (for example <a href="http://planner.ardupilot.com/wp-admin/">http://planner.ardupilot.com/wp-admin/</a>).</li>
+	<li>Enter the site level authentication username and password (provided in your sign-up email)</li>
+	<li>Enter your personal WordPress username and password (provided in your sign-up email)</li>
+</ol>
+Following this two-step authentication process you will be logged into the wiki. A dark <em>Administration Bar</em> should appear above the top of pages in the site.
+
+[caption id="attachment_3550" align="alignnone" width="958"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiAdminBar_Sites.png"><img class="size-full wp-image-3550" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiAdminBar_Sites.png" alt="Administration Bar - showing available sites" width="958" height="265" /></a> Administration Bar - showing available sites[/caption]
+
+The <em>Admin Bar</em> shows the sites you are authorized to edit (select <strong>My Sites</strong> on the left hand side of this bar). From this bar you can also edit the current wiki page, create new wiki pages, and view the <em>Administration Dashboard</em> for performing other editing operations.
+
+
+
+<h1>Style guidelines</h1>
+
+The following guidelines promote consistency of appearance and maintainability of wiki content. The general rule is to keep things simple, using as little styling as possible.
+<ul>
+	<li><span style="text-decoration: underline">Titles:</span>
+<ul>
+	<li>Choose a concise and specific title.</li>
+	<li>The title should be informative enough that a reader can determine if the content is likely to be relevant and differentiate it from other (similar) topics.</li>
+	<li>Use the <strong>common-</strong> prefix for common titles</li>
+	<li>Use first-letter capitalization for all words in the title (except connecting words: "and","the", "with" etc.)</li>
+</ul>
+</li>
+	<li><span style="text-decoration: underline">Headings:</span>
+<ul>
+	<li>Use any heading style from <code>h1</code> - <code>h6</code>, but be consistent in your nesting (e.g. <code>h2</code> and lower must always be nested inside <code>h1</code>).</li>
+	<li>Use sentence capitalization for headings (first letter of first word).</li>
+</ul>
+</li>
+	<li><span style="text-decoration: underline">Content:</span>
+<ul>
+	<li>Use <strong>minimal</strong> HTML and CSS styling:
+<ul>
+	<li>Use an empty line to specify space between paragraphs rather than <code>p</code> tags.</li>
+	<li>Use heading tags to create headings (don't create "pseudo headings" using bold or other styling).</li>
+	<li>Do not add additional styling or alignment to tags. For example, use <code>&lt;h1&gt;</code>, not <code>&lt;h1 style"align:right;"&gt;</code><code>.</code></li>
+	<li>Use emphasis to mark up <em>types</em> of information:
+<ul>
+	<li><code>code</code> for code and variables</li>
+	<li><strong>bold</strong> for "button to press" and filenames</li>
+	<li><em>italic</em> for names of dialogs and tools.</li>
+</ul>
+</li>
+	<li>Otherwise, use emphasis <em>sparingly</em>. A page with too much bold or italic is hard to read, and the effect of emphasis as a tool for identifying important information is reduced.</li>
+	<li>Use the <code>note</code>, <code>tip </code>and <code>warning</code> shortcodes rather than creating your own styling for notes etc.</li>
+</ul>
+</li>
+	<li><span style="text-decoration: underline">Images:</span>
+<ul>
+	<li>Use alignment of "none" (style <code>alignnone</code>) by default. This causes images to be left aligned on their own lines.</li>
+	<li>User lower resolution images where possible to reduce load time.</li>
+</ul>
+</li>
+	<li>Start the topic with text rather than a heading or an image. Ideally this should be a single sentence or short paragraph "abstract" describing the content and scope of the topic.</li>
+	<li>Ensure the table of contents is visible without scrolling. If the introductory section is too large, it may be necessary to add a heading entitled "Overview" to force this TOC to appear near the top.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h1>Creating a new wiki page</h1>
+
+[tip]First search the wiki to determine if there is already a wiki page about your topic — it is better to improve an existing topic than create a near-duplicate! Also discuss it with the <a href="https://groups.google.com/forum/#!forum/ardu-wiki-editors">Wiki Editors Discussion Group</a>.[/tip]
+
+New wiki pages can be created from the <em>Admin Bar</em>, by selecting <strong>+New | Wiki</strong>. They can also be created from within the <em>Administration Dashboard Sidebar</em> using <strong>Wiki | Add New</strong>.
+
+[caption id="attachment_3513" align="alignnone" width="424"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/AdminBar_Add_New_Wiki.png"><img class="size-full wp-image-3513" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/AdminBar_Add_New_Wiki.png" alt="Administration Bar - Add New Wiki" width="424" height="104" /></a> Add a New Wiki Article[/caption]
+
+The title of the new page should be concise — informative enough that the reader can determine whether the topic is relevant and to differentiate it from other similar topics. The first letter of every word in the heading should be capitalized, with the exception of short connecting words like "a", "with", "and", "the".
+
+Information on how to use the wiki editor is provided in <a href="#editing_a_wiki_page">Editing a wiki page</a>.
+
+[note]New pages that are common to rover, copter, and plane should be created in the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Their title should be prefixed with <em>common-</em>. These titles will automatically be copied to the appropriate wikis.[/note]
+
+
+
+<h1>Editing a wiki page</h1>
+
+Wiki pages can be opened for editing from the <em>Administration Bar</em> by selecting <strong>Edit Wiki page</strong>, or from within a page by selecting the <strong>Edit</strong> link immediately below the page title. You can also list all wiki pages and select them to edit from within the <em>Administration Dashboard </em>(see the sidebar <strong>Wiki </strong>option).
+
+[caption id="attachment_3519" align="alignnone" width="450"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/AdminBar_Edit_Wiki.png"><img class="size-full wp-image-3519" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/AdminBar_Edit_Wiki.png" alt="Admin Bar - Edit Wiki page" width="450" height="34" /></a> Admin Bar - Edit Wiki[/caption]
+
+Pages are edited using either the visual or text editors described below. Switch between them using the <em>Visual</em> and <em>Text</em> tabs, respectively.
+
+Typically you will use both editors. The visual editor is easier to use and provides a quick (and approximate) preview of the output. However it can't be used to apply all possible styling, and can inject unwanted style into the source. 
+
+Both editors provide toolbars for entering useful/common styling and support normal key codes for copy-paste (<strong>Ctrl+C</strong>/<strong>Ctrl+V</strong>) and undo (<strong>Ctrl+Z</strong>). The visual editor also supports keycodes for bold (<strong>Ctrl+B</strong>) and italic (<strong>Ctrl+I</strong>).
+
+[tip]Use the <strong>Preview Page</strong> button before saving to see exactly what the published page will look like. [/tip]
+
+When your changes are ready select the <strong>Submit Revision</strong> button to start the process of <a title="How to get articles approved" href="#how_to_get_articles_approved">getting your changes approved</a>.
+
+[warning]Any changes you make to common pages outside of the <a href="http://planner.ardupilot.com">Mission Planner wiki</a> will be overwritten when the master version is updated! If you're logged in to a platform-wiki, a warning not to edit common topics in displayed below their heading.[/warning]
+
+<h2>Text Mode (HTML)</h2>
+<em>Text Mode</em> allows you to directly edit the source code for the page content.
+
+The source code format is a very <em>slightly</em> simplified form of HTML — specifically the editor does not require you to enter <code>p</code> tags to differentiate your paragraphs. The mode allows full control over the HTML and styling of your content.
+
+[note]While it is possible to create any styling you want, we recommend you use the minimum possible (as noted in the <a href="#style_guidelines">style guidelines</a>).[/note]
+
+Typically this mode is used to add styling that is not possible through the visual editor, for example adding nested bullets. It is also useful for tidying up the source code to make it more readable.
+
+[caption id="attachment_3569" align="alignnone" width="1360"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiEditor_TextMode.png"><img class="size-full wp-image-3569" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiEditor_TextMode.png" alt="Wiki Editor - Text Mode" width="1360" height="633" /></a> Wiki Editor - Text Mode[/caption]
+
+
+<h2>Visual Mode</h2>
+
+The Visual Mode is a graphical HTML editor which enables almost all of the styling supported by WordPress through its menus. It is particularly useful if you don't know HTML, and for getting a quick preview of what the output might look like (much faster but less accurate than using <strong>Preview Page</strong>).
+
+[caption id="attachment_3566" align="alignnone" width="827"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiVisualEditor.png"><img class="size-full wp-image-3566" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/02/WikiVisualEditor.png" alt="Wiki Visual Mode" width="827" height="589" /></a> Wiki Visual Mode[/caption]
+
+[warning]This mode is not completely robust! On occasion the editor can break links and formatting. Use <strong>Ctrl+Z</strong> to undo unintended changes.[/warning]
+
+
+
+<h1>Working with common pages</h1>
+
+The wiki has a lot of information that is applicable to users of all the different vehicle types. In order to reduce (manual) duplication we define these topics in one place (the <a href="http://planner.ardupilot.com">Mission Planner Wiki</a>) and automatically copy them to the plane, copter and rover wikis. 
+
+Creating and editing common pages is similar to editing other pages except:
+<ul>
+	<li>The title of common pages must start with the text <em>common-</em>. For example, this page is <strong>common-Wiki Editing Guide</strong>.</li>
+	<li>Changes must be made to the copy on the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Changes made on rover, copter, plane wikis will be over-written when the "master" copy is next updated.</li>
+	<li>Vehicle-specific content can be added to the common topic using <code>site_ArduRover</code>, <code>site_ArduCopter</code> and <code>site_ArduPlane</code> shortcodes, and will only be displayed on the respective wikis. For example, to display text only on Rover wiki do: <code>[[site_ArduRover]Rover specific text[/site_ArduRover]]</code></li>
+	<li>Always <a href="#how_to_link_to_other_topics">link to other common topics</a> using relative linking. This ensures that you will link to the correct common topic when the wiki article sis copied.</li>
+</ul>
+
+
+<h1>How to link to other topics</h1>
+
+[tip]Use relative links to link to pages on the same wiki. This is particularly important in links to <em>common</em> pages as it ensures that they connect to the version on the same wiki, rather than the original.[/tip]
+
+Relative links are specified using the <em>page slug</em>. The page slug is the last part of the path in the URL (e.g. the part shown in bold in this URL: <em>http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/<strong>reversing-servos-and-setting-normalelevon-mode</strong>/</em>).
+
+To link to the above page from the same wiki (or for a common page) you specify the link as:
+<pre>&lt;a href="<strong>reversing-servos-and-setting-normalelevon-mode</strong>"&gt;Reversing servos and setting normal/elevon mode&lt;/a&gt;</pre>
+To link to the specific page above from another wiki you would use the whole URL:
+<pre>&lt;a href="<strong>http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/reversing-servos-and-setting-normalelevon-mode/</strong>"&gt;Reversing servos and setting normal/elevon mode&lt;/a&gt;</pre>
+
+If you need to link to a heading within a page you can specify the anchor at the end of the URL. For example, to link to the "Important Notes" heading in the above document.
+<pre>&lt;a href="<strong>reversing-servos-and-setting-normalelevon-mode/#important_notes</strong>"&gt;Reversing servos and setting normal/elevon mode&lt;/a&gt;</pre>
+From within the topic you would link as shown:
+<pre>&lt;a href="<strong>#important_notes</strong>"&gt;Important notes&lt;/a&gt;</pre>
+
+[note]The easiest way to get a heading anchor is to copy it from the target page's table of contents. Note however that this link/anchor will be broken if the heading changes. If you really need an unbreakable link then you can create an anchor by assigning an <code>id</code> to an element/div. [/note]
+
+<h1>How to get articles approved</h1>
+Simply press <strong>Submit Revision</strong> to submit your article for review (or move it into <strong>Pending</strong> state if it is a new article).
+
+An email is automatically sent to the <a href="https://groups.google.com/forum/?hl=en#!forum/ardu-wiki-editors">Wiki-editors discussion group</a> and the <em>Wiki Approvers</em> will evaluate and accept/reject your changes before publishing. You should join this discussion group (if you haven't already) to see any review comments and discuss your article.
+
+[note]If you edit a published article then "under the hood" a copy is created and tagged as a pending revision (using the <a href="https://wordpress.org/plugins/revisionary/">Revisionary plugin</a>). It is this copy that is reviewed and merged by the approvers. If you need to update your draft before it is published, then you can and should update this revision in the pending wiki pages. If there is an existing revision by another user, you should update this instead of creating your own revision.[/note]
+
+
+<h1>How to set the page sidebar and TOC position</h1>
+The position of pages within the sidebar menu and table of contents can only be set by <em>Wiki Approvers</em>. If you have a preferred position for the article, raise it with the <a href="https://groups.google.com/forum/?hl=en#!forum/ardu-wiki-editors">Wiki-editors discussion group</a> after you submit the article.
+
+<strong>Wiki Approvers:</strong> 
+
+<ul>
+	<li>Page positions are managed in the <em>Menus</em> (<strong>Appearance | Menu</strong>). </li>
+	<li>First load the desired menu. The sidebar menu is generally named <em>Instructions</em>, while the table of contents is generated using the menu named <em>TOC</em>.</li> 
+        <li>In the <em>Wiki</em> box, <em>Search</em> tab, search for the current page and then press "Add to Menu". The page will then appear at the bottom of the menu. Drag and drop it to the desired position and then press <strong>Save Menu</strong>.
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/TOCmenu.png"><img class="alignnone size-full wp-image-874" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/TOCmenu.png" alt="TOCmenu" width="866" height="710" /></a></li>
+</ul>
+
+
+
+
+<h1>Using images in your wiki pages</h1>
+You can add images to your page by selecting the <strong>Add Media</strong> button (located just above the editing toolbar).
+
+This will display the <em>Insert Media</em> dialog where you can:
+<ul>
+	<li><strong>Insert from URL </strong>(link): Insert an image or other file by specifying its URL (if you have the right to do so!)</li>
+	<li><strong> Upload Files</strong> (tab): Drag'n'drop images here to load them into the Media Library (from which you can then insert them)</li>
+	<li><strong>Media Library</strong> (tab): Select an image to insert, specifying the alignment, caption and size of image</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/AddMedia.png"><img class="alignnone size-full wp-image-873" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/AddMedia.png" alt="AddMedia" width="828" height="622" /></a>
+
+Once you have an image in the Media library, you can select it and insert it into the wiki page. The image <em>alignment</em> should be set as <strong>none</strong> (by default), and a meaningful caption and alt-text provided. The size of image will depend on your particular context.
+
+Select <strong>Insert into page</strong> to insert the image at the current cursor position.
+
+[tip]Check the gallery before uploading a new file[/tip]
+
+[tip]Choose an appropriate resolution for uploaded files. Very high resolution files take longer to download.[/tip]
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MediaLibrary.png"><img class="alignnone size-full wp-image-872" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MediaLibrary.png" alt="MediaLibrary" width="861" height="622" /></a>
+
+
+<h1>Copying information from other sites</h1>
+You can copy information from other WordPress sites by simply <a href="#creating_a_new_wiki_page">creating a new page</a> and copy-pasting in the required text. You may then have to update the content to correctly locate images and comply with wiki <a href="#style_guidelines">style guidelines</a>.
+
+If you need to copy from another source then start by <a href="#creating_a_new_wiki_page">creating a new page</a> and then copy-paste the text into the Text Mode editor. This will lose all styling, so you will need to go through and re-add it.
+
+[tip]It is possible to copy <em>basic</em> styling (headings, bold, italic) from MS Word into the Visual Mode editor. This can make it a little easier to copy content.[/tip]
+
+
+<h1>Information notes and warnings</h1>
+You can add notes, tips and warnings in the text using the [[note]This is a note[/note]], [[tip]This is a tip[/tip]] and [[warning]This is a warning[/warning]] shortcodes, respectively. These render the text in an information box, as shown:
+
+[note]This is a note[/note]
+
+[tip]This is a tip[/tip]
+
+[warning]This is a warning[/warning]
+
+
+<h1>Archiving topics</h1>
+Topics that are no longer relevant for current products, but which may be useful for some existing users, should be archived. This is done by adding the <strong>archived</strong> shortcode to the top of the page, and moving the topic under Archived in the menu.
+
+The <strong>archived</strong> shortcode can have an optional reason (recommended) and date:
+<ul>
+	<li><strong>[[archived]This is the reason that the article was archived[/archived]]</strong> - with reason</li>
+	<li><strong>[[archived date=20150206]This is the reason that the article was archived[/archived]]</strong> - with optional date</li>
+         <li><strong>&#91;archived&#93;</strong> - no reason or date</li>
+</ul>
+The three formats render as:
+[archived]This is the reason that the article was archived[/archived]
+[archived date=20150206]This is the reason that the article was archived[/archived]
+[archived]
+
+
+<h1>Deleting wiki pages</h1>
+Wiki pages can be deleted by selecting the <strong>Move to Trash</strong> link when editing the page OR by selecting the <strong>Trash</strong> link in administration wiki page listings. A wiki page can further be <em>Permanently Deleted</em> by selecting the appropriate link in the administration area for the wiki.
+
+<strong>Notes:</strong>
+<ul>
+	<li>If the page is "common" (defined in planner wiki and copied to copter, plane and rover) then it must be removed from all wikis, starting with the planner wiki.</li>
+	<li>Before deleting a wiki page it is important to ensure that it is removed from the TOC and Instructions menu (for all wikis in which it is present). If you trash a page that is a "parent" in a menu, then all sub-pages in the menu will disappear for logged-out users. If you permanently delete a parent menu item then the sub-items will automatically be promoted to the top level.</li>
+</ul>
+
+
+<h1>Legal information</h1>
+
+All content on this wiki is licensed under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC BY-SA">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. 
+
+[warning]Only post content that you have the legal right to make available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC BY-SA">CC BY-SA 3.0</a> license. If you do use images or content that belongs to others, seek permission for re-use and clearly state their origin and terms for re-use.[/warning]
+
+
+<h1>FAQ</h1>
+<h2>Why can't I edit a particular page?</h2>
+Either you are not logged into the wikis, or you do not have rights to edit a particular wiki, or the topic is a page (not a wiki) and you don't have rights to edit non-wiki pages.
+
+The first thing to check is whether you are logged in - you are if you can see the <em>Wiki Administration Bar</em> up the top of any pages that you expect to be able to edit. If you are, and the page is a wiki page (has <code>/wiki/</code> in the URL) then the most likely cause is that you don't have editor rights to that wiki; request the rights through the <a href="https://groups.google.com/forum/#!forum/ardu-wiki-editors">Wiki Editors Discussion Group</a>.
+
+
+<h2>Why are my changes not published?</h2>
+The wiki is moderated to help reduce the chance of misleading or incorrect information being posted. All articles and changes are reviewed by the <a href="#how_to_get_articles_approved">Wiki Approvers</a> before they are published.

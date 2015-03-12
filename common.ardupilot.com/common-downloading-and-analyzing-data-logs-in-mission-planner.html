@@ -1,0 +1,220 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-downloading-and-analyzing-data-logs-in-mission-planner 
+title: common-Downloading and Analyzing Data Logs in Mission Planner 
+id: 222 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Log Types (Dataflash vs tlogs)</h1>
+
+There are two ways to record your flight data with ArduCopter. With some exceptions, the two methods record very similar data but in different ways:
+<ul>
+	<li><strong>dataflash logs</strong> (the subject of this page) use the APM or Pixhawk's onboard dataflash memory, which you can download after the flight. On ArduPlane and ArduRover dataflash logs are created soon after start-up. On ArduCopter they are created after you first arm the copter.</li>
+	<li><strong>telemetry logs</strong> (also known as "tlogs") are recorded by the mission planner (or other ground station) when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link. You can find the details <a title="Telemetry Logs details" href="/wiki/common-mission-planner-telemetry-logs/">here</a>.</li>
+</ul>
+&nbsp;
+
+
+
+<h1>Downloading logs via MAVLink</h1>
+
+This method is available in AC3.2 (or higher).
+<ul>
+	<li>Connect your vehicle to the mission planner using the micro USB cable</li>
+	<li>Open the Mission Planner's Flight Data screen</li>
+	<li>On the bottom left, select the "DataFlash Logs" tab and push the "Download DataFlash Log Via Mavlink" button</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture1.png"><img class="alignnone size-full wp-image-2379" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture1.png" alt="Capture" width="370" height="447" /></a>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture.png"><img class="alignnone size-full wp-image-2380" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture.png" alt="Capture" width="626" height="428" /></a>
+
+Then, select the log you want to download. This will save that log to your MissionPlanner/logs directory, in a folder named after the vehicle type, such as QUADCOPTER.
+
+
+
+<h1>Automatic Analysis of logs</h1>
+
+<img class="alignnone size-full wp-image-2381" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture2.png" alt="Capture" width="363" height="137" />
+
+The simplest analysis is to generate a basic automated report that will highlight common problem areas. For that, click on "Log Analysis" and select a log that you've already saved to the MissionPlanner/logs directory.  They will be in folders named after the vehicle type, such as QUADCOPTER or ROVER. Once you pick the log you want, it will generate a report that looks like this: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture3.png"><img class="alignnone size-full wp-image-2384" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture3.png" alt="Capture" width="660" height="354" /></a>
+
+
+
+<h1>Manually review a log</h1>
+
+For more detailed analysis, click on "Review a Log" and select a log that you've already saved to the MissionPlanner/logs directory.  Once again, they will be in folders named after the vehicle type, such as QUADCOPTER or ROVER. Once you pick the log you want, you will get charts such as the below. The basic format of the dataflash is:
+<ul>
+	<li>Line numbers appear on the very left side of the viewer</li>
+	<li>Software version and board type appear at the top</li>
+	<li>FMT messages are next which tell the mission planner the column headers for each message type</li>
+	<li>PARM rows which show each parameter (in the order in which they appear in the eeprom) along with their value at the beginning of the flight</li>
+	<li>Flight data messages including GPS, IMU, etc.</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_Dataflash_format.png"><img class="alignnone size-full wp-image-2275" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_Dataflash_format.png" alt="MissionPlanner_Dataflash_format" width="1160" height="915" /></a> Graph any flight data by first clicking on the appropriate row, you should see the column headers update appropriately. Next find the column you wish to graph, click on it and then push the "Graph this data" button. In the example above the ATT's Roll-In and Roll data have been graphed. The mouse's scroll wheel can be used to zoom in or out. You may also select an area of the graph to zoom in on it. Zoom out by right-mouse-button clicking and selecting "Set Scale to Default". <a href="http://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607" target="_blank">Here's</a> a mini tutorial on using this feature. You may also filter on just the first column (the flight data message type) by clicking on the first column and selecting the message type from the drop-down. This is very useful especially for viewing the different flight modes (called "MODE" messages) used during the mission. Click the first column again but press "Cancel" to clear the filter. <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CLI_openDataflashFilter.png"><img class="alignnone size-full wp-image-2289" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CLI_openDataflashFilter.png" alt="MissionPlanner_CLI_openDataflashFilter" width="793" height="370" /></a>
+
+
+
+<h1>Setting what data you want recorded</h1>
+The LOG_BITMASK parameter controls what message types are recorded in the dataflash. If you only wish to enable one particular message type in addition to the defaults you can use the Log Bitmask drop down in the Mission Planner's Standard Parameters list. <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/MissionPlanner_LogBitmask.png"><img class="alignnone size-full wp-image-1124" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/MissionPlanner_LogBitmask.png" alt="MissionPlanner_LogBitmask" width="1024" height="575" /></a>
+
+
+
+<h1>Message Details (APM:Copter specific)</h1>
+<p style="padding-left: 30px"><strong>ATT (attitude information):</strong></p>
+<p style="padding-left: 60px">RollIn: the pilot's desired roll angle in centi-degrees (roll left is negative, right is positive)</p>
+<p style="padding-left: 60px">Roll: the vehicle's actual roll in centi-degrees (roll left is negative, right is positive)</p>
+<p style="padding-left: 60px">PitchIn: the pilot's desired pitch angle in centi-degrees (pitch forward is negative, pitch back is positive)</p>
+<p style="padding-left: 60px">Pitch: the vehicle's actual pitch angle in centi-degrees (roll left is negative, right is positive)</p>
+<p style="padding-left: 60px">YawIn: the pilot's desired yaw rate as a number from -4500 ~ 4500 (not in deg/sec, clockwise is positive)</p>
+<p style="padding-left: 60px">Yaw: the vehicles actual heading in centi-degrees with 0 = north</p>
+<p style="padding-left: 60px">NavYaw: the desired heading in centi-degrees</p>
+<p style="padding-left: 30px"><strong>ATUN (auto tune overview):</strong></p>
+<p style="padding-left: 60px">Axis: 0 = Roll, 1 = Pitch</p>
+<p style="padding-left: 60px">TuneStep: 0 = Returning towards Level (before or after a test), 1 = Testing (i.e. performing a twitch to test response), 2 = Updating gains (twitch completed and gains adjusted)</p>
+<p style="padding-left: 60px">RateMin: Minimum recorded rate during this test</p>
+<p style="padding-left: 60px">RateMax: Maximum recorded rate during this test</p>
+<p style="padding-left: 60px">RPGain: Rate P gain value being tested</p>
+<p style="padding-left: 60px">RDGain: Rate D gain value being tested</p>
+<p style="padding-left: 60px">SPGain: Stabilize P gain being tested</p>
+<p style="padding-left: 30px"><strong>ATDE (auto tune step details):</strong></p>
+<p style="padding-left: 60px">Angle: angle of the copter in centi-degrees for the axis being tested</p>
+<p style="padding-left: 60px">Rate: rate of rotation of the copter for the axis being tested</p>
+<p style="padding-left: 30px"><strong>CAM (time and position when camera shutter was activated):</strong></p>
+<p style="padding-left: 60px">GPSTime : the GPS reported time since epoch in milliseconds</p>
+<p style="padding-left: 60px">Lat : the accelerometer + GPS latitude estimate</p>
+<p style="padding-left: 60px">Lat : the accelerometer + GPS longitude estimate</p>
+<p style="padding-left: 60px">Alt: the accelerometer + barometer estimated altitude in cm above ground</p>
+<p style="padding-left: 60px">Roll: the vehicle roll angle in centi-degrees</p>
+<p style="padding-left: 60px">Pitch: the vehicle pitch angle in centi-degrees</p>
+<p style="padding-left: 60px">Yaw: the vehicle's heading in centi-degrees</p>
+<p style="padding-left: 30px"><strong>CMD (commands received from the ground station or executed as part of a mission):</strong></p>
+<p style="padding-left: 60px">CTot: the total number of commands in the mission</p>
+<p style="padding-left: 60px">CNum: this command's number in the mission (0 is always home, 1 is the first command, etc)</p>
+<p style="padding-left: 60px">CId: the <a href="https://pixhawk.ethz.ch/mavlink/">mavlink message id</a></p>
+<p style="padding-left: 60px">Copt: the option parameter (used for many different purposes)</p>
+<p style="padding-left: 60px">Prm1: the command's parameter (used for many different purposes)</p>
+<p style="padding-left: 60px">Alt: the command's altitude in meters</p>
+<p style="padding-left: 60px">Lat: the command's latitude position</p>
+<p style="padding-left: 60px">Lng: the command's longitude position</p>
+<p style="padding-left: 30px"><strong>COMPASS (raw compass, offset and compassmot compensation values):</strong></p>
+<p style="padding-left: 60px">MagX, MagY. MagZ: raw magnetic field values for x, y and z axis</p>
+<p style="padding-left: 60px">OfsX, OfsY, OfsZ: raw magnetic offsets (will only change if COMPASS_LEARN parameter is 1)</p>
+<p style="padding-left: 60px">MOfsX, MOfsY, MOfsZ: compassmot compensation for throttle or current</p>
+<p style="padding-left: 30px"><strong>CURRENT (battery voltage, current and board voltage information):</strong></p>
+<p style="padding-left: 60px">Thr: pilot input throttle from 0 ~ 1000</p>
+<p style="padding-left: 60px">ThrInt: integrated throttle (i.e. sum of total throttle output for this flight)</p>
+<p style="padding-left: 60px">Volt: battery voltage in volts * 100</p>
+<p style="padding-left: 60px">Curr: current drawn from the battery in amps * 100</p>
+<p style="padding-left: 60px">Vcc: board voltage</p>
+<p style="padding-left: 60px">CurrTot: total current drawn from battery</p>
+<p style="padding-left: 30px"><strong>CTUN (throttle and altitude information):</strong></p>
+<p style="padding-left: 60px">ThrIn: the pilot's throttle in as a number from 0 to 1000</p>
+<p style="padding-left: 60px">SonAlt: the altitude above ground according to the sonar</p>
+<p style="padding-left: 60px">BarAlt: the altitude above ground according to the barometer</p>
+<p style="padding-left: 60px">WPAlt: the desired altitude while in AltHold, Loiter, RTL or Auto flight modes</p>
+<p style="padding-left: 60px">NavThr: not used</p>
+<p style="padding-left: 60px">AngBst: throttle increase (from 0 ~ 1000) as a result of the copter leaning over (automatically added to all pilot and autopilot throttle to reduce altitude loss while leaning)</p>
+<p style="padding-left: 60px">CRate: accelerometer + baro climb rate estimate in cm/s</p>
+<p style="padding-left: 60px">ThrOut: final throttle output sent to the motors (from 0 ~ 1000). Normally equal to ThrIn+AngBst while in stabilize mode.</p>
+<p style="padding-left: 60px">DCRate - pilot desired climb rate in cm/s</p>
+<p style="padding-left: 30px"><strong>D32, DU32 (single data values which are either signed 32bit integers or unsigned 32bit integers):</strong></p>
+<p style="padding-left: 60px">id: identification number for the variable.  There are only two possible values</p>
+<p style="padding-left: 90px">7 = bit mask of internal state.  The meaning of individual bits can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.pde#L361" target="_blank">ArduCopter.pde’s definition of the ap structure</a>.</p>
+<p style="padding-left: 90px">9 = simple mode's initial heading in centi-degrees</p>
+<p style="padding-left: 30px"><strong>EKF (Extended Kalman Filter</strong>): see dedicated page <a href="wiki/common-apm-navigation-extended-kalman-filter-overview/">here</a>.</p>
+<p style="padding-left: 30px"><strong>ERR (an error message):</strong></p>
+<p style="padding-left: 60px">SubSystem and Error codes listed below</p>
+<p style="padding-left: 60px">1: Main (never used)</p>
+<p style="padding-left: 60px">2: Radio</p>
+<p style="padding-left: 90px">ECode 1: “Late Frame” which means the APM’s onboard ppm encoder did not provide an update for at least 2 seconds</p>
+<p style="padding-left: 90px">ECode 0: error resolved which means the ppm encoder started providing data again</p>
+<p style="padding-left: 60px">3: Compass</p>
+<p style="padding-left: 90px">ECode 1: the compass failed to initialise (likely a hardware issue)</p>
+<p style="padding-left: 90px">ECode 2: failure while trying to read a single value from the compass (probably a hardware issue)</p>
+<p style="padding-left: 90px">ECode 0: above errors resolved</p>
+<p style="padding-left: 60px">4: Optical flow</p>
+<p style="padding-left: 90px">Ecode 1: failed to initialise (likely a hardware issue)</p>
+<p style="padding-left: 60px">5: Throttle failsafe</p>
+<p style="padding-left: 90px">ECode 1: throttle dropped below FS_THR_VALUE meaning likely loss of contact between RX/TX</p>
+<p style="padding-left: 90px">ECode 0: above error resolve meaning RX/TX contact likely restored</p>
+<p style="padding-left: 60px">6: Battery failsafe</p>
+<p style="padding-left: 90px">ECode 1: battery voltage dropped below LOW_VOLT or total battery capacity used exceeded BATT_CAPACITY</p>
+<p style="padding-left: 60px">7: GPS failsafe</p>
+<p style="padding-left: 90px">ECode 1: GPS lock lost for at least 5 seconds</p>
+<p style="padding-left: 90px">ECode 0: GPS lock restored</p>
+<p style="padding-left: 60px">8: GCS (Ground station) failsafe</p>
+<p style="padding-left: 90px">ECode 1: updates from ground station joystick lost for at least 5 seconds</p>
+<p style="padding-left: 90px">ECode 0: updates from ground station restored</p>
+<p style="padding-left: 60px">9: Fence</p>
+<p style="padding-left: 90px">ECode 1: altitude fence breached</p>
+<p style="padding-left: 90px">ECode 2: circular fence breached</p>
+<p style="padding-left: 90px">ECode 3: both altitude and circular fences breached</p>
+<p style="padding-left: 90px">ECode 0: vehicle is back within the fences</p>
+<p style="padding-left: 60px">10: Flight Mode</p>
+<p style="padding-left: 90px">ECode 0 ~ 10: the vehicle was unable to enter the desired flight mode</p>
+<p style="padding-left: 90px">(0=Stabilize, 1=Acro, 2=AltHold, 3=Auto, 4=Guided, 5=Loiter, 6=RTL, 7=Circle, 8=Position, 9=Land, 10=OF_Loiter)</p>
+<p style="padding-left: 60px">11: GPS</p>
+<p style="padding-left: 90px">ECode 2: GPS Glitch</p>
+<p style="padding-left: 90px">ECode 0: GPS Glitch cleared</p>
+<p style="padding-left: 60px">12: Crash Check</p>
+<p style="padding-left: 90px">ECode 1: Crash detected</p>
+<p style="padding-left: 30px"><strong>EV: (an event number)</strong>. The full list of possible events can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/defines.h#L291" target="_blank">defines.h</a> but the most common are:</p>
+<p style="padding-left: 60px">10 = Armed</p>
+<p style="padding-left: 60px">11 = Disarmed</p>
+<p style="padding-left: 60px">15 = Auto Armed (pilot has raised throttle above zero and autopilot is free to take control of throttle)</p>
+<p style="padding-left: 60px">16 = TakeOff</p>
+<p style="padding-left: 60px">18 = Land Complete</p>
+<p style="padding-left: 60px">25 = Set Home (home location coordinates have been capture)</p>
+<p style="padding-left: 30px"><strong>GPS:</strong></p>
+<p style="padding-left: 60px">Status - 0 = no GPS, 1 = GPS but no fix, 2 = GPS with 2D fix, 3 = GPS with 3D fix</p>
+<p style="padding-left: 60px">Time: the GPS reported time since epoch in milliseconds</p>
+<p style="padding-left: 60px">NSats: the number of satellites current being used</p>
+<p style="padding-left: 60px"><a href="http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29">HDop</a>: a measure of gps precision (1.5 is good, &gt;2.0 is not so good)</p>
+<p style="padding-left: 60px">Lat: Lattitude according to the GPS</p>
+<p style="padding-left: 60px">Lng: Longitude according to the GPS</p>
+<p style="padding-left: 60px">RelAlt: Accelerometer + Baro altitude in meters</p>
+<p style="padding-left: 60px">Alt: GPS reported altitude (not used by the flight controller)</p>
+<p style="padding-left: 60px">SPD: horizontal ground speed in m/s</p>
+<p style="padding-left: 60px">GCrs: ground course in degrees (0 = north)</p>
+<p style="padding-left: 30px"><strong>IMU (accelerometer and gyro information):</strong></p>
+<p style="padding-left: 60px">GyrX, GyrY, GyrZ: the raw gyro rotation rates in degrees/second</p>
+<p style="padding-left: 60px">AccX, AccY, AccZ: the raw accelerometer values in m/s/s</p>
+<p style="padding-left: 30px"><strong>Mode (flight mode):</strong></p>
+<p style="padding-left: 60px">Mode: the flight mode displayed as a string (i.e. STABILIZE, LOITER, etc)</p>
+<p style="padding-left: 60px">ThrCrs: throttle cruise (from 0 ~ 1000) which is the autopilot's best guess as to what throttle is required to maintain a stable hover</p>
+<p style="padding-left: 30px"><strong>NTUN (navigation information):</strong></p>
+<p style="padding-left: 60px">WPDst: distance to the next waypoint (or loiter target) in cm. Only updated while in Loiter, RTL, Auto flight modes.</p>
+<p style="padding-left: 60px">WPBrg:bearing to the next waypoint in degrees</p>
+<p style="padding-left: 60px">PErX: distance to intermediate target between copter and the next waypoint in the latitude direction</p>
+<p style="padding-left: 60px">PErY:distance to intermediate target between copter and the next waypoint in the longitude direction</p>
+<p style="padding-left: 60px">DVelX: desired velocity in cm/s in the latitude direction</p>
+<p style="padding-left: 60px">DVelY: desired velocity in cm/s in the longitude direction</p>
+<p style="padding-left: 60px">VelX: actual accelerometer + gps velocity estimate in the latitude direction</p>
+<p style="padding-left: 60px">VelY: actual accelerometer + gps velocity estimate in the longitude direction</p>
+<p style="padding-left: 60px">DAcX: desired acceleration in cm/s/s in the latitude direction</p>
+<p style="padding-left: 60px">DAcY: desired acceleration in cm/s/s in the longitude direction</p>
+<p style="padding-left: 60px">DRol: desired roll angle in centi-degrees</p>
+<p style="padding-left: 60px">DPit: desired pitch angle in centi-degrees</p>
+<p style="padding-left: 30px"><strong>PM (performance monitoring):</strong></p>
+<p style="padding-left: 60px">RenCnt: DCM renormalization count - a high number may indicate problems in DCM (extremely rare)</p>
+<p style="padding-left: 60px">RenBlw:DCM renormalization blow-up count - how many times DCM had to completely rebuild the DCM matrix since the last PM. Normally innocuous but a number that constantly grows may be an indication that DCM is having troubles calculating the attitude (extremely rare)</p>
+<p style="padding-left: 60px">FixCnt: the number of GPS fixes received since the last PM message was received (it's hard to imagine how this would be useful)</p>
+<p style="padding-left: 60px">NLon: number of long running main loops (i.e. loops that take more than 5% longer than the 10ms they should)</p>
+<p style="padding-left: 60px">NLoop: the total number of loops since the last PM message was displayed. Normally 1000 and allows you to calculate the percentage of slow running loops which should never be higher than 15%.</p>
+<p style="padding-left: 60px">MaxT: the maximum time that any loop took since the last PM message. This should be close to 10,000 but will be up to 6,000,000 during the interval where the motors are armed</p>
+<p style="padding-left: 60px">PMT: a number that increments each time a heart beat is received from the ground station</p>
+<p style="padding-left: 60px">I2CErr: the number of I2C errors since the last PM message. Any I2C errors may indicate a problem on the I2C bus which may in turn slow down the main loop and cause performance problems.</p>
+<strong>RCOUT (pwm output to individual RC outputs):</strong> RC1, RC2, etc : pwm command sent from flight controller to the esc/motor/RC output
+
+
+
+<h1>Viewing KMZ FILES</h1>
+When you download the dataflash log files from the APM/PX4 it will automatically create a KMZ file (file with extension .kmz). This file can be opened with Google Earth (just double click the file) to view your flight in Google Earth. Please see the instructions on the <a href="/wiki/common-mission-planner-telemetry-logs/#Creating-3d-images-of-the-flight-path">Telemetry Logs Page</a> for additional details.
+
+
+
+<h1>Video Tutorials</h1>
+https://www.youtube.com/watch?v=62TmGiwFiDU https://www.youtube.com/watch?v=IcVlJCR8N2g

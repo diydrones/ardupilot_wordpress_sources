@@ -1,0 +1,52 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-load-firmware-apm 
+title: common-Loading Firmware onto APM 
+id: 16 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+APM<a title="Glossary (opens in a new tab/window)" href="/wiki/common-glossary/" target="_blank"> firmware</a> is the brains of your autopilot operation, created and maintained by the dedicated open source community. Downloading the latest firmware onto APM is an important part of first time setup and also useful when updating APM's existing firmware. These instructions will show you how to download the latest firmware onto APM.
+
+
+<h1>Connect APM to computer</h1>
+
+Once you've downloaded Mission Planner onto your ground station computer, connect APM to your computer using the micro USB connector and APM's micro USB port. Use a direct USB port on your computer, not a USB hub.<em> Click on images to enlarge.</em>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/apm_micro_usb.jpg"><img class="alignnone  wp-image-2761" title="APM micro USB" alt="Connect APM using USB port." src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/apm_micro_usb.jpg" width="317" height="111" /></a>
+
+Windows will automatically detect APM and install the correct driver software. If you get a message stating "driver not found", follow <a href="common-apm-usb-driver" target="_blank">these instructions to download the software manually</a>.
+
+
+
+<h1>Connect APM to Mission Planner</h1>
+
+Next we'll let Mission Planner know which port we're using to connect to APM. In Mission Planner, use the drop-down menus in the upper-right corner of the screen (near the Connect button) to connect to APM. Select <strong>Arduino Mega 2560</strong> and set the Baud rate to <strong>115200</strong> as shown. Don't hit <strong>Connect</strong> just yet.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/connect-to-com-port.png"><img class="alignnone wp-image-1942" alt="Select APM COM port and set Baud rate." src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/connect-to-com-port.png" width="320" height="60" /></a>
+
+
+<h1>Select firmware</h1>
+
+Now we'll select which firmware to download to APM; this depends on the configuration of your craft. Select the Hardware screen from the icons at the top of the display. Choose your copter's frame by clicking the corresponding icon: Quad, Hexa, Y6, plane, rover, or other. (We'll specify + or x configuration later.) The firmware screen will not appear if you have already selected Connect, so ensure that Mission Planner shows a disconnected icon in the upper-right corner to access the firmware.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/mission-planner-firmware-download.png"><img class="alignnone wp-image-1943" alt="Select frame to download firmware." src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/mission-planner-firmware-download.png" width="316" height="100" /></a>
+
+Once you select your frame, Mission Planner will automatically detect the latest firmware version for your craft and prompt you to confirm the download. Select <strong>Yes</strong> to download the firmware onto APM. When the download status reads <strong>Done</strong>, your firmware download is complete.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/mission-planner-select-firmware.png"><img class="wp-image-6560" alt="Confirm firmware download." src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/mission-planner-select-firmware.png" width="316" height="70" /></a>
+
+
+
+<h1>Connect to MavLink</h1>
+
+Select <strong>Connect</strong> (upper-right corner of the screen) to load MavLink parameters to APM. Mission Planner will display a window showing the progress of the MavLink download.
+
+<img class=" wp-image-6796" alt="con mavlink" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/con-mavlink.png" width="315" height="89" />
+
+When the window displays <strong>Done</strong> and Mission Planner shows the <strong>Disconnect</strong> option in place of <span style="color: #333333;font-style: normal;line-height: 21px">Connect, your APM firmware has been downloaded successfully.</span>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/condiscon.png"><img class="alignnone wp-image-1944" alt="Mission Planner APM connection icons." src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/condiscon.png" width="318" height="92" /></a>

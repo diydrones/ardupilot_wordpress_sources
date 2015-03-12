@@ -1,0 +1,129 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-ppm-encoder-8-channel-standalone-encoder 
+title: common-PPM Encoder AT328P 8 Channel Standalone Encoder 
+id: 297 
+menu_order: 10 
+post_parent_id: 341 
+post_parent_stub: common-ppm-encoder 
+post_parent_title: common-PPM Encoder 
+END METADATA 
+-->
+This article describes the standalone PPM Encoder that can be purchased from 3DRobotics. It is provided for use in the (very unlikely) event that the encoder needs to be reprogrammed.
+
+<h3>Overview</h3>
+
+The ATMEGA 328P 8 channel STANDALONE PPM encoder allows to encode up to 8 PWM (pulse width modulated) signals into one PPM (pulse position modulation) signal. This allows you to use any R/C receiver and a microcontroller that supports PPM (e.g. the [<a href="http://pixhawk.ethz.ch/px4/modules/px4fmu" rel="nofollow">http://pixhawk.ethz.ch/px4/modules/px4fmu</a> PX4FMU). The design is based on the Atmega328P using and an external 16Mhz resonator.   The 3DR PPM Encoder (v2) now uses the ArduPPM firmware, replacing the previously used Paparazzi PPM Encoder firmware. The new ArduPPM firmware has been designed from scratch to enhance performance and robustness, and to better accommodate our product needs now and in the future. Firmware for Plane (and Rover) can be <a href="http://ardupilot.com/downloads/?did=28" target="_blank"><strong>downloaded here</strong></a>. Firmware for Copter can be <a href="http://ardupilot.com/downloads/?did=27" target="_blank"><strong>downloaded here</strong></a>. (The source code, while not necessary if using the compiled code, <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/ArduPPM/Libraries/PPM_Encoder.h" target="_blank"><strong>can be found here</strong></a>.)
+
+<h3>Setup Manual</h3>
+The <a href="http://ardupilot.com/downloads/?did=25" target="_blank">Manual </a>shows how to solder and wire the PPM Encoder and explains the different failsafe modes.
+
+<h3>Version 3</h3>
+The third version of the PPM Encoder features a smaller form factor and DF13 connector ports. To set up, connect the three-wire cable to the autopilot and the 10-wire cable to a PWM receiver. For more instructions, <a href="http://3drobotics.com/wp-content/uploads/2014/01/PPM-Encoder-V3-Manual.pdf" target="_blank">view the manual here</a>.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/ppm-encoder-wiring.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/ppm-encoder-wiring-300x148.jpg" alt="ppm encoder wiring" width="300" height="148" class="alignnone wp-image-1712" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PPM-Encoder-Manual-V3.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PPM-Encoder-Manual-V3-1024x477.jpg" alt="PPM Encoder V3" width="300" height="139" class="alignnone wp-image-1708" /></a>
+
+
+<h3>Re-Programming the Atmega328p PPM encoder</h3>
+
+<strong>Note</strong>: !The PPM Encoder comes with the PPM encoder firmware pre-programmed, and most users will never need or want to modify it.   However, some users may want to get into the code to change the way the PPM Encoder interprets RC signals or may want to update to the latest version. Some rare users did report receiver compatility problems with the old version (before ArduPPM). For most cases, ArduPPM did solve them.   ArduPPM is the official name for the newer generation firmwares. It has been designed from scratch with reliability as a top priority. The official release of the encoder firmware is in the Downloads section as ArduPPM_Vx.x.xx_ATMega328p.hex. The official source code is in the <a href="https://github.com/diydrones/ardupilot/tree/master/Tools/ArduPPM" target="_blank">Git repository here</a>. The standalone PPM Encoder needs the ATMega328p version.   To flash, connect the PPM Encoder to an AVR programmer such as the AVRISP mkII: 
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/reprogramming_the_standalone_ppm_encoder1.jpg"><img class="alignnone size-full wp-image-1123" alt="reprogramming_the_standalone_ppm_encoder" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/reprogramming_the_standalone_ppm_encoder1.jpg" width="554" height="369" /></a>   
+
+When flashing, make sure the PPM Encoder is powered using any of the 5V and Ground pins.
+
+
+
+<h4>Re-Programming instructions for Windows</h4>
+
+Download and install the latest <a href="http://sourceforge.net/projects/winavr/" rel="nofollow">WinAVR</a>. Plug in the AVRISP mkII and Install the drivers for AVRISP mkII as follows: Open the device manager and select the AVRISP mkII, choose "Update Driver Software..."   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_11.png"><img class="alignnone size-full wp-image-1124" alt="windows_install_avrispmkii_driver_1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_11.png" width="812" height="552" /></a>   
+
+Choose "Browse my Computer for driver software"   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_21.png"><img class="alignnone size-full wp-image-1125" alt="windows_install_avrispmkii_driver_2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_21.png" width="817" height="552" /></a>   
+
+Browse to the folder where WinAVR is installed (e.g. C:\WinAVR-20100110\)   <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_31.png"><img class="alignnone size-full wp-image-1126" alt="windows_install_avrispmkii_driver_3" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_31.png" width="811" height="547" /></a>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_41.png"><img class="alignnone size-full wp-image-1127" alt="windows_install_avrispmkii_driver_4" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_41.png" width="807" height="544" /></a>   
+
+Choose "Install this driver software anyway"   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_51.png"><img class="alignnone size-full wp-image-1128" alt="windows_install_avrispmkii_driver_5" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_51.png" width="818" height="590" /></a>   
+
+This should finish successful:   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_61.png"><img class="alignnone size-full wp-image-1129" alt="windows_install_avrispmkii_driver_6" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_install_avrispmkii_driver_61.png" width="819" height="551" /></a>
+
+Now start the command line: Press "Start" and type cmd and enter.   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_start_cmd1.png"><img class="alignnone  size-full wp-image-1130" alt="windows_start_cmd" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_start_cmd1.png" width="418" height="528" /></a>
+
+Change Directory using cd to the folder where your Hex file is located: e.g. cd Downloads\ if it is in Downloads   Then type the command: avrdude -P usb -c avrispmkii -p atmega328p -U flash:w:ArduPPM_Vx.x.x_PPM_Encoder.hex (substitute x.x.x with the your version number)   
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_cmd_avrdude_11.png"><img class="alignnone size-full wp-image-1131" alt="windows_cmd_avrdude_1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_cmd_avrdude_11.png" width="677" height="534" /></a>
+
+If it all went well, the following output should appear:   <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_cmd_avrdude_21.png"><img class="alignnone size-full wp-image-1132" alt="windows_cmd_avrdude_2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/windows_cmd_avrdude_21.png" width="691" height="550" /></a>
+
+
+
+<h4>Re-Programming instructions for Mac OS X</h4>
+Todo: add content on how to flash the hex file here
+
+<h4>Re-Programming instructions for Linux</h4>
+Install avrdude:   For Ubuntu:
+<pre>sudo apt-get install avrdude</pre>
+Program instructions for the AVRISP mkII:
+<pre>avrdude -p atmega328p -P usb -c avrispmkii -U flash:w:ArduPPM_Vx.x.x_ATMega328p.hex</pre>
+This should output:
+<pre>avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: Device signature = 0x1e950f
+avrdude: NOTE: FLASH memory has been specified, an erase cycle will be performed
+         To disable this feature, specify the -D option.
+avrdude: erasing chip
+avrdude: reading input file "ArduPPM_V2.3.0_ATMega328p.hex"
+avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex auto detected as Intel Hex
+avrdude: writing flash (1952 bytes):
+
+Writing | ################################################## | 100% 0.61s
+
+avrdude: 1952 bytes of flash written
+avrdude: verifying flash memory against ArduPPM_V2.3.0_ATMega328p.hex:
+avrdude: load data flash data from input file ArduPPM_V2.3.0_ATMega328p.hex:
+avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex auto detected as Intel Hex
+avrdude: input file ArduPPM_V2.3.0_ATMega328p.hex contains 1952 bytes
+avrdude: reading on-chip flash data:
+
+Reading | ################################################## | 100% 0.56s
+
+avrdude: verifying ...
+avrdude: 1952 bytes of flash verified
+
+avrdude: safemode: Fuses OK
+
+avrdude done.  Thank you.</pre>
+If you get permission errors, try using sudo.
+
+<h3>Re-Compiling Options</h3>
+By default negative pulse PPM is encoded. In order to change to positive pulse PPM, the line 158 in Tools/ArduPPM/Libraries/PPM_Encoder.h needs to be uncommented from:
+<pre>// #define _POSITIVE_PPM_FRAME_ // Switch to positive pulse PPM</pre>
+to
+<pre>#define _POSITIVE_PPM_FRAME_    // Switch to positive pulse PPM</pre>
+
+<h4>Re-Compiling using Linux</h4>
+These instructions are tested using Ubuntu:
+<pre>sudo apt-get install build-essential git-core gcc-avr avrdude
+git clone http://code.google.com/p/ardupilot-mega
+cd ardupilot-mega/Tools/ArduPPM/</pre>
+edit ATMega328p/Encoder-PPM.c or Libraries/PPM_Encoder.h now
+<pre>cd ATMega328p/
+make clean
+make</pre>
+and you should have your custom hex-file to program using:
+<pre>avrdude -p atmega328p -P usb -c avrispmkii -U flash:w:Encoder-PPM.hex</pre>

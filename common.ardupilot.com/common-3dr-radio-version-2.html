@@ -1,0 +1,346 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-3dr-radio-version-2 
+title: common-3DR Radio version 2 
+id: 2453 
+menu_order: 2 
+post_parent_id: 2447 
+post_parent_stub: common-telemetry-landingpage 
+post_parent_title: common-Telemetry (landing page) 
+END METADATA 
+-->
+The <a href="http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz">3DR Radio</a> is the easiest way to setup a telemetry connection between your APM/Pixhawk and a ground station. Small, inexpensive and with ranges of about 300m easily achievable and up to several kilometers with the use of a patch antenna on the ground.  The 3DR radio uses <a href="https://github.com/tridge/SiK" target="_blank">open source firmware</a> which has been specially designed to work well with MAVLink packets and to be integrated with the Mission Planner, ArduCopter, ArduRover and ArduPlane. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_RadioVer2.jpg"><img class="alignnone size-full wp-image-2454" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_RadioVer2.jpg" alt="Telemetry_3DR_RadioVer2" width="419" height="303" /></a>
+
+Instructions on this page cover the newer <a href="#3DR_Radio_Version_2">Version 2.</a>  Instructions for the older <a href="wiki/common-using-the-3dr-radio-for-telemetry-with-apm-and-px4/">Version 1 can be found here along with additional technical details that apply to both radios</a>.
+
+
+<h3>Overview</h3>
+The 3DR Radio has interchangeable air and ground modules meaning that you use them as a pair but it does not matter which one goes on the vehicle and which remains on the ground.  The radios can be either 915Mhz or 433Mhz and you should purchase the module which is appropriate for your country/region (<a href="#Support_for_different_countriesregions">see country table here</a>).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2.jpg"><img class="alignnone wp-image-1450" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2-300x155.jpg" alt="3DR Radio V2" width="300" height="155" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout.jpg"><img class="alignnone wp-image-1453" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout-1024x382.jpg" alt="3dr radio pinout" width="584" height="217" /></a>
+
+The 3DR Radios have 2 status LEDs, one red and one green. The meaning of the different LED states is:
+<ul>
+	<li>green LED blinking - searching for another radio</li>
+	<li>green LED solid - link is established with another radio</li>
+	<li>red LED flashing - transmitting data</li>
+	<li>red LED solid - in firmware update mode</li>
+</ul>
+
+
+
+<h3>Connecting the radio to your Pixhawk</h3>
+Use the <a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">6 pin DF13 connector</a> that should have come with the radio to connect the 3DR radio to your Pixhawk's "Telem 1" ("Telem 2" or "Serial 4/5" can also be used but the default recommendation is "Telem1").
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Pixhawk.png"><img class="alignnone size-medium wp-image-2478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Pixhawk-300x252.png" alt="Telemetry_3DR_Radio_Pixhawk" width="300" height="252" /></a>
+
+
+
+<h3>Connecting the radio to your APM2.x</h3>
+Use the <a href="http://store.3drobotics.com/products/df13-6-position-to-5-position-connector-15-cm" target="_blank">6-to-5 pin DF13</a> connector to connect the 3DR radio to your APM2's Telem port.  Because of the limited number of serial ports on the APM2.x, the telemetry radio cannot be used while the board is also plugged in with the micro USB port.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2.png"><img class="alignnone size-medium wp-image-2484" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2-300x181.png" alt="Telemetry_3DR_Radio_APM2" width="300" height="181" /></a>
+
+
+
+<h3>Connecting the radio to your PC and testing the connection</h3>
+Connecting the 3DR radio to your Windows PC is as simple as connecting the micro USB cable (which should have been included with the radio) to your PC. The necessary drivers should be installed automatically and the radio will appear as a new "USB Serial Port" in the Windows Device Manager under Ports (COM &amp; LPT). The Mission Planner's com port selection drop-down should also contain the same new COM port.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP.png"><img class="alignnone size-medium wp-image-2476" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP-300x123.png" alt="Telemetry_3drRadio_DeviceManagerAndMP" width="300" height="123" /></a>
+Select the new COM port, set the baud rate drop down (which appears between the COM port and Connect buttons) to 57600.
+Press the "Connect" button and if the two radios connect successfully you should be able to lean your vehicle left and right and see it's attitude update on the MP's Flight Data screen's artificial horizon.
+
+
+
+<h3>Connecting the radio to your Android Tablet</h3>
+Connecting the 3DR radio to your Android tablet using the L shaped micro USB cable (which should have been included with the radio). More details can be found on the <a href="wiki/common-android-ground-stations/">Android Ground Station wiki page</a>.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Tablet.png"><img class="alignnone size-medium wp-image-2487" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Tablet-300x181.png" alt="Telemetry_3DR_Radio_Tablet" width="300" height="181" /></a>
+
+
+
+<h3>Configuring using the Mission Planner</h3>
+In many cases there is no need to configure the radios but in case you wish to make changes, please follow these instructions:
+<ul>
+	<li>Connect one of the 3DR radios to your computer using the micro USB cable.</li>
+	<li>Power the radio attached to the vehicle by plugging in the vehicle's battery.</li>
+	<li>Open the Mission Planner and go to the Initial Setup &gt;&gt; Optional Hardware &gt;&gt; 3DR Radio page.</li>
+	<li>Select the correct COM port and set the baud rate to 57600.  Ensure the "Connect" button is in a disconnected state as shown in the image below..</li>
+	<li>Press the "Load Settings" button and both the "Local" and "Remote" areas should fill in with values including the firmware Version</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_MPSetup_NetID.png"><img class="alignnone size-full wp-image-2488" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_MPSetup_NetID.png" alt="Telemetry_MPSetup_NetID" width="1024" height="575" /></a>
+<ul>
+	<li>The most common entry to change is the Net ID.  The default is 25 for all 3DR radios but if you plan to fly in an area with other pilots who may be using the same radio it is best to change this to another number.</li>
+	<li>After making changes, click the "Copy Required Items to Remote" and press "Save Settings"</li>
+</ul>
+&nbsp;
+
+Other parameters you may choose to update:
+<ul>
+	<li>Baud (default 57) : the rate at which the mission planner or vehicle communicates with the local radio.  "57" = 57600 bits per second.</li>
+	<li>Air Speed (default 64) : the rate at which the two radios will communicate with each other.  "64" = 64kbps (kilobits per second).  Setting a lower rate will increase the range of the radio but reduce the rate of data (i.e. the amount of data that can be sent in a given time) across the link.</li>
+	<li>ECC (default is "on"): controls whether error correction is on or off.  When on "12/24 Golay error correcting code" is used which involves sending a 16 bit CRC byte along with the data to ensure that bad data is thrown away.  Unfortunately this also halves the data rate across the link but it is recommended to leave ECC on especially when when the vehicle is far from home base because transmission errors increase greatly with distance.</li>
+	<li>MAVlink (default is "MAVLink") : this controls whether the transmission is optimised for MAVLink packets or not.  Set to "Low Latency" if using a joystick or an android tablet's virtual joystick to manually fly the vehicle.  Note that information on the radio signal strength (rssi) and error rate is only sent if this parameter is set to it's default, "MAVLink".</li>
+	<li>Tx Power (default 20) : the transmission power where 1=1.3milliWats, 2=1.5mW, 5=3.2mW, 8=6.3mW,11=12.5mW, 14=25mW, 17=50mW, 20=100mW.  This should be set to conform with your local regulations.  <a href="#Support_for_different_countriesregions">Some per-country information is below</a>.</li>
+	<li>Duty Cycle (default 100) : the maximum percentage of time that the radio will transmit packets.  Some regions of the world allow for higher transmit power or more frequencies if you have a duty cycle below a given threshold. So for example in Europe you can transmit on a wider range of frequencies in the 433 band if your duty cycle is below 10%.  Telemetry traffic is quite 'bursty', so the average transmit time is not generally high.  When you set a duty cycle below 100% then your available bandwidth will be reduced, so you will find it will only work well for telemetry at higher air speeds.  A radio can be set to receive only by setting it's Duty Cycle to zero.</li>
+	<li>Max Window (default 33) : ensure the GCS can send a packet to the vehicle ever 33msec.  This should be kept as a low number (like 33) when the "MAVLink" setting is "Low Latency"</li>
+	<li>LBT Rssi (default 0) : holds the threshold used for "listen before talk" which allows it to comply with some country's regulatory requirements. When non-zero the radio listens for quiet period of time where no signals from other radios are received before transmitting.  This parameter holds the receiver signal strength below which the airwaves are considered "quiet".  If this param is set to zero then LBT is disabled.  Setting this to 25 (the min) is -121 dBm.  Each increment above 25 raises the threshold by about 0.5dB so for example 40 equals a signal strength of 7.5dB.  The full formula is:
+<pre>signal_dBm = (RSSI / 1.9) - 127</pre>
+The LBT implementation in the 3DR radio uses a minimum listen time of 5ms, plus randomised listen time as per the European 9.2.2.2 rules.  Note that in many regions you need to implement LBT in conjunction with AFA (Adaptive Frequency Agility). The 3DR Radio implements AFA as long as you have NUM_CHANNELS set to more than 1.</li>
+</ul>
+
+
+
+<h3>Upgrading the radio firmware</h3>
+The firmware for the 3DR radios is <a href="https://github.com/tridge/SiK" target="_blank">open source</a>, and new features are regularly added.  The easiest way to upgrade is to:
+<ul>
+	<li>Connect the radio to be upgraded to your computer using the micro USB cable</li>
+	<li>Open the Mission Planner and go to the Initial Setup &gt;&gt; Optional Hardware &gt;&gt; 3DR Radio page.</li>
+	<li>Select the correct COM port and set the baud rate to 57600.  Ensure the "Connect" button is in a disconnected state as shown in the image below..</li>
+	<li>Press the "Upload Firmware (Local)" button and after a short delay, the "programming" message should appear and the green bar should slowly increase from the left to right.</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_UploadFirmware.png"><img class="alignnone size-large wp-image-2503" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_UploadFirmware-1024x522.png" alt="Telemetry_3DR_Radio_UploadFirmware" width="584" height="297" /></a><a href="https://github.com/tridge/SiK">
+</a>The above process should be performed for both radios.
+Note: occasionally a new firmware update will modify some settings so it might be a good idea to compare the settings before and after and look for changes.
+
+
+
+<h3>Monitoring the link quality</h3>
+You can monitor the link quality in real time using the Mission Planner by graphing the "rssi" (PC's radio signal strength) and the "remrssi" (remote radio's signal strength).  Values above 50 are considered good.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_MonitorLink.png"><img class="alignnone size-large wp-image-2500" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_MonitorLink-1024x627.png" alt="Telemetry_3DR_Radio_MonitorLink" width="584" height="357" /></a>
+
+Here is a graph (produced using MAVProxy) of the RSSI levels for one of the developers flying an airplane at a local flying field.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/rssi-distance.png" alt="" />
+
+The RSSI value scales approximately as 1.9x the dBm signal strength, plus an offset. See the Si1000 data sheet for the exact mapping between RSSI and dBm received signal strength, or use this approximate formula
+<pre>signal_dBm = (RSSI / 1.9) - 127</pre>
+
+
+
+<h3>What Range can I expect and how can I improve this?</h3>
+Reported ranges achieved with the 3DR radios using standard configuration and antenna seems to be about 300 ~ 500m.  This can be improved by:
+<ul>
+	<li>Using a small "patch antenna" on the ground like <a href="http://www.readymaderc.com/store/index.php?main_page=product_info&amp;cPath=11_45_47&amp;products_id=51" target="_blank">this flat patch antenna</a> or this <a href="http://www.readymaderc.com/store/index.php?main_page=product_info&amp;cPath=11_45_47&amp;products_id=296" target="_blank">Yagi antenna</a> perhaps mounted on an <a href="http://antennatracker.ardupilot.com/">Antenna Tracker</a></li>
+	<li>Replace at least one of the two 3DR radios with a higher powered <a href="wiki/common-rfd900/">RFD900</a></li>
+	<li>Reduce the AirRate parameter which will increase range but at the expense of the rate of the data transfer.</li>
+</ul>
+&nbsp;
+
+The graph below shows the ground and remote receiver strength vs distance from home (in meters) for a test flight of a 3DR radio on a SkyFun plane.  The ground based radio was attached to a 3.5dB flat patch antenna.  The SkyFun had a small 'wire' antenna.  The graph shows the vehicle reached a distance of nearly 3km and the link was completely maintained throughout the flight.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3DR-915-txpower2-64kbps-ECC.png" alt="" />
+
+Although anecdotal, another user provided a tlog showing a good link kept while the vehicle was 4.5km from the base station, using default radio settings for a 3DR 900 radio. The plane used a small omni antenna, and a 8dB patch antenna on the ground station.
+
+
+
+<h3>Diagnosing range problems</h3>
+If you get less range than you would expect from the above information then what you need to do is graph the noise and signal levels from a flight to work out what the problem is.
+
+The most common source of range problems is noise. Noise is unwanted radio emissions in the same frequency range that your radio is using that interferes with the operation of your radio. The 3DR radios have telemetry logging built in to help you diagnose the source of the noise.
+
+There are three key types of noise that are likely to affect your 3DR radios
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+	<li>noise from the electronics in your aircraft (such as your motor, ESC, APM etc)</li>
+	<li>noise from your ground station computer, especially its USB bus</li>
+	<li>noise from other people operating radios nearby that are on the same frequency as your 3DR radios</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+To work out what sort of noise you have, open up mission planner and choose the "telemetry logs" tab. Then choose "Tlog&gt;
+Kml or Graph". When the window pops up choose "Graph Log" and select a log from a test flight with your radios. Wait for the log to load, then choose the following items to log:
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+	<li>rssi</li>
+	<li>remrssi</li>
+	<li>noise</li>
+	<li>remnoise</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+Put all 4 values on the one graph. You will end up with a plot like this:
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/diag-range-graph1.png" alt="" />
+
+That graph shows you 4 things:
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+	<li>the amount of signal being received on the ground</li>
+	<li>the amount of signal being received in the aircraft</li>
+	<li>the amount of noise being received on the ground</li>
+	<li>the amount of noise being received in the aircraft</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+For the best possible range you want the two noise lines to be low, and the two signal lines to be high. In the above graph (taken from my SkyFun with a pair of 3DR-433 radios) you can see that the noise levels in the plane are higher than the noise levels on the ground. Also note that at the start of the flight (before I started the motor) the noise levels on the plane were lower, then they went up after I started the motor. That shows I'm getting some noise from my motor. If I wanted more range I would need to move the radio further from the motor and ESC.
+
+Perhaps the most common source of noise with the 3DR-433 is noise from the USB bus on your ground station. That shows up as high values for the RADIO.noise value. If you get this, then you could try using a different USB cable, or a different laptop. You can also try using a USB hub between your laptop and your radio.
+
+If the 'rssi' and 'noise' levels meet on the graph then you will lose the link. To determine what your range would be, a rough rule of thumb is to subtract the 'rssi' and 'noise' numbers, then divide by 2. That tells you your "fade margin" in decibels. For each 6dB of fade margin your range doubles. So if you have 18dB of fade margin, then you will be able to do roughly 8x whatever range you were at when you measured the margin.
+
+Another key source of range problems is the antenna placement. Your ground station antenna should be well clear of obstructions and a couple of meters off the ground. You may need to build a stand to hold it to get the best range.
+
+
+
+<h3>Support for different countries/regions</h3>
+It is very important that you find out what the local country or region regulations are on frequency, hopping channels and power levels and configure your 3DR Radios correctly for your local rules.
+
+Here is some general information to help you get started.
+<table>
+<tbody>
+<tr>
+<td><strong>Region
+</strong></td>
+<td><strong>Radio Model
+</strong></td>
+<td><strong>Settings
+</strong></td>
+<td><strong>Standard
+</strong></td>
+</tr>
+<tr>
+<td>USA</td>
+<td>3DR 900</td>
+<td>MIN_FREQ902000 MAX_FREQ928000 NUM_CHANNELS=50</td>
+<td>FCC 15.247</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>3DR 900</td>
+<td>MIN_FREQ
+<strong>902000 MAX_FREQ</strong>
+928000 NUM_CHANNELS=50</td>
+<td>RSS-210 Annex 8.1</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>3DR 900</td>
+<td>MIN_FREQ
+<strong>915000 MAX_FREQ</strong>
+928000 NUM_CHANNELS&gt;=20</td>
+<td>LIPD-2000 item 52</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>433050 MAX_FREQ</strong>
+434790 TXPOWER&lt;=14</td>
+<td>LIPD-2000 item 17</td>
+</tr>
+<tr>
+<td>Europe (most countries)</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>434040 MAX_FREQ</strong>
+434790 TXPOWER&lt;
+<strong>8 NUM_CHANNELS&gt;</strong>
+30</td>
+<td>ETSI EN300 220 7.2.3</td>
+</tr>
+<tr>
+<td>Europe (most countries)</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>433050 MAX_FREQ</strong>
+434790 TXPOWER&lt;
+<strong>8 DUTY_CYCLE</strong>
+10</td>
+<td>ETSI EN300 220 7.2.3</td>
+</tr>
+<tr>
+<td>United Kingdom</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>433050 MAX_FREQ</strong>
+434790 TXPOWER&lt;
+<strong>8 DUTY_CYCLE</strong>
+10</td>
+<td><a href="http://stakeholders.ofcom.org.uk/binaries/spectrum/spectrum-policy-area/spectrum-management/research-guidelines-tech-info/interface-requirements/IR_2030.pdf">IR2030/1/10
+</a></td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>3DR 900</td>
+<td>MIN_FREQ
+<strong>921000 MAX_FREQ</strong>
+928000</td>
+<td>Notice 2007, Schedule 1</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>433050 MAX_FREQ</strong>
+434790</td>
+<td>Notice 2007, Schedule 1</td>
+</tr>
+<tr>
+<td>Brazil</td>
+<td>3DR 433</td>
+<td>MIN_FREQ
+<strong>433000 MAX_FREQ</strong>
+435000 TXPOWER&lt;=8</td>
+<td>252315&amp;assuntoPublicacao
+<strong>null&amp;caminhoRel</strong>
+In%EDcio-Biblioteca-Apresenta%E7%E3o&amp;filtro
+<strong>1&amp;documentoPath</strong>
+252315.pdf"&gt;Resolu??o ANATEL n?506/2008</td>
+</tr>
+<tr>
+<td>Brazil</td>
+<td>3DR 900</td>
+<td>MIN_FREQ
+<strong>902000 MAX_FREQ</strong>
+907500 NUM_CHANNELS&gt;=11</td>
+<td>Resolu??o ANATEL n?506/2008</td>
+</tr>
+<tr>
+<td>Brazil</td>
+<td>3DR 900</td>
+<td>MIN_FREQ
+<strong>915000 MAX_FREQ</strong>
+928000 NUM_CHANNELS&gt;=26</td>
+<td>Resolu??o ANATEL n?506/2008</td>
+</tr>
+</tbody>
+</table>
+We'd be delighted to add more countries to this table! Please post the information on the forums, giving links to the applicable regulations and information on what it all means. Also, please point out any inaccuracies in the existing table.
+
+Note that the above table is for most users without any special license. If you are have an application specific license or have a HAM license then you should know what rules are applicable to you.
+
+Finally, compliance is your responsibility. The 3DR radio is a 'DIY' radio part and you need to ensure what whatever you build meets local regulations. Please check your local rules carefully.
+
+
+
+<h3>3DR Radio Discussion Forum</h3>
+The best place to get involved with the development or tuning of these radios is the
+<a href="http://ardupilot.com/forum/viewforum.php?f=22" target="_blank">3DR Radios forum</a>. Join in on the forum to help make these radios even better!

@@ -1,0 +1,27 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-antenna-tracking 
+title: common-Antenna Tracking 
+id: 1103 
+menu_order: 200 
+post_parent_id: 3736 
+post_parent_stub: other-project-and-common-topics 
+post_parent_title: Other Project and Common Topics 
+END METADATA 
+-->
+<em>Antenna Trackers</em> are systems that track your vehicle's location, and use this information to correctly align a direction antenna. This approach significantly improves the range over which signals can be both sent and received from the ground station.
+
+ArduPilot supports two methods for Antenna Tracking. Both methods use GPS information from the vehicle and ground station to aim the antenna. The main difference is that the <a title="Antenna Tracker Project" href="http://antennatracker.ardupilot.com/">AntennaTracker</a> is independent of any particular GCS.
+
+<a title="Antenna Tracker Project" href="http://antennatracker.ardupilot.com/">AntennaTracker</a>
+<ul>
+	<li>The AntennaTracker firmware turns a ArduPilot-supported board (Pixhawk, APM2, etc) into the controller for an antenna tracker.</li>
+	<li>The board calculates the required antenna direction and can drive the antenna's servos directly.</li>
+	<li>Mission Planner (or any other GCS) may be used, but is not required.</li>
+</ul>
+<a title="common-Mission Planner GPS-based Antenna Tracking" href="common-mission-planner-gps-based-antenna-tracking">Mission Planner-based GPS Tracking</a>
+<ul>
+	<li>Uses the <em>Mission Planner</em> GCS to determine the direction to aim the antenna.</li>
+	<li>The PC running Mission Planner must have GPS.</li>
+	<li>You will need a special servo driver board to control the servo's.</li>
+</ul>

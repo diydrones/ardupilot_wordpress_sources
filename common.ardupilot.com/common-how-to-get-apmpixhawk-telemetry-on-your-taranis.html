@@ -1,0 +1,122 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-how-to-get-apmpixhawk-telemetry-on-your-taranis 
+title: common-How to Get APM/Pixhawk telemetry on your Taranis 
+id: 2104 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222016.jpg"><img class="alignnone size-full wp-image-2105" alt="20140312_222016" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222016.jpg" width="750" height="473" /></a>
+<ul>
+	<li>This is a great post by Jared Reabow on how to get APM or Pixhawk telemetry back on your Taranis transmitters LCD screen.
+<ul>
+	<li>Link to Jared's original blog post <strong><a href="http://diydrones.com/profiles/blogs/how-to-get-apm-pixhawk-telemetry-on-your-taranis-brought-to-you">!Here</a> Check this for comments and upcoming video.</strong><a href="http://diydrones.com/profiles/blogs/how-to-get-apm-pixhawk-telemetry-on-your-taranis-brought-to-you">
+</a></li>
+	<li>And Rolf Blomgren is the writer of the firmware running on the Teensy with updates to come.</li>
+	<li>The teensy board site is <strong><a href="https://www.pjrc.com/store/teensy31.html">Here!</a></strong></li>
+</ul>
+</li>
+	<li>So just as with all my tutorials, This is simplifying the process of doing whatever it is aimed at.
+<ul>
+	<li>Very often you will find tutorials on how to do things but they are poorly explained or make assumptions on what you know already.</li>
+	<li>I try to make the tutorial "for Dummies" put everything in to answer every question.</li>
+</ul>
+</li>
+	<li>So here we go!</li>
+</ul>
+
+
+
+<h3>Telemetry Adapter APM to SBus:</h3>
+<a style="font-style: normal" href="https://www.sparkfun.com/products/12646" rel="nofollow">https://www.sparkfun.com/products/12646</a> (another choice)
+
+
+<h3>Wire the Telemetry Adapter:</h3>
+<ul>
+	<li>You will need the above and a Soldering Iron and shrink wrap if you want to make things tidy.</li>
+	<li>Get your teensy and solder on the plugs</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/CAD1q.png"><img class="alignnone size-full wp-image-2106" alt="CAD1q" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/CAD1q.png" width="750" height="235" /></a>
+<ul>
+	<li>The servo plug is soldered on the same side as the Micro USB,
+<ul>
+	<li>Red wire to the hole rite of the Micro USB.</li>
+	<li>Black to the hole left of the USB (GND)</li>
+	<li>white to the hole two down from the black (1)</li>
+</ul>
+</li>
+	<li> On the telemetry side you solder the Yellow wire ( Number 2 on the plug to hole 9)
+<ul>
+	<li>The green or blue wire depending on your cable (no 3 on the plug, goes to 10)</li>
+	<li>The black wire (5 on the plug, goes to the center hole on the back of the teensy.</li>
+</ul>
+</li>
+	<li> the end result is this:</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222407.jpg"><img class="alignnone size-full wp-image-2107" alt="20140312_222407" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222407.jpg" width="750" height="421" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222417.jpg"><img class="alignnone size-full wp-image-2108" alt="20140312_222417" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/20140312_222417.jpg" width="750" height="421" /></a>
+
+
+
+<h3>Program It:</h3>
+<ul>
+	<li>To do this you need arduino, I will let you download that just google arduino installer.
+<ul>
+	<li>Once downloaded you will need to download the teensy installer</li>
+	<li><strong><a style="font-style: normal" href="http://www.pjrc.com/teensy/td_download.html" rel="nofollow">http://www.pjrc.com/teensy/td_download.html</a></strong></li>
+</ul>
+</li>
+	<li>Pick the one appropriate for your operating system.</li>
+	<li>Once downloaded just run the installer.</li>
+	<li>You now have the teensy software for your computer.</li>
+	<li>Now you will need to copy the library folder contents into the Arduino library folder which is in
+<ul>
+	<li>C:\Program Files (x86)\Arduino\libraries or where ever you told arduino to install.</li>
+	<li>The library folder is in this zip<strong> <a style="font-style: normal" href="http://api.ning.com/files/ARLRee19CK6y*l06HBx8m2JWZ1zoCI-CjiC0HUP247nrckiBjU8nvR9E71IcRzsJgNBjMwmv4UE2ajCr6AOioTtiaZbeq3tV/MavLink_FrSkySPort_1.21.zip" target="_self">MavLink_FrSkySPort_1.2%20%281%29.zip</a></strong></li>
+</ul>
+</li>
+	<li>Now that all this is done you will want to copy the other folder in the zip file and extract it to your desktop.
+<ul>
+	<li>Open MavLink_FrSkySPort in arduino, it should just open not ask to be put in a folder, if it does, you did something wrong</li>
+</ul>
+</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/kluh.png"><img class="alignnone size-full wp-image-2109" alt="kluh" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/kluh.png" width="750" height="471" /></a>
+<ul>
+	<li> Now that it is ready in arduino, go to tools and them select board and choose the teensy 3.1.</li>
+	<li>Then click upload</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/kluh1.png"><img class="alignnone size-full wp-image-2110" alt="kluh" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/kluh1.png" width="317" height="317" /></a>
+<ul>
+<ul>
+	<li>This window will appear when you do , press the reset button on your teensy and it will start uploading.
+<ul>
+	<li>It takes only seconds and that is it!</li>
+</ul>
+</li>
+</ul>
+</ul>
+
+
+
+<h3>Use It:</h3>
+<ul>
+	<li>Now plug it into the apm and SBUS.</li>
+	<li>Power it up using a UBEC , Do not use USB as it will not work.</li>
+	<li>The teensy will blink red while the APM initializes which can be up to 10s.
+<ul>
+	<li>IT should then start blinking very fast, this indicates it is communicating.</li>
+	<li>If it continues to blink it means your APM is operating above 5v or it is not connected correctly.</li>
+	<li>IF it still blinks then your APM regulator might be blown. get a multimeter and check it out.</li>
+</ul>
+</li>
+	<li>Now to get this telemetry on the taranis is simple, power on the taranis and when at the home screen press menu.
+<ul>
+	<li>Then long press page twice to get to telemetry, scroll down to page two and change the - - - to each telemetry choice.</li>
+</ul>
+</li>
+</ul>

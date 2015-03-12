@@ -1,0 +1,610 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-pixhawk-overview 
+title: common-Pixhawk Overview 
+id: 545 
+menu_order: 10 
+post_parent_id: 301 
+post_parent_stub: common-autopilots 
+post_parent_title: common-Autopilot Hardware Options 
+END METADATA 
+-->
+<h1>Specifications</h1>
+
+
+<ul>
+	<li><strong>Processor</strong>
+<ul>
+	<li>32-bit ARM Cortex M4 core with FPU</li>
+	<li>168 Mhz/256 KB RAM/2 MB Flash</li>
+	<li>32-bit failsafe co-processor</li>
+</ul>
+</li>
+	<li><strong>Sensors</strong>
+<ul>
+	<li>MPU6000 as main accel and gyro</li>
+	<li>ST Micro 16-bit gyroscope</li>
+	<li>ST Micro 14-bit accelerometer/magnetometer</li>
+	<li>MEAS barometer</li>
+</ul>
+</li>
+	<li><strong>Power</strong>
+<ul>
+	<li>Ideal diode controller with automatic failover</li>
+	<li>Servo rail high-power (7 V) and high-current ready</li>
+	<li>All peripheral outputs over-current protected, all inputs ESC protected</li>
+</ul>
+</li>
+	<li><strong>Interfaces</strong>
+<ul>
+	<li>5x UART serial ports, 1 high-power capable, 2x with HW flow control</li>
+	<li>Spektrum DSM/DSM2/DSM-X Satellite input</li>
+	<li>Futaba S.BUS input (output not yet implemented)</li>
+	<li>PPM sum signal</li>
+	<li>RSSI (PWM or voltage) input</li>
+	<li>I2C, SPI, 2x CAN, USB</li>
+	<li>3.3 and 6.6 ADC inputs</li>
+</ul>
+</li>
+	<li><strong>Dimensions</strong>
+<ul>
+	<li>Weight 38 g (1.3 oz)</li>
+	<li>Width 50 mm (2.0”)</li>
+	<li>Height 15.5 mm (.6”)</li>
+	<li>Length 81.5 mm (3.2”)</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h1>Pixhawk connector assignments</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/64a09ed25796066acab3e37ea630969e.media_.700x1038.png"><img class="alignnone size-full wp-image-1888" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/64a09ed25796066acab3e37ea630969e.media_.700x1038.png" alt="64a09ed25796066acab3e37ea630969e.media.700x1038" width="700" height="1038" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawk-status-LEDs-definition.jpg"><img class="alignnone size-full wp-image-2186" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawk-status-LEDs-definition.jpg" alt="pixhawk status LEDs definition" width="700" height="154" /></a>
+
+
+
+<h1>Pixhawk top connectors</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/PixhawkLabled.jpg"><img class="alignnone size-full wp-image-551" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/PixhawkLabled.jpg" alt="PixhawkLabled" width="600" height="507" /></a>
+
+
+
+<h1>Pixhawk PWM connectors for servos and ESCs and PPM-SUM in and SBUS out</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawkPWM.jpg"><img class="alignnone size-full wp-image-559" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawkPWM.jpg" alt="pixhawkPWM" width="952" height="512" /></a>
+
+
+
+<h1>Pixhawk connector diagram</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PixHawk_labelled.png"><img class="alignnone size-full wp-image-627" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PixHawk_labelled.png" alt="PixHawk_labelled" width="957" height="749" /></a>
+<strong>For all connectors pin 1 is on the right in the above image.</strong>
+<strong>Serial 1 (Telem 1), Serial 2 (Telem 2) and Serial 3 (GPS) Pins: <strong>6 = GND, <strong>5 = RTS, <strong>4 = CTS, <strong>3 = RX, <strong> 2 = TX, </strong></strong></strong></strong></strong>1 = 5V.</strong>
+
+
+
+<h1>Pixhawk connector pin assignments</h1>
+
+<strong>TELEM1, TELEM2 ports</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>TX (OUT)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>RX (IN)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>CTS</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>5 (blk)</td>
+<td>RTS</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>6 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>GPS port</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>TX (OUT)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>RX (IN)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>CAN2 TX</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>5 (blk)</td>
+<td>CAN2 RX</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>6 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>SERIAL 4/5 port - due to space constraints two ports are on one connector.</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>TX (#4)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>RX (#4)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>TX (#5)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>5 (blk)</td>
+<td>RX (#5)</td>
+<td>+3.3V</td>
+</tr>
+<tr>
+<td>6 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>ADC 6.6V</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>ADC IN</td>
+<td>up to +6.6V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>ADC 3.3V</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>ADC IN</td>
+<td>up to +3.3V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>ADC IN</td>
+<td>up to +3.3V</td>
+</tr>
+<tr>
+<td>5 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>I2C</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>SCL</td>
+<td>+3.3 (pullups)</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>SDA</td>
+<td>+3.3 (pullups)</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<strong>CAN</strong>
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Volt</th>
+</tr>
+<tr>
+<td>1 (red)</td>
+<td>VCC</td>
+<td>+5V</td>
+</tr>
+<tr>
+<td>2 (blk)</td>
+<td>CAN_H</td>
+<td>+12V</td>
+</tr>
+<tr>
+<td>3 (blk)</td>
+<td>CAN_L</td>
+<td>+12V</td>
+</tr>
+<tr>
+<td>4 (blk)</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="console_port"><strong>Console Port</strong></p>
+The system's serial console runs on the port labeled SERIAL4/5. The pinout is standard serial pinout, to connect to a standard FTDI cable (3.3V, but its 5V tolerant).
+<div>
+<table style="width: auto;border: 1px solid #ddd">
+<tbody>
+<tr>
+<th>Pixhawk</th>
+<th></th>
+<th>FTDI</th>
+<th></th>
+</tr>
+<tr>
+<td>1</td>
+<td>+5V (red)</td>
+<td></td>
+<td>N/C</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Tx</td>
+<td></td>
+<td>N/C</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rx</td>
+<td></td>
+<td>N/C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tx</td>
+<td>5</td>
+<td>Rx (yellow)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Rx</td>
+<td>4</td>
+<td>Tx (orange)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>GND</td>
+<td>1</td>
+<td>GND (black)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<h1>Pixhawk system features</h1>
+
+<ul>
+	<li>The Pixhawk flight controller is a further evolution of the PX4 flight controller system. Pixhawk consists of a PX4-FMU controller and a PX4-IO integrated on a single board with additional IO, Memory and other features.</li>
+	<li>It is highly optimized to provide control and automation for APM flight navigation software with high performance and capacity. Pixhawk allows current APM and PX4 operators to seamlessly transition to this system and lowers the barriers to entry for new users.</li>
+	<li>The NuttX real-time operating system, features high performance, flexibility, and reliability for controlling any autonomous vehicle.</li>
+	<li>A Unix/Linux-like programming environment, Integrated multithreading and autopilot functions such as Lua scripting of missions and flight behavior provide powerful development capabilities.</li>
+	<li>A custom PX4 driver layer ensures tight timing across all processes.</li>
+	<li>New peripheral options will include a digital airspeed sensor, support for an external multi-color LED indicator and an external magnetometer.</li>
+	<li>All peripherals are automatically detected and configured.</li>
+	<li><strong>A very powerful 32-bit processor with an additional failsafe backup controller and extensive memory.</strong>
+<ul>
+	<li>STM32F427 32-bit primary microcontroller: 168 MHz, 252 MIPS, Cortex M4 core with a floating point unit.</li>
+	<li>Two megabytes of Flash program memory and 256 kilobytes of RAM.</li>
+	<li>STM32F103 backup failsafe 32-bit co-processor provides for manual recovery and has its own power supply.</li>
+	<li>Socket for a plug in micro SD memory card for data logging and other uses.</li>
+</ul>
+</li>
+	<li><strong>Advanced sensor profile</strong>
+<ul>
+	<li>3 axis 16-bit ST Micro L3GD20H gyro for determining orientation.</li>
+	<li>3 axis 14-bit accelerometer and magnetometer for determining outside influences and compass heading.</li>
+	<li>Provision for external magnetometer with automatic switch-over if desired.</li>
+	<li>MEAS MS5611 barometric pressure sensor for determining altitude.</li>
+	<li>Built in voltage and current sensing for battery condition determination.</li>
+	<li>Connection for an externally mountable UBLOX LEA GPS for determining absolute position.</li>
+</ul>
+</li>
+	<li><strong>Extensive I/O interfaces with dedicated connectors</strong>
+<ul>
+	<li>Fourteen PWM servo or ESC speed control outputs.</li>
+	<li>Five UART (serial ports), one high-power capable, 2x with HW flow control.</li>
+	<li>Two CAN I/O ports (one with internal 3.3V transceiver, one on expansion connector)</li>
+	<li>Spektrum DSM / DSM2 / DSM-X® Satellite reciever compatible input: Permits use of Spektrum RC Transmitters.</li>
+	<li>Futaba S.BUS® compatible input and output.</li>
+	<li>PPM sum signal input.</li>
+	<li>RSSI (PWM or voltage) input.</li>
+	<li>I2C and SPI serial ports.</li>
+	<li>Two 3.3 volt and one 6.6 volt Analog inputs.</li>
+	<li>Internal microUSB port and external microUSB port extension.</li>
+	<li>Contains its own on board microcontroller and stacks with the FMU.</li>
+</ul>
+</li>
+	<li><strong>Comprehensive power system with redundancy and extensive protection.</strong>
+<ul>
+	<li>The Pixhawk is supplied with an in line power supply with voltage and current sensor outputs.</li>
+	<li>Ideal diode controller with redundant power supply inputs and automatic fail-over.</li>
+	<li>Servo rail high-power (max. 10V) and high-current (10A+) ready.</li>
+	<li>All peripheral outputs are over-current protected and all inputs ESD protected.</li>
+	<li>The provided external safety button enables safe motor activation / deactivation.</li>
+	<li>LED status indicators and driver for high brightness external multicolored LED to indicate flight status.</li>
+	<li>High-power, multi-tone piezo audio indicator also informs of current flight status.</li>
+	<li>Available high performance UBLOX GPS plus external Magnetometer in protective case.</li>
+	<li>Weight: 38g (1.31oz), Width: 50mm (1.96"), Thickness: 15.5mm (.613"), Length: 81.5mm (3.21")</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h1>Comparison of PX4-FMU-IO and Pixhawk</h1>
+
+The new PX4 <a href="https://pixhawk.ethz.ch/px4/modules/pixhawk" target="_blank" rel="nofollow">Pixhawk module</a> is an evolution of the existing <a href="https://pixhawk.ethz.ch/px4/modules/px4fmu" target="_blank" rel="nofollow">FMU</a> and <a href="https://pixhawk.ethz.ch/px4/modules/px4io" target="_blank" rel="nofollow">IO</a> modules and is completely compatible.
+<ul>
+	<li>The PX4 FMU and IO stack is very small (the size of an 8 ch RC receiver) and very densely packed, Pixhawk has more space, more serial ports and more PWM outputs.</li>
+	<li>There are two groups of servo connectors, one main group of 8 outputs wired through the backup processor, and an auxiliary group of 6 outputs directly wired to the main processor.</li>
+	<li>The port labeled "RC" can take normal PPM sum or Futaba S.Bus inputs and the port labeled "SB" can read RSSI our output S.Bus to servos.</li>
+	<li>A Spektrum satellite compatible port is on top (labeled SPKT/DSM).</li>
+	<li>The basic operation is the same, and the software is shared.</li>
+	<li>Inside Pixhawk a FMUv2 and an IOv2 do their duties on a single board (and developers will find that the software will refer to FMUv2 and IOv2)</li>
+	<li>The PX4 / Pixhawk system has more than 10 times the CPU performance and memory of the APM and a lot more as well.</li>
+	<li>14 PWM outputs (Pixhawk) vs. 12 PWM outputs (PX4)</li>
+	<li>All Pixhawk PWM outputs on servo connectors (PX4: 8 on servo, 4 on 15 pin DF13 connector)</li>
+	<li>5 serial ports vs. 4 (with some double functionality, so only 3 in some configurations on old version)</li>
+	<li>256 KB RAM and 2 MB flash vs 192 KB RAM and 1 MB flash (old)</li>
+	<li>Modernized sensor suite (latest generation)</li>
+	<li>High-power buzzer driver (old: VBAT driven, not as loud)</li>
+	<li>High-power multicolor led (old: only external BlinkM support)</li>
+	<li>Support for panel-mounted USB extension (old: not present)</li>
+	<li>Revised, improved power architecture</li>
+	<li>Better protection on all input / output pins against shorts and over voltage</li>
+	<li>Better sensing of power rails (internal and external, e.g. servo voltage)</li>
+	<li>Support for Spektrum Satellite pairing (needed some manual wiring work in v1, but also software-supported)</li>
+	<li>No more solid state relays on v2 (was not really used)</li>
+	<li>Connectors easier to disconnect in case, as the surrounding plastic helps to place the fingers correctly (more on this in a separate post)</li>
+	<li>Case prevents one-off failure operation of servo connectors</li>
+	<li>The new unit is consirably larger, has the same height, but offers in general more handling convenience.</li>
+	<li>External power supply similar to existing 3DR power brick (every unit comes with a free module).</li>
+	<li>Both generations offer the same backup / override processor that allows failover to manual if the autopilot fails in fixed wing setups.</li>
+	<li>For software developers the differences are nicely abstracted in the PX4 middleware, and can be sensed / configured at runtime.</li>
+</ul>
+
+
+
+<h1>Connecting and disconnecting DF13 connectors</h1>
+
+http://www.youtube.com/watch?v=Kfu8M8t2fWY
+
+
+
+<h1>Pixhawk analog input pins</h1>
+
+This section lists the analog pins available on the Pixhawk. These are virtual pins, defined in the firmware.
+
+<strong>Virtual Pin 2 and Power connector Pin 4 and Virtual Pin 2</strong>: power management connector voltage pin, accepts up to 3.3V, usually attached to 3DR power brick with 10.1:1 scaling
+
+<strong>Virtual Pin 3 and Power connector Pin 3</strong>: power management connector current pin, accepts up to 3.3V, usually attached to 3DR power brick with 17:1 scaling
+
+<strong>Virtual Pin 4 and (No connector Pin)</strong>: VCC 5V rail sensing. This virtual pin reads the voltage on the 5V supply rail. It is used to provide the HWSTATUS.Vcc reading that ground stations use to display 5V status
+
+<strong>Virtual Pin 13 and ADC 3.3V connector Pin 4</strong>: This takes a max of 3.3V. May be used for sonar or other analog sensor.
+
+<strong>Virtual Pin 14 and ADC 3.3V connector Pin 2</strong>: This takes a max of 3.3V. May be used for second sonar or other analog sensor.
+
+<strong>Virtual Pin 15 and ADC 6.6V connector Pin 2</strong>: analog airspeed sensor port. This has 2:1 scaling builtin, so can take up to 6.6v analog inputs. Usually used for analog airspeed, but may be used for analog sonar or other analog sensors.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/09/pixhawk1.jpg"><img class="alignnone size-medium wp-image-11421" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/09/pixhawk1-212x300.jpg" alt="pixhawk1" width="212" height="300" /></a>
+
+<strong>Virtual Pin 102</strong>: Servo power rail voltage. This is an internal measurement of the servo rail voltage made by the IO board within the Pixhawk. It has 3:1 scaling, allowing it to measure up to 9.9V.
+
+<strong>Virtual Pin 103</strong>: RSSI (Received Signal Strength Input) input pin voltage (SBus connector output pin). This is the voltage measured by the RSSI input pin on the SBUS-out connector (the bottom pin of the 2nd last servo connector on the 14 connector servo rail). Can alternatively serve as SBus out but not yet implemented.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2.jpg"><img class="alignnone  wp-image-1718" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2-300x161.jpg" alt="pixhawk2" width="300" height="161" /></a>
+
+
+<h1>Pixhawk digital inputs</h1>
+
+The Pixhawk digital output pins on the FMU servo rail (the "AUX" pins) can also be used as digital input pins, using the same pin numbers as are used for outputs. This can be used for options that allow for digital input pins, such as the AUTO_TRIGGER_PIN in APM:Rover.
+
+The same rules for setting up BRD_PWM_COUNT apply for digital inputs and digital outputs.
+
+
+<h1>Pixhawk digital outputs (Virtual Pins 50 - 55)</h1>
+
+The Pixhawk has no dedicated digital output pins on its DF13 connectors, but you can assign up to 6 of the "AUX SERVO" connectors to be digital outputs. These are the first 6 of the 14 three-pin servo connectors on the end of the board. They are marked as AUX servo pins 1 - 6 on the silkscreen as seen above.
+
+To set the number of these pins that are available as digital outputs, set the BRD_PWM_COUNT parameter. On Pixhawk this defaults to 4, which means the first 4 AUX connectors are for servos (PWM) and the last 2 are for digital outputs. If you set BRD_PWM_COUNT to 0 then you would have 6 digital outputs and still have 8 PWM outputs on the rest of the connector.
+
+The 6 possible pins are available for PIN variables as pin numbers 50 to 55 inclusive. So if you have BRD_PWM_COUNT at the default value of 4, then the two digital output pins will be pin numbers 54 and 55.
+
+In summary:
+
+If BRD_PWM_CNT= 2 then
+50 = RC9
+51 = RC10
+52 = Aux 3
+53 = Aux 4
+54 = Aux 5
+55 = Aux 6
+
+If BRD_PWM_CNT= 4 then
+50 = RC9
+51 = RC10
+52 = RC11
+53 = RC12
+54 = Aux 5
+55 = Aux 6
+
+If BRD_PWM_CNT= 6 then
+50 = RC9
+51 = RC10
+52 = RC11
+53 = RC12
+54 = RC13
+55 = RC14
+
+
+
+<h1>Powering</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img class="alignnone size-medium wp-image-2310" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port-196x300.jpg" alt="pixhawkpower port" width="196" height="300" /></a>
+Pixhawk should primarily be powered via its power port as shown in the picture above,  The power port simultaneously powers Pixhawk and reads voltage and current analog measurements produced by an optional 3DR power module (or other voltage/current measurement devices such as an Attopilot). To power Pixhawk off the servo rail without a power module, connect a servo or BEC to a power (+) pin and a ground (-) pin of the main outputs. When powering Pixhawk off the servo rail, we recommend adding a Zener diode (part number 1N5339) to condition the power across the rail and prevent it from becoming too high. This method (with Zener diode) can also be used as backup power for Pixhawk when using a power module, so in the case of a failure on the power module, Pixhawk will take power from the output rail. See the voltage ratings below for more information on powering Pixhawk. Note: The Zener diode should not be used with servos with more than 5V.Digital servos can feed up to 11v into the servo rail when powered off an external 5.1v bec.<strong>Pixhawk does not supply power to the servo rail</strong>. 
+
+[note]Looking for a detailed explanation of power wiring with Pixhawk? <a href="http://pixhawk.org/users/actuators/pwm_escs_and_servos" target="_blank">Click here for more information about connecting ESCs and servos to Pixhawk.</a>[/note]
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/servo-power-wiring.png"><img class="alignnone wp-image-2054" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/servo-power-wiring-300x110.png" alt="servo power wiring" width="300" height="110" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/zener-diode.png"><img class="alignnone wp-image-2056" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/zener-diode-296x300.png" alt="zener diode" width="150" height="152" /></a> 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/common_Wiring_Pixhawk2.jpg"><img class="alignnone size-full wp-image-2353" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/common_Wiring_Pixhawk2.jpg" alt="common_Wiring_Pixhawk2" width="1057" height="381" /></a>
+
+The block diagram above synthesizes an overview of Pixhawk's power and ESC wiring,  <em>Diagram acronyms: PDB = Power Distribution Board. PM = pixhawk power port. PM/Atto = optional power module from 3DR or Attopilot alternative for higher than 4S battery voltages. </em> In this diagram, a 3DR power module (or equivalent device) power Pixhawk through its power port (primary source). One power source is enough but obviously not redundant if the power module fails to power this primary source. Therefore we have represented on the diagram a second backup power source via a 5V BEC that wires to Pixhawk's output servo rail. If the primary source fails, Pixhawk will automatically switch to this second power source. 
+
+<strong>Advanced configuration </strong>: triple redundant power sources (power module as primary , plus two backup BECs - instead of one- to power Pixhawk's servo rail): A simple Tie bus circuit can be used to make the secondary power source redundant ! (therefore the power module can fail, a secondary BEC can fail while the third BEC will take over). In this scheme, a simple MBR1545CT integrated circuit is used. This circuit takes two BEC on its inputs and outputs only of of the two BEC according to the highest voltage (i.e. if BEC1 outputs 5.25V and BEC2 outputs 5.45V, MBR1545CT will pass BEC2 and blocks BEC1). Here a tie bus circuit wiring diagram and example realisation with the MBR1545CT integrated circuit and a 6 pin JST connector: 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT-diagram2.jpg"><img class="alignnone size-full wp-image-2357" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT-diagram2.jpg" alt="MBR1545CT diagram2" width="306" height="314" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT.jpg"><img class="alignnone size-full wp-image-2356" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT.jpg" alt="MBR1545CT" width="756" height="587" /></a> 
+
+<strong>Wiring recommendations: </strong>
+<ul>
+	<li>Always connect a ground reference wire with your ESC's signal wires on pixhawk servo rail (output ports 1-8). Indeed an ESC's signal wire should never be left floating without its ground reference (THERE IS NO SETUP WHICH WOULDN'T REQUIRE SIGNAL GROUND TO BE CONNECTED).</li>
+	<li>It is dangerous to power the Pixhawk <strong>only </strong>from the servo rail, especially with digital servos. Servos may cause voltage spikes (as shown on illlustration below that shows the servo rail voltage on an oscilloscope when a single digital servo attached to a Pixhawk is moved rapidly ). The key thing is that the digital servo causes the voltage on the rail to rise above the critical 5.7V level. Above that level the Pixhawk power management will cut power to the FMU and the Pixhawk will reboot. If that happens when flying you will lose your aircraft. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/servo-V-spike.jpg"><img class="alignnone size-full wp-image-2359" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/servo-V-spike.jpg" alt="servo V spike" width="442" height="291" /></a>
+
+It is up to the user to provide a clean source of power for the cases when it is powered off the servo rail. Servos by themselves are not quiet enough.</li>
+	<li>Do not connect a BEC power source to the RC IN port (black ground, red power and white signal wires from the receiver's PPM ouput are connected to these RC pins)</li>
+	<li>Adding an external Zener is a recommendation specifically for systems that are using 5V servos and have the servo rail configured for back up power. Connect the recommended Zener diode with its polarity as indicated on the diagram. Use as short wires as possible or even better, use a standard 3 position JR servo connector with the diode legs directly inserted (and soldered) in the servo female pins. To complement the diode, it is also useful to add a capacitorin parallel to the diode. The capacitor will smooth out eventual voltage ripples. As advised for the diode, the capacitor should be connected with as short wires as possible. Do not oversize the capacitor.</li>
+</ul>
+
+
+
+<h1>Voltage ratings</h1>
+
+Pixhawk can be triple-redundant on the power supply if three power sources are supplied. The three rails are: Power module input, servo rail input, USB input.
+
+<strong>Normal Operation Maximum Ratings</strong>
+Under these conditions all power sources will be used in this order to power the system.
+Power module input (4.1V to 5.7V) [refers to the voltage coming into Pixhawk from the power module]
+Servo rail input (4.1V to 5.7V)
+USB power input (4.1V to 5.7V)
+
+<strong>Absolute Maximum Ratings</strong>
+Under these conditions the system will not draw any power (will not be operational), but will remain intact.
+Power module input (0V to 20V) [refers to the voltage coming into Pixhawk from the power module]
+Servo rail input (0V to 20V)
+USB power input (0V to 6V)

@@ -1,0 +1,35 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: basic-tuning 
+title: Basic Tuning 
+id: 12068 
+menu_order: 60 
+post_parent_id: 1540 
+post_parent_stub: flying-arducopter 
+post_parent_title: First Flight with ArduCopter 
+END METADATA 
+-->
+This topic covers basic Roll and pitch and throttle tuning.
+
+<h3>Overview</h3>
+After your first flight, you may notice that you copter doesn't respond to control inputs the way you want it to or you may have trouble maintaining control of your copter. If you are familiar with PID controllers, check out the <a href="http://copter.ardupilot.com/wiki/tuning/">advanced tuning guide here</a>. If you are an experienced operator, try out <a href="http://copter.ardupilot.com/wiki/autotune/">the autotune feature</a>. This page will cover the basic tuning section of Mission Planner and APM Planner that simplified the complex tuning process into a few simple sliders. This is the best tuning method for new operators.
+
+<h3>Roll and pitch tuning</h3>
+Tuning is easiest at the field using a <a href="http://copter.ardupilot.com/wiki/common-using-the-3dr-radio-for-telemetry-with-apm-and-px4/">telemetry radio</a>. Perform an initial flight with the following questions in mind:
+<ul>
+	<li>How does the copter respond to roll and pitch? Is the response more sluggish or twitchy than you want?</li>
+	<li>When the copter is hover, what level is the throttle set at? Does it hover at the middle position of the stick or is it above or below the center position?</li>
+	<li>When raising the throttle, what rate does the copter accelerate at? Does it gain altitude more slowly or more quickly than you want?</li>
+</ul>
+Connect the telemetry radio ground module to your ground station computer and open either Mission Planner or APM Planner. Select the correct COM port and select Connect. You should see live data on the Flight Data screen. To begin tuning, select Config/Tuning and Basic Tuning.
+
+Start with the Roll/Pitch slider at the top of the page. If you observed that your copter was too twitchy in response to roll and pitch controls, move the slider one tick mark to the left, or, if you observed that your copter was too sluggish, move the slider one tick mark to the right. Repeat your flight to determine if the change was beneficial. Repeat the process until you are satisfied with the way your copter responds to roll and pitch.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/04/apm-planner-basic-tuning2.png"><img class="alignnone wp-image-12069" alt="apm planner basic tuning2" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/04/apm-planner-basic-tuning2.png" width="421" height="266" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/04/mission-planner-basic-tuning.png"><img class="alignnone wp-image-12070" style="padding-left: 20px" alt="mission planner basic tuning" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/04/mission-planner-basic-tuning.png" width="405" height="265" /></a>
+
+
+
+<h3>Throttle tuning</h3>
+The bottom two sliders allows you to tune the throttle control. Adjust the slider marked Throttle Hover until the copter hovers at the throttle stick's middle position. If the copter hovers with the throttle stick above middle position, move the slider to the left by one tick-mark until it hovers at mid-stick, testing as you go. If the copter hovers with the throttle stick below middle position, move the slider to the right by single tick-mark increments until it does. Make sure to test each set of tuning settings as you go.
+
+Move the slider marked Throttle Accel or Climb Sensitivity to the right to have the copter gain altitude more aggressively or to the left to have the copter gain altitude more gently. Test each increment after setting to evaluate the tune.

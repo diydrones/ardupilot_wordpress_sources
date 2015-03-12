@@ -1,0 +1,34 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: poshold-mode 
+title: PosHold Mode 
+id: 12288 
+menu_order: 70 
+post_parent_id: 1556 
+post_parent_stub: flight-modes 
+post_parent_title: Flight Modes 
+END METADATA 
+-->
+The PosHold flight mode (previously known as "Hybrid") is a new mode for AC3.2.  It is similar to Loiter in that the vehicle maintains a constant location, heading, and altitude but is generally more popular because the pilot stick inputs directly control the vehicle's lean angle providing a more "natural" feel.
+
+<h3>Overview</h3>
+When switched on, PosHold mode will automatically attempts to maintain the current location, heading and altitude. Good GPS position, <a href="wiki/common-diagnosing-problems-using-logs/#Compass_interference">low magnetic interference on the compass </a>and <a href="wiki/common-diagnosing-problems-using-logs/#Vibrations">low vibrations</a> are all important in achieving good loiter performance.
+
+https://www.youtube.com/watch?v=O5lEUo7w0bY#t=117
+
+<h3>Controls</h3>
+The pilot can control the copter's location horizontally and vertically with the control sticks.
+<ul>
+	<li>Horizontal location can be adjusted with the the Roll and Pitch control sticks with the default maximum lean angle being 45 degrees (angle can be adjusted with the ANGLE_MAX parameter). When the pilot releases the sticks the copter will lean back to bring the vehicle to a stop.</li>
+	<li>Altitude can be controlled with the Throttle control stick just as in <a href="wiki/altholdmode/#Controls">AltHold mode</a></li>
+	<li>The heading can be set with the Yaw control stick</li>
+	<li>You may arm in PosHold mode but only once the GPS has 3D lock and the HDOP has dropped to 2.0 or lower.</li>
+</ul>
+<p style="padding-left: 30px">On an APM2 the board's blue light will become solid when 3D lock is attained. On a Pixhawk the LED will become green (<a href="wiki/common-apm-board-leds/">more details on LED patterns here</a>).
+The HDOP value can be made clearly visible through the mission planner's Quick screen by double clicking and then selecting "gpshdop" from the large grid of checkboxes.</p>
+<p style="padding-left: 30px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Loiter_DisplayHDOP.png"><img class="alignnone size-medium wp-image-11027" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Loiter_DisplayHDOP-300x184.png" alt="Loiter_DisplayHDOP" width="300" height="184" /></a></p>
+
+<ul>
+	<li>The maximum brake-angle can be set with the PHLD_BRAKE_ANGLE parameter (i.e. 3000 = the vehicle will lean back up to 30degrees)</li>
+	<li>The speed the vehicle rotates back to the maximum angle can be set with the PHLD_BRAKE_RATE parameter (i.e. 8 = rotates back at 8 degrees per second))</li>
+</ul>

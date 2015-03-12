@@ -1,0 +1,63 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: ac2_simple_geofence 
+title: Simple GeoFence 
+id: 1573 
+menu_order: 60 
+post_parent_id: 1539 
+post_parent_stub: configuration 
+post_parent_title: Advanced Configuration 
+END METADATA 
+-->
+<h3>Overview</h3>
+
+AC 3.0.1 (and higher) includes a simple "tin can" shaped fence centered on home that will attempt to stop your copter from flying too far away by initiating an RTL.  The maximum circular distance and altitude and the vehicle behaviour when the fence is reached can be configured using Mission Planner.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence.png"><img class="alignnone size-full wp-image-8737" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence.png" alt="Fence" width="1395" height="813" /></a>
+
+If the vehicle strays outside these borders it will switch into RTL or LAND.  At the moment the fence is breached a backup fence is erected 20m further out (or up).  If the copter breaches this backup fence (for example if the the vehicle is not set up correctly or the operator takes control but is unable to bring the copter back towards home) the copter will be switched into RTL again (and another backup fence an additional 20m further out will be created).
+
+
+If the copter eventually flies 100m outside the configured fence distance, the vehicle will switch into LAND mode.  The idea being that it's clearly impossible to get the copter home so best to just bring it down.  The pilot can still retake control of course with the flight mode switches.  Like with the earlier fences, another fence is erected 20m out which will again switch the copter to LAND if it continues away from home.
+
+<h3>Enabling the Fence in Mission Planner</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPSetup.png"><img class="alignnone size-full wp-image-8738" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPSetup.png" alt="Fence_MPSetup" width="955" height="329" /></a>
+
+The Fence can be set-up by doing the following:
+<ul>
+	<li>Connect your APM/PX4 to the Mission Planner</li>
+	<li>Go to the Software -&gt; GeoFence screen</li>
+	<li>Click the "Enable" button</li>
+	<li>Leave the "Type" as "Altitude and Circle" (unless you want only an Altitude limit or only a Circular fence in which case you can select "Altitude" or "Circle")</li>
+	<li>Leave the Action as "RTL or Land"</li>
+	<li>Set "Max Alt" to the altitude limit you want (in meters)</li>
+	<li>Set "Max Radius" to the maximum distance from home you want (in meters).  This should normally be at least 50m</li>
+</ul>
+
+
+
+<h3>Enabling the fence with Channel 7 or 8</h3>
+It is not necessary to set-up a switch to enable or disable the fence but if you wish to control the fence with a switch please follow these steps:
+<ul>
+	<li>Go to the Mission Planner's Software &gt; ArduCopter Pids screen and set either "Ch7 Opt" OR "Ch8 Opt" to Fence.</li>
+	<li>holding the switch high (i.e. PWM &gt; 1800) will enable the fence, low (under 1800) will disable the fence.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPCh78.png"><img class="alignnone size-full wp-image-8739" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPCh78.png" alt="Fence_MPCh78" width="1024" height="485" /></a>
+
+
+
+<h3>Warnings:</h3>
+<ul>
+	<li>The minimum recommended fence radius is 30m</li>
+	<li>The fence requires the GPS to be functioning well so do not disable the <a href="wiki/prearm_safety_check/">GPS arming check</a> nor the <a href="wiki/battery-gps-and-gcs-failsafes/#GPS_Failsafe">GPS failsafe</a> while the fence is enabled.  Conversely if you disable either of these checks, disable the Fence.</li>
+	<li>For the best results, ensure RTL is working on your vehicle.</li>
+	<li>With the Fence enabled, the pre-arm checks will require you have GPS lock before arming the vehicle.</li>
+	<li>If GPS failsafe is not enabled and the Fence is enabled and you loose GPS lock while flying the fence will be disabled.</li>
+	<li>If GPS failsafe is enabled and the Fence is enabled and you lose GPS lock while flying the vehicle will switch to LAND because we no longer know the vehicle position and we want to ensure the copter never travels far outside the fence.  This beahviour will occur regardless of the flight mode.  If a LAND sequence is not desired, the pilot can retake control by moving the flight mode switch.</li>
+	<li>The backup fences are created 20m out from the previous breached fence not 20m out from the vehicle's position.  This means if you choose to override the fence you may have less than 20m to regain vehicle control before the fence switches the copter to RTL (or LAND) again.  If you really want to override the fence, you should be ready to switch the flight mode twice or alternatively set-up the enable/disable fence switch.</li>
+</ul>
+
+
+
+<h3>Video overview of the Fence setup and Operation</h3>
+http://www.youtube.com/watch?v=HDnGdo54o-4

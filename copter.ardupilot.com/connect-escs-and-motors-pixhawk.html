@@ -1,0 +1,74 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: connect-escs-and-motors-pixhawk 
+title: Connect ESCs and Motors (Pixhawk) 
+id: 12828 
+menu_order: 40 
+post_parent_id: 1514 
+post_parent_stub: assembly-instructions 
+post_parent_title: Connecting the APM2 
+END METADATA 
+-->
+This article explains how to connect the ESCs, Motors and Propellers. 
+<!--more-->
+
+<h1>Connect motor outputs</h1>
+
+There are two methods of connecting the motor outputs: connect the electronic speed controllers (ESCs) to Pixhawk directly or use a power distribution board (PDB).
+
+When using a power distribution board, connect the power (+), ground (-), and signal (s) wires for each ESC to the PDB according to motor number. Find your frame type in the section below to determine the assigned order of the motors (select images to enlarge). Then connect the signal wires from the PDB to the main output signal pins on Pixhawk, ensuring that the motor order numbers match the main output pin numbers on Pixhawk. If you are using a power module, it is optional to connect the power and ground wires from the PDB to Pixhawk. If you would like to use these cables in addition to or instead of the power module or as a common point for low current servos, see the instructions above for powering Pixhawk off the servo rail.
+
+When connecting the ESCs directly to Pixhawk, connect the power (+), ground (-), and signal (s) wires for each ESC to the Pixhawk main output pins by motor number. Find your frame type in the section below to determine the assigned order of the motors (select images to enlarge).
+
+
+<h1>Motor order diagrams</h1>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/quads_PH.jpg"><img class="alignnone wp-image-1925" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/quads_PH-300x140.jpg" alt="quads_PH" width="500" height="233" /></a>
+<img class="alignnone wp-image-1789" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_Hb-300x178.jpg" alt="APM_2_5_MOTORS_QUAD_Hb" width="300" height="178" />
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo.jpg"><img class="alignnone wp-image-1790" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo-300x289.jpg" alt="hexa octo" width="300" height="289" /></a>       <img class="alignnone wp-image-1791" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_TRI-300x153.jpg" alt="APM_2_5_MOTORS_TRI" width="300" height="153" />
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_Y6A_Y6B.jpg"><img class="alignnone size-medium wp-image-1792" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_Y6A_Y6B-300x137.jpg" alt="APM_2_5_MOTORS_Y6A_Y6B" width="300" height="137" /></a>          <img class="alignnone size-medium wp-image-1793" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_X8-300x222.jpg" alt="APM_2_5_MOTORS_X8" width="300" height="222" />
+
+<strong>Note: 2014 3DR RTF Y6 uses the Y6B configuration.</strong>
+
+
+<h1>Attach propellers</h1>
+
+Find your frame in the motor order diagrams above. Clockwise motors are shown in green, marked CW, and take pusher propellers. Counterclockwise motors are shown in blue, marked CCW, and take puller propellers. Use the diagram for your frame type, and attach propellers to your vehicle as shown. For copters, attach propellers with the writing facing towards the sky. For more information on recognizing the different types of propellers, see the next section. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_HEXA_OCTA.jpg"><img class="alignnone wp-image-1800" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_HEXA_OCTA-300x213.jpg" alt="APM_2_5_MOTORS_HEXA_OCTA" width="300" height="213" /></a>
+
+
+
+<h2>Recognizing clockwise and counterclockwise propellers</h2>
+
+The diagrams above show two types of propellers: clockwise (called pushers) and counterclockwise (called pullers). Pusher propellers are often marked with a P. However not all propellers are marked and both types are often available in either rotational direction. Therefore, it is most reliable to recognize the correct propeller type by its shape as shown below. Note that the propellers below have the edge with the shallow consistent curve at the leading edge in direction of rotation and the more radical scalloped (and usually thinner edge) as the trailing edge. You can use these features to recognize propellers of the correct direction of rotation. <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/prop_direction.jpg"><img class="alignnone size-medium wp-image-1799" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/prop_direction-300x200.jpg" alt="prop_direction" width="500" height="333" /></a>
+
+
+
+<h1>Checking the motor numbering with the Mission Planner Motor test</h1>
+
+An alternative way to check that the motors have been hooked up correctly is to use the "Motors" test in the Mission Planner Initial Setup menu. When connected to the vehicle via MAVLink, you can click on the green buttons shown below and the corresponding motor should spin for five seconds. Letters correspond to motor numbers as shown in the example below.
+<ul>
+	<li>Take off your props first!</li>
+	<li>If no motors turn, raise the "Throttle %" to 10% and try again. If that doesn't work, try 15%</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Capture.png"><img class="alignnone size-medium wp-image-12642" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Capture-236x300.png" alt="Capture" width="236" height="300" /></a>
+
+The first motor to spin will be the one located directly forward in the case of + configuration, or the first motor to the right of straight forward in the case of X configuration. The motor test will then proceed in a clockwise rotation.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/APM_2_5_MOTORS_QUAD_enc.jpg"><img class="alignnone wp-image-12641 size-full" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/APM_2_5_MOTORS_QUAD_enc.jpg" alt="APM_2_5_MOTORS_QUAD_enc" width="720" height="410" /></a>
+
+In the case of X8, it will spin the top front-right motor first, then the bottom front-right, and proceed around with the same pattern.
+
+OctoV will spin the front-right motor first, and then again, proceed clock-wise until reaching the front left motor.
+
+
+
+<h1>Note about KDE (and other) Opto Isolated ESCs</h1>
+
+The KDEXF-UAS and KDEF-UASHV Series are opto-solated and do not provide BEC power output for the peripheral equipment. They require +5V to power the opto-isolator and while the Pixhawk can be powered from the servo rail, it does not provide +5V to the servo rail. The ESCs must be powered by a BEC or with a jumper from an unused connector on the board.  It is strongly recommended that you use a BEC to power the rail rather than a jumper.  Do not add servos or other devices to the servo rail as the power module is not intended to supply power to them.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk-Correction-to-KDE-Optoisolated-ESC.png"><img class="alignnone size-medium wp-image-2936" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk-Correction-to-KDE-Optoisolated-ESC-300x231.png" alt="Pixhawk Correction to KDE Optoisolated ESC" width="300" height="231" /></a>
+
+The KDE ESCs have fixed PWM ranges so you must manually set the output range of each PWM signal so that <span style="color: #222222">RCx_MIN is 1100 and RCx_MAX is 1900us using the Advanced Parameter or Full Parameter Settings Page in the planner.</span>

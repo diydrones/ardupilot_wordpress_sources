@@ -1,0 +1,48 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-db-watt-dbm 
+title: common-Understanding dB, Watts and dBm 
+id: 319 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+We usually refer to power in Watts. So, its easy to understand when certain radio transmitter has an output of 1w.
+
+But, why sometimes this output is given in dBm?
+
+That's because while a signal travels through a conductive medium it loses energy.
+
+From step to step on a range the power of the signal is attenuated on a percent applied to the resultant power from the previous step. You should notice that the loss isn't linear and will never reaches zero.
+
+To express those non-linear steps, we use <tt>"dB"</tt> which is a logarithmic ratio. Is a function that rules the non-linear differences of each two values of power or amplitude in a range. A positive or negative difference means a gain or a loss of the signal. The unit <tt>"dB"</tt> is based on log<sub>10</sub>. The function <tt>"Log"</tt> of your scientific calculator matches the function log<sub>10</sub>(x).
+
+The term <tt>"dBm"</tt> is how much, in dB, a value exceeds 1mW. So, 0dBm is 1mW and 1dBm is 1,259mW.
+
+Here you can see how to do some basic calculations:
+
+<strong>Watt to dBm</strong>
+
+10<tt>*</tt>log<sub>10</sub>(<tt>[signal in watt]*</tt>1000)
+
+<strong>dBm to Watt</strong>
+
+(10^(<tt>[ratio in dBm]</tt>/10))/1000
+
+&nbsp;
+<h3>How to use it?</h3>
+When signal and medium propeties are expressed in dB or dBm all the output calculation is resumed in just addition and subtraction.
+
+E.g.: A radio has an output of 60mW. This radio is connected to a 7m cable with atennuation of 25dB per 100m which goes to the antenna with a gain of 14dBi. What is the output power?
+
+<strong>TX_Power</strong> -&gt; 60mW -&gt; (60 / 1000) = <strong>0.06W</strong>. By using the conversion you know it means <strong>17.78dBm</strong>
+
+<strong>Cable_Loss</strong> -&gt; 25dB/100m -&gt; 0,25bB per meter <tt>*</tt> 7 = <strong>1.75dB</strong>
+
+<strong>Antenna_Gain</strong> -&gt; <strong>14dBi</strong>
+
+<strong>Output_Power</strong> = <strong>TX_Power</strong> - <strong>Cable_Loss</strong> + <strong>Antenna_Gain</strong>
+
+<strong>Output_Power</strong> = <strong>17.78</strong> - <strong>1.75</strong> + <strong>14</strong> = <strong>30.03dB</strong>. By using the conversion you know it means <strong>1W</strong>.

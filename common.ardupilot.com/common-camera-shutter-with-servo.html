@@ -1,0 +1,34 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-camera-shutter-with-servo 
+title: common-Camera Shutter with Servo 
+id: 1856 
+menu_order: 40 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
+END METADATA 
+-->
+This article explains how to configure Mission Planner to trigger the camera shutter with a Servo.
+
+<h1>Shutter configuration</h1>
+Use the <strong>Shutter</strong> drop-down (see image below) to select which analog output the servo is connected to, typically <strong>A10 or A11</strong> (although the Mission Planner calls them RC10 and RC11 - check the photos in the Connecting Servos section below as to which is A10 &amp; A11). If you select "Relay" from the drop-down, then pin A9 on the APM2 will be pulled high to trigger the camera's shutter).
+
+Set up the Servo Limits so that the servo does not bind. Under "Shutter" you can set the PWM values (normally between 1000 ~ 2000) that correspond to the servo positions when the shutter is "pushed" and "not pushed".
+
+The "Duration" field controls how long the servo pressing the shutter button remains held down. 10 = 1 second, 20 = 2 seconds, etc. <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPShutterSetupScreen.png"><img class="alignnone size-full wp-image-5662" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPShutterSetupScreen.png" alt="MPShutterSetupScreen" width="1024" height="202" /></a>
+
+You can manually test that the shutter is being activated correctly if you set the the CH7 option (in Arducopter PID tab) to "Trigger Camera", having set the "Shutter" to A10 and the limits in the previous step.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPCH7TriggerCamera.png"><img class="alignnone size-full wp-image-5664" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPCH7TriggerCamera.png" alt="MPCH7TriggerCamera" width="615" height="356" /></a>
+
+You can also trigger the shutter during a mission using the <code>DO_DIGICAM_CONTROL</code> command (no additional parameters required).
+
+Please note that like all other DO_x commands it cannot appear right at the beginning or end of a mission, it must be appear between two waypoints.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPTriggerCameraFromMissionSmall.png"><img class="alignnone size-full wp-image-5665" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPTriggerCameraFromMissionSmall.png" alt="MPTriggerCameraFromMissionSmall" width="1024" height="183" /></a>
+
+
+
+<h1>Shutter configuration for Canon cameras</h1>
+A page describing how to trigger the Canon shutter using CHDK can be found <a href="wiki/common-chdk-camera-control-tutorial/">here</a>.

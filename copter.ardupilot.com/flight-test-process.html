@@ -1,0 +1,49 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: flight-test-process 
+title: Flight Test Process 
+id: 1590 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h3>To Test Loiter and Altitude Hold:</h3>
+<ol>
+	<li><strong><span style="color: #0000ff">(PX4)</span> Ensure that the SD card is plugged into your PX4FMU board and seated properly (It wont arm if it isn't).</strong></li>
+	<li>Set up your APM so that Stabilize mode is at one extreme of your three-position mode select switch on your RC transmitter, Alt Hold mode is in the middle and Loiter mode is in the third position.</li>
+	<li>First, it´s important that Stabilize Mode is working OK. Set the Mode switch to Stabilize, turn on the transmitter and connect your battery. Wait until the GPS gets a lock. (Both the Blue GPS LED and the Blue C LED on the APM should be on and solid before arming and taking off). (It is even better to wait a bit longer to allow the GPS acquire additional satellites.)
+<strong>Note! the UBLOX GPS works differently
+</strong> On the UBLOX GPS the LED on the GPS module is off during satellite acquistion and on with the blue LED blinking when the satellite is acquired.</li>
+	<li><span style="color: #0000ff"><strong>(PX4)</strong></span> The PX4 requires that you disengage the safety before you can arm; Press the Safety button for 5 seconds to disengage the safety - (Blink twice, Pause, Repeat).</li>
+	<li>Hold the throttle down and to the right for several seconds to "Arm" The motors on your copter.</li>
+	<li>Start flying in Stabilize mode. Make sure you can take off, fly comfortably, and land. If you find it tilting, land and run the "Level" command in the Mission Planner. Fly through a whole battery like this, getting a feel for the controls (this will also calibrate your compass).</li>
+	<li>Now change batteries and try the auto modes. First, try Alt Hold at an altitude of about 20 meters. Your actual current throttle position is recorded as the "hovering point" when you switch to an altitude holding mode so it is important that you are not ascending or descending when you switch to Alt Hold. You should be able to fly around with the copter maintaining the same altitude, plus or minus a meter or so.</li>
+	<li>If that's working well, try Loiter. Just fly to a safe spot with lots of room around it and an altitude of about 20 meters and switch into Loiter. It should try to stay in that position, plus or minus about five meters.</li>
+	<li>When you have finished flying in Loiter or Alt Hold modes (or if anything unexpected or undesirable happens) switch back to Stabilize mode and land. (You cannot land and turn the motors off in Loiter or Alt Hold mode.)</li>
+	<li>Disarm your copter and record a log by holding the throttle down and to the left for 5 seconds.</li>
+	<li><span style="color: #0000ff"><strong>(PX4)</strong></span> For the PX4 also re-engage the "Safety" by pressing and holding the "Safety Button" for 5 seconds - (Blinks Continuously).</li>
+</ol>
+
+
+
+<h3>What you should expect?</h3>
+In Alt Hold, the copter should stay at the altitude you initiated the mode in, give or take about a meter. Adding sonar will improve that to +- 20cm accuracy up to 12 feet of altitude (above which sonar doesn't work).
+
+<span style="color: #ff0000"><strong>Warning!</strong></span> In any Alt Hold based mode including: Alt Hold, Loiter, Auto, AutoLand or RTL if your copters operation becomes erratic when you are close to the ground or landing (and also if any auto landing procedure results in bouncing or failure to turn off motors properly after landing) you probably have the fight controller situated such that it's barometer (altimeter) is being affected by the pressure created by the copters prop-wash against the ground.
+This is easily verified by looking at the Altimeter reading in your logs and seeing if it spikes or oscillates strangely when near the ground.
+If this is a problem, you will need to move the flight controller out of prop wash effect or shield it with an appropriately ventilated enclosure. Success can be verified by flight check and log results.
+
+<span style="color: #ff0000"><strong>Warning:</strong></span> The flight controller uses a barometer which measures air pressure as the primary means for determining altitude ("Pressure Altitude") and if the air pressure is changing in your flight area, the copter will follow the air pressure change rather than actual altitude.
+
+In Loiter, the quad should stay in a 4-5 meter diameter "circle" around the target position. If there is wind, it may take a few seconds to compensate. If the wind is strong, you may see the control can't compensate and you will have more error (ex 10-15 meters).
+
+You can use the stick to move the quad manually in Loiter. Or you can use the throttle to raise or lower the quad.
+<ul>
+	<li><strong><span style="color: #ff0000">Warning: "Home" position is always supposed to be your Copters actual GPS takeoff location:</span></strong></li>
+	<li>It is very important to acquire GPS lock before arming in order for RTL, Loiter, Auto or any GPS dependent mode to work properly.</li>
+	<li>For APM:Copter if you get GPS lock and then ARM your copter the home position is the location the copter was in when it was armed.</li>
+	<li>This means if you execute an RTL in APM:Copter, it will return to the location where it was armed.</li>
+	<li>For APM:Copter: Arm it where you want it to return to: (Not the Pits).</li>
+</ul>
