@@ -10,16 +10,19 @@ post_parent_title: common-Telemetry (landing page)
 END METADATA 
 -->
 XBee radios (also known as ZigBee radios) are generally not recommended over the <a href="http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz">3DR Radio</a> and RFD900 Radio.  Still there may be some situations where only an XBee can be used so these high-level instructions could be helpful.
+<!--more-->
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/Telemetry_XBee_Pixhawk.png"><img class="alignnone  wp-image-2944" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/Telemetry_XBee_Pixhawk.png" alt="Telemetry_XBee_Pixhawk" width="583" height="322" /></a>
 
 
-<h3>Where to Buy</h3>
+<h1>Where to Buy</h1>
+
 XBee radios are available from <a href="https://www.sparkfun.com/categories/111" target="_blank">Sparkfun</a> and many other robotics stores globally.  Generally you will need two XBee radiios (one for the ground station and one for the vehicle) along with two different adapter boards.  <a href="https://www.sparkfun.com/products/11812" target="_blank">One with a USB connection</a> for the ground station computer and <a href="https://www.sparkfun.com/products/11373" target="_blank">another with a serial connection</a> which can be connected to the flight controller as shown above.
 
 
 
-<h3>Configuration</h3>
+<h1>Configuration</h1>
+
 Click on the diagram at the top of this page to see the individual wire connections that must be made between the flight controller and Xbee module.  Note that in the diagram above only 4 wires are connected (GND, 5V, Transmit, Receiver).  The CTS and RTS (Ready-to-send) pins are left unconnected because although connecting them should improve the data rate during the creation of this wiki page we were unable to successfully connect.
 
 With the CTS and RTS pins disconnected the BRD_SER1_RTSCTS (if using Telem1) or BRD_SER2_RTSCTS (if using Telem2) should be set to zero (after making the change the flight controller will need to be restarted).
@@ -29,7 +32,17 @@ The <a href="http://www.digi.com/products/wireless-wired-embedded-solutions/zigb
 
 
 
-<h3>Connecting from the Ground Station</h3>
+<h1>Connecting to the Ground Station</h1>
+
+If you're using a USB adapter, simply connect it via a USB cable as shown:
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/IMG_4887.jpg" alt="" />
+
+If you're using an XtreamBee adapter on the ground side, connect it to a FTDI cable as shown below and plug that into your USB port. The adapter should also be in Master mode.
+
+[caption id="attachment_4258" align="alignnone" width="600"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/XtreemBee.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/XtreemBee.png" alt="XBee with XtreemBee Adapter" width="600" height="193" class="size-full wp-image-4258" /></a> XBee with XtreemBee Adapter[/caption]
+
 Once properly configured you should be able to connect to the vehicle from the ground station (i.e. Mission Planner) by selecting the appropriate COM port for the XBee and selecting the baud rate of 57600. If the connection is successful but the download of parameter stalls please see the notes above re CTS and RTS.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/Telemetry_XBee_MPConnect.png"><img class="alignnone size-large wp-image-2950" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/11/Telemetry_XBee_MPConnect-1024x516.png" alt="Telemetry_XBee_MPConnect" width="584" height="294" /></a>
+

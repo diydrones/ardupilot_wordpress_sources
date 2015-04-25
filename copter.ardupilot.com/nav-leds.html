@@ -22,7 +22,7 @@ An external Pixhawk LED can be added by connecting it to the Pixhawk's I2C port.
 
 <h1>Two External LED solutions for APM2</h1>
 
-There are two recommended solutions for adding LEDs to your APM/Arducopter
+There are two recommended solutions for adding LEDs to your APM/Copter
 <ul>
 	<li>the <a href="http://store.jdrones.com/jD_IOBoard_p/jdioboard11.htm" target="_blank">JDrones I/O board</a> (<a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=Q2oT808mJnQ" target="_blank">video here</a>) and <a href="http://store.jdrones.com/Night_Flying_LED_Drivers_s/94.htm" target="_blank">LED strips</a> listens to the mavlink messages on the APM/PX4's telemetry port (much like the <a href="wiki/common-on-screen-display-for-fpv/" target="_blank">minimOSD</a>)  and updates the LEDs.  The board includes a voltage regulator so it takes power directly from the battery</li>
 	<li>the APM's A4 ~ A11 pins can be used to control LEDs directly.  <a href="http://diydrones.com/forum/topics/apm-2-x-led-buzzer-modules" target="_blank">This is an example of a community members solution</a> you can purchase or you can build your own by purchasing a Darlington Driver DIP chip (<a href="https://www.sparkfun.com/products/312" target="_blank">like this one from Sparkfun</a>) to allow you to power the LEDs from the battery.  See this <a href="http://diydrones.com/profiles/blogs/adding-external-led-indicators-and-a-piezo-beeper-for-arm-and-gps" target="_blank">blog post</a> for more details.</li>
@@ -62,7 +62,7 @@ Connect the buzzer as follows:
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Buzzer_ConnectionDiagram.png"><img class="alignnone size-full wp-image-9578" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Buzzer_ConnectionDiagram.png" alt="Buzzer_ConnectionDiagram" width="649" height="466" /></a>
 
 The buzzer will beep in these situations:
-<strong> Arming</strong>: twice at the beginning of the arming procedure, and then again twice when completed (arducopter can take a long time to arm especially the first time).
+<strong> Arming</strong>: twice at the beginning of the arming procedure, and then again twice when completed (Copter can take a long time to arm especially the first time).
 <strong> Disarming</strong>: once when the pilot disarms the copter
 <strong> Low Battery</strong>: continuous tone when the battery voltage is low. The only way to turn off the tone is to arm or disarm the copter.
 

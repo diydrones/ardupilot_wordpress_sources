@@ -11,9 +11,9 @@ END METADATA
 -->
 <h1>Log Types (Dataflash vs tlogs)</h1>
 
-There are two ways to record your flight data with ArduCopter. With some exceptions, the two methods record very similar data but in different ways:
+There are two ways to record your flight data with Copter. With some exceptions, the two methods record very similar data but in different ways:
 <ul>
-	<li><strong>dataflash logs</strong> (the subject of this page) use the APM or Pixhawk's onboard dataflash memory, which you can download after the flight. On ArduPlane and ArduRover dataflash logs are created soon after start-up. On ArduCopter they are created after you first arm the copter.</li>
+	<li><strong>dataflash logs</strong> (the subject of this page) use the APM or Pixhawk's onboard dataflash memory, which you can download after the flight. On Plane and Rover dataflash logs are created soon after start-up. On Copter they are created after you first arm the copter.</li>
 	<li><strong>telemetry logs</strong> (also known as "tlogs") are recorded by the mission planner (or other ground station) when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link. You can find the details <a title="Telemetry Logs details" href="/wiki/common-mission-planner-telemetry-logs/">here</a>.</li>
 </ul>
 &nbsp;
@@ -62,7 +62,7 @@ The LOG_BITMASK parameter controls what message types are recorded in the datafl
 
 
 
-<h1>Message Details (APM:Copter specific)</h1>
+<h1>Message Details (Copter specific)</h1>
 <p style="padding-left: 30px"><strong>ATT (attitude information):</strong></p>
 <p style="padding-left: 60px">RollIn: the pilot's desired roll angle in centi-degrees (roll left is negative, right is positive)</p>
 <p style="padding-left: 60px">Roll: the vehicle's actual roll in centi-degrees (roll left is negative, right is positive)</p>
@@ -122,7 +122,7 @@ The LOG_BITMASK parameter controls what message types are recorded in the datafl
 <p style="padding-left: 60px">DCRate - pilot desired climb rate in cm/s</p>
 <p style="padding-left: 30px"><strong>D32, DU32 (single data values which are either signed 32bit integers or unsigned 32bit integers):</strong></p>
 <p style="padding-left: 60px">id: identification number for the variable.  There are only two possible values</p>
-<p style="padding-left: 90px">7 = bit mask of internal state.  The meaning of individual bits can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.pde#L361" target="_blank">ArduCopter.pde’s definition of the ap structure</a>.</p>
+<p style="padding-left: 90px">7 = bit mask of internal state.  The meaning of individual bits can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/Copter/Copter.pde#L361" target="_blank">Copter.pde’s definition of the ap structure</a>.</p>
 <p style="padding-left: 90px">9 = simple mode's initial heading in centi-degrees</p>
 <p style="padding-left: 30px"><strong>EKF (Extended Kalman Filter</strong>): see dedicated page <a href="wiki/common-apm-navigation-extended-kalman-filter-overview/">here</a>.</p>
 <p style="padding-left: 30px"><strong>ERR (an error message):</strong></p>
@@ -161,7 +161,7 @@ The LOG_BITMASK parameter controls what message types are recorded in the datafl
 <p style="padding-left: 90px">ECode 0: GPS Glitch cleared</p>
 <p style="padding-left: 60px">12: Crash Check</p>
 <p style="padding-left: 90px">ECode 1: Crash detected</p>
-<p style="padding-left: 30px"><strong>EV: (an event number)</strong>. The full list of possible events can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/defines.h#L291" target="_blank">defines.h</a> but the most common are:</p>
+<p style="padding-left: 30px"><strong>EV: (an event number)</strong>. The full list of possible events can be found in <a href="https://github.com/diydrones/ardupilot/blob/master/Copter/defines.h#L291" target="_blank">defines.h</a> but the most common are:</p>
 <p style="padding-left: 60px">10 = Armed</p>
 <p style="padding-left: 60px">11 = Disarmed</p>
 <p style="padding-left: 60px">15 = Auto Armed (pilot has raised throttle above zero and autopilot is free to take control of throttle)</p>

@@ -39,7 +39,7 @@ The HDOP value can be made clearly visible through the mission planner's Quick s
 
 Loiter mode incorporates the altitude controller from AltHold mode.  Details for tuning <a href="wiki/altholdmode/#Tuning">AltHold are on this wiki page</a>.
 
-The maximum horizontal speed of the copter during loiter mode can be adjusted with the Loiter Speed (aka WPNAV_LOIT_SPEED) parameter on the Config/Tuning &gt;&gt; APM:Copter Pids screen.  The value is expressed in cm/s so 500 = 5m/s.  The maximum acceleration during Loiter mode is always 1/2 of the Loiter speed.
+The maximum horizontal speed of the copter during loiter mode can be adjusted with the Loiter Speed (aka WPNAV_LOIT_SPEED) parameter on the Config/Tuning &gt;&gt; Copter Pids screen.  The value is expressed in cm/s so 500 = 5m/s.  The maximum acceleration during Loiter mode is always 1/2 of the Loiter speed.
 
 The Loiter PID's P value (top right of the screen shot above) is used to conver the horizontal position error (i.e difference between the desired position and the actual position) to a desired speed towards the target position.  <strong>It is generally not required to adjust this.</strong>
 
@@ -67,4 +67,4 @@ As mentioned above, Loiter mode incorporates the altitude controller from AltHol
 
 
 <h3>OF_LOITER Mode</h3>
-OF_LOITER is a special version of Loiter mode that will use the Optical Flow device to maintain position. It is not yet implemented but work is ongoing. Do Not select OF_LOITER mode until an update of APM:Copter specifies that it is installed and working.
+OF_LOITER is a special version of Loiter mode that will use the Optical Flow device to maintain position. It is not yet implemented but work is ongoing. Do Not select OF_LOITER mode until an update of Copter specifies that it is installed and working.

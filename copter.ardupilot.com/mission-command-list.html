@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: mission-command-list 
-title: ArduCopter Mission Command List 
+title: Copter Mission Command List 
 id: 11907 
 menu_order: 10 
 post_parent_id: 1555 
@@ -9,7 +9,7 @@ post_parent_stub: mission-planning-and-analysis
 post_parent_title: Mission Planning and Analysis 
 END METADATA 
 -->
-This page provides details of all the mission commands (i.e. <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink commands</a>) supported by ArduCopter that can be run as part of a mission (i.e. <a href="wiki/auto-mode/">AUTO flight mode</a>).
+This page provides details of all the mission commands (i.e. <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink commands</a>) supported by Copter that can be run as part of a mission (i.e. <a href="wiki/auto-mode/">AUTO flight mode</a>).
 
 Each of the commands below is either a "Navigation" command or a "Do" command.  Navigation commands (i.e. "TakeOff" and "Waypoint") affect the location of the vehicle while "Do" commands (i.e. "Do-Set-Servo" and "Do-Cam-Trigg-Dist") are for auxiliary functions and do not affect the vehicle's position.  During a mission at most one "Navigation" command and one "Do" command can be running at one time.  The "Do" commands will be run in order as soon as the preceeding navigation command before them starts.  For more information on setting up missions please refer to the <a href="wiki/common-planning-a-mission-with-waypoints-and-events/">Planning a Mission with Waypoints and Events</a> page.
 
@@ -226,6 +226,4 @@ Trigger the <a href="wiki/common-camera-shutter-with-servo/">camera shutter</a> 
 <h3>Do-Mount-Control</h3>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoMountControl.png"><img class="alignnone size-full wp-image-11961" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoMountControl.png" alt="MissionList_DoMountControl" width="1021" height="137" /></a>
 
-<strong><span style="color: #ff0000">Not Supported</span></strong>. This command does nothing and takes no arguments.
-
-In a future version of this command will allow specifying a roll, pitch and yaw angle which will be sent to the <a href="wiki/common-cameras-and-gimbals/">camera gimbal</a>. This could be useful for pointing the camera in specific directions at various times in the mission.
+From AC3.3 This command allows you to specify  a roll, pitch and yaw angle which will be sent to the <a href="common-cameras-and-gimbals">camera gimbal</a>. This can be used to point the camera in specific directions at various times in the mission.

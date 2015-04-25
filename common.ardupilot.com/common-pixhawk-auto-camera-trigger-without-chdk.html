@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-pixhawk-auto-camera-trigger-without-chdk 
-title: common-Pixhawk auto camera trigger (without CHDK) 
+title: common-Camera Shutter Triggering using Stratosnapper 
 id: 2062 
 menu_order: 60 
 post_parent_id: 1850 
@@ -9,160 +9,105 @@ post_parent_stub: common-cameras-and-gimbals
 post_parent_title: common-Cameras and Gimbals 
 END METADATA 
 -->
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/PixhawkCAMTRIGDISTIR2.jpg"><img class="alignnone size-full wp-image-2069" alt="PixhawkCAMTRIGDISTIR2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/PixhawkCAMTRIGDISTIR2.jpg" width="453" height="250" /></a>
+This tutorial shows how to automatically trigger the camera shutter from ArduPilot using a Pixhawk and <a href="http://littlesmartthings.com/stratosnapper2/" target="_blank" rel="nofollow">Stratosnapper V2</a> (with an IR Module). 
+<!--more-->
+[tip]The <em>Stratosnapper v2</em> board supports a large number of output types: cables/connectors, infra-red, LANC, etc. The approach described in this article could be extended to target a <a href="http://littlesmartthings.com/stratosnapper2/stratosnapper-supported-cameras/">broad range of cameras</a> from many popular brands.[/tip]
+
+<h1>Overview</h1>
+
+ArduPilot allows you to <a href="common-camera-shutter-with-servo" title="common-Camera Shutter with Servo">configure a servo or relay output as the control signal for the camera shutter</a> so that it can be used in <a href="common-camera-control-and-auto-missions-in-mission-planner" title="common-Camera Control and Auto Missions in Mission Planner">Camera Missions</a>. Additional hardware is required to convert the shutter activation signal to the format expected by the particular camera. 
+
+This tutorial shows how to set up a Pixhawk to connect to a Sony NEX5 using the <em>Stratosnapper v2</em> board with an IR trigger. This configuration has been selected because the NEX5 is widely used for aerial photography in UAVs, and because an IR Trigger does not require an extra cable connected to your camera. 
 
 
 
-<h1>Introduction:</h1>
+<h1>Parts and hardware connections</h1>
+
+The diagram below shows the required parts and general cabling. This includes the Pixhawk, IR Trigger device (<em>Stratosnapper</em>), IR LED and camera, and the BEC to power the <em>Stratosnapper</em>.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/generalhwconnectionscheme.jpg"><img class="alignnone size-full wp-image-2070" alt="generalhwconnectionscheme" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/generalhwconnectionscheme.jpg" width="750" height="414" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawklargeview.jpg"><img class="alignnone size-full wp-image-2072" alt="Pixhawklargeview" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawklargeview.jpg" width="750" height="498" /></a>
+
+<h2>Pixhawk board</h2>
+
+Pixhawk has 6 AUX ports that may be used for triggering the camera (see AUX1-AUX6 = RC9-RC14). This tutorial uses port 2/AUX2, as shown in the diagram below:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview.jpg"><img class="alignnone size-full wp-image-2073" alt="Pixhawkdetailview" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview.jpg" width="750" height="498" /></a>
+
+
+
+<h2>IR trigger device</h2>
+
+The <em>Stratosnapper</em> with its inputs/outputs is shown below. The servo inputs can be push-buttons, sticks, two or three-way switches, etc. These are configured using a GUI configuration utility from your PC via USB.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/stratosnapper2cables.jpg"><img class="alignnone size-full wp-image-2074" alt="stratosnapper2cables" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/stratosnapper2cables.jpg" width="750" height="498" /></a>
+
+Note the two servo leads are connected on the input side of <em>Stratosnapper</em>; one of these is to power the IR module.
+
+[warning]It is not possible to power the IR module (or any other device) from the Pixhawk AUX ports. You must either power provide a separate BEC to power the IR device or power the Pixhawk outputs rail with a BEC and power the device off that. [/warning]
+
+The control signal from Pixhawk can be assigned to any of the 4 servo inputs. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2AUX1.jpg"><img class="size-full wp-image-2075 alignone" alt="SS2AUX1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2AUX1.jpg" width="300" height="199" /></a>
+
+The output of the <em>Stratosnapper</em> is shown below. It connects to an IR cable, which in turn triggers a IR led that must be placed in front of your camera IR sensor:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2IR.jpg"><img class="size-full wp-image-2076 alignnone" alt="SS2IR" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2IR.jpg" width="300" height="200" /></a>
+
+
+
+
+<h2>IR LED positioning and camera gimbal</h2>
+
+Shown here is a picture of X8 Mr Grey (formerly known as Mr Red when was used with APM). 
+
+The electronics are protected using a grey flower pot (the only colour my wife had!) and we used some green gardening wire to shape the IR LED cable so it is correctly positioned in front of the camera's IR sensor. Gardeners &amp; farmers are notoriously UAV friendly :-)
+
+<a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal1.jpg"><img class="size-full wp-image-2077 alignnone" alt="vuegimbal1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal1.jpg" width="517" height="784" /></a>
+
+The Sony NEX5 is held in a 2-axis stabilized brushless gimbal (NEX5 not shown...used to take this picture). Here below a zoomed view of the IR LED positioning and gimbal: 
+
+<a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal2.jpg"><img class="alignnone size-full wp-image-2078" alt="vuegimbal2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal2.jpg" width="750" height="498" /></a>
+
+The IR LED works well even in bright sunlight (verified in the field). It also works some distance from the sensor (no problem within 5inches of the Sony NEX5 sensor) and in any orientation with respect to the sensor. 
+
+
+
+<h1>Camera shutter configuration in Mission Planner</h1>
+
+The <a href="common-camera-shutter-with-servo" title="common-Camera Shutter Configuration in Mission Planner">Camera Shutter Configuration in Mission Planner</a> article explains how to configure Pixhawk AUX output as a servo camera trigger. 
+
+The parameters used to configure this Stratosnapper/IR/NEX5 hardware are listed below:
 
 <ul>
-	<li>If, like me, you are not using a canon camera, you then do not have access to the CHDK canon firmware which provides advanced automation scripts to automate your camera trigger on your UAV.</li>
-	<li>There exist on the market other great alternatives for all camera brands (some of them are functionally richer and simpler to use than CHDK).</li>
-	<li>As an example in this guide, I will use the "Stratosnapper V2".</li>
-	<li>This is a little smart thing that allows you to trigger any camera brand (Sony, Canon, Nikon, etc) by many ways : infrared, cable, LANC, etc. If you'd like more details on this little marvel read <a style="font-style: normal" href="http://littlesmartthings.com/stratosnapper2/" target="_blank" rel="nofollow">here</a>.</li>
-	<li>I personally prefer the "IR trigger mode" the best because it does not require an extra cable connected to your camera, which is a must when you are using a brushless gimbal.</li>
-	<li>It supposes of course your camera supports an IR trigger function;</li>
-	<li>I thus assume the use of a Sony NEX5 in this guide, widely used for aerial photography among UAV'iers.</li>
-	<li>Then there is another obstacle for many of us : how does Pixhawk work to trigger such a triggering device in auto mission ?</li>
-	<li>There is a lot of posts on diydrones.com about how to do this with APM, but not much yet on the recent Pixhawk.</li>
-	<li>Therefore this guide will try to document it.</li>
-	<li>I will end the guide with a practical auto photo taking mission example (making sure it really works!).</li>
+  <li><code>CAM_TRIG_TYPE</code>: 0  (Servo). </li>
+  <li><code>Shutter (Port)</code>: RC10  (AUX2). </li>
+  <li><code>Shutter Pushed</code>: 1800 </li>
+  <li><code>Shutter Not Pushed</code>: 1100</li>
+  <li><code>Shutter Duration</code>: 10 (1 second)</li>
+  <li><code>Servo Limits Max</code>: 1900</li>
+  <li><code>Servo Limits Min</code>: 1100</li>
+  <li><code>CH7_OPT</code> : 9 (Optional - enables manual shutter triggering on Copter only).
 </ul>
 
+[caption id="attachment_2080" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionplannercameragimbalscreen.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionplannercameragimbalscreen-300x273.jpg" alt="Mission Planner: Stratosnapper Configuration" width="300" height="273" class="size-medium wp-image-2080" /></a> Mission Planner: Camera Gimbal Setup Screen[/caption]
 
 
-<h1>Parts and hardware connections:</h1>
-Let's start by a general hardware scheme showing all the required parts and general cabling: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/generalhwconnectionscheme.jpg"><img class="alignnone size-full wp-image-2070" alt="generalhwconnectionscheme" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/generalhwconnectionscheme.jpg" width="750" height="414" /></a>
+<h1>IR device configuration (Stratosnapper V2)</h1>
+
+Every IR device has its own configuration method. <em>Stratosnapper</em> comes with a simple GUI interface to define which PWM values will trigger what port. 
+
+The IR device configuration is explained in this video:
+
+http://player.vimeo.com/video/67660032
 
 
+<h1>Testing and mission planning</h1>
 
-<h2>2.1 Pixhawk board</h2>
-One or more of the 6 AUX ports can be used on Pixhawk (AUX1=RC9, AUX2=RC10, AUX3=RC11, etc.): <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawklargeview.jpg"><img class="alignnone size-full wp-image-2072" alt="Pixhawklargeview" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawklargeview.jpg" width="750" height="498" /></a>
+Once a camera trigger has been defined it can be used in <a href="common-camera-control-and-auto-missions-in-mission-planner" title="common-Camera Control and Auto Missions in Mission Planner">Camera Control and Auto Missions</a> to take pictures and make area surveys. 
 
-In this guide I chose port 2 which corresponds to AUX2 as is illustrated in this detailed view : <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview.jpg"><img class="alignnone size-full wp-image-2073" alt="Pixhawkdetailview" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview.jpg" width="750" height="498" /></a>
-<ul>
-	<li>By default, only the three first AUX ports can be used (1 to 3, or RC9 to RC11).</li>
-	<li>To trigger the IR device, we need a servo output (PWM signal), not a relay signal.</li>
-	<li>We will see later what parameters configuration is required in mission planner screens (we can for example also configure 6 AUX ports as PWM outputs.</li>
-	<li>More details later - let's finish the hw description first).</li>
-</ul>
+The configuration in this article was tested when creating the <a href="common-camera-control-and-auto-missions-in-mission-planner/#survey_grid_example" title="common-Camera Control and Auto Missions in Mission Planner">Survey (Grid) Example</a>.
 
 
-
-<h2>2.2 IR trigger device</h2>
-Here an illustration of "stratosnapper" with its inputs/outputs: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/stratosnapper2cables.jpg"><img class="alignnone size-full wp-image-2074" alt="stratosnapper2cables" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/stratosnapper2cables.jpg" width="750" height="498" /></a>
-<ul>
-	<li>You may notice two servo leads are connected on the input side of stratosnapper.</li>
-	<li><b style="color: #000000;font-style: normal"><span style="text-decoration: underline"><span style="color: #ff0000">This is one of the most important point in this guide : a servo lead must be used to power the IR device from a BEC (5V in this case); the power provided by the second servo lead coming from Pixhawk AUX2 port DOES NOT provide enough power to make it work !!!</span></span></b></li>
-	<li>Either you have powered the Pixhawk ouputs rail with a BEC and you are fine.</li>
-	<li>Either you must provide a separate BEC power to the IR device.</li>
-	<li>This is also true for any other type of device you will connect on Pixhawk.</li>
-	<li>DO NOT expect pixhawk to power these devices (and certainly not servos as we already knew in the context of the previous generation flight controller, APM2.x).</li>
-	<li>Stratosnapper works with a servo lead on one of its 4 servo inputs (yes, you may control stratosnapper from 4 different inputs, isn't that great ?).</li>
-	<li>The servo inputs may be various things : push-button, stick, two way switch, three way switch, etc (all configured by a GUI configuration utility from your PC via usb).</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2AUX1.jpg"><img class="size-full wp-image-2075 aligncenter" alt="SS2AUX1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2AUX1.jpg" width="300" height="199" /></a>And it ouputs on a IR cable to trigger a IR led that must be placed in front of your camera IR sensor:
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2IR.jpg"><img class="size-full wp-image-2076 aligncenter" alt="SS2IR" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/SS2IR.jpg" width="300" height="200" /></a>
-
-
-
-<h2>2.3 IR Led positionning and camera gimbal</h2>
-<ul>
-	<li>The IR led works perfectly, even under a bright sun (verified on the field).</li>
-	<li>It works even quite faraway from the sensor (no problem 5 inches away of the Sony NEX5 sensor) and works fine in any orientation versus the sensor.</li>
-</ul>
-<a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal1.jpg"><img class="size-full wp-image-2077 aligncenter" alt="vuegimbal1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal1.jpg" width="517" height="784" /></a>
-<ul>
-	<li>Shown here is a picture of X8 Mr Grey (formerly known as Mr Red when was used with APM.</li>
-	<li>My wife had only grey flower pots I could snatch to cover the new Pixhawk &amp; electronics).</li>
-	<li>The Sony NEX5 is held in a 2-axis stabilized brushless gimbal (NEX5 not shown...used to take this picture).</li>
-	<li>Here below a zoomed view of the IR LED positionning and gimbal: <a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal2.jpg"><img class="alignnone size-full wp-image-2078" alt="vuegimbal2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/vuegimbal2.jpg" width="750" height="498" /></a></li>
-	<li>Gardeners &amp; farmers are notoriously UAV friendly.</li>
-	<li>After getting a flower pot to protect your electronics, snatch also some green gardening wire which is very handy to shape your IR LED cable, so it is correctly positionned in front of the camera's IR sensor.</li>
-</ul>
-
-
-
-<h1>Software and parameters configuration:</h1>
-
-
-
-<h2>Mission planner</h2>
-<ul>
-	<li>We need to configure Pixhawk to output a servo command on AUX2 (RC10) to trigger stratosnapper which will in turn trigger the IR LED which will in turn trigger the camera.</li>
-	<li>And this needs to happen automatically during an auto mission.</li>
-	<li>How do we do this ? By using the CAM_TRIGG_DIST function or by using a programmed DO_DIGICAM_CONTROL command.</li>
-	<li>In this guide we will only document the CAM_TRIGG_DIST function.</li>
-	<li>The CAM_TRIGG_DIST function will command your UAV to take picture everytime it has moved a certain distance (in meters).</li>
-	<li>This is very useful to take pictures at precise distance intervals during geomapping missions or photogrammetry missions.</li>
-	<li>To configure CAM_TRIGG_DIST, go in mission planner, click on config/tuning to open the full parameters list.</li>
-	<li>In this list you will find three parameters to configure: <a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/cam_trigg_dist1.jpg"><img class="alignnone size-full wp-image-2079" alt="cam_trigg_dist1" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/cam_trigg_dist1.jpg" width="750" height="206" /></a></li>
-	<li>CAM_TRIGG_DIST : defines in meters the distance between two camera triggers.
-<ul>
-	<li>For an auto mission, leave value at zero.</li>
-	<li>It will be changed automatically during the mission by a DO_SET command, to avoid taking pictures before and after the useful parts of your auto mission.</li>
-</ul>
-</li>
-	<li>-CAM_TRIG_TYPE : defines if you want the Pixhawk AUX output used to control a relay or to ouput a PWM signal.
-<ul>
-	<li>In the case of an IR device we need a PWM servo signal, so we set it to a value of zero.</li>
-</ul>
-</li>
-	<li>-CH7_OPT: internal firmware parameter.
-<ul>
-	<li>In this case, it does NOT correspond to the CH7 of your receiver.</li>
-	<li>You must set it to a value of 9 to indicate the firmware that it must do a camera trigger to the AUX ouput (which will be defined in the camera gimbal setup screen).</li>
-</ul>
-</li>
-	<li>Next, we need to define to which AUX ouput we want this servo/PWM signal produced.
-<ul>
-	<li>To do this, open "Initial setup", then "Optional Hardware", then "Camera Gimbal":</li>
-</ul>
-</li>
-</ul>
-<a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionplannercameragimbalscreen.jpg"><img class="alignnone size-full wp-image-2080" alt="missionplannercameragimbalscreen" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionplannercameragimbalscreen.jpg" width="728" height="663" /></a>
-<ul>
-	<li>In the shutter drop down list, select which AUX port you'd like to use (RC10 = AUX2 in my example).</li>
-	<li>Then do not forget to adapt the "pushed" and "not pushed" PWM values that will trigger your IR device (stratosnapper in my example).</li>
-	<li>Tune also the duration to the required button pressure duration to trigger your camera.
-<ul>
-	<li>For a Sony NEX5, I set it to 10 = equivalent of 1 second button pressure.</li>
-</ul>
-</li>
-</ul>
-
-
-
-<h2>IR device configuration (stratosnapper V2):</h2>
-<ul>
-	<li>Every IR device comes with its own configuration method.</li>
-	<li>Stratosnapper comes with an ultra easy GUI interface to define which PWM values will trigger what port.</li>
-	<li>It is explained in this video:</li>
-</ul>
-
-
-<a style="font-style: normal" href="http://player.vimeo.com/video/67660032" rel="nofollow">http://player.vimeo.com/video/67660032</a>
-
-
-
-<h1>Concrete application : test auto mission, applying all of the above</h1>
-Finally lets' apply all of the above in a true auto mission on the field<span>,</span> I configured this test auto mission as an example: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionexemple.jpg"><img class="alignnone size-full wp-image-2084" alt="missionexemple" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionexemple.jpg" width="750" height="850" /></a>
-<ul>
-	<li>To create this auto mission, we can use a very convenient "SURVEY" function of mission planner.</li>
-	<li>You start by drawing a polygon of the zone you'd like to photograph.</li>
-	<li>Then you right click on the map to select "Survey(Grid)": <a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample.jpg"><img class="size-full wp-image-2085 aligncenter" alt="surveyexample" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample.jpg" width="484" height="498" /></a></li>
-	<li>It will then show you a configuration screen that will allow you to define which camera make/model you are using and other rather self explanatory parameters (like how much overlap you want between pictures, lens size, etc).</li>
-	<li>The tool will then automatically define for you which is the best CAM_TRIGG_DIST parameter! :</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample2.jpg"><img class="size-full wp-image-2086 aligncenter" alt="surveyexample2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample2.jpg" width="394" height="574" /></a>
-<ul>
-	<li>After clicking on "Accept", you will get automatically a list of waypoints starting with a "DO_SET_CAM_TRIGG_DIST" command that will set the distance in meters between two camera triggers during your mission.</li>
-	<li>It ends with another "DO_SET_CAM_TRIGG_DIST" to set the parameter back to zero (stops the shooting).</li>
-	<li>DO NOT forget to add at least a waypoint (take -off) before and another waypoint (land or RTL) after the last waypoint.</li>
-	<li>After this is done, after you have passed through your checklist, after you have got all of the authorizations, etc, -&gt; you are then ready to arm, flick the auto switch and off you go!</li>
-	<li>The above test auto mission lead to this result below.</li>
-	<li>It is a stiched panorama of about 15 pictures; shown here as a reduced thumbnail image (because the full size image is too large at about 107 Mbytes).</li>
-	<li>Click on image for better resolution: <a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Mortierthumbnail2.jpg"><img class="alignnone size-full wp-image-2087" alt="Mortierthumbnail2" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Mortierthumbnail2.jpg" width="750" height="878" /></a></li>
-</ul>
 <strong>I hope this will help you in your own auto-photo-shoot missions! Cheers, Hugues</strong>

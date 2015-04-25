@@ -9,7 +9,7 @@ post_parent_stub: common-optional-hardware
 post_parent_title: common-Optional Hardware 
 END METADATA 
 -->
-The <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR UBlox GPS + Compass module</a> is the recommended GPS for Pixhawk, PX4 and APM2.6 (and above) flight controllers using ArduPlane, Rover and Copter.  These come set-up with <a href="wiki/common-ublox-gps/">the best known GPS configuration</a> and have been thoroughly tested by thousands of users.
+The <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR UBlox GPS + Compass module</a> is the recommended GPS for Pixhawk, PX4 and APM2.6 (and above) flight controllers using Plane, Rover and Copter.  These come set-up with <a href="wiki/common-ublox-gps/">the best known GPS configuration</a> and have been thoroughly tested by thousands of users.
 <!--more-->
 
 <img class="alignnone size-full wp-image-2598" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide.jpg" alt="GPS_TopAndSide" width="690" height="297" />
@@ -20,7 +20,7 @@ This page covers the installation of the GPS+Compass module.  If you are instal
 
 Connect the GPS's 6-pin DF13 connector to the Pixhawk's "GPS" port and the compass's 4-pin connector to the I2C port.  Alternatively the compass can be first connected through an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> if other I2C devices are to be attached.
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_Pixhawk_Dual.png"><img class="alignnone size-full wp-image-2600" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_Pixhawk_Dual.png" alt="GPS_Pixhawk_Dual" width="985" height="834" /></a>
-As of ArduCopter 3.2 and recent versions of ArduPlane and ArduRover, a secondary GPS can be connected to the Pixhawk's Serial 4/5 port.  Limited testing suggests that a secondary GPS can reduce the likelihood that GPS glitches will affect the vehicle.  If the parameters are set-up as shown below, the flight controller will use the GPS with the higher number of satellites (Note: it will switch when one GPS has at least 2 more satellites than the other).
+As of Copter 3.2 and recent versions of Plane and Rover, a secondary GPS can be connected to the Pixhawk's Serial 4/5 port.  Limited testing suggests that a secondary GPS can reduce the likelihood that GPS glitches will affect the vehicle.  If the parameters are set-up as shown below, the flight controller will use the GPS with the higher number of satellites (Note: it will switch when one GPS has at least 2 more satellites than the other).
 <p style="padding-left: 60px">GPS_AUTO_SWITCH = 1
 GPS_TYPE2 = 1</p>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_MPSetup_Dual.jpg"><img class="alignnone size-large wp-image-2601" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_MPSetup_Dual-1024x497.jpg" alt="GPS_MPSetup_Dual" width="584" height="283" /></a>

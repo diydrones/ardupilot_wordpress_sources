@@ -3,20 +3,28 @@ START METADATA - Only title should be translated
 slug: xbee-radios 
 title: Using Xbee radios for telemetry with APM 
 id: 1603 
-menu_order: 0 
-post_parent_id: 12882 
-post_parent_stub: common-telemetry-xbee 
-post_parent_title: common-Telemetry-XBee 
+menu_order: 900 
+post_parent_id: 13872 
+post_parent_stub: common-archived-topics 
+post_parent_title: common-Archived Topics 
 END METADATA 
 -->
+[archived]The correct topic to use is <a href="common-telemetry-xbee" title="common-Telemetry-XBee">Telemetry-XBee</a>[/archived]
+
 <img style="color: #000000; font-weight: bold;" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/KT-Telemetry-Xbee-2new.jpg" alt="" />
+
+
 <h2>Hooking up your Xbee wireless modules</h2>
+
 Adding wireless telemetry is not difficult and can extend the capabilities of your UAV immensely. We recommend
 <a href="https://www.sparkfun.com/categories/222.html">900Mhz Xbees</a>. If you are in Europe, where 900Mhz is not allowed, you can use a 2.4Ghz Xbee kit instead. Instructions for that are <a href="http://diydrones.com/profiles/blogs/uk-eu-2-4-ghz-telemetry-kit">here
 </a>.
 
 [warning]On APM 2, you cannot use the Xbee while your APM board is connected to the USB port.[/warning]
+
 That's because the Xbee and USB share the same serial port, with some clever multiplexing to detect if the USB cable is plugged in and switching output to the USB if so. Although that has the huge win of freeing up a serial port for some other use (want to <a href="http://store.3drobotics.com/products?utf8=%E2%9C%93&amp;keywords=phonedrone">connect an Android phone </a>anyone?), it does mean that you need to disconnect the board from the USB cable and power it some other way when testing wireless telemetry on your bench.
+
+
 <h2>Wiring it up</h2>
 <h3>APM 2.0</h3>
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/telemtry.jpg" alt="" />
@@ -26,6 +34,8 @@ That's because the Xbee and USB share the same serial port, with some clever mul
 Connect the XtremeBee adapter (with the Xbee plugged in) to APM 2 as shown above. Your adapter should be in "Master" mode. ("Master" and "Slave" just reverse the TX and RX pins).
 
 We recommend the <a href="http://store.3drobotics.com/products/telemetry-cable-for-apm-1-x-and-apm-2-0">3DR four-wire Xbee cable</a>, which comes with the official Wireless Telemetry kit shown above. It is designed to connect the XtreamBee adapter to APM, as it will provide the neatest and safest connection.
+
+
 <h3>APM 2.5</h3>
 On APM 2.5, use the dedicated telemetry port and supplied cable, as shown:
 
@@ -105,7 +115,7 @@ It will still show XBP09-DM in the PC Settings Query. Don't worry about that.
 
 <h2>For Non-PC users</h2>
 MacOS, Linux or Windows users - there is a free cross-platform alternative to X-CTU, called moltosenso Network Manager. Download the software <a href="http://www.moltosenso.com/#/pc</a>=/client/fe/download.php">here</a>. The moltosenso Team collaborated with us writing a <a href="http://forum.moltosenso.com/viewtopic.php?f16&t=8">special tutorial</a>
-on the setup of Xbee radios for ARDUPILOT and ARDUCOPTER Temetry using their software. Enjoy!
+on the setup of Xbee radios for ArduPilot and Copter Telemetry using their software. Enjoy!
 
 
 <h2>Testing the connection</h2>

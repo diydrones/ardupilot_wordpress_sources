@@ -1,0 +1,75 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-3dr-radio-v1 
+title: common-3DR Radio v1 
+id: 4015 
+menu_order: 100 
+post_parent_id: 2447 
+post_parent_stub: common-telemetry-landingpage 
+post_parent_title: common-Telemetry (landing page) 
+END METADATA 
+-->
+This article explains how to connect the <em>3DR Radio v1</em> to your flight controller. You should also read <a href="common-3dr-radio-version-2" title="common-3DR Radio v2">3DR Radio v2</a>, which contains a more detailed user guide and feature list. 
+<!--more-->
+
+[caption id="attachment_4008" align="alignnone" width="285"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR_Radio_Version1.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR_Radio_Version1.jpg" alt="3DR Radio v1" width="285" height="262" class="size-full wp-image-4008" /></a> 3DR Radio v1[/caption]
+
+<h1>Overview</h1>
+
+The <a href="http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz">3DR Radio</a> is the easiest way to setup a telemetry connection between your flight controller and a ground station. 
+
+There are two versions of the 3DR Radio (version 2 is more recent). The radios have slightly different form factors and connections (v2 comes with a built-in FTDI cable) but otherwise their behaviour is very similar. 
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Telemetry_Ver1Ver2.jpg"><img class="alignnone size-full wp-image-2047" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Telemetry_Ver1Ver2.jpg" alt="Telemetry_Ver1Ver2" width="709" height="303" /></a>.
+
+This article only covers the main difference between the two radios — connecting the radios.
+
+
+
+<h1>Connecting the radio</h1>
+
+3DR Radio v1 has different radio modules for air and ground:
+
+<ul>
+	<li>The "ground" module has a USB connector making it easy to connect directly to your ground station.  On a windows 7 or higher machine, the require drivers should be automatically installed the first time you plug in the ground module but if it does not install for some reason or the ground computer is running Windows XP (or earlier) you can get the D2XX FTDI driver <a href="http://www.ftdichip.com/Drivers/D2XX.htm">here.</a></li>
+	<li>The 'aircraft' module has a FTDI six pin header, allowing it to be directly connected to your APM/Pixhawk/PX4's telemetry port as shown in the following sections. </li>
+</ul>
+
+
+
+<h2>Connecting to APM 2.5</h2>
+
+Use the <a href="http://store.3drobotics.com/products/telemetry-adapter-cable-for-apm-2-5" target="_blank">included cable</a> and plug it into the telemetry port on APM 2.5 and on the 3DR radio side, plug the connector with the red cable on the +5v pin and the black cable on the end on GND as shown:
+
+[note]You cannot connect via the radios when your APM 2.x is also connected via USB (they share the same port) so make sure you disconnect your USB cable from the flight controller before attempting a wireless connection.[/note]
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/APM2_telemcable.jpg"><img class="alignnone size-full wp-image-2042" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/APM2_telemcable.jpg" alt="APM2_telemcable" width="453" height="217" /></a>
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/IMG_5408.jpg" alt="" />
+
+
+
+<h2>Connecting to Pixhawk</h2>
+
+The Pixhawk telemetry ports use a <a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">6 pin cable</a> instead of <a href="http://store.3drobotics.com/products/telemetry-adapter-cable-for-apm-2-5" target="_blank">5 pins used on the APM2</a>.  This allows flow control but unfortunately means that you will need to hack a cable to get a Version1 radio to a Pixhawk.  The connections required are shown below.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3drRadioV1_pixhawk1.png"><img class="alignnone size-full wp-image-2043" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3drRadioV1_pixhawk1.png" alt="3drRadioV1_pixhawk" width="876" height="498" /></a>
+
+
+
+<h2>Connecting to PX4</h2>
+
+To use the 3DR Radio v1 with your PX4FMU plus PX4IO Flight Controller:
+
+<ul>
+	<li>Plug the large black connector of the adapter cable into the 3DR radio remote as shown above.
+          <ul>
+	    <li>The side of the black connector with the wire missing goes towards the center of the board.</li>
+          </ul>
+        </li>
+	<li>Plug the adapter cable's beige connector into the PX4IO FMU UART5 as shown above.
+          <ul><li>The FMU UART5 connector is on the opposite edge of the PX4IO from the Servo connector and is in the middle of the board.</li></ul>
+        </li>
+</ul>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PX43DRtelemetry.jpg"><img class="alignnone size-full wp-image-5697" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PX43DRtelemetry.jpg" alt="PX43DRtelemetry" width="2816" height="1880" /></a>

@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page aims to show you how to diagnose the top 5 most common problems affecting APM:Copter in particular but to some extent APM:Plane and APM: Rover as well.  If you are not yet familiar with the basics of <a href="common-mission-planner-telemetry-logs/">telemtery logs</a> and <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/" title="common-Downloading and Analyzing Data Logs in Mission Planner">dataflash logs</a> you will probably want to review the introductory pages that go over where these logs are stored and how you can download and view the information held within them.
+This page aims to show you how to diagnose the top 5 most common problems affecting Copter in particular but to some extent Plane and Rover as well.  If you are not yet familiar with the basics of <a href="common-mission-planner-telemetry-logs/">telemetry logs</a> and <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/" title="common-Downloading and Analyzing Data Logs in Mission Planner">dataflash logs</a> you will probably want to review the introductory pages that go over where these logs are stored and how you can download and view the information held within them.
 
 
 
@@ -29,7 +29,7 @@ Extra notes:
 
 
 <h3>Vibrations</h3>
-High vibrations cause the APM:Copter's accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with alt hold (normally rocketing into the sky) or Loiter (drifting).
+High vibrations cause the Copter's accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with alt hold (normally rocketing into the sky) or Loiter (drifting).
 
 Vibrations are best viewed by graphing the dataflash's <strong>IMU</strong> message's <strong>AccX</strong>, <strong>AccY</strong> and <strong>AccZ</strong> values.  The AccX and AccY values (primarily used for horizontal position control) should be between -3 and +3 m/s/s and the AccZ should be between -15 and -5 m/s/s.  The accelerometer values will change momentarily as the copter moves up and down which is why it is better to pull the data from a portion of the flight where the copter was mostly stationary but even with a copter that is moving you can still see the vibration levels by comparing the difference between the top and bottom of the "grass".  an occasional blade of grass going over the lines is ok but if it's sustained then it's likely a real vibration problem.
 
@@ -64,7 +64,7 @@ Extra Notes:
 
 
 <h3>GPS glitches</h3>
-When in autopilot modes (Loiter, RTL, AUTO) position errors from the GPS can cause APM:Copter to think that it's suddenly in the wrong position and lead to aggressive flying to correct the perceived error.  These "glitches" show up in both the tlogs and dataflash logs as an decrease in the number of satellites visible and an increase in the <a href="http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29">hdop</a>.
+When in autopilot modes (Loiter, RTL, AUTO) position errors from the GPS can cause Copter to think that it's suddenly in the wrong position and lead to aggressive flying to correct the perceived error.  These "glitches" show up in both the tlogs and dataflash logs as an decrease in the number of satellites visible and an increase in the <a href="http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29">hdop</a>.
 
 If using tlogs graph the the you can do this by graphing the GPS_RAW_IT group's "eph" and "satellites_visible" values.  An hdop value of 1.5 (displayed as 150) or lower is very good.  Over 2.0 (i.e. 200) indicates a bad position value.  The number of satellites falling below 9 is also bad.  A significant change in these two values often accompanies a GPS position change.
 
@@ -110,7 +110,7 @@ The easiest way to find these is to look in the dataflash logs and filter the 1s
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_FilterForErrors.png"><img class="alignnone size-full wp-image-2353" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_FilterForErrors.png" alt="DiagnosingWithLogs_FilterForErrors" width="755" height="419" /></a>
 
-The Subsys (aka Sub-system) gives the area that generated the error and the ECode (aka Error Code) tells you what the error was specifically.  The very limited number of subsystems and error codes can be found at the bottom of the APM:Copter <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/defines.h#L409">defines.h file</a>.
+The Subsys (aka Sub-system) gives the area that generated the error and the ECode (aka Error Code) tells you what the error was specifically.  The very limited number of subsystems and error codes can be found at the bottom of the Copter <a href="https://github.com/diydrones/ardupilot/blob/master/Copter/defines.h#L409">defines.h file</a>.
 <p style="padding-left: 30px">Sub Systems / Error Codes</p>
 <p style="padding-left: 60px">1: Main (never used)</p>
 <p style="padding-left: 60px">2: Radio</p>

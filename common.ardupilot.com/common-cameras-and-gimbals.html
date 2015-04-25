@@ -9,9 +9,35 @@ post_parent_stub: common-optional-hardware
 post_parent_title: common-Optional Hardware 
 END METADATA 
 -->
-ArduCopter, ArduPlane and ArduRover support up to 3-axis gimbals and automatic triggering of a camera shutter.  Follow the links below for configuration information based upon your set-up.
-
+Copter, Plane and Rover support up to 3-axis gimbals, including advance features like automated aiming of the camera at a Region of Interest (ROI), and automatic triggering of a camera shutter.  This article explains how to configure gimbals and shutter triggering based on your hardware setup.
+<!--more-->
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Cameras_Gimbals.jpg"><img class="size-full wp-image-1851" alt="Cameras_Gimbals" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Cameras_Gimbals.jpg" width="705" height="301" /></a>
 
-<!-- EDITOR NOTE: This generates dynamic lists of topics based on the parent relationship between pages. To add a page to this list, make its parent this page -->
-[subpages post_type='wiki']
+
+<h1>Gimbals and gimbal controllers</h1>
+
+UAVs use gimbals to provide an independently controlled and stable platform for photography. ArduPilot supports both brushless direct drive gimbals (Tarot, SToRM32) that have a separate controller (providing self-stabilisation), and the increasingly-less-common servo-driven gimbals where both control and gimbal stabilisation are provided by ArduPilot.
+
+<ul>
+	<li><a href="common-tarot-gimbal" title="common-Tarot Gimbal">Tarot Gimbal</a> — a popular 2-axis gimbal controller and gimbal kit that is controlled using PWM signals.</li>
+	<li><a href="common-storm32-gimbal" title="common-SToRM32 Gimbal Controller">SToRM32 Gimbal Controller</a> — an inexpensive 3-axis <em>brushless gimbal controller</em> that can be used with a number of gimbals (available separately). It is controlled with MAVLink commands over a serial interface; a richer format than PWM.</li>
+	<li><a href="common-camera-gimbal" title="common-Camera Gimbal with Servos">Camera Gimbal with Servos</a> — older-style servo-driven gimbal where ArduPilot provides both positioning and stabilisation.</li>
+	<li><a href="common-automatic-camera-stabilization" title="common-Automatic Camera Stabilization">Automatic Camera Stabilization</a></li>
+</ul>
+
+
+
+
+<h1>Camera shutter triggering</h1>
+
+ArduPilot allows you to <a href="common-camera-shutter-with-servo" title="common-Camera Shutter Configuration in Mission Planner">configure the camera shutter output port</a> (servo, relay). In <a href="common-camera-control-and-auto-missions-in-mission-planner" title="common-Camera Control and Auto Missions in Mission Planner">camera mission planning</a> you can specify when the camera shutter should trigger, or a distance that the vehicle should travel between shots. 
+
+Camera manufacturers use their own mechanisms for remote control of the camera (including its shutter). The topics explain how to configure the camera shutter, and list a number of different approaches for converting the output signal into the form expected by your particular camera: 
+
+<ul>
+	<li><a href="common-camera-shutter-with-servo" title="common-Camera Shutter Configuration in Mission Planner">Camera Shutter Configuration in Mission Planner</a></li>
+	<li><a href="common-pixhawk-auto-camera-trigger-without-chdk" title="common-Camera Shutter Tutorial using Stratosnapper">Camera Shutter Tutorial using Stratosnapper</a> (camera from many brands)</li>
+	<li><a href="common-apm-to-chdk-camera-link-tutorial" title="common-APM to CHDK Camera Link Tutorial">Camera Shutter Triggering using CHDK</a></li>
+	<li><a href="common-chdk-camera-control-tutorial" title="common-CHDK Camera Control Tutorial">CHDK Camera Control Tutorial</a> (non-standard integration)</li>
+	<li><a href="common-camera-control-board" title="common-3DR Camera Control Board">3DR Camera Control Board</a> (prototype - many cameras)</li>
+</ul>

@@ -1,0 +1,84 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-camera-control-and-auto-missions-in-mission-planner 
+title: common-Camera Control and Auto Missions in Mission Planner 
+id: 4092 
+menu_order: 20 
+post_parent_id: 31 
+post_parent_stub: common-other-mission-planner-features 
+post_parent_title: common-Other Mission Planner Features 
+END METADATA 
+-->
+This article describes ArduPilot's camera and gimbal commands, and explains how these can be used in Mission Planner to define camera survey missions.
+<!--more-->
+The instructions assume that the camera shutter/gimbal have already been <a title="common-Cameras and Gimbals" href="common-cameras-and-gimbals">connected and configured</a>.
+<h1>Overview</h1>
+Planning a camera mission is almost exactly the same as <a title="common-Planning a Mission with Waypoints and Events" href="common-planning-a-mission-with-waypoints-and-events">planning any other mission with waypoints and events</a>. The only difference is that in a camera mission you specify commands to trigger the camera shutter at waypoints or at regular intervals as the vehicle moves. If the camera is mounted on a gimbal, you can also set the gimbal orientation, or make it track a particular point of interest.
+
+For simple missions you can manually specify the required waypoints and camera commands. For more complex paths and grid surveys Mission Planner makes things easy by providing tools to automatically generating the required mission for arbitrary regions.
+
+This article explains the available camera and gimbal commands. It also describes the auto-missions provided by Mission Planner and shows how these can be used to generate composite survey images of arbitrary regions.
+<h2>Camera commands</h2>
+<ul>
+	<li><code><a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-set-cam-trigg-dist">DO_SET_CAM_TRIGG_DIST</a></code> — Trigger the camera shutter at regular intervals. This is most commonly used for supporting area surveys.</li>
+	<li><code><a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-digicam-control">DO_DIGICAM_CONTROL</a></code> — Trigger the camera shutter once every time this command is called.</li>
+</ul>
+<h2>Camera gimbal commands</h2>
+If a camera gimbal is used, you can set the camera position (yaw, tilt, roll) or aim it at a specific region of interest (ROI):
+<ul>
+	<li><code><a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-set-roi">DO_SET_ROI</a></code> — Target the camera towards a specified region of interest (position, including altitude).</li>
+	<li><code><a title="DO_MOUNT_CONTROL" href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-mount-control">DO_MOUNT_CONTROL</a></code> — Position the gimbal with the specified roll, pitch and yaw.</li>
+</ul>
+<h2>Servo and relay commands</h2>
+Servos and relay outputs can be connected to hardware and activated during missions using the <code><a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-set-servo">DO_SET_SERVO</a></code> or <code><a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/#do-set-relay">DO_SET_RELAY</a></code> commands, respectively.
+
+One possible use for these outputs is to control camera features other than the shutter (for example, to set the zoom level or switch capture from still to video).
+
+[note]The method used to connect your servo or relay to the camera, and what features are accessible, will depend the camera and its supported remote-control mechanism(s). Depending on the camera manufacturer, you may find hints at how this can be done in these <a title="common-CHDK Camera Control Tutorial" href="common-chdk-camera-control-tutorial">CHDK</a> and <a title="common-Camera Shutter Tutorial using Stratosnapper" href="common-pixhawk-auto-camera-trigger-without-chdk">Stratosnapper</a> tutorials.[/note]
+<h1>Auto-mission types</h1>
+Mission Planner supports the following <em>Auto Waypoint</em> options. To access these open the <em>Flight Plan</em> screen, right-click on the map and select the option from under the <em>Auto WP</em> menu:
+<ul>
+	<li><strong>Create WP Circle</strong> — Create a circle of waypoints.</li>
+	<li><strong>Area</strong> — Displays the area of the current polygon (if defined).</li>
+	<li><strong>Create Spline Circle</strong> — A circle where the altitude of waypoints follows a rising spline (relevant to flying vehicles).</li>
+	<li><strong>Survey (Grid)</strong> — Automatically create waypoints and camera control commands to survey a specified polygon.</li>
+	<li><strong>Survey (Gridv2)</strong> — <em>Under construction!</em> This is a simpler grid control for creating a rectangular survey area.</li>
+	<li><strong>SimpleGrid</strong> — A simple auto-created survey grid. No camera control is defined, so this must be added separately.</li>
+</ul>
+The following sections include community-provided examples of automatic survey missions.
+
+
+
+<h2>Survey (Grid) Example</h2>
+
+Mission Planner's <em>Survey (Grid)</em> option automatically defines the waypoints required to cover an arbitrary polygon, and sets <code>DO_SET_CAM_TRIGG_DIST</code> on relevant waypoints to ensure that pictures are captured at regular intervals in the vehicle's path.
+<ul>
+	<li>Open the <em>Flight Plan</em> tab</li>
+	<li><strong>Right click</strong> on the map, and select <strong>Draw Polygon | Add PolyGon Point</strong>. Create points surrounding the area to be photographed.</li>
+	<li><strong>Right click</strong> on the map and select <strong>Auto WP | Survey(Grid)</strong>:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample.jpg"><img class="size-full wp-image-2085 alignnone" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample.jpg" alt="surveyexample" width="484" height="498" /></a></li>
+	<li><em>Mission Planner</em> will then display a configuration screen where you can define the camera make/model and other parameters including teh overlap you want between pictures, lens size, etc. <code>DO_SET_CAM_TRIGG_DIST</code> is automatically calculated based on this information!
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample2.jpg"><img class="size-full wp-image-2086 alignnone" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/surveyexample2.jpg" alt="surveyexample2" width="394" height="574" /></a></li>
+</ul>
+After clicking on <strong>Accept</strong>, <em>Mission Planner</em> will generate a list of waypoints covering the specified area, and including take-off and landing waypoints. The <code>DO_SET_CAM_TRIGG_DIST</code> command is called to set the distance in meters between two camera triggers during your mission. At the end of the mission <code>DO_SET_CAM_TRIGG_DIST</code> is called again to set the parameter back to zero (stops capturing images).
+
+The final mission with waypoints and camera triggers looks like this:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionexemple.jpg"><img class="alignnone size-full wp-image-2084" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/missionexemple.jpg" alt="mission example" width="750" height="850" /></a>
+
+The test mission shown above was run. It generated 15 images, which have been stitched together. A thumbnail of the composite image is shown below (because the full size image is too large at about 107 MBytes).
+
+<a style="font-style: normal" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Mortierthumbnail2.jpg"><img class="alignnone size-full wp-image-2087" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Mortierthumbnail2.jpg" alt="Mortierthumbnail2" width="750" height="878" /></a>
+
+[note]This section was originally part of the article <a title="common-Camera Shutter Tutorial using Stratosnapper" href="common-pixhawk-auto-camera-trigger-without-chdk">Camera Shutter Tutorial using Stratosnapper</a> (by Hugues)[/note]
+
+
+<h1>Creating composite images</h1>
+
+There are a number of good free and paid tools for creating composite images:
+
+<ul>
+	<li><a href="https://pix4d.com/products/">Pix4Dmapper</a> - The free "discovery" version supports image merging. </li>
+	<li><a href="http://research.microsoft.com/en-us/um/redmond/groups/ivm/ice/" target="_blank">Microsoft Image Composite Editor (ICE)</a></li>
+</ul>
+
+

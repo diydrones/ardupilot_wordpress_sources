@@ -9,75 +9,100 @@ post_parent_stub: common-rangefinder-landingpage
 post_parent_title: common-Rangefinders (landing page) 
 END METADATA 
 -->
-The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with up to a 60m range, low power consumption, and small form factor.  This sensor can be purchased from <a href="https://store.3drobotics.com/products/lidar-lite/" target="_blank">3DRobotics</a> and the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/LIDAR-Lite-Data-Sheet.pdf" target="_blank">data sheet</a> and other technical info can be found <a href="http://pulsedlight.myshopify.com/pages/docs" target="_blank">here</a>.
+The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/LIDAR-Lite-Data-Sheet.pdf" target="_blank">data sheet</a> and other technical info can be found <a href="http://pulsedlight.myshopify.com/pages/docs" target="_blank">here</a>.
 <!-- more -->
 
-[warning]This rangefinder is only supported on the Pixhawk running AC3.2 or higher (and is supported on recent versions of ArduPlane and ArduRover).[/warning]
+[note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.2 or higher (as well as Rover 2.49 or higher).[/note]
 
 https://www.youtube.com/watch?v=3I06AOwIQVY
-
-
-
 <h1>Connecting to the Pixhawk via I2C</h1>
-
-<span style="color: #ff0000;">NOTE:</span> Serious bugs have been found in Lidars made before March 2015 that make the I2C interface unreliable. See the PWM alternative connection option below.
+[warning]If you have a LIDAR-Lite that has a manufacture date label prior to February 2015 there are I2C interface communications issues that will cause unreliable operation of the sensor with Pixhawk and <em>will cause your vehicle to crash</em>. When using these versions of LIDAR-Lite please use the PWM alternative listed below for best results.[/warning]
 
 The cable is configured with a 6-position Molex CLIK Mate connector on one end and tinned leads on the opposite end.  You will need to solder the tinned ends to a modified <a href="http://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2-3-4" target="_blank">DF13 4-pin I2C cable</a> as shown below.
 
 The power to the rangefinder should be supplied from a separate external BEC as shown in the diagram below.
 
-[caption id="attachment_3140" align="alignnone" width="736"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Pixhawk_v2_Capacitor1.png"><img class="size-full wp-image-3140" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Pixhawk_v2_Capacitor1.png" alt="LIDAR-Lite/Pixhawk Connection Diagram" width="736" height="589" /></a> LIDAR-Lite/Pixhawk Connection Diagram[/caption]
+[caption id="attachment_4267" align="alignnone" width="736"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Pixhawk_v2_Capacitor_3.png"><img class="size-full wp-image-4267" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Pixhawk_v2_Capacitor_3.png" alt="LIDAR-Lite/Pixhawk Connection Diagram" width="736" height="589" /></a> LIDAR-Lite/Pixhawk Connection Diagram[/caption]
 
-<strong>Note: The low pass filter shown in the diagram is required for first generation hardware (as available Jan 2015) - a <a title="PCB and Schematic for Low Pass Filter" href="http://123d.circuits.io/circuits/514802-lidar-lite">schematic and PCB design are provided here</a>. These should not be required in later versions of the LIDAR Lite (at which point the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Pixhawk_v2.png">diagram will change to this</a> and will have <a title="circuit diagram" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/LIDAR-LitePixhawkConnectionCircuitDiagram.png">this circuit diagram</a>).</strong>
+[note]The low pass filter shown in the diagram is required for first generation hardware (for hardware with manufacture dates prior to February 2015) - a <a title="PCB and Schematic for Low Pass Filter" href="http://123d.circuits.io/circuits/514802-lidar-lite">schematic and PCB design are provided here</a>. These should not be required in later versions of the LIDAR Lite (at which point the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/RangeFinder_LIDARLite_Pixhawk_v2.png">diagram will change to this</a> and will have <a title="circuit diagram" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/LIDAR-LitePixhawkConnectionCircuitDiagram.png">this circuit diagram</a>).[/note]
 
 You may wish to also purchase an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter board</a> so that you can continue to connect an <a href="wiki/common-installing-3dr-ublox-gps-compass-module/" target="_blank">external GPS/Compass module</a>.
 
 [note]It is important to ensure that the ground from the BEC is connected to the ground on the servo rail.[/note]
-
-
-
 <h1>Connecting to Pixhawk via PWM</h1>
-
-As of the 3.3.x release of APM:Plane you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
+As of the 3.3.x release of Plane you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
 
 To connect via PWM you need to connect 4 pins on the Lidar to the PWM rail of the Pixhawk. The connections are as follows:
+<table>
+<tbody>
+<tr>
+<td><strong>LIDAR-Lite Pin</strong></td>
+<td><strong>Pixhawk Pin</strong></td>
+</tr>
+<tr>
+<td>J1</td>
+<td>CH6 Out V+</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>CH6 Out Signal</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>Ch7 Out Signal</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>(not used)</td>
+</tr>
+<tr>
+<td>J5</td>
+<td>(not used)</td>
+</tr>
+<tr>
+<td>J6</td>
+<td>Ch6 Out Ground</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2.jpg"><img class="alignnone size-full wp-image-1718" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2.jpg" alt="pixhawk2" width="800" height="430" /></a>
-<ul>
-	<li>Lidar J1 Pin1 -&gt; 5V servo rail (pin 102 in above)</li>
-	<li>Lidar J1 Pin2 -&gt; Pin 55 in above diagram</li>
-	<li>Lidar J1 Pin3 -&gt; Pin 54 in above diagram</li>
-	<li>Lidar J1 Pin6 -&gt; GND on servo rail</li>
-</ul>
-You also need a resistor between J1-pin3 and ground (ie. between pin3 and pin6). The exact value of the resistor isn't critical, somewhere between 200 Ohm and 1kOhm will do. Testing for the development of the driver was done with a 470 Ohm resistor. The resistor is what tells the Lidar to start taking a reading, so connecting a resistor between pin 3 and ground tells the Lidar to go into continuous acquisition mode.
+<img class="alignnone size-full wp-image-4254" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/side_back.jpg" alt="side_back" width="795" height="538" />
+
+You need a resistor between J3 and ground. The exact value of the resistor isn't critical, somewhere between 200 Ohm and 1kOhm will do. Testing for the development of the driver was done with a 470 Ohm resistor. The resistor is what tells the Lidar to start taking a reading, so connecting a resistor between pin 3 and ground tells the Lidar to go into continuous acquisition mode.
+
+Here's a picture of the necessary cable, with the resistor shown before being covered by heat-shrink tubing:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_5511.jpg"><img class="alignnone size-full wp-image-4255" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_5511.jpg" alt="IMG_5511" width="800" height="681" /></a>
 
 You then need the following parameters set to enable the PWM driver:
 <ul>
-	<li>RNGFND_TYPE = 5</li>
-	<li>RNGFND_STOP_PIN = 55</li>
-	<li>BRD_PWM_COUNT = 4</li>
-	<li>RNGFND_SCALING = 1</li>
-	<li>RNGFND_OFFSET = 0</li>
+	<li><code>RNGFND_TYPE</code> = 5</li>
+	<li><code>RNGFND_STOP_PIN</code> = 55</li>
+	<li><code>BRD_PWM_COUNT</code> = 4</li>
+	<li><code>RNGFND_SCALING</code> = 1</li>
+	<li><code>RNGFND_OFFSET</code> = 0</li>
 </ul>
 The use of pin 55 as the stop pin is just a suggestion, not a requirement. It connects to the enable pin on the Lidar, and allows the driver to reset the Lidar if it stops providing readings.
 
 The use of pin 54 for the PWM signal is required, and only FMU AUX5 (pin 54) can be used due to the internal timer routing of the Pixhawk.
 
+<strong>Note</strong>: when using LIDAR-Lite in PWM mode please keep the following in mind:
+<ol>
+	<li>You need to have a battery/ESC plugged in. (in PWM mode, the LIDAR-Lite gets its power from the servo rail, which is powered by the ESC)</li>
+	<li>On the ground station side, APMPlanner currently does not display the data, but Mission Planner does. Fixes are on the way.</li>
+	<li>Make sure the LIDAR is not right on a table and is at least 20cm or so from the nearest surface. Otherwise, it will display 0 distance (which is correct!)</li>
+</ol>
 <h2>Optional Power Saving</h2>
-When using the PWM driver you can optionally set RNGFND_PWRRNG to a terrain height in meters above which the Lidar will be disabled to save power. When the terrain data indicates that the vehicle is above that height the RNGFND_STOP_PIN will be used to disable the Lidar. This saves around 100mA of current. Your GCS must <a href="/wiki/common-planning-a-mission-with-waypoints-and-events/common-terrain-following/">provide terrain data</a> for this to work.
-
-
-
+When using the PWM driver you can optionally set <code>RNGFND_PWRRNG</code> to a terrain height in meters above which the Lidar will be disabled to save power. When the terrain data indicates that the vehicle is above that height the <code>RNGFND_STOP_PIN</code> will be used to disable the Lidar. This saves around 100mA of current. Your GCS must <a href="common-terrain-following/">provide terrain data</a> for this to work.
 <h1>Setup in Mission Planner</h1>
+To configure Copter, Plane or Rover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set: <code>RNGFND_TYPE</code> to “3" if using an APM2, or "4" if using a PX4 or Pixhawk.
 
-To configure ArduCopter, ArduPlane or ArduRover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parameter List page and set: RNGFND_TYPE to “3" if using an APM2, or "4" if using a PX4 or Pixhawk.
+Set the <code>RNGFND_MAX_CM</code> parameter to 4000 (40m). This parameter represents the maximum distance in centimeters that the LiDAR is reliable over — when ignoring “0” distance readings in the driver, a value of 4000 should work well in almost all conditions.
 
-You also need to set the RNGFND_MAX_CM parameter to 4000 (40m) which is the maximum distance in centimeters that your LiDAR is reliable over.  This number may need to be lower (i.e. 1000 or 2500) depending on the exact model of LiDAR that you have (and to some extent the surface you are flying over).
+<code>RNGFND_MIN_CM</code> should be set to 20cm. Below that distance you will still get readings, but they may be inaccurate (the optics can start to introduce parallax error if the sensor picks up signal from specular reflections rather than directly from a return signal).
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_MPSetup.png"><img class="alignnone size-large wp-image-2903" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_MPSetup-1024x561.png" alt="RangeFinder_LIDARLite_MPSetup" width="584" height="319" /></a>
-
-
-
 <h1>Testing the sensor</h1>
-
 Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab.  Look closely for "sonarrange".
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>

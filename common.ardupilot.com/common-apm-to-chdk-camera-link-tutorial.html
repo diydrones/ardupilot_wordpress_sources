@@ -1,71 +1,160 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-apm-to-chdk-camera-link-tutorial 
-title: common-APM to CHDK Camera Link Tutorial 
+title: common-Camera Shutter Triggering using CHDK 
 id: 633 
-menu_order: 0 
-post_parent_id: 0 
-post_parent_stub:  
-post_parent_title:  
+menu_order: 50 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
 END METADATA 
 -->
-<h3>Use the Canon CHDK Camera Link to connect Your Canon Camera to the APM</h3>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg"><img class="alignnone size-full wp-image-634" alt="APM_CHDK-600x260" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg" width="600" height="260" /></a>
+This article explains how to set up camera shutter triggering for Canon Cameras that support the <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">Canon Hacker Development Kit</a> (CHDK).
+<!--more-->
 
-This tutorial will show you how to get your CHDK-enabled camera connected to your ArduPilot Mega (APM) without buying any extra hardware or decoding PWM outputs. You might want to make this connection to take advantage of the camera trigger function based on distance covered, to ensure a certain overlap and to avoid excessively high overlap. This modification is not necessary, if you have a CHDK camera and want to keep it simple, you won’t gain much by switching to this method right away.
+<h1>Overview</h1>
+
+ArduPilot allows you to <a href="common-camera-shutter-with-servo" title="common-Camera Shutter with Servo">configure a servo or relay output as the control signal for the camera shutter</a> so that it can be used in <a href="common-camera-control-and-auto-missions-in-mission-planner" title="common-Camera Control and Auto Missions in Mission Planner">Camera Missions</a>. Additional hardware is required to convert the shutter activation signal to the format expected by the particular camera. 
+
+This article explains how to set up the shutter-trigger for Canon Cameras that support the <em>Canon Hacker Development Kit</em> (CHDK). The method connects the ArduPilot output to the camera using a *custom cable*, and causes a script running on the camera to take pictures when the <em>relay</em> output voltage goes high. 
+
+At the end of the article is a <a href="#chdk_cables_for_purchase">list of cables that you can purchase</a> instead of using the custom cable (please extend this list if you find another approriate cable).
+
+The article covers both Pixhawk and APM2.x. 
+
+[caption id="attachment_634" align="alignnone" width="600"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_CHDK-600x260.jpg" alt="APM Connected to a Canon SX260 HS using a custom cable" width="600" height="260" class="size-full wp-image-634" /></a> APM Connected to a Canon SX260 HS using a custom cable[/caption]
+
+[note]It is also possible to use a <a href="#using_a_servo_instead_of_a_relay">servo output instead of a relay</a>.[/note]
 
 
 
-<h3>Modify a USB Cable to connect Between the Camera and the APM</h3>
-For this tutorial, I’ll use an SX260 HS but this should work equally well on any CHDK-supported Canon Powershot camera. You’ll need just the supplies below to make the cable. The SX260 uses a USB Mini-B connector. Most Powershot cameras come with a USB cable, you can just use that one to be safe.
+<h1>CHKD and ArduPilot integration</h1>
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682.jpg"><img class="alignnone size-full wp-image-635" alt="Supplies-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682.jpg" width="1024" height="682" /></a>
+CHDK is an experimental (and free) development tool, which temporarily patches (supported) <em>Canon cameras</em> so that they can be controlled using scripts. The scripts are able to take pictures, control the camera zoom, set the focus, and access many other camera features. 
 
-If you don’t have a crimp tool to attach the servo connector, just take a spare servo wire and solder the wires together instead.
+Scripts can also read the camera USB port voltage and execute different instructions/functions based on the signal pulse-length. When using a relay, the script can be very simple — all it needs to do is check the voltage (in a loop), and take a picture when it detects the relay voltage go high. More complicated scripts might first set the focus, zoom, or preform any other default behaviour. 
+
+The <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">CHDK Wiki</a> documentation explains which cameras are supported, how you install CHDK on you camera, and how to install and run scripts.
+
+
+
+<h1>Cable for connecting to APM</h1>
+
+A cable is needed to connect the APM board to the camera USB port. This section shows how to modify the USB cable that is supplied with the camera, replacing the standard USB connector with a 3-position header that can connect to the AMP output port.
+
+[note]This example uses the USB Mini-B connector that comes with the SX260 HS camera. The same approach should work equally well using the supplied cable on any CHDK-supported Canon Powershot camera.[/note]
+
+The components used to attach the servo connector to the wire are shown below. If you don’t have a crimp tool you can just solder a spare servo wire connector instead.
+
+[caption id="attachment_635" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Supplies-1024x682-300x199.jpg" alt="CHDK Camera Control Cable for APM" width="300" height="199" class="size-medium wp-image-635" /></a>APM CHDK Camera Control Cable: Parts needed[/caption]
+
+
 
 We’ll only be using the Mini-B side of this cable, so measure whatever length you need from that end depending on how your camera and autopilot mount in your airframe. I’ve measured out about 14″ and cut the cable completely through. Inside are four wires, we only need the red and black wire so cut away the green and white wires. Strip the ends of the red and black wires.
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682.jpg"><img class="alignnone size-full wp-image-636" alt="USB_StrippedWires-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682.jpg" width="1024" height="682" /></a>
+[caption id="attachment_636" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/USB_StrippedWires-1024x682-300x199.jpg" alt="CHDK Camera Control Cable: Stripped Wires" width="300" height="199" class="size-medium wp-image-636" /></a> CHDK Camera Control Cable: Stripped Wires[/caption]
 
 If you have the crimp tool, crimp and insert the wires into the first and third positions of a 3-position header. If you don’t have the crimp tool, solder these two wires to the ground and signal wires of a spare servo wire. Insert the ground wire into the side with an arrow so you can tell which wire is which later on.
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682.jpg"><img class="alignnone size-full wp-image-637" alt="Connector_Attached-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682.jpg" width="1024" height="682" /></a>
+[caption id="attachment_637" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Attached-1024x682-300x199.jpg" alt="CHDK Camera Cable: Attaching the 3 Header Connector" width="300" height="199" class="size-medium wp-image-637" /></a> CHDK Camera Cable: Attaching the 3-Position Header[/caption]
 
 Cover the connector with heatshrink. Be careful with the hot air near the connector as it can cause the locking plastic pieces in the receptacle to deform.
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg"><img class="alignnone size-full wp-image-638" alt="Connector_Heatshrink-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg" width="1024" height="682" /></a>
+[caption id="attachment_638" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682-300x199.jpg" alt="Connector covered with heatshrink" width="300" height="199" class="size-medium wp-image-638" /></a>ACHDK Camera Cable: Connector covered with Heatshrink[/caption]
+
+
+<h1>Cable for connecting to Pixhawk</h1>
+
+For Pixhawk you have to modify the APM cable above, adding a circuit step the output pin signal voltage from 3.3 to 5 volts. This is required because the relay/servo output voltage is approximately 3.3V while CHDK needs 5V to trigger. 
+
+A circuit and PCB you can use are shown below. 5V should be supplied from a BEC (or from a BEC powering the central pin on the AUX output rail) because the servo rail itself is not powered.
+
+1 x BC547 or 2N3904
+1 x BC557 or 2N3906
+2 x 1 K
+1 x 220 ohm
+
+[caption width="640" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1581209"><img src="http://api.ning.com/files/6A05RJELsODapmzmxrkfVjh3WsYV3VM6gRNmnUfTqO8MDOtaCuWg6baF2UChPaKaq52lXT63W*i-uwbGNqEGfbEczIHGK3ER/3.3vto5vlogiclevelshifterwithtransistorsinproteus.jpg" width="640" height="345" alt="3V to 5V Shifter Circuit" class /></a> 3V to 5V Shifter Circuit[/caption]
+
+
+[caption width="704" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1594680"><img src="http://api.ning.com/files/iAT0B9wCR3AoT2PagGiqpRaMPAUgnytMSGSeJ7sSKh9gtRNuhdzj01dCdTkRLM2*x0pN58LfGHlqFbKfTThHXPkyjaetHNu-/Pixhawk_35_diag.png" width="704" height="773" alt="3V to 5V Shifter (PCB)" class /></a> 3V to 5V Shifter (PCB)[/caption]
+
+[note]The voltage stepper circuit and PCB above are <a href="http://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209">from the community discussion boards </a>.[/note]
+
+It is also possible to find pre-built stepper circuits like the <a href="https://www.sparkfun.com/products/10968">SparkFun 5V Step-Up Breakout - NCP1402</a> (not tested).
+
+
+<h1>Camera shutter configuration in Mission Planner</h1>
+
+<a href="common-camera-shutter-with-servo" title="common-Camera Shutter Configuration in Mission Planner">Camera Shutter Configuration in Mission Planner</a> explains how to configure a Pixhawk AUX output or the APM2.x A9 pin as a relay camera trigger. Connect the cable to the appropriate port as described, and to the camera.
+
+The specific Mission Planner settings required for this CHDK hardware are listed below. Note that duration required may be different on some cameras:
+
+<ul>
+  <li><u>Pixhawk:</u>
+    <ul>
+      <li><code>CAM_TRIG_TYPE</code>: 1  (Relay). </li>
+      <li><code>Shutter (Port)</code>: RC10  (Name of connected port, in this example we use RC10 = AUX2). </li>
+    </ul>
+  </li>
+  <li><u>APM2.x:</u>
+    <ul>
+      <li><code>Shutter (Port)</code>: Relay (A9 Pin). </li>
+    </ul>
+  </li>
+
+  <li><code>Shutter Duration</code>: 1 (1/10 second)</li>
+  <li><code>CH7_OPT</code> : 9 (Optional - enables manual shutter triggering on Copter only).
+</ul>
+
+The servo settings are not used for the relay configuration, and can be ignored.
 
 
 
-<h3>Connect the APM and your Camera</h3>
-Now plug this cable into pin A9 on the side row of APM. The text doesn’t line up exactly so be sure to count rows. SPI takes two rows, then A11 and A10 are two more so there should be 4 rows of free pins, then our new connector.
+<h1>Creating and installing the CHDK script</h1>
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_Connect.jpg"><img class="alignnone size-full wp-image-639" alt="SAMSUNG CSC" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/APM_Connect.jpg" width="733" height="575" /></a>
+One of the simplest scripts you can use is <a href="http://www.event38.com/v/vspfiles/downloadables/E38_APM.bas" rel="nofollow">E38_APM.bas</a>, which simply waits on the relay signal and then takes a picture.
 
+Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source <a href="http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script">KAP UAV Exposure Control Script</a> (v3.1). This was used as the basis for the <a href="http://store.3drobotics.com/products/3DR-Aero">3DR Aero Plane</a> <em>3DR EAI (Exposure-Aperture-ISO)</em> script described in the <a href="http://3drobotics.com/wp-content/uploads/2014/12/AeroM-Operation-Manual-v3.pdf" title="Aero-M Operations Manual">Aero-M Operation Manual</a>.
 
-
-<h3>Install the CHDK software into your Canon Camera</h3>
-If you already have CHDK installed, just install <a href="http://www.event38.com/v/vspfiles/downloadables/E38_APM.bas" rel="nofollow">the script file</a> (right click, save link as) into the scripts directory on your SD card. If not, follow instructions for installing CHDK from the page corresponding to your camera at <a href="http://chdk.wikia.com/wiki/CHDK" rel="nofollow">the CHDK wiki</a>. Load up CHDK and go into the menu then navigate to Miscellaneous Stuff -&gt; Remote Parameters and make sure the Enable Remote setting is checked.
+The <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">CHDK Wiki</a> explains how you set up CHDK and install and activate scripts for your particular camera. Installing scripts is usually as simple as copying them into the "scripts" directory on your SD card. You can then activate them by navigating to the menu <strong>Miscellaneous Stuff -&gt; Remote Parameters</strong> and making sure the <strong>Enable Remote</strong> setting is checked.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/CHDK_Remote-1024x682.jpg"><img class="alignnone size-full wp-image-640" alt="CHDK_Remote-1024x682" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/CHDK_Remote-1024x682.jpg" width="1024" height="682" /></a>
 
 
 
-<h3>Set up the APM parameters for use with CHDK</h3>
-If not already connected, connect your camera to the APM with the modified cable and open the Full Parameters List in the Config/Tuning tab. Set the parameters as following:
+<h1>Testing</h1>
+
+Load and run your CHDK script. On Copter you should be able to trigger the shutter using the CH7 switch.
+
+On other vehicles set the <code>CAM_TRIGG_DIST</code> to 1 or 2 meters. Small changes in the GPS readings will cause the distance value to count up slowly and it should trigger the shutter every few seconds.  If nothing happens at all, take your vehicle outside and walk around to make sure that some distance is detected. If your camera lens closes and opens instead of taking a picture, make sure the CHDK <em>remote enable</em> setting is activated on the camera.
+
+
+<h1>Using a servo instead of a relay</h1>
+
+It is also possible to trigger the camera shutter using a servo output, but that requires additional (and often more expensive) hardware to decode the servo's PWM signal. The <a href="common-chdk-camera-control-tutorial" title="common-CHDK Camera Control Tutorial">CHDK Camera Control Tutorial</a> describes a suitable PWM-to-voltage pulse cable, and information from which the servo settings can be inferred.
+
+[note]The <a href="common-chdk-camera-control-tutorial" title="common-CHDK Camera Control Tutorial">CHDK Camera Control Tutorial</a> integrates with the camera as a "generic servo" rather than as a shutter trigger. This approach means that camera triggering is not as well integrated with mission planning, but more camera commands can be called.[/note]
+
+<h1>CHDK Cables for purchase</h1>
+
+This section is for listing CHDK cables that you can purchase (rather than creating your own, as described in this article). Please extend the list if you discover more.
+
+
+<h1>Tuffwing camera trigger cable for Pixhawk</h1>
+
+Tuffwing camera trigger cable for connecting Pixhawk to a CHDK Canon PowerShot. This includes circuitry to upscale the Pixhawk 3.3 volt signal to 5 volts from the + pin. You'll need to have an ESC with an BEC or UBEC plugged into any of the open AUX or MAIN OUTs on the Pixhawk. 
 <ul>
-	<li>CAM_DURATION: 1</li>
-	<li>CAM_TRIGG_DIST: Depending on overlap required.. be sure to keep in mind the normal downwind speed of your plane as well as the maximum rate at which the camera can take pictures. For the SX260 and the E382 that’s once every 2.7 seconds and about 18m/s. I plan to operate below those condition in most cases but I do like to get as many pictures as possible, so I set my distance to 49 (meters).</li>
-	<li>CAM_TRIGG_TYPE: 1</li>
-	<li>RELAY_PIN: 13</li>
+	<li><a href="http://www.tuffwing.com/store/store.html#PixHawk_Camera_Trigger_Cable" title="Purchase from Tuffwing Store">Purchase from Tuffwing store</a></li>
+	<li><a href="http://www.tuffwing.com/support/pixhawk_camera_trigger_cable.html" title="Pixhawk Camera Trigger Cable User Guide">Pixhawk Camera Trigger Cable</a> (User Guide)</li>
 </ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_CAM-1024x554.png"><img class="alignnone size-full wp-image-641" alt="Params_CAM-1024x554" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_CAM-1024x554.png" width="1024" height="554" /></a>
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_Relay-1024x553.png"><img class="alignnone size-full wp-image-642" alt="Params_Relay-1024x553" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Params_Relay-1024x553.png" width="1024" height="553" /></a>
-
+[caption width="150" align="alignnone"]<a href="http://www.tuffwing.com/store/store.html#PixHawk_Camera_Trigger_Cable"><img src="http://www.tuffwing.com/images/pixhawk_trigger_cable.jpg" width="150" height="150" alt="Tuffwing Pixhawk CHDK Camera Trigger Cable" class /></a> Tuffwing Pixhawk CHDK Camera Trigger Cable[/caption]
 
 
-<h3>Ensure that everything is working properly</h3>
-All that’s left is to test it out. Load the E38_APM.bas script file like any normal CHDK script and start running it. If you can get a 3d fix inside, you can test it on your lab bench just using USB power. Just set the CAM_TRIGG_DIST to 1 or 2 meters and let your plane sit on the desk. Small movements between GPS readings will cause the distance value to count up slowly and it should trigger the shutter every few seconds.
 
-If your camera lens closes and opens instead of taking a picture, make sure the CHDK remote enable setting saved properly. If nothing happens at all, take your APM outside and walk around to make sure you are getting some distance covered.
+
+
+
+
+

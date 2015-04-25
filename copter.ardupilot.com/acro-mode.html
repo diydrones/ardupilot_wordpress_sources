@@ -29,7 +29,7 @@ The above video was filmed with a Pixhawk running AC3.2 in ACRO mode using <a hr
 
 <h1>Acro Trainer</h1>
 
-The <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Trainer_ArduCopterACRO_TRAINER">ACRO_TRAINER</a> parameter can be set to:
+The <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Trainer_CopterACRO_TRAINER">ACRO_TRAINER</a> parameter can be set to:
 
 <ul>
 	<li>0  = disabled.  This means the pilot operates in full Rate control with no automatic leveling nor angle-limiting performed by the autopilot.</li>
@@ -46,9 +46,9 @@ The trainer can be enabled/disabled using the Ch7/Ch8 switches.  With a 3 posit
 <h1>Tuning Parameters</h1>
 
 <ul>
-	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Roll_and_Pitch_P_gain_ArduCopterACRO_RP_P">ACRO_RP_P</a> controls the rotation rate for the roll and pitch axis.  The default, 4.5, will command a 200deg/sec rotation rate.  Higher values lead to higher rotation rates, lower to slower rotation rates.</li>
-	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Yaw_P_gain_ArduCopterACRO_YAW_P">ACRO_YAW_P </a>controls the rotation rate for the yaw axis.  The default, 4.5, like roll and pitch, will command a 200deg/sec rotation rate.</li>
-	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Expo_ArduCopterACRO_EXPO">ACRO_EXPO </a>is an amount of Exponential to apply to the pilots stick inputs that only applies to ACRO mode.  By default, ACRO mode is much more responsive, even in the center-sticks positions, than the other modes, so this parameter allows the pilot to fine-tune stick response in the control to match what they feel when they are in other modes such as Stabilize, AltHold, PosHold, etc.  The default value of 0 applies 30% expo to Roll and Pitch demands from the pilot.</li>
+	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Roll_and_Pitch_P_gain_CopterACRO_RP_P">ACRO_RP_P</a> controls the rotation rate for the roll and pitch axis.  The default, 4.5, will command a 200deg/sec rotation rate.  Higher values lead to higher rotation rates, lower to slower rotation rates.</li>
+	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Yaw_P_gain_CopterACRO_YAW_P">ACRO_YAW_P </a>controls the rotation rate for the yaw axis.  The default, 4.5, like roll and pitch, will command a 200deg/sec rotation rate.</li>
+	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#Acro_Expo_CopterACRO_EXPO">ACRO_EXPO </a>is an amount of Exponential to apply to the pilots stick inputs that only applies to ACRO mode.  By default, ACRO mode is much more responsive, even in the center-sticks positions, than the other modes, so this parameter allows the pilot to fine-tune stick response in the control to match what they feel when they are in other modes such as Stabilize, AltHold, PosHold, etc.  The default value of 0 applies 30% expo to Roll and Pitch demands from the pilot.</li>
 </ul>
 
 

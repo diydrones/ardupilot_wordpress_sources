@@ -20,7 +20,7 @@ This can be due to a number of mistakes:
 	<li>Are you sure you're arming them right? When the motors are armed, the arm LED (green on APM1, yellow on APM 2) on the IMU will turn solid after the IMU calibration flashing (about 5 seconds). Review the <a href="arming_the_motors" rel="nofollow">arming guide</a> to make sure you're doing it right.</li>
 	<li>Are your Yaw or Throttle channels reversed on your transmitter? Try moving the Yaw stick to the far left, instead of the right. If that works (green LED tuns solid after the IMU calibration, your Yaw is reversed. If not, try the same with the Throttle channel: push it to max and try full right yaw from there. If that works, your Throttle channel is reversed.</li>
 	<li>Is your RC gear in Mode 2? If not, you'll need to move the right stick (yaw) to the right and the left stick (throttle) to the top. (Or just switch back to Mode 2)</li>
-	<li>Some ESCs are thrown off by some startup signals in ArduCopter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
+	<li>Some ESCs are thrown off by some startup signals in Copter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
 	<li>It's possible you've changed your throttle trim settings since you did your initial radio calibration. Trim the throttle down a few notches and try arming again.</li>
 	<li>Some ESCs have a minimum low threshold before they will arm. If you need to, trim down your radio throttle and redo radio calibration.</li>
 	<li>Redo your radio calibration in the Mission Planner. Make sure that the throttle channel (Ch 3) is being read properly and the values are around 1100 (low) and 1900 (high), more or less. Remember that your LiPo must be plugged in to power the RC gear.</li>
@@ -36,13 +36,13 @@ If this is the case, there is an easy fix. Put the dataflash back in, and power
 
 
 
-<h4>ArduCopter tilts/flips over or wobbles crazily when I try to take off.</h4>
+<h4>Copter tilts/flips over or wobbles crazily when I try to take off.</h4>
 This almost always means that you've configured it or set it up wrong. Check the following:
 <ol>
 	<li>Is the APM board facing forward and in the direction of forward motion (towards the forward arm in + mode and between the arms in x mode)?</li>
 	<li>Have you set your quad orientation right in the setup process: + or x?</li>
 	<li>Check that all the motors are hooked up right, turning the right way and the pusher/puller props are on the right motors and oriented the right way.</li>
-	<li>Check the signal wires on the power distribution board to make sure they are oriented correctly. If you've reversed two, it will cause ArduCopter to flip. This should be noticeable by doing the hand test as well. (It should have also shown up in the Motors test above)</li>
+	<li>Check the signal wires on the power distribution board to make sure they are oriented correctly. If you've reversed two, it will cause Copter to flip. This should be noticeable by doing the hand test as well. (It should have also shown up in the Motors test above)</li>
 	<li>Check that your props can't turn on their motor shafts, as if they weren't tightened down enough. If one can, despite its prop being tightened, that may mean that its motor shaft has been pushed down into the motor too far for the prop mount to get a grip. Take off the prop and and use a small allen wrench to loosen the little set screw that holds the shaft onto the motor. Then with pliers pull the shaft out until it's the same height as those of the other motors. Then tighten the set screw, and put the prop back and tighten it up again.</li>
 	<li>Was the quad stable and flat for the whole calibration routine at startup? Was it stable and flat during the setup process? (If need be, do it again)</li>
 	<li>Did you calibrate your ESCs? They should all start together when you advance the throttle. If need be, do it again manually, as described <a href="esc-motor" rel="nofollow">here</a>.</li>
@@ -53,7 +53,7 @@ This almost always means that you've configured it or set it up wrong. Check the
 
 
 <h4>My overpowered copter rockets into the air can't be brought down unless I cut the throttle</h4>
-Very over powered multicopters can require so little throttle to hover that even the minimum throttle (13%) is enough for them climb. In addition, the default Rate roll/pitch gains, which are meant for weaker copter, are too high for a powerful copter and can lead to roll/pitch instability. The ArduCoper firmware may try to compensate for this roll/pitch instability by increasing the overall throttle which can lead to the copter climbing further (Note: in this particular case arducopter increasing the overall throttle is counter-productive but in a properly tuned quad it helps in cases where there is a motor failure).
+Very over powered multicopters can require so little throttle to hover that even the minimum throttle (13%) is enough for them climb. In addition, the default Rate roll/pitch gains, which are meant for weaker copter, are too high for a powerful copter and can lead to roll/pitch instability. The Copter firmware may try to compensate for this roll/pitch instability by increasing the overall throttle which can lead to the copter climbing further (Note: in this particular case Copter increasing the overall throttle is counter-productive but in a properly tuned quad it helps in cases where there is a motor failure).
 
 The possible solutions are:
 <ul>
@@ -98,21 +98,21 @@ Check the following:
 
 
 
-<h4>My ArduCopter isn't as stable as I'd like or doesn't Loiter/Hold Altitude/Navigate reliably</h4>
+<h4>My Copter isn't as stable as I'd like or doesn't Loiter/Hold Altitude/Navigate reliably</h4>
 Every copter is different, and even the official kit can have differences in motor performance or balance depending on how you've put it together. So we've made it relatively easy to tweak many of the performance settings to turn your copter perfectly. That said, tuning is something of an art, so it helps to read a bit more before you start tweaking.
 
 There is a guide to PID tuning <a href="tuning" rel="nofollow">here</a>.
 
 
 
-<h4>My ArduCopter flies okay, but it tends to tilt one way or another</h4>
+<h4>My Copter flies okay, but it tends to tilt one way or another</h4>
 Make sure the CG (center of gravity) of the copter is dead center. Then run the level command on a flat surface. (hold disarm for ~15 seconds to invoke.) You can also fly in auto-trim mode in a windless (important!) environment--any wind will cause the changes you make to work against you when the quad rotates 180°. Hold arm for ~ 20 seconds to fly in auto-trim mode for about 45 seconds. It will exit auto-trim automatically and fly normally. (Don't worry about counting out the time, just wait for the flashing lights to enter either mode.
 
 You <strong>can</strong> use your radio pitch and roll trims, but remember to re-center them when you set up your radio with the config tools. I'm not a fan of trimming the radio for quads, but NEVER, NEVER trim yaw. (Quads are also susceptible to drafts. They will need constant correction unless you install an optical flow sensor. One day...)
 
 
 
-<h4>My ArduCopter Moves In a Direction even though the Stick is Centered</h4>
+<h4>My Copter Moves In a Direction even though the Stick is Centered</h4>
 <ol>
 	<li>It is very important that the RC Channel 1 and 2 Trim parameter values (for the Roll and Pitch axes) are equal to the PWM value displayed in Mission Planner for the stick in its center position during Radio Calibration.
 <ol>
@@ -212,19 +212,19 @@ Check that you've switching the Mission Planner to the COM port assigned to your
 <ol>
 	<li>Double check that you've selected the right COM port and baud rate for USB (115200). Also double check in your Windows Device Manager which COM port your APM has been assigned to. It will be listed under Ports.</li>
 	<li>Did you use the MP installation program, which installs the drivers, and did it complete successfully?</li>
-	<li>Have you loaded flight firmware (ArduCopter or ArduPlane) to APM?</li>
+	<li>Have you loaded flight firmware (Copter or Plane) to APM?</li>
 	<li>Did you press Connect in the MP?</li>
 </ol>
 
 
 
-<h4>ArduCopter ESCs keep beeping</h4>
+<h4>Copter ESCs keep beeping</h4>
 <ol>
 	<li>Have you set up your RC input in the Mission Planner setup process?</li>
 	<li>Check that your RC radio is talking properly to its receiver (typically, that will be shown by a green light on the receiver).</li>
 	<li>If those two check out, you probably just need to calibrate your ESCs (even if you've done that before, if you've erased your EEPROM and done a reset, you'll need to do it again. It's an easy procedure and the instructions are <a href="esc-motor" rel="nofollow">here.</a></li>
 	<li>Check that your radio channels are in right order (cabling and/or Mode-1, Mode-2)</li>
-	<li>Some ESCs are thrown off by some startup signals in ArduCopter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
+	<li>Some ESCs are thrown off by some startup signals in Copter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
 </ol>
 
 
@@ -260,21 +260,21 @@ If you're getting avrdude sync error message in the Arduino status bar), go thro
 
 
 
-<h4>My ArduCopter just won't rise/lift off</h4>
-If you have a problems on getting your ArduCopter up from the ground, check that you propellers are mounted correct way.
+<h4>My Copter just won't rise/lift off</h4>
+If you have a problems on getting your Copter up from the ground, check that you propellers are mounted correct way.
 
-Official ArduCopter propellers are not symmetric and they need to be mounted proper way. If you look close to center mounting hole, there are small texts saying 10x45 or 12x45. There texts needs to be upside.
+Official Copter propellers are not symmetric and they need to be mounted proper way. If you look close to center mounting hole, there are small texts saying 10x45 or 12x45. There texts needs to be upside.
 
-If text is on downside, your ArduCopter cannot lift properly.
+If text is on downside, your Copter cannot lift properly.
 
-The props that came with early version of the 3D Robotics Arducopter were also of uneven quality and some would flex too much under load, reducing lift. If you have these (black and more flexible than most props), you should replace them with APC or equivalent props or contact 3D Robotics for a replacement.
+The props that came with early version of the 3D Robotics Copter were also of uneven quality and some would flex too much under load, reducing lift. If you have these (black and more flexible than most props), you should replace them with APC or equivalent props or contact 3D Robotics for a replacement.
 
 
 
-<h4>My ArduCopter feels sloppy on roll or pitch axis</h4>
+<h4>My Copter feels sloppy on roll or pitch axis</h4>
 Both of roll and pitch axis should give to you exact or close to similar response when doing hand tests. If one of the axis does not respond as expected, check your PID settings and you can try to upload firmware again.
 
-Firmware upload might be successful but due internal timing issues some of the code is not written properly and this can cause unstabiliness on your ArduCopter.
+Firmware upload might be successful but due internal timing issues some of the code is not written properly and this can cause unstabiliness on your Copter.
 
 
 
@@ -296,9 +296,9 @@ a GPS will rarely give an accurate position while indoors or near walls due to m
 
 
 <h4>In Alt-Hold or loiter my copter is very bouncy or takes off into the sky</h4>
-Arducopter uses the accelerometers heavily for calculating altitude and climb rate. Vibrations from the motors can cause the accelerometer values to become very noisy and throw off the altitude estimates. The solution is to reduce sources of vibration from your frame (bent prop adapters and motor shafts, replace EPP props with APC) and remove hard connections between the frame and APM by using vibration dampening products such as <a href="http://shop.dubro.com/p/1-2-r-c-protective-foam-rubber-qty-pkg-1" rel="nofollow">DuBro foam</a>.
+Copter uses the accelerometers heavily for calculating altitude and climb rate. Vibrations from the motors can cause the accelerometer values to become very noisy and throw off the altitude estimates. The solution is to reduce sources of vibration from your frame (bent prop adapters and motor shafts, replace EPP props with APC) and remove hard connections between the frame and APM by using vibration dampening products such as <a href="http://shop.dubro.com/p/1-2-r-c-protective-foam-rubber-qty-pkg-1" rel="nofollow">DuBro foam</a>.
 
-As of version 2.9 of ArduCopter, inertial navigation is used to maintain altitude and in 2.9.2 horizontal position as well so vibration truly needs to be minimized. A small pad (1/2 to 1") of Kyosho Zeal tape under each corner of the Flight Control board should get vibration low enough.
+As of version 2.9 of Copter, inertial navigation is used to maintain altitude and in 2.9.2 horizontal position as well so vibration truly needs to be minimized. A small pad (1/2 to 1") of Kyosho Zeal tape under each corner of the Flight Control board should get vibration low enough.
 
 Or you can use a standoff with an extending screw 1/10" outboard of each corner of the flight control board and suspend it with four 1/16" O-rings of appropriate diameter such that when folded over through the flight control board they just hold the board without movement, but also not in much tension.
 
@@ -313,14 +313,14 @@ There is a good discussion <a href="http://diydrones.com/forum/topics/vibration
 
 
 <h4>My copter slowly rises or descends when I enable Alt-Hold or Loiter</h4>
-The throttle deadband when in alt-hold or loiter mode is from 40% ~ 60% of the throttle. If you have an overpowered or underpowered copter then when in stabilize mode the throttle required to maintain a hover may be outside this range. So when you engage alt-hold or loiter your throttle is outside of the deadband and arducopter thinks you want to climb or descend. The simple solution is to move your throttle back to center as you engage alt-hold. A permanent solution is to modify the THR_MID parameter through the mission planner's Adv Parameter List screen. If your copter hover at 40% of throttle stick when in stabilize mode, make THR_MID = 400. If it hovers at 60% of throttle make the parameter 600, etc.
+The throttle deadband when in alt-hold or loiter mode is from 40% ~ 60% of the throttle. If you have an overpowered or underpowered copter then when in stabilize mode the throttle required to maintain a hover may be outside this range. So when you engage alt-hold or loiter your throttle is outside of the deadband and Copter thinks you want to climb or descend. The simple solution is to move your throttle back to centre as you engage alt-hold. A permanent solution is to modify the THR_MID parameter through the mission planner's Adv Parameter List screen. If your copter hover at 40% of throttle stick when in stabilize mode, make THR_MID = 400. If it hovers at 60% of throttle make the parameter 600, etc.
 
 
 
 <h4>Mission planner displays enormous "Distance to Home" or "Dist to WP"</h4>
-The "Dist to WP" (distance to waypoint) default to -1 when you do not have a waypoint set. Because of a display issue the mission planner displays this negative number as 65535. It will display a proper number as soon as you enter loiter mode, guided more or start a mission. This display issue will be fixed in a future version of ArduCopter.
+The "Dist to WP" (distance to waypoint) default to -1 when you do not have a waypoint set. Because of a display issue the mission planner displays this negative number as 65535. It will display a proper number as soon as you enter loiter mode, guided more or start a mission. This display issue will be fixed in a future version of Copter.
 
-The "Distance to Home" is the distance from the mission planner's home location (which is different from the arducopter's home location which is set when you arm the motors). You can reset the mission planner's home location to the copter's current location by clicking on the "Home Location" link in the Flight Planner screen. Below is a video explanation and how resolve it.
+The "Distance to Home" is the distance from the mission planner's home location (which is different from the Copter's home location which is set when you arm the motors). You can reset the mission planner's home location to the copter's current location by clicking on the "Home Location" link in the Flight Planner screen. Below is a video explanation and how resolve it.
 
 
 

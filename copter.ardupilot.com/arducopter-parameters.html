@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: arducopter-parameters 
-title: ArduCopter Parameters 
+title: Copter Parameters 
 id: 5838 
 menu_order: 100 
 post_parent_id: 1539 
@@ -15,9 +15,6 @@ This page was generated using Tools/autotest/param_metadata/param_parse.py
 DO NOT EDIT
 -->
 
-
-<h3 style="text-align: center">Complete Parameter List</h3>
-<hr />
 
 <p>This is a complete list of the parameters which can be set via the MAVLink protocol in the EEPROM of your APM to control vehicle behaviour. This list is automatically generated from the latest ardupilot source code, and so may contain parameters which are not yet in the stable released versions of the code.</p>
 
@@ -135,19 +132,6 @@ DO NOT EDIT
 <ul>
 <li>Increment: 50</li>
 <li>Units: mAh</li>
-</ul>
-
-
-<h2>GPS Failsafe Enable (ArduCopter:FS_GPS_ENABLE)</h2>
-
-<p>Controls what action will be taken if GPS signal is lost for at least 5 seconds</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td>1</td><td>Land</td></tr>
-<tr><td>2</td><td>AltHold</td></tr>
-<tr><td>3</td><td>Land even from Stabilize</td></tr>
-</table>
 </ul>
 
 
@@ -347,16 +331,6 @@ DO NOT EDIT
 <p>The minimum throttle that will be sent to the motors to keep them spinning</p>
 <ul>
 <li>Range: 0 300</li>
-<li>Increment: 1</li>
-<li>Units: Percent*10</li>
-</ul>
-
-
-<h2>Throttle Maximum (ArduCopter:THR_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>The maximum throttle that will be sent to the motors.  This should normally be left as 1000.</p>
-<ul>
-<li>Range: 800 1000</li>
 <li>Increment: 1</li>
 <li>Units: Percent*10</li>
 </ul>
@@ -668,7 +642,6 @@ DO NOT EDIT
 <tr><td> 17</td><td>AutoTune</td></tr>
 <tr><td> 18</td><td>Land</td></tr>
 <tr><td> 19</td><td>EPM</td></tr>
-<tr><td> 20</td><td>EKF</td></tr>
 <tr><td> 21</td><td>Parachute Enable</td></tr>
 <tr><td> 22</td><td>Parachute Release</td></tr>
 <tr><td> 23</td><td>Parachute 3pos</td></tr>
@@ -704,7 +677,146 @@ DO NOT EDIT
 <tr><td> 17</td><td>AutoTune</td></tr>
 <tr><td> 18</td><td>Land</td></tr>
 <tr><td> 19</td><td>EPM</td></tr>
-<tr><td> 20</td><td>EKF</td></tr>
+<tr><td> 21</td><td>Parachute Enable</td></tr>
+<tr><td> 22</td><td>Parachute Release</td></tr>
+<tr><td> 23</td><td>Parachute 3pos</td></tr>
+<tr><td> 24</td><td>Auto Mission Reset</td></tr>
+<tr><td> 25</td><td>AttCon Feed Forward</td></tr>
+<tr><td> 26</td><td>AttCon Accel Limits</td></tr>
+<tr><td> 27</td><td>Retract Mount</td></tr>
+<tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 29</td><td>Landing Gear</td></tr>
+</table>
+</ul>
+
+
+<h2>Channel 9 option (ArduCopter:CH9_OPT)</h2>
+
+<p>Select which function if performed when CH9 is above 1800 pwm</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Do Nothing</td></tr>
+<tr><td> 2</td><td>Flip</td></tr>
+<tr><td> 3</td><td>Simple Mode</td></tr>
+<tr><td> 4</td><td>RTL</td></tr>
+<tr><td> 5</td><td>Save Trim</td></tr>
+<tr><td> 7</td><td>Save WP</td></tr>
+<tr><td> 8</td><td>Multi Mode</td></tr>
+<tr><td> 9</td><td>Camera Trigger</td></tr>
+<tr><td> 10</td><td>RangeFinder</td></tr>
+<tr><td> 11</td><td>Fence</td></tr>
+<tr><td> 12</td><td>ResetToArmedYaw</td></tr>
+<tr><td> 13</td><td>Super Simple Mode</td></tr>
+<tr><td> 14</td><td>Acro Trainer</td></tr>
+<tr><td> 16</td><td>Auto</td></tr>
+<tr><td> 17</td><td>AutoTune</td></tr>
+<tr><td> 18</td><td>Land</td></tr>
+<tr><td> 19</td><td>EPM</td></tr>
+<tr><td> 21</td><td>Parachute Enable</td></tr>
+<tr><td> 22</td><td>Parachute Release</td></tr>
+<tr><td> 23</td><td>Parachute 3pos</td></tr>
+<tr><td> 24</td><td>Auto Mission Reset</td></tr>
+<tr><td> 25</td><td>AttCon Feed Forward</td></tr>
+<tr><td> 26</td><td>AttCon Accel Limits</td></tr>
+<tr><td> 27</td><td>Retract Mount</td></tr>
+<tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 29</td><td>Landing Gear</td></tr>
+</table>
+</ul>
+
+
+<h2>Channel 10 option (ArduCopter:CH10_OPT)</h2>
+
+<p>Select which function if performed when CH10 is above 1800 pwm</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Do Nothing</td></tr>
+<tr><td> 2</td><td>Flip</td></tr>
+<tr><td> 3</td><td>Simple Mode</td></tr>
+<tr><td> 4</td><td>RTL</td></tr>
+<tr><td> 5</td><td>Save Trim</td></tr>
+<tr><td> 7</td><td>Save WP</td></tr>
+<tr><td> 8</td><td>Multi Mode</td></tr>
+<tr><td> 9</td><td>Camera Trigger</td></tr>
+<tr><td> 10</td><td>RangeFinder</td></tr>
+<tr><td> 11</td><td>Fence</td></tr>
+<tr><td> 12</td><td>ResetToArmedYaw</td></tr>
+<tr><td> 13</td><td>Super Simple Mode</td></tr>
+<tr><td> 14</td><td>Acro Trainer</td></tr>
+<tr><td> 16</td><td>Auto</td></tr>
+<tr><td> 17</td><td>AutoTune</td></tr>
+<tr><td> 18</td><td>Land</td></tr>
+<tr><td> 19</td><td>EPM</td></tr>
+<tr><td> 21</td><td>Parachute Enable</td></tr>
+<tr><td> 22</td><td>Parachute Release</td></tr>
+<tr><td> 23</td><td>Parachute 3pos</td></tr>
+<tr><td> 24</td><td>Auto Mission Reset</td></tr>
+<tr><td> 25</td><td>AttCon Feed Forward</td></tr>
+<tr><td> 26</td><td>AttCon Accel Limits</td></tr>
+<tr><td> 27</td><td>Retract Mount</td></tr>
+<tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 29</td><td>Landing Gear</td></tr>
+</table>
+</ul>
+
+
+<h2>Channel 11 option (ArduCopter:CH11_OPT)</h2>
+
+<p>Select which function if performed when CH11 is above 1800 pwm</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Do Nothing</td></tr>
+<tr><td> 2</td><td>Flip</td></tr>
+<tr><td> 3</td><td>Simple Mode</td></tr>
+<tr><td> 4</td><td>RTL</td></tr>
+<tr><td> 5</td><td>Save Trim</td></tr>
+<tr><td> 7</td><td>Save WP</td></tr>
+<tr><td> 8</td><td>Multi Mode</td></tr>
+<tr><td> 9</td><td>Camera Trigger</td></tr>
+<tr><td> 10</td><td>RangeFinder</td></tr>
+<tr><td> 11</td><td>Fence</td></tr>
+<tr><td> 12</td><td>ResetToArmedYaw</td></tr>
+<tr><td> 13</td><td>Super Simple Mode</td></tr>
+<tr><td> 14</td><td>Acro Trainer</td></tr>
+<tr><td> 16</td><td>Auto</td></tr>
+<tr><td> 17</td><td>AutoTune</td></tr>
+<tr><td> 18</td><td>Land</td></tr>
+<tr><td> 19</td><td>EPM</td></tr>
+<tr><td> 21</td><td>Parachute Enable</td></tr>
+<tr><td> 22</td><td>Parachute Release</td></tr>
+<tr><td> 23</td><td>Parachute 3pos</td></tr>
+<tr><td> 24</td><td>Auto Mission Reset</td></tr>
+<tr><td> 25</td><td>AttCon Feed Forward</td></tr>
+<tr><td> 26</td><td>AttCon Accel Limits</td></tr>
+<tr><td> 27</td><td>Retract Mount</td></tr>
+<tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 29</td><td>Landing Gear</td></tr>
+</table>
+</ul>
+
+
+<h2>Channel 12 option (ArduCopter:CH12_OPT)</h2>
+
+<p>Select which function if performed when CH12 is above 1800 pwm</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Do Nothing</td></tr>
+<tr><td> 2</td><td>Flip</td></tr>
+<tr><td> 3</td><td>Simple Mode</td></tr>
+<tr><td> 4</td><td>RTL</td></tr>
+<tr><td> 5</td><td>Save Trim</td></tr>
+<tr><td> 7</td><td>Save WP</td></tr>
+<tr><td> 8</td><td>Multi Mode</td></tr>
+<tr><td> 9</td><td>Camera Trigger</td></tr>
+<tr><td> 10</td><td>RangeFinder</td></tr>
+<tr><td> 11</td><td>Fence</td></tr>
+<tr><td> 12</td><td>ResetToArmedYaw</td></tr>
+<tr><td> 13</td><td>Super Simple Mode</td></tr>
+<tr><td> 14</td><td>Acro Trainer</td></tr>
+<tr><td> 16</td><td>Auto</td></tr>
+<tr><td> 17</td><td>AutoTune</td></tr>
+<tr><td> 18</td><td>Land</td></tr>
+<tr><td> 19</td><td>EPM</td></tr>
 <tr><td> 21</td><td>Parachute Enable</td></tr>
 <tr><td> 22</td><td>Parachute Release</td></tr>
 <tr><td> 23</td><td>Parachute 3pos</td></tr>
@@ -790,19 +902,6 @@ DO NOT EDIT
 <tr><td> 0.6</td><td>Strict</td></tr>
 <tr><td> 0.8</td><td>Default</td></tr>
 <tr><td> 1.0</td><td>Relaxed</td></tr>
-</table>
-</ul>
-
-
-<h2>DCM yaw error threshold (ArduCopter:DCM_CHECK_THRESH)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Allows setting the maximum acceptable yaw error as a sin of the yaw error (0 to disable check)</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 0.6</td><td>Strict</td></tr>
-<tr><td> 0.8</td><td>Default</td></tr>
-<tr><td> 0.98</td><td>Relaxed</td></tr>
 </table>
 </ul>
 
@@ -902,7 +1001,7 @@ DO NOT EDIT
 
 <p>Roll axis rate controller P gain.  Converts the difference between desired roll rate and actual roll rate into a motor speed output</p>
 <ul>
-<li>Range: 0.08 0.25</li>
+<li>Range: 0.08 0.30</li>
 <li>Increment: 0.005</li>
 </ul>
 
@@ -930,7 +1029,7 @@ DO NOT EDIT
 
 <p>Pitch axis rate controller P gain.  Converts the difference between desired pitch rate and actual pitch rate into a motor speed output</p>
 <ul>
-<li>Range: 0.08 0.25</li>
+<li>Range: 0.08 0.30</li>
 <li>Increment: 0.005</li>
 </ul>
 
@@ -1149,11 +1248,9 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>1</td><td>GCS Mavlink</td></tr>
-<tr><td> 2</td><td>GCS Mavlink (2nd)</td></tr>
 <tr><td> 3</td><td>Frsky D-PORT</td></tr>
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
-<tr><td> 6</td><td>2nd GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 </table>
 </ul>
@@ -1186,11 +1283,9 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>1</td><td>GCS Mavlink</td></tr>
-<tr><td> 2</td><td>GCS Mavlink (2nd)</td></tr>
 <tr><td> 3</td><td>Frsky D-PORT</td></tr>
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
-<tr><td> 6</td><td>GPS (2nd)</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 </table>
 </ul>
@@ -1223,11 +1318,9 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>1</td><td>GCS Mavlink</td></tr>
-<tr><td> 2</td><td>GCS Mavlink (2nd)</td></tr>
 <tr><td> 3</td><td>Frsky D-PORT</td></tr>
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
-<tr><td> 6</td><td>GPS (2nd)</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 </table>
 </ul>
@@ -1260,11 +1353,9 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>1</td><td>GCS Mavlink</td></tr>
-<tr><td> 2</td><td>GCS Mavlink (2nd)</td></tr>
 <tr><td> 3</td><td>Frsky D-PORT</td></tr>
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
-<tr><td> 6</td><td>GPS (2nd)</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 </table>
 </ul>
@@ -3603,27 +3694,6 @@ DO NOT EDIT
 </ul>
 
 
-<h1>INAV_ Parameters</h1>
-
-
-<h2>Horizontal Time Constant (INAV_TC_XY)</h2>
-
-<p>Time constant for GPS and accel mixing. Higher TC decreases GPS impact on position estimate</p>
-<ul>
-<li>Range: 0 10</li>
-<li>Increment: 0.1</li>
-</ul>
-
-
-<h2>Vertical Time Constant (INAV_TC_Z)</h2>
-
-<p>Time constant for baro and accel mixing. Higher TC decreases barometers impact on altitude estimate</p>
-<ul>
-<li>Range: 0 10</li>
-<li>Increment: 0.1</li>
-</ul>
-
-
 <h1>WPNAV_ Parameters</h1>
 
 
@@ -3731,26 +3801,6 @@ DO NOT EDIT
 
 
 <h1>ATC_ Parameters</h1>
-
-
-<h2>Angle Rate Roll-Pitch max (ATC_RATE_RP_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>maximum rotation rate in roll/pitch axis requested by angle controller used in stabilize, loiter, rtl, auto flight modes</p>
-<ul>
-<li>Range: 9000 36000</li>
-<li>Increment: 500</li>
-<li>Units: Centi-Degrees/Sec</li>
-</ul>
-
-
-<h2>Angle Rate Yaw max (ATC_RATE_Y_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>maximum rotation rate in roll/pitch axis requested by angle controller used in stabilize, loiter, rtl, auto flight modes</p>
-<ul>
-<li>Range: 4500 18000</li>
-<li>Increment: 500</li>
-<li>Units: Centi-Degrees/Sec</li>
-</ul>
 
 
 <h2>Yaw target slew rate (ATC_SLEW_YAW)</h2><em>Note: This parameter is for advanced users</em><br>
@@ -5254,74 +5304,6 @@ DO NOT EDIT
 </ul>
 
 
-<h1>GPSGLITCH_ Parameters</h1>
-
-
-<h2>GPS Glitch protection enable/disable (GPSGLITCH_ENABLE)</h2>
-
-<p>Allows you to enable (1) or disable (0) gps glitch protection</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td>1</td><td>Enabled</td></tr>
-</table>
-</ul>
-
-
-<h2>GPS glitch protection radius within which all new positions are accepted (GPSGLITCH_RADIUS)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>GPS glitch protection radius within which all new positions are accepted</p>
-<ul>
-<li>Range: 100 2000</li>
-<li>Increment: 100</li>
-<li>Units: cm</li>
-</ul>
-
-
-<h2>GPS glitch protection's max vehicle acceleration assumption (GPSGLITCH_ACCEL)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>GPS glitch protection's max vehicle acceleration assumption</p>
-<ul>
-<li>Range: 100 2000</li>
-<li>Increment: 100</li>
-<li>Units: cm/s/s</li>
-</ul>
-
-
-<h1>BAROGLTCH_ Parameters</h1>
-
-
-<h2>Baro Glitch protection enable/disable (BAROGLTCH_ENABLE)</h2>
-
-<p>Allows you to enable (1) or disable (0) baro glitch protection</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td>1</td><td>Enabled</td></tr>
-</table>
-</ul>
-
-
-<h2>Baro glitch protection distance within which alt update is immediately accepted (BAROGLTCH_DIST)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Baro glitch protection distance within which alt update is immediately accepted</p>
-<ul>
-<li>Range: 100 2000</li>
-<li>Increment: 100</li>
-<li>Units: cm</li>
-</ul>
-
-
-<h2>Baro glitch protection's max vehicle acceleration assumption (BAROGLTCH_ACCEL)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Baro glitch protection's max vehicle acceleration assumption</p>
-<ul>
-<li>Range: 100 2000</li>
-<li>Increment: 100</li>
-<li>Units: cm/s/s</li>
-</ul>
-
-
 <h1>H_ Parameters</h1>
 
 
@@ -5848,18 +5830,18 @@ DO NOT EDIT
 <h1>EKF_ Parameters</h1>
 
 
-<h2>GPS horizontal velocity measurement noise (m/s) (EKF_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS horizontal velocity measurement noise scaler (EKF_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in the North and East GPS velocity measurements. Increasing it reduces the weighting on these measurements.</p>
+<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the horizontal velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on these measurements.</p>
 <ul>
 <li>Range: 0.05 5.0</li>
 <li>Increment: 0.05</li>
 </ul>
 
 
-<h2>GPS vertical velocity measurement noise (m/s) (EKF_VELD_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS vertical velocity measurement noise scaler (EKF_VELD_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in the vertical GPS velocity measurement. Increasing it reduces the weighting on this measurement.</p>
+<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the vertical velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on this measurement.</p>
 <ul>
 <li>Range: 0.05 5.0</li>
 <li>Increment: 0.05</li>
@@ -5895,7 +5877,7 @@ DO NOT EDIT
 
 <h2>Equivalent airspeed measurement noise (m/s) (EKF_EAS_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in magnetometer measurements. Increasing it reduces the weighting on these measurements.</p>
+<p>This is the RMS value of noise in equivalent airspeed measurements. Increasing it reduces the weighting on these measurements.</p>
 <ul>
 <li>Range: 0.5 5.0</li>
 <li>Increment: 0.1</li>
@@ -5988,9 +5970,9 @@ DO NOT EDIT
 </ul>
 
 
-<h2>GPS velocity mode control (EKF_GPS_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS mode control (EKF_GPS_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter controls use of GPS velocity measurements : 0 = use 3D velocity, 1 = use 2D velocity, 2 = use no velocity, 3 = use no GPS</p>
+<p>This parameter controls use of GPS measurements : 0 = use 3D velocity &amp; 2D position, 1 = use 2D velocity and 2D position, 2 = use 2D position, 3 = use no GPS (optical flow will be used if available)</p>
 <ul>
 <li>Range: 0 3</li>
 <li>Increment: 1</li>
@@ -6050,6 +6032,7 @@ DO NOT EDIT
 <tr><td>0</td><td>Speed and Height</td></tr>
 <tr><td>1</td><td>Acceleration</td></tr>
 <tr><td>2</td><td>Never</td></tr>
+<tr><td>3</td><td>Always</td></tr>
 </table>
 <li>Increment: 1</li>
 </ul>
@@ -6138,6 +6121,17 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Primary height source (EKF_ALT_SOURCE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter controls which height sensor is used by the EKF during optical flow navigation (when EKF_GPS_TYPE = 3). A value of will 0 cause it to always use baro altitude. A value of 1 will casue it to use range finder if available.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Use Baro</td></tr>
+<tr><td> 1</td><td>Use Range Finder</td></tr>
+</table>
+</ul>
+
+
 <h1>MIS_ Parameters</h1>
 
 
@@ -6213,7 +6207,7 @@ DO NOT EDIT
 
 <h2>rangefinder offset (RNGFND_OFFSET)</h2>
 
-<p>Offset in volts for zero distance</p>
+<p>Offset in volts for zero distance for analog rangefinders. Offset added to distance in centimeters for PWM and I2C Lidars</p>
 <ul>
 <li>Units: Volts</li>
 <li>Increment: 0.001</li>
@@ -6480,5 +6474,14 @@ DO NOT EDIT
 <p>This sets the parts per thousand scale factor correction applied to the flow sensor Y axis optical rate. It can be used to correct for variations in effective focal length. Each positive increment of 1 increases the scale factor applied to the Y axis optical flow reading by 0.1%. Negative values reduce the scale factor.</p>
 <ul>
 <li>Range: -200 +200</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Flow sensor yaw alignment (FLOWORIENT_YAW)</h2>
+
+<p>Specifies the number of centi-degrees that the flow sensor is yawed relative to the vehicle. A sensor with its X-axis pointing to the right of the vehicle X axis has a positive yaw angle.</p>
+<ul>
+<li>Range: -18000 +18000</li>
 <li>Increment: 1</li>
 </ul>

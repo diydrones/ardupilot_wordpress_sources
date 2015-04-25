@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Although there are many gains that can be tuned in APM:Copter to get optimal performance, the most critical is the Rate Roll and Pitch P values which convert the desired rotation rate into a motor output.  This alone will likely get it flying reasonably well at least in Stabilize mode.
+Although there are many gains that can be tuned in Copter to get optimal performance, the most critical is the Rate Roll and Pitch P values which convert the desired rotation rate into a motor output.  This alone will likely get it flying reasonably well at least in Stabilize mode.
 
 Some general advice on how to tune this parameter:
 <ul>
@@ -26,7 +26,7 @@ Rate Roll P and Rate Pitch P can be tuned in flight using your transmitter's cha
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/RollPitchTuning.png"><img class="alignnone size-full wp-image-10997" alt="RollPitchTuning" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/RollPitchTuning.png" width="1024" height="575" /></a>
 <ol>
 	<li>Connect your APM/Pixhawk/PX4 to the Mission Planner</li>
-	<li>On the mission planner, select Config/Tuning &gt;&gt; APM:Copter Pids</li>
+	<li>On the mission planner, select Config/Tuning &gt;&gt; Copter Pids</li>
 	<li>Set the CH6 Opt to "Rate Roll/Pitch kP"</li>
 	<li>Set Min to 0.08, Max to 0.20 (most copters ideal gain is within this range although from a small number of copter the Max can be as high as 0.25)</li>
 	<li>Push the "Write Params" button</li>
@@ -35,7 +35,7 @@ Rate Roll P and Rate Pitch P can be tuned in flight using your transmitter's cha
 	<li>Move the CH6 knob back to the middle</li>
 	<li>Arm and fly your copter in Stabilize mode adjusting the ch6 knob until you get a copter that is responsive but not wobbly</li>
 	<li>After the flight, disconnect your lipo battery and reconnect the APM to the mission planner</li>
-	<li>With the CH6 knob in the position that gave the best performance, return to the ArduCopter Pids screen and push the "Refresh Params" button</li>
+	<li>With the CH6 knob in the position that gave the best performance, return to the Copter Pids screen and push the "Refresh Params" button</li>
 	<li>In the Rate Roll P and Rate Pitch P fields re-type the value that you see but just slightly modified so that the mission planner recongises that it's changed and resends to the APM/PX4 (Note: if you re-type exactly the same number as what appears in Rate Roll P it won't be updated).  So for example if the Rate Roll P appears as "0.1213" make it "0.1200"</li>
 	<li>Set Ch6 Opt back to "None" and push "Write Params"</li>
 	<li>Push the Disconnect button on the top right, and the Connect</li>
@@ -43,7 +43,7 @@ Rate Roll P and Rate Pitch P can be tuned in flight using your transmitter's cha
 </ol>
 &nbsp;
 
-Note: while you are moving the tuning knob the values update at 3 times per second.  The need to press the Refresh button in the mission planner in steps #6 and #7 above is just because the APM:Copter is not sending the updates to the mission planner in real-time.
+Note: while you are moving the tuning knob the values update at 3 times per second.  The need to press the Refresh button in the mission planner in steps #6 and #7 above is just because the Copter is not sending the updates to the mission planner in real-time.
 
 
 <h3>Video of in-flight tuning</h3>

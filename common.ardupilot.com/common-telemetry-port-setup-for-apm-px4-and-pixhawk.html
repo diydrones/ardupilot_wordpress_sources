@@ -11,7 +11,7 @@ END METADATA
 -->
 <h3>Px4 and Pixhawk can each have two Telemetry Ports</h3>
 <ul>
-	<li>As of APM:Copter version 3.1 firmware, there are patches to enable uartD in rover/plane/copter.
+	<li>As of Copter version 3.1 firmware, there are patches to enable uartD in rover/plane/copter.
 <ul>
 	<li>This enables the secondary telemetry port on Pixhawk, and also allows for a secondary telemetry port on PX4 and SITL.</li>
 	<li>The patches include some parameter changes, so may require some mods in MissionPlanner and other GCS implementations.</li>
@@ -55,9 +55,9 @@ END METADATA
 
 <h3>Permanently adjusting the telemetry rates for OSD</h3>
 <ul>
-	<li>APM:Copter defaults the telemetry rates to zero to try to keep CPU loads down.</li>
-	<li>If you change the rates via the <strong>REQUEST_DATA_STREAM</strong> MAVLink message APM:Copter <strong>DOES</strong> <strong>NOT</strong> save the rate changes.</li>
-	<li>If you change the <strong>SR1_*</strong> and <strong>SR2_*</strong> parameters directly in the Advanced Parameter List APM:Copter <strong>DOES</strong> save the rate changes .</li>
+	<li>Copter defaults the telemetry rates to zero to try to keep CPU loads down.</li>
+	<li>If you change the rates via the <strong>REQUEST_DATA_STREAM</strong> MAVLink message Copter <strong>DOES</strong> <strong>NOT</strong> save the rate changes.</li>
+	<li>If you change the <strong>SR1_*</strong> and <strong>SR2_*</strong> parameters directly in the Advanced Parameter List Copter <strong>DOES</strong> save the rate changes .</li>
 	<li>Changing the SR1 and SR2 parameters directly will enable you to set the desired messages on the port used for OSD.</li>
 	<li>Those values will then persist over reboots.</li>
 </ul>

@@ -10,7 +10,7 @@ post_parent_title:
 END METADATA 
 -->
 <h3>Log Types (Dataflash vs tlogs)</h3>
-There are two ways to record your flight data with ArduCopter. With some exceptions, the two methods record very similar data but in different ways:
+There are two ways to record your flight data with Copter. With some exceptions, the two methods record very similar data but in different ways:
 <ul>
 	<li><strong>dataflash logs</strong> use the APM's onboard 16Mb dataflash memory, which you can download after use. See table of contents.</li>
 	<li><strong>telemetry logs</strong> (also known as "tlogs" and the subject of this page) are recorded by the mission planner when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link or USB.</li>
@@ -28,7 +28,7 @@ Besides the ".tlog" files, ".rlog" files are also created.  These contain all t
 <h3>Setting the datarate</h3>
 The desired rate at which data is sent from the APM/PX to the ground station can be controlled through the mission planner's Software &gt; Planner screen's Telemetry drop-downs.  Because all data sent over the telemetry link is also recorded in the tlog, this also controls the rate of data saved to the tlogs.
 
-Note that especially on ArduCopter, due to CPU resource limitations, the actual rate of the data sent and saved may be lower than the rate requested.
+Note that especially on Copter, due to CPU resource limitations, the actual rate of the data sent and saved may be lower than the rate requested.
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png"><img class="alignnone size-full wp-image-2210" alt="MissionPlanner_TelemetryRate" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png" width="1024" height="575" /></a>
 

@@ -95,7 +95,7 @@ In general, the correct order to load and run everything is as follows:
 </a>, rather than the pre-compiled hex file in the Mission Planner, you can. You just need to change your APM_config.h file to the following:</li>
 </ul>
 <pre>#define HIL_MODE            HIL_MODE_ATTITUDE</pre>
-HIL_MODE_SENSORS is not currently (Jan 2012) working. HIL_MODE_ATTITUDE informs ArduPlane of the attitude of the plane but not the accelerations or roll rates. HIL_MODE_SENSORS originally was going to inject the lower level physics into the real sensor code, from which would (hopefully) be derived the same or similar attitude figures, plus more information from the Barometer and so on.
+HIL_MODE_SENSORS is not currently (Jan 2012) working. HIL_MODE_ATTITUDE informs Plane of the attitude of the plane but not the accelerations or roll rates. HIL_MODE_SENSORS originally was going to inject the lower level physics into the real sensor code, from which would (hopefully) be derived the same or similar attitude figures, plus more information from the Barometer and so on.
 
 Software-in-the-loop (SITL) sim has taken this further, emulating !Arduino registers and injecting the sensor information at the lowest level possible. It is therefore the better option if you want to sim with the most realistic inputs.
 <h3>Error messages and fixes</h3>
@@ -129,7 +129,7 @@ This section shows how to use Python for some basic scripted acrobatic moves for
 	<li>You need a python based script. You can start with the one I've put together. It's attached here. "<a href="http://api.ning.com/files/e86-46o09Aysi4zyyv8mnDWV0ljIXbNUV*fTsE9MwLsZ8J1em1bwUNnHadjWSmygB*jnKvZwo7Bx0A*AHE8pZVGLkN9W4n1u/simple_script.txt" target="_self">simple_script.txt</a>"</li>
 	<li>With X-plane, the APM Mission Planner (MP) and the script open, get your plane in the air and press "p" for pause. "a" will put you in chase view ("w" to go back in the plane) and "-" and "=" will zoom your view of the plane in and out.</li>
 	<li>In the MP click on the "Flight Data" button, then select the "Actions" tab underneath the Heads-Up-Display.</li>
-	<li>Click on the "Script" button. This will bring up another window with a preloaded script (for arducopter). Switch to the already open "simple_script.txt" and select-all then copy.</li>
+	<li>Click on the "Script" button. This will bring up another window with a preloaded script (for Copter). Switch to the already open "simple_script.txt" and select-all then copy.</li>
 	<li>Go to the python script window and paste "simple_script.txt" in the python script window. DO NOT close it yet.</li>
 	<li>Go to X-plane, and press "p" again to un-pause the plane.</li>
 	<li>Go back to your python script window and close it. This will trigger the execution of the script when you click "yes" in the pop-up.</li>

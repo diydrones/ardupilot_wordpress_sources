@@ -1,0 +1,51 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-storm32-gimbal 
+title: common-SToRM32 Gimbal Controller 
+id: 4070 
+menu_order: 30 
+post_parent_id: 1850 
+post_parent_stub: common-cameras-and-gimbals 
+post_parent_title: common-Cameras and Gimbals 
+END METADATA 
+-->
+The <em>SToRM32-BGC</em> is a relatively low-cost 3-axis brushless gimbal controller that can communicate with ArduPilot (Copter, Plane and Rover) using MAVLink.
+<!--more-->
+With 3-axis control and MAVLink interface, the SToRM32 offers more capabilities and than the Tarot Gimbal.  MAVLink is a richer communications format that PWM and may be used in the future to provide additional information to the gimbal including centrefugal force corrections leading to better performance during aggressive maneuvers.
+
+Please refer to the <a href="http://www.olliw.eu/storm32bgc-wiki/Main_Page" target="_blank">SToRM32-BGC wiki pages</a> for more detailed information including where the gimbals can be purchased.  This gimbal has been tested with a <a href="http://www.hobbyking.com/hobbyking/store/__52136__DYS_Smart3_3_Axis_GoPro_Gimbal_with_AlexMos_Control_Board_BaseCam_.html" target="_blank">DYS 3-axis brushless gimbal</a>.
+
+[note]Support for this gimbal is included in Copter 3.3 (and higher) for gimbals running <a href="http://www.olliw.eu/storm32bgc-wiki/Downloads" target="_blank">v067e</a> (or higher).  [/note]
+<h1>Connecting the gimbal to the Pixhawk</h1>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_Pixhawk.png"><img class="alignnone size-full wp-image-4071" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_Pixhawk.png" alt="SToRM32_Pixhawk" width="959" height="586" /></a>
+
+You will need to solder 3-pins of a <a href="http://store.3drobotics.com/products/df13-6-position-connector-45-cm" target="_blank">DF13 6-pin cable</a> to the gimbal controller board as shown above and then plug the other end into the Pixhawk's Telem 2 port (from Copter 3.3 it should be possible to attach the gimbal to any of the available 6-pin ports.)
+
+[note]The remaining 3 pins (VCC, RTS, CTS) of the cable should not be connected.[/note]
+<h1>Configuring the gimbal</h1>
+In addition to the regular gimbal configuration described on the <a href="http://www.olliw.eu/storm32bgc-wiki/Getting_Started" target="_blank">SToRM32-BGC wiki</a>, the MAVlink heartbeats should be enabled through OlliW's o323BGCTool's <strong>Tools | Expert Tool</strong> screen as shown below.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png"><img class="alignnone size-full wp-image-4072" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png" alt="SToRM32_enableMavlink" width="777" height="603" /></a>
+<h1>Set-up through the Mission Planner</h1>
+Through your GCS (i.e. MP's Full Param List or Tree) set the <code>SERIAL2_BAUD</code> parameter to 115 as shown below:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud.png"><img class="alignnone size-large wp-image-4073" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud-1024x567.png" alt="SToRM32_MP_Serial2Baud" width="474" height="262" /></a>
+
+Set <code>MNT_TYPE</code> to "4" to enable the SToRM32 gimbal driver (the Pixhawk must be rebooted for this change to take effect).
+
+Set <code>MNT_RC_IN_TILT</code> to "6" if you wish to control the gimbal's tilt (aka pitch angle) with your transmitters ch6 tuning knob.
+
+Set the <code>MNT_ANGMAX_PAN</code>, <code>MNT_ANGMIN_TIL</code>, <code>MNT_ANGMIN_ROL</code> and <code>MNT_ANGMIN_PAN</code>, <code>MNT_ANGMIN_TIL</code>, <code>MNT_ANGMIN_ROL</code> to match the range of your gimbal. For example, the screenshot below shows a setup in which the gimbal has:
+<ul>
+	<li>360 of yaw rotation (<code>MNG_ANGMIN_PAN</code> = -18000, <code>MNT_ANGMAX_PAN</code> = 17999)</li>
+	<li>60 degrees of roll (<code>MNG_ANGMIN_ROL</code> = -6000, <code>MNG_ANGMAX_ROL</code> = +6000)</li>
+	<li>Can point straight down (<code>MNG_ANG_MIN_TIL</code> = -9000)</li>
+	<li>Can point straight up (<code>MNG_ANG_MAX_TIL</code> = +9000)</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams.png"><img class="alignnone size-large wp-image-4074" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams-1024x806.png" alt="SToRM32_MP_MountParams" width="474" height="373" /></a>
+<h1>Testing the gimbal</h1>
+For instructions for testing the gimbal moves correctly please check the <a href="common-tarot-gimbal/#testing_the_gimbal_moves_correctly">similar section for the Tarot gimbal</a>.
+
+The video below shows the SToRM32 being tested on Copter3.3. It demonstrates a few features that would not be possible on a 2-axis gimbal like the <a title="common-Tarot Gimbal" href="common-tarot-gimbal">Tarot Gimbal</a>.
+
+https://youtu.be/LAKrGXSFWpM

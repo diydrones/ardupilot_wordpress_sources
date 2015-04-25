@@ -66,7 +66,7 @@ The 3DR PPM Encoder (v2) now uses the ArduPPM firmware, replacing the previously
 </tr>
 </tbody>
 </table>
-In ArduCopter and ArduPlane a fail-safe action can be triggered by the throttle low signal.
+In Copter and Plane a fail-safe action can be triggered by the throttle low signal.
 This should be carefully configured as explained in the wiki for <a href="http://copter.ardupilot.com/wiki/throttle-failsafe/" target="_blank">APM Copter</a> and <a href="http://plane.ardupilot.com/wiki/arduplane-setup/apms-failsafe-function/" target="_blank">APM Plane</a>
 
 Also note that this has nothing to do with losing the radio connection between the transmitter and the receiver. The receiver's behaviour when it gets out of range depends on the transmitter/receiver hardware and setup. So make sure to go through all the scenarios before flying</li>
@@ -76,9 +76,7 @@ Also note that this has nothing to do with losing the radio connection between t
 
 <h1>Setup Manual</h1>
 
-
 The <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PPM-Encoder-3DR-Manual.pdf">PPM Encoder 3DR Manual</a> shows how to solder and wire the PPM Encoder and explains the different failsafe modes.
-
 
 
 
@@ -89,9 +87,7 @@ The <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PPM
 
 However, some users may want to get into the code to change the way the PPM Encoder interprets RC signals or may want to update to the latest version. Some rare users did report receiver compatility problems with the old version (before ArduPPM). For most cases, ArduPPM did solve them.
 
-
-ArduPPM is the official name for the newer generation firmwares. It has been designed from scratch with reliability as a top priority. The official release of the encoder firmware is in the Downloads section as ArduPPM_Vx.x.xx_ATMega328p.hex. The official source code is in the Git repository: <a href="http://code.google.com/p/ardupilot-mega/source/browse/#git/Tools/ArduPPM/ATMega328p.html">http://code.google.com/p/ardupilot-mega/source/browse/#git/Tools/ArduPPM/ATMega328p</a>. The standalone PPM Encoder needs the ATMega328p version.
-
+ArduPPM is the official name for the newer generation firmwares. It has been designed from scratch with reliability as a top priority. The official release of the encoder firmware is in the Downloads section as ArduPPM_Vx.x.xx_ATMega328p.hex. The official source code is in the Git repository: <a href="https://github.com/diydrones/ardupilot/tree/master/Tools/ArduPPM">https://github.com/diydrones/ardupilot/tree/master/Tools/ArduPPM</a>. The standalone PPM Encoder needs the ATMega328p version.
 
 To flash, connect the PPM Encoder to an AVR programmer such as the AVRISP mkII:
 
@@ -99,6 +95,8 @@ To flash, connect the PPM Encoder to an AVR programmer such as the AVRISP mkII:
 <img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/reprogramming_the_standalone_ppm_encoder1.jpg" />
 
 When flashing, make sure the PPM Encoder is powered using any of the 5V and Ground pins.
+
+
 
 <h1>Re-Programming instructions for Windows</h1>
 

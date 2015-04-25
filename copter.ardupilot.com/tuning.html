@@ -13,7 +13,7 @@ END METADATA
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Tuning_CommonThingsToChange.png"><img class="alignnone size-full wp-image-10999" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Tuning_CommonThingsToChange.png" alt="Tuning_CommonThingsToChange" width="1024" height="575" /></a>
 
-The default <a href="http://en.wikipedia.org/wiki/PID_controller" target="_blank">PID gains</a> are meant for the <a href="http://store.3drobotics.com/products/IRIS" target="_blank">3DR quad copter</a> although they work on a wide variety of frames.  Still to get optimal performance you may need to adjust them which can be done through the Mission Planner's Config/Tuning &gt;&gt; APM:Copter Pids screen.  The screen shot above shows the most important parameters for Roll/Pitch (yellow), Yaw (orange), <a href="/wiki/altholdmode/">Altitude hold</a> (green), <a href="/wiki/loiter-mode/">Loiter</a> (pink) and <a href="wiki/auto-mode/">Waypoint navigation</a> (blue).
+The default <a href="http://en.wikipedia.org/wiki/PID_controller" target="_blank">PID gains</a> are meant for the <a href="http://store.3drobotics.com/products/IRIS" target="_blank">3DR quad copter</a> although they work on a wide variety of frames.  Still to get optimal performance you may need to adjust them which can be done through the Mission Planner's Config/Tuning &gt;&gt; Copter Pids screen.  The screen shot above shows the most important parameters for Roll/Pitch (yellow), Yaw (orange), <a href="/wiki/altholdmode/">Altitude hold</a> (green), <a href="/wiki/loiter-mode/">Loiter</a> (pink) and <a href="wiki/auto-mode/">Waypoint navigation</a> (blue).
 
 The most important parameter to get right is the Rate Roll P (and by default Rate Pitch P is locked to the same value) as discussed <a href="wiki/ac_rollpitchtuning/">here</a>.
 
@@ -70,7 +70,7 @@ Generally if Roll and Pitch are tuned correctly,  the <a href="wiki/common-diag
 
 
 <h3>In-flight tuning</h3>
-A single parameter's value can be tuned in flight using the transmitter's Ch6 tuning knob.  A specific example for tuning the Rate Roll/Pitch P values can be found on the <a href="wiki/ac_rollpitchtuning/#In-flight_tuning">Rate Roll and Pitch P tuning wiki page</a>.  Please see the Ch6 Opt drop-down on the Mission Planner's Config/Tuning &gt; APM:Copter Pids's screen for a full list of parameters that can be tuned.
+A single parameter's value can be tuned in flight using the transmitter's Ch6 tuning knob.  A specific example for tuning the Rate Roll/Pitch P values can be found on the <a href="wiki/ac_rollpitchtuning/#In-flight_tuning">Rate Roll and Pitch P tuning wiki page</a>.  Please see the Ch6 Opt drop-down on the Mission Planner's Config/Tuning &gt; Copter Pids's screen for a full list of parameters that can be tuned.
 
 After setting the Ch6 Opt value, the Min and Max should also be set to reasonable values (i.e. non-zero and also not unreasonably high) and then the "Refresh screen" button should be pushed by tuning the Ch6 knob to ensure that the parameter is updating correctly.
 

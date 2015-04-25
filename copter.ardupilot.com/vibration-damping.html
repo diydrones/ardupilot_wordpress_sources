@@ -14,7 +14,7 @@ This article explains how to use Vibration Damping and isolate the Flight Contro
 <h3>Why vibration damping is important:</h3>
 <ul>
 	<li>The APM and PX4 Flight Control boards have accelerometers built into the board that are sensitive to vibrations.</li>
-	<li>APM:Copter (the firmware) combines the data from these accelerometers with barometer and GPS data to calculate an estimate of its position.</li>
+	<li>Copter (the firmware) combines the data from these accelerometers with barometer and GPS data to calculate an estimate of its position.</li>
 	<li>This position estimate is critical when in AltHold, Loiter, RTL, Guided, Position and AUTO flight modes.</li>
 	<li>With excessive vibrations, the estimate can be thrown off and lead to very bad performance in these modes (i.e. the copter becomes jumpy or flies off).</li>
 </ul>
@@ -35,7 +35,7 @@ For copters vibration comes mostly from frame flex and motors and propellers and
 	<li>Frame flex especially arm flex is a big cause of asynchronous vibration, Frame arms should be as rigid as possible.</li>
 	<li>The real DJI Flamewheel copters have sufficiently rigid injection molded arms, the many off brand clones do not.</li>
 	<li>Generally carbon fiber armed copters have sufficient anti twist and anti-bend characteristics.</li>
-	<li>Heavier aluminum armed copters like the Arducopter are flex free, cheaper Chinese ones often not.</li>
+	<li>Heavier aluminum armed copters like the Copter are flex free, cheaper Chinese ones often not.</li>
 	<li>Most purpose designed commercial copters with injection molded exoskeletons or arms like the Iris or Phantom are sufficiently rigid.</li>
 	<li>Cheap, light frames tend to flex more than high quality stronger ones and the heavier you load the copter the more "Flexi" it gets.</li>
 	<li>Motor to frame arm and frame arm to central hub mounts need to be secure and flex free (sometimes a problem for carbon tube arms).</li>
@@ -190,7 +190,7 @@ The results so far suggest that it's working very well:
 
 <a href="http://i.imgur.com/7TksoQI.png" target="_blank" rel="nofollow"><img src="http://i.imgur.com/7TksoQI.png?width=640" alt="" width="640" /></a>
 
-The above graph is taken from a two minute hover in loiter mode.  All axes are below ±1g, which exceeds the specifications set out in Arducopter guidelines.
+The above graph is taken from a two minute hover in loiter mode.  All axes are below ±1g, which exceeds the specifications set out in Copter guidelines.
 
 Using a tool <strong><a href="http://www.diydrones.com/forum/attachment/download?id=705844%3AUploadedFile%3A1419464" target="_blank" rel="nofollow">(Link)</a></strong> that <strong><a href="http://www.diydrones.com/profile/ForrestFrantz" target="_blank" rel="nofollow">Forrest Frantz</a></strong> developed, we can see these results from another perspective:
 

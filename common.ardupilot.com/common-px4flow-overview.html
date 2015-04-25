@@ -11,7 +11,7 @@ END METADATA
 -->
 The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4-FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features plus the built-in Maxbotix LZ-EZ4 sonar to determine aircraft ground velocity.  The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
 
-[warning]The PX4Flow is not supported in the current stable releases of ArduCopter, ArduPlane or ArduRover software. Support will be added for the Pixhawk in ArduCopter 3.3 but it is unlikely that it will ever be supported for use with the APM2.[/warning]
+[warning]The PX4Flow is not supported in the current stable releases of Copter, Plane or Rover software. Support will be added for the Pixhawk in Copter 3.3 but it is unlikely that it will ever be supported for use with the APM2.[/warning]
 
 https://www.youtube.com/watch?v=LP8kl4hGfMw
 
@@ -38,7 +38,7 @@ The sensor can be enabled by connecting with the Mission Planner and then on the
 The raw data from the sensor will eventually be visible on the Mission Planner's Flight Data screen's Status tab (<a href="https://github.com/diydrones/MissionPlanner/issues/745" target="_blank">issue raised here</a>).  Until then you can perform the following test in a well lit room:
 <ul>
 	<li>Remove the lens cap from the sensor</li>
-	<li>If using ArduCopter, arm the vehicle  to allow logging to start (no need to connect the flight battery)</li>
+	<li>If using Copter, arm the vehicle  to allow logging to start (no need to connect the flight battery)</li>
 	<li>Move the sensor around</li>
 	<li>Download the dataflash logs and graph the OF message's data including "Qual", flowX and flowY values.</li>
 </ul>

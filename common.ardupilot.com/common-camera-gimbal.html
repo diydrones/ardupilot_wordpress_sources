@@ -9,25 +9,23 @@ post_parent_stub: common-cameras-and-gimbals
 post_parent_title: common-Cameras and Gimbals 
 END METADATA 
 -->
-APMCopter, APMPlane or APMRover can stabilize a gimbal with up to three axis of motion using any of the free output channels. Combining stabilization with input from the pilot is also possible (normally using receiver's channel 6 tuning knob).
+This article explains how to connect a camera gimbal with servos to a flight controller and configure it for use with ArduPilot (in Mission Planner).
+<h1>Overview</h1>
+Copter, Plane or Rover can stabilize a gimbal with up to three axis of motion using any of the free output channels. Combining stabilization with input from the pilot is also possible (normally using receiver's channel 6 tuning knob).
 
-The examples shown below use APMCopter Screen Shots, but work exactly the same for Plane and Rover.
+The examples shown below use Copter screen shots, but work exactly the same for Plane and Rover.
 
 A camera's shutter can be triggered from the APM once connected with a servo or "relay". The act of triggering the shutter can be controlled through your receiver's channel 7 switch or automatically during missions.
 
 For best performance, ensure that after you add the extra weight of the camera gimbal your copter still hovers ideally at 50% throttle but certainly no more than 70% throttle while in Stabilize mode because an underpowered copter also has less power to recover from disturbances.
+<h1>Camera mount and build</h1>
+The camera needs to be mounted securely to the gimbal, but in such a way that reduces/dampens vibrations from the motor. It is difficult to achieve both aims at the same time!
 
-
-
+Common methods for mounting the camera on the gimbal include using: soft foam, stiff foam, neoprene tubes (mount camera on tube side), surgical tube, rubber bands, nylon bolt (direct stiff attachment) and velcro. Tubes have been used mostly on traditional helicopters. We make no specific recommendation here as there is no single obvious "best choice" and to some extent this depends on the airframe. That said, using velcro and rubber bands (for extra security) is quick to set up and can give reasonable results.
 <h1>Connecting the Servos to a Pixhawk</h1>
-
 Connect the gimbal to Pixhawk's auxiliary output pins. Connect tilt (pitch) to aux out signal (s) pin 1, roll to aux out signal (s) pin 2, and ground to an aux out ground (-) pin.
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gimbal-control-connect2.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gimbal-control-connect2.jpg" alt="gimbal control connect2" width="350" height="124" /></a>
-
-
-
 <h1>Connecting the Servos to a PX4</h1>
-
 <ol>
 	<li>The Camera Gimbal Servo connections are located on (FMU USART2) on the PX4IO board.</li>
 	<li>The 5 pin connector on the end of the PX4IO board opposite the servo connector and at the edge of the board.</li>
@@ -36,11 +34,7 @@ Connect the gimbal to Pixhawk's auxiliary output pins. Connect tilt (pitch) to a
 	<li>If you have a yaw camera gimbal it's servo out signal wire should should connect to pin 4 (RC12).</li>
 	<li>Provide power and ground separately to the servos.</li>
 </ol>
-
-
-
 <h1>Connecting the servos to an APM2</h1>
-
 <ul>
 	<li>The gimbal's roll and pitch servo's signal wires (only the signal wires!) should be connected to the inner most pin (labelled S in the image below) of A10 and A11.
 <ul>
@@ -56,13 +50,15 @@ Connect the gimbal to Pixhawk's auxiliary output pins. Connect tilt (pitch) to a
 
 <strong>Note:</strong> APM2.x RC10 &amp; RC11 outputs operate at 50hz (labeled A10 &amp; A11 on the case) making them acceptable for analog or digital servos while PWM outputs RC1 to RC8 operate at 490hz making them theoretically only suitable for digital servos.
 
+For the APM 2.x board for ch9, ch10 and/or ch11 ensure that the jumper trace(s) on the bottom of the board have not been cut and that they have not been re-jumpered for analog use.
 
-
+For APM 1: ch5, ch6, ch7 and/or ch8
 <h1>Gimbal configuration through the mission planner</h1>
-
 Under the configuration Menu, Hardware Options you will find a Camera Gimbal set-up screen. (see image below)
 
 For each servo/axis of your camera gimbal select the appropriate servo channel and ensure the <strong>"Stabilise"</strong> checkbox is checked.
+
+[note]Modern brushless gimbals (like the <a title="common-Tarot Gimbal" href="common-tarot-gimbal">Tarot</a> and <a title="common-SToRM32 Gimbal Controller" href="common-storm32-gimbal">SToRM32</a>) usually come with their own controllers that handle gimbal <em>stabilisation</em>. For those controllers the <strong>"Stabilise"</strong> checkbox must not be checked. [/note]
 
 The <strong>Servo Limits</strong> should be adjusted to ensure the gimbal servos don't bind.
 
@@ -82,21 +78,34 @@ If set to -15/+15 the servo will reach -30°/+30° (its limit) when the 'copter 
 
 If you find your gimbal is moving in the wrong direction, check the <strong>Reverse</strong> checkbox.
 
-[caption id="attachment_3788" align="alignnone" width="1024"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/MPCameraAndGimbalSetupScreen.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/MPCameraAndGimbalSetupScreen.png" alt="Mission Planner: Camera and Gimbal Setup Screen" width="1024" height="695" class="size-full wp-image-3788" /></a> Mission Planner: Camera and Gimbal Setup Screen[/caption]
+[caption id="attachment_3788" align="alignnone" width="1024"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/MPCameraAndGimbalSetupScreen.png"><img class="size-full wp-image-3788" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/MPCameraAndGimbalSetupScreen.png" alt="Mission Planner: Camera and Gimbal Setup Screen" width="1024" height="695" /></a> Mission Planner: Camera and Gimbal Setup Screen[/caption]
 
 If you wish to adjust the gimbal tilt, roll or pan while flying, you can set the input channel to "RC6" which normally corresponds to your transmitters tuning knob.
-<strong>!Note!</strong> If you do this you need to set your CH6 Opt to "CH6_NONE" in the Mission Planner <strong>Standard Parameters | Configuration</strong> screen.
+[note]If you do this you need to set your CH6 Opt to <code>CH6_NONE</code> in the Mission Planner <strong>Standard Parameters | Configuration</strong> screen.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPCamSetupSetCH61.png"><img class="alignnone size-full wp-image-5660" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MPCamSetupSetCH61.png" alt="MPCamSetupSetCH6" width="615" height="345" /></a>
-
-
-
+[/note]
+<h2>Aligning Min and Max PWM values with full throw of gimbal</h2>
+This section shows how to align the maximum and minimum PWM servo settings:
+<ul>
+	<li>Tilt airframe over hard left ( just past where the servo stops moving, or ~45 deg ), and raise the "Roll" "Servo" "Min" value until the servo starts to physically move a tiny bit, stop there.</li>
+	<li>Tilt airframe over hard right ( just past where the servo stops moving, or ~45 deg ), and lower the "Roll" "Servo" "Max" value until the servo starts to physically move a tiny bit, stop there.</li>
+</ul>
+<ul>
+	<li>Repeat for Pitch ( forward and backward motion)</li>
+</ul>
+<h2>Leveling/centering the gimbal</h2>
+To level and centre the gimbal:
+<ul>
+	<li>Keep the airframe perfectly straight-and-level</li>
+	<li>If the gimbal is not quite perfectly level, tweak the hardware first, eg, get servo horn/s so that gimbal is as close to level as possible before doing next step/s .. do this by unscrewing horn from servo and repositioning it, and/or if using push-rods to the gimbal, by adjusting the length of them).</li>
+	<li>If "tilt" is still not quite level, you can "trim" it by adjusting the Tilt-&gt;Angle-&gt;Min and Tilt-&gt;Angle-&gt;Max ... BOTH by one click in the same direction ( eg, click both down arrows once each) This will ensure that the difference between them remains constant ( important ), but will adjust the "centre" position of the gimbal by small amounts ( do not do this too much as it affects the maximum throw/s at the extremeties by the same amount).</li>
+</ul>
 <h1>Common fixes for poor video</h1>
-
+Some of the more common causes and solutions for poor video are listed below:
 <ul>
 	<li>"Jello" effect (or rolling shutter) is a by-product of using a camera with a CMOS sensor (GoPro, et al) caused by vibration from unbalanced props/motors and can be mitigated by mounting the camera on soft rubber, silcone, foam ear plugs or sometimes just on velcro.</li>
-	<li>digital and optical stabilization systems found in many cameras often do not perform well because of the vibrations found on many multicopters.</li>
-	<li>
+	<li>digital and optical stabilization systems found in many cameras often do not perform well because of the vibrations found on many multicopters.
 <ul>
 	<li>Exceptions: the Sony video camera balanced steady shot system is very effective even at maximum 30 power zoom.</li>
 </ul>
@@ -104,11 +113,6 @@ If you wish to adjust the gimbal tilt, roll or pan while flying, you can set the
 	<li>If you have jerky camera movement adjust the RC_Feel parameter to a lower number such as 50 or 25.</li>
 	<li>For better and smoother Yaw, use Expo control on your RC and lower the Acro_Yaw_P gain in APM.</li>
 </ul>
-
-
-
-
+It is important to remember that even with a perfect setup, photography is an art as well as a science. Using the camera pointing straight to ground is a good place to start, but more dramatic viewpoints can be achieved with angles other than vertical. Mount about 40 degrees deviation from vertical to obtain mainly ground photos but with oblique view. About 70 degrees off vertical will give you a lot more sky giving scenic photos (from <a href="http://www.draganfly.com/news/2008/08/23/rc-aerial-photography-get-great-pictures-tutorial/" rel="nofollow">Draganfly</a>). ArduPilot will stabilise the gimbal to whatever position you set.
 <h1>Shutter configuration</h1>
-
-<a href="common-camera-shutter-with-servo/">Details on automatically triggering the camera shutter using a servo are here</a>.
-<a href="common-chdk-camera-control-tutorial/">Details using a Canon camera's CHDK method are here</a> and <a href="common-apm-to-chdk-camera-link-tutorial/">here</a>.
+See <a href="common-camera-shutter-with-servo/">Camera Shutter Configuration in Mission Planner</a> for information on how to integrate shutter triggering with ArduPilot. Several (camera-specific) mechanisms for getting the trigger signal to the camera are <a href="common-cameras-and-gimbals/#camera_shutter_triggering">discussed here</a>.

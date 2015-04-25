@@ -10,7 +10,7 @@ post_parent_title: common-Rangefinders (landing page)
 END METADATA 
 -->
 The <a href="http://www.lightware.co.za/shop/en/lrf-modules/7-sf02f.html" target="_blank">Lightware SF02</a> is lightweight laser rangefinder module that provides fast and accurate distance measurements up to 40 meters (130 feet). In <a href="http://diydrones.com/profiles/blogs/testing-laser-rangefinders-with-arduplane" target="_blank">tests by the development team</a> the sensor has produced very reliable distance measurements for long and short ranges even on fast moving vehicles.
-[warning]This rangefinder is only supported on the Pixhawk running AC3.2 or higher or recent versions of ArduPlane and ArduRover using the sensor's analog output much like an analog sonar.[/warning]
+[warning]This rangefinder is only supported on the Pixhawk running AC3.2 or higher or recent versions of Plane and Rover using the sensor's analog output much like an analog sonar.[/warning]
 <!--more-->
 
 <h1>Connecting to the Pixhawk</h1>
@@ -20,10 +20,10 @@ The SF02's Analog Out pin should be conneted to the Pixhawk's 3.3V ADC (analog t
 
 
 <h1>Setup through the mission planner</h1>
-To configure ArduCopter, ArduPlane or ArduRover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parmeter List page and set:
+To configure Copter, Plane or Rover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the Config/Tuning &gt;&gt; Full Parmeter List page and set:
 <ul>
 	<li>RNGFND_MAX_CM = "4000" (i.e. 40m max range)</li>
-	<li>RNGND_PIN = "14" (2nd pin of 3.3V ADC connector)</li>
+	<li>RNGFND_PIN = "14" (2nd pin of 3.3V ADC connector)</li>
 	<li>RNGFND_SCALING = "12.12" (ie. 40m / 3.3v = 12.12)</li>
 	<li>RNGFND_TYPE = “1" (Analog)</li>
 	<li>RNGFND_RMETRIC = "0" (non-ratiometric, shown incorrectly in the diagram below)</li>

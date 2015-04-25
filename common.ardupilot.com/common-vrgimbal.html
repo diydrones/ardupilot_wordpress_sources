@@ -1,14 +1,18 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-vrgimbal 
-title: common-VR Gimbal (3-Axis Open Source) 
+title: common-VR Gimbal Controller (3-Axis Open Source) 
 id: 1812 
-menu_order: 20 
-post_parent_id: 1850 
-post_parent_stub: common-cameras-and-gimbals 
-post_parent_title: common-Cameras and Gimbals 
+menu_order: 60 
+post_parent_id: 3495 
+post_parent_stub: common-archived-topics 
+post_parent_title: common-Archived Topics 
 END METADATA 
 -->
+[archived]
+
+This article explains how to set up and configure the VR Gimbal 3 Axes Brushless Gimbal Controller for use with ArduPilot. 
+
 <h1>Overview</h1>
 The <a href="http://vrgimbal.wordpress.com/" target="_blank">VRGimbal</a> (<a href="http://www.virtualrobotix.it/index.php/en/shop/gimbal-control-board/vrgimbal-2-axis-detail" target="_blank">2-axis</a> and <a href="http://www.virtualrobotix.it/index.php/en/shop/gimbal-control-board/vrgimbal-3-axis-detail" target="_blank">3-axis</a> available) began as a fork of the open source <a href="http://sourceforge.net/projects/brushless-gimbal-brugi/" target="_blank">Martinez 2-axis brushless gimbal controller</a> to support the more powerful STM32 CPUs but since then has been mostly rewritten and includes significant enhancements including 3-axis support and Mavlink for serial communication with the flight controller or ground station.
 <ul>
@@ -18,9 +22,9 @@ The <a href="http://vrgimbal.wordpress.com/" target="_blank">VRGimbal</a> (<a hr
 </ul>
 http://www.youtube.com/watch?feature=player_embedded&amp;v=KIqWXnAuKPo#t=25
 
-As with the <a href="wiki/common-tarot-gimbal/">Tarot gimbal</a>, ArduCopter, ArduPlane, ArduRover currently only support passing through a pilot desired roll or pitch angle but future releases will support more advanced automated aiming of the camera (i.e. ROI - region-of-interest).
-<h1>Gimbal Assembly instructions</h1>
-We do not yet have an recommended affordable 3-axis gimbal for use with the VRGimbal.  Testing by the Ardupilot dev team has so far been limited to using a Tarot 2-axis gimbal.
+[note]We do not yet have an recommended affordable 3-axis gimbal for use with the VRGimbal.  Testing by the Ardupilot dev team has so far been limited to using a Tarot 2-axis gimbal.[/note]
+
+
 <h1>Connecting the VRGimbal to the Pixhawk</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_Wiring1.png"><img class="alignnone  wp-image-1815" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_Wiring1.png" alt="VRGimbal_Wiring1" width="1436" height="741" /></a>
 The IMU Sensor should be attached to the top or bottom of the camera so that the white arrow points forward.
@@ -32,6 +36,8 @@ The Pitch, Roll and Yaw (if present) gimbal motors should be connected to MOT1, 
 The "RC2" pin (label on the underside of the board) should be connected to the Pixhawk's AUX OUT 1 signal pin (see image above).
 
 The gound pin which is on the edge of the board near "RC2" should be connected to the Pixhawk's AUX OUT 1 "-" pin (see image above).
+
+
 <h1>Operation</h1>
 Upon powering the gimbal, the green power light (bottom right in the image above) should turn on immediately.  The gimbal should not be touched within the first 10seconds after start-up as it will be performing an IMU calibration.  Once the calibration is done the red LED (immediately left of the green LED) will come on and the controller will attempt to stabilize the cmaera.
 
@@ -41,42 +47,56 @@ Solid Red LED = calibration complete, stabilizing camera
 <h1>Configuring the gimbal</h1>
 Use a mini USB cable to connect the Gimbal board to your computer (Windows only?). If this is the first time you have plugged in the dongle you will see a USB device installation window but it will likely fail (see "BAD" device driver screen shot below).
 
-To update the Maple driver:
-<ul>
+
+
+<ol>
+    <li>To update the Maple driver:
+      <ul>
 	<li>Download the latest driver from <a href="http://www.radionav.it/virtualrobotix/fwtools/maple_usb_serial_win.zip" target="_blank">here</a> and unzip it to somewhere convenient on your computer</li>
 	<li>In the device manager, right-mouse-button-click on the the Maple driver and select "Update Driver Software", then "Browse my computer for driver software" and select the folder where you unzipped the driver.  Windows 8 machines may complain because the driver is not signed, instructions are <a href="http://www.makeuseof.com/tag/how-can-i-install-hardware-with-unsigned-drivers-in-windows-8/" target="_blank">here</a> on how to get around this.</li>
 	<li>After the driver is installed, if the Maple device appears as COM9 or higher you will not be able to connect.  The Control Panel's Device Manager can be used to reassign the comport to the COM1 ~ COM8 range.  <a href="http://www.digi.com/support/kbase/kbaseresultdetl?id=3308" target="_blank">Instructions on how to do this are here</a>.</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_DeviceManager.png"><img class="alignnone size-full wp-image-1827" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_DeviceManager.png" alt="VRGimbal_DeviceManager" width="930" height="638" /></a>
-2. Download and run the latest VRGimbal UI installation .msi file by going to the <a href="http://vrgimbal.wordpress.com/download/" target="_blank">VRGimbal wordpress site and select the top item from the Downloads menu</a>.  At the time this wiki page was written it was <a href="http://vrgimbal.wordpress.com/download/vrgimbal-1-13-2/" target="_blank">version 1.13</a>.  After installation the "VRGimbal GUI" should appear in your start menu.
-3. Start the VRGimbal GUI from the start menu.
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbalGUI_PitchAbsolute.png"><img class="alignnone size-full wp-image-1869" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbalGUI_PitchAbsolute.png" alt="VRGimbalGUI_PitchAbsolute" width="810" height="602" /></a>
-4. Connect the gimbal to your computer with the mini USB cable
-5. On the VRGimbalGUI select the COM port and press the "Open" button
-6. Click on the Pitch tab, click the "Absolute" checkbox, press "Send Config" and "Save to Flash" buttons.
+      </ul>
+      <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_DeviceManager.png"><img class="alignnone size-full wp-image-1827" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_DeviceManager.png" alt="VRGimbal_DeviceManager" width="930" height="638" /></a>
+    </li>
+    <li>Download and run the latest VRGimbal UI installation .msi file by going to the <a href="http://vrgimbal.wordpress.com/download/" target="_blank">VRGimbal wordpress site and select the top item from the Downloads menu</a>.  At the time this wiki page was written it was <a href="http://vrgimbal.wordpress.com/download/vrgimbal-1-13-2/" target="_blank">version 1.13</a>.  After installation the "VRGimbal GUI" should appear in your start menu.</li>
+    <li>Start the VRGimbal GUI from the start menu.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbalGUI_PitchAbsolute.png"><img class="alignnone size-full wp-image-1869" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbalGUI_PitchAbsolute.png" alt="VRGimbalGUI_PitchAbsolute" width="810" height="602" /></a></li>
+    <li>Connect the gimbal to your computer with the mini USB cable</li>
+    <li>On the VRGimbalGUI select the COM port and press the <strong>Open</strong> button</li>
+    <li>Click on the <em>Pitch</em> tab, click the <strong>Absolute</strong> checkbox, press <strong>Send Config</strong> and <strong>Save to Flash</strong> buttons.</li>
+
+</ol>
+
+
 <h1>Set-up through the mission planner</h1>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_MPsetup.png"><img class="alignnone size-full wp-image-1773" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_MPsetup.png" alt="Gimbal_Tarot_MPsetup" width="1023" height="680" /></a>
+
 The channel 6 tuning knob's output can be used to control the pitch angle of the gimbal by:
-<blockquote>
+
 <ul>
-	<li><em>Connect the Pixhawk to the mission planner</em></li>
-	<li><em>Open the <strong>Initial Setup | Optional Hardware | Camera Gimbal</strong> screen set:</em>
+	<li>Connect the Pixhawk to the mission planner</em></li>
+	<li>Open the <strong>Initial Setup | Optional Hardware | Camera Gimbal</strong> screen set:</em>
 <ul>
 <ul>
-	<li><em>Tilt drop-down to RC9 (equivalent to AUX OUT1)</em></li>
-	<li><em>Input Ch drop-down to RC6</em></li>
-	<li><em>The "Stabilize Tilt" checkbox should not be checked</em></li>
+	<li>Tilt drop-down to RC9 (equivalent to AUX OUT1)</li>
+	<li>Input Ch drop-down to RC6</li>
+	<li>The "Stabilize Tilt" checkbox should not be checked</li>
 </ul>
 </ul>
 </li>
 </ul>
-</blockquote>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_MPsetup.png"><img class="alignnone size-full wp-image-1773" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_MPsetup.png" alt="Gimbal_Tarot_MPsetup" width="1023" height="680" /></a>
+
+
+
+
 <h1>Updating the gimbal software</h1>
+
 Please see the <a href="http://vrgimbal.wordpress.com/quick-start-guide/firmware-upgrade/" target="_blank">VRGimbal firmware upgrade wordpress site</a> for details.
 <h1>Common Problems</h1>
 <ul>
 	<li>Camera is not level.  Perform the accelerometer calibration as described at the bottom of <a href="http://vrgimbal.wordpress.com/quick-start-guide/configuration-and-calibration/" target="_blank">this page</a>.</li>
-	<li>Small gimbal motors emit a high pitches squeal.  Connect with the VRGimbalGui, Go to the Advanced tab and set the "PWM frequency" to High.  Press "Send Config" and "Save to Flash" buttons.</li>
+	<li>Small gimbal motors emit a high pitches squeal.  Connect with the VRGimbalGui, Go to the Advanced tab and set the "PWM frequency" to High.  Press <strong>Send Config</strong> and <strong>Save to Flash</strong> buttons.</li>
 </ul>
 <h1>Other Open Source Alternatives</h1>
 <a href="http://sourceforge.net/projects/brushless-gimbal-brugi/" target="_blank">Martinez 2-axis gimbal controllers</a> using the original AVR328 chip can be found at retailers including <a href="https://www.hobbyking.com/hobbyking/store/__41386__2_Axis_Brushless_Camera_Gimbal_Stabilization_Control_Board_w_IMU.html" target="_blank">hobbyking</a>.
