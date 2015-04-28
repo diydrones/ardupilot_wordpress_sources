@@ -23,92 +23,51 @@ This article lists and describes the commands and command-parameters that are su
 
 Some commands and command-parameters are not implemented because they are not relevant for particular vehicle types (for example "MAV_CMD_NAV_TAKEOFF" command makes sense for Plane and Copter but not Rover, and the pitch parameter only makes sense for Plane). There are also some potentially useful command-parameters that are not handled because there is a limit to the message size, and a decision has been made to prioritise some parameters over others.
 
-[note]
-The lists were inferred from the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466">switch statement in <code>AP_Mission::mavlink_to_mission_cmd</code></a> and the command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.pde#L56">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.pde#L36">Rover</a>). There is additional information about the supported commands on Copter (from a Mission Planner perspective) in the <a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/" title="Copter Mission Command List">Copter Mission Command List</a>. 
-[/note]
+[note]There is additional information about the supported commands on Copter (from a Mission Planner perspective) in the <a href="http://copter.ardupilot.com/wiki/mission-planning-and-analysis/mission-command-list/" title="Copter Mission Command List">Copter Mission Command List</a>. [/note]
 
 
 <h2>Types of commands</h2>
 
 There are several different types of commands that can be used within missions:
 <ul>
-	<li>Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints and changing altitude, and landing. </li>
+	<li>Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints, changing altitude, and landing. </li>
 	<li>DO commands are for auxiliary functions and do not affect the vehicle’s position (for example, setting the camera trigger distance, or setting a servo value).</li>
 	<li>Condition commands are used to delay DO commands until some condition is met, for example the UAV reaches a certain altitude or distance from the waypoint.</li>
 </ul>
 
-During a mission at most one “Navigation” command and one “Do” or "Condition" command can be running at one time. A typical mission might set a waypoint (NAV command), add a CONDITION command that doesn't complete until a certain distance from the destination (<a href="#mav_cmd_condition_distance">MAV_CMD_CONDITION_DISTANCE</a>), and then start taking pictures using a DO command (<a href="#mav_cmd_do_set_cam_trigg_dist">MAV_CMD_DO_SET_CAM_TRIGG_DIST</a>) when the condition completes.
+During a mission at most one “Navigation” command and one “Do” or "Condition" command can be running at one time. A typical mission might set a waypoint (NAV command), add a CONDITION command that doesn't complete until a certain distance from the destination (<a href="#mav_cmd_condition_distance">MAV_CMD_CONDITION_DISTANCE</a>), and then add a number of DO commands that are executed sequentially (for example <a href="#mav_cmd_do_set_cam_trigg_dist">MAV_CMD_DO_SET_CAM_TRIGG_DIST</a> to take pictures at regular intervals) when the condition completes.
 
 [note]CONDITION and DO commands are associated with the preceding NAV command: if the UAV reaches the waypoint before these commands are executed, the next NAV command is loaded and they will be skipped.[/note]
 
-In addition to mission commands (i.e. MAVLink commands that can be run as part of a mission in AUTO mode), some commands can be sent outside the context of a mission (for example in GUIDED or STABILIZE modes). These commands are called "Immediate commands".
-
-
-#HW TODO
-Mission commands
-Immediate commands
-Nav commands
-DO/
-Conditional
 
 <h2>Frames of reference</h2>
 
 Many of the commands (in particular the <a href="#navigation_commands">NAV_ commands</a>) include position/location information. The information is provided relative to a particular "frame of reference", which is specified in the message's <code>frame</code> field. 
 
-The frames supported by the MAVLink protocol are listed in the <a href="https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L434" title="MAV_FRAME enum">MAV_FRAME</a> enum. Not all of these frame types are supported by ArduPilot in different vehicles, or in all command-types.
+Copter and Rover Mission use <a href="#mav_cmd_do_set_home">MAV_CMD_DO_SET_HOME</a> command to set the "home position" in the global coordinate frame (MAV_FRAME_GLOBAL), <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" title="WikiPedia link for WGS584">WGS84 coordinate system</a>, where altitude is relative to mean sea level. All other commands use the MAV_FRAME_GLOBAL_RELATIVE_ALT frame, which uses the same latitude and longitude, but sets altitude as relative to the <em>home position</em> (home altitude = 0).
 
-Specifically:
-<ul>
-	<li>Copter Mission Commands: <ul>
-	<li>MAV_FRAME_GLOBAL_RELATIVE_ALT - All commands use this reference frame. </li>
-        <li>Latitude and longitude are defined in the global coordinate frame, <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" title="WikiPedia link for WGS584">WGS84 coordinate system</a>. Altitude is relative to the <em>home position</em> (home altitude = 0). </li>
-        <li>The <a href="#mav_cmd_do_set_home">MAV_CMD_DO_SET_HOME</a> is the exception, it uses the global reference frame where altitude is relative to mean sea level (MAV_FRAME_GLOBAL).</li>
-</ul>
+Plane commands can additionally use MAV_FRAME_GLOBAL_TERRAIN_ALT frame of reference. This again has the same WGS84 frame of reference for latitude/Longitude, but specifies altitude relative to ground height (as defined in a terrain database).
 
-</li>
-	<li>Plane Mission Commands: 
-          <ul>
-	    <li>Commands can use any of the following frame-types: 
-              <ul>
-	      <li>MAV_FRAME_GLOBAL</li>
- 	      <li>MAV_FRAME_GLOBAL_RELATIVE_ALT</li>
-  	      <li>MAV_FRAME_GLOBAL_TERRAIN_ALT (Latitude/Longitude in WGS84 coordinate system, Altitude relative to ground height, as defined in a terrain database.</li>
-           </ul>  </li>
-        </ul>
-</li>
-	<li>Rover Mission Commands: 
-<ul>	<li>
-All commands use MAV_FRAME_GLOBAL_RELATIVE_ALT. In most commands the specified altitude is ignored!</li>
-</ul>
-
-</li>
-	<li>Immediate commands: These are implemented differently than mission commands, and can support other frame types.</li>
-</ul>
+[note]The other frame types defined in the MAVLink protocol (see <a href="https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L434" title="MAV_FRAME enum">MAV_FRAME</a>) are not supported for mission commands.[/note]
 
 
-#HW TODO - confirm it is MAV_FRAME_GLOBAL_TERRAIN_ALT not MAV_FRAME_GLOBAL_TERRAIN_ALT_INT we support
+<h2>How accurate is the information?</h2>
+
+
+The lists were inferred from the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466">switch statement in <code>AP_Mission::mavlink_to_mission_cmd</code></a> and the command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.pde#L56">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.pde#L36">Rover</a>). 
+
+
+<h2>How to interpret the commands parameters</h2>
 
 
 
-<h1>SOME OPEN QUESTIONS</h1>
-
-#HW TODO Something here about the frame setting .... "Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data."
-
-CROSS LINK TO http://dev.ardupilot.com/wiki/apmpilot_project_developer_information/mavlink-commands/ ?
+<h1>OPEN QUESTIONS</h1>
 
 
 #HW TODO LINK TO THIS FROM http://dev.ardupilot.com/wiki/apmpilot_project_developer_information/mavlink-commands/ when all items have records
-#HW TODO add text in introduction outlining the command types - nav, conditional, do
-
-
-MORE COPTER NOTES TO POTENTIALLY INTEGRATE
-
 This page provides details of all the mission commands (i.e. <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink commands</a>) supported by Copter that can be run as part of a mission (i.e. <a href="wiki/auto-mode/">AUTO flight mode</a>).
-
-Each of the commands below is either a "Navigation" command or a "Do" command.  Navigation commands (i.e. "TakeOff" and "Waypoint") affect the location of the vehicle while "Do" commands (i.e. "Do-Set-Servo" and "Do-Cam-Trigg-Dist") are for auxiliary functions and do not affect the vehicle's position.  During a mission at most one "Navigation" command and one "Do" command can be running at one time.  The "Do" commands will be run in order as soon as the preceeding navigation command before them starts.  For more information on setting up missions please refer to the <a href="wiki/common-planning-a-mission-with-waypoints-and-events/">Planning a Mission with Waypoints and Events</a> page.
-
-
 #HW TODO / Questions <a href="#mav_cmd_nav_return_to_launch">MAV_CMD_NAV_RETURN_TO_LAUNCH</a> - not supported by Rover but has a specific handler - best to move that to the general handler?
+
 
 
 <h1>Commands supported by Copter</h1>

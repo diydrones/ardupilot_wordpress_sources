@@ -1,0 +1,174 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-zubax-gnss-positioning-module-gps-compass-and-barometer 
+title: common-Zubax GNSS Positioning Module — GPS, Compass and Barometer 
+id: 4370 
+menu_order: 20 
+post_parent_id: 4372 
+post_parent_stub: common-positioning-landing-page 
+post_parent_title: common-Positioning (landing page) 
+END METADATA 
+-->
+<a href="http://docs.zubax.com/Zubax_GNSS">Zubax GNSS</a> is a high-performance positioning module for outdoor environments with doubly redundant UAVCAN bus interface. It includes a state-of-the-art GPS/GLONASS receiver, a high-precision barometer and a 3-axis compass. <!-- more -->
+[tip]This article reproduces the official Zubax documentation. See <a href="http://docs.zubax.com/Zubax_GNSS">Zubax GNSS</a> for general information about the device, including technical specifications and information about LED indicators. See <a href="http://docs.zubax.com/Zubax_GNSS_tutorial:_Using_with_Pixhawk">Zubax GNSS tutorial: Using with Pixhawk</a> for the original version of this document, and to check for significant changes and updates.[/tip]
+
+[caption id="attachment_4379" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/Zubax-gnss-top-bottom.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/Zubax-gnss-top-bottom-300x125.jpg" alt="Zubax GNSS: GPS, Compass and Barometer" width="300" height="125" class="size-medium wp-image-4379" /></a> Zubax GNSS: GPS, Compass and Barometer[/caption]
+
+<h1>Parts Required</h1>
+
+Aside from Zubax GNSS itself and the Pixhawk it will be connected to, the following parts are needed:
+<ul>
+	<li>A <strong>UAVCAN Micro to DF13 adapter cable</strong></li>
+	<li>A <strong>UAVCAN Micro termination plug</strong> (two plugs if the bus is doubly redundant)</li>
+</ul>
+
+Also, in order to configure the board, either of these tools is needed:
+<ul>
+	<li>A <strong>USB-UART bridge with a CLIK-Mate connector</strong> - for configuring via the Auxiliary Serial Port</li>
+	<li>A PC CAN adapter, e.g., 8devices USB2CAN - for configuring via UAVCAN</li>
+</ul>
+
+The parts listed above in bold font can be purchased from <a href="http://zubax.com/sales-network">Zubax distributors</a>.
+
+
+<h1>Configuring Pixhawk with ArduPilot firmware</h1>
+
+UAVCAN is supported in the following ArduPilot firmwares:
+<ul>
+	<li>ArduPlane 3.2.1 and newer</li>
+	<li>ArduCopter 3.3rc1 and newer</li>
+</ul>
+
+
+UAVCAN driver is enabled in ArduPilot by default, but it is necessary to change some configuration parameters to make ArduPilot listen to external UAVCAN-connected sensors (Zubax GNSS in this case). The following sections assume that Mission Planner is installed on the user's computer, and that Pixhawk is otherwise properly configured. 
+
+Remember to restart Pixhawk after making the changes.
+
+<h2>GPS</h2>
+
+In order to make ArduPilot receive measurements from an UAVCAN-interfaced GNSS receiver, set the parameter <code>GPS_TYPE</code> to 9.
+
+[caption width="1365" align="alignnone"]<a href="http://docs.zubax.com/File:Mission_planner_gps_type_9.png"><img src="http://docs.zubax.com/images/9/94/Mission_planner_gps_type_9.png" width="1365" height="767" alt="Enabling UAVCAN GPS via Mission Planner" class /></a> Enabling UAVCAN GPS via Mission Planner[/caption]
+
+
+
+<h2>Compass</h2>
+
+In order to make ArduPilot receive measurements from an UAVCAN-interfaced compass, open the tab <strong>INITIAL SETUP</strong>, then select <strong>Mandatory Hardware → Compass</strong>. On the displayed page:
+
+<ul>
+	<li>Check the checkbox <strong>Enable</strong>.</li>
+	<li>In the <em>Orientation </em>frame, select the option <strong>Manual</strong>, <strong>ROTATION_NONE</strong>. You may need to select a different rotation if the arrow printed on Zubax GNSS is not aligned with vehicle's longitudinal axis.</li>
+</ul>
+
+[caption width="1365" align="alignnone"]<a href="http://docs.zubax.com/File:Mission_planner_compass.png"><img src="http://docs.zubax.com/images/6/68/Mission_planner_compass.png" width="1365" height="766" alt="Enabling external compass via Mission Planner" class /></a> Enabling external compass via Mission Planner[/caption]
+
+Don't forget to perform compass calibration when done.
+
+
+<h2>Barometer</h2>
+
+ArduPilot does not have proper support for external barometers, so proposed solution is a bit hackish, but it still works. This modification is not required if external barometer is not needed. Also, make sure that barometer is enabled on Zubax GNSS.
+
+Power off the Pixhawk, extract its microSD card and mount it on a computer. Create a file <em>etc/rc.txt</em> on the card and put the following script in it:
+
+<pre># uORB will be started again by the main init script later, it's OK.
+
+
+if uorb start
+then
+    echo "ext: uORB started"
+    if uavcan start 1
+    then
+        echo "ext: UAVCAN started"
+    else
+        echo "ext: Could not start UAVCAN"
+    fi
+else
+    echo "ext: Could not start uORB"
+fi
+
+ 
+# This delay allows UAVCAN to pick external sensors before internal ones
+sleep 2
+</pre>
+
+Insert the card back into Pixhawk.
+
+Done, now the Pixhawk will be using barometer installed on Zubax GNSS, provided that Zubax GNSS was connected to the bus at the time of boot; otherwise it will fall back to internal barometer.
+
+
+
+<h1>Configuring Zubax GNSS</h1>
+
+The default configuration should be changed as follows:
+<ul>
+	<li>The parameter uavcan_node_id needs to be set to an appropriate unique value to avoid Node ID conflicts</li>
+	<li>Possibly, some functionality that is disabled by default needs to be enabled (such as the time synchronization master or the air data sensor)</li>
+</ul>
+
+
+There are two ways to alter the configuration: via Auxiliary Serial Port, or via UAVCAN. Both are described below.
+
+<h2>Via Auxiliary Serial Port</h2>
+
+<a href="http://docs.zubax.com/Auxiliary_Serial_Port_Interface#Communication">Connect the interface, open CLI</a>, then execute:
+<pre> > cfg set uavcan_node_id 50</pre>
+
+This command will set the Node ID to 50.
+
+Save the configuration into the non-volatile memory:
+<pre> > cfg save</pre>
+
+An error like <code>ublox: Invalid checksum</code> may appear, which is expected because non-volatile memory IO disrupts other IO operations.
+
+Now, restart the device in order to apply the new parameters:
+<pre> > reset</pre>
+
+Configuration is complete.
+
+
+
+<h2>Via UAVCAN</h2>
+The following steps need to be performed:
+<ul>
+	<li>Change the configuration parameters using the service <code>uavcan.protocol.param.GetSet</code></li>
+	<li>Save the parameters into the non-volatile memory using the <code>service uavcan.protocol.param.SaveErase</code></li>
+	<li>Restart the node using the service <code>uavcan.protocol.RestartNode</code></li>
+</ul>
+
+
+Under Linux, these steps can be easily performed with <strong>uavcan_nodetool</strong> as described in this section.
+
+Start the <a href="http://uavcan.org/Libuavcan_platform_documentation:_Linux#uavcan_nodetool">uavcan_nodetool</a> (assuming that the CAN interface name is can0):
+<pre>$ uavcan_nodetool 127 can0</pre>
+Tip: Under Linux 3.9 or newer, with 8devices USB2CAN, the interface can0 can be brought up using a command like: ip link set can0 up type can bitrate 1000000 sample-point 0.875
+<strong>uavcan_nodetool</strong> should open its internal command prompt. Assuming that the Node ID needs to be changed from 1 (default) to 50, enter the following command:
+<pre> > param 1 uavcan_node_id 50 </pre>
+
+[tip]Execute <code>help</code> to get usage info[/tip]
+The output should look roughly like this:
+<pre>
+Name                                     Value          Default        Min            Max
+--------------------------------------------------------------------------------------------------
+uavcan_node_id                           50             1              1              125
+</pre>
+Now, save the configuration:
+<pre> > param_save 1</pre>
+
+Restart the node:
+<pre> > restart 1</pre>
+Now, make sure that the node is available at the newly set Node ID:
+<pre> > info 50</pre>
+
+Configuration is complete. Press <strong>Ctrl+C</strong> to stop the application.
+
+<h1>Connecting</h1>
+
+Since Zubax GNSS can be powered directly from the bus, the electrical connections are quite simple:
+<ul>
+	<li>Connect Zubax GNSS with Pixhawk using the <a href="#parts_required">appropriate cable for your configuration</a>. In case you're using a non-redundant CAN interface (which is the only available option for Pixhawk v1), you can use either of the interfaces on the Zubax GNSS, leaving the second one unconnected.</li>
+	<li>Insert the termination plug into another connector of the used CAN interface on the Zubax GNSS.</li>
+</ul>
+
+Now the setup is ready to work.

@@ -9,7 +9,7 @@ post_parent_stub: common-rangefinder-landingpage
 post_parent_title: common-Rangefinders (landing page) 
 END METADATA 
 -->
-The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/LIDAR-Lite-Data-Sheet.pdf" target="_blank">data sheet</a> and other technical info can be found <a href="http://pulsedlight.myshopify.com/pages/docs" target="_blank">here</a>.
+The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and then technical info can be found <a href="http://kb.pulsedlight3d.com/support/home" target="_blank">here</a>.
 <!-- more -->
 
 [note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.2 or higher (as well as Rover 2.49 or higher).[/note]
@@ -30,7 +30,7 @@ You may wish to also purchase an <a href="http://store.3drobotics.com/products/p
 
 [note]It is important to ensure that the ground from the BEC is connected to the ground on the servo rail.[/note]
 <h1>Connecting to Pixhawk via PWM</h1>
-As of the 3.3.x release of Plane you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
+As of the 3.3.x release of Plane and 3.2.x release of Copter you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
 
 To connect via PWM you need to connect 4 pins on the Lidar to the PWM rail of the Pixhawk. The connections are as follows:
 <table>
@@ -45,11 +45,11 @@ To connect via PWM you need to connect 4 pins on the Lidar to the PWM rail of th
 </tr>
 <tr>
 <td>J2</td>
-<td>CH6 Out Signal</td>
+<td>CH6 Out Signal (internal pin 55)</td>
 </tr>
 <tr>
 <td>J3</td>
-<td>Ch7 Out Signal</td>
+<td>CH5 Out Signal (internal pin 54)</td>
 </tr>
 <tr>
 <td>J4</td>
@@ -73,7 +73,7 @@ You need a resistor between J3 and ground. The exact value of the resistor isn't
 
 Here's a picture of the necessary cable, with the resistor shown before being covered by heat-shrink tubing:
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_5511.jpg"><img class="alignnone size-full wp-image-4255" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_5511.jpg" alt="IMG_5511" width="800" height="681" /></a>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_55111.jpg"><img class="alignnone size-full wp-image-4344" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/IMG_55111.jpg" alt="IMG_5511" width="800" height="681" /></a>
 
 You then need the following parameters set to enable the PWM driver:
 <ul>
