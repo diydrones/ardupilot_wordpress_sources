@@ -12,7 +12,7 @@ END METADATA
 The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and then technical info can be found <a href="http://kb.pulsedlight3d.com/support/home" target="_blank">here</a>.
 <!-- more -->
 
-[note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.2 or higher (as well as Rover 2.49 or higher).[/note]
+[note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.3 or higher (as well as Rover 2.49 or higher).[/note]
 
 https://www.youtube.com/watch?v=3I06AOwIQVY
 <h1>Connecting to the Pixhawk via I2C</h1>
@@ -30,7 +30,7 @@ You may wish to also purchase an <a href="http://store.3drobotics.com/products/p
 
 [note]It is important to ensure that the ground from the BEC is connected to the ground on the servo rail.[/note]
 <h1>Connecting to Pixhawk via PWM</h1>
-As of the 3.3.x release of Plane and 3.2.x release of Copter you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
+As of the 3.3.x release of Plane and Copter you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
 
 To connect via PWM you need to connect 4 pins on the Lidar to the PWM rail of the Pixhawk. The connections are as follows:
 <table>
@@ -92,6 +92,7 @@ The use of pin 54 for the PWM signal is required, and only FMU AUX5 (pin 54) can
 	<li>You need to have a battery/ESC plugged in. (in PWM mode, the LIDAR-Lite gets its power from the servo rail, which is powered by the ESC)</li>
 	<li>On the ground station side, APMPlanner currently does not display the data, but Mission Planner does. Fixes are on the way.</li>
 	<li>Make sure the LIDAR is not right on a table and is at least 20cm or so from the nearest surface. Otherwise, it will display 0 distance (which is correct!)</li>
+	<li>By default, on Copter if you have the LIDAR enabled, it will check LIDAR range on startup. To pass the check, lift the vehicle up at least 50cm.  Don't tip it over too much because the check is a bit sensitive, it needs to see a range of between 50cm ~ 2m but nothing longer than 2m.  If it sees a range longer than that, it'll never pass unless you reboot the board (nicer solution to this coming soon!).  The check can be disabled by setting ARMING_CHECK to Skip Param/Sonar.</li>
 </ol>
 <h2>Optional Power Saving</h2>
 When using the PWM driver you can optionally set <code>RNGFND_PWRRNG</code> to a terrain height in meters above which the Lidar will be disabled to save power. When the terrain data indicates that the vehicle is above that height the <code>RNGFND_STOP_PIN</code> will be used to disable the Lidar. This saves around 100mA of current. Your GCS must <a href="common-terrain-following/">provide terrain data</a> for this to work.
