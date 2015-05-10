@@ -1,0 +1,43 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-multi-vehicle-flying 
+title: common-Multi-Vehicle Flying 
+id: 4424 
+menu_order: 40 
+post_parent_id: 3689 
+post_parent_stub: common-use-cases-and-applications 
+post_parent_title: common-Use-Cases and Applications 
+END METADATA 
+-->
+This page shows how to monitor and control multiple vehicles using a single ground station. Although this capability has been demonstrated (see video below) it is somewhat <a href="http://diydrones.com/profiles/blogs/multi-vehicle-testing-with-apm-copter-tracker-and-mission-planner" target="_blank">experimental</a>.
+<!-- more -->
+
+[embed width="800" ]https://youtu.be/M4LxtYa94nk[/embed]
+
+.
+<h1>Equipment you will need</h1>
+<ul>
+	<li>Multiple <a href="http://plane.ardupilot.com/">Planes</a> or <a href="http://copter.ardupilot.com/">Copters</a> or <a href="http://rover.ardupilot.com/">Rovers</a></li>
+	<li>An <a href="http://antennatracker.ardupilot.com/">Antenna Tracker </a>(a.k.a. Tracker) to combine the telemetry data from vehicles and send to the GCS.</li>
+	<li>Pairs of telemetry radios (i.e. <a href="wiki/common-optional-hardware/common-telemetry-landingpage/common-3dr-radio-version-2/">3DR radios</a>) for each vehicle (i.e. 2x number of vehicles) OR multi-point radios (like the <a href="wiki/common-rfd900/">RFD900</a>) in which case just 1 radio for each vehicle + 1 for the ground station.</li>
+	<li>GCS capable of displaying/controlling multiple vehicles (i.e. the <a href="http://planner.ardupilot.com/">Mission Planner</a>).</li>
+	<li>RC transmitter for each vehicle (optional).</li>
+</ul>
+<h1>Pre-Flight Setup</h1>
+<ul>
+	<li>If using 3DR radios, <a href="wiki/common-optional-hardware/common-telemetry-landingpage/common-3dr-radio-version-2/#configuring_using_the_mission_planner">set the NetID</a> of each pair of radios to a unique number.  I.e. if controlling 3 vehicles, set the <code>NetID</code> of one pair to "23", the 2nd pair to "24", the 3rd pair to "25".</li>
+	<li>Connect one of each radio pairs to the vehicle flight controllers (i.e. Pixhawk) using Telem1 or Telem2.</li>
+	<li>Connect the other pairs to the Tracker's controller (i.e. Pixhawk) using Telem1, Telem2 and Serial 4/5 ports.</li>
+	<li>If using Serial 4/5 set the Tracker's <code>SERIAL4_PROTOCOL</code> to "1" to enable MAVLink communication on that port.</li>
+	<li>Connect to each vehicle's flight controller and the tracker and set the <code>SYSID_THISMAV</code> to a unique number (i.e. "1" for first vehicle, "2" for second vehicle, "3" for third, "9" for the tracker).</li>
+	<li>On the GCS, <a href="wiki/common-mission-planner-telemetry-logs/#setting_the_datarate">reduce data rate</a> to the minimum acceptable value to reduce network traffic.</li>
+	<li>Plug in the tracker to the ground station PC using a USB cable.</li>
+</ul>
+<h1>Controlling the vehicles</h1>
+Plug in the battery of each vehicle and tracker.  After connecting to the tracker from the <em>Mission Planner</em> (or other GCS) each vehicle including the tracker should appear on the Map.
+
+Controlling the vehicle depends upon the GCS used but if using the <em>Mission Planner</em>, "Ctrl-X" pulls up a drop-down selector which allows the user to choose which vehicle to control.
+
+If using Copter, switch each vehicle into GUIDED mode.  On the MP's map, right-mouse-button-click and select "Takeoff" and input 2m to get the vehicle off the air.  Once in the air, each vehicle can be pushed around in GUIDED mode (by using Ctrl-X to select the vehicle and then click on the map) or the mode can be changed to AUTO etc.
+
+If you wish to retake control of a vehicle, use the transmitter for that vehicle to change the flight to LOITER, STABILIZE, etc and then fly manually.  If only one transmitter is being used (not recommended) then use the GCS to switch the single vehicle's mode to LOITER and then control with the TX sticks (the other vehicles will ignore the TX's roll, pitch and throttle input if they are in AUTO or GUIDED - they will accept yaw input however).

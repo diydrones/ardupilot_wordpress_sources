@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-px4flow-overview 
-title: common-PX4-FLOW Optical Flow Camera Board Overview 
+title: common-PX4FLOW Optical Flow Camera Board Overview 
 id: 325 
 menu_order: 20 
 post_parent_id: 3767 
@@ -9,37 +9,47 @@ post_parent_stub: common-optical-flow-sensors-landingpage
 post_parent_title: common-Optical Flow Sensors (landingpage) 
 END METADATA 
 -->
-[warning]The PX4Flow is not supported in the current stable releases of Copter, Plane or Rover software, but is now supported as an experimental feature in Copter 3.3 beta. It is unlikely that it will ever be supported for use with the APM2.[/warning]
+[warning]The PX4FLOW is not supported in the current stable releases of Copter, Plane or Rover software, but is now supported as an experimental feature in Copter 3.3 beta. It is unlikely that it will ever be supported for use with the APM2.[/warning]
 
-The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4-FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features. Although the sensor has plus a built-in Maxbotix LZ-EZ4 sonar to measure height, this has not been reliable enough over a range of surfaces in testing, so its readings are not used.  The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
+The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features. Although the sensor has plus a built-in Maxbotix LZ-EZ4 sonar to measure height, this has not been reliable enough over a range of surfaces in testing, so its readings are not used.  The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
 
-More information on this sensor including how to upgrade the sensor's firmware using QGroundControl can be found on the <a href="http://pixhawk.org/modules/px4flow" target="_blank">ETH's PX4Flow wiki page</a>.
+More information on this sensor including how to upgrade the sensor's firmware using QGroundControl can be found on the <a href="http://pixhawk.org/modules/px4flow" target="_blank">ETH's PX4FLOW wiki page</a>.
 
 [warning]To use this flow sensor to perform optical flow loiter as seen in the following video, you will need to purchase a separate range finder. Our testing has been performed using the <a title="Pulse Light unit" href="http://pulsedlight3d.com/">Pulsed Light unit</a> [/warning]
 
-&nbsp;
 
 https://www.youtube.com/watch?v=LP8kl4hGfMw
+
+
 <h1>Connecting to the Pixhawk</h1>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk.png"><img class="alignnone size-large wp-image-2973" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk-1024x567.png" alt="OptFlow_Pixhawk" width="584" height="323" /></a>
 
 The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
+<h1>Mounting to the Frame</h1>
+Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The FLOW_ORIENT_YAW parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
+
+<strong>NOTE</strong>: The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW </code> to -9000.
+
+
 <h1>Setup through the Mission Planner</h1>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup.png"><img class="alignnone size-large wp-image-2974" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup-1024x575.png" alt="OptFlow_MPSetup" width="584" height="327" /></a>
 
-The sensor can be enabled by connecting with the Mission Planner and then on the Initial Setup &gt;&gt; Optional Hardware &gt;&gt; Optical Flow page check the "Enable checkbox".  Alternatively the FLOW_ENABLE parameter should be set to "1" through the full parameters list.  The sensor will be initialised once the Pixhawk board is rebooted.
+The sensor can be enabled by connecting with the Mission Planner and then on the <strong>Initial Setup | Optional Hardware | Optical Flow</strong> page check the <strong>Enable</strong> checkbox.  Alternatively the <code>FLOW_ENABLE</code> parameter should be set to "1" through the full parameters list.  The sensor will be initialised once the Pixhawk board is rebooted.
+
+
 <h1>Testing the sensor</h1>
+
 The raw data from the sensor will eventually be visible on the Mission Planner's Flight Data screen's Status tab (<a href="https://github.com/diydrones/MissionPlanner/issues/745" target="_blank">issue raised here</a>).  Until then you can perform the following test in a well lit room. Note that some artificial lighting has strobing that can reduce the sensor performance. Natural light or a high power incandescent light source is best.
 
-[warning]Follow the instructions on the <a href="http://pixhawk.org/modules/px4flow" target="_blank">ETH's PX4Flow wiki page</a> on how to use QGroundControl to check and adjust the focus of your sensor. Do not assume it was in focus as shipped. You should be pointing it at a high contrast object about 3m away when you check the focus.[/warning]
+[warning]Follow the instructions on the <a href="http://pixhawk.org/modules/px4flow" target="_blank">ETH PX4FLOW wiki page</a> on how to use QGroundControl to check and adjust the focus of your sensor. Do not assume it was in focus as shipped. You should be pointing it at a high contrast object about 3m away when you check the focus.[/warning]
 
 [warning]Disconnect the sensor I2C connection from your flight computer before you connect it to via USB to your computer, Otherwise the sensor will be trying to power the flight computer and it may not have enough voltage to work properly.[/warning]
-
-Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The FLOW_ORIENT_YAW parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
 <ol>
 	<li>Remove the lens cap from the sensor</li>
-	<li>We recommend you upgrade to <a href="http://ardupilot.com/downloads/?did=118" target="_blank">this modified px4flow sensor firmware</a>. using QGroundControl. This modified firmware uses a different method to determine the optical flow and provides readings over a wider range of light and distance, but has a smaller maximum flow speed compared to the standard firmware.</li>
-	<li>Reconnect the I2C connection your flight computer  and change the following parameters: FLOW_ENABLE = 1 turns on use of the sensor and LOG_BITMASK = 131071 turns on pre-arm logging and will help diagnose problems</li>
+	<li>We recommend you upgrade to <a href="http://ardupilot.com/downloads/?did=118" target="_blank">this modified PX4FLOW sensor firmware</a>. using QGroundControl. This modified firmware uses a different method to determine the optical flow and provides readings over a wider range of light and distance, but has a smaller maximum flow speed compared to the standard firmware.</li>
+	<li>Reconnect the I2C connection your flight computer  and change the following parameters: <code>FLOW_ENABLE = 1</code> turns on use of the sensor and <code>LOG_BITMASK = 131071</code> turns on pre-arm logging and will help diagnose problems</li>
 	<li>Power up the vehicle (you can power up via the flight computer USB) to start logging and rotate the vehicle with the sensor pointing at the floor.</li>
 	<li>Download the dataflash logs and graph the OF message's data including "Qual", flowX, flowY, bodyX and bodyY values. The quality reading should be greater than 0, and you should see the flow and body rates changing.</li>
 	<li>Power up the vehicle using the battery and repeat steps 4. and 5. If you get no data, but works when the Pixhawk is powered via USB, then it is likely you have encountered a start-up problem with the PX4-Flow sensor and the APM+Pixhawk combination that is known to affect some sensors. Currently there is no solution to this other than to always power up via USB first before connecting the battery. Please notify the APM developers and PX4Flow supplier if this occurs.</li>
@@ -51,12 +61,14 @@ Mount the flow sensor pointing straight down with the X axis forwards and the Y
 	<li>Power on the vehicle and hold level away from your body and at eye level</li>
 	<li>Rotate about the vehicle in roll through a range from -15 to +15 degrees in about a second and then back again. Repeat this 10 times. By closing one eye you will be able to keep the centre of the sensor stationary against the background while you do the rotation.</li>
 	<li>Repeat  about the vehicle pitch axis.</li>
-	<li>Download the data flash logs and plot the OF.flowX, OF.bodyX and IMU.GyrX data. It should look something like this: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-roll-calibration.png"><img class="alignnone size-large wp-image-4395" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-roll-calibration-1024x479.png" alt="OF roll calibration" width="474" height="221" /></a></li>
-	<li>If OF.flowX is larger or smaller than OF.bodyX, then it can be adjusted by changing the FLOW_FXSCALER parameter</li>
-	<li>IF OF.bodyX is uncorrelated or opposite sign to IMU.GyrX, the FLOW_ORIENT_YAW parameter is probably set incorrectly or you do not have the flow sensor pointing downwards</li>
-	<li>Plot the OF.flowY, OF.bodyYband IMU.GyrY data. It should look something like this:<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-pitch-calibration.png"><img class="alignnone size-large wp-image-4396" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-pitch-calibration-1024x479.png" alt="OF pitch calibration" width="474" height="221" /></a></li>
-	<li>If OF.flowY is larger or smaller than OF.bodyY, then it can be adjusted by changing the FLOW_FYSCALER parameter</li>
-	<li>IF OF.bodyY is uncorrelated or opposite sign to IMU.GyrY, the FLOW_ORIENT_YAW parameter is probably set incorrectly or you do not have the flow sensor pointing downwards</li>
+	<li>Download the data flash logs and plot the <code>OF.flowX</code>, <code>OF.bodyX</code> and <code>IMU.GyrX</code> data. It should look something like this: 
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-roll-calibration.png"><img class="alignnone size-large wp-image-4395" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-roll-calibration-1024x479.png" alt="OF roll calibration" width="474" height="221" /></a></li>
+	<li>If <code>OF.flowX</code> is larger or smaller than <code>OF.bodyX</code>, then it can be adjusted by changing the <code>FLOW_FXSCALER</code> parameter</li>
+	<li>IF <code>OF.bodyX</code> is uncorrelated or opposite sign to <code>IMU.GyrX</code>, the <code>FLOW_ORIENT_YAW</code> parameter is probably set incorrectly or you do not have the flow sensor pointing downwards</li>
+	<li>Plot the <code>OF.flowY</code>, <code>OF.bodyYband</code>, <code>IMU.GyrY</code> data. It should look something like this:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-pitch-calibration.png"><img class="alignnone size-large wp-image-4396" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OF-pitch-calibration-1024x479.png" alt="OF pitch calibration" width="474" height="221" /></a></li>
+	<li>If <code>OF.flowY</code> is larger or smaller than <code>OF.bodyY</code>, then it can be adjusted by changing the <code>FLOW_FYSCALER</code> parameter</li>
+	<li>IF <code>OF.bodyY</code> is uncorrelated or opposite sign to <code>IMU.GyrY</code>, the <code>FLOW_ORIENT_YAW</code> parameter is probably set incorrectly or you do not have the flow sensor pointing downwards</li>
 </ol>
 <h1>Range Sensor Check</h1>
 Check the EKF5.meaRng message in the flashlog from your flow sensor calibration test. Check the following:
@@ -66,11 +78,11 @@ Check the EKF5.meaRng message in the flashlog from your flow sensor calibration
 </ol>
 <h1>First Flight (Copter Only)</h1>
 <ol>
-	<li>Perform a short test flight  hovering in stabilise at small tilt angles at heights ranging from 50cm to 3m with EKF_GPS_TYPE = 0 (we don't want the optical flow being used by the EKF at this stage)</li>
+	<li>Perform a short test flight  hovering in stabilise at small tilt angles at heights ranging from 50cm to 3m with <code>EKF_GPS_TYPE = 0</code> (we don't want the optical flow being used by the EKF at this stage)</li>
 	<li>Download the flash log and plot the following in mission planner</li>
 	<li>EKF5.meaRng should correlate with the change in vehicle height</li>
-	<li>OF.flowX and OF.flowY should be varying</li>
-	<li>OF.bodyX and OF.bodyY should be consistent with IMU.GyrX and IMU.GyrY</li>
+	<li><code>OF.flowX</code> and <code>OF.flowY</code> should be varying</li>
+	<li><code>OF.bodyX</code> and <code>OF.bodyY</code> should be consistent with IMU.GyrX and IMU.GyrY</li>
 </ol>
 <h1>Second Flight (Copter only)</h1>
 [warning] You will need at least 15m of clear space around the vehicle to do this flight safely,[/warning]

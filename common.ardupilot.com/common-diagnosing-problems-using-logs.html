@@ -9,10 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page aims to show you how to diagnose the top 5 most common problems affecting Copter in particular but to some extent Plane and Rover as well.  If you are not yet familiar with the basics of <a href="common-mission-planner-telemetry-logs/">telemetry logs</a> and <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/" title="common-Downloading and Analyzing Data Logs in Mission Planner">dataflash logs</a> you will probably want to review the introductory pages that go over where these logs are stored and how you can download and view the information held within them.
-
-
-
+This page aims to show you how to diagnose the top 5 most common problems affecting Copter in particular but to some extent Plane and Rover as well.  If you are not yet familiar with the basics of <a href="common-mission-planner-telemetry-logs/">telemetry logs</a> and <a title="common-Downloading and Analyzing Data Logs in Mission Planner" href="common-downloading-and-analyzing-data-logs-in-mission-planner/">dataflash logs</a> you will probably want to review the introductory pages that go over where these logs are stored and how you can download and view the information held within them.
 <h3>Mechanical Failures</h3>
 Common mechanical failures include a motor or ESC failure (<a href="https://www.youtube.com/watch?v=hBUBbeyLe0Q" target="_blank">including ESC sync failures</a>), the propeller slipping or coming off, etc.  These appear in the log as a sudden divergence in the desired roll and pitch vs the vehicles actual roll and pitch.  This discrepancy is most clearly visible in the <strong>dataflash logs</strong> by graphing the ATT message's Roll-In vs Roll and Pitch-In vs Pitch and to a lesser extent in the NavYaw vs Yaw.
 
@@ -25,9 +22,6 @@ Extra notes:
 	<li>tlogs are generally more difficult to use in this case because although we have nav_roll and nav_pitch which hold the desired roll and pitch, they are only updated when in RTL, Loiter or Auto flight modes.</li>
 	<li>in AC3.1 (and higher) Roll-In and Pitch-In only hold the desired roll and pitch while in stabilize mode.  When in an autopilot mode you must look at the NTUN messages's DRol and DPit columns</li>
 </ul>
-
-
-
 <h3>Vibrations</h3>
 High vibrations cause the Copter's accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with alt hold (normally rocketing into the sky) or Loiter (drifting).
 
@@ -42,9 +36,6 @@ Tlog's RAW_IMU <strong>xacc</strong>, <strong>yacc</strong> and <strong>zacc</st
 If using tlogs the scale is in milli-Gs so the acceptable range for <strong>xacc</strong> and <strong>yacc</strong> is -300 ~ +300, and for zacc is -500 ~ -1500.  Note that in the image below the values appear out of that range which perhaps indicates a vibration problem although this user did not complain of AltHold or Loiter problems so it is more likely that these variations were because the copter was not in a stable hover and the update rate was low.
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_VibesTlog.png"><img class="alignnone size-full wp-image-2340" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_VibesTlog.png" alt="DiagnosingWithLogs_VibesTlog" width="1752" height="523" /></a>
-
-
-
 <h3>Compass interference</h3>
 Interference from the power distribution board, motors, battery, esc and other electrical devices near the APM or PX4 can throw off the compass heading which can lead to circling (aka "toilet bowling") or even the copter flying off in completely the wrong direction.  Graphing the tlog's mag_field (found under "CUSTOM") and throttle (found under VFR_HUD) values are the easiest way to quickly see the amount of interference.
 
@@ -60,9 +51,6 @@ Extra Notes:
 	<li>Another general thing to check re the compass is the offsets which should bet between -150 ~ 150.  These are found in the tlog's SENSOR_OFFSET group as <strong>mag_ofs_x</strong>, <strong>mag_ofs_y</strong>, <strong>mag_ofs_z</strong> and in the dataflash's COMPASS message as <strong>OfsX</strong>, <strong>OfsY</strong>, <strong>OfsZ</strong>.  They can also be seen in the parameters as <strong>COMPASS_OFS_X</strong>, <strong>COMPASS_OFS_Y</strong>, <strong>COMPASS_OFS_Z</strong>.</li>
 	<li>The image above it shows a short spike at the beginning of the graph but this can be ignored because it's before the throttle is raised so it's probably just as the user plugged in some other electrical device.</li>
 </ul>
-
-
-
 <h3>GPS glitches</h3>
 When in autopilot modes (Loiter, RTL, AUTO) position errors from the GPS can cause Copter to think that it's suddenly in the wrong position and lead to aggressive flying to correct the perceived error.  These "glitches" show up in both the tlogs and dataflash logs as an decrease in the number of satellites visible and an increase in the <a href="http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29">hdop</a>.
 
@@ -75,9 +63,6 @@ In the Dataflash logs's GPS message you will find the "HDop" and "NSats" columns
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DisagnosingWithLogs_GPShdopAndNumSats_DF.png"><img class="alignnone size-full wp-image-2467" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DisagnosingWithLogs_GPShdopAndNumSats_DF.png" alt="DisagnosingWithLogs_GPShdopAndNumSats_DF" width="790" height="400" /></a>
 
 AC 3.1 includes <a href="http://copter.ardupilot.com/wiki/gps-failsafe/">GPS Glitch detection</a> which attempts to ignore glitches by sanity checking the positions.
-
-
-
 <h3>Power Problems (BrownOuts, etc)</h3>
 The introduction of the 3dr power module has made it much easier for people to provide a reliable power supply to their APM/PX4.  This has led to a massive reduction in the number of brown-outs reported but they do still occur.  They can normally be reconised by the logs suddenly ending while the copter is still in the air (i.e. barometer or inerital navigation altitude is still well above zero).
 
@@ -100,9 +85,6 @@ In the image directly below shows the board voltage sinking by 0.15V when the th
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_BoardVccVsThr.png"><img class="alignnone size-full wp-image-2350" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_BoardVccVsThr.png" alt="DiagnosingWithLogs_BoardVccVsThr" width="1670" height="508" /></a>
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_DataFlashBoardVcc.png"><img class="alignnone size-full wp-image-2351" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_DataFlashBoardVcc.png" alt="DiagnosingWithLogs_DataFlashBoardVcc" width="809" height="363" /></a>
-
-
-
 <h3>Unexpected ERRORS including Failsafes</h3>
 When unexpected behaviour from the flight controller occurs (especially when the user complains that the copter no longer responded to their input) it is often caused by one of the failsafes being triggered.  There are 5 failsafes that can be activated: Throttle Failsafe, GPS Failsafe, GCS Failsafe (ground station failsafe), Battery Failsafe and the Fence.
 
@@ -110,7 +92,7 @@ The easiest way to find these is to look in the dataflash logs and filter the 1s
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_FilterForErrors.png"><img class="alignnone size-full wp-image-2353" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_FilterForErrors.png" alt="DiagnosingWithLogs_FilterForErrors" width="755" height="419" /></a>
 
-The Subsys (aka Sub-system) gives the area that generated the error and the ECode (aka Error Code) tells you what the error was specifically.  The very limited number of subsystems and error codes can be found at the bottom of the Copter <a href="https://github.com/diydrones/ardupilot/blob/master/Copter/defines.h#L409">defines.h file</a>.
+The Subsys (aka Sub-system) gives the area that generated the error and the ECode (aka Error Code) tells you what the error was specifically.  The very limited number of subsystems and error codes can be found at the bottom of the Copter <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/defines.h#L339">defines.h file</a>.
 <p style="padding-left: 30px">Sub Systems / Error Codes</p>
 <p style="padding-left: 60px">1: Main (never used)</p>
 <p style="padding-left: 60px">2: Radio</p>

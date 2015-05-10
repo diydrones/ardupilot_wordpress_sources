@@ -16,6 +16,9 @@ DO NOT EDIT
 -->
 
 
+<h3 style="text-align: center">Complete Parameter List</h3>
+<hr />
+
 <p>This is a complete list of the parameters which can be set via the MAVLink protocol in the EEPROM of your APM to control vehicle behaviour. This list is automatically generated from the latest ardupilot source code, and so may contain parameters which are not yet in the stable released versions of the code.</p>
 
 <!-- add auto-generated table of contents with "Table of Contents Plus" plugin -->
@@ -72,6 +75,37 @@ DO NOT EDIT
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td>1</td><td>Enabled</td></tr>
+</table>
+</ul>
+
+
+<h2>Throttle filter cutoff (ArduCopter:PILOT_THR_FILT)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Throttle filter cutoff (Hz) - active whenever altitude control is inactive - 0 to disable</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: .5</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Pilot takeoff altitude (ArduCopter:PILOT_TKOFF_ALT)</h2>
+
+<p>Altitude that altitude control modes will climb to when a takeoff is triggered with the throttle stick.</p>
+<ul>
+<li>Range: 0.0 1000.0</li>
+<li>Increment: 10</li>
+<li>Units: Centimeters</li>
+</ul>
+
+
+<h2>Throttle stick behavior (ArduCopter:PILOT_THR_BHV)</h2>
+
+<p>Bits for: Feedback starts from mid stick</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>FeedbackFromMid</td></tr>
 </table>
 </ul>
 
@@ -524,6 +558,9 @@ DO NOT EDIT
 <tr><td>-6146</td><td>NearlyAll-AC315</td></tr>
 <tr><td>45054</td><td>NearlyAll</td></tr>
 <tr><td>131070</td><td>All+DisarmedLogging</td></tr>
+<tr><td>131071</td><td>All+FastATT</td></tr>
+<tr><td>262142</td><td>All+MotBatt</td></tr>
+<tr><td>393214</td><td>All+FastIMU</td></tr>
 <tr><td>0</td><td>Disabled</td></tr>
 </table>
 </ul>
@@ -570,8 +607,6 @@ DO NOT EDIT
 <tr><td>17</td><td>OF Loiter kP</td></tr>
 <tr><td>18</td><td>OF Loiter kI</td></tr>
 <tr><td>19</td><td>OF Loiter kD</td></tr>
-<tr><td>30</td><td>AHRS Yaw kP</td></tr>
-<tr><td>31</td><td>AHRS kP</td></tr>
 <tr><td>38</td><td>Declination</td></tr>
 <tr><td>39</td><td>Circle Rate</td></tr>
 <tr><td>41</td><td>RangeFinder Gain</td></tr>
@@ -631,7 +666,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -651,6 +685,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -666,7 +703,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -686,6 +722,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -701,7 +740,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -721,6 +759,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -736,7 +777,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -756,6 +796,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -771,7 +814,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -791,6 +833,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -806,7 +851,6 @@ DO NOT EDIT
 <tr><td> 4</td><td>RTL</td></tr>
 <tr><td> 5</td><td>Save Trim</td></tr>
 <tr><td> 7</td><td>Save WP</td></tr>
-<tr><td> 8</td><td>Multi Mode</td></tr>
 <tr><td> 9</td><td>Camera Trigger</td></tr>
 <tr><td> 10</td><td>RangeFinder</td></tr>
 <tr><td> 11</td><td>Fence</td></tr>
@@ -826,6 +870,9 @@ DO NOT EDIT
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
+<tr><td> 30</td><td>Lost Copter Sound</td></tr>
+<tr><td> 31</td><td>Motor Emergency Stop</td></tr>
+<tr><td> 32</td><td>Motor Interlock</td></tr>
 </table>
 </ul>
 
@@ -841,7 +888,7 @@ DO NOT EDIT
 <tr><td> -5</td><td>Skip Compass</td></tr>
 <tr><td> -9</td><td>Skip GPS</td></tr>
 <tr><td> -17</td><td>Skip INS</td></tr>
-<tr><td> -33</td><td>Skip Parameters</td></tr>
+<tr><td> -33</td><td>Skip Params/Sonar</td></tr>
 <tr><td> -65</td><td>Skip RC</td></tr>
 <tr><td> 127</td><td>Skip Voltage</td></tr>
 </table>
@@ -3777,6 +3824,26 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Loiter maximum acceleration (WPNAV_LOIT_MAXA)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Loiter maximum acceleration in cm/s/s.  Higher values cause the copter to accelerate and stop more quickly.</p>
+<ul>
+<li>Range: 100 981</li>
+<li>Increment: 1</li>
+<li>Units: cm/s/s</li>
+</ul>
+
+
+<h2>Loiter minimum acceleration (WPNAV_LOIT_MINA)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Loiter minimum acceleration in cm/s/s. Higher values stop the copter more quickly when the stick is centered, but cause a larger jerk when the copter stops.</p>
+<ul>
+<li>Range: 100 981</li>
+<li>Increment: 1</li>
+<li>Units: cm/s/s</li>
+</ul>
+
+
 <h1>CIRCLE_ Parameters</h1>
 
 
@@ -3800,75 +3867,16 @@ DO NOT EDIT
 </ul>
 
 
-<h1>ATC_ Parameters</h1>
+<h1>POSCON_ Parameters</h1>
 
 
-<h2>Yaw target slew rate (ATC_SLEW_YAW)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>XY Acceleration filter cutoff frequency (POSCON__ACC_XY_FILT)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Maximum rate the yaw target can be updated in Loiter, RTL, Auto flight modes</p>
+<p>Lower values will slow the response of the navigation controller and reduce twitchiness</p>
 <ul>
-<li>Range: 500 18000</li>
-<li>Increment: 100</li>
-<li>Units: Centi-Degrees/Sec</li>
-</ul>
-
-
-<h2>Acceleration Max for Yaw (ATC_ACCEL_Y_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Maximum acceleration in yaw axis</p>
-<ul>
-<li>Range: 0 72000</li>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 18000</td><td>Slow</td></tr>
-<tr><td> 36000</td><td>Medium</td></tr>
-<tr><td> 54000</td><td>Fast</td></tr>
-</table>
-<li>Increment: 1000</li>
-<li>Units: Centi-Degrees/Sec/Sec</li>
-</ul>
-
-
-<h2>Rate Feedforward Enable (ATC_RATE_FF_ENAB)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Controls whether body-frame rate feedfoward is enabled or disabled</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 1</td><td>Enabled</td></tr>
-</table>
-</ul>
-
-
-<h2>Acceleration Max for Roll (ATC_ACCEL_R_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Maximum acceleration in roll axis</p>
-<ul>
-<li>Range: 0 180000</li>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 72000</td><td>Slow</td></tr>
-<tr><td> 108000</td><td>Medium</td></tr>
-<tr><td> 162000</td><td>Fast</td></tr>
-</table>
-<li>Increment: 1000</li>
-<li>Units: Centi-Degrees/Sec/Sec</li>
-</ul>
-
-
-<h2>Acceleration Max for Pitch (ATC_ACCEL_P_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Maximum acceleration in pitch axis</p>
-<ul>
-<li>Range: 0 180000</li>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 72000</td><td>Slow</td></tr>
-<tr><td> 108000</td><td>Medium</td></tr>
-<tr><td> 162000</td><td>Fast</td></tr>
-</table>
-<li>Increment: 1000</li>
-<li>Units: Centi-Degrees/Sec/Sec</li>
+<li>Range: 0.5 5</li>
+<li>Increment: 0.1</li>
+<li>Units: Hz</li>
 </ul>
 
 
@@ -4308,10 +4316,10 @@ DO NOT EDIT
 </ul>
 
 
-<h1>MNT_ Parameters</h1>
+<h1>MNT Parameters</h1>
 
 
-<h2>Mount default operating mode (MNT__DEFLT_MODE)</h2>
+<h2>Mount default operating mode (MNT_DEFLT_MODE)</h2>
 
 <p>Mount default operating mode on startup and after control is returned from autopilot</p>
 <ul>
@@ -4325,7 +4333,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount roll angle when in retracted position (MNT__RETRACT_X)</h2>
+<h2>Mount roll angle when in retracted position (MNT_RETRACT_X)</h2>
 
 <p>Mount roll angle when in retracted position</p>
 <ul>
@@ -4335,7 +4343,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount tilt/pitch angle when in retracted position (MNT__RETRACT_Y)</h2>
+<h2>Mount tilt/pitch angle when in retracted position (MNT_RETRACT_Y)</h2>
 
 <p>Mount tilt/pitch angle when in retracted position</p>
 <ul>
@@ -4345,7 +4353,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount yaw/pan angle when in retracted position (MNT__RETRACT_Z)</h2>
+<h2>Mount yaw/pan angle when in retracted position (MNT_RETRACT_Z)</h2>
 
 <p>Mount yaw/pan angle when in retracted position</p>
 <ul>
@@ -4355,7 +4363,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount roll angle when in neutral position (MNT__NEUTRAL_X)</h2>
+<h2>Mount roll angle when in neutral position (MNT_NEUTRAL_X)</h2>
 
 <p>Mount roll angle when in neutral position</p>
 <ul>
@@ -4365,7 +4373,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount tilt/pitch angle when in neutral position (MNT__NEUTRAL_Y)</h2>
+<h2>Mount tilt/pitch angle when in neutral position (MNT_NEUTRAL_Y)</h2>
 
 <p>Mount tilt/pitch angle when in neutral position</p>
 <ul>
@@ -4375,7 +4383,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount pan/yaw angle when in neutral position (MNT__NEUTRAL_Z)</h2>
+<h2>Mount pan/yaw angle when in neutral position (MNT_NEUTRAL_Z)</h2>
 
 <p>Mount pan/yaw angle when in neutral position</p>
 <ul>
@@ -4385,7 +4393,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize mount's roll angle (MNT__STAB_ROLL)</h2>
+<h2>Stabilize mount's roll angle (MNT_STAB_ROLL)</h2>
 
 <p>enable roll stabilisation relative to Earth</p>
 <ul>
@@ -4396,7 +4404,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize mount's pitch/tilt angle (MNT__STAB_TILT)</h2>
+<h2>Stabilize mount's pitch/tilt angle (MNT_STAB_TILT)</h2>
 
 <p>enable tilt/pitch stabilisation relative to Earth</p>
 <ul>
@@ -4407,7 +4415,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize mount pan/yaw angle (MNT__STAB_PAN)</h2>
+<h2>Stabilize mount pan/yaw angle (MNT_STAB_PAN)</h2>
 
 <p>enable pan/yaw stabilisation relative to Earth</p>
 <ul>
@@ -4418,7 +4426,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>roll RC input channel (MNT__RC_IN_ROLL)</h2>
+<h2>roll RC input channel (MNT_RC_IN_ROLL)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control roll movements</p>
 <ul>
@@ -4432,7 +4440,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Minimum roll angle (MNT__ANGMIN_ROL)</h2>
+<h2>Minimum roll angle (MNT_ANGMIN_ROL)</h2>
 
 <p>Minimum physical roll angular position of mount.</p>
 <ul>
@@ -4442,7 +4450,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Maximum roll angle (MNT__ANGMAX_ROL)</h2>
+<h2>Maximum roll angle (MNT_ANGMAX_ROL)</h2>
 
 <p>Maximum physical roll angular position of the mount</p>
 <ul>
@@ -4452,7 +4460,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>tilt (pitch) RC input channel (MNT__RC_IN_TILT)</h2>
+<h2>tilt (pitch) RC input channel (MNT_RC_IN_TILT)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control tilt (pitch) movements</p>
 <ul>
@@ -4466,7 +4474,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Minimum tilt angle (MNT__ANGMIN_TIL)</h2>
+<h2>Minimum tilt angle (MNT_ANGMIN_TIL)</h2>
 
 <p>Minimum physical tilt (pitch) angular position of mount.</p>
 <ul>
@@ -4476,7 +4484,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Maximum tilt angle (MNT__ANGMAX_TIL)</h2>
+<h2>Maximum tilt angle (MNT_ANGMAX_TIL)</h2>
 
 <p>Maximum physical tilt (pitch) angular position of the mount</p>
 <ul>
@@ -4486,7 +4494,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>pan (yaw) RC input channel (MNT__RC_IN_PAN)</h2>
+<h2>pan (yaw) RC input channel (MNT_RC_IN_PAN)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control pan (yaw) movements</p>
 <ul>
@@ -4500,7 +4508,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Minimum pan angle (MNT__ANGMIN_PAN)</h2>
+<h2>Minimum pan angle (MNT_ANGMIN_PAN)</h2>
 
 <p>Minimum physical pan (yaw) angular position of mount.</p>
 <ul>
@@ -4510,7 +4518,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Maximum pan angle (MNT__ANGMAX_PAN)</h2>
+<h2>Maximum pan angle (MNT_ANGMAX_PAN)</h2>
 
 <p>Maximum physical pan (yaw) angular position of the mount</p>
 <ul>
@@ -4520,7 +4528,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>mount joystick speed (MNT__JSTICK_SPD)</h2>
+<h2>mount joystick speed (MNT_JSTICK_SPD)</h2>
 
 <p>0 for position control, small for low speeds, 100 for max speed. A good general value is 10 which gives a movement speed of 3 degrees per second.</p>
 <ul>
@@ -4529,7 +4537,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Roll stabilization lead time (MNT__LEAD_RLL)</h2>
+<h2>Roll stabilization lead time (MNT_LEAD_RLL)</h2>
 
 <p>Causes the servo angle output to lead the current angle of the vehicle by some amount of time based on current angular rate, compensating for servo delay. Increase until the servo is responsive but doesn't overshoot. Does nothing with pan stabilization enabled.</p>
 <ul>
@@ -4539,7 +4547,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Pitch stabilization lead time (MNT__LEAD_PTCH)</h2>
+<h2>Pitch stabilization lead time (MNT_LEAD_PTCH)</h2>
 
 <p>Causes the servo angle output to lead the current angle of the vehicle by some amount of time based on current angular rate. Increase until the servo is responsive but doesn't overshoot. Does nothing with pan stabilization enabled.</p>
 <ul>
@@ -4549,7 +4557,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount Type (MNT__TYPE)</h2>
+<h2>Mount Type (MNT_TYPE)</h2>
 
 <p>Mount Type (None, Servo or MAVLink)</p>
 <ul>
@@ -4563,7 +4571,96 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount default operating mode (MNT_2_DEFLT_MODE)</h2>
+<h2>MAVLink Mount's roll angle offsets (MNT_OFF_JNT_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's roll angle offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians</li>
+</ul>
+
+
+<h2>MAVLink Mount's pitch angle offsets (MNT_OFF_JNT_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's pitch angle offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians</li>
+</ul>
+
+
+<h2>MAVLink Mount's yaw angle offsets (MNT_OFF_JNT_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's yaw angle offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians</li>
+</ul>
+
+
+<h2>MAVLink Mount's roll velocity offsets (MNT_OFF_ACC_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's roll velocity offsets</p>
+<ul>
+<li>Range: 0 2</li>
+<li>Units: m/s</li>
+</ul>
+
+
+<h2>MAVLink Mount's pitch velocity offsets (MNT_OFF_ACC_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's pitch velocity offsets</p>
+<ul>
+<li>Range: 0 2</li>
+<li>Units: m/s</li>
+</ul>
+
+
+<h2>MAVLink Mount's yaw velocity offsets (MNT_OFF_ACC_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's yaw velocity offsets</p>
+<ul>
+<li>Range: 0 2</li>
+<li>Units: m/s</li>
+</ul>
+
+
+<h2>MAVLink Mount's roll gyro offsets (MNT_OFF_GYRO_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's roll gyro offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians/sec</li>
+</ul>
+
+
+<h2>MAVLink Mount's pitch gyro offsets (MNT_OFF_GYRO_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's pitch gyro offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians/sec</li>
+</ul>
+
+
+<h2>MAVLink Mount's yaw gyro offsets (MNT_OFF_GYRO_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's yaw gyro offsets</p>
+<ul>
+<li>Range: 0 0.5</li>
+<li>Units: radians/sec</li>
+</ul>
+
+
+<h2>MAVLink Mount's rate gain (MNT_K_RATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>MAVLink Mount's rate gain</p>
+<ul>
+<li>Range: 0 10</li>
+</ul>
+
+
+<h2>Mount default operating mode (MNT2_DEFLT_MODE)</h2>
 
 <p>Mount default operating mode on startup and after control is returned from autopilot</p>
 <ul>
@@ -4577,7 +4674,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 roll angle when in retracted position (MNT_2_RETRACT_X)</h2>
+<h2>Mount2 roll angle when in retracted position (MNT2_RETRACT_X)</h2>
 
 <p>Mount2 roll angle when in retracted position</p>
 <ul>
@@ -4587,7 +4684,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 tilt/pitch angle when in retracted position (MNT_2_RETRACT_Y)</h2>
+<h2>Mount2 tilt/pitch angle when in retracted position (MNT2_RETRACT_Y)</h2>
 
 <p>Mount2 tilt/pitch angle when in retracted position</p>
 <ul>
@@ -4597,7 +4694,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 yaw/pan angle when in retracted position (MNT_2_RETRACT_Z)</h2>
+<h2>Mount2 yaw/pan angle when in retracted position (MNT2_RETRACT_Z)</h2>
 
 <p>Mount2 yaw/pan angle when in retracted position</p>
 <ul>
@@ -4607,7 +4704,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 roll angle when in neutral position (MNT_2_NEUTRAL_X)</h2>
+<h2>Mount2 roll angle when in neutral position (MNT2_NEUTRAL_X)</h2>
 
 <p>Mount2 roll angle when in neutral position</p>
 <ul>
@@ -4617,7 +4714,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 tilt/pitch angle when in neutral position (MNT_2_NEUTRAL_Y)</h2>
+<h2>Mount2 tilt/pitch angle when in neutral position (MNT2_NEUTRAL_Y)</h2>
 
 <p>Mount2 tilt/pitch angle when in neutral position</p>
 <ul>
@@ -4627,7 +4724,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 pan/yaw angle when in neutral position (MNT_2_NEUTRAL_Z)</h2>
+<h2>Mount2 pan/yaw angle when in neutral position (MNT2_NEUTRAL_Z)</h2>
 
 <p>Mount2 pan/yaw angle when in neutral position</p>
 <ul>
@@ -4637,7 +4734,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize Mount2's roll angle (MNT_2_STAB_ROLL)</h2>
+<h2>Stabilize Mount2's roll angle (MNT2_STAB_ROLL)</h2>
 
 <p>enable roll stabilisation relative to Earth</p>
 <ul>
@@ -4648,7 +4745,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize Mount2's pitch/tilt angle (MNT_2_STAB_TILT)</h2>
+<h2>Stabilize Mount2's pitch/tilt angle (MNT2_STAB_TILT)</h2>
 
 <p>enable tilt/pitch stabilisation relative to Earth</p>
 <ul>
@@ -4659,7 +4756,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Stabilize mount2 pan/yaw angle (MNT_2_STAB_PAN)</h2>
+<h2>Stabilize mount2 pan/yaw angle (MNT2_STAB_PAN)</h2>
 
 <p>enable pan/yaw stabilisation relative to Earth</p>
 <ul>
@@ -4670,7 +4767,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's roll RC input channel (MNT_2_RC_IN_ROLL)</h2>
+<h2>Mount2's roll RC input channel (MNT2_RC_IN_ROLL)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control roll movements</p>
 <ul>
@@ -4684,7 +4781,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's minimum roll angle (MNT_2_ANGMIN_ROL)</h2>
+<h2>Mount2's minimum roll angle (MNT2_ANGMIN_ROL)</h2>
 
 <p>Mount2's minimum physical roll angular position</p>
 <ul>
@@ -4694,7 +4791,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's maximum roll angle (MNT_2_ANGMAX_ROL)</h2>
+<h2>Mount2's maximum roll angle (MNT2_ANGMAX_ROL)</h2>
 
 <p>Mount2's maximum physical roll angular position</p>
 <ul>
@@ -4704,7 +4801,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's tilt (pitch) RC input channel (MNT_2_RC_IN_TILT)</h2>
+<h2>Mount2's tilt (pitch) RC input channel (MNT2_RC_IN_TILT)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control tilt (pitch) movements</p>
 <ul>
@@ -4718,7 +4815,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's minimum tilt angle (MNT_2_ANGMIN_TIL)</h2>
+<h2>Mount2's minimum tilt angle (MNT2_ANGMIN_TIL)</h2>
 
 <p>Mount2's minimum physical tilt (pitch) angular position</p>
 <ul>
@@ -4728,7 +4825,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's maximum tilt angle (MNT_2_ANGMAX_TIL)</h2>
+<h2>Mount2's maximum tilt angle (MNT2_ANGMAX_TIL)</h2>
 
 <p>Mount2's maximum physical tilt (pitch) angular position</p>
 <ul>
@@ -4738,7 +4835,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's pan (yaw) RC input channel (MNT_2_RC_IN_PAN)</h2>
+<h2>Mount2's pan (yaw) RC input channel (MNT2_RC_IN_PAN)</h2>
 
 <p>0 for none, any other for the RC channel to be used to control pan (yaw) movements</p>
 <ul>
@@ -4752,7 +4849,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's minimum pan angle (MNT_2_ANGMIN_PAN)</h2>
+<h2>Mount2's minimum pan angle (MNT2_ANGMIN_PAN)</h2>
 
 <p>Mount2's minimum physical pan (yaw) angular position</p>
 <ul>
@@ -4762,7 +4859,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's maximum pan angle (MNT_2_ANGMAX_PAN)</h2>
+<h2>Mount2's maximum pan angle (MNT2_ANGMAX_PAN)</h2>
 
 <p>MOunt2's maximum physical pan (yaw) angular position</p>
 <ul>
@@ -4772,7 +4869,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's Roll stabilization lead time (MNT_2_LEAD_RLL)</h2>
+<h2>Mount2's Roll stabilization lead time (MNT2_LEAD_RLL)</h2>
 
 <p>Causes the servo angle output to lead the current angle of the vehicle by some amount of time based on current angular rate, compensating for servo delay. Increase until the servo is responsive but doesn't overshoot. Does nothing with pan stabilization enabled.</p>
 <ul>
@@ -4782,7 +4879,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2's Pitch stabilization lead time (MNT_2_LEAD_PTCH)</h2>
+<h2>Mount2's Pitch stabilization lead time (MNT2_LEAD_PTCH)</h2>
 
 <p>Causes the servo angle output to lead the current angle of the vehicle by some amount of time based on current angular rate. Increase until the servo is responsive but doesn't overshoot. Does nothing with pan stabilization enabled.</p>
 <ul>
@@ -4792,7 +4889,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mount2 Type (MNT_2_TYPE)</h2>
+<h2>Mount2 Type (MNT2_TYPE)</h2>
 
 <p>Mount Type (None, Servo or MAVLink)</p>
 <ul>
@@ -5119,7 +5216,7 @@ DO NOT EDIT
 <tr><td>6</td><td>SiRF</td></tr>
 <tr><td>7</td><td>HIL</td></tr>
 <tr><td>8</td><td>SwiftNav</td></tr>
-<tr><td>9</td><td>PX4EXPERIMENTAL</td></tr>
+<tr><td>9</td><td>PX4-UAVCAN</td></tr>
 </table>
 </ul>
 
@@ -5138,7 +5235,7 @@ DO NOT EDIT
 <tr><td>6</td><td>SiRF</td></tr>
 <tr><td>7</td><td>HIL</td></tr>
 <tr><td>8</td><td>SwiftNav</td></tr>
-<tr><td>9</td><td>PX4EXPERIMENTAL</td></tr>
+<tr><td>9</td><td>PX4-UAVCAN</td></tr>
 </table>
 </ul>
 
@@ -5201,6 +5298,34 @@ DO NOT EDIT
 <ul>
 <li>Range: -100 90</li>
 <li>Units: Degrees</li>
+</ul>
+
+
+<h2>Destination for GPS_INJECT_DATA MAVLink packets (GPS_INJECT_TO)</h2>
+
+<p>The GGS can send raw serial packets to inject data to multiple GPSes.</p>
+<ul>
+<li>Values: 0,1: send to specified instance. 127: broadcast</li>
+</ul>
+
+
+<h2>Swift Binary Protocol Logging Mask (GPS_SBP_LOGMASK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Masked with the SBP msg_type field to determine whether SBR1/SBR2 data is logged</p>
+<ul>
+<li>Values: 0x0000 for none, 0xFFFF for all, 0xFF00 for external only.</li>
+</ul>
+
+
+<h2>Raw data logging (GPS_RXM_RAW)</h2>
+
+<p>Enable logging of RXM raw data from uBlox which includes carrier phase and pseudo range information. This allows for post processing of dataflash logs for more precise positioning. Note that this requires a raw capable uBlox such as the 6P or 6T.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>1</td><td>log at 1MHz</td></tr>
+<tr><td>5</td><td>log at 5MHz.</td></tr>
+</table>
 </ul>
 
 
@@ -5447,6 +5572,7 @@ DO NOT EDIT
 <p>Feed-forward compensation to automatically add rudder input when collective pitch is increased. Can be positive or negative depending on mechanics.</p>
 <ul>
 <li>Range: -10 10</li>
+<li>Increment: 0.1</li>
 </ul>
 
 
@@ -6295,6 +6421,16 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Distance (in cm) from the range finder to the ground (RNGFND_GNDCLEAR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the expected range measurement(in cm) that the range finder should return when the vehicle is on the ground.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+<li>Units: centimeters</li>
+</ul>
+
+
 <h2>Second Rangefinder type (RNGFND2_TYPE)</h2>
 
 <p>What type of rangefinder device that is connected</p>
@@ -6420,6 +6556,16 @@ DO NOT EDIT
 <tr><td>0</td><td>No</td></tr>
 <tr><td>1</td><td>Yes</td></tr>
 </table>
+</ul>
+
+
+<h2>Distance (in cm) from the second range finder to the ground (RNGFND2_GNDCLEAR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the expected range measurement(in cm) that the second range finder should return when the vehicle is on the ground.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+<li>Units: centimeters</li>
 </ul>
 
 
