@@ -49,9 +49,9 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Mavlink version (ArduCopter:SYSID_THISMAV)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>MAVLink system ID of this vehicle (ArduCopter:SYSID_THISMAV)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Allows reconising the mavlink version</p>
+<p>Allows setting an individual MAVLink system id for this vehicle to distinguish it from others on the same network</p>
 <ul>
 <li>Range: 1 255</li>
 </ul>
@@ -430,6 +430,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -451,6 +452,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -472,6 +474,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -493,6 +496,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -514,6 +518,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -535,6 +540,7 @@ DO NOT EDIT
 <tr><td>11</td><td>Drift</td></tr>
 <tr><td>13</td><td>Sport</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
+<tr><td>17</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -688,6 +694,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -725,6 +732,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -762,6 +770,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -799,6 +808,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -836,6 +846,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -873,6 +884,7 @@ DO NOT EDIT
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
+<tr><td> 33</td><td>Brake</td></tr>
 </table>
 </ul>
 
@@ -1475,7 +1487,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (HS1_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1528,7 +1540,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (HS2_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1581,7 +1593,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (HS3_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1634,7 +1646,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (HS4_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1687,7 +1699,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC1_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1740,7 +1752,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC2_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1793,7 +1805,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC3_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1846,7 +1858,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC4_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1899,7 +1911,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC5_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -1986,7 +1998,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC6_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2073,7 +2085,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC7_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2160,7 +2172,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC8_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2247,7 +2259,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC9_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2334,7 +2346,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC10_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2421,7 +2433,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC11_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2508,7 +2520,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC12_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2595,7 +2607,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC13_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -2682,7 +2694,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (RC14_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -4159,6 +4171,99 @@ DO NOT EDIT
 </ul>
 
 
+<h1>SR3_ Parameters</h1>
+
+
+<h2>Raw sensor stream rate (SR3_RAW_SENS)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of RAW_IMU, SCALED_IMU2, SCALED_PRESSURE, and SENSOR_OFFSETS to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Extended status stream rate to ground station (SR3_EXT_STAT)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of SYS_STATUS, MEMINFO, MISSION_CURRENT, GPS_RAW_INT, NAV_CONTROLLER_OUTPUT, and LIMITS_STATUS to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>RC Channel stream rate to ground station (SR3_RC_CHAN)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of SERVO_OUTPUT_RAW and RC_CHANNELS_RAW to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Raw Control stream rate to ground station (SR3_RAW_CTRL)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of RC_CHANNELS_SCALED (HIL only) to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Position stream rate to ground station (SR3_POSITION)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of GLOBAL_POSITION_INT to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Extra data type 1 stream rate to ground station (SR3_EXTRA1)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of ATTITUDE and SIMSTATE (SITL only) to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Extra data type 2 stream rate to ground station (SR3_EXTRA2)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of VFR_HUD to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Extra data type 3 stream rate to ground station (SR3_EXTRA3)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of AHRS, HWSTATUS, and SYSTEM_TIME to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
+<h2>Parameter stream rate to ground station (SR3_PARAMS)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Stream rate of PARAM_VALUE to ground station</p>
+<ul>
+<li>Range: 0 10</li>
+<li>Increment: 1</li>
+<li>Units: Hz</li>
+</ul>
+
+
 <h1>AHRS_ Parameters</h1>
 
 
@@ -4307,11 +4412,12 @@ DO NOT EDIT
 
 <h2>Use NavEKF Kalman filter for attitude and position estimation (AHRS_EKF_USE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This controls whether the NavEKF Kalman filter is used for attitude and position estimation</p>
+<p>This controls whether the NavEKF Kalman filter is used for attitude and position estimation and whether fallback to the DCM algorithm is allowed</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td>1</td><td>Enabled</td></tr>
+<tr><td> 2</td><td>Enabled - No Fallback</td></tr>
 </table>
 </ul>
 
@@ -5690,7 +5796,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (SS1_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -5743,7 +5849,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (SS2_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -5796,7 +5902,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (SS3_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>
@@ -5849,7 +5955,7 @@ DO NOT EDIT
 
 <h2>RC dead-zone (SS4_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>dead zone around trim.</p>
+<p>dead zone around trim or bottom</p>
 <ul>
 <li>Range: 0 200</li>
 <li>Units: pwm</li>

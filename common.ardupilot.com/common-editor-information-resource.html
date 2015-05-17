@@ -294,23 +294,31 @@ All content on this wiki is licensed under the terms of the <a href="http://crea
 
 <h1>Translating wiki pages</h1>
 
-We currently support "manual" translations in Spanish, Korean, French, and German using the <a href="https://wordpress.org/plugins/transposh-translation-filter-for-wordpress/">Trasposh Wordpress Translation Plugin</a>. 
+We currently support "manual" translations using <a href="https://www.transifex.com/">Transifex</a> and the <a href="https://wordpress.org/plugins/transifex-live/">Transifex Live Integration Wordpress Plugin</a>.  The system will automatically display the correct translation based on your browser language settings, or you can choose your preferred language using the selection list on the bottom right on the page.
 
-[note]Chinese translations are managed separately/off-site by their community (we do <a href="https://github.com/diydrones/ardupilot_wordpress_sources" title="Wiki sources on github">export the sources to github</a> to make this easier).[/note]
+[caption id="attachment_4444" align="alignnone" width="382"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Transifex-LanguageSelectorBottomRight.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Transifex-LanguageSelectorBottomRight.png" alt="Translation Selection List (Bottom Right)" width="382" height="380" class="size-full wp-image-4444" /></a> Translation Selection List (Bottom Right)[/caption]
 
-Translations are managed through the "Translations" selection list in the sidebar. Select the language of interest to load a translation, if one exists. The text below the selection box allows you to specify the current language as the "default" when you load a page. 
+In order to contribute to the translations you need to sign up to <a href="https://www.transifex.com/">Transifex</a> and then request to be <a href="https://www.transifex.com/organizations/dashboard/ardupilot">added to a group to translate a particular language</a> (or request a new language). 
+[note]If you have problems with this step, join the <a href="https://groups.google.com/forum/?hl=en#!forum/ardu-wiki-editors">Wiki Editors discussion group</a> and we will help set you up.[/note]
 
-[caption id="attachment_4390" align="alignnone" width="248"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Wiki-Translation_LoggedIn.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Wiki-Translation_LoggedIn.png" alt="Wiki translation selection and edit checkbox" width="248" height="288" class="size-full wp-image-4390" /></a> Wiki translation selection and edit checkbox[/caption]
+Once you have access to Transifex and have joined the Translation group:
+<ul>
+<li><a href="https://www.transifex.com/projects/p/ardupilot/live/">Navigate to the project on Transifex Live</a>.  </li>
+<li>Select the wiki URL that you are interested in translating from the left sidebar.</li>
+<li>Select the page URL that you want to translate from the left sidebar. 
+[tip]The list of pages to translate in the sidebar is not necessarily complete. If you navigate to a new page through the editor (and wait until it loads) the page will then be added to the sidebar.[/tip]</li>
+<li>The page will be loaded into the WYSIWYG editor. 
+[note]If the page does not load cleanly there may be some issue with mixed content. The site will prompt you to click the shield icon, allow unsafe scripts, and reload the page.[/note]</li>
+<li>After the page has loaded cleanly, select the language that you wish to translate from the selection list at the top right.
+[caption id="attachment_4445" align="alignnone" width="1930"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Transifex-WYSIWYG.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Transifex-WYSIWYG.png" alt="Transifex WYSIWYG Website editor" width="1930" height="1007" class="size-full wp-image-4445" /></a> Transifex WYSIWYG Website editor[/caption]
+</li>
+<li>Hover over the strings you want to translate and select the <strong>Collect</strong> button to collect a string into Transifex. You can then select the actual text and enter a translated version.</li>
+<li>After translation the team manager can publish the content (these do not go live until explicitly published). </li>
+</ul>
 
-If you are logged in, you will also be able to see the <em>Edit Translation</em> checkbox. Select this to start editing the translation. 
+[tip]This above instructions are a very brief overview. There are more detailed instructions <a href="http://docs.transifex.com/live/">in the Transifex documentation</a>.[/tip]
 
-Transposh breaks the page into sentences and you can select the markers displayed on the page to open a dialog and provide a translation for the string. The dialog also provides a button that you can use to fetch an automatic translation of the string as a starting point.
-
-[caption id="attachment_4391" align="alignnone" width="954"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Wiki-Translation_Editing.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/Wiki-Translation_Editing.png" alt="Wiki Translation using Transposh" width="954" height="388" class="size-full wp-image-4391" /></a> Wiki Translation using Transposh[/caption]
-
-We recommend that translators work in groups to review each other's work and choose the most important content to translate. We do not "manage" this process, other than to provide logins to users that need them. 
-
-To become a wiki translator, request a new language, or make any other query about translation, please email <em>hamish@3drobotics.com</em> with your name, and a brief overview of what sort of vehicles and articles you're interested in translating.
+The organisation owners will attempt to publish the new content on a regular basis (weekly). If you have completed a block of translation and it has not gone live, please request this on the <a href="https://groups.google.com/forum/?hl=en#!forum/ardu-wiki-editors">Wiki Editors discussion group</a>. If you would like to manage your own translation group, this can also be requested on the ArduWiki Editors group too.
 
 
 <h1>FAQ</h1>
