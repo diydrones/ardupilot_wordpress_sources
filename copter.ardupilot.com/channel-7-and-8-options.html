@@ -9,9 +9,11 @@ post_parent_stub: configuration
 post_parent_title: Advanced Configuration 
 END METADATA 
 -->
-By default, Channel 7 is configured to save the current location as a waypoint (see "Save WP" below) but you can change the default behavior from the Mission Planner's Software &gt; Copter Pids screen.
+Many "Auxiliary" features can be setup to be invoked from the transmitter's channel 7 and 8 switches (ver AC3.3 and higher support auxiliar functions on channels 9 ~ 12 as well).
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png"><img class="alignnone size-full wp-image-8896" alt="MPchan7options" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png" width="1024" height="575" /></a>
+By default the auxiliary switches are disabled but you can assign features using the Mission Planner's Config/Tuning &gt;&gt; Extended Tuning screen or by setting the CH7_OPT (or CH8_OPT) parameter directly.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png"><img class="alignnone size-full wp-image-8896" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png" alt="MPchan7options" width="1024" height="575" /></a>
 
 Here are the options:
 <table>
@@ -48,7 +50,7 @@ Here are the options:
 <tr>
 <td><strong>Multi Mode
 </strong></td>
-<td>Ch6 tuning knob position controls which of the following 3 functions is invoked when ch7 or ch8 switch put in the on position.
+<td>This option has been removed from AC3.3 (and higher).Ch6 tuning knob position controls which of the following 3 functions is invoked when ch7 or ch8 switch put in the on position.
 <p style="padding-left: 30px">Ch6 &lt;1200 : Flip</p>
 <p style="padding-left: 30px">Ch6 1201 ~ 1799 : RTL</p>
 <p style="padding-left: 30px">Ch6 &gt; 1800 : Save Waypoint</p>
@@ -78,11 +80,29 @@ Here are the options:
 </strong></td>
 <td>Similar to simple mode except controls are relative home position. Move the pitch stick forward and the copter will fly away from home, pull pitch back and it will return. Move roll stick left or right and the copter to orbit home regardless of the copter's actual heading.</td>
 </tr>
+<tr>
+<td><strong><a href="wiki/landing-gear/">Landing Gear</a></strong></td>
+<td>Retracts/Deploys landing gear. (AC3.3 only)</td>
+</tr>
+<tr>
+<td><strong>Lost Copter Alarm</strong></td>
+<td>Plays the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/LostCopter.wav" target="_blank">lost copter alarm</a> though the buzzer (AC3.3 only)</td>
+</tr>
+<tr>
+<td><strong>Emergency Stop Motors</strong></td>
+<td>Stops motors immediately (<a href="https://www.youtube.com/watch?v=-Db4u8LJE5w" target="_blank">video</a>). (AC3.3 only)</td>
+</tr>
+<tr>
+<td><strong>Motor Interlock</strong></td>
+<td>Opposite of Emergency stop (above) in that switch must be ON for motors to spin (<a href="https://youtu.be/-Db4u8LJE5w?t=51" target="_blank">video</a>). (AC3.3 only)</td>
+</tr>
+<tr>
+<td><strong>Brake</strong></td>
+<td>Invokes the <a href="wiki/brake-mode/">Brake flight mode</a> when switch goes high.  Bringing switch back to low will return the vehicle to the mode indicated by the ch5 flight mode switch. (AC3.3 only)</td>
+</tr>
 </tbody>
 </table>
-
-
 <h3>Check Ch7 &amp; Ch8 PWM values reach 1800</h3>
 Your channel 7 and/or channel 8 pwm value must reach at least 1800 PWM or the auxiliary function will not be activated.  You can check that it surpasses this threshold using the Mission Planner's radio config page.
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png"><img class="alignnone size-full wp-image-8298" alt="MPCH7checkPWMrange" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png" width="1024" height="575" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png"><img class="alignnone size-full wp-image-8298" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png" alt="MPCH7checkPWMrange" width="1024" height="575" /></a>

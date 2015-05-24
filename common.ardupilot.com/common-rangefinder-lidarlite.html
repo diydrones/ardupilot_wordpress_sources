@@ -14,7 +14,9 @@ The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</
 
 [note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.3 or higher (as well as Rover 2.49 or higher).[/note]
 
-https://www.youtube.com/watch?v=3I06AOwIQVY
+[embed width=700]https://www.youtube.com/watch?v=3I06AOwIQVY[/embed]
+
+
 <h1>Connecting to the Pixhawk via I2C</h1>
 [warning]If you have a LIDAR-Lite that has a manufacture date label prior to February 2015 there are I2C interface communications issues that will cause unreliable operation of the sensor with Pixhawk and <em>will cause your vehicle to crash</em>. When using these versions of LIDAR-Lite please use the PWM alternative listed below for best results.[/warning]
 
@@ -107,3 +109,10 @@ Set the <code>RNGFND_MAX_CM</code> parameter to 4000 (40m). This parameter repre
 <h1>Testing the sensor</h1>
 Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab.  Look closely for "sonarrange".
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>
+
+
+<h1>Video guide</h1>
+
+The following video guide also shows how to set up the LIDAR-Lite (referencing this wiki article):
+
+[embed width=800]https://www.youtube.com/watch?v=FUT-ZsKGtxI[/embed]

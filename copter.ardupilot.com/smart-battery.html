@@ -1,0 +1,41 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: smart-battery 
+title: Smart Battery 
+id: 14459 
+menu_order: 10 
+post_parent_id: 12443 
+post_parent_stub: common-powermodule-landingpage 
+post_parent_title: common-Power Modules (landing page) 
+END METADATA 
+-->
+Copter supports "smart batteries" that communicate using <a href="http://en.wikipedia.org/wiki/System_Management_Bus" target="_blank">SMBus</a> <a href="https://store.3drobotics.com/products/solo-smart-battery?taxon_id=66" target="_blank">like those found on the Solo</a>.  This allows easier setup than available when using a traditional power module.
+<!-- more -->[note]Support for smart batteries was introduced in Copter 3.3[/note]
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/SmartBattery_Solo.png"><img class="alignnone size-full wp-image-14461" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/SmartBattery_Solo.png" alt="SmartBattery_Solo" width="370" height="250" /></a>
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+SMBus is close enough to I2C that the GND, SDA and SCLK lines from the battery can be connected to the Pixhawk's I2C connector (see I2C pin assignment on <a href="wiki/common-autopilots/common-pixhawk-overview/#pixhawk_connector_pin_assignments">this page</a>).
+
+
+<h1>Setup through Mission Planner</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/SmartBattery_SetupMP.png"><img class="alignnone size-full wp-image-14463" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/SmartBattery_SetupMP.png" alt="SmartBattery_SetupMP" width="1023" height="573" /></a>
+
+Simply set the <a href="arducopter-parameters/#battery_monitoring_batt_monitor">BATT_MONITOR</a> parameter to "SMBus" and reboot the board.  When it restarts, if it successfully finds the battery, the <a href="arducopter-parameters/#battery_capacity_batt_capacity">BATT_CAPACITY</a> parameter should be automatically updated to the batteries actual capacity in mAh.
+
+
+<h1>Limitations</h1>
+
+<ul>
+	<li>Battery "address discovery" is not supported so the battery must use slave address 0x0B (7 bit address).</li>
+	<li>Start-up scripts for ArduPilot only search for the battery on the "internal" I2C bus which is not easily accessible on the Pixhawk board.  This can be changed in <a href="https://github.com/diydrones/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM#L399" target="_blank">the startup scripts</a> to tell the batt_smbus driver to searching on bus "1" instead of "2".</li>
+</ul>
+
+
+<h1>Additional information</h1>
+
+<a href="http://smbus.org/specs/" target="_blank">SMBus specifications (see ver 1.1, ver 2.0)</a>
+<a href="https://github.com/diydrones/PX4Firmware/blob/master/src/drivers/batt_smbus/batt_smbus.cpp" target="_blank">Software driver for ArduPilot/PX4</a>

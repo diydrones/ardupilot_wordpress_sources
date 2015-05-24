@@ -1,0 +1,42 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: connecting-the-apm2 
+title: Connecting the APM2 
+id: 14487 
+menu_order: 20 
+post_parent_id: 1514 
+post_parent_stub: assembly-instructions 
+post_parent_title: Assembly Instructions 
+END METADATA 
+-->
+<h1>Overview</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/QuadHookUp800B.jpg"><img class="alignnone size-full wp-image-8753" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/QuadHookUp800B.jpg" alt="QuadHookUp800B" width="800" height="472" /></a>
+
+The diagram above is an overview of how an APM2 can be connected to a receiver, ESC, GPS and even a camera gimbal.  Please visit the links below for more detailed information on how the APM2 can be connected to each of the individual components.
+<ul>
+	<li><a href="wiki/connecting-your-rc-input-and-motors/">Connecting the Radio Receiver (APM2)</a></li>
+	<li><a href="wiki/connecting-the-escs-and-motors/">Connect the ESCs/Motors (APM2)</a></li>
+</ul>
+
+
+<h1>Powering your copter</h1>
+
+The easiest way to power your copter is using a <a href="http://copter.ardupilot.com/wiki/common-measuring-battery-voltage-and-current-consumption-with-apm/">3DR Power Module</a> with a LiPo battery (see <a href="http://copter.ardupilot.com/wiki/battery-information">Battery Information Page</a>). For alternative methods of powering your copter, see the <a href="/wiki/common-apm25-and-26-overview/">APM 2.5 and 2.6 Overview Page.</a>
+
+To wiring a power module, connect the red-and-black two wire cable on the power module to the PDB red and black two-wire. Connect the power module to the APM PM port using a 6-position cable.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/power-wiring.jpg"><img class="alignnone wp-image-8045" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/power-wiring.jpg" alt="Powering your copter." width="200" height="141" /></a>
+
+Connect the PDB multi-wire cable to APM Output Signal pins with the M1 wire connecting to the signal pin labeled 1, M6 and signal pin 6, etc. (<a href="http://copter.ardupilot.com/wiki/px4fmu-plus-px4io-wiring/">For wiring with a PX4 autopilot, click here for PX4 wiring instructions.</a>)
+
+
+<h1>Connect ESCs and motors</h1>
+
+Connect motor cables to electronic speed controller (ESC) bullet connectors. Each motor must connect to only one ESC.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/esc-motor-connect.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/esc-motor-connect.jpg" alt="ESC Motor Connect" width="200" height="169" /></a>
+
+Connect ESC Deans connectors to Power Distribution Board (PDB) Deans connectors. Connect three-wire cables from the ESCs to the PDB signal pins according to motor number (view <strong><a href="http://copter.ardupilot.com/wiki/motor-setup/" target="_blank">Motor Setup</a> </strong>to find the motor number configuration for your frame). Connect the ESC for motor 1 to the PDB pins marked M1, motor 6's ESC to the pins marked M6, etc.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/pdb-esc-connect.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/pdb-esc-connect.jpg" alt="Connect ESCs to PDB." width="200" height="140" /></a>
