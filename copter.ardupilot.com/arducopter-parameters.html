@@ -120,6 +120,19 @@ DO NOT EDIT
 </ul>
 
 
+<h2>GCS PID tuning mask (ArduCopter:GCS_PID_MASK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>bitmask of PIDs to send MAVLink PID_TUNING messages for</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>Roll</td></tr>
+<tr><td>2</td><td>Pitch</td></tr>
+<tr><td>4</td><td>Yaw</td></tr>
+</table>
+</ul>
+
+
 <h2>RTL Altitude (ArduCopter:RTL_ALT)</h2>
 
 <p>The minimum altitude the model will move to before Returning to Launch.  Set to zero to return at current altitude.</p>
@@ -567,6 +580,7 @@ DO NOT EDIT
 <tr><td>131071</td><td>All+FastATT</td></tr>
 <tr><td>262142</td><td>All+MotBatt</td></tr>
 <tr><td>393214</td><td>All+FastIMU</td></tr>
+<tr><td>397310</td><td>All+FastIMU+PID</td></tr>
 <tr><td>0</td><td>Disabled</td></tr>
 </table>
 </ul>
@@ -1948,6 +1962,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2035,6 +2051,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2122,6 +2140,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2209,6 +2229,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2296,6 +2318,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2383,6 +2407,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2470,6 +2496,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2557,6 +2585,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2644,6 +2674,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -2731,6 +2763,8 @@ DO NOT EDIT
 <tr><td>25</td><td>Flaperon2</td></tr>
 <tr><td>26</td><td>GroundSteering</td></tr>
 <tr><td>27</td><td>Parachute</td></tr>
+<tr><td>28</td><td>EPM</td></tr>
+<tr><td>29</td><td>LandingGear</td></tr>
 </table>
 </ul>
 
@@ -4672,7 +4706,8 @@ DO NOT EDIT
 <tr><td> 1</td><td>Servo</td></tr>
 <tr><td> 2</td><td>MAVLink</td></tr>
 <tr><td> 3</td><td>Alexmos Serial</td></tr>
-<tr><td> 4</td><td>SToRM32</td></tr>
+<tr><td> 4</td><td>SToRM32 MAVLink</td></tr>
+<tr><td> 5</td><td>SToRM32 Serial</td></tr>
 </table>
 </ul>
 
@@ -5004,7 +5039,8 @@ DO NOT EDIT
 <tr><td> 1</td><td>Servo</td></tr>
 <tr><td> 2</td><td>MAVLink</td></tr>
 <tr><td> 3</td><td>Alexmos Serial</td></tr>
-<tr><td> 4</td><td>SToRM32</td></tr>
+<tr><td> 4</td><td>SToRM32 MAVLink</td></tr>
+<tr><td> 5</td><td>SToRM32 Serial</td></tr>
 </table>
 </ul>
 
@@ -5965,49 +6001,35 @@ DO NOT EDIT
 <h1>MOT_ Parameters</h1>
 
 
-<h2>Motors always spin when armed (MOT_SPIN_ARMED)</h2>
-
-<p>Controls whether motors always spin when armed (must be below THR_MIN)</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Do Not Spin</td></tr>
-<tr><td>70</td><td>VerySlow</td></tr>
-<tr><td>100</td><td>Slow</td></tr>
-<tr><td>130</td><td>Medium</td></tr>
-<tr><td>150</td><td>Fast</td></tr>
-</table>
-</ul>
-
-
-<h2>Reverse roll feedback  (MOT_REV_ROLL)</h2>
+<h2>Reverse roll feedback  (MOT_ROLL_SV_REV)</h2>
 
 <p>Ensure the feedback is negative</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>-1</td><td>Opposite direction</td></tr>
-<tr><td>1</td><td>Same direction</td></tr>
+<tr><td>-1</td><td>Reversed</td></tr>
+<tr><td>1</td><td>Normal</td></tr>
 </table>
 </ul>
 
 
-<h2>Reverse pitch feedback  (MOT_REV_PITCH)</h2>
+<h2>Reverse pitch feedback  (MOT_PITCH_SV_REV)</h2>
 
 <p>Ensure the feedback is negative</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>-1</td><td>Opposite direction</td></tr>
-<tr><td>1</td><td>Same direction</td></tr>
+<tr><td>-1</td><td>Reversed</td></tr>
+<tr><td>1</td><td>Normal</td></tr>
 </table>
 </ul>
 
 
-<h2>Reverse yaw feedback  (MOT_REV_YAW)</h2>
+<h2>Reverse yaw feedback  (MOT_YAW_SV_REV)</h2>
 
 <p>Ensure the feedback is negative</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>-1</td><td>Opposite direction</td></tr>
-<tr><td>1</td><td>Same direction</td></tr>
+<tr><td>-1</td><td>Reversed</td></tr>
+<tr><td>1</td><td>Normal</td></tr>
 </table>
 </ul>
 
@@ -6025,37 +6047,41 @@ DO NOT EDIT
 
 <h2>Roll channel (RCMAP_ROLL)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Roll channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Roll is normally on channel 1, but you can move it to any channel with this parameter.</p>
+<p>Roll channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Roll is normally on channel 1, but you can move it to any channel with this parameter.  Reboot is required for changes to take effect.</p>
 <ul>
 <li>Range: 1 8</li>
 <li>Increment: 1</li>
+<li>RebootRequired: True</li>
 </ul>
 
 
 <h2>Pitch channel (RCMAP_PITCH)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Pitch channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Pitch is normally on channel 2, but you can move it to any channel with this parameter.</p>
+<p>Pitch channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Pitch is normally on channel 2, but you can move it to any channel with this parameter.  Reboot is required for changes to take effect.</p>
 <ul>
 <li>Range: 1 8</li>
 <li>Increment: 1</li>
+<li>RebootRequired: True</li>
 </ul>
 
 
 <h2>Throttle channel (RCMAP_THROTTLE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Throttle channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Throttle is normally on channel 3, but you can move it to any channel with this parameter. Warning APM 2.X: Changing the throttle channel could produce unexpected fail-safe results if connection between receiver and on-board PPM Encoder is lost. Disabling on-board PPM Encoder is recommended.</p>
+<p>Throttle channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Throttle is normally on channel 3, but you can move it to any channel with this parameter. Warning APM 2.X: Changing the throttle channel could produce unexpected fail-safe results if connection between receiver and on-board PPM Encoder is lost. Disabling on-board PPM Encoder is recommended.  Reboot is required for changes to take effect.</p>
 <ul>
 <li>Range: 1 8</li>
 <li>Increment: 1</li>
+<li>RebootRequired: True</li>
 </ul>
 
 
 <h2>Yaw channel (RCMAP_YAW)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Yaw channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Yaw (also known as rudder) is normally on channel 4, but you can move it to any channel with this parameter.</p>
+<p>Yaw channel number. This is useful when you have a RC transmitter that can't change the channel order easily. Yaw (also known as rudder) is normally on channel 4, but you can move it to any channel with this parameter.  Reboot is required for changes to take effect.</p>
 <ul>
 <li>Range: 1 8</li>
 <li>Increment: 1</li>
+<li>RebootRequired: True</li>
 </ul>
 
 

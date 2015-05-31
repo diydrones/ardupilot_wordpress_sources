@@ -1,0 +1,60 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-uavcan-escs 
+title: common-UAVCAN ESCs 
+id: 4510 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Copter, Plane and Rover support UAVCAN Electronic Speed Controllers (ESCs) that allow two-way communication with the flight controller enabling potentially easier setup and in-flight monitoring of ESC and motor health.
+
+<!-- more -->[note]UAVCAN ESCs are not yet readily available for purchase but should appear in 2015[/note]
+
+[embed width="800"]https://youtu.be/LnUmYgAINBc[/embed]
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/Pixhawk_UAVCAN_ESC.png"><img class="alignnone size-full wp-image-4511" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/Pixhawk_UAVCAN_ESC.png" alt="Pixhawk_UAVCAN_ESC" width="1269" height="619" /></a>
+
+One ESC (it does not matter which) should be connected to the Pixhawk's CAN port using a 4-pin DF13 to 4-pin ClickMate adapter cable. Each subsequent ESC should be connected to the previous using a 4-pin ClickMate cable.  The final ESC should have a CAN bus terminator plugged into one of it's 4-pin ClickMate ports.
+
+The FTDI Cable connection is only required for the one-time set-up discussed below.
+
+
+
+<h1>ESC setup using CLI</h1>
+
+Each ESC must go through a one-time manual setup using an <a href="https://store.3drobotics.com/products/ftdi-cable-3-3v" target="_blank">FTDI cable</a> to define it's UAVCAN Node Id and motor number.  In future versions of ardupilot this will be replaced with a setup procedure using the mission planner (and other GCSs).
+
+The steps required are:
+<ul>
+	<li>Connect the FTDI cable to the ESC's "Developer port" as shown in the image above.</li>
+	<li>Power the ESCs with a battery</li>
+	<li>Use a terminal program such as <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank">Putty</a> to connect to the ESC using the FTDI cable's COM port, using serial at 115200 baud</li>
+	<li>press <strong>Enter</strong> into the terminal and a "ch&gt;" prompt should appear</li>
+	<li>type <code>cfg list</code> to see a full list of parameters</li>
+	<li>on motor #1 (i.e. front-right on a quad) set the uavcan_node_id to "10" and uavcan_esc_index to "0" by typing:
+<ul>
+	<li><code>cfg set uavcan_node_id 10</code></li>
+	<li><code>cfg set uavcan_esc_index 0</code></li>
+	<li><code>cfg save</code>   (to save the configuration)</li>
+</ul>
+</li>
+	<li>to test the motor moves:
+<ul>
+	<li><code>dc arm</code>  (to enable the output)</li>
+	<li><code>dc 0.2</code> (to spin motor at 20%)</li>
+	<li><code>dc</code> (to stop motor)</li>
+</ul>
+</li>
+	<li>repeat for motors #2 (back left on a quad), #3, #4, etc with each motor having a node-id and index one higher than the previous (in fact the node-id doesn't matter as long as it's unique).</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/ESC_cli_setup.png"><img class="alignnone size-full wp-image-4512" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/ESC_cli_setup.png" alt="ESC_cli_setup" width="715" height="761" /></a>
+<h1>Additional information</h1>
+<a href="https://pixhawk.org/modules/pixhawk_esc" target="_blank">Pixhawk ESC wiki page</a>
+<a href="https://pixhawk.org/firmware/px4esc" target="_blank">Pixhawk ESC configuration wiki page</a>
+<a href="https://github.com/PX4/px4esc" target="_blank"> Pixhawk ESC firmware on github</a>

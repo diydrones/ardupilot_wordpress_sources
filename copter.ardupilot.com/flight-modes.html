@@ -9,19 +9,12 @@ post_parent_stub: flying-arducopter
 post_parent_title: First Flight with Copter 
 END METADATA 
 -->
-There are 14 flight modes available in Copter, 10 of which are regularly used. You can set these up by doing the following:
-<ul>
-	<li>Turn on your RC transmitter</li>
-	<li>Connect the APM/PX4 to the Mission Planner</li>
-	<li>Go to the Initial Setup &gt; Mandatory Hardware &gt; Flight Modes screen</li>
-	<li>Note as you move your transmitter's flight mode switch (channel 5) the green highlight bar will move to a different position.</li>
-	<li>Use the drop-down on each line to select the flight mode for that switch position ensuring that at least one switch position is left assigned to Stabilize</li>
-	<li>Optionally check the <a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/#Simple_Mode">Simple Mode</a> check-box for that switch position. If using AC3.1 or higher you can optionally set <a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/#Super_Simple_Mode">Super Simple mode</a>. If both Simple mode and Super Simple mode checkboxes are checked Super Simple will be used.</li>
-	<li>When finished press the "Save Modes" button.</li>
-</ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png"><img class="alignnone size-full wp-image-10283" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png" alt="MP_SetupFlightMode" width="1023" height="401" /></a>
+This article provides an overview of the available flight modes for Copter and instructions for how to configure which modes are available through the RC Transmitter. 
+<!-- more -->
 
-Some flight modes can also be invoked from the <a href="wiki/configuration/channel-7-and-8-options/">auxiliary switches</a> (aka ch7, ch8 option switches).
+<h1>Recommended Flight Modes</h1>
+
+There are 14 flight modes available in Copter, 10 of which are regularly used. 
 
 In general when first starting to use Copter you should progress through the flight modes in the order listed below, being sure that you are comfortable with each before progressing to the next. Click on any of the flight modes below for more details.
 <ul>
@@ -45,6 +38,8 @@ Additional flight modes
 	<li><a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/">Simple and Super Simple </a></li>
 </ul>
 Most transmitters provide a 3 position switch but you can find instructions <a href="wiki/common-six-modes/">here for setting up a 6-position flight mode switch</a>.
+
+
 <h1>GPS Dependency</h1>
 Flight modes that use GPS-positioning data require an active GPS lock prior to takeoff. To see if your autopilot has acquired GPS lock, connect to a ground station or consult your autopilot's hardware overview page to see the LED indication for GPS lock. Below is a summary of GPS dependency for Copter flight modes.
 
@@ -67,3 +62,19 @@ Does not require GPS lock:
 	<li><a title="Sport" href="wiki/sport-mode/">Sport</a></li>
 	<li><a title="Land mode" href="wiki/land-mode/">Land</a></li>
 </ul>
+
+<h1>Setting up Flight Modes</h1>
+
+You can set these up the flight modes by doing the following:
+<ul>
+	<li>Turn on your RC transmitter</li>
+	<li>Connect the Pixhawk (or other flight controller) to the <em>Mission Planner</em></li>
+	<li>Go to the <strong>Initial Setup | Mandatory Hardware | Flight Modes</strong> screen</li>
+	<li>Note as you move your transmitter's flight mode switch (channel 5) the green highlight bar will move to a different position.</li>
+	<li>Use the drop-down on each line to select the flight mode for that switch position ensuring that at least one switch position is left assigned to Stabilize</li>
+	<li>Optionally check the <a href="simpleandsuper-simple-modes/#Simple_Mode">Simple Mode</a> check-box for that switch position. If using AC3.1 or higher you can optionally set <a href="simpleandsuper-simple-modes/#Super_Simple_Mode">Super Simple mode</a>. If both Simple mode and Super Simple mode checkboxes are checked Super Simple will be used.</li>
+	<li>When finished press the "Save Modes" button.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png"><img class="alignnone size-full wp-image-10283" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png" alt="MP_SetupFlightMode" width="1023" height="401" /></a>
+
+Some flight modes can also be invoked from the <a href="channel-7-and-8-options">auxiliary switches</a> (a.k.a. ch7, ch8 option switches).

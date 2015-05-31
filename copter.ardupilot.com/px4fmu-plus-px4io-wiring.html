@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: px4fmu-plus-px4io-wiring 
-title: PX4FMU and PX4IO Board Copter Wiring/Installation 
+title: PX4 Wiring QuickStart 
 id: 4006 
 menu_order: 40 
 post_parent_id: 0 
@@ -9,14 +9,16 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Bill Of Materials</h3>
-<ol>
-	<li>PX4 FMU Board plus PX4 IO Board kit available from 3DRobotics <a href="http://store.3drobotics.com/products/px4-fmu-flight-management-unit-plus-io-input-slash-output-kit"> (Here!)</a></li>
-</ol>
+This article provides an overview of the <a href="https://store.3drobotics.com/products/px4fmu-1?taxon_id=42">PX4FMU</a> and <a href="https://store.3drobotics.com/products/px4io-1?taxon_id=42">PX4IO</a> Board Copter Wiring/Installation.
 
 
+<h1>PX4FMU plus PX4IO Wiring Diagrams</h1>
 
-<h3>Assembly</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4IOWiring1PPMSUMrec.jpg"><img class="alignnone size-full wp-image-4784" alt="PX4IOWiring1PPMSUMrec" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4IOWiring1PPMSUMrec.jpg" width="800" height="574" /></a>
+
+[caption id="attachment_9918" align="alignnone" width="1035"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg" alt="PX4 Wiring: PX4FMU plus PX4IO with 3DR 8 channel encoder and 3DR telemetry radio" width="1035" height="755" class="size-full wp-image-9918" /></a> PX4 Wiring: PX4FMU plus PX4IO with 3DR 8 channel encoder and 3DR telemetry radio[/caption]
+
+<h1>Assembly</h1>
 <ol>
 	<li><strong>Solder the right angle 9x3 pin connector that was included with your PX4 kit to the side of the PX4IO board that has "PX4 autopilot" printed on it.</strong>
 <ol>
@@ -50,8 +52,8 @@ END METADATA
 	<li>Thread 4 more of the black standoffs into the already installed black standoffs.</li>
 </ol>
 </li>
-	<li><strong>In order to reduce DC EMF effect on the Magnetometer you should review the link: <a href="http://copter.ardupilot.com/wiki/automatic-compass-declination/">(Here!)</a></strong></li>
-	<li><strong>You will need additional vibration damping and should review the Wiki section on vibration control <a href="http://copter.ardupilot.com/wiki/vibration-damping/">(Here!)</a></strong>
+	<li><strong>In order to reduce DC EMF effect on the Magnetometer see <a href="automatic-compass-declination">Magnetic Interference</a></strong>.</li>
+	<li>You will need additional vibration damping and should review <a href="http://copter.ardupilot.com/wiki/vibration-damping/">Vibration Damping</a></strong>.
 <ol>
 	<li>At a minimum you should mount the standoffs to an intermediate plate.</li>
 	<li>Mount the plate to your airframe with 4 small (&lt;1")square pads of Kyosho "Zeal" gel or "Moon Gel" in the corners.</li>
@@ -67,13 +69,7 @@ END METADATA
 </ol>
 
 
-
-<h3>PX4FMU plus PX4IO Wiring Diagram</h3>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4IOWiring1PPMSUMrec.jpg"><img class="alignnone size-full wp-image-4784" alt="PX4IOWiring1PPMSUMrec" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4IOWiring1PPMSUMrec.jpg" width="800" height="574" /></a>
-
-
-
-<h3>Wire the PX4FMU and PX4IO boards to Your Copter</h3>
+<h1>Wire the PX4FMU and PX4IO boards to Your Copter</h1>
 <ol>
 	<li><strong>Wire the PX4-IO board.</strong>
 <ol>
@@ -108,30 +104,25 @@ END METADATA
 
 
 
-<h3>PX4FMU plus PX4IO with 3DR 8 channel encoder and 3DR telemetry radio</h3>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg"><img class="alignnone size-full wp-image-9918" alt="PX4FMU_PX4IO_Wire_3DRradio2" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg" width="1035" height="755" /></a>
 
+
+<h1>Using a 3DR telemetry radio with your PX4FMU plus PX4IO system.</h1>
 
 
 <ol>
-	<li><strong>Using a 3DR telemetry radio with your PX4FMU plus PX4IO system.</strong>
-<ol>
-	<li>You will need a 3DR radio <strong><a href="http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz"> (Here!)</a></strong></li>
+	<li>You will need a <a href="common-3dr-radio-version-2">3DR Radio</a>.</li>
 	<li>Plug the telemetry adapter cable's large black connector into the 3DR radio as shown above.</li>
 	<li>The telemetry radio is shown above<strong> incorrectly</strong> connected to the FMU USART2 socket at the corner of the PX4IO board.
 <ol>
 	<li><strong>Correctly</strong> plug the telemetry adapter cable's beige connector into the PX4IO boards <strong>FMU UART5</strong> socket.</li>
 	<li>FMU UART5 is the middle socket on the end of the PX4IO board as indicated by the <strong>red arrow</strong> above.</li>
 	<li>(FMU UARTx) means a port that is pass through connected directly from the PX4IO board to the PX4FMU.</li>
-</ol>
-</li>
-</ol>
-</li>
+</ol></li>
 </ol>
 
 
 
-<h3>Separate Servo power for high power applications</h3>
+<h1>Separate Servo power for high power applications</h1>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4io-bottom1.jpg"><img class="alignnone size-full wp-image-9915" alt="PX4io-bottom" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4io-bottom1.jpg" width="729" height="529" /></a>
 <ol>
 	<li><strong>Using a separate power supply to provide power to the center servo power pins of the PX4IO board.</strong>
@@ -146,7 +137,7 @@ END METADATA
 
 
 
-<h3>Wiring your Motors for X or + mode configuration</h3>
+<h1>Wiring your Motors for X or + mode configuration</h1>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg"><img class="size-full wp-image-3977 aligncenter" alt="FRAMES_QUAD_PX4" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg" width="650" height="415" /></a>
 
 
@@ -159,54 +150,28 @@ END METADATA
 
 
 
-<h3>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h3>
-<ul>
-<ul>
-	<li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>
-<ul>
-	<li>An 8 Channel PPM Encoder is available from 3DRobotics <a href="http://store.3drobotics.com/products/8-channel-ppm-encoder-version-2"> (Here!)</a></li>
-	<li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>
-	<li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>
+<h1>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h1>	 	 
+<ul>	 	 
+<ul>	 	 
+ <li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>	 	 
+<ul>	 	 
+ <li>An 8 Channel PPM Encoder is <a href="https://store.3drobotics.com/products/ppm-encoder">available from 3DRobotics</a>.</li>	 	 
+ <li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>	 	 
+ <li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>	 	 
+</ul>	 	 
+</li>	 	 
+ <li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>	 	 
+<ul>	 	 
+ <li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>	 	 
+</ul>	 	 
+</li>	 	 	 	 
+</ul>	 	 
 </ul>
-</li>
-	<li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>
-<ul>
-	<li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>
-</ul>
-</li>
-	<li><strong>Note! If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.</strong></li>
-</ul>
-</ul>
 
+[note]If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.[/note]
 
+<h1>Compatible remote control (RC) receivers</h1>
 
-<h4>3DRobotics 8 Channel PPM-Sum Encoder</h4>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PPMEncoderDesc.jpg"><img class="alignnone size-full wp-image-3865" alt="PPMEncoderDesc" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PPMEncoderDesc.jpg" width="1152" height="564" /></a>
+PX4 is compatible with PPM remote control (RC) receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. For traditional single-wire-per-channel (PWM) receivers a PPM encoder can be used to convert the receiver outputs to PPM-SUM.  Information about compatible receivers and how they are connected can be found in <a href="common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems" target="_blank">this wiki page</a>. 
 
-
-
-<h3> There are Several Radio systems that support PPM-Sum or S-Bus directly</h3>
-
-
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkySystem.jpg"><img alt="FRSky Transmitter Adapter and PPM-Sum Receiver" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkySystem.jpg" width="565" height="414" /></a>
-<h4>FRSky transmitter adapter module and PPM-Sum receiver</h4>
-
-
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkyTaranis.jpg"><img alt="FRSkyTaranis" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkyTaranis.jpg" width="560" height="372" /></a>
-<h4>FRSky PPM-Sum compatible transmitter</h4>
-
-
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/Turnigy9XR.jpg"><img class="size-full wp-image-4469" title="The Turnigy 9XR Transmitter can be used with the FRSky module" alt="Turnigy9XR" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/Turnigy9XR.jpg" width="565" height="414" /></a>
-<h4>Turnigy transmitter compatible with FRSky transmitter module</h4>
-
-
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FutabaT8FG.jpg"><img class="size-full wp-image-4470" alt="FutabaT8FG" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FutabaT8FG.jpg" width="350" height="437" /></a>
-<h4>Futaba transmitter compatible with Futaba S-Bus receivers</h4>
-
-
-
-<strong>You can also go to the PixHawk Link for even more options <a href="https://pixhawk.ethz.ch/px4/modules/peripherals#rc_transmitters"> (Here!)</a></strong>
+[caption id="attachment_11140" align="alignnone" width="150"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis-150x150.jpg" alt="FRSky Taranis Transmitter" width="150" height="150" class="size-thumbnail wp-image-11140" /></a> FRSky Taranis Transmitter[/caption]

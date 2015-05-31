@@ -9,11 +9,80 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-For most users powering the Pixhawk is as simple as connecting the 6-pin DF13 cable from the <a href="http://store.3drobotics.com/products/apm-power-module-with-xt60-connectors" target="_blank">3DR power module</a> into the Pixhawk's "Power" port as shown above.  This will provide a steady 5V and allow the Pixhawk to measure the current and voltage of the main battery.  The power module can be used with 3S or 4S batteries (i.e. up to 18V) and 90amps of power (most multicopters draw less than 20amps when hovering and rarely consume more than 90amps at full throttle).
+This article explains how to power the <a href="common-pixhawk-overview">Pixhawk</a>.
+<!-- more -->
+
+<h1>Overview</h1>
+
+For most users powering the Pixhawk is as simple as connecting the 6-pin DF13 cable from the <a href="http://store.3drobotics.com/products/apm-power-module-with-xt60-connectors" target="_blank">3DR power module</a> into the Pixhawk's "Power" port as shown below.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img class="alignnone  wp-image-2310" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg" alt="pixhawkpower port" width="294" height="449" /></a>
 
-<h3>Backup power from ESC</h3>
-If a secondary source of 5.8V or less is available (such as from an ESC) it can be connected to the rear "MAIN OUT" or "AUX OUT" pins as shown below. If the voltage provided by the power module falls too low (4V?) the secondary source will be used.
+This will provide a steady 5V and allow the Pixhawk to measure the current and voltage of the main battery.  The power module can be used with 3S or 4S batteries (i.e. up to 18V) and 90amps of power (most multicopters draw less than 20amps when hovering and rarely consume more than 90amps at full throttle).
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/PoweringThePixhawk_backupBEC.jpg"><img class="alignnone size-full wp-image-2790" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/PoweringThePixhawk_backupBEC.jpg" alt="PoweringThePixhawk_backupBEC" width="471" height="318" /></a>
+Other voltage/current measurement devices such as an Attopilot can be used in place of the 3DR Power Module.
+
+[warning]Pixhawk does <strong>not</strong> <em>supply</em> power to the servo rail. Powering the servo rails is normally done by an ESC or alternatively a separate source such as a BEC (as shown in the <a href="#pixhawk_poweresc_wiring_overview">wiring overview below</a>).[/warning]
+
+
+<h1>Powering/backup off the servo rail</h1>
+
+Pixhawk can be powered off the servo rail instead of from a power module. This is achieved by connecting a 5V BEC (with or without a servo) to a power (+) pin and a ground (-) pin of the "MAIN OUT" or "AUX OUT" pins. You <strong>must</strong> also add a Zener diode (part number 1N5339) to condition the power across the rail and restrict it to less than 5.7V.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/servo-power-wiring.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/05/servo-power-wiring-300x94.png" alt="Servo Power Wiring" width="300" height="94" class="size-medium wp-image-4493" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/zener-diode.png"><img class="alignnone wp-image-2056" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/zener-diode-296x300.png" alt="zener diode" width="150" height="152" /></a>
+
+This method can also be used as backup power for Pixhawk when using a power module. If the voltage provided by the power module falls too low (4V?), Pixhawk will take power from the output rail. See the <em>voltage ratings</em> section below for more information on powering Pixhawk.
+
+[warning]At any voltage above 5.7V the servo rail cannot be used to power the Pixhawk and the Zener diode <strong>must not be used</strong>. The servo rail can supply servos requiring up to 10.5V (but not also power the Pixhawk).[/warning]
+
+
+<h1>Pixhawk Power/ESC Wiring Overview</h1>
+
+The block diagram below synthesizes an overview of Pixhawk's power and ESC wiring. In this diagram, a 3DR power module (or equivalent device) powers Pixhawk through its power port (primary source). One power source is enough but obviously not redundant if the power module fails to power this primary source. Therefore the diagram adds a second backup power source via a 5V BEC that wires to Pixhawk's output servo rail. If the primary source fails, Pixhawk will automatically switch to this second power source.
+
+[caption id="attachment_2353" align="alignnone" width="1057"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/common_Wiring_Pixhawk2.jpg"><img class="size-full wp-image-2353" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/common_Wiring_Pixhawk2.jpg" alt="Pixhawk Power/ESC Wiring Overview" width="1057" height="381" /></a> Pixhawk Power/ESC Wiring Overview[/caption]
+
+<em>Diagram acronyms: </em>
+<ul>
+	<li><em>PDB = Power Distribution Board. </em></li>
+	<li><em>PM = pixhawk power port. </em></li>
+	<li><em>PM/Atto = optional power module from 3DR or Attopilot alternative for higher than 4S battery voltages. </em></li>
+</ul>
+
+[note]Looking for a detailed explanation of power wiring with Pixhawk? <a href="http://pixhawk.org/users/actuators/pwm_escs_and_servos" target="_blank">Click here for more information about connecting ESCs and servos to Pixhawk.</a>[/note]
+<h1>General wiring recommendations</h1>
+<ul>
+	<li>Always connect a ground reference wire with your ESC's signal wires on the Pixhawk servo rail (output ports 1-8). Indeed an ESC's signal wire should never be left floating without its ground reference (THERE IS NO SETUP WHICH WOULDN'T REQUIRE SIGNAL GROUND TO BE CONNECTED).</li>
+	<li>It is dangerous to power the Pixhawk <strong>only </strong>from the servo rail, especially with digital servos. Servos may cause voltage spikes (as shown on illustration below that shows the servo rail voltage on an oscilloscope when a single digital servo attached to a Pixhawk is moved rapidly ). The key thing is that the digital servo causes the voltage on the rail to rise above the critical 5.7V level. Above that level the Pixhawk power management will cut power to the FMU and the Pixhawk will reboot. If that happens when flying you will lose your aircraft.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/servo-V-spike.jpg"><img class="alignnone size-full wp-image-2359" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/servo-V-spike.jpg" alt="servo V spike" width="442" height="291" /></a>
+
+It is up to the user to provide a clean source of power for the cases when it is powered off the servo rail. Servos by themselves are not quiet enough.</li>
+	<li>Do not connect a BEC power source to the RC IN port (black ground, red power and white signal wires from the receiver's PPM ouput are connected to these RC pins)</li>
+	<li>Adding an external Zener is a recommendation specifically for systems that are using 5V servos and have the servo rail configured for back up power. Connect the recommended Zener diode with its polarity as indicated on the diagram. Use as short wires as possible or even better, use a standard 3 position JR servo connector with the diode legs directly inserted (and soldered) in the servo female pins. To complement the diode, it is also useful to add a capacitorin parallel to the diode. The capacitor will smooth out eventual voltage ripples. As advised for the diode, the capacitor should be connected with as short wires as possible. Do not oversize the capacitor.</li>
+</ul>
+
+
+
+<h1>Advanced power supply configuration</h1>
+
+This section explains how to set up triple redundant power sources (power module as primary, with two backup BECs).
+
+In this scheme, a simple MBR1545CT integrated circuit is used. This circuit takes two BECs on its inputs, and outputs only off the BEC with the highest voltage (i.e. if BEC1 outputs 5.25V and BEC2 outputs 5.45V, MBR1545CT will pass BEC2 and blocks BEC1). Here is a tie bus circuit wiring diagram and example realisation with the MBR1545CT integrated circuit and a 6 pin JST connector:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT-diagram2.jpg"><img class="alignnone size-full wp-image-2357" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT-diagram2.jpg" alt="MBR1545CT diagram2" width="306" height="314" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT.jpg"><img class="alignnone size-full wp-image-2356" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/MBR1545CT.jpg" alt="MBR1545CT" width="756" height="587" /></a>
+
+
+<h1>Voltage ratings</h1>
+Pixhawk can be triple-redundant on the power supply if three power sources are supplied. The three rails are: Power module input, servo rail input, USB input.
+
+<strong>Normal Operation Maximum Ratings</strong>
+Under these conditions all power sources will be used in this order to power the system.
+Power module input (4.1V to 5.7V) [refers to the voltage coming into Pixhawk from the power module]
+Servo rail input (4.1V to 5.7V)
+USB power input (4.1V to 5.7V)
+
+<strong>Absolute Maximum Ratings</strong>
+Under these conditions the system will not draw any power (will not be operational), but will remain intact.
+Power module input (0V to 20V) [refers to the voltage coming into Pixhawk from the power module]
+Servo rail input (0V to 20V)
+USB power input (0V to 6V)

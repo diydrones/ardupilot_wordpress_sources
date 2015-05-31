@@ -65,6 +65,8 @@ Cover the connector with heatshrink. Be careful with the hot air near the connec
 
 <h1>Cable for connecting to Pixhawk</h1>
 
+[note]See <a href="#chdk_cables_for_purchase">CHDK cables for purchase</a> if you just want to buy a cable. This section is useful if you want to create your own cable or understand what the cable needs to do.[/note]
+
 For Pixhawk you have to modify the APM cable above, adding a circuit step the output pin signal voltage from 3.3 to 5 volts. This is required because the relay/servo output voltage is approximately 3.3V while CHDK needs 5V to trigger. 
 
 A circuit and PCB you can use are shown below. 5V should be supplied from a BEC (or from a BEC powering the central pin on the AUX output rail) because the servo rail itself is not powered.
@@ -115,7 +117,7 @@ The servo settings are not used for the relay configuration, and can be ignored.
 
 One of the simplest scripts you can use is <a href="http://www.event38.com/v/vspfiles/downloadables/E38_APM.bas" rel="nofollow">E38_APM.bas</a>, which simply waits on the relay signal and then takes a picture.
 
-Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source <a href="http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script">KAP UAV Exposure Control Script</a> (v3.1). This was used as the basis for the <a href="http://store.3drobotics.com/products/3DR-Aero">3DR Aero Plane</a> <em>3DR EAI (Exposure-Aperture-ISO)</em> script described in the <a href="http://3drobotics.com/wp-content/uploads/2014/12/AeroM-Operation-Manual-v3.pdf" title="Aero-M Operations Manual">Aero-M Operation Manual</a>.
+Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source <a href="http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script">KAP UAV Exposure Control Script</a> (v3.1). This was used as the basis for the <a href="http://store.3drobotics.com/products/3DR-Aero">3DR Aero Plane</a> <em>3DR EAI (Exposure-Aperture-ISO)</em> script described in the <a href="http://3drobotics.com/kb/aero-m/" title="Aero-M Operations Manual">Aero-M Operation Manual</a>.
 
 The <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">CHDK Wiki</a> explains how you set up CHDK and install and activate scripts for your particular camera. Installing scripts is usually as simple as copying them into the "scripts" directory on your SD card. You can then activate them by navigating to the menu <strong>Miscellaneous Stuff -&gt; Remote Parameters</strong> and making sure the <strong>Enable Remote</strong> setting is checked.
 
@@ -150,7 +152,6 @@ Tuffwing camera trigger cable for connecting Pixhawk to a CHDK Canon PowerShot. 
 </ul>
 
 [caption width="150" align="alignnone"]<a href="http://www.tuffwing.com/store/store.html#PixHawk_Camera_Trigger_Cable"><img src="http://www.tuffwing.com/images/pixhawk_trigger_cable.jpg" width="150" height="150" alt="Tuffwing Pixhawk CHDK Camera Trigger Cable" class /></a> Tuffwing Pixhawk CHDK Camera Trigger Cable[/caption]
-
 
 
 

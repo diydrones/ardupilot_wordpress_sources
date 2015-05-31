@@ -189,3 +189,47 @@ The PX4V1 digital output pins come in two types, one is pins that give 5V when o
 
 <strong>Pin 116</strong>: IO digital accessory pin 2
 
+
+
+
+[site_Copter]
+<h1>Copter wiring (diagram and instructions)</h1>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PX4IOWiring2PPMSUMrec.jpg"><img class="alignnone size-full wp-image-3860" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PX4IOWiring2PPMSUMrec.jpg" alt="PX4IOWiring2PPMSUMrec" width="800" height="600" /></a>
+
+
+<ol>
+	<li><strong>Wire the PX4-IO board.</strong>
+<ol>
+	<li>The PX4IO board has a built in Power Supply which can connect to up to 18 volts.</li>
+	<li>Insert the white PAP-02-VS 2 pin connector with the black and red wires coming out of it into the mating power connector you soldered in previously on the PX4IO board.</li>
+	<li>Battery Plus is the(red wire) and should be soldered to your battery red power lead / connector.</li>
+	<li>Battery Ground is the(black wire) and should be soldered to your battery black battery (Ground) lead / connector.</li>
+</ol>
+</li>
+	<li><strong>The main power inputs of your ESC's will also need to connect to these wires and to a battery connector.</strong>
+<ol>
+	<li>A Power Distribution board can also be used.</li>
+</ol>
+</li>
+	<li><strong>Connect your PPM-Sum RC receiver's 3 wire cable to the end of the 9 x 3 angle connector that is nearest the edge of the PX4IO board with the signal wire furthest from the board and the ground closest to the board.</strong></li>
+	<li><strong>Wire the PX4 boards servo out signals to your ESC control inputs.</strong>
+<ol>
+	<li>Run the Signal wires ONLY from the ESCs to the 3 x 9 Servo Connector on the PX4IO board.</li>
+	<li>The PX4IO board connector for Motor 1 is at the edge of the connector next to the Battery power in wires.</li>
+	<li>Insert the Motor ESC wires arranged progressively from that edge, (1,2,3,4,etc) for 2 to 8 motors depending on your copter type.</li>
+	<li>You can put the ESC Signal wires into a single inline connector with the correct number of pins for your copter.</li>
+	<li>The ESC Signal Wires / connector should be plugged into the top row (furthest from the board) of the PX4IO boards 3 x 9 Servo Connector.</li>
+</ol>
+</li>
+	<li><strong>Note, the cable that is supplied in the plastic envelope with the UBLOX GPS which has white 6 pin connectors on both ends is not the correct cable for the PX4FMU board.</strong>
+<ol>
+	<li>The correct longer GPS cable is provided in a separate envelope and has a 5 pin "beige" connector on one end and a 6 pin white connector on the other end.</li>
+	<li>Plug the correct GPS cable's white 6 pin connector into the 6 pin socket on the GPS.</li>
+	<li>Plug the beige 5 pin connector into the PX4FMU board's 5 pin GPS socket which is next to the 15 pin DF13 Mini connector.</li>
+</ol>
+</li>
+	<li><strong>Plug the 2 pin connector attached to the lead supplied with the buzzer into the buzzer socket on the side of the PX4FMU board that has the SD card holder on it.</strong></li>
+	<li><strong>Connect the "Arming Switch" to the Arming switch connector on the PX4IO board on the opposite side of the board from the Battery pads.</strong></li>
+</ol>
+[/site_Copter]

@@ -59,7 +59,7 @@ The reason for this is that the information was predominantly inferred by inspec
 
 <ul>
 <li>The <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466">switch statement in <code>AP_Mission::mavlink_to_mission_cmd</code></a> was inspected to determine which commands are handled by <em>all</em> vehicle platforms, and which parameters from the message are stored. </li>
-<li>The command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.pde#L56">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.pde#L36">Rover</a>) tells us which commands are likely to be supported in each vehicle and which parameters are passed to the handler. </li>
+<li>The command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.cpp#L25">Rover</a>) tells us which commands are likely to be supported in each vehicle and which parameters are passed to the handler. </li>
 </ul>
 
 The above checks give a very accurate picture of what commands and parameters are not supported. They gives a fairly accurate picture of what commands/parameters are <em>likely to be supported</em>. However this indication is not guaranteed to be accurate because a command handler could just throw away all the information (and we have not fully checked all of these).
@@ -87,6 +87,8 @@ Other GCSs (APM Planner 2, Tower etc.) may support some other subset of commands
 
 This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">/ArduCopter/commands_logic.pde</a>.
 
+<a href="#mav_cmd_mission_start">MAV_CMD_MISSION_START</a>
+<a href="#mav_cmd_component_arm_disarm">MAV_CMD_COMPONENT_ARM_DISARM</a>
 <a href="#mav_cmd_nav_waypoint">MAV_CMD_NAV_WAYPOINT</a>
 <a href="#mav_cmd_nav_return_to_launch">MAV_CMD_NAV_RETURN_TO_LAUNCH</a>
 <a href="#mav_cmd_condition_delay">MAV_CMD_CONDITION_DELAY</a>
@@ -131,7 +133,7 @@ copter only
 [site_Plane]
 <h1>Commands supported by Plane</h1>
 
-This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.pde">/ArduPlane/commands_logic.pde</a>.
+This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33">/ArduPlane/commands_logic.cpp</a>.
 
 <a href="#mav_cmd_nav_waypoint">MAV_CMD_NAV_WAYPOINT</a>
 <a href="#mav_cmd_nav_return_to_launch">MAV_CMD_NAV_RETURN_TO_LAUNCH</a>
@@ -174,7 +176,7 @@ plane only
 [site_Rover]
 <h1>Commands supported by Rover</h1>
 
-This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.pde#L36">/APMrover2/commands_logic.pde</a>.
+This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.cpp#L25">/APMrover2/commands_logic.cpp</a>.
 
 <a href="#mav_cmd_nav_waypoint">MAV_CMD_NAV_WAYPOINT</a>
 <a href="#mav_cmd_nav_return_to_launch">MAV_CMD_NAV_RETURN_TO_LAUNCH</a>
@@ -195,12 +197,124 @@ This list of commands was inferred from the command handler in <a href="https://
 
 <!-- MAV_CMD_DO_CONTROL_VIDEO (Camera enabled only). : his is hidden. It is in ROVER, PLANE, COPTER hanlders but not in the master handler. Confirmed not implemented in copter -->
 [/site_Rover]
+
+
+[site_Copter]
+
+<h1>Special Commands</h1>
+
+This section is for commands that may be relevant to missions, but but which are not mission commands (part of the mission).
+
+
+<h2>MAV_CMD_MISSION_START</h2>
+
+Supported by: Copter
+
+Start running the current mission. This allows a GCS/companion computer to start a mission in AUTO without raising the throttle.
+
+[note]This was introduced in AC3.3.[/note]
+
+<h3>Copter</h3>
+
+This command can be used to start a mission when the Copter is on the ground in AUTO mode. If the vehicle is already in the air then the mission will start as soon as you switch into AUTO mode (so this command is not needed/ignored).
+
+[note]Previously a mission would only start after the pilot engaged the throttle. This command makes it possible to start missions without directly controlling the throttle (though that approach is still available).[/note]
+
+This is not a "mission command" (it can't be used as a type of mission waypoint). It is run from the <strong>Action</strong> menu (see the screenshot below).
+
+
+<b>Command parameters</b>
+
+The parameters are all ignored.
+
+<table>
+<tr><th>Command Field</th><th>Mission Planner Field</th><th>Description</th></tr>
+<tr style="color: #C0C0C0;">
+    <td><strong>param1</strong></td><td></td><td>The first mission item to run.</td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td><strong>param2</strong></td><td></td><td>The last mission item to run (after this item is run, the mission ends).</td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param3</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param4</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param5</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param6</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param7</td><td></td><td></td>
+</tr>
+</table>
+
+
+
+<b>Mission Planner screenshots</b>
+
+[caption id="attachment_4460" align="alignnone" width="800"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/MissionPlanner_MissionStartCommand.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/MissionPlanner_MissionStartCommand.png" alt="Mission Planner: MISSION_START command" width="800" height="828" class="size-full wp-image-4460" /></a> Mission Planner: MISSION_START command[/caption]
+
+
+
+<h2>MAV_CMD_COMPONENT_ARM_DISARM</h2>
+
+Supported by: Copter
+
+Disarm the motors. 
+
+[note]This was introduced in AC3.3. [/note]
+
+
+<h3>Copter</h3>
+
+Disarm the motors. 
+
+The command supports disarming on the ground and in flight. 
+
+[note]The motors will disarm automatically after landing.[/note]
+
+This is not a "mission command" (it can't be used as a type of mission waypoint).
+
+<b>Command parameters</b>
+
+<table>
+<tr><th>Command Field</th><th>Mission Planner Field</th><th>Description</th></tr>
+<tr>
+    <td><strong>param1</strong></td><td></td><td>1 to arm, 0 to disarm. This only works when the vehicle is on the ground.</td>
+</tr>
+<tr>
+    <td><strong>param2</strong></td><td></td><td>A value of 21196 will disarm the vehicle in flight.</td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param3</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param4</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param5</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param6</td><td></td><td></td>
+</tr>
+<tr style="color: #C0C0C0;">
+    <td>param7</td><td></td><td></td>
+</tr>
+</table>
+[/site_Copter]
+
+
  
 <h1>Navigation commands</h1>
 
 Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints, and landing.
 
 NAV commands have the highest priority. Any DO_ and CONDITION_ commands that have not executed when a NAV command is loaded are skipped (for example, if a waypoint completes and the NAV command for another waypoint is loaded, and unexecuted DO/CONDITION commands associated with the first waypoint are dropped.
+
 
 
 <h2>MAV_CMD_NAV_WAYPOINT</h2>
@@ -218,7 +332,7 @@ The Copter will fly a straight line to the specified latitude, longitude and alt
 
 <table>
 <tr><th>Command Field</th><th>Mission Planner Field</th><th>Description</th></tr>
-<tr"><td><strong>param1</strong></td><td>Delay</td><td>Hold time at mission waypoint in decimal seconds (Copter/Rover only) </td></tr>
+<tr><td><strong>param1</strong></td><td>Delay</td><td>Hold time at mission waypoint in decimal seconds (Copter/Rover only) </td></tr>
 <tr style="color: #C0C0C0;"><td><strong>param2</strong></td><td></td><td>Acceptance radius in meters (when plain inside the sphere of this radius, the waypoint is considered reached) (Plane only).</td></tr>
 <tr style="color: #C0C0C0;">
     <td>param3</td><td></td><td>0 to pass through the WP, if > 0 radius in meters to pass by WP. Positive value for clockwise orbit, negative value for counter-clockwise orbit. Allows trajectory control.</td>
@@ -1399,7 +1513,7 @@ Change the target horizontal speed (airspeed or groundspeed) and/or the vehicle'
 
 Change the target horizontal speed and/or the vehicle's throttle.
 
-#HW TODO: GRANT - Possible bug in DO_CHANGE_SPEED for Rover - https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.pde#L279 . The docs and plane indicate that param1 indicates speed-type (0 for airspeed, 1 for ground speed). This code checks on the value speed-type and only changes it if the value is zero - airspeed. IMO the value should do what copter does, and just ignore param1.  If it does check, it should set speed based on param1=1 (groundspeed). If this is a bug, just document "0" as groundspeed for this case, or would you change it in the code?
+The value of <code>param1</code> is ignored from v2.50 (earlier versions should set to 0).
 
 
 <b>Command parameters</b>
@@ -1407,8 +1521,8 @@ Change the target horizontal speed and/or the vehicle's throttle.
 <table>
 <tr><th>Command Field</th><th>Mission Planner Field</th><th>Description</th>
 </tr>
-<tr>
-<td><strong>param1</strong></td><td>Type (0=as 1=gs)</td><td>Speed type (0=Airspeed, 1=Ground Speed). </td>
+<tr style="color: #C0C0C0;">
+<td><strong>param1</strong></td><td>Type (0=as 1=gs)</td><td>Speed type (0=Airspeed, 1=Ground Speed). Set to 0 before v2.50, otherwise ignored.</td>
 </tr>
 <tr>
   <td><strong>param2</strong></td><td>Speed (m/s)</td><td>Target speed (m/s). A value of -1 indicates no change.</td>

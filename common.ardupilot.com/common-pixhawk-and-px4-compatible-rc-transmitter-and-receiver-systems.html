@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems 
-title: common-Pixhawk and PX4 Compatible RC Transmitter and Receiver Systems 
+title: common-Compatible RC Transmitter and Receiver Systems (Pixhawk/PX4) 
 id: 1629 
 menu_order: 0 
 post_parent_id: 0 
@@ -9,58 +9,41 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>PX4FMU plus PX4IO with 3DR 8 channel PPM encoder and 3DR telemetry radio</h3>
-<ul>
-	<li>The 3DR PPM Encoder will allow you to use any Conventional RC receiver but there are some downsides.</li>
-	<li>The 3DR PPM Encoder does require quite a bit of additional wiring to the receiver.</li>
-	<li>It uses quite a bit of power making it likely you will need to plug in your battery while doing radio setup with USB cable in Mission Planner.</li>
-	<li>The 3DR encoder also costs as much or more than several of the available PPM-Sum receivers including the FRSky Delta 8 below.</li>
-	<li>The Newest version of the <strong><a href="http://store.3drobotics.com/products/ppm-encoder">3DR PPM-Sum encoder</a></strong> is here:</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PPM_cables_-_Copy.jpg"><img class="alignnone size-full wp-image-1947" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PPM_cables_-_Copy.jpg" alt="PPM_cables_-_Copy" width="600" height="400" /></a>
+This article provides an overview of the RC Transmitter and Receiver Systems that can be used with Pixhawk (and PX4) along with guidance on how they are connected.
+<!-- more -->
 
-&nbsp;
-<ul>
-	<li>And the original 3DR PPM-Sum encoder is here:</li>
-</ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc.jpg"><img class="alignnone size-large wp-image-11128" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc-1024x501.jpg" alt="PPMEncoderDesc" width="584" height="285" /></a>
+<h1>Overview</h1>
 
+Pixhawk is compatible with PPM RC receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers as discus. For traditional single-wire-per-channel (PWM) receivers a <a href="https://store.3drobotics.com/products/ppm-encoder?taxon_id=39" target="_blank">PPM encoder</a> can be used to convert the receiver outputs to PPM-SUM.
 
+[note]Futaba S.BUS2 receivers are not yet supported.[/note]
 
-<h4>Using the 3DR 8 channel PPM Sum encoder in a system:</h4>
-<ul>
-	<li>The Original 3DR PPM-Sum encoder is shown, but the new encoder installs in the same fashion.</li>
-</ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg"><img class="alignnone size-full wp-image-9918" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg" alt="PX4FMU_PX4IO_Wire_3DRradio2" width="1035" height="755" /></a>
+To connect a PPM receiver, Futaba S.Bus receiver, or PPM encoder, connect the black ground, red power and white signal wires to the RC pins. These S.BUS receivers have been tested and are known to work: R2008SB, R6008SB.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/rc-input-wiring.png"><img class="alignnone  wp-image-1786" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/rc-input-wiring-300x138.png" alt="rc input wiring" width="300" height="138" /></a>
+
+For a <strong>Spektrum DSM</strong>, <strong>DSM2</strong>, or <strong>DSM-X Satellite</strong> receiver, connect to the <strong>SPKT/DSM</strong> port.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect.jpg"><img class="alignnone  wp-image-1478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect-300x192.jpg" alt="spektrum connect" width="200" height="128" /></a>
 
 
+<h1>Radio systems that support PPM-Sum or S-Bus directly</h1>
 
-<h4>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h4>
-<ul>
-<ul>
-	<li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>
-<ul>
-	<li>An 8 Channel PPM Encoder is available from 3DRobotics <a href="http://store.3drobotics.com/products/8-channel-ppm-encoder-version-2"> (Here!)</a></li>
-	<li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>
-	<li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>
-</ul>
-</li>
-	<li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>
-<ul>
-	<li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>
-</ul>
-</li>
-	<li><strong>Note! If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.</strong></li>
-</ul>
-</ul>
+This section list radio systems that support PPM-Sum or S-Bus directly.
+
+<h2>FRSKY Taranis PPM-Sum Compatible Transmitter</h2>
+
+[tip]This solution is <strong>very highly recommended</strong> for all RC uses[/tip]
+
+The <a title="&quot;" href="http://www.frsky-rc.com/product/pro.php?pro_id=113">FRSky Taranis RC Transmitter</a> is a very high quality open source RC Transmitter that is compatible with a wide variety of high quality FrSky PPM-Sum compatible receivers.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
+
+[note]This transmitter is a real bargain. At time of writing they are in short supply and hard to find. Currently in the US <strong><a href="http://www.rangevideo.com/en/radios-and-receivers/96-frsky-taranis-24ghz-rc-system.html">Range Video</a></strong> has them in stock and <strong><a>Aloft Hobbies</a></strong> should be getting them in stock also.[/note]
 
 
+<h2>FRSky Delta 8 MultiProtocol PPM-Sum Receiver</h2>
 
-<h3>There are several radio systems that support PPM-Sum or S-Bus directly</h3>
-
-
-
-<h4>FRSky Delta 8 MultiProtocol PPM-Sum Receiver</h4>
 <ul>
 	<li>This PPM-Sum compatible<strong style="color: #000000;font-style: normal"> <a title="&quot;" href="http://www.valuehobby.com/frysky-delta-8.html">FRSky Delta 8 Receiver</a></strong> is multi-platform capable including Hitec Aurora 9 and Futaba RC transmitters.</li>
 	<li>For an Aurora 9, install a jumper between receiver signal pins 6 and 7 (Hitec AFHSS) and pins 3 and 4 (CPPM mode) in order to bind.</li>
@@ -77,19 +60,11 @@ END METADATA
 
 
 
-<h4>FRSKY Taranis PPM-Sum Compatible Transmitter (highly Recommended)</h4>
-More information on the open source <strong><a title="&quot;" href="http://www.frsky-rc.com/product/pro.php?pro_id=113">FRSky Taranis RC Transmitter</a> <span style="color: #008000">(Very highly recommended for all RC uses)</span></strong>
-This is a very high quality RC Transmitter and it is a real bargain, they are (as this is written) in short supply and hard to find.
-Currently in the US <strong><a href="http://www.rangevideo.com/en/radios-and-receivers/96-frsky-taranis-24ghz-rc-system.html">Range Video</a></strong> has them in stock and <strong><a>Aloft Hobbies</a></strong> should be getting them in stock also.
-A wide variety of the high quality FRSky PPM-Sum compatible receivers operate appropriately with the Taranis transmitter.
+<h2>Turnigy Transmitter Compatible With FRSky Transmitter Module</h2>
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
-
-
-
-<h4>Turnigy Transmitter Compatible With FRSky Transmitter Module</h4>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg"><img class="alignnone size-full wp-image-11142" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg" alt="Turnigy9XR" width="565" height="414" /></a>
-<h4>FRSky Transmitter Adapter Module and PPM-Sum Receiver</h4>
+
+<h2>FRSky Transmitter Adapter Module and PPM-Sum Receiver</h2>
 The FR-Sky PPM Sum Receiver and conversion module below will work with Turnigy 9x, 9XR (above) and other RC transmitters.
 FRSky makes several receivers, some are compatible with PPM-Sum, some are not, check at <strong><a href="http://www.frsky-rc.com/product/product.php?cate_id=12&amp;cate_name=Receivers">FRSky's web site</a></strong>.
 The receiver shown is PPM-Sum compatible and is recommended (4 channel receivers still do 8 channel PPM-Sum)
@@ -98,7 +73,7 @@ The receiver shown is PPM-Sum compatible and is recommended (4 channel receivers
 
 
 
-<h4>Futaba Transmitter Compatible With Futaba S-Bus Receivers</h4>
+<h2>Futaba Transmitter Compatible With Futaba S-Bus Receivers</h2>
 <ul>
 	<li>Support for Futaba SBUS is not fully implemented, although some receivers do work at this time, including <strong>Futaba R6303SB</strong>.</li>
 	<li>Connect the SBUS receiver to the PPM input, not the adjacent SBUS output.</li>
@@ -107,7 +82,7 @@ The receiver shown is PPM-Sum compatible and is recommended (4 channel receivers
 
 
 
-<h3>Spektrum Satellite Receivers Operate on PPM-Sum</h3>
+<h1>Spektrum Satellite Receivers Operate on PPM-Sum</h1>
 <ul>
 	<li>Although Spektrum main receivers do not communicate by PPM-Sum their range extending "satellite" receivers do.</li>
 	<li>So it is feasible to use a single <strong style="color: #000000;font-style: normal"><a href="http://www.amainhobbies.com/product_info.php/cPath/61_435/products_id/199408/n/Spektrum-DSMX-Remote-Receiver">Spektrum Satellite Receiver</a></strong> to act as a PPM-Sum receiver with PX4 and Pixhawk.
@@ -120,10 +95,50 @@ The receiver shown is PPM-Sum compatible and is recommended (4 channel receivers
 	<li>Please note that you can use a Spektrum Satellite receiver with Pixhawk or PX4 if you bind it to the transmitter using a main Spektrum receiver module. It is not currently supported to bind the Satellite receiver directly to the transmitter while the receiver is connected to the Pixhawk or PX4.</li>
 	<li>Being a satellite, range is limited with this configuration and the preceding receivers and methods will provide greater range.</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg"><img class="alignnone size-full wp-image-11149" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg" alt="spm9645" width="200" height="160" /></a><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PX4SpektrumSatellite1.jpg"><img class="alignright size-full wp-image-1694" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PX4SpektrumSatellite1.jpg" alt="PX4SpektrumSatellite" width="412" height="223" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg"><img class="alignnone size-full wp-image-11149" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/spm9645.jpg" alt="spm9645" width="200" height="160" /></a><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PX4SpektrumSatellite1.jpg"><img class="alignnone size-full wp-image-1694" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PX4SpektrumSatellite1.jpg" alt="PX4SpektrumSatellite" width="412" height="223" /></a>
 
-&nbsp;
 
-&nbsp;
+<h1>3DR PPM encoder and 3DR telemetry radio</h1>
 
-&nbsp;
+The <a href="https://store.3drobotics.com/products/ppm-encoder">3DR PPM Encoder</a> will allow you to use any Conventional RC receiver. Both the new and previous versions of the <a href="http://store.3drobotics.com/products/ppm-encoder">3DR PPM-Sum encoder</a> are shown below:
+[caption id="attachment_1947" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PPM_cables_-_Copy.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/PPM_cables_-_Copy-300x200.jpg" alt="Newest 3DR PPM-Sum encoder" width="300" height="200" class="size-medium wp-image-1947" /></a> Newest 3DR PPM-Sum encoder[/caption]
+[caption id="attachment_11128" align="alignnone" width="300"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/PPMEncoderDesc-300x146.jpg" alt="Original 3DR PPM-Sum encoder" width="300" height="146" class="size-medium wp-image-11128" /></a> Original 3DR PPM-Sum encoder[/caption]
+
+There are some downsides of using this encoder:
+<ul>
+	<li>The 3DR PPM Encoder does require quite a bit of additional wiring to the receiver.</li>
+	<li>It uses quite a bit of power making it likely you will need to plug in your battery while doing radio setup with USB cable in Mission Planner.</li>
+	<li>The 3DR encoder also costs as much or more than several of the available PPM-Sum receivers including the FRSky Delta 8 below.</li>
+</ul>
+
+There is addition information <a href="http://common-ppm-encoder">about connecting and configuring the encoder here</a>.
+
+<h2>Using the 3DR PPM Sum encoder in a system</h2>
+
+The diagram below shows how to use the original 3DR PPM-Sum encoder. The new encoder is used in the same way.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg"><img class="alignnone size-full wp-image-9918" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMU_PX4IO_Wire_3DRradio2.jpg" alt="PX4FMU_PX4IO_Wire_3DRradio2" width="1035" height="755" /></a>
+
+
+
+<h2>Using a Standard RC Radio Receiver with 3DR PPM Encoder</h2>
+<ul>
+<ul>
+	<li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>
+<ul>
+	<li>An 8 Channel PPM Encoder is available from 3DRobotics <a href="https://store.3drobotics.com/products/ppm-encoder"> Here!</a></li>
+	<li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>
+	<li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>
+</ul>
+</li>
+	<li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>
+<ul>
+	<li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>
+</ul>
+</li>
+	<li>[note]If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.[/note]</li>
+</ul>
+</ul>
+
+
+

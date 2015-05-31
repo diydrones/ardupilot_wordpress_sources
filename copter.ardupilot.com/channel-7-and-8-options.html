@@ -9,9 +9,12 @@ post_parent_stub: configuration
 post_parent_title: Advanced Configuration 
 END METADATA 
 -->
-Many "Auxiliary" features can be setup to be invoked from the transmitter's channel 7 and 8 switches (ver AC3.3 and higher support auxiliar functions on channels 9 ~ 12 as well).
+This article shows how to set up which "auxiliary" features are invoked from the transmitter's channel 7 and 8 switches.<!-- more -->
+[note]AC3.3 and higher support auxiliary functions on channels 9 ~ 12 as well.[/note]
 
-By default the auxiliary switches are disabled but you can assign features using the Mission Planner's Config/Tuning &gt;&gt; Extended Tuning screen or by setting the CH7_OPT (or CH8_OPT) parameter directly.
+<h1>Configuration</h1>
+
+By default the auxiliary switches are disabled but you can assign features using the <em>Mission Planner</em>'s <strong>Config/Tuning | Extended Tuning</strong> screen or by setting the <code>CH7_OPT</code> (or <code>CH8_OPT</code>) parameter directly.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png"><img class="alignnone size-full wp-image-8896" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPchan7options.png" alt="MPchan7options" width="1024" height="575" /></a>
 
@@ -35,7 +38,7 @@ Here are the options:
 <tr>
 <td><strong>RTL
 </strong></td>
-<td>Return-to-Launch. The vehicle will first climb to a safe altitude (defined by RTL_ALT parameter), then return home, pause over home for 5 seconds (configurable by RTL_LOIT_TIME parameter) then descend to 2m or land (configurable by RTL_ALT_FINAL parameter).</td>
+<td>Return-to-Launch. The vehicle will first climb to a safe altitude (defined by <code>RTL_ALT</code> parameter), then return home, pause over home for 5 seconds (configurable by <code>RTL_LOIT_TIME</code> parameter) then descend to 2m or land (configurable by <code>RTL_ALT_FINAL</code> parameter).</td>
 </tr>
 <tr>
 <td><strong>Save Trim
@@ -59,7 +62,7 @@ Here are the options:
 <tr>
 <td><strong>Camera Trigger
 </strong></td>
-<td>Camera shutter will be activated. See more details <a href="wiki/camera-mount/#Shutter_configuration">here</a>.</td>
+<td>Camera shutter will be activated. See more details <a href="common-camera-shutter-with-servo">here</a>.</td>
 </tr>
 <tr>
 <td><strong>Sonar
@@ -102,7 +105,11 @@ Here are the options:
 </tr>
 </tbody>
 </table>
-<h3>Check Ch7 &amp; Ch8 PWM values reach 1800</h3>
+
+
+
+<h1>Check Ch7 &amp; Ch8 PWM values reach 1800</h1>
+
 Your channel 7 and/or channel 8 pwm value must reach at least 1800 PWM or the auxiliary function will not be activated.  You can check that it surpasses this threshold using the Mission Planner's radio config page.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png"><img class="alignnone size-full wp-image-8298" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/01/MPCH7checkPWMrange.png" alt="MPCH7checkPWMrange" width="1024" height="575" /></a>
