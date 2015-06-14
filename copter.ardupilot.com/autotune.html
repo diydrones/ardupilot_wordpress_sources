@@ -10,15 +10,12 @@ post_parent_title:
 END METADATA 
 -->
 <h3>Overview</h3>
-AutoTune is a feature available in Copter 3.1-rc5 (and later) versions. It attempts to tune the Stabilize P and Rate P and D terms that provide the highest response without significant overshoot. It does this by twitching the copter in the roll and pitch access which means that the copter needs to be basically flyable in AltHold mode before attempting to use AutoTune.
+AutoTune is a feature available in Copter 3.1 (and later) versions. It attempts to tune the Stabilize P and Rate P and D terms that provide the highest response without significant overshoot. It does this by twitching the copter in the roll and pitch axis which means that the copter needs to be basically flyable in AltHold mode before attempting to use AutoTune.
 http://www.youtube.com/watch?v=js2GzeRysAc
-
-
-
 <h3>How to invoke AutoTune</h3>
 1. Set up one flight mode switch position to be AltHold.
 2. Set the <a href="wiki/channel-7-and-8-options/">Ch7 Opt or Ch8 Opt</a> to Autotune to allow you to turn the auto tuning on/off with the ch7 or ch8 switch.
-<p style="padding-left: 60px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch.png"><img class="alignnone size-medium wp-image-9840" alt="AutoTuneCh7Switch" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch-300x179.png" width="300" height="179" /></a></p>
+<p style="padding-left: 60px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch.png"><img class="alignnone size-medium wp-image-9840" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch-300x179.png" alt="AutoTuneCh7Switch" width="300" height="179" /></a></p>
 3. Ensure the ch7 or ch8 switch is in the LOW position.
 4. Wait for a calm day and go to a large open area.
 5. Take off and put the copter into AltHold mode at a comfortable altitude.
@@ -37,7 +34,18 @@ http://www.youtube.com/watch?v=js2GzeRysAc
 9. Put the ch7/ch8 switch into the LOW position to fly using the original PID gains.
 10. If you are happy with the autotuned PID gains, leave the ch7/ch8 switch in the HIGH position, land and disarm to save the PIDs permanently.
 If you DO NOT like the new PIDS, switch ch7/ch8 LOW to return to the original PIDs. The gains will not be saved when you disarm.
-
+<h3>Copter-3.3 changes</h3>
+Copter 3.3 adds some additional features:
+<ul>
+	<li>Yaw axis is also autotuned</li>
+	<li>AUTOTUNE_BITMASK allows control of which axis are to be tuned (useful if the vehicle's battery life is not long enough to complete all 3-axis)</li>
+	<li>Upon a succesful tune these additional values are saved:
+<ul>
+	<li>roll and pitch axis rate feed-forward is enabled (ATC_RATE_FF_ENABLE)</li>
+	<li>roll, pitch and yaw acceleration limits are saved (ACCEL_R_MAX, ACCEL_P_MAX, ACCEL_Y_MAX)</li>
+</ul>
+</li>
+</ul>
 <strong>Notes:</strong>
 <ul>
 	<li><strong><span style="color: #ff0000">Warning!  AutoTune can request very large and fast changes in outputs to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV).</span></strong>  See this video showing a test which recreates a sync problem.</li>
@@ -49,8 +57,5 @@ https://www.youtube.com/watch?v=hBUBbeyLe0Q
 	<li>Be advised that AutoTune will engage in Stabilize, so don't accidentally flip your AutoTune switch until you are in AltHold and ready to begin the procedure.</li>
 	<li><span style="color: #ff0000"> When reporting issues with AutoTune please include a description of your frame and a dataflash log of the flight.</span></li>
 </ul>
-
-
-
 <h3>Dataflash logging</h3>
 ATUN (auto tune overview) and ATDE (auto tune details) messages are written to the dataflash logs. Some details of the contents of those messages can be found on the <a href="http://copter.ardupilot.com/wiki/downloading-and-analyzing-data-logs-in-mission-planner/#Message_Details_APMCopter_specific">dataflash logging message details wiki page</a>.
