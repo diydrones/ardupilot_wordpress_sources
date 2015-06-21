@@ -9,9 +9,15 @@ post_parent_stub: common-pixhawk-overview
 post_parent_title: common-Pixhawk Overview 
 END METADATA 
 -->
+This topic explains how to interpret the colours and flash sequence of the main LED. Some of the LED patterns have associated sound/tone patterns as listed in <a href="common-sounds-pixhawkpx4">Sounds (Pixhawk/PX4)</a>.
+<!-- more -->
+
+<h1>Video Overview</h1>
 
 https://www.youtube.com/watch?v=j-CMLrAwlco
 
+
+<h1>LED Meanings</h1>
 <strong>Flashing red and blue</strong>: Initializing gyroscopes. !! Hold the vehicle still and level while it initializes the sensors.
 
 <strong>Flashing blue</strong>: Disarmed, no GPS lock found
@@ -34,3 +40,6 @@ https://www.youtube.com/watch?v=j-CMLrAwlco
 
 <strong>Flashing purple and yellow</strong>: Barometer glitch
 
+<strong>Solid Red</strong>: Error
+
+<strong>Solid Red with <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/NoSDCard_short.wav">SOS tone sequence</a></strong>: SD Card missing (or other SD error like bad format etc.)

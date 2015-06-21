@@ -4,15 +4,14 @@ slug: common-mavlink-mission-command-messages-mav_cmd
 title: common-MAVLink Mission Command Messages (MAV_CMD) 
 id: 4393 
 menu_order: 10 
-post_parent_id: 33 
-post_parent_stub: common-planning-a-mission-with-waypoints-and-events 
-post_parent_title: common-Planning a Mission with Waypoints and Events 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 This article describes the specific set of mission commands and parameters that are supported by Copter, Plane and Rover.
 
 [warning]This is a  WORK IN PROGRESS. It has not been reviewed, and is full of questions/actions (usually preceded by "#HW" or "TODO". The list of what commands are supported in each platform are likely to be correct. The copter-specific documentation is more likely to be correct as it is based on existing copter mission docs. [/warning]
-
 <!--more-->
 
 <h1>Overview</h1>
@@ -59,7 +58,7 @@ The reason for this is that the information was predominantly inferred by inspec
 
 <ul>
 <li>The <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466">switch statement in <code>AP_Mission::mavlink_to_mission_cmd</code></a> was inspected to determine which commands are handled by <em>all</em> vehicle platforms, and which parameters from the message are stored. </li>
-<li>The command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.cpp#L25">Rover</a>) tells us which commands are likely to be supported in each vehicle and which parameters are passed to the handler. </li>
+<li>The command handler switch for each vehicle type (<a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33">Plane</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49">Copter</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.cpp#L25">Rover</a>) tells us which commands are likely to be supported in each vehicle and which parameters are passed to the handler. </li>
 </ul>
 
 The above checks give a very accurate picture of what commands and parameters are not supported. They gives a fairly accurate picture of what commands/parameters are <em>likely to be supported</em>. However this indication is not guaranteed to be accurate because a command handler could just throw away all the information (and we have not fully checked all of these).
@@ -85,7 +84,7 @@ Other GCSs (APM Planner 2, Tower etc.) may support some other subset of commands
 [site_Copter]
 <h1>Commands supported by Copter</h1>
 
-This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.pde#L49">/ArduCopter/commands_logic.pde</a>.
+This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49">/ArduCopter/commands_logic.cpp</a>.
 
 <a href="#mav_cmd_mission_start">MAV_CMD_MISSION_START</a>
 <a href="#mav_cmd_component_arm_disarm">MAV_CMD_COMPONENT_ARM_DISARM</a>
@@ -1334,7 +1333,7 @@ Point (yaw) the nose of the vehicle towards a specified heading.
 
 Point (yaw) the nose of the vehicle towards a specified heading.
 
-The parameters allow you to specify whether the target direction is absolute or relative to the current direction. If the direction is relative you can also (separately) specify whether the value is added or subtracted from the current heading (note that the vehicle will always turn in direction that most quickly gets it to the new target heading regardless of the <code>param3</code> value).
+The parameters allow you to specify whether the target direction is absolute or relative to the current yaw direction. If the direction is relative you can also (separately) specify whether the value is added or subtracted from the current heading (note that the vehicle will always turn in direction that most quickly gets it to the new target heading regardless of the <code>param3</code> value).
 
 We don't support controlling the yaw rate, so the <code>param2</code> value (Sec) is ignored.
 
@@ -1354,7 +1353,7 @@ If <code>param4=1</code> (relative): The change in heading (in degrees).</td>
 <tr>
     <td><strong>param3</strong></td><td>Dir 1=CW</td><td>If <code>param4=1</code> (relative) only: [-1 = CCW, +1 = CW]. This denotes whether the flight controller should add (CW) or subtract (CCW) the degrees (<code>param1</code>) from the current heading to calculate the target heading. </td></tr>
 <tr>
-    <td><strong>param4</strong></td><td>rel/abs</td><td>Specify if <code>param1</code> ("Deg" field) is an absolute direction (0) or a direction relative to the current heading (1).</td>
+    <td><strong>param4</strong></td><td>rel/abs</td><td>Specify if <code>param1</code> ("Deg" field) is an absolute direction (0) or a relative to the current yaw direction (1).</td>
 </tr>
 <tr style="color: #C0C0C0;">
     <td>param5</td><td></td><td>Empty</td>

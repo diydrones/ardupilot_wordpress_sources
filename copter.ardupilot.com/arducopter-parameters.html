@@ -124,6 +124,7 @@ DO NOT EDIT
 
 <p>bitmask of PIDs to send MAVLink PID_TUNING messages for</p>
 <ul>
+<li>Bitmask: 0:Roll,1:Pitch,2:Yaw</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>None</td></tr>
 <tr><td>1</td><td>Roll</td></tr>
@@ -569,6 +570,7 @@ DO NOT EDIT
 
 <p>4 byte bitmap of log types to enable</p>
 <ul>
+<li>Bitmask: 0:ATTITUDE_FAST,1:ATTITUDE_MED,2:GPS,3:PM,4:CTUN,5:NTUN,6:RCIN,7:IMU,8:CMD,9:CURRENT,10:RCOUT,11:OPTFLOW,12:PID,13:COMPASS,14:INAV,15:CAMERA,16:WHEN_DISARMED,17:MOTBATT,18:IMU_FAST,19:IMU_RAW</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>830</td><td>Default</td></tr>
 <tr><td>894</td><td>Default+RCIN</td></tr>
@@ -581,6 +583,7 @@ DO NOT EDIT
 <tr><td>262142</td><td>All+MotBatt</td></tr>
 <tr><td>393214</td><td>All+FastIMU</td></tr>
 <tr><td>397310</td><td>All+FastIMU+PID</td></tr>
+<tr><td>655358</td><td>All+FullIMU</td></tr>
 <tr><td>0</td><td>Disabled</td></tr>
 </table>
 </ul>
@@ -966,16 +969,23 @@ DO NOT EDIT
 </ul>
 
 
-<h2>EKF check compass and velocity variance threshold (ArduCopter:EKF_CHECK_THRESH)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>EKF Failsafe Action (ArduCopter:FS_EKF_ACTION)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Allows setting the maximum acceptable compass and velocity variance (0 to disable check)</p>
+<p>Controls the action that will be taken when an EKF failsafe is invoked</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td> 0.6</td><td>Strict</td></tr>
-<tr><td> 0.8</td><td>Default</td></tr>
-<tr><td> 1.0</td><td>Relaxed</td></tr>
+<tr><td>1</td><td>Land</td></tr>
+<tr><td> 2</td><td>AltHold</td></tr>
+<tr><td> 3</td><td>Land even in Stabilize</td></tr>
 </table>
+</ul>
+
+
+<h2>EKF failsafe variance threshold (ArduCopter:FS_EKF_THRESH)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Allows setting the maximum acceptable compass and velocity variance</p>
+<ul>
+<li>Values: 0.6:Strict, 0.8:Default, 1.0:Relaxed</li>
 </ul>
 
 
@@ -1267,6 +1277,7 @@ DO NOT EDIT
 
 <p>1-byte bitmap of axes to autotune</p>
 <ul>
+<li>Bitmask: 0:Roll,1:Pitch,2:Yaw</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>7</td><td>All</td></tr>
 <tr><td>1</td><td>Roll Only</td></tr>
@@ -1285,10 +1296,6 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.05 0.10</li>
 </ul>
-
-
-<h1>Library Parameters</h1>
-
 
 
 <h1>SERIAL Parameters</h1>
@@ -5783,6 +5790,15 @@ DO NOT EDIT
 <li>Range: 0 1000</li>
 <li>Increment: 1</li>
 <li>Units: PWM</li>
+</ul>
+
+
+<h2>Critical Rotor Speed (H_RSC_CRITICAL)</h2>
+
+<p>Rotor speed below which flight is not possible</p>
+<ul>
+<li>Range: 0 1000</li>
+<li>Increment: 10</li>
 </ul>
 
 

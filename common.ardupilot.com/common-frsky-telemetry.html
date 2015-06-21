@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-frsky-telemetry 
-title: common-FrSky-telemetry 
+title: common-FrSky Telemetry 
 id: 2520 
 menu_order: 20 
 post_parent_id: 2447 
@@ -12,11 +12,9 @@ END METADATA
 FrSky telemetry can be used to transmit some vehicle information down to your FrSky transmitter (including the Taranis).  Instructions for the set-up are below and these are largely based upon information from the <a href="http://pixhawk.org/peripherals/telemetry/frsky" target="_blank">Pixhawk website</a>.
 
 This feature is only officially supported on the Pixhawk (running AC3.2 or higher) but there is a <a href="http://diydrones.com/forum/topics/amp-to-frsky-x8r-sport-converter" target="_blank">DIY solution for the APM2.x here</a>.
-
-<h3>D-Receiver setup</h3>
+<h1>D-Receiver setup</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png"><img class="alignnone size-full wp-image-2583" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png" alt="Telemetry_FrSky_Pixhawk" width="1128" height="592" /></a>
-
-<h3>What you will need for D-Receiver</h3>
+<h1>What you will need for D-Receiver</h1>
 <ul>
 	<li>FrSky D telemetry capable receiver such as the <a href="http://store.3drobotics.com/products/frsky-d4r-ii-receiver" target="_blank">FrSky D4R-II from 3DRobotics</a>.</li>
 	<li>FrSky D telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
@@ -24,15 +22,9 @@ This feature is only officially supported on the Pixhawk (running AC3.2 or highe
 	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
 	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
 </ul>
-
-
-
-<h3>X-Receiver setup</h3>
+<h1>X-Receiver setup</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png"><img class="alignnone wp-image-3127 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png" alt="Telemetry_FrSky_Pixhawk SPORT" width="1347" height="592" /></a>
-
-
-
-<h3>What you will need for X-Receiver</h3>
+<h1>What you will need for X-Receiver</h1>
 <ul>
 	<li>FrSky X telemetry capable receiver such as the FrSky X4R, X6R or X8R .</li>
 	<li>FrSky X telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
@@ -43,16 +35,160 @@ This feature is only officially supported on the Pixhawk (running AC3.2 or highe
 </ul>
 
 
+<h1>Setup through the mission planner</h1>
 
-<h3>Setup through the mission planner</h3>
-To enable the FrSky Telemetry output on the Pixhawk's Telem2 port, please connect with the Mission Planner and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set the <code>SERIAL2_PROTOCOL</code> parameter to "3" for D-Receiver and "4" for X-Receiver. 
+To enable the FrSky Telemetry output on the Pixhawk's Telem2 port, please connect with the Mission Planner and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set the <code>SERIAL2_PROTOCOL</code> parameter to "3" for D-Receiver and "4" for X-Receiver.
 [note]The information above is for ArduCopter 3.3. Prior to AC3.2 the values are 2 for D-Receiver and 3 for X-Receiver.[/note]
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png"><img class="alignnone  wp-image-2531" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png" alt="Telemetry_FrSky_MPSetup" width="751" height="346" /></a>
-
-
-
-<h3>Transmitter set-up</h3>
+<h1>Transmitter set-up</h1>
 Please refer to the <a href="https://docs.google.com/document/d/1qlh09LzxtpPt7j_aqG8yiOu2yoYMzP9XA-PJA81rDJQ/edit#heading=h.36trni4byo5x" target="_blank">OpenTX manual</a> for how to control which values from the telemetry feed will be displayed on the transmitter's screen.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup.png"><img class="alignnone size-medium wp-image-2533" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup-222x300.png" alt="Telemetry_FrSky_TXSetup" width="222" height="300" /></a>
+
+
+
+<h1>Protocol information</h1>
+
+This section outlines what values are being sent over the telemetry link, and how they are encoded.
+
+[note]The list below is produced by code observation, and is not fully complete.[/note]
+
+<table>
+<tbody>
+<tr>
+<th>Taranis telemetry screen identifier</th>
+<th>FRSKY_ID_</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>T1</td>
+<td>TEMP1</td>
+<td>send control_mode as Temperature 1 (TEMP1)</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>TEMP2</td>
+<td>send number of GPS satellites and GPS status. For example: 73 means 7 satellite and 3D lock</td>
+</tr>
+<tr>
+<td>FUEL</td>
+<td>FUEL</td>
+<td>Send battery remaining</td>
+</tr>
+<tr>
+<td>Vfas</td>
+<td>VFAS</td>
+<td>Send battery voltage</td>
+</tr>
+<tr>
+<td>CURR</td>
+<td>CURRENT</td>
+<td>Send current consumption</td>
+</tr>
+<tr>
+<td>Hdg</td>
+<td>GPS_COURS_BP</td>
+<td>Send heading in degrees based on AHRS and not GPS</td>
+</tr>
+<tr>
+<td>GPS lat/long</td>
+<td>?</td>
+<td>Is transmitted normally</td>
+</tr>
+<tr>
+<td>Spd</td>
+<td>GPS_SPEED_BP/AP</td>
+<td>GPS speed</td>
+</tr>
+<tr>
+<td>Alt</td>
+<td>FRSKY_ID_BARO_ALT_BP/AP</td>
+<td>Barometer altitude</td>
+</tr>
+<tr>
+<td>GAlt</td>
+<td>FRSKY_ID_GPS_ALT_BP/AP</td>
+<td>GPS altitude</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+
+Other available values:
+<table>
+<tbody>
+<tr>
+<th>Taranis telemetry screen identifier</th>
+<th>FRSKY_ID_</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>RSSI</td>
+<td></td>
+<td>Transmitter data</td>
+</tr>
+<tr>
+<td>Batt, time</td>
+<td></td>
+<td>Consumption (maybe mAh used?)</td>
+</tr>
+<tr>
+<td>CONS</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SWR</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>A1</td>
+<td></td>
+<td>Receiver voltage (not very useful since is always around 4-5V).</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+
+Missing:
+<table>
+<tbody>
+<tr>
+<th>Taranis telemetry screen identifier</th>
+<th>FRSKY_ID_</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>GPS date&amp;time</td>
+<td></td>
+<td>Note: These were logged as some fixed date&amp;time in the year 2000 on my Taranis SD card. Reviewing if this is a logging issue or a telemetry issue.</td>
+</tr>
+<tr>
+<td>AccelX,Y,Z</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CELLS</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RPM</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Air speed</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Vertical speed</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>

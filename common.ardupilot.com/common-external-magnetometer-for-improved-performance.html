@@ -9,8 +9,8 @@ post_parent_stub: common-archived-topics
 post_parent_title: common-Archived Topics 
 END METADATA 
 -->
-[archived]Almost everyone has moved to <a href="http://copter.ardupilot.com/wiki/common-installing-3dr-ublox-gps-compass-module/">GPS+compass module</a>.[/archived]
-This page covers the installation of an <a href="http://store.3drobotics.com/products/hmc5883l-triple-axis-magnetometer" target="_blank">Stand-alone external compass</a>.  You may alternatively use the combined <a href="common-installing-3dr-ublox-gps-compass-module/">GPS+Compass module</a>.
+[archived]Almost everyone has moved to <a href="common-installing-3dr-ublox-gps-compass-module">GPS+compass module</a>.[/archived]
+This page covers the installation of a stand-alone external compass ( hmc5883l-triple-axis-magnetometer).  You may alternatively use the combined <a href="common-installing-3dr-ublox-gps-compass-module/">GPS+Compass module</a>.
 <!--more-->
 
 
@@ -53,7 +53,7 @@ The 3DR external compass should only be used with the APM series of flight contr
 
 <h1>Connecting to the APM 2.5</h1>
 
-<strong>1. </strong>Purchase a <a href="http://store.3drobotics.com/HMC5883L_Triple_Axis_Magnetometer_p/br-hmc5883-01.htm" target="_blank">HMC5883L magnetometer breakout board</a>. Ensure the magnetometer board is set to use 3.3 volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts). The magnetometer board is supplied with the 5 volt pad solder bridged and must be modified as shown below.
+<strong>1. </strong>Purchase an <em>HMC5883L magnetometer breakout board</em>. Ensure the magnetometer board is set to use 3.3 volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts). The magnetometer board is supplied with the 5 volt pad solder bridged and must be modified as shown below.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MagnetometerJumper3v3.jpg"><img class="alignnone size-full wp-image-532" alt="MagnetometerJumper3v3" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MagnetometerJumper3v3.jpg" width="764" height="358" /></a>
 
@@ -61,7 +61,7 @@ The 3DR external compass should only be used with the APM series of flight contr
 
 <img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/APMCompassModification.jpg" />
 
-<strong>3. </strong>The APM 2.5 I2C connector needs a 4 pin DF13 connector, such as <a href="http://store.3drobotics.com/DF13_4_Position_Connector_10_cm_p/ca-0001-16-02.htm">this one</a>. Cut off one and and strip and tin the four wires.
+<strong>3. </strong>The APM 2.5 I2C connector needs a 4 pin DF13 connector. Cut off one and and strip and tin the four wires.
 
 <strong>4. </strong>Connect the DF13’s 4 wires to the compass breakout board. Note that the wires will not be one to one. Pin 1 on the DF13 connector will not go to pin 1 of the compass board. The standard 3DR cable has one red wire and three black wires. Substitute your wire colors accordingly. Solder the wires as follows:
 <ul>

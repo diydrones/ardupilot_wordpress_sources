@@ -9,9 +9,11 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-APM firmware can be used with PX4 FMU and PX4 IO autopilot boards, allowing you to use the same advanced, community-developed APM firmware with the high performance PX4 processor. This page provides instructions for downloading the latest firmware onto PX4 using Mission Planner, either as a part of first time setup or whenever you need to update the firmware.
+ArduPilot firmware can be used with PX4 FMU and PX4 IO autopilot boards, allowing you to use the same advanced, community-developed ArduPilot firmware with the high performance PX4 processor. This page provides instructions for downloading the latest firmware onto PX4 using <em>Mission Planner</em>, either as a part of first time setup or whenever you need to update the firmware.
 
-<h3>Load firmware onto PX4 FMU</h3>
+
+<h1>Load firmware onto PX4 FMU</h1>
+
 Connect your PX4 FMU board's micro USB port (shown below) to your computer using the supplied micro USB cable. <em>Click on images to enlarge.</em>
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/PX4FMU_PX4IO_USB.jpg"><img class=" wp-image-5076 alignnone" alt="PX4 FMU USB Port" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/PX4FMU_PX4IO_USB.jpg" width="304" height="159" /></a>
@@ -46,7 +48,8 @@ When the download status reads <strong>Done</strong>, your firmware download is
 
 
 
-<h3>Load Firmware onto PX4 IO Board</h3>
+<h1>Load Firmware onto PX4 IO Board</h1>
+
 <ol>
 	<li>The PX4IO board requires its own firmware to be directly loaded onto it separately from the PX4 FMU board itself.</li>
 	<li>There are two methods for loading firmware onto the PX4 IO board</li>
@@ -57,23 +60,25 @@ When the download status reads <strong>Done</strong>, your firmware download is
 
 
 
-<h4>Load Firmware onto PX4 IO Board (Newer Versions)</h4>
+<h2>Load Firmware onto PX4 IO Board (Newer Versions)</h2>
+
 <strong>New Method for Copter version 3.1 and later, Plane version 2.75 and later and Rover version 2.43 and later.</strong>
 <ol>
 	<li>After loading your vehicles appropriate firmware onto your PX4FMU using Mission Planner disconnect the USB cable.</li>
 	<li>While holding down the PX4's Safety Button Connect the vehicles battery.</li>
 	<li>You will hear several tone sequences followed by two beeps indicating successful loading of the firmware to the PX4IO board.
 <ol>
-	<li>The tone sequence for a PX4 should sound like this Wav file link:<strong> <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4_CompletedIOBoardFirmwareUpload.wav">New IO board firmware loaded successfully</a></strong></li>
+	<li>The tone sequence for a PX4 should sound like this Wav file link: <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4_CompletedIOBoardFirmwareUpload.wav">New IO board firmware loaded successfully</a></li>
 </ol>
 </li>
 	<li>Release the Safety Button and disconnect the Battery.</li>
-	<li>For complete information on PX4 Sound sequences go to this Link: <strong><a href="http://copter.ardupilot.com/wiki/common-apm-board-leds/#PX4_Sound_meaning">PX4_Sound_meaning</a></strong></li>
+	<li>For complete information on PX4 Sound sequences go to this Link: <a href="http://copter.ardupilot.com/wiki/common-apm-board-leds/#PX4_Sound_meaning">PX4_Sound_meaning</a></li>
 </ol>
 
 
 
-<h4>Load Firmware onto PX4 IO Board (Older Versions)</h4>
+<h2>Load Firmware onto PX4 IO Board (Older Versions)</h2>
+
 <strong>Old Method for Copter prior to version 3.1, Plane <strong>prior to </strong>version 2.75 and Rover <strong>prior to </strong>version 2.43.</strong>
 
 The PX4 IO module requires separate firmware from the PX4 FMU module. To load the PX4 IO firmware, we will use the micro SD card and USB SD card reader supplied with the PX4 IO board.
@@ -120,12 +125,13 @@ Now we'll install the firmware to the PX4IO board from the SD card while holding
 	<li>If your PX4 system is already connected to a receiver and PPM encoder your computer may not provide sufficient USB power.</li>
 	<li>If this procedure fails, try either the <strong><span style="color: #ff0000">Alternate Instructions using Battery</span> </strong>below or the powered USB hub as follows.
 <ol>
-	<li>A <strong>Powered USB hub</strong> with a fast charge feature and sufficient current to power the PX4 system, receiver and encoder <span style="color: #ff0000"><strong>MAY</strong></span> work.</li>
+	<li>A <strong>Powered USB hub</strong> with a fast charge feature and sufficient current to power the PX4 system, receiver and encoder <strong>MAY</strong> work.</li>
 	<li>For some PX4 systems a powered USB hub with high current fast charge feature has been shown to work, but it is not guaranteed.</li>
 </ol>
 </li>
 </ol>
-<span style="font-size: medium"><strong><span style="color: #ff0000">Alternate Instructions using Battery:</span></strong></span>
+
+<span style="font-size: medium"><strong>Alternate Instructions using Battery:</strong></span>
 <ol>
 	<li>Remove your propellers or place a towel over them before following this procedure.</li>
 	<li>Hold down PX4's safety button.</li>
@@ -145,7 +151,8 @@ Now we'll install the firmware to the PX4IO board from the SD card while holding
 
 
 
-<h3>Load MavLink Parameters From PX4 to Mission Planner Program</h3>
+<h1>Load MavLink Parameters From PX4 to Mission Planner Program</h1>
+
 <ol>
 	<li>Connect your PX4 to your computer via the USB cable.</li>
 	<li>Ensure that the <strong>COM</strong> window on the top right is displaying your PX4's current port.
@@ -182,4 +189,4 @@ When the window displays <strong>Done</strong> and Mission Planner shows the 
 </ul>
 &nbsp;
 
-<strong>Additional firmware and alternate methods may be found here:</strong> <strong><a title="setup" href="http://firmware.diydrones.com/" target="_blank">ArduPilot Firmware Builds Site</a></strong>.
+<strong>Additional firmware and alternate methods may be found here:</strong> <a title="setup" href="http://firmware.diydrones.com/" target="_blank">ArduPilot Firmware Builds Site</a>.

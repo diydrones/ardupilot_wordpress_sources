@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-measuring-battery-voltage-and-current-consumption-with-apm 
-title: common-Measuring battery voltage and current consumption with APM 
+title: common-3DR Power Module 
 id: 332 
 menu_order: 0 
 post_parent_id: 0 
@@ -9,61 +9,44 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page explains how to set up the Power Module (PM) to measure battery voltage and current consumption.
+This page explains how to set up the 3DR Power Module (PM) to measure battery voltage and current consumption. The information will also be useful for setting up other types of Power Module.
+<!-- more -->
 
-<h3>Overview</h3>
+<h1>Overview</h1>
 
+The Pixhawk and APM 2.x have a dedicated connector for attaching the <a title="3DR Power Module" href="https://store.3drobotics.com/products/apm-power-module-with-xt60-connectors" target="_blank">3DR Power Module</a> (PM). This is useful because it:
 <ul>
-	<li>The APM 2.5 has a dedicated connector for attaching the <a title="3DR Power Module" href="http://store.3drobotics.com/products/apm-power-module-with-deans-connectors" target="_blank">3DR Power Module</a> (PM) which is useful because:
+
+	<li>Provides a stable 5.37V and 2.25Amp power supply which reduces the chances of a brown-out</li>
+	<li>Allows monitoring of the battery's voltage and current and triggering a return-to-launch when the voltage becomes low or the total power consumed during the flight approaches the battery's capacity</li>
+	<li>Allows the autopilot firmware to more accurately compensate for the interference on the compass from other components</li>
+</ul>
+
+The PM accepts a maximum input voltage of 18V (up to 4S Lipo battery) and maximum current of 90Amps. When used with an APM the full 90Amp current sensing range can be used, with the PX4/Pixhawks up to 60Amps can be measured.
+
+There is more general information on powering in <a href="common-powering-the-pixhawk">Powering the Pixhawk</a>.
+
+[warning]The Power Module's maximum input voltage is 18V. This is the maximum allowed by the on-board regulator. (4 cell LiPo max).[/warning][warning]The Power Module does not have sufficient power for servos or high current devices such as FPV transmitters.
 <ul>
-<ul>
-<ul>
-<ul>
-	<li>it provides a stable 5.3V and 2.25Amp power supply to the APM which reduces the chances of a brown-out</li>
-	<li>allows monitoring of the battery's voltage and current and triggering a return-to-launch when the voltage becomes low or the total power consumed during the flight approaches the battery's capacity</li>
-	<li>allows the Copter firmware to more accurately compensate for the interference on the compass from the PDB, ESCs and motors</li>
-</ul>
-</ul>
-</ul>
-</ul>
-</li>
-	<li>The PM accepts a maximum input voltage of 18V (up to 4S Lipo battery) and maximum current of 90Amps.</li>
-	<li>When used with an APM the full 90Amp current sensing range can be used, with the PX4/Pixhawks up to 60Amps can be measured.</li>
-	<li><span style="color: #ff0000"><strong>Warning:</strong> </span><strong><span style="color: #ff0000">The Power Module's maximum input voltage is 18V</span>,</strong> the maximum allowed by the on-board regulator. (4 cell LiPo max).</li>
-	<li><span style="color: #ff0000"><strong>Warning:</strong> <strong>The Power Module does not have sufficient power for servos or high current devices such as FPV transmitters.</strong></span>
-<ul>
-	<li>The power module does provide sufficient power for the APM, your receiver and a small electronic module such as a PPM encoder or 3DR telemetry radio.<strong>
-</strong></li>
-	<li>You may "control" servos from the signal pin of A9, A10 and A11 on the left side of the APM but the servos must be powered by a separate ESC meaning you should detach jumper JP1 and use a separate BEC (or the BEC built into your ESCs) to power the APM's rear power rail and then attach the servo's red and black wires to the rear power rails's middle and bottom row respectively.</li>
-</ul>
-</li>
-</ul>
+	<li>The power module does provide sufficient power for the Pixhawk/APM, your receiver and a small electronic module such as a PPM encoder or 3DR telemetry radio.</li>
+	<li>You may "control" servos from signal pins, but the servos must be powered by a separate ESC.</li>
+</ul>[/warning]
 
 
 
-<h3>Connecting it to the APM 2.5 board</h3>
+<h1>Connecting the PM to a flight controller board</h1>
+
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3DR-current-sensor-top.jpg" alt="" />
-<ul>
-	<li>The 6-pos cable plugs into the 6-pos connector on both the Power Module and APM.</li>
-	<li>Your battery connects to the Power Module's male connector, and its female connector plugs into your ESC or Power Distribution Board.</li>
-</ul>
-<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/3DR-current-sensor-APM-conn.jpg"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/3DR-current-sensor-APM-conn.jpg" alt="3DR-current-sensor-APM-conn" width="800" height="426" /></a>
-<ul>
-	<li>the pin mapping from the image shown above from left to right is GND, GND, Voltage measurement, Current measurement, 5V, 5V</li>
-</ul>
+
+The 6-pos cable plugs into the 6-pos connector on both the Power Module and Pixhawk/APM.
+
+[caption id="attachment_2310" align="alignnone" width="196"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port-196x300.jpg" alt="Pixhawk Power Port" width="196" height="300" class="size-medium wp-image-2310" /></a> Pixhawk Power Port[/caption][caption id="attachment_1597" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/3DR-current-sensor-APM-conn.jpg"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/3DR-current-sensor-APM-conn-300x159.jpg" alt="APM2.x Power Port" width="300" height="159" class="size-medium wp-image-1597" /></a> APM2.x Power Port[/caption]
+
+Your battery connects to the Power Module's male connector, and its female connector plugs into your ESC or Power Distribution Board.
 
 
 
-<h4>Note for Plane users:</h4>
-<ul>
-	<li>You must remove the APM's JP1 jumper when using the Power Module so your electronics are only powered from the Power Module's on board regulator and not from your ESC's built in BEC.</li>
-	<li>Removing the jumper allows you to use the APM's servo output rail to distribute power from your ESC's BEC or separate UBEC to your servos.</li>
-	<li>Plug a BEC or UBEC power wire and ground wire into two of the power and ground pins on the APM's servo output rail.</li>
-</ul>
-
-
-
-<h4>Note for Copter users:</h4>
+[note]<strong>APM 2.x Power Module Notes:</strong>
 <ul>
 	<li>You should normally remove the APM's JP1 jumper when using the Power Module so that only your APM board and your receiver are powered from the Power Module's on-board regulator and not from your ESCs.
 <ul>
@@ -74,69 +57,74 @@ This page explains how to set up the Power Module (PM) to measure battery voltag
 	<li>You can leave the jumper present if you are using ESCs that have no BECs or if all the ESC BECs power wires are cut and you are not powering any servos from the servo out rail.</li>
 	<li>You can also individually power each servo from each individual ESC-BEC.
 <ul>
-	<li>Simply run the power and ground from each ESC-BEC individually and directly to each servo. (Very handy for multicopters).</li>
+	<li>Simply run the power and ground from each ESC-BEC individually and directly to each servo (very handy for multicopters).</li>
 </ul>
 </li>
 </ul>
+[/note]
 
-<hr width="800" />
 
-<h3>Setup through mission planner</h3>
-Battery measurement is set up in the Mission Planner's <strong>Hardware &gt; Optional Hardware &gt; Battery Monitor</strong> screen
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/MP_battery_monitor.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/MP_battery_monitor.png" alt="MP_battery_monitor" width="809" height="453" /></a>
 
-<strong><span style="background-color: #ff6600"><span style="color: #ffffff">  1 </span> </span> Enable voltage and current sensing by selecting:</strong>
+<h1>Setup through Mission Planner</h1>
 
-<strong>Monitor: </strong><em>4: Voltage and Current
-</em>
+Battery measurement is set up in the Mission Planner's <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen
 
-<strong>Sensor: </strong><em>4: 3DR Power Module
-</em>
+[caption id="attachment_4531" align="alignnone" width="1025"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_BatteryMonitorConfiguration.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_BatteryMonitorConfiguration.png" alt="MissionPlanner: Battery Monitor Configuration" width="1025" height="621" class="size-full wp-image-4531" /></a> MissionPlanner: Battery Monitor Configuration[/caption]
 
-<strong>APM: </strong><em>2: APM2.5 - 3DR Power Module
-</em>
+<ol>
+  <li>Enable voltage and current sensing by selecting:
+    <ul>
+	<li><strong>Monitor:</strong> Voltage and Current</li>
+	<li><strong>Sensor:</strong> 3DR Power Module</li>
+	<li><strong>APM ver:</strong> Pixhawk (or whatever board you are using)</li>
+	<li><strong>Battery Capacity:</strong> Fill in the your battery capacity in mAh</li>
+    </ul>
 
-<strong>Battery Capacity:</strong> Fill in the your battery capacity in mAh
 
-<strong><span style="background-color: #ff6600;color: #ffffff"> 2 </span> </strong>  <strong>Low Battery Alert from ground station
-</strong>
 
-If you wish the mission planner to alert you verbally when your battery is low check the "MP Alert on Low Battery" checkbox and enter the warning you wish to hear (it will be read out by a computerized voice), the voltage level and finally the percentage of remaining current.
+</li>
+  <li>Low Battery Alert from ground station:
+  <ul>	
+    <li>If you wish the <em>Mission Planner</em> to alert you verbally when your battery is low check the "MP Alert on Low Battery" checkbox and enter the warning you wish to hear (it will be read out by a computerized voice), the voltage level and finally the percentage of remaining current.
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_001.png" alt="MP_battery_alarm_001" width="316" height="145" />
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_002.png" alt="MP_battery_alarm_002" width="316" height="145" />
 
-<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_003.png" alt="MP_battery_alarm_003" width="316" height="145" />
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_003.png" alt="MP_battery_alarm_003" width="316" height="145" /></li>
+
+  </ul>
+</li>
+</oll>
 
 
 
-<h3>Calibrating the voltage reading</h3>
+<h1>Calibrating the voltage reading</h1>
+
 You can check that the APM/PX4 is correctly measuring the voltage of the battery by:
-<blockquote>
 <ol>
-	<li><em>Check the voltage of your lipo battery with a hand-held volt meter or a <a href="http://www.hobbyking.com/hobbyking/store/__10080__Turnigy_130A_Watt_Meter_and_Power_Analyzer.html" target="_blank">power analyzer</a></em></li>
-	<li><em>Connect your APM/PX4 to your computer and plug in the lipo battery</em></li>
-	<li><em>Check the voltage through the mission planner's INITIAL SETUP &gt; Optional Hardware &gt; Battery Monitor screen or on the Flight Data screen's HUD or Status tab.</em></li>
-</ol>
-</blockquote>
+	<li>Check the voltage of your lipo battery with a hand-held volt meter or a <a href="http://www.hobbyking.com/hobbyking/store/__10080__Turnigy_130A_Watt_Meter_and_Power_Analyzer.html" target="_blank">power analyzer</a></li>
+	<li>Connect your APM/PX4 to your computer and plug in the lipo battery</li>
+	<li>Check the voltage through the mission planner's <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen or on the Flight Data screen's HUD or <em>Status</em> tab.
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MPCheckVoltage.png"><img class="alignnone size-medium wp-image-680" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MPCheckVoltage-300x191.png" alt="MPCheckVoltage" width="300" height="191" /></a>
+</li>
+</ol>
+
 
 If you find the voltage is not correct (i.e. if off from the hand-held volt meter's reading by more than perhaps 0.2V) you can correct the APM/PX4's reading by doing the following:
-<blockquote>
 <ol>
-	<li><em>On the mission planner's INITIAL SETUP &gt; Optional Hardware &gt; Battery Monitor screen set the "Sensor" to "Other".
-</em></li>
-	<li><em>Enter the voltage according to the hand-held volt meter in the "Measured Battery Voltage" field</em></li>
-	<li><em>Press tab or click out of the field and the "Voltage Divider (Calced)" value will update and the "Battery voltage (Calced)" should now equal the measured voltage</em></li>
-</ol>
-</blockquote>
+	<li>On the mission planner's <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen set the "Sensor" to "Other".</li>
+	<li>Enter the voltage according to the hand-held volt meter in the "Measured Battery Voltage" field</li>
+	<li>Press tab or click out of the field and the "Voltage Divider (Calced)" value will update and the "Battery voltage (Calced)" should now equal the measured voltage
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/CalibrateVoltage.png"><img class="alignnone size-full wp-image-681" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/CalibrateVoltage.png" alt="CalibrateVoltage" width="1024" height="575" /></a>
 
 http://www.youtube.com/watch?v=tEA0Or-1n18
+</li>
+</ol>
 
-<h3>Connecting power module to alternative pins</h3> 
+
+<h1>Connecting power module to alternative pins</h1> 
 
 The above connection information assumes assumes the power module will be plugged into the default port on the flight controller (ie. Pixhawk). If you wish to change where the power module is plugged into the controller, the pins used can be modified using the BATT_VOLT_PIN and BATT_CURR_PIN parameters.
 

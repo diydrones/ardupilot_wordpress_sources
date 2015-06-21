@@ -1,0 +1,52 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-external-leds 
+title: common-External LEDs 
+id: 4570 
+menu_order: 0 
+post_parent_id: 3743 
+post_parent_stub: common-optional-hardware 
+post_parent_title: common-Optional Hardware 
+END METADATA 
+-->
+This article shows how to connect external LEDs.
+
+<!--more-->
+<h1>External LED for Pixhawk</h1>
+
+An external Pixhawk LED can be added by connecting it to the Pixhawk's I2C port. Because most users use an <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass" target="_blank">Ublox GPS and Compass module</a>, an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> is recommended.  Once connected the similar LED on the center of the Pixhawk will no longer light up.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ExternalLED_PixhawkLED.png"><img class="alignnone size-full wp-image-12422" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ExternalLED_PixhawkLED.png" alt="ExternalLED_PixhawkLED" width="853" height="225" /></a>
+
+
+[site_Copter]
+<h1>Two External LED solutions for APM2 (Copter only)</h1>
+
+There are two recommended solutions for adding LEDs.
+<ul>
+	<li>the <a href="http://store.jdrones.com/jD_IOBoard_p/jdioboard11.htm" target="_blank">JDrones I/O board</a> (<a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=Q2oT808mJnQ" target="_blank">video here</a>) and <a href="http://store.jdrones.com/Night_Flying_LED_Drivers_s/94.htm" target="_blank">LED strips</a> listens to the mavlink messages on the APM/PX4's telemetry port (much like the <a href="common-minim-osd-quick-installation-guide" target="_blank">minimOSD</a>)  and updates the LEDs.  The board includes a voltage regulator so it takes power directly from the battery</li>
+	<li>the APM's A4 ~ A11 pins can be used to control LEDs directly.  <a href="http://diydrones.com/forum/topics/apm-2-x-led-buzzer-modules" target="_blank">This is an example of a community members solution</a> you can purchase or you can build your own by purchasing a Darlington Driver DIP chip (<a href="https://www.sparkfun.com/products/312" target="_blank">like this one from Sparkfun</a>) to allow you to power the LEDs from the battery.  See this <a href="http://diydrones.com/profiles/blogs/adding-external-led-indicators-and-a-piezo-beeper-for-arm-and-gps" target="_blank">blog post</a> for more details.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/leds01.jpg"><img class="alignnone size-full wp-image-2983" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/leds01.jpg" alt="UPDATE THIS IMAGE" width="700" height="350" /></a>
+
+If you choose to control the pins directly from the APM, you must choose LEDs which have a current draw lower than the maximum permissible current of the AVR chip on the APM: 40mA.
+
+For <strong>AC3.1.5</strong>, the pinout of the APM is as follows:
+<ul>
+	<li>A4 : AUX led</li>
+	<li>A5 : Beeper - can drive a piezo buzzer directly (see below)</li>
+	<li>A6 : GPS - will flash with no GPS lock, solid with GPS lock</li>
+	<li>A7 ~ A11 : Motor LEDs</li>
+</ul>
+Which LEDs are active and when they blink is somewhat configurable through the LED_MODE parameter which can be set from the Mission Planner's CONFIG/TUNING &gt; Standard Params &gt; Copter LED Mode drop down.
+
+For <strong>AC3.2</strong>, the LED_MODE parameter is removed but all the following reduced set of pins are always active:
+<ul>
+	<li>A4 : Motor LED</li>
+	<li>A5 : Beeper - can drive a piezo buzzer directly (see below)</li>
+	<li>A6 : GPS - will flash with no GPS lock, solid with GPS lock</li>
+	<li>A7: Arming LED</li>
+</ul>
+
+[/site_Copter]
+
