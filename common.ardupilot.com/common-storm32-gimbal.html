@@ -26,10 +26,10 @@ You will need to solder 3-pins of a <a href="http://store.3drobotics.com/product
 In addition to the regular gimbal configuration described on the <a href="http://www.olliw.eu/storm32bgc-wiki/Getting_Started" target="_blank">SToRM32-BGC wiki</a>, the MAVlink heartbeats should be enabled through OlliW's o323BGCTool's <strong>Tools | Expert Tool</strong> screen as shown below.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png"><img class="alignnone size-full wp-image-4072" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png" alt="SToRM32_enableMavlink" width="777" height="603" /></a>
-<h1>Set-up through the Mission Planner</h1>
-Through your GCS (i.e. MP's Full Param List or Tree) set the <code>SERIAL2_BAUD</code> parameter to 115 as shown below:
+<h1>Set-up through the Mission Planner (MAVLink protocol)</h1>
+Through your GCS (i.e. MP's Full Param List or Tree) set the <code>SERIAL2_BAUD</code> parameter to "115" and SERIAL2_PROTOCOL to "1" as shown below:
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud.png"><img class="alignnone size-large wp-image-4073" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud-1024x567.png" alt="SToRM32_MP_Serial2Baud" width="474" height="262" /></a>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud_new.png"><img class="alignnone size-large wp-image-4620" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud_new-1024x567.png" alt="SToRM32_MP_Serial2Baud_new" width="474" height="262" /></a>
 
 Set <code>MNT_TYPE</code> to "4" to enable the SToRM32 gimbal driver (the Pixhawk must be rebooted for this change to take effect).
 
@@ -43,6 +43,8 @@ Set the <code>MNT_ANGMAX_PAN</code>, <code>MNT_ANGMIN_TIL</code>, <code>MNT_ANGM
 	<li>Can point straight up (<code>MNT_ANG_MAX_TIL</code> = +9000)</li>
 </ul>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams.png"><img class="alignnone size-large wp-image-4074" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams-1024x806.png" alt="SToRM32_MP_MountParams" width="474" height="373" /></a>
+<h1>Set-up through the Mission Planner (SToRM32 serial protocol)</h1>
+The custom SToRM32 protocol is also supported as an alternative to the MAVLink protocol.  To use the serial protocol use your GCS (i.e. MP's Full Param List or Tree) to set the <code>SERIAL2_BAUD</code> parameter to "115" and SERIAL2_PROTOCOL to "8":
 <h1>Testing the gimbal</h1>
 For instructions for testing the gimbal moves correctly please check the <a href="common-tarot-gimbal/#testing_the_gimbal_moves_correctly">similar section for the Tarot gimbal</a>.
 

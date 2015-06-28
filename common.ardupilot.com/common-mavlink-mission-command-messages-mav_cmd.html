@@ -647,9 +647,7 @@ This is the command equivalent of the <a href="http://copter.ardupilot.com/wiki/
 [site_Plane]
 <h3>Plane</h3>
 
-Loiter (circle) the specified location for a specified number of turns, and then proceed to the next command. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
-
-#HW TODO / QUESTION : 1. Just confirm this is NOT equivalent to Circle mode on plane: http://plane.ardupilot.com/wiki/flying/flight-modes/#circle - also that it uses the Radius value in command (unlike copter).
+Loiter (circle) the specified location for a specified number of turns at the given radius, and then proceed to the next command. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
 
 <b>Command parameters</b>
 
@@ -733,8 +731,7 @@ This is the mission equivalent of the <a href="http://copter.ardupilot.com/wiki/
 
 Fly to the specified location and then loiter there for the specified number of seconds — where loiter means "circle the waypoint". The timer starts when the waypoint is reached; when it expires the waypoint is complete. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used. You can also specify the radius and direction for the loiter.
 
-
-#HW TODO - confirm radius field lable in MP 
+The radius of loiter is set in the <code>WP_LOITER_RAD</code> parameter.
 
 <b>Command parameters</b>
 

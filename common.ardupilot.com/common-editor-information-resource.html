@@ -262,6 +262,18 @@ You can add notes, tips and warnings in the text using the [[note]This is a note
 [warning]This is a warning[/warning]
 
 
+<h1>Pagelists</h1>
+
+If you need to list the immediate sidebar-menu children of the current page in the sidebar menu you can use the shortcode: <strong>[[pagelist_navmenu]]</strong>.
+
+This is particularly useful for "common" landing pages where the list of sub-pages differs on each of the wikis.
+
+[note]<ul>
+<li>The shortcode relies on the menu item correctly storing the page ID. The menu items can sometimes store the wrong ID. The solution is to re-add the page to the menu and remove the old menu item. Everything will then work.</li>
+<li>If a page appears in the menu twice, then then the children of the second instance will be used.</li></ul>[/note]
+
+ 
+
 <h1>Archiving topics</h1>
 Topics that are no longer relevant for current products, but which may be useful for some existing users, should be archived. This is done by adding the <strong>archived</strong> shortcode to the top of the page, and moving the topic under Archived in the menu.
 
@@ -277,7 +289,11 @@ The three formats render as:
 [archived]
 
 
+
+
+
 <h1>Deleting wiki pages</h1>
+
 Wiki pages can be deleted by selecting the <strong>Move to Trash</strong> link when editing the page OR by selecting the <strong>Trash</strong> link in administration wiki page listings. A wiki page can further be <em>Permanently Deleted</em> by selecting the appropriate link in the administration area for the wiki.
 
 <strong>Notes:</strong>

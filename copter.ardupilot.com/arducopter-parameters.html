@@ -910,6 +910,7 @@ DO NOT EDIT
 
 <p>Allows enabling or disabling of pre-arming checks of receiver, accelerometer, barometer, compass and GPS</p>
 <ul>
+<li>Bitmask: 0:All,1:Baro,2:Compass,3:GPS,4:INS,5:Parameters+Sonar,6:RC,7:Voltage</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td> 1</td><td>Enabled</td></tr>
@@ -1332,6 +1333,7 @@ DO NOT EDIT
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
+<tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
 </table>
 </ul>
 
@@ -1367,6 +1369,7 @@ DO NOT EDIT
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
+<tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
 </table>
 </ul>
 
@@ -1402,6 +1405,7 @@ DO NOT EDIT
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
+<tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
 </table>
 </ul>
 
@@ -1437,6 +1441,7 @@ DO NOT EDIT
 <tr><td> 4</td><td>Frsky S-PORT</td></tr>
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
+<tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
 </table>
 </ul>
 
@@ -5454,7 +5459,11 @@ DO NOT EDIT
 
 <p>The GGS can send raw serial packets to inject data to multiple GPSes.</p>
 <ul>
-<li>Values: 0,1: send to specified instance. 127: broadcast</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>send to first GPS</td></tr>
+<tr><td> 1</td><td>send to 2nd GPS</td></tr>
+<tr><td> 127</td><td>send to all</td></tr>
+</table>
 </ul>
 
 
@@ -5462,7 +5471,11 @@ DO NOT EDIT
 
 <p>Masked with the SBP msg_type field to determine whether SBR1/SBR2 data is logged</p>
 <ul>
-<li>Values: 0x0000 for none, 0xFFFF for all, 0xFF00 for external only.</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0x0000</td><td>None</td></tr>
+<tr><td> 0xFFFF</td><td>All</td></tr>
+<tr><td> 0xFF00</td><td>External only</td></tr>
+</table>
 </ul>
 
 
@@ -6128,6 +6141,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.1 10.0</li>
 <li>Increment: 0.1</li>
+<li>Units: meters</li>
 </ul>
 
 
@@ -6137,6 +6151,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.1 10.0</li>
 <li>Increment: 0.1</li>
+<li>Units: meters</li>
 </ul>
 
 
@@ -6155,6 +6170,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.5 5.0</li>
 <li>Increment: 0.1</li>
+<li>Units: m/s</li>
 </ul>
 
 
@@ -6182,6 +6198,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.001 0.05</li>
 <li>Increment: 0.001</li>
+<li>Units: rad/s</li>
 </ul>
 
 
@@ -6191,6 +6208,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.05 1.0</li>
 <li>Increment: 0.01</li>
+<li>Units: m/s/s</li>
 </ul>
 
 
@@ -6199,6 +6217,7 @@ DO NOT EDIT
 <p>This noise controls the growth of gyro bias state error estimates. Increasing it makes rate gyro bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.0000001 0.00001</li>
+<li>Units: rad/s</li>
 </ul>
 
 
@@ -6207,6 +6226,7 @@ DO NOT EDIT
 <p>This noise controls the growth of the vertical acelerometer bias state error estimate. Increasing it makes accelerometer bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.00001 0.001</li>
+<li>Units: m/s/s</li>
 </ul>
 
 
@@ -6215,6 +6235,7 @@ DO NOT EDIT
 <p>This noise controls the growth of earth magnetic field state error estimates. Increasing it makes earth magnetic field bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.0001 0.01</li>
+<li>Units: gauss/s</li>
 </ul>
 
 
@@ -6223,6 +6244,7 @@ DO NOT EDIT
 <p>This noise controls the growth of body magnetic field state error estimates. Increasing it makes compass offset estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.0001 0.01</li>
+<li>Units: gauss/s</li>
 </ul>
 
 
@@ -6232,6 +6254,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0 500</li>
 <li>Increment: 10</li>
+<li>Units: milliseconds</li>
 </ul>
 
 
@@ -6241,6 +6264,7 @@ DO NOT EDIT
 <ul>
 <li>Range: 0 500</li>
 <li>Increment: 10</li>
+<li>Units: milliseconds</li>
 </ul>
 
 
@@ -6248,8 +6272,12 @@ DO NOT EDIT
 
 <p>This parameter controls use of GPS measurements : 0 = use 3D velocity &amp; 2D position, 1 = use 2D velocity and 2D position, 2 = use 2D position, 3 = use no GPS (optical flow will be used if available)</p>
 <ul>
-<li>Range: 0 3</li>
-<li>Increment: 1</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>GPS 3D Vel and 2D Pos</td></tr>
+<tr><td> 1</td><td>GPS 2D vel and 2D pos</td></tr>
+<tr><td> 2</td><td>GPS 2D pos</td></tr>
+<tr><td> 3</td><td>No GPS use optical flow</td></tr>
+</table>
 </ul>
 
 
@@ -6308,7 +6336,6 @@ DO NOT EDIT
 <tr><td>2</td><td>Never</td></tr>
 <tr><td>3</td><td>Always</td></tr>
 </table>
-<li>Increment: 1</li>
 </ul>
 
 
@@ -6327,10 +6354,11 @@ DO NOT EDIT
 <ul>
 <li>Range: 10 50</li>
 <li>Increment: 5</li>
+<li>Units: meters</li>
 </ul>
 
 
-<h2>Terrain Gradient % RMS (EKF_GND_GRADIENT)</h2>
+<h2>Terrain Gradient % RMS (EKF_GND_GRADIENT)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This parameter sets the RMS terrain gradient percentage assumed by the terrain height estimation. Terrain height can be estimated using optical flow and/or range finder sensor data if fitted. Smaller values cause the terrain height estimate to be slower to respond to changes in measurement. Larger values casue the terrain height estimate to be faster to respond, but also more noisy. Generally this value can be reduced if operating over very flat terrain and increased if operating over uneven terrain.</p>
 <ul>
@@ -6339,16 +6367,17 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Optical flow measurement noise (rad/s) (EKF_FLOW_NOISE)</h2>
+<h2>Optical flow measurement noise (rad/s) (EKF_FLOW_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This is the RMS value of noise and errors in optical flow measurements. Increasing it reduces the weighting on these measurements.</p>
 <ul>
 <li>Range: 0.05 - 1.0</li>
 <li>Increment: 0.05</li>
+<li>Units: rad/s</li>
 </ul>
 
 
-<h2>Optical Flow measurement gate size (EKF_FLOW_GATE)</h2>
+<h2>Optical Flow measurement gate size (EKF_FLOW_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This parameter sets the number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
@@ -6357,16 +6386,17 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Optical Flow measurement delay (msec) (EKF_FLOW_DELAY)</h2>
+<h2>Optical Flow measurement delay (msec) (EKF_FLOW_DELAY)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This is the number of msec that the optical flow measurements lag behind the inertial measurements. It is the time from the end of the optical flow averaging period and does not include the time delay due to the 100msec of averaging within the flow sensor.</p>
 <ul>
 <li>Range: 0 - 500</li>
 <li>Increment: 10</li>
+<li>Units: milliseconds</li>
 </ul>
 
 
-<h2>Range finder measurement gate size (EKF_RNG_GATE)</h2>
+<h2>Range finder measurement gate size (EKF_RNG_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This parameter sets the number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
@@ -6375,7 +6405,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Maximum valid optical flow rate (EKF_MAX_FLOW)</h2>
+<h2>Maximum valid optical flow rate (EKF_MAX_FLOW)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This parameter sets the magnitude maximum optical flow rate in rad/sec that will be accepted by the filter</p>
 <ul>

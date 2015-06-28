@@ -11,29 +11,30 @@ END METADATA
 -->
 For good altitude hold and loiter performance it is important that your vibration levels are low.  The instructions below will shows you how to measure the vibration levels.  If you find they are out-of-tolerance you should follow the advice found on the First Time Set-up sections <a href="wiki/vibration-damping/">Vibration Damping page</a>.
 
-
-
 Please follow these steps to ensure your vibration levels are within tolerance:
+<h2>Copter-3.3 and later versions:</h2>
+<ul>
+	<li>Perform a regular flight (i.e. not just a gentle hover) of at least a few minutes and <a href="wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/#downloading_logs_via_mavlink">download the dataflash logs</a>.</li>
+	<li>Using the Mission Planner or other GCS graph the VIBE message's VibeX, VibeY and VibeZ values.  These show the standard deviation of the primary accelerometer's output in m/s/s.  The image below, taken from a 3DR IRIS, shows normal levels which are below 15m/s/s but occasionally peak to 30m/s/s.  It is not yet clear what the maximum acceptable values are.</li>
+	<li>Graph the Clip0, Clip1 and Clip2 values which increase each time one of the accelerometers reaches it's maximum limit (16G).  Ideally these should be zero for the whole flight but low numbers (&lt;100) are likely ok especially if they occur during hard landings.  A regularly increasing number through the log indicates a serious vibration problem that <a href="wiki/vibration-damping/">should be fixed</a>.</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png"><img class="alignnone size-full wp-image-14654" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png" alt="Vibe_DataFlashMsg" width="1093" height="706" /></a>
+<h2>Copter-3.2.1 and earlier versions:</h2>
 <ul>
 	<li>Connect your APM/PX4 to the mission planner</li>
 	<li>Go to the CONFIG/TUNING &gt; Standard Params screen and set the Log bitmask to Default+IMU.  This will enable the capture of the accelerometer data to the dataflash logs.</li>
 	<li>Press the "Write Params" button</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png"><img class="alignnone size-full wp-image-10263" alt="Vibration_EnableDataflashIMU" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png" width="1024" height="575" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png"><img class="alignnone size-full wp-image-10263" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png" alt="Vibration_EnableDataflashIMU" width="1024" height="575" /></a>
 <ul>
 	<li>Fly your copter in Stabilize mode and try to maintain a level hover (it doesn't need to be perfectly stable or level)</li>
 	<li>Disconnect the Lipo, reconnect your APM/PX4 to the mission planner</li>
-	<li>Download the latest dataflash log using the Terminal screen (more detailed explanation of working with dataflash logs is <a href="wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/">here</a>)</li>
+	<li><a href="wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/#downloading_logs_via_mavlink">Download the dataflash logs and</a> after the download has completed, use the Mission Planner's "Review a Log" buttong to open the latest file in the log directory (it's last digit will be the Log number you downloaded so in the example above we downloaded Log #1 so the filename will end in 1.log)</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_DownloadLogs.png"><img class="alignnone size-full wp-image-8560" alt="Vibration_DownloadLogs" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_DownloadLogs.png" width="1024" height="662" /></a>
-<ul>
-	<li>After the download has completed, close the "Log" window and push the "Log Browse" button and open the latest file in the log directory (it's last digit will be the Log number you downloaded so in the example above we downloaded Log #1 so the filename will end in 1.log)</li>
-</ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_BrowseLogs.png"><img class="alignnone size-full wp-image-8561" alt="Vibration_BrowseLogs" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_BrowseLogs.png" width="1024" height="662" /></a>
 <ul>
 	<li>When the Log Browser appears, scroll down until you find any IMU message.  Click on the row's AccX and push "Graph this data Left" button.  Repeat for the AccY and AccZ columns to produce a graph like below.</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png"><img class="alignnone size-full wp-image-8562" alt="DiagnosingWithLogs_Vibes" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png" width="861" height="437" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png"><img class="alignnone size-full wp-image-8562" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png" alt="DiagnosingWithLogs_Vibes" width="861" height="437" /></a>
 <ul>
 	<li>Check the scale on the left and ensure that your vibration levels for the AccX and AccY are between -3 and +3.  For AccZ the acceptable range is -15 to -5.  If it is very close or over these limits you should refer back to the <a href="wiki/vibration-damping/">Vibration Dampening page</a> for possible solutions.</li>
 	<li>After all the above is complete, go to the Mission Planner's standard parameters page (you may need to press the "Connect" button again) and set the Log Bitmask back to "Default".  This is important because especially on the APM logging requires significant CPU resources and it's a waste to log these if they're not really needed.</li>
