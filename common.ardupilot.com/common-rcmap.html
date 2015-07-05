@@ -1,0 +1,25 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-rcmap 
+title: common-RCMAP 
+id: 4624 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to set up a non-standard RC input channel mapping using the RCMAP feature.<!-- more -->
+[note]this feature is available in AC3.2.1 and higher.[/note]
+<h1>Configuration</h1>
+By default the RC input channels are:
+Channel 1: Roll input
+Channel 2 : Pitch input
+Channel 3 : Throttle input
+Channel 4 : Yaw input
+
+These can be changed by setting the RCMAP_PITCH, ROLL, THROTTLE and YAW parameters as shown below using the <em>Mission Planner</em>'s <strong>Config/Tuning | Full Parameter Tree</strong> (or Full Parameter List).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/07/RCMAP_MPSetup.png"><img class="alignnone size-full wp-image-4625" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/07/RCMAP_MPSetup.png" alt="RCMAP_MPSetup" width="1023" height="576" /></a>
+
+After changing any of these parameters the flight controller should be rebooted and for multicopters, the <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_radio_control">RC calibration</a> and <a href="http://copter.ardupilot.com/wiki/initial-setup/esc-motor/">ESC calibration</a> should be re-done.

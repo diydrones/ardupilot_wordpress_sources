@@ -19,6 +19,13 @@ Please follow these steps to ensure your vibration levels are within tolerance:
 	<li>Graph the Clip0, Clip1 and Clip2 values which increase each time one of the accelerometers reaches it's maximum limit (16G).  Ideally these should be zero for the whole flight but low numbers (&lt;100) are likely ok especially if they occur during hard landings.  A regularly increasing number through the log indicates a serious vibration problem that <a href="wiki/vibration-damping/">should be fixed</a>.</li>
 </ul>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png"><img class="alignnone size-full wp-image-14654" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png" alt="Vibe_DataFlashMsg" width="1093" height="706" /></a>
+The algorithm for calculating the vibration levels can be seen in the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_InertialSensor/AP_InertialSensor.cpp#L1435" target="_blank">AP_InertialSensor.cpp's calc_vibration_and_clipping()</a> method but in short it involves calculating the standard deviation of the accelerometer readings like this:
+<ul>
+	<li>capture the raw x, y and z accelerometer values from the primary IMU</li>
+	<li>high-pass filter the raw values at 5hz to remove the vehicle's movement and create a "accel_vibe_floor" for x,y and z axis.</li>
+	<li>calculate the difference between the latest accel values and the accel_vibe_floor.</li>
+	<li>square the above differences, filter at 2hz and then calculate the square root (for x, y and z).  These final three values are what appear in the VIBE msg's VibeX, Y and Z fields.</li>
+</ul>
 <h2>Copter-3.2.1 and earlier versions:</h2>
 <ul>
 	<li>Connect your APM/PX4 to the mission planner</li>
