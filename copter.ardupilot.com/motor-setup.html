@@ -11,64 +11,8 @@ END METADATA
 -->
 Multicopters require that the motors spin in specific directions according to their configuration. As part of first time setup, you'll need to verify that each motor spins in the correct direction.
 
-This page gives instructions for setting motor directions, selecting propellers, and attaching propellers to motors.
-
-<h3>Ensuring that the motor order is correct</h3>
-The most important thing in setting up a new copter is ensuring that the motors are connected in the right order to the autopilot.
+Instructions on setting up the ESCS, motors and propellors are found in the autopilot-specific articles:
 <ul>
-	<li>Use <a href="http://copter.ardupilot.com/wiki/connecting-the-escs-and-motors/">these instructions</a> to connect motors in correct order to APM 2</li>
 	<li>Use <a href="http://copter.ardupilot.com/wiki/connect-escs-and-motors-pixhawk/">these instructions</a> to connect motors in correct order to Pixhawk</li>
+	<li>Use <a href="http://copter.ardupilot.com/wiki/connecting-the-escs-and-motors/">these instructions</a> to connect motors in correct order to APM 2</li>
 </ul>
-
-<h3>Testing motor spin directions</h3>
-<ol>
-	<li>Make sure there are no propellers on your copter!!</li>
-	<li>Turn transmitter on and ensure the flight mode switch is set to Stabilize.</li>
-	<li>Connect battery.</li>
-	<li>Arm copter by holding the throttle down and rudder right for five seconds.</li>
-	<li>If it fails to Arm with the throttle down and to the right and the motors will not spin, it has probably failed the  Pre-Arm Safety Check.
-<ol>
-	<li>Pre-Arm safety check failure is also indicated by the red arming light double flashing and then repeating.</li>
-	<li>If the Pre-Arm check fails go to the <strong><a href="http://copter.ardupilot.com/wiki/prearm_safety_check/">Prearm Safety Check Page</a></strong> and correct the problem or disable the check before continuing.</li>
-</ol>
-</li>
-	<li>When you can Arm successfully, apply a small amount of throttle, and observe and note spin direction of each motor.</li>
-</ol>
-
-
-<h3>Set correct spin directions</h3>
-Now that your motors are spinning, we'll set the correct direction for each motor.
-The direction the motors spin (clockwise or counterclockwise) is determined by the connection to the ESCs.
-As you apply a small amount of throttle to the motors, check and see what direction they are spinning in.
-Motors should spin as indicated by the diagrams below according to type.
-Check the diagram below to see what direction each motor should spin and verify that the motor does spin in the specific direction.
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_enc-Copy.jpg"><img class="alignnone wp-image-1788" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_enc-Copy-300x136.jpg" alt="APM_2_5_MOTORS_QUAD_enc - Copy" width="300" height="136" /></a>          <img class="alignnone wp-image-1789" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_Hb-300x178.jpg" alt="APM_2_5_MOTORS_QUAD_Hb" width="300" height="178" />
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo.jpg"><img class="alignnone wp-image-1790" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo-300x289.jpg" alt="hexa octo" width="300" height="289" /></a>       <img class="alignnone wp-image-1791" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_TRI-300x153.jpg" alt="APM_2_5_MOTORS_TRI" width="300" height="153" />
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_Y6A_Y6B.jpg"><img class="alignnone size-medium wp-image-1792" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_Y6A_Y6B-300x137.jpg" alt="APM_2_5_MOTORS_Y6A_Y6B" width="300" height="137" /></a>          <img class="alignnone size-medium wp-image-1793" style="color: #333333;font-style: normal" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_X8-300x222.jpg" alt="APM_2_5_MOTORS_X8" width="300" height="222" />
-
-Most likely some of your motor directions will need to be switched.
-Take note of which motors needs to be reversed and <strong>disconnect the battery from your copter</strong>.
-To reverse the spin direction of a motor, switch two of the three cables connecting the motor to the ESC by disconnecting two of the bullet connectors, switching the wires, and reconnecting as shown below.
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/motor-spin2.jpg"><img class="alignnone wp-image-7980" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/motor-spin2.jpg" alt="Switch two cables to reverse motor spin direction." width="200" height="210" /></a>
-<h3>Choosing propellers</h3>
-Propellers come in many varieties and are suited to different needs. Have experience choosing propellers? Help us by editing this section!
-
-
-
-<h3>Attach propellers</h3>
-Unscrew prop nuts and add propellers to motor collets with writing on props facing up in relation to the sky.
-If you have a co-axial motor configuration, make sure that the writing on the props faces up even if the motor faces down.
-Add metal spacers on top of prop nuts if prop hub measures less than 5 mm in height.
-Tighten prop nuts to secure propellers in place.
-Try inserting a 2 mm (5/64) hex wrench into the hole in the side of the prop nut to get better leverage when tightening prop nuts.
-Select propellers based on motor directions.
-Find your frame in the images above. Use pusher propellers for motors marked clockwise and normal propellers marked counterclockwise.
-Pusher propellers are usually marked "P" or "SFP" on the propeller.
-
-
-
-More detailed information on the set-up of motors (and RC Inputs) can be found <strong><a href="wiki/connecting-your-rc-input-and-motors/">(Here!)</a></strong>.

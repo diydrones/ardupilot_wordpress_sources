@@ -34,6 +34,8 @@ http://www.youtube.com/watch?v=js2GzeRysAc
 9. Put the ch7/ch8 switch into the LOW position to fly using the original PID gains.
 10. If you are happy with the autotuned PID gains, leave the ch7/ch8 switch in the HIGH position, land and disarm to save the PIDs permanently.
 If you DO NOT like the new PIDS, switch ch7/ch8 LOW to return to the original PIDs. The gains will not be saved when you disarm.
+
+If you find after performing an AutoTune that the vehicle feels overly twitchy when flying Stabilize, AltHold or PosHold (but ok in more autonomous modes like Loiter, RTL, Auto) try reducing the RC_FEEL parameter to 0.25.  This smooths out the pilot's input.
 <h3>Copter-3.3 changes</h3>
 Copter 3.3 adds some additional features:
 <ul>

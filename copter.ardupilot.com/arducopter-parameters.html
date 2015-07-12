@@ -4729,7 +4729,7 @@ DO NOT EDIT
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>None</td></tr>
 <tr><td> 1</td><td>Servo</td></tr>
-<tr><td> 2</td><td>MAVLink</td></tr>
+<tr><td> 2</td><td>3DR Solo</td></tr>
 <tr><td> 3</td><td>Alexmos Serial</td></tr>
 <tr><td> 4</td><td>SToRM32 MAVLink</td></tr>
 <tr><td> 5</td><td>SToRM32 Serial</td></tr>
@@ -5062,7 +5062,7 @@ DO NOT EDIT
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>None</td></tr>
 <tr><td> 1</td><td>Servo</td></tr>
-<tr><td> 2</td><td>MAVLink</td></tr>
+<tr><td> 2</td><td>3DR Solo</td></tr>
 <tr><td> 3</td><td>Alexmos Serial</td></tr>
 <tr><td> 4</td><td>SToRM32 MAVLink</td></tr>
 <tr><td> 5</td><td>SToRM32 Serial</td></tr>
@@ -6494,6 +6494,7 @@ DO NOT EDIT
 <tr><td>3</td><td>APM2-PulsedLightI2C</td></tr>
 <tr><td>4</td><td>PX4-I2C</td></tr>
 <tr><td>5</td><td>PX4-PWM</td></tr>
+<tr><td>6</td><td>BBB-PRU</td></tr>
 </table>
 </ul>
 
@@ -6641,6 +6642,7 @@ DO NOT EDIT
 <tr><td>3</td><td>APM2-PulsedLightI2C</td></tr>
 <tr><td>4</td><td>PX4-I2C</td></tr>
 <tr><td>5</td><td>PX4-PWM</td></tr>
+<tr><td>6</td><td>BBB-PRU</td></tr>
 </table>
 </ul>
 
@@ -6794,7 +6796,7 @@ DO NOT EDIT
 <h1>FLOW Parameters</h1>
 
 
-<h2>Optical flow enable/disable (FLOWENABLE)</h2>
+<h2>Optical flow enable/disable (FLOW_ENABLE)</h2>
 
 <p>Setting this to Enabled(1) will enable optical flow. Setting this to Disabled(0) will disable optical flow</p>
 <ul>
@@ -6805,7 +6807,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>X axis optical flow scale factor correction (FLOWFXSCALER)</h2>
+<h2>X axis optical flow scale factor correction (FLOW_FXSCALER)</h2>
 
 <p>This sets the parts per thousand scale factor correction applied to the flow sensor X axis optical rate. It can be used to correct for variations in effective focal length. Each positive increment of 1 increases the scale factor applied to the X axis optical flow reading by 0.1%. Negative values reduce the scale factor.</p>
 <ul>
@@ -6814,7 +6816,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Y axis optical flow scale factor correction (FLOWFYSCALER)</h2>
+<h2>Y axis optical flow scale factor correction (FLOW_FYSCALER)</h2>
 
 <p>This sets the parts per thousand scale factor correction applied to the flow sensor Y axis optical rate. It can be used to correct for variations in effective focal length. Each positive increment of 1 increases the scale factor applied to the Y axis optical flow reading by 0.1%. Negative values reduce the scale factor.</p>
 <ul>
@@ -6823,7 +6825,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Flow sensor yaw alignment (FLOWORIENT_YAW)</h2>
+<h2>Flow sensor yaw alignment (FLOW_ORIENT_YAW)</h2>
 
 <p>Specifies the number of centi-degrees that the flow sensor is yawed relative to the vehicle. A sensor with its X-axis pointing to the right of the vehicle X axis has a positive yaw angle.</p>
 <ul>

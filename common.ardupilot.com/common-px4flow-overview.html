@@ -24,8 +24,12 @@ https://www.youtube.com/watch?v=LP8kl4hGfMw
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk.png"><img class="alignnone size-large wp-image-2973" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk-1024x567.png" alt="OptFlow_Pixhawk" width="584" height="323" /></a>
 
 The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
+
+
+
 <h1>Mounting to the Frame</h1>
-Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The FLOW_ORIENT_YAW parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
+
+Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#flow_sensor_yaw_alignment_flow_orient_yaw">FLOW_ORIENT_YAW</a> parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
 
 <strong>NOTE</strong>: The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW </code> to -9000.
 <h1>Setup through the Mission Planner</h1>
