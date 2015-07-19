@@ -297,6 +297,16 @@ DO NOT EDIT
 </ul>
 
 
+<h2>RTL minimum climb (ArduCopter:RTL_CLIMB_MIN)</h2>
+
+<p>The vehicle will climb this many cm during the initial climb portion of the RTL</p>
+<ul>
+<li>Range: 0 3000</li>
+<li>Increment: 10</li>
+<li>Units: Centimeters</li>
+</ul>
+
+
 <h2>Receiver RSSI sensing pin (ArduCopter:RSSI_PIN)</h2>
 
 <p>This selects an analog pin for the receiver RSSI voltage. It assumes the voltage is RSSI_RANGE for max rssi, 0V for minimum</p>
@@ -601,7 +611,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>ESC Calibration (ArduCopter:ESC)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>ESC Calibration (ArduCopter:ESC_CALIBRATION)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Controls whether ArduCopter will enter ESC calibration on the next restart.  Do not adjust this parameter manually.</p>
 <ul>
@@ -609,6 +619,7 @@ DO NOT EDIT
 <tr><td>0</td><td>Normal Start-up</td></tr>
 <tr><td> 1</td><td>Start-up in ESC Calibration mode if throttle high</td></tr>
 <tr><td> 2</td><td>Start-up in ESC Calibration mode regardless of throttle</td></tr>
+<tr><td> 9</td><td>Disabled</td></tr>
 </table>
 </ul>
 
