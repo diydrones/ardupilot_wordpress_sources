@@ -1,37 +1,49 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: quick-start-guide 
-title: Quick Start Guide for Ready-to-Fly Vehicles 
+title: Archived: Quick Start Guide for Ready-to-Fly Vehicles 
 id: 7917 
 menu_order: 3 
-post_parent_id: 7929 
-post_parent_stub: introduction 
-post_parent_title: Introducing Copter 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
-This page is a quick start guide for users who have purchased a <a href="http://store.3drobotics.com/t/ready-to-fly/" target="_blank">3DRobotics Ready-to-Fly (RTF) multicopter</a> including a Pixhawk preloaded with the latest Copter firmware.  All other users should skip to the <a href="http://copter.ardupilot.com/wiki/initial-setup">First Time Setup</a> section which includes the full flight controller set-up and calibration instructions.
+[archived]The article is out of date (3DR replaced APM2.x with Pixhawk and the kits come with everything configured out of the box). In addition, 3DR provides its own detailed usage instructions for all RTF vehicles in the <a href="http://3drobotics.com/support/">Support page</a> (e.g. <a href="http://3drobotics.com/kb/iris/">Iris+</a>, <a href="http://3drobotics.com/solo-drone/">Solo</a>, <a href="http://3drobotics.com/kb/x8/">X8</a>, <a href="http://3drobotics.com/kb/aero-m/">Aero-M</a>).[/archived]
 
-<h3>Install Mission Planner</h3>
-Go to the <strong><a href="http://ardupilot.com/downloads/?category=4&amp;sortby=date" target="_blank">Mission Planner Downloads page</a></strong> and select the most recent Mission Planner MSI. This will lead you to the page for the specific download. Select Download to save the installer file to your computer. <em>Click on images to enlarge</em>
 
-<a href="http://ardupilot.com/downloads/?category=4&amp;sortby=date"><img class="alignnone wp-image-1897" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/mission-planner-download.png" alt="Select the most recent MSI and select Download." width="300" height="186" /></a>
+This page is a quick start guide for users who have purchased a <a href="https://store.3drobotics.com/t/hobbyist-mapping" target="_blank">3DRobotics Ready-to-Fly (RTF) multicopter</a> including a Pixhawk preloaded with the latest Copter firmware.  All other users should skip to the <a href="http://copter.ardupilot.com/wiki/initial-setup">First Time Setup</a> section which includes the full flight controller set-up and calibration instructions.
+
+
+
+<h1>Install Mission Planner</h1>
+
+Go to the <a href="http://ardupilot.com/downloads/?did=82" target="_blank">Mission Planner Downloads page</a> to download the most recent Mission Planner MSI. Select <strong>Download</strong> to save the installer file to your computer. <em>Click on images to enlarge</em>
+
+[caption id="attachment_14753" align="alignnone" width="300"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/mission-planner-download_v2.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/mission-planner-download_v2-300x82.png" alt="MIssion Planner Download Page" width="300" height="82" class="size-medium wp-image-14753" /></a> <a href="http://ardupilot.com/downloads/?did=82">MIssion Planner Download Page</a>[/caption]
 
 Open the Microsoft installer file (.msi) and select <strong>Run</strong> to run the installation utility.
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/installation.png"><img style="color: #333333;font-style: normal;line-height: 21px" title="Mission Planner Installation Utility" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/installation.png" alt="Mission Planner Installation Utility" width="200" height="156" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/installation.png"><img title="Mission Planner Installation Utility" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/installation.png" alt="Mission Planner Installation Utility" width="200" height="156" /></a>
 
-Follow the instructions to complete the setup process. The installation utility will automatically install any necessary software drivers. If you receive a DirectX installation error, please update your DirectX plug-in from the <a href="http://www.microsoft.com/en-us/download/details.aspx?id=35" target="_blank">DirectX Download Center</a>. If you receive the warning pictured here, select <strong>Install this driver software anyway</strong> to continue.
+Follow the instructions to complete the setup process (accept the license terms, choose a location for the installation etc.)
+
+The installation utility will automatically install any necessary software drivers. If you receive a DirectX installation error, please update your DirectX plug-in from the <a href="http://www.microsoft.com/en-us/download/details.aspx?id=35" target="_blank">DirectX Download Center</a>. If you receive the warning pictured here, select <strong>Install this driver software anyway</strong> to continue.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/driver1.png"><img title="Driver Warning Error" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/driver1.png" alt="Select install this driver anyways." width="200" height="120" /></a>
 
 Once installation is complete, open Mission Planner. Mission Planner automatically notifies you about available updates. Please always run the most current version of Mission Planner.
-<h3>Connect RC receiver</h3>
+
+
+
+<h1>Connect RC receiver</h1>
+
 Is your RC receiver already connected and configured? If not, follow these instructions.
 For RC control with <strong>PWM</strong>, connect RC receiver to APM Input Signal pins using connectors to attach channel 1 to the APM signal pin labeled 1, channel 2 to signal pin 2, etc. You will also need to provide power to the receiver by connecting a three-wire cable between the receiver and the APM for one of the channels.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PWM-wiring.jpg"><img class="alignnone wp-image-7887" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PWM-wiring.jpg" alt="Connect RC receiver to APM for PWM." width="200" height="121" /></a>
 
-For <strong>PPM </strong>(all channels over one wire), use PPM jumper connectors to connect Input signal pins 2 and 3 on APM and signal pins 3 and 4 on the receiver. Use a 3-wire cable to connect the signal, power, and ground pins for channel 1 on the receiver to the three pins labeled 1 on APM. The specific pins used for the receiver may vary by model, so consult the documentation on your receiver for PPM configuration.
+For <strong>PPM</strong> (all channels over one wire), use PPM jumper connectors to connect Input signal pins 2 and 3 on APM and signal pins 3 and 4 on the receiver. Use a 3-wire cable to connect the signal, power, and ground pins for channel 1 on the receiver to the three pins labeled 1 on APM. The specific pins used for the receiver may vary by model, so consult the documentation on your receiver for PPM configuration.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PPM-wiring.jpg"><img class="alignnone wp-image-7888" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/PPM-wiring.jpg" alt="Connect RC reiver to APM for PPM." width="200" height="136" /></a>
 
@@ -74,7 +86,7 @@ Channel 4: low = yaw left, high = yaw right.
 When the red bars for roll, pitch, throttle, yaw, and radio 5 (and optionally radio 6) are set at the minimum and maximum positions, select <strong>Click when Done</strong>. Mission Planner will show a summary of the calibration data. Normal values are around 1100 for minimums and 1900 for maximums.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png"><img class=" wp-image-7560t" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png" alt="radi calib results" width="250" height="201" /></a>
-<h3>Attach propellers</h3>
+<h1>Attach propellers</h1>
 Unscrew prop nuts and add propellers to motor collets with writing on props facing up in relation to the sky. If you have a co-axial motor configuration, make sure that the writing on the props faces up even if the motor faces down. Add metal spacers on top of prop nuts if prop hub measures less than 5 mm in height. Tighten prop nuts to secure propellers in place. Try inserting a 2 mm (5/64) hex wrench into the hole in the side of the prop nut to get better leverage when tightening prop nuts. Select propellers based on motor directions. Find your frame in the images below. Use pusher propellers for motors marked clockwise and normal propellers marked counterclockwise. Pusher propellers are usually marked "P" or "SFP" on the propeller.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg"><img class="alignnone wp-image-3977" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg" alt="Choose propellers based on motor direction." width="200" height="128" /></a>
@@ -82,11 +94,19 @@ Unscrew prop nuts and add propellers to motor collets with writing on props faci
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_all_hexa_octa_y6.jpg"><img class="alignnone  wp-image-4019" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_all_hexa_octa_y6.jpg" alt="Choose propellers based on motor direction." width="200" height="368" /></a>
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_X8.jpg"><img class="alignnone wp-image-4021" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_X8.jpg" alt="Choose propellers based on motor direction." width="200" height="119" /></a>
-<h3>Pre-flight information</h3>
+
+
+
+<h1>Pre-flight information</h1>
+
 Safety is the key to successful flight. Please read the <a href="http://copter.ardupilot.com/wiki/safety-multicopter/">Safety Information Page</a> before flying. Select an unpopulated area to fly your copter, away from people and developed areas, and always run the <a href="http://copter.ardupilot.com/wiki/checklist/">pre-flight checklist </a>before connecting the battery. Make sure to read the <a href="http://copter.ardupilot.com/wiki/flying-arducopter/">Flying</a> page for information about arming, disarming, and controlling your copter during flight.
 
 When you're ready to fly, place copter on the ground facing away from you. Connect fully charged LiPo battery to the power module connector when you're ready to power on your copter. Follow the safe arming and disarming procedure described on the <a href="wiki/flying-arducopter/">Maiden Flight</a> page.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/Connect-Battery.jpg"><img class="alignnone wp-image-7042" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/Connect-Battery.jpg" alt="Connect Battery" width="200" height="83" /></a>
-<h3>Next steps</h3>
+
+
+
+<h1>Next steps</h1>
+
 Try learning about different <a href="http://copter.ardupilot.com/wiki/flight-modes/">autonomous flight modes</a> to get the most out of your Copter, including loitering and running missions.

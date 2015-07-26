@@ -1,0 +1,446 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: using-python-scripts-in-mission-planner 
+title: Using Python Scripts in Mission Planner 
+id: 36 
+menu_order: 50 
+post_parent_id: 31 
+post_parent_stub: common-other-mission-planner-features 
+post_parent_title: common-Other Mission Planner Features 
+END METADATA 
+-->
+One of the cool features of the Mission Planner is that it can run Python scripts, which is an easy way to extend the functionality of the program beyond its built-in functions. It can also enable integration easily with other dlls and modules far beyond the original scope of the Mission Planner.
+
+<h1>Overview</h1>
+
+You can easily program your UAV to do anything, from robotic acrobatics to just script-driven missions. Python 2.x is currently supported, up to 2.7 (Mission Planner uses an implementation of <a href="http://ironpython.codeplex.com/">IronPython</a> internally)
+
+Aside from the regular Python commands, these are the special Mission Planner commands you can use:
+<strong><code>cs.???? = currentstate</code></strong>
+Any variable on the status tab in the planner can be used.
+
+<code>Script.????</code>
+
+options are
+<ul>
+	<li><code>Script.Sleep(ms)</code></li>
+	<li><code>Script.ChangeParam(name,value)</code></li>
+	<li><code>Script.GetParam(name)</code></li>
+	<li><code>Script.ChangeMode(mode)</code>(same as displayed in mode setup screen 'AUTO')</li>
+	<li>><code>Script.WaitFor(string,timeout)</code></li>
+	<li><code>Script.SendRC(channel,pwm,sendnow)</code></li>
+</ul>
+
+Here's an example, which tells a multicopter to do a roll in the air!
+<pre>print 'Start Script'
+for chan in range(1,9):
+	Script.SendRC(chan,1500,False)
+	Script.SendRC(3,Script.GetParam('RC3_MIN'),True)
+	Script.Sleep(5000) 
+
+while cs.lat == 0:
+	print 'Waiting for GPS' 
+	Script.Sleep(1000) 
+	print 'Got GPS' 
+	jo = 10 * 13 
+	print jo 
+	Script.SendRC(3,1000,False) 
+	Script.SendRC(4,2000,True) 
+	cs.messages.Clear() 
+	Script.WaitFor('ARMING MOTORS',30000) 
+	Script.SendRC(4,1500,True) 
+	print 'Motors Armed!'
+	Script.SendRC(3,1700,True) 
+
+while cs.alt &lt; 50:  	
+	Script.Sleep(50) 	
+	Script.SendRC(5,2000,True) # acro 	
+	Script.SendRC(1,2000,False) # roll  	
+	Script.SendRC(3,1370,True) # throttle  	 
+
+while cs.roll &gt; -45: # top half 0 - 180 
+	Script.Sleep(5) 
+
+while cs.roll &lt; -45: # -180 - -45  	
+	Script.Sleep(5) 	
+	Script.SendRC(5,1500,False) # stabilize  	
+	Script.SendRC(1,1500,True) # level roll  	
+	Script.Sleep(2000) # 2 sec to stabilize  	
+	Script.SendRC(3,1300,True) # throttle back to land 	
+	thro = 1350 # will descend 	 
+
+while cs.alt &gt; 0.1: 
+	Script.Sleep(300)
+	Script.SendRC(3,1000,False) 
+	Script.SendRC(4,1000,True) 
+	Script.WaitFor('DISARMING MOTORS',30000) 
+	Script.SendRC(4,1500,True)
+
+print 'Roll complete'</pre>
+
+
+
+<h1>Classes Exposed by Mission Planner to Python</h1>
+
+Mission Planner exposes classes using the following code:
+
+[caption id="attachment_1120" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/ardu_sciptcs.jpg"><img class="size-medium wp-image-1120" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/ardu_sciptcs-300x184.jpg" alt="linking classes into python" width="300" height="184" /></a> linking classes into python[/caption]
+
+scope.SetVariable(Variablename, ClassInstance);
+
+That the following classes are exposed:
+<ul>
+	<li><code>scope.SetVariable("MAV", MainV2.comPort);</code></li>
+	<li><code>scope.SetVariable("cs", MainV2.comPort.MAV.cs);</code></li>
+	<li><code>scope.SetVariable("Script", this);</code></li>
+	<li><code>scope.SetVariable("mavutil", this);</code></li>
+</ul>
+This is where you can add your own classes. For now lets us explore the important methods and properties you can use into your script using these classes.
+
+<strong>Class Name: </strong>Script.cs
+
+<strong>Python Variable:</strong> Script , mavutil
+<table class="auto-style1">
+<tbody>
+<tr>
+<td class="auto-style2">Method</td>
+<td class="auto-style2">Description</td>
+</tr>
+<tr>
+<td>bool ChangeParam (string param, float value)</td>
+<td></td>
+</tr>
+<tr>
+<td>Float getParam (string param)</td>
+<td></td>
+</tr>
+<tr>
+<td>bool ChangeMode (string mode)</td>
+<td>Changes flying mode</td>
+</tr>
+<tr>
+<td>bool SendRC (int channel, ushort pwm, bool sendnow)</td>
+<td>Send Chxout values.</td>
+</tr>
+</tbody>
+</table>
+<strong>Class Name: </strong>CurrentState.cs
+
+<strong>Python Variable:</strong> cs
+<table class="auto-style1">
+<tbody>
+<tr>
+<td class="auto-style2">Method</td>
+<td class="auto-style2">Type</td>
+<td class="auto-style2">Description</td>
+</tr>
+<tr>
+<td>roll</td>
+<td>float</td>
+<td>Roll (deg)</td>
+</tr>
+<tr>
+<td>pitch</td>
+<td>float</td>
+<td>Pitch (deg)</td>
+</tr>
+<tr>
+<td>yaw</td>
+<td>float</td>
+<td>Yaw (deg)</td>
+</tr>
+<tr>
+<td>lat</td>
+<td>float</td>
+<td>Latitude (deg)</td>
+</tr>
+<tr>
+<td>lng</td>
+<td>float</td>
+<td>Longitude (deg)</td>
+</tr>
+<tr>
+<td>groundcourse</td>
+<td>float</td>
+<td>Ground Course (deg)</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>float</td>
+<td>Altitude (dist)</td>
+</tr>
+<tr>
+<td>altoffsethome</td>
+<td>float</td>
+<td>Altitude Home Offset (dist)</td>
+</tr>
+<tr>
+<td>gpsstatus</td>
+<td>float</td>
+<td>GPS Status</td>
+</tr>
+<tr>
+<td>gpshdop</td>
+<td>float</td>
+<td>GPS HDOP</td>
+</tr>
+<tr>
+<td>satcount</td>
+<td>float</td>
+<td>Satellite Count</td>
+</tr>
+<tr>
+<td>altd100</td>
+<td>float</td>
+<td>Altitude / 100</td>
+</tr>
+<tr>
+<td>altd1000</td>
+<td>float</td>
+<td>Altitude / 1000</td>
+</tr>
+<tr>
+<td>airspeed</td>
+<td>float</td>
+<td>Airspeed (speed)</td>
+</tr>
+<tr>
+<td>targetairspeed</td>
+<td>float</td>
+<td>Airspeed Target (speed)</td>
+</tr>
+<tr>
+<td>groundspeed</td>
+<td>float</td>
+<td>Ground Speed (speed)</td>
+</tr>
+<tr>
+<td>verticalspeed</td>
+<td>float</td>
+<td>Vertical Speed (speed)</td>
+</tr>
+<tr>
+<td>wind_dir</td>
+<td>float</td>
+<td>Wind Direction (deg)</td>
+</tr>
+<tr>
+<td>wind_vel</td>
+<td>float</td>
+<td>Wind Velocity (speed)</td>
+</tr>
+<tr>
+<td>ax, ay, az</td>
+<td>float</td>
+<td>Acceleration Values in x,y,z</td>
+</tr>
+<tr>
+<td>gx, gy, gz</td>
+<td>float</td>
+<td>Gyro Values in x,y,z</td>
+</tr>
+<tr>
+<td>mx, my, mz</td>
+<td style="direction: ltr;">float</td>
+<td>Mag Values in x,y,z</td>
+</tr>
+<tr>
+<td>failsafe</td>
+<td>bool</td>
+<td>Faile Sate Active or Not</td>
+</tr>
+<tr>
+<td>rxrssi</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>chx1in, chx2in, .... chx8in</td>
+<td>float</td>
+<td>Input Channels from 1 to 8</td>
+</tr>
+<tr>
+<td>ch1out, chx2out, .... chx8out</td>
+<td>float</td>
+<td>Output Channel form 1 to 8</td>
+</tr>
+<tr>
+<td>nav_roll</td>
+<td>float</td>
+<td>Roll Target (deg)</td>
+</tr>
+<tr>
+<td>nav_pitch</td>
+<td>float</td>
+<td>Pitch Target (deg)</td>
+</tr>
+<tr>
+<td>nav_bearing</td>
+<td>float</td>
+<td>Bearing target (deg)</td>
+</tr>
+<tr>
+<td>target_bearing</td>
+<td>float</td>
+<td>Bearing Target (deg)</td>
+</tr>
+<tr>
+<td>wp_dist</td>
+<td>float</td>
+<td>Distance to Next Waypoint (dist)</td>
+</tr>
+<tr>
+<td>alt_error</td>
+<td>float</td>
+<td>Altitude Error (dist)</td>
+</tr>
+<tr>
+<td>ber_error</td>
+<td>float</td>
+<td>Bearing Error (dist)</td>
+</tr>
+<tr>
+<td>aspd_error</td>
+<td>float</td>
+<td>Airspeed Error (speed)</td>
+</tr>
+<tr>
+<td>wpno</td>
+<td>float</td>
+<td>Flying Mode</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>String</td>
+<td>Flying Mode</td>
+</tr>
+<tr>
+<td>dimbrate</td>
+<td>float</td>
+<td>Climb Rate (speed)</td>
+</tr>
+<tr>
+<td>tot</td>
+<td>int</td>
+<td>Time over target (sec)</td>
+</tr>
+<tr>
+<td>distTraveled</td>
+<td>float</td>
+<td>Distance Travelled (dist)</td>
+</tr>
+<tr>
+<td>timeInAir</td>
+<td>float</td>
+<td>Time in Air (sec)</td>
+</tr>
+<tr>
+<td>turnrate</td>
+<td>float</td>
+<td>Turn Rate (speed)</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>float</td>
+<td>Turn Radius (dist)</td>
+</tr>
+<tr>
+<td>battery_voltage</td>
+<td>float</td>
+<td>Battery Voltage (volt)</td>
+</tr>
+<tr>
+<td>battery_remaining</td>
+<td>float</td>
+<td>Battery Remaining (%)</td>
+</tr>
+<tr>
+<td>current</td>
+<td>float</td>
+<td>battery Current (Amps)</td>
+</tr>
+<tr>
+<td>HomeAlt</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>DistToHome</td>
+<td>float</td>
+<td>Absolute Pressure Value</td>
+</tr>
+<tr>
+<td>press_abs</td>
+<td>float</td>
+<td>Absolute Pressure Value</td>
+</tr>
+<tr>
+<td>sonarrange</td>
+<td>float</td>
+<td>Sonar Range (meters)</td>
+</tr>
+<tr>
+<td>sonarVoltage</td>
+<td>float</td>
+<td>Sonar Voltage (volt)</td>
+</tr>
+<tr>
+<td>armed</td>
+<td>bool</td>
+<td>True if Armed</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+
+Please note that although these properties are read/write howvever writing to some of them can corrupt the status. Use methods from Script class to control the vehicle. for example use Script.ChangeMode(xmode) rather than cs.mode = xmode.
+
+&nbsp;
+
+<strong>Class Name: </strong>MavLink.cs
+
+<strong>Python Variable:</strong> MAV
+
+&nbsp;
+<table class="auto-style1">
+<tbody>
+<tr>
+<td class="auto-style2">Method</td>
+<td class="auto-style2">Description</td>
+</tr>
+<tr>
+<td>bool setParam (string paramname, float value)</td>
+<td>Same as Script.ChangeParam()</td>
+</tr>
+<tr>
+<td>bool doARM (bool armit)</td>
+<td>BE CAREFUL when using it.</td>
+</tr>
+<tr>
+<td>byte getWPCount ( )</td>
+<td>Gets Waypoints Count.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h1>Using CPython Standard Libraries</h1>
+
+You can import standard libraries from your regular Python 2.x folders by adding this line to top of your script (replacing "c:\python27\lib" with whatever the folder is on your drive):
+<pre>import sys
+sys.path.append(r"c:\python27\lib")</pre>
+Here, for example, we're importing the serial, os, and threading libraries, which are in two folders in a typical Python 2.7 installation. Appending the specific folder paths for those three libraries first allows us to import them with the next "import" command:
+<pre>import sys
+sys.path.append(r"c:\Python27\Lib\site-packages")
+sys.path.append(r"c:\Python27\Lib")
+import serial, os, threading</pre>
+
+
+<h1>Tutorials and sample scripts</h1>
+
+<ul>
+	<li><a href="http://diydrones.com/profiles/blogs/scripted-fixed-wing-acrobatics">Scripting fixed-wing acrobatics</a></li>
+	<li><a href="http://diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A1469666">Adding new variables and classes</a></li>
+	<li><a href="http://diydrones.com/forum/topics/how-to-python-script-a-time-based-flight-plan">Writing a time-based script</a></li>
+</ul>

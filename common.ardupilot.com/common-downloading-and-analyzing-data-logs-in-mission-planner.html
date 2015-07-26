@@ -9,15 +9,10 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h1>Log Types (Dataflash vs tlogs)</h1>
+<a href="common-downloading-and-analyzing-data-logs-in-mission-planner">Dataflash logs</a> are stored on the Pixhawk (or APM2.x) onboard dataflash memory and can be download after a flight. On Plane and Rover dataflash logs are created soon after start-up. On Copter they are created after you first arm the copter. This topic explains how to configure and access Dataflash logs.
+<!-- more -->
 
-There are two ways to record your flight data with Copter. With some exceptions, the two methods record very similar data but in different ways:
-<ul>
-	<li><strong>Dataflash logs</strong> (the subject of this page) use the APM or Pixhawk's onboard dataflash memory, which you can download after the flight. On Plane and Rover dataflash logs are created soon after start-up. On Copter they are created after you first arm the copter.</li>
-	<li><strong>Telemetry logs</strong> (also known as "tlogs") are recorded by the mission planner (or other ground station) when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link. You can find the details <a title="Telemetry Logs details" href="/wiki/common-mission-planner-telemetry-logs/">here</a>.</li>
-</ul>
-
-
+[note]<a title="Telemetry logs" href="common-mission-planner-telemetry-logs/">Telemetry logs</a> (also known as "tlogs")  collect similar information to dataflash logs (see <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#log_types_dataflash_vs_tlogs">Diagnosing problems using Logs</a> for more information). [/note]
 
 
 <h1>Downloading logs via MAVLink</h1>

@@ -14,9 +14,16 @@ This article provides an overview of the RC Transmitter and Receiver Systems tha
 
 <h1>Overview</h1>
 
-Pixhawk is compatible with PPM RC receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers as discus. For traditional single-wire-per-channel (PWM) receivers a <a href="https://store.3drobotics.com/products/ppm-encoder?taxon_id=39" target="_blank">PPM encoder</a> can be used to convert the receiver outputs to PPM-SUM.
+Pixhawk is compatible with PPM RC receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. 
+
+For traditional single-wire-per-channel (PWM) receivers a <a href="https://store.3drobotics.com/products/ppm-encoder" target="_blank">PPM encoder</a> can be used to convert the receiver outputs to PPM-SUM.
 
 [note]Futaba S.BUS2 receivers are not yet supported.[/note]
+
+
+
+<h1>Connecting the receiver</h1>
+
 
 To connect a PPM receiver, Futaba S.Bus receiver, or PPM encoder, connect the black ground, red power and white signal wires to the RC pins. These S.BUS receivers have been tested and are known to work: R2008SB, R6008SB.
 
@@ -25,6 +32,7 @@ To connect a PPM receiver, Futaba S.Bus receiver, or PPM encoder, connect the bl
 For a <strong>Spektrum DSM</strong>, <strong>DSM2</strong>, or <strong>DSM-X Satellite</strong> receiver, connect to the <strong>SPKT/DSM</strong> port.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect.jpg"><img class="alignnone  wp-image-1478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/spektrum-connect-300x192.jpg" alt="spektrum connect" width="200" height="128" /></a>
+
 
 
 <h1>Radio systems that support PPM-Sum or S-Bus directly</h1>
@@ -139,6 +147,5 @@ The diagram below shows how to use the original 3DR PPM-Sum encoder. The new enc
 	<li>[note]If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.[/note]</li>
 </ul>
 </ul>
-
 
 

@@ -5093,6 +5093,7 @@ DO NOT EDIT
 <tr><td>3</td><td>Analog Voltage Only</td></tr>
 <tr><td>4</td><td>Analog Voltage and Current</td></tr>
 <tr><td>5</td><td>SMBus</td></tr>
+<tr><td>6</td><td>Bebop</td></tr>
 </table>
 </ul>
 
@@ -5168,6 +5169,7 @@ DO NOT EDIT
 <tr><td>3</td><td>Analog Voltage Only</td></tr>
 <tr><td>4</td><td>Analog Voltage and Current</td></tr>
 <tr><td>5</td><td>SMBus</td></tr>
+<tr><td>6</td><td>Bebop</td></tr>
 </table>
 </ul>
 
@@ -5404,6 +5406,7 @@ DO NOT EDIT
 <tr><td>8</td><td>SwiftNav</td></tr>
 <tr><td>9</td><td>PX4-UAVCAN</td></tr>
 </table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5423,6 +5426,7 @@ DO NOT EDIT
 <tr><td>8</td><td>SwiftNav</td></tr>
 <tr><td>9</td><td>PX4-UAVCAN</td></tr>
 </table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5440,6 +5444,7 @@ DO NOT EDIT
 <tr><td>7</td><td>Airborne2G</td></tr>
 <tr><td>8</td><td>Airborne4G</td></tr>
 </table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5454,7 +5459,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Minimum Lock Type Accepted for DGPS (GPS_DGPS_MIN_LOCK)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Minimum Lock Type Accepted for DGPS (GPS_MIN_DGPS)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Sets the minimum type of differential GPS corrections required before allowing to switch into DGPS mode.</p>
 <ul>
@@ -5463,6 +5468,7 @@ DO NOT EDIT
 <tr><td>50</td><td>FloatRTK</td></tr>
 <tr><td>100</td><td>IntegerRTK</td></tr>
 </table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5475,6 +5481,7 @@ DO NOT EDIT
 <tr><td>1</td><td>Enabled</td></tr>
 <tr><td>2</td><td>NoChange</td></tr>
 </table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5484,6 +5491,7 @@ DO NOT EDIT
 <ul>
 <li>Range: -100 90</li>
 <li>Units: Degrees</li>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5511,15 +5519,25 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Raw data logging (GPS_RXM_RAW)</h2>
+<h2>Raw data logging (GPS_RAW_DATA)</h2>
 
 <p>Enable logging of RXM raw data from uBlox which includes carrier phase and pseudo range information. This allows for post processing of dataflash logs for more precise positioning. Note that this requires a raw capable uBlox such as the 6P or 6T.</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td>1</td><td>log at 1MHz</td></tr>
-<tr><td>5</td><td>log at 5MHz.</td></tr>
+<tr><td>5</td><td>log at 5MHz</td></tr>
 </table>
+<li>RebootRequired: True</li>
+</ul>
+
+
+<h2>GNSS system configuration (GPS_GNSS_MODE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Bitmask for what GNSS system to use</p>
+<ul>
+<li>Values: 0: Leave as currently configured 1: GPS 2: SBAS 4: Galileo 8: Beidou 16: IMES 32: QZSS 64: GLONASS</li>
+<li>RebootRequired: True</li>
 </ul>
 
 

@@ -9,23 +9,21 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Log Types (Dataflash vs tlogs)</h3>
-There are two ways to record your flight data with Copter. With some exceptions, the two methods record very similar data but in different ways:
-<ul>
-	<li><strong>dataflash logs</strong> use the APM's onboard 16Mb dataflash memory, which you can download after use. See table of contents.</li>
-	<li><strong>telemetry logs</strong> (also known as "tlogs" and the subject of this page) are recorded by the mission planner when you connect your APM to your computer via your 3DR or Xbee wireless telemetry link or USB.</li>
-</ul>
+Telemetry logs (also known as "tlogs") are recorded by the <em>Mission Planner</em> (or other ground station) when you connect ArduPilot to your computer via a <a href="common-telemetry-landingpage">telemetry link</a>. This topic explains how to configure and access tlogs.
+<!-- more -->
+
+[note]<a href="common-downloading-and-analyzing-data-logs-in-mission-planner">Dataflash logs</a> collect similar information to tlogs (see <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#log_types_dataflash_vs_tlogs">Diagnosing problems using Logs</a> for more information). [/note]
 
 
-
-<h3>When and where tlogs are created</h3>
+<h1>When and where tlogs are created</h1>
 Tlogs are recordings of the MAVLink telemetry messages sent between the APM/PX and the groundstation and are automatically created the moment you press the connect button on the mission planner.  Files of the format YYYY-MM-DD hh-mm-ss.tlog appear in the "logs" subfolder in your Mission Planner installation folder or to the location you select in the Planner options [Config/Tuning] [Planner].
 
 Besides the ".tlog" files, ".rlog" files are also created.  These contain all the .tlog data plus additional debug output from the mission planner.  but cannot be parsed or played back so they should be ignored.
 
 
 
-<h3>Setting the datarate</h3>
+<h1>Setting the datarate</h1>
+
 The desired rate at which data is sent from the APM/PX to the ground station can be controlled through the mission planner's Software &gt; Planner screen's Telemetry drop-downs.  Because all data sent over the telemetry link is also recorded in the tlog, this also controls the rate of data saved to the tlogs.
 
 Note that especially on Copter, due to CPU resource limitations, the actual rate of the data sent and saved may be lower than the rate requested.
@@ -34,7 +32,8 @@ Note that especially on Copter, due to CPU resource limitations, the actual rate
 
 
 
-<h3>Playing back missions</h3>
+<h1>Playing back missions</h1>
+
 If you are using wireless telemetry and have connected to to APM via the Mission Planner, your flight data will automatically recorded.  You can play back these logs by doing the following:
 <ul>
 	<li>Open the mission planner's Flight Data screen</li>
@@ -52,7 +51,8 @@ While the log is replaying, the HUD will move and the vehicles location on the m
 
 
 
-<h3>Creating 3d images of the flight path</h3>
+<h1>Creating 3d images of the flight path</h1>
+
 You can create KMZ files by doing this:
 <ul>
 	<li>Open the mission planner's Flight Data screen</li>
@@ -77,7 +77,8 @@ The different flight modes used during the flight will appear as different color
 
 
 
-<h3>Extracting parameters and Waypoints</h3>
+<h1>Extracting parameters and Waypoints</h1>
+
 You can extract the parameters and waypoints from the tlog by following the same steps as for creating the KML file except that at the last step select "Extract Params" or "Extract WPs".
 
 Extract Params will cause a .param file to be created along side the tlog.  This file is tab separated and contains a full list of parameters (in the same order as they appear in the eeprom) along with their values during the flight.  This can be opened in excel or a text editor.
@@ -86,7 +87,8 @@ Extract WPs will create one or more .txt files containing any missions uploaded 
 
 
 
-<h3>Graphing data from a flight</h3>
+<h1>Graphing data from a flight</h1>
+
 Data from the flight can be graphed by doing the following:
 <ul>
 	<li>Open the mission planner's Flight Data screen</li>
@@ -106,5 +108,5 @@ Data from the flight can be graphed by doing the following:
 
 
 
-<h3>Video overview of tlogs</h3>
+<h1>Video overview of tlogs</h1>
 http://www.youtube.com/watch?feature=player_embedded&amp;v=4IRRN5YMHJA

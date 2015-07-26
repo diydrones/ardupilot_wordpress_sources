@@ -18,28 +18,31 @@ https://www.youtube.com/watch?v=j-CMLrAwlco
 
 
 <h1>LED Meanings</h1>
-<strong>Flashing red and blue</strong>: Initializing gyroscopes. !! Hold the vehicle still and level while it initializes the sensors.
 
-<strong>Flashing blue</strong>: Disarmed, no GPS lock found
 
-<strong>Solid blue</strong>: Armed with no GPS lock
 
-<strong>Flashing green</strong>: Disarmed, GPS lock acquired (with quick double beep tone at time of disarming)
+<strong><span style="color: #ff0000">Flashing red</span> <span style="color: #0000ff">and</span> <span style="color: #0000ff">blue</span></strong>: Initializing gyroscopes. !! Hold the vehicle still and level while it initializes the sensors.
 
-<strong>Solid green</strong>: Armed, GPS lock acquired (with single long tone at time of arming)
+<strong><span style="color: #0000ff">Flashing blue</span></strong>: Disarmed, no GPS lock found. Autopilot, loiter, and return-to-launch modes require GPS lock.
 
-<strong>Double flashing yellow</strong>: Failing pre-arm checks
+<strong><span style="color: #0000ff">Solid blue</span></strong>: Armed with no GPS lock
 
-<strong>Single Flashing yellow</strong>: Radio failsafe activated
+<strong><span style="color: #008000">Flashing green</span></strong>: Disarmed (ready to arm), GPS lock acquired. Quick double tone when disarming from the armed state.
 
-<strong>Single Flashing yellow with quick beeping tone</strong>: Battery failsafe activated
+<strong><span style="color: #008000">Solid green</span> - with single long tone at time of arming:</strong> Armed, GPS lock acquired. Ready to fly!
 
-<strong>Flashing blue and yellow with high-high-high-low tone sequence (dah-dah-dah-doh)</strong>: GPS glitch or GPS failsafe activated
+<strong><span style="color: #ffcc00">Double flashing yellow</span>:</strong> Failing pre-arm checks (system refuses to arm).
 
-<strong>Flashing red and yellow with rising tone</strong>: EKF or Inertial Nav failure
+<strong><span style="color: #ffcc00">Single Flashing yellow</span>:</strong> Radio failsafe activated
 
-<strong>Flashing purple and yellow</strong>: Barometer glitch
+<strong><span style="color: #ffcc00">Flashing yellow</span> - with quick beeping tone</strong>: Battery failsafe activated
 
-<strong>Solid Red</strong>: Error
+<strong><span style="color: #ffcc00">Flashing yellow</span> <span style="color: #0000ff">and blue</span> - with high-high-high-low tone sequence (dah-dah-dah-doh):</strong> GPS glitch or GPS failsafe activated
 
-<strong>Solid Red with <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/NoSDCard_short.wav">SOS tone sequence</a></strong>: SD Card missing (or other SD error like bad format etc.)
+<strong><span style="color: #ff0000">Flashing red</span> and <span style="color: #ffcc00">yellow</span> - with rising tone:</strong> EKF or Inertial Nav failure
+
+<strong><span style="color: purple">Flashing purple</span> and <span style="color: #ffcc00">yellow</span></strong>: Barometer glitch
+
+<strong><span style="color: #ff0000">Solid Red</span></strong>: Error
+
+<strong><span style="color: #ff0000">Solid Red</span> with <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/NoSDCard_short.wav">SOS tone sequence</a></strong>: SD Card missing (or other SD error like bad format etc.)

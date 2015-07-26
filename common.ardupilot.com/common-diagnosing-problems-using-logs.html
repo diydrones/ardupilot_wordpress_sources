@@ -9,8 +9,20 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page aims to show you how to diagnose the top 5 most common problems affecting Copter in particular but to some extent Plane and Rover as well.  If you are not yet familiar with the basics of <a href="common-mission-planner-telemetry-logs/">telemetry logs</a> and <a title="common-Downloading and Analyzing Data Logs in Mission Planner" href="common-downloading-and-analyzing-data-logs-in-mission-planner/">dataflash logs</a> you will probably want to review the introductory pages that go over where these logs are stored and how you can download and view the information held within them.
-<h3>Mechanical Failures</h3>
+This page aims to show you how to diagnose the top 5 most common problems affecting Copter in particular but to some extent Plane and Rover as well.  
+
+<h1>Log Types (Dataflash vs tlogs)</h1>
+
+There are two ways to record your flight data. With some exceptions, the two methods record very similar data but in different ways:
+<ul>
+	<li><a href="common-downloading-and-analyzing-data-logs-in-mission-planner">Dataflash logs</a> use the Pixhawk (or APM2.x) onboard dataflash memory, which you can download after the flight. On Plane and Rover dataflash logs are created soon after start-up. On Copter they are created after you first arm the copter.</li>
+	<li><a title="Telemetry logs" href="common-mission-planner-telemetry-logs/">Telemetry logs</a> (also known as "tlogs") are recorded by the <em>Mission Planner</em> (or other ground station) when you connect ArduPilot to your computer via a <a href="common-telemetry-landingpage">telemetry link</a>.</li>
+</ul>
+
+If you are not yet familiar with the basics of these log files, first review the introductory pages to understand where these logs are stored and how you can download and view the information held within them.
+
+
+<h1>Mechanical Failures</h1>
 Common mechanical failures include a motor or ESC failure (<a href="https://www.youtube.com/watch?v=hBUBbeyLe0Q" target="_blank">including ESC sync failures</a>), the propeller slipping or coming off, etc.  These appear in the log as a sudden divergence in the desired roll and pitch vs the vehicles actual roll and pitch.  This discrepancy is most clearly visible in the <strong>dataflash logs</strong> by graphing the ATT message's Roll-In vs Roll and Pitch-In vs Pitch and to a lesser extent in the NavYaw vs Yaw.
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_RollInVsRoll.png"><img class="alignnone size-full wp-image-2335" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_RollInVsRoll.png" alt="DiagnosingWithLogs_RollInVsRoll" width="831" height="445" /></a>
@@ -22,7 +34,9 @@ Extra notes:
 	<li>tlogs are generally more difficult to use in this case because although we have nav_roll and nav_pitch which hold the desired roll and pitch, they are only updated when in RTL, Loiter or Auto flight modes.</li>
 	<li>in AC3.1 (and higher) Roll-In and Pitch-In only hold the desired roll and pitch while in stabilize mode.  When in an autopilot mode you must look at the NTUN messages's DRol and DPit columns</li>
 </ul>
-<h3>Vibrations</h3>
+
+
+<h1>Vibrations</h1>
 High vibrations cause the Copter's accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with alt hold (normally rocketing into the sky) or Loiter (drifting).
 
 Vibrations are best viewed by graphing the dataflash's <strong>IMU</strong> message's <strong>AccX</strong>, <strong>AccY</strong> and <strong>AccZ</strong> values.  The AccX and AccY values (primarily used for horizontal position control) should be between -3 and +3 m/s/s and the AccZ should be between -15 and -5 m/s/s.  The accelerometer values will change momentarily as the copter moves up and down which is why it is better to pull the data from a portion of the flight where the copter was mostly stationary but even with a copter that is moving you can still see the vibration levels by comparing the difference between the top and bottom of the "grass".  an occasional blade of grass going over the lines is ok but if it's sustained then it's likely a real vibration problem.
@@ -36,7 +50,9 @@ Tlog's RAW_IMU <strong>xacc</strong>, <strong>yacc</strong> and <strong>zacc</st
 If using tlogs the scale is in milli-Gs so the acceptable range for <strong>xacc</strong> and <strong>yacc</strong> is -300 ~ +300, and for zacc is -500 ~ -1500.  Note that in the image below the values appear out of that range which perhaps indicates a vibration problem although this user did not complain of AltHold or Loiter problems so it is more likely that these variations were because the copter was not in a stable hover and the update rate was low.
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_VibesTlog.png"><img class="alignnone size-full wp-image-2340" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_VibesTlog.png" alt="DiagnosingWithLogs_VibesTlog" width="1752" height="523" /></a>
-<h3>Compass interference</h3>
+
+
+<h1>Compass interference</h1>
 Interference from the power distribution board, motors, battery, esc and other electrical devices near the APM or PX4 can throw off the compass heading which can lead to circling (aka "toilet bowling") or even the copter flying off in completely the wrong direction.  Graphing the tlog's mag_field (found under "CUSTOM") and throttle (found under VFR_HUD) values are the easiest way to quickly see the amount of interference.
 
 In the graph's below shows an acceptable amount of magnetic interference.  You can see the <span style="color: #ff0000">mag_field</span> fluctuates when the <span style="color: #339966">throttle</span> is raised but only moves around by about 10% ~ 20%.  Below 30% inteference is acceptable.  Between 30% ~ 60% is in the grey zone where it might be ok (some users are ok, some are not) and really bad magnetic interference will show up as jumps of over 60% when the throttle is raised.
@@ -51,7 +67,9 @@ Extra Notes:
 	<li>Another general thing to check re the compass is the offsets which should bet between -150 ~ 150.  These are found in the tlog's SENSOR_OFFSET group as <strong>mag_ofs_x</strong>, <strong>mag_ofs_y</strong>, <strong>mag_ofs_z</strong> and in the dataflash's COMPASS message as <strong>OfsX</strong>, <strong>OfsY</strong>, <strong>OfsZ</strong>.  They can also be seen in the parameters as <strong>COMPASS_OFS_X</strong>, <strong>COMPASS_OFS_Y</strong>, <strong>COMPASS_OFS_Z</strong>.</li>
 	<li>The image above it shows a short spike at the beginning of the graph but this can be ignored because it's before the throttle is raised so it's probably just as the user plugged in some other electrical device.</li>
 </ul>
-<h3>GPS glitches</h3>
+
+
+<h1>GPS glitches</h1>
 When in autopilot modes (Loiter, RTL, AUTO) position errors from the GPS can cause Copter to think that it's suddenly in the wrong position and lead to aggressive flying to correct the perceived error.  These "glitches" show up in both the tlogs and dataflash logs as an decrease in the number of satellites visible and an increase in the <a href="http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29">hdop</a>.
 
 If using tlogs graph the the you can do this by graphing the GPS_RAW_IT group's "eph" and "satellites_visible" values.  An hdop value of 1.5 (displayed as 150) or lower is very good.  Over 2.0 (i.e. 200) indicates a bad position value.  The number of satellites falling below 9 is also bad.  A significant change in these two values often accompanies a GPS position change.
@@ -63,7 +81,9 @@ In the Dataflash logs's GPS message you will find the "HDop" and "NSats" columns
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DisagnosingWithLogs_GPShdopAndNumSats_DF.png"><img class="alignnone size-full wp-image-2467" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DisagnosingWithLogs_GPShdopAndNumSats_DF.png" alt="DisagnosingWithLogs_GPShdopAndNumSats_DF" width="790" height="400" /></a>
 
 AC 3.1 includes <a href="http://copter.ardupilot.com/wiki/gps-failsafe/">GPS Glitch detection</a> which attempts to ignore glitches by sanity checking the positions.
-<h3>Power Problems (BrownOuts, etc)</h3>
+
+
+<h1>Power Problems (BrownOuts, etc)</h1>
 The introduction of the 3dr power module has made it much easier for people to provide a reliable power supply to their APM/PX4.  This has led to a massive reduction in the number of brown-outs reported but they do still occur.  They can normally be reconised by the logs suddenly ending while the copter is still in the air (i.e. barometer or inerital navigation altitude is still well above zero).
 
 Try graphing the:
@@ -85,7 +105,9 @@ In the image directly below shows the board voltage sinking by 0.15V when the th
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_BoardVccVsThr.png"><img class="alignnone size-full wp-image-2350" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_BoardVccVsThr.png" alt="DiagnosingWithLogs_BoardVccVsThr" width="1670" height="508" /></a>
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_DataFlashBoardVcc.png"><img class="alignnone size-full wp-image-2351" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/DiagnosingWithLogs_DataFlashBoardVcc.png" alt="DiagnosingWithLogs_DataFlashBoardVcc" width="809" height="363" /></a>
-<h3>Unexpected ERRORS including Failsafes</h3>
+
+
+<h1>Unexpected ERRORS including Failsafes</h1>
 When unexpected behaviour from the flight controller occurs (especially when the user complains that the copter no longer responded to their input) it is often caused by one of the failsafes being triggered.  There are 5 failsafes that can be activated: Throttle Failsafe, GPS Failsafe, GCS Failsafe (ground station failsafe), Battery Failsafe and the Fence.
 
 The easiest way to find these is to look in the dataflash logs and filter the 1st column by "ERR".

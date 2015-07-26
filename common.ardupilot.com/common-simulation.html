@@ -9,20 +9,8 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page describes the options for code-testing by simulation with the ArduPilot.  Simulation allows for safe testing of experimental code and settings.  Crashing software planes is a lot cheaper than crashing real ones!
+Simulation allows for safe testing of experimental code and settings, and can help you practice using your Ground Station without having to leave your desk.<!-- more -->
 
-<strong>Hardware in the loop (HITL):</strong> HITL simulation replaces the plane and the environment with a simulator.  The simulator has a high-fidelity aircraft dynamics model and environment model (wind, turbulence, etc.).  The physical APM hardware is configured exactly as for flight, and connects to your computer running the simulator, rather than the aircraft.
+[tip]Crashing simulated planes is a lot cheaper than crashing real ones![/tip]
 
-<strong>Software in the loop (SITL):</strong> SITL simulation additionally virtualizes the APM hardware as well as the aircraft and the environment as in HITL.  SITL is useful for rapid development and when physical hardware (autopilots and ground stations) are not available or not required.
-<ul>
-	<li><a href="http://dev.ardupilot.com/wiki/setting-up-sitl-on-linux/">Setting up SITL on Linux</a></li> (Dev Wiki)
-	<li><a href="http://dev.ardupilot.com/wiki/setting-up-sitl-on-windows/">Setting up SITL on Windows</a></li> (Dev Wiki)
-</ul>
-
-<strong>Log replay</strong>: You can <a href="http://dev.ardupilot.com/wiki/testing-with-replay/">replay binary dataflash log files</a> using the "Replay" system to examine the behaviour of some aspects of the ArduPilot internals
-
-<ul>
-	<li><a href="/wiki/common-simulation/common-x-plane-hardware-in-the-loop-simulation/" title="common-X-Plane Hardware in the Loop Simulation">X-Plane Hardware in the Loop Simulation</a></li>
-
-</ul>
-
+Most users should choose the <a href="http://dev.ardupilot.com/wiki/simulation-2/sitl-simulator-software-in-the-loop/">Software In The Loop (SITL) simulator</a> (dev wiki) as it can simulate Copter, Plane or Rover without the need for any vehicle hardware, and can be run on Linux, Windows and Mac OSX. It is also the easiest form of simulation to set up.

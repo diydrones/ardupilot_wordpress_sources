@@ -12,21 +12,16 @@ END METADATA
 This article explains how to connect the ESCs, Motors and Propellers.
 <!--more-->
 <h1>Connect motor PWM signal outputs</h1>
-
 Connecting the ESCs directly to Pixhawk, connect the power (+), ground (-), and signal (s) wires for each ESC to the Pixhawk main output pins by motor number. Find your frame type in the section below to determine the assigned order of the motors (select images to enlarge).
 
+[note]Some ESCs have been reported as not working with Pixhawk.
 
-[note]Some ESCs have been reported as "not working" with Pixhawk. 
-&nbsp;
-The development team have verified that Pixhawk works with every ESC that works with a normal RC receiver (because it sends the same type of signal). The flight stack (on multicopters) ensures that initialisation requirements for the ESC are met (e.g. requiring a low pulse - 900 us say, or timing out after a few seconds without signal) by sending a 900 us pulse at boot and raising this to about 1100/1200 when armed.
-&nbsp;
+The Pixhawk should work with every ESC that works with a normal RC receiver (because it sends the same type of signal) but there is <a href="https://github.com/diydrones/ardupilot/issues/2094" target="_blank">one known exception, the EMAX ESC</a>.
+
 In most cases problems are due to incorrect wiring. Always connect signal and ground. Check your ESC type to decide how to connect the +5V line. On APM2.x you could get away with using the power ground as the signal return with the APM but for Pixhawk you must connect both the signal and the signal ground in order to make the ESC work.
-&nbsp;
+
 For more information <a href="https://pixhawk.org/users/actuators/pwm_escs_and_servos">see this page</a> and the <a href="https://youtu.be/6C1YG1e2aTo">video here</a>.[/note]
-
-
 <h1>Motor order diagrams</h1>
-
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/quads_PH.jpg"><img class="alignnone size-medium wp-image-1925" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/quads_PH-300x140.jpg" alt="quads_PH" width="300" height="140" /></a>       <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_Hb.jpg"><img class="alignnone size-medium wp-image-1789" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_QUAD_Hb-300x178.jpg" alt="APM_2_5_MOTORS_QUAD_Hb" width="300" height="178" /></a>
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo.jpg"><img class="alignnone wp-image-1790" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/hexa-octo-300x289.jpg" alt="hexa octo" width="300" height="289" /></a>       <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_TRI.jpg"><img class="alignnone size-medium wp-image-1791" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/APM_2_5_MOTORS_TRI-300x153.jpg" alt="APM_2_5_MOTORS_TRI" width="300" height="153" /></a>

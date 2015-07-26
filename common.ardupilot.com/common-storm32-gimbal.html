@@ -19,7 +19,7 @@ Please refer to the <a href="http://www.olliw.eu/storm32bgc-wiki/Main_Page" targ
 <h1>Connecting the gimbal to the Pixhawk</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_Pixhawk.png"><img class="alignnone size-full wp-image-4071" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_Pixhawk.png" alt="SToRM32_Pixhawk" width="959" height="586" /></a>
 
-You will need to solder 3-pins of a <a href="http://store.3drobotics.com/products/df13-6-position-connector-45-cm" target="_blank">DF13 6-pin cable</a> to the gimbal controller board as shown above and then plug the other end into the Pixhawk's Telem 2 port (from Copter 3.3 it should be possible to attach the gimbal to any of the available 6-pin ports.)
+You will need to solder 3-pins of a <a href="http://store.3drobotics.com/products/df13-6-position-connector-45-cm" target="_blank">DF13 6-pin cable</a> to the gimbal controller board as shown above and then plug the other end into one of the Pixhawk's Telemetry ports (Telem1, Telem2, Serial4).
 
 [note]The remaining 3 pins (VCC, RTS, CTS) of the cable should not be connected.[/note]
 <h1>Configuring the gimbal</h1>
@@ -27,8 +27,25 @@ In addition to the regular gimbal configuration described on the <a href="http:/
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png"><img class="alignnone size-full wp-image-4072" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_enableMavlink.png" alt="SToRM32_enableMavlink" width="777" height="603" /></a>
 <h1>Set-up through the Mission Planner (MAVLink protocol)</h1>
-Through your GCS (i.e. MP's Full Param List or Tree) set the <code>SERIAL2_BAUD</code> parameter to "115" and SERIAL2_PROTOCOL to "1" as shown below:
+Through your GCS (i.e. MP's Full Param List or Tree) set the following parameters
 
+If using Telem1:
+<ul>
+	<li><code><code>SERIAL1_BAUD = "115"</code></code></li>
+	<li><code><code>SERIAL1_PROTOCOL = "1"</code></code></li>
+	<li><code><code>BRD_SER1_RTSCTS = "0"</code></code></li>
+</ul>
+If using Telem2:
+<ul>
+	<li><code><code>SERIAL2_BAUD = "115"</code></code></li>
+	<li><code><code>SERIAL2_PROTOCOL = "1"</code></code></li>
+	<li><code><code>BRD_SER2_RTSCTS = "0"</code></code></li>
+</ul>
+If using Serial4:
+<ul>
+	<li><code><code>SERIAL4_BAUD = "115"</code></code></li>
+	<li><code><code>SERIAL4_PROTOCOL = "1"</code></code></li>
+</ul>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud_new.png"><img class="alignnone size-large wp-image-4620" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_Serial2Baud_new-1024x567.png" alt="SToRM32_MP_Serial2Baud_new" width="474" height="262" /></a>
 
 Set <code>MNT_TYPE</code> to "4" to enable the SToRM32 gimbal driver (the Pixhawk must be rebooted for this change to take effect).
@@ -44,7 +61,7 @@ Set the <code>MNT_ANGMAX_PAN</code>, <code>MNT_ANGMIN_TIL</code>, <code>MNT_ANGM
 </ul>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams.png"><img class="alignnone size-large wp-image-4074" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams-1024x806.png" alt="SToRM32_MP_MountParams" width="474" height="373" /></a>
 <h1>Set-up through the Mission Planner (SToRM32 serial protocol)</h1>
-The custom SToRM32 protocol is also supported as an alternative to the MAVLink protocol.  To use the serial protocol use your GCS (i.e. MP's Full Param List or Tree) to set the <code>SERIAL2_BAUD</code> parameter to "115" and SERIAL2_PROTOCOL to "8":
+The custom SToRM32 protocol was added as an alternative to the MAVLink protocol but only works with older gimbal firmware Ver 0.70.  To use the serial protocol use all the same settings as above except set the SERIALX_PROTOCOL to "8" (where "X" is "1", "2" or "4" depending upon which Pixhawk serial port the gimbal is connected to)
 <h1>Testing the gimbal</h1>
 For instructions for testing the gimbal moves correctly please check the <a href="common-tarot-gimbal/#testing_the_gimbal_moves_correctly">similar section for the Tarot gimbal</a>.
 
