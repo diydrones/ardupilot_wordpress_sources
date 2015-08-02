@@ -1,0 +1,55 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-measuring-vibration 
+title: common-Measuring Vibration 
+id: 4693 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to measure vibration levels and confirm they are acceptable.
+<!-- more -->
+
+<h1>Overview</h1>
+
+Flight controller accelerometers are sensitive to vibration. As accelerometer data is used to estimate vehicle position (along with barometer and GPS readings), excessive vibration can lead to poor performance in modes that rely on accurate position calculation. Vibration affects all vehicle types, but is most critical for the Copter (particularly in AltHold, Loiter, RTL, Guided, Position and AUTO flight modes).
+
+These instructions explain how to measure the vibration levels. If you find they are out-of-tolerance then follow the advice found on the First Time Set-up sections <a href="common-vibration-damping">Vibration Damping</a>.
+
+
+<h1>Copter-3.3 and later versions</h1>
+
+[note]At time of writing (27 July 2015), Copter-3.3 is still a release candidate. Its changes are not yet present the official release of Copter, Plane and Rover. The changes here are expected to be in the next release of Plane and Rover.[/note]
+<ul>
+	<li>Perform a regular flight (i.e. not just a gentle hover) of at least a few minutes and <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#downloading_logs_via_mavlink">download the dataflash logs</a>.</li>
+	<li>Using the Mission Planner or other GCS graph the VIBE message's VibeX, VibeY and VibeZ values.  These show the standard deviation of the primary accelerometer's output in m/s/s.  The image below, taken from a 3DR IRIS, shows normal levels which are below 15m/s/s but occasionally peak to 30m/s/s.  Maximum acceptable values appear to be below 60m/s/s (see second picture below).</li>
+	<li>Graph the Clip0, Clip1 and Clip2 values which increase each time one of the accelerometers reaches it's maximum limit (16G).  Ideally these should be zero for the whole flight but low numbers (&lt;100) are likely ok especially if they occur during hard landings.  A regularly increasing number through the log indicates a serious vibration problem that <a href="common-vibration-damping">should be fixed</a>.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png"><img class="alignnone size-full wp-image-14654" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibe_DataFlashMsg.png" alt="Vibe_DataFlashMsg" width="1093" height="706" /></a></li>
+</ul>
+This is an example of a vehicle that had position estimate problems due to high vibrations.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/MeasuringVibration_BadVibes.png"><img class="alignnone size-full wp-image-14782" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/MeasuringVibration_BadVibes.png" alt="MeasuringVibration_BadVibes" width="995" height="1294" /></a>
+The algorithm for calculating the vibration levels can be seen in the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_InertialSensor/AP_InertialSensor.cpp#L1435" target="_blank">AP_InertialSensor.cpp's calc_vibration_and_clipping()</a> method but in short it involves calculating the standard deviation of the accelerometer readings like this:
+<ul>
+	<li>capture the raw x, y and z accelerometer values from the primary IMU</li>
+	<li>high-pass filter the raw values at 5hz to remove the vehicle's movement and create a "accel_vibe_floor" for x,y and z axis.</li>
+	<li>calculate the difference between the latest accel values and the accel_vibe_floor.</li>
+	<li>square the above differences, filter at 2hz and then calculate the square root (for x, y and z).  These final three values are what appear in the VIBE msg's VibeX, Y and Z fields.</li>
+</ul>
+
+
+<h1>Earlier firmware versions</h1>
+<ul>
+	<li>Connect your Pixhawk/Flight controller to the Mission Planner</li>
+	<li>Go to the <strong>CONFIG/TUNING | Standard Params</strong> screen and set the Log bitmask to Default+IMU.  This will enable the capture of the accelerometer data to the dataflash logs.</li>
+	<li>Press the <strong>Write Params</strong> button
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png"><img class="alignnone size-full wp-image-10263" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Vibration_EnableDataflashIMU.png" alt="Vibration_EnableDataflashIMU" width="1024" height="575" /></a></li>
+	<li>Fly your copter in Stabilize mode and try to maintain a level hover (it doesn't need to be perfectly stable or level)</li>
+	<li>Disconnect the Lipo, reconnect your APM/PX4 to the mission planner</li>
+	<li><a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#downloading_logs_via_mavlink">Download the dataflash logs and</a> after the download has completed, use the Mission Planner's "Review a Log" buttong to open the latest file in the log directory (it's last digit will be the Log number you downloaded so in the example above we downloaded Log #1 so the filename will end in 1.log)</li>
+	<li>When the Log Browser appears, scroll down until you find any IMU message.  Click on the row's AccX and push <strong>Graph this data</strong> Left button.  Repeat for the AccY and AccZ columns to produce a graph like below.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png"><img class="alignnone size-full wp-image-8562" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/DiagnosingWithLogs_Vibes.png" alt="DiagnosingWithLogs_Vibes" width="861" height="437" /></a></li>
+	<li>Check the scale on the left and ensure that your vibration levels for the AccX and AccY are between -3 and +3.  For AccZ the acceptable range is -15 to -5.  If it is very close or over these limits you should refer back to the <a href="common-vibration-damping">Vibration Damping</a> page for possible solutions.</li>
+	<li>After all the above is complete, go to the Mission Planner's standard parameters page (you may need to press the <strong>Connect</strong> button again) and set the Log Bitmask back to "Default".  This is important because especially on the APM logging requires significant CPU resources and it's a waste to log these if they're not really needed.</li>
+</ul>

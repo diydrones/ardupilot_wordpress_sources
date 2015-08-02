@@ -9,39 +9,52 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Overview</h3>
-AutoTune is a feature available in Copter 3.1 (and later) versions. It attempts to tune the Stabilize P and Rate P and D terms that provide the highest response without significant overshoot. It does this by twitching the copter in the roll and pitch axis which means that the copter needs to be basically flyable in AltHold mode before attempting to use AutoTune.
-http://www.youtube.com/watch?v=js2GzeRysAc
-<h3>How to invoke AutoTune</h3>
-1. Set up one flight mode switch position to be AltHold.
-2. Set the <a href="wiki/channel-7-and-8-options/">Ch7 Opt or Ch8 Opt</a> to Autotune to allow you to turn the auto tuning on/off with the ch7 or ch8 switch.
-<p style="padding-left: 60px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch.png"><img class="alignnone size-medium wp-image-9840" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch-300x179.png" alt="AutoTuneCh7Switch" width="300" height="179" /></a></p>
-3. Ensure the ch7 or ch8 switch is in the LOW position.
-4. Wait for a calm day and go to a large open area.
-5. Take off and put the copter into AltHold mode at a comfortable altitude.
-6. Set the ch7/ch8 switch to the HIGH position to engage auto tuning:
-<blockquote>
-<ul>
-	<li><em>You will see it twitch about 20 degrees left and right for a few minutes, then it will repeat forward and back.</em></li>
-	<li><em>Use the roll and pitch stick at any time to reposition the copter if it drifts away (it will use the original PID gains during repositioning and between tests).  When you release the sticks it will continue auto tuning where it left off.
-</em></li>
-	<li><em>Move the ch7/ch8 switch into the LOW position at any time to abandon the autotuning and return to the origin PIDs.</em></li>
-	<li><em>Make sure that you do not have any trim set on your transmitter or the autotune may not get the signal that the sticks are centered.</em></li>
-</ul>
-</blockquote>
-7. When the tune completes the copter will change back to the original PID gains.
-8. Put the ch7/ch8 switch into the LOW position then back to the HIGH position to test the tuned PID gains.
-9. Put the ch7/ch8 switch into the LOW position to fly using the original PID gains.
-10. If you are happy with the autotuned PID gains, leave the ch7/ch8 switch in the HIGH position, land and disarm to save the PIDs permanently.
-If you DO NOT like the new PIDS, switch ch7/ch8 LOW to return to the original PIDs. The gains will not be saved when you disarm.
+This article explains how to use AutoTune on Copter.
 
+
+<h1>Overview</h1>
+
+AutoTune attempts to automatically tune the Stabilize P and Rate P and D terms in order to provide the highest response without significant overshoot. Copter needs to be "basically" flyable in <a href="altholdmode">AltHold mode</a> before attempting to use AutoTune as the feature needs to be able to "twitch" the copter in the roll and pitch axis.
+
+[note]The AutoTune feature was introduced in Copter 3.1.[/note]
+
+http://www.youtube.com/watch?v=js2GzeRysAc
+
+
+
+<h1>How to invoke AutoTune</h1>
+
+<ol>
+	<li>Set up one flight mode switch position to be AltHold.</li>
+	<li>Set the <a href="wiki/channel-7-and-8-options/">Ch7 Opt or Ch8 Opt</a> to Autotune to allow you to turn the auto tuning on/off with the ch7 or ch8 switch.<img class="alignnone size-medium wp-image-9840" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch-300x179.png" alt="AutoTuneCh7Switch" width="300" height="179" /></li>
+	<li>Ensure the ch7 or ch8 switch is in the LOW position.</li>
+	<li>Wait for a calm day and go to a large open area.</li>
+	<li>Take off and put the copter into AltHold mode at a comfortable altitude.</li>
+	<li>Set the ch7/ch8 switch to the HIGH position to engage auto tuning:
+<ul>
+	<li>You will see it twitch about 20 degrees left and right for a few minutes, then it will repeat forward and back.</li>
+	<li>Use the roll and pitch stick at any time to reposition the copter if it drifts away (it will use the original PID gains during repositioning and between tests).  When you release the sticks it will continue auto tuning where it left off.</li>
+	<li>Move the ch7/ch8 switch into the LOW position at any time to abandon the autotuning and return to the origin PIDs.</li>
+	<li>Make sure that you do not have any trim set on your transmitter or the autotune may not get the signal that the sticks are centered.</li>
+</ul>
+</li>
+	<li>When the tune completes the copter will change back to the original PID gains.</li>
+	<li>Put the ch7/ch8 switch into the LOW position then back to the HIGH position to test the tuned PID gains.</li>
+	<li>Put the ch7/ch8 switch into the LOW position to fly using the original PID gains.</li>
+	<li>If you are happy with the autotuned PID gains, leave the ch7/ch8 switch in the HIGH position, land and disarm to save the PIDs permanently.
+If you DO NOT like the new PIDS, switch ch7/ch8 LOW to return to the original PIDs. The gains will not be saved when you disarm.</li>
+</ol>
 If you find after performing an AutoTune that the vehicle feels overly twitchy when flying Stabilize, AltHold or PosHold (but ok in more autonomous modes like Loiter, RTL, Auto) try reducing the RC_FEEL parameter to 0.25.  This smooths out the pilot's input.
-<h3>Copter-3.3 changes</h3>
+
+
+
+<h1>Copter-3.3 changes</h1>
+
 Copter 3.3 adds some additional features:
 <ul>
 	<li>Yaw axis is also autotuned</li>
 	<li>AUTOTUNE_BITMASK allows control of which axis are to be tuned (useful if the vehicle's battery life is not long enough to complete all 3-axis)</li>
-	<li>AUTOTUNE_AGGR : Should be in the range of 0.05 to 0.10. Controls the threshold for D-term bounce back and P-term overshoot.   This affects the tuning noise immunity (a higher value is more tolerant to flex in the frame or other disturbances that could trick the tuning algorithm).  High values also leads to a tune that rejects external disturbances better.  Lower values result in a tune that is more responsive to pilot input.</li>
+	<li>AUTOTUNE_AGGR : Should be in the range of 0.05 to 0.10. Controls the threshold for D-term bounce back and P-term overshoot. This affects the tuning noise immunity (a higher value is more tolerant to flex in the frame or other disturbances that could trick the tuning algorithm).  High values also leads to a tune that rejects external disturbances better.  Lower values result in a tune that is more responsive to pilot input.</li>
 	<li>Upon a succesful tune these additional values are saved:
 <ul>
 	<li>roll and pitch axis rate feed-forward is enabled (ATC_RATE_FF_ENABLE)</li>
@@ -49,16 +62,27 @@ Copter 3.3 adds some additional features:
 </ul>
 </li>
 </ul>
-<strong>Notes:</strong>
+
+
+<h1>AutoTuning notes</h1>
+
+
 <ul>
-	<li><strong><span style="color: #ff0000">Warning!  AutoTune can request very large and fast changes in outputs to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV).</span></strong>  See this video showing a test which recreates a sync problem.</li>
-</ul>
+	<li>AutoTune can r<strong>equest very large and fast changes in output</strong>s to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV). See this video showing a test which recreates a sync problem.
+
 https://www.youtube.com/watch?v=hBUBbeyLe0Q
-<ul>
+</li>
 	<li>AutoTune is sometimes unable to find a good tune for frames with very soft dampening on the APM or very flexible arms.</li>
 	<li>For best results the copter shouldn't be allowed to build up too much speed. This can be prevented by applying a quick correction between tests (twitches).</li>
 	<li>Be advised that AutoTune will engage in Stabilize, so don't accidentally flip your AutoTune switch until you are in AltHold and ready to begin the procedure.</li>
-	<li><span style="color: #ff0000"> When reporting issues with AutoTune please include a description of your frame and a dataflash log of the flight.</span></li>
 </ul>
-<h3>Dataflash logging</h3>
-ATUN (auto tune overview) and ATDE (auto tune details) messages are written to the dataflash logs. Some details of the contents of those messages can be found on the <a href="http://copter.ardupilot.com/wiki/downloading-and-analyzing-data-logs-in-mission-planner/#Message_Details_APMCopter_specific">dataflash logging message details wiki page</a>.
+
+
+[tip]When reporting issues with AutoTune please include a description of your frame and a dataflash log of the flight.[/tip]
+
+<h1>Dataflash logging</h1>
+
+ATUN (auto tune overview) and ATDE (auto tune details) messages are written to the dataflash logs. Some details of the contents of those messages can be found on the <a href="http://copter.ardupilot.com/wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/#message_details_copter_specific">Downloading and Analyzing Data Logs in Mission Planner</a> wiki page.
+
+
+
