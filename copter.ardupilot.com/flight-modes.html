@@ -12,60 +12,70 @@ END METADATA
 This article provides an overview of the available flight modes for Copter and instructions for how to configure which modes are available through the RC Transmitter. 
 <!-- more -->
 
+
+<h1>Overview</h1>
+
+Copter has 14 flight built-in flight modes, 10 of which are regularly used. There are modes to support different levels/types of flight stabilization, a sophisticated autopilot, a follow-me system etc. 
+
+Flight modes are controlled through the radio (via a transmitter switch), via mission commands, or using commands from a ground station (GCS) or companion computer.
+
+
 <h1>Recommended Flight Modes</h1>
 
-There are 14 flight modes available in Copter, 10 of which are regularly used. 
-
-In general when first starting to use Copter you should progress through the flight modes in the order listed below, being sure that you are comfortable with each before progressing to the next. Click on any of the flight modes below for more details.
+In general when first starting to use Copter you should progress through the flight modes in the order listed below, being sure that you are comfortable with each before progressing to the next (click the links for more details):
 <ul>
-	<li><a href="wiki/stabilize-mode/">Stabilize</a></li>
-	<li><a href="wiki/altholdmode/">Alt Hold</a></li>
-	<li><a href="wiki/loiter-mode/">Loiter</a></li>
-	<li><a href="wiki/rtl-mode/">RTL (Return-to-Launch)</a></li>
-	<li><a href="wiki/auto-mode/">Auto</a></li>
+	<li><a href="stabilize-mode">Stabilize</a></li>
+	<li><a href="altholdmode">Alt Hold</a></li>
+	<li><a href="loiter-mode">Loiter</a></li>
+	<li><a href="rtl-mode">RTL (Return-to-Launch)</a></li>
+	<li><a href="auto-mode">Auto</a></li>
 </ul>
-Additional flight modes
+Additional flight modes:
 <ul>
-	<li><a href="wiki/acro-mode/">Acro</a></li>
-	<li><a title="Sport" href="wiki/sport-mode/">Sport</a></li>
-	<li><a href="http://copter.ardupilot.com/wiki/drift-mode/">Drift</a></li>
-	<li><a href="wiki/ac2_guidedmode/">Guided</a></li>
-	<li><a href="wiki/circle-mode/">Circle</a></li>
-	<li><a href="wiki/flying-arducopter/flight-modes/poshold-mode/">PosHold</a></li>
-	<li><a title="Land mode" href="wiki/land-mode/">Land</a></li>
-	<li><a href="wiki/brake-mode/">Brake</a></li>
-	<li><a href="http://copter.ardupilot.com/wiki/ac2_followme/">Follow Me</a></li>
-	<li><a href="http://copter.ardupilot.com/wiki/flight-modes/simpleandsuper-simple-modes/">Simple and Super Simple </a></li>
+	<li><a href="acro-mode">Acro</a></li>
+	<li><a title="Sport" href="sport-mode">Sport</a></li>
+	<li><a href="drift-mode">Drift</a></li>
+	<li><a href="ac2_guidedmode">Guided</a></li>
+	<li><a href="circle-mode">Circle</a></li>
+	<li><a href="poshold-mode">PosHold</a></li>
+	<li><a title="Land mode" href="land-mode">Land</a></li>
+	<li><a href="brake-mode">Brake</a></li>
+	<li><a href="ac2_followme">Follow Me</a></li>
+	<li><a href="simpleandsuper-simple-modes">Simple and Super Simple </a></li>
 </ul>
-Most transmitters provide a 3 position switch but you can find instructions <a href="wiki/common-six-modes/">here for setting up a 6-position flight mode switch</a>.
+Most transmitters provide a 3 position switch but you can find instructions <a href="common-six-modes">here for setting up a 6-position flight mode switch</a>.
 
 
 <h1>GPS Dependency</h1>
+
 Flight modes that use GPS-positioning data require an active GPS lock prior to takeoff. To see if your autopilot has acquired GPS lock, connect to a ground station or consult your autopilot's hardware overview page to see the LED indication for GPS lock. Below is a summary of GPS dependency for Copter flight modes.
 
 Requires GPS lock prior to takeoff:
 <ul>
-	<li><a href="wiki/loiter-mode/">Loiter</a></li>
-	<li><a href="wiki/rtl-mode/">RTL (Return-to-Launch)</a></li>
-	<li><a href="wiki/auto-mode/">Auto</a></li>
-	<li><a href="wiki/ac2_guidedmode/">Guided</a></li>
-	<li><a href="http://copter.ardupilot.com/wiki/drift-mode/">Drift</a></li>
-	<li><a href="http://wiki/flying-arducopter/flight-modes/poshold-mode/">PosHold</a></li>
-	<li><a href="http://copter.ardupilot.com/wiki/ac2_followme/">Follow Me</a></li>
-	<li><a href="wiki/circle-mode/">Circle</a></li>
+	<li><a href="loiter-mode">Loiter</a></li>
+	<li><a href="rtl-mode">RTL (Return-to-Launch)</a></li>
+	<li><a href="auto-mode">Auto</a></li>
+	<li><a href="ac2_guidedmode">Guided</a></li>
+	<li><a href="drift-mode">Drift</a></li>
+	<li><a href="poshold-mode">PosHold</a></li>
+	<li><a href="ac2_followme">Follow Me</a></li>
+	<li><a href="circle-mode">Circle</a></li>
 </ul>
-Does not require GPS lock:
+
+Do not require GPS lock:
 <ul>
-	<li><a href="wiki/stabilize-mode/">Stabilize</a></li>
-	<li><a href="wiki/altholdmode/">Alt Hold</a></li>
-	<li><a href="wiki/acro-mode/">Acro</a></li>
-	<li><a title="Sport" href="wiki/sport-mode/">Sport</a></li>
-	<li><a title="Land mode" href="wiki/land-mode/">Land</a></li>
+	<li><a href="stabilize-mode">Stabilize</a></li>
+	<li><a href="altholdmode">Alt Hold</a></li>
+	<li><a href="acro-mode">Acro</a></li>
+	<li><a title="Sport" href="sport-mode">Sport</a></li>
+	<li><a title="Land mode" href="land-mode">Land</a></li>
 </ul>
 
-<h1>Setting up Flight Modes</h1>
 
-You can set these up the flight modes by doing the following:
+
+<h1>Configure Flight Modes settable on Transmitter</h1>
+
+You can set up the flight modes available on the transmitter by doing the following:
 <ul>
 	<li>Turn on your RC transmitter</li>
 	<li>Connect the Pixhawk (or other flight controller) to the <em>Mission Planner</em></li>

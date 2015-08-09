@@ -10,49 +10,43 @@ post_parent_title: First Time Setup
 END METADATA 
 -->
 As part of first time setup, you'll need to configure some required hardware components using the Mission Planner. These instructions describe the process for selecting frame orientation and configuring the RC transmitter/receiver, compass, and accelerometer.
+<!-- more -->
 
-<h3>Select frame type</h3>
-On the Mission Planner's Initial Setup screen select <strong>Mandatory Hardware</strong> &gt; <strong>Frame Type</strong><strong></strong>. Select the frame for your copter. The default configuration is<strong> X</strong>. If you want one of the arms to serve as the exclusive front-facing direction, select the <strong>Plus</strong> configuration. For Tricopters, Traditional Helis and Y6s, the frame type is ignored.
+<h1>Select frame type</h1>
+On the Mission Planner's Initial Setup screen select <strong>Mandatory Hardware | Frame Type</strong>. Select the frame for your copter. The default configuration is<strong> X</strong>. If you want one of the arms to serve as the exclusive front-facing direction, select the <strong>Plus</strong> configuration. For Tricopters, Traditional Helis and Y6s, the frame type is ignored.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/select-frame-type1.png"><img class="alignnone size-full wp-image-9415" alt="select frame type" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/select-frame-type1-e1377904351353.png" width="600" height="261" /></a>
 
 (<strong>For an H-Frame</strong> quadcopter use the option to set the frame type to '3' in the Advanced Parameter Tab. To apply the H-frame configuration, swap the left rear and right rear props and reverse the motor direction for each of those motors (by swapping any two motor wires). Repeat the same process for the front two motors.)
 
 
-
-&nbsp;
-<h3>Calibrate Compass</h3>
+<h1>Calibrate Compass</h1>
 To perform the basic compass calibration you should:
 <ul>
-	<li>Under<strong> Intial Setup &gt; Mandatory Hardware</strong> select <strong>Compass</strong>. Select the correct orientation for your setup.</li>
+	<li>Under <strong>Intial Setup | Mandatory Hardware</strong> select <strong>Compass</strong>. Select the correct orientation for your setup.</li>
 	<li>Ensure the <strong>Enable</strong> and <strong>AutoDec</strong> check boxes are checked</li>
 	<li>Click the "Live Calibration" button</li>
-<li>Next select your autopilot configuration, for Pixhawk and PX4, select the option Pixhawk/PX4 with the image of the Pixhawk. For APM 2.6, select APM with External Compass with the image of the GPS with Compass module. These options will automatically enter the correct orientation for the board. Ensure that you have mounted the GPS with Compass with the arrow facing toward the front of the vehicle and in the same direction as the arrow on the autopilot.</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png" alt="calibrate compass" width="400" height="210" class="alignnone wp-image-2250" /></a>
-<ul>
+<li>Next select your autopilot configuration, for Pixhawk and PX4, select the option Pixhawk/PX4 with the image of the Pixhawk. For APM 2.6, select APM with External Compass with the image of the GPS with Compass module. These options will automatically enter the correct orientation for the board. Ensure that you have mounted the GPS with Compass with the arrow facing toward the front of the vehicle and in the same direction as the arrow on the autopilot.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png" alt="calibrate compass" width="400" height="210" class="alignnone wp-image-2250" /></a></li>
 	<li>A window should pop-up informing you that you have 60 seconds in which to rotate the APM/PX4 around all axis, press "OK"</li>
 	<li>A countdown window should appear to show that the mission planner is collecting compass data</li>
-</ul>
-<ul>
-	<li>During these next 60 seconds you should hold the copter in the air and rotate it slowly so that each side (front, back, left, right, top and bottom) points down towards the earth for a few seconds in turn.</li>
-</ul>
-<p style="padding-left: 60px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg"><img class="wp-image-7535" alt="When calibrating the compass, move copter into each position shown." src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg" width="400" height="134" /></a></p>
-
-<ul>
+	<li>During these next 60 seconds you should hold the copter in the air and rotate it slowly so that each side (front, back, left, right, top and bottom) points down towards the earth for a few seconds in turn.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg"><img class="wp-image-7535" alt="When calibrating the compass, move copter into each position shown." src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg" width="400" height="134" /></a></li>
 	<li>Upon completion, another window will pop up showing you the new offsets that it calculated.</li>
 	<li>For APM, as long as all three values are between -150 and 150 the offsets are good.  Press "OK".</li>
 	<li><strong>Note</strong>, for PX4 and Pixhawk values may be greater than 150 and less than -150. Press "OK".</li>
 </ul>
+
 Check out <a href="https://www.youtube.com/watch?v=DmsueBS0J3E" target="_blank">this video</a> for an example of performing compass calibration.
 
-More details on this and other compass set-up procedures "<a href="wiki/ac_compasssetupupadvanced/#Compassmot_8211_compensation_for_interference_from_the_PDB_ESC_motors">compassmot</a>" can be found <a href="wiki/ac_compasssetupupadvanced/">here</a>.
+More details on this and other compass set-up procedures "<a href="common-compass-setup-advanced/#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_motors">compassmot</a>" can be found <a href="common-compass-setup-advanced">here</a>.
 
 General discussion on magnetic interference and ways to reduce it can be found <a href="wiki/automatic-compass-declination/">here</a>.
 
 
 
-<h3>Calibrate accelerometer</h3>
+<h1>Calibrate accelerometer</h1>
+
 Under Initial Setup, select Accel Calibration from the left-side menu.
 
 If you are using Copter Code 3.0, make sure you check the AC 3.0+ box. If you are using 2.9.1b (or earlier), leave the box unchecked.  This process will require you to place your copter in the positions shown below in sequence. The level position is the most important to get right as this will be the attitude that your controller considers level while flying.
@@ -75,7 +69,7 @@ When you've completed the calibration process, Mission Planner will display "Cal
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibration-successful.png"><img class="wp-image-7548" alt="Successful calibration screen" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibration-successful.png" width="300" height="150" /></a>
 
 
-<h3>Calibrate radio control</h3>
+<h1>Calibrate radio control</h1>
 Turn on transmitter. Verify that the transmitter is in Airplane mode (APM needs airplane mode regardless of the platform type being piloted) and all trims are centered.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/radio_setup1.png"><img class=" wp-image-7392" style="border-color: #bbbbbb;background-color: #eeeeee" alt="Recommended setup of RC channels on transmitter." src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/radio_setup1.png" width="150" height="146" /></a>
@@ -105,6 +99,11 @@ When the red bars for roll, pitch, throttle, yaw, and radio 5 (and optionally ra
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png"><img class=" wp-image-7560t" alt="radi calib results" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png" width="250" height="201" /></a>
 
 
+<h1>Configure flight modes</h1>
 
-<h3>Configure additional hardware (optional)</h3>
-<strong>Optional Hardware</strong> configuration for the battery monitor, sonar, airspeed sensor, optical flow, OSD, camera gimbal, and antenna tracker are detailed on the <a href="http://copter.ardupilot.com/wiki/optional-additions/">Optional Hardware wiki page</a>.
+You should also <a href="flight-modes/#configure_flight_modes_settable_on_transmitter">configure the flight modes that can be selected from your Transmitter mode-selection switch</a>.
+
+
+<h1>Configure additional hardware (optional)</h1>
+
+<strong>Optional Hardware</strong> configuration for the battery monitor, sonar, airspeed sensor, optical flow, OSD, camera gimbal, and antenna tracker are detailed on the <a href="common-optional-hardware">Optional Hardware</a> page.

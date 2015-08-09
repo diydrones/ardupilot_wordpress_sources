@@ -12,36 +12,24 @@ END METADATA
 <a href="common-downloading-and-analyzing-data-logs-in-mission-planner">Dataflash logs</a> are stored on the Pixhawk (or APM2.x) onboard dataflash memory and can be download after a flight. On Plane and Rover dataflash logs are created soon after start-up. On Copter they are created after you first arm the copter. This topic explains how to configure and access Dataflash logs.
 <!-- more -->
 
-[note]<a title="Telemetry logs" href="common-mission-planner-telemetry-logs/">Telemetry logs</a> (also known as "tlogs")  collect similar information to dataflash logs (see <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#log_types_dataflash_vs_tlogs">Diagnosing problems using Logs</a> for more information). [/note]
-
-
+[note]<a title="Telemetry logs" href="common-mission-planner-telemetry-logs/">Telemetry logs</a> (also known as "tlogs") collect similar information to dataflash logs (see <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#log_types_dataflash_vs_tlogs">Diagnosing problems using Logs</a> for more information). [/note]
 <h1>Downloading logs via MAVLink</h1>
-
 This method is available in AC3.2 (or higher).
 <ul>
 	<li>Connect your vehicle to the mission planner using the micro USB cable</li>
 	<li>Open the Mission Planner's Flight Data screen</li>
 	<li>On the bottom left, select the "DataFlash Logs" tab and push the "Download DataFlash Log Via Mavlink" button</li>
 </ul>
-
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture1.png"><img class="alignnone size-full wp-image-2379" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture1.png" alt="Capture" width="370" height="447" /></a>
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture.png"><img class="alignnone size-full wp-image-2380" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture.png" alt="Capture" width="626" height="428" /></a>
 
 Then, select the log you want to download. This will save that log to your MissionPlanner/logs directory, in a folder named after the vehicle type, such as QUADCOPTER.
-
-
-
 <h1>Automatic Analysis of logs</h1>
-
 <img class="alignnone size-full wp-image-2381" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture2.png" alt="Capture" width="363" height="137" />
 
 The simplest analysis is to generate a basic automated report that will highlight common problem areas. For that, click on "Log Analysis" and select a log that you've already saved to the MissionPlanner/logs directory.  They will be in folders named after the vehicle type, such as QUADCOPTER or ROVER. Once you pick the log you want, it will generate a report that looks like this: <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture3.png"><img class="alignnone size-full wp-image-2384" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Capture3.png" alt="Capture" width="660" height="354" /></a>
-
-
-
 <h1>Manually review a log</h1>
-
 For more detailed analysis, click on "Review a Log" and select a log that you've already saved to the MissionPlanner/logs directory.  Once again, they will be in folders named after the vehicle type, such as QUADCOPTER or ROVER. Once you pick the log you want, you will get charts such as the below. The basic format of the dataflash is:
 <ul>
 	<li>Line numbers appear on the very left side of the viewer</li>
@@ -51,14 +39,8 @@ For more detailed analysis, click on "Review a Log" and select a log that you've
 	<li>Flight data messages including GPS, IMU, etc.</li>
 </ul>
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_Dataflash_format.png"><img class="alignnone size-full wp-image-2275" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_Dataflash_format.png" alt="MissionPlanner_Dataflash_format" width="1160" height="915" /></a> Graph any flight data by first clicking on the appropriate row, you should see the column headers update appropriately. Next find the column you wish to graph, click on it and then push the "Graph this data" button. In the example above the ATT's Roll-In and Roll data have been graphed. The mouse's scroll wheel can be used to zoom in or out. You may also select an area of the graph to zoom in on it. Zoom out by right-mouse-button clicking and selecting "Set Scale to Default". <a href="http://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607" target="_blank">Here's</a> a mini tutorial on using this feature. You may also filter on just the first column (the flight data message type) by clicking on the first column and selecting the message type from the drop-down. This is very useful especially for viewing the different flight modes (called "MODE" messages) used during the mission. Click the first column again but press "Cancel" to clear the filter. <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CLI_openDataflashFilter.png"><img class="alignnone size-full wp-image-2289" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_CLI_openDataflashFilter.png" alt="MissionPlanner_CLI_openDataflashFilter" width="793" height="370" /></a>
-
-
-
 <h1>Setting what data you want recorded</h1>
 The LOG_BITMASK parameter controls what message types are recorded in the dataflash. If you only wish to enable one particular message type in addition to the defaults you can use the Log Bitmask drop down in the Mission Planner's Standard Parameters list. <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/MissionPlanner_LogBitmask.png"><img class="alignnone size-full wp-image-1124" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/MissionPlanner_LogBitmask.png" alt="MissionPlanner_LogBitmask" width="1024" height="575" /></a>
-
-
-
 <h1>Message Details (Copter specific)</h1>
 <p style="padding-left: 30px"><strong>ATT (attitude information):</strong></p>
 <p style="padding-left: 60px">RollIn: the pilot's desired roll angle in centi-degrees (roll left is negative, right is positive)</p>
@@ -151,8 +133,8 @@ The LOG_BITMASK parameter controls what message types are recorded in the datafl
 <p style="padding-left: 90px">ECode 3: both altitude and circular fences breached</p>
 <p style="padding-left: 90px">ECode 0: vehicle is back within the fences</p>
 <p style="padding-left: 60px">10: Flight Mode</p>
-<p style="padding-left: 90px">ECode 0 ~ 10: the vehicle was unable to enter the desired flight mode</p>
-<p style="padding-left: 90px">(0=Stabilize, 1=Acro, 2=AltHold, 3=Auto, 4=Guided, 5=Loiter, 6=RTL, 7=Circle, 8=Position, 9=Land, 10=OF_Loiter)</p>
+<p style="padding-left: 90px">ECode 0 ~ 17: the vehicle was unable to enter the desired flight mode</p>
+<p style="padding-left: 90px">(0=Stabilize, 1=Acro, 2=AltHold, 3=Auto, 4=Guided, 5=Loiter, 6=RTL, 7=Circle, 8=Position, 9=Land, 10=OF_Loiter, 11=Drift, 13=Sport, 14=Flip, 15=AutoTune, 16=PosHold, 17=Brake)</p>
 <p style="padding-left: 60px">11: GPS</p>
 <p style="padding-left: 90px">ECode 2: GPS Glitch</p>
 <p style="padding-left: 90px">ECode 0: GPS Glitch cleared</p>
@@ -205,16 +187,9 @@ The LOG_BITMASK parameter controls what message types are recorded in the datafl
 <p style="padding-left: 60px">PMT: a number that increments each time a heart beat is received from the ground station</p>
 <p style="padding-left: 60px">I2CErr: the number of I2C errors since the last PM message. Any I2C errors may indicate a problem on the I2C bus which may in turn slow down the main loop and cause performance problems.</p>
 <strong>RCOUT (pwm output to individual RC outputs):</strong> RC1, RC2, etc : pwm command sent from flight controller to the esc/motor/RC output
-
-
-
 <h1>Viewing KMZ FILES</h1>
 When you download the dataflash log files from the APM/PX4 it will automatically create a KMZ file (file with extension .kmz). This file can be opened with Google Earth (just double click the file) to view your flight in Google Earth. Please see the instructions on the <a href="/wiki/common-mission-planner-telemetry-logs/#Creating-3d-images-of-the-flight-path">Telemetry Logs Page</a> for additional details.
-
-
-
 <h1>Video tutorials</h1>
-
-https://www.youtube.com/watch?v=62TmGiwFiDU 
+https://www.youtube.com/watch?v=62TmGiwFiDU
 
 https://www.youtube.com/watch?v=IcVlJCR8N2g

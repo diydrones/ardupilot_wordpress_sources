@@ -9,27 +9,34 @@ post_parent_stub: common-telemetry-landingpage
 post_parent_title: common-Telemetry (landing page) 
 END METADATA 
 -->
-FrSky telemetry can be used to transmit some vehicle information down to your FrSky transmitter (including the Taranis).  Instructions for the set-up are below and these are largely based upon information from the <a href="http://pixhawk.org/peripherals/telemetry/frsky" target="_blank">Pixhawk website</a>.
+This article describes how to transmit vehicle information from the autopilot and display it on an FrSky transmitter ("FrSky Telemetry").
+<h1>Overview</h1>
+An FrSky RC transmitter will not be able to display vehicle telemetry information "out of the box" because ArduPilot normally outputs data using the MAVLink protocol, while FrSky uses its own non-MAVLink protocol.
 
-This feature is only officially supported on the Pixhawk (running AC3.2 or higher) but there is a <a href="http://diydrones.com/forum/topics/amp-to-frsky-x8r-sport-converter" target="_blank">DIY solution for the APM2.x here</a>.
+This article explains a number of approaches for getting information from the autopilot to an FrSky transmitter (including the Taranis).
 
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
+<h1>Software/hardware solution</h1>
+ArduPilot provides a driver that can directly output the FrSky protocol. This section explains how you can connect and configure a Pixhawk to communicate with a D-Receiver or X-Receiver.
 
-<h1>D-Receiver setup</h1>
+[note]This feature is only officially supported on the Pixhawk (running AC3.2 or higher) but there is a <a href="http://diydrones.com/forum/topics/amp-to-frsky-x8r-sport-converter" target="_blank">DIY solution for the APM2.x here</a>.[/note]
 
+[note]These instructions are largely based upon information from the <a href="http://pixhawk.org/peripherals/telemetry/frsky" target="_blank">Pixhawk website</a>.[/note]
+<h2>D-Receiver setup</h2>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png"><img class="alignnone size-full wp-image-2583" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png" alt="Telemetry_FrSky_Pixhawk" width="1128" height="592" /></a>
-<h1>What you will need for D-Receiver</h1>
+
+For the D-Receiver setup you will need:
 <ul>
-	<li>FrSky D telemetry capable receiver/transmitter set <a href="https://store.3drobotics.com/products/copy-of-rtf-flysky-fs-th9x-rc">like this one from 3DRobotics</a>, OR </li>
-
+	<li>FrSky D telemetry capable receiver/transmitter set <a href="https://store.3drobotics.com/products/copy-of-rtf-flysky-fs-th9x-rc">like this one from 3DRobotics</a>, OR</li>
 	<li>a FrSky D telemetry capable receiver such as the <a href="http://www.hobbyking.com/hobbyking/store/__24788__FrSky_D4R_II_4ch_2_4Ghz_ACCST_Receiver_w_telemetry_.html" target="_blank">FrSky D4R-II</a> (HobbyKing) and FrSky D telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
-
 	<li>TTL-to-RS232 converter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=34" target="_blank">FrSky FUL-1</a> which is sold by many retailers <a href="http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR11.TRC1.A0.H0.Xfrsky+ful-1.TRS0&amp;_nkw=frsky+ful-1&amp;_sacat=0&amp;_from=R40" target="_blank">including these on ebay</a>.</li>
 	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
 	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
 </ul>
-<h1>X-Receiver setup</h1>
+<h2>X-Receiver setup</h2>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png"><img class="alignnone wp-image-3127 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png" alt="Telemetry_FrSky_Pixhawk SPORT" width="1347" height="592" /></a>
-<h1>What you will need for X-Receiver</h1>
+
+For the X-Receiver setup you will need:
 <ul>
 	<li>FrSky X telemetry capable receiver such as the FrSky X4R, X6R or X8R .</li>
 	<li>FrSky X telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
@@ -38,27 +45,19 @@ This feature is only officially supported on the Pixhawk (running AC3.2 or highe
 	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
 	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
 </ul>
-
-
-<h1>Setup through the mission planner</h1>
-
-To enable the FrSky Telemetry output on the Pixhawk's Telem2 port, please connect with the Mission Planner and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set the <code>SERIAL2_PROTOCOL</code> parameter to "3" for D-Receiver and "4" for X-Receiver.
+<h2>FrSky Telemetry setup in Mission Planner</h2>
+To enable the FrSky Telemetry output on the Pixhawk's <em>Telem2</em> port, please connect with the <strong>Mission Planner</strong> and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set the <code>SERIAL2_PROTOCOL</code> parameter to "3" for D-Receiver and "4" for X-Receiver.
 [note]The information above is for ArduCopter 3.3. Prior to AC3.2 the values are 2 for D-Receiver and 3 for X-Receiver.[/note]
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png"><img class="alignnone  wp-image-2531" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png" alt="Telemetry_FrSky_MPSetup" width="751" height="346" /></a>
-<h1>Transmitter set-up</h1>
+<h2>Transmitter set-up</h2>
 Please refer to the <a href="https://docs.google.com/document/d/1qlh09LzxtpPt7j_aqG8yiOu2yoYMzP9XA-PJA81rDJQ/edit#heading=h.36trni4byo5x" target="_blank">OpenTX manual</a> for how to control which values from the telemetry feed will be displayed on the transmitter's screen.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup.png"><img class="alignnone size-medium wp-image-2533" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup-222x300.png" alt="Telemetry_FrSky_TXSetup" width="222" height="300" /></a>
-
-
-
-<h1>Protocol information</h1>
-
+<h2>Protocol information</h2>
 This section outlines what values are being sent over the telemetry link, and how they are encoded.
 
 [note]The list below is produced by code observation, and is not fully complete.[/note]
-
 <table>
 <tbody>
 <tr>
@@ -197,3 +196,15 @@ Missing:
 </tr>
 </tbody>
 </table>
+<h1>Hardware solutions</h1>
+This section contains hardware-only MAVLink to FrSky converter solutions.
+
+Please feel free to add your own solutions (<a href="https://github.com/diydrones/ardupilot/issues/new">or ask us to</a>).
+<h2>APM MavLink to FrSky SmartPort Converter (Airborne Projects)</h2>
+Airborne Project's <a href="https://www.airborneprojects.com/product/apm-mavlink-to-frsky-smartport-converter/">APM MavLink to FrSky SmartPort Converter</a> converts MAVLink messages to FrSkySmartPort format. It can directly be connected to the Taranis Radio. You only have to load the Taranis telemetry modules and configure in Mission Planner. No soldering required!
+
+[caption id="" align="alignnone" width="500"]<a href="https://www.airborneprojects.com/product/apm-mavlink-to-frsky-smartport-converter/"><img class="" src="https://www.airborneprojects.com/wp-content/uploads/2015/08/converter_1-500x500.jpg" alt="" width="500" height="500" /></a> Airborne Projects: APM MavLink to FrSky SmartPort Converter[/caption]
+
+The converter includes all needed cable. It features a hardware modified version of the Arduino Nano and be powered directly from the Taranis receiver.
+
+For more information see the <a href="https://www.airborneprojects.com/wp-content/uploads/2015/08/GETTING-STARTED.pdf">QuickStart Guide</a> (www.airborneprojects.com).

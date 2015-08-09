@@ -12,53 +12,30 @@ END METADATA
 This article provides high level information about how to power Pixhawk and connect its most important peripherals.
 <!-- more -->
 
-
 [warning]Do not connect any servos to the direct PWM outputs of your receiver. The RCIN port on the Pixhawk is designed for low power devices only, and a servo may draw a lot of current when moving rapidly. If you connect a servo directly onto your receiver while the receiver is powered from the RCIN port of your Pixhawk you may damage your Pixhawk.[/warning]
-
-
-
 <h1>Pixhawk Wiring Chart</h1>
-
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals.jpg"><img class="alignnone size-large wp-image-1475" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals-729x1024.jpg" alt="connect peripherals" width="584" height="820" /></a>
 
 [site_Copter]Copter users should also see the <a href="http://copter.ardupilot.com/wiki/advanced-pixhawk-quadcopter-wiring-chart/">Advanced Pixhawk Quadcopter Wiring Chart</a>.[/site_Copter]
-
-
 <h1>Power Pixhawk</h1>
-
 Pixhawk is typically powered via its "power" port, as shown in the picture below. The power port simultaneously powers Pixhawk and reads voltage and current analog measurements produced by an optional power module. Information about powering the Pixhawk can be found in the topic <a href="common-powering-the-pixhawk">Powering the Pixhawk</a>.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img class="alignnone size-medium wp-image-2310" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port-196x300.jpg" alt="pixhawkpower port" width="196" height="300" /></a>
-
-
-
 <h1>Connect remote control inputs</h1>
+Pixhawk is compatible with PPM remote control (RC) receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. For traditional single-wire-per-channel (PWM) receivers a PPM encoder can be used to convert the receiver outputs to PPM-SUM.  Information about compatible receivers and how they are connected can be found in <a href="common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems" target="_blank">Compatible RC Transmitter and Receiver Systems (Pixhawk/PX4)</a>.
 
-Pixhawk is compatible with PPM remote control (RC) receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. For traditional single-wire-per-channel (PWM) receivers a PPM encoder can be used to convert the receiver outputs to PPM-SUM.  Information about compatible receivers and how they are connected can be found in <a href="common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems" target="_blank">Compatible RC Transmitter and Receiver Systems (Pixhawk/PX4)</a>. 
-
-[caption id="attachment_11140" align="alignnone" width="150"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis-150x150.jpg" alt="FRSky Taranis Transmitter" width="150" height="150" class="size-thumbnail wp-image-11140" /></a> FRSky Taranis Transmitter[/caption]
-
-
-
+[caption id="attachment_11140" align="alignnone" width="150"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="size-thumbnail wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis-150x150.jpg" alt="FRSky Taranis Transmitter" width="150" height="150" /></a> FRSky Taranis Transmitter[/caption]
 <h1>Connect buzzer and safety switch</h1>
-
-The buzzer and safety switch button are mandatory for Pixhawk. Connect to the BUZZER and SWITCH ports as shown. 
+The buzzer and safety switch button are mandatory for Pixhawk. Connect to the BUZZER and SWITCH ports as shown.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/required-peripherals.png"><img class="alignnone wp-image-1782" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/required-peripherals-300x261.png" alt="required peripherals" width="300" height="261" /></a>
-
-
-
 <h1>3DR GPS+Compass</h1>
+The <a href="common-positioning-landing-page/common-installing-3dr-ublox-gps-compass-module">3DR UBlox GPS + Compass Module</a> is the recommended GPS for Pixhawk on ArduPilot.  The GPS ports are connected with the six-position DF13 cable, and the MAG port is connected to the I2C port with the four-position DF13 cable.
 
-The <a href="common-positioning-landing-page/common-installing-3dr-ublox-gps-compass-module">3DR UBlox GPS + Compass Module</a> is the recommended GPS for Pixhawk on ArduPilot.  The GPS ports are connected with the six-position DF13 cable, and the MAG port is connected to the I2C port with the four-position DF13 cable. 
-
-[caption id="attachment_2598" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide-300x129.jpg" alt="3DR UBlox GPS + Compass Module" width="300" height="129" class="size-medium wp-image-2598" /></a> 3DR UBlox GPS + Compass Module[/caption]
+[caption id="attachment_2598" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide.jpg"><img class="size-medium wp-image-2598" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide-300x129.jpg" alt="3DR UBlox GPS + Compass Module" width="300" height="129" /></a> 3DR UBlox GPS + Compass Module[/caption]
 
 The topic <a href="common-installing-3dr-ublox-gps-compass-module/#connecting_to_pixhawk">3DR UBlox GPS + Compass Module</a> shows how to connect to Pixhawk and include additional configuration and mounting information.
-
-
 <h1>Connect Motors</h1>
-
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs.jpg"><img class="alignnone size-medium wp-image-1481" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs-300x221.jpg" alt="main outputs" width="300" height="221" /></a>
 
 [site_Copter]
@@ -74,7 +51,6 @@ In overview, for copters connect each signal wire from the PDB to the main outpu
 </ul>
 [/site_Copter]
 
-
 [site_Plane]
 For planes connect the control channel wires to the main output signal pins:
 <ul>
@@ -89,22 +65,15 @@ For planes connect the control channel wires to the main output signal pins:
 For Rovers connect the throttle and steering wires to the main output signal pins:
 <ul>
 	<li>Pin 3 = Throttle</li>
-	<li>Pin 4 = Steering</li>
+	<li>Pin 1 = Steering</li>
 </ul>
 [/site_Rover]
-
-
-
 <h1>Connect other peripherals</h1>
-
 Depending on your hardware there may be any number of other peripherals attached, including sensors, cameras, grippers etc. These can be found as sub-pages of the topic <a href="common-optional-hardware">Optional Hardware</a>.
 
 Information about connecting these peripherals to Pixhawk is found in the respective pages.
-
-
 <h1>Related information</h1>
-
 <ul>
-<li><a href="common-pixhawk-overview">Pixhawk Overview</a> - includes specifications, pin assignments etc.</li>
-<li><a href="http://3drobotics.com/wp-content/uploads/2014/03/pixhawk-manual-rev7.pdf">3DR Pixhawk Quick Start PDF</a> - duplicates some content from this wiki article</li></ul>
-
+	<li><a href="common-pixhawk-overview">Pixhawk Overview</a> - includes specifications, pin assignments etc.</li>
+	<li><a href="http://3drobotics.com/wp-content/uploads/2014/03/pixhawk-manual-rev7.pdf">3DR Pixhawk Quick Start PDF</a> - duplicates some content from this wiki article</li>
+</ul>

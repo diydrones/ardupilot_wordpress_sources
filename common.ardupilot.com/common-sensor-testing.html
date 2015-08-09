@@ -9,23 +9,27 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<strong>Connect to Mission Planner</strong>
-<ul>
-	<li>Start Mission Planner and hook up your APM or PX4 board via the USB port.</li>
-	<li>Ensure that the correct COM port for your APM or PX4 is selected and click on the "Connect" button on the right.</li>
-	<li>With MAVlink connected, move the APM board and you should see the "Artificial Horizon" in the HUD move accordingly.</li>
-	<li>In an artificial horizon, when the aircraft tilts to the right, the horizon tilts to the left. (Just tilt your head and you can visualize this). This is normal! Please don't tell us it's reversed ;-)</li>
-	<li>In the below example, the quad is tilted a bit to the right.</li>
-	<li>Unless you have the GPS module connected, are outside and have GPS lock, the map will not show your current position.</li>
-</ul>
+This article shows how to check that the main main sensors (including position and GPS) are working properly.
+<!-- more -->
+
+<h1>Checking the main sensors</h1>
+With <em>Mission Planner</em> connected, move the flight controller board and you should see the artificial horizon move accordingly.
+
+[note]Remember how artificial horizons work: when the aircraft tilts to the right, the horizon tilts to the left (tilt your head and you'll see what I mean). This is normal![/note]
+
+In the screenshot below, the vehicle is tilted a bit to the right.
+
+The map will also show your current position using the GPS sensor if you have the GPS module connected, are outside and have GPS lock.
 
 
+<h1>Display Sensor Data on Graph</h1>
 
-<strong>Display Sensor Data on Graph Video How To Below.</strong>
+You can see the output from all the various sensors by clicking on the <strong>Tuning</strong> checkbox on the bottom right of the display <span style="background-color: #ff6600;color: #ffffff"><strong>  1  </strong></span> This will bring up the graphical sensor display.
 
-https://www.youtube.com/watch?v=w4G4K5Q27hw
-
-You can see the output from all the various sensors by clicking on the "Tuning" checkbox on the bottom right of the display <span style="background-color: #ff6600;color: #ffffff"><strong>  1  </strong></span> This will bring up the graphical sensor display.
 If you click on the legend at the top of it <span style="background-color: #ff6600;color: #ffffff"><strong>  2  </strong></span> , it will bring up a window <strong>"Graph This"</strong> that allows you to choose which sensors and data outputs to display.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_RAW_SENSOR_DISPLAY.png"><img class="alignnone size-full wp-image-2658" alt="MP_RAW_SENSOR_DISPLAY" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_RAW_SENSOR_DISPLAY.png" width="1024" height="575" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_Graph_This.png"><img class="alignnone  wp-image-2653" alt="MP_Graph_This" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_Graph_This.png" width="1010" height="250" /></a>
+
+A video showing how to graph the sensor data is provided below:
+
+[embed width="800"]https://www.youtube.com/watch?v=w4G4K5Q27hw[/embed]

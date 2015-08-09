@@ -10,7 +10,9 @@ post_parent_title:
 END METADATA 
 -->
 This article shows how to set up a non-standard RC input channel mapping using the RCMAP feature.<!-- more -->
-[note]This feature is available in AC3.2.1 and higher.[/note]
+[note]This feature is available in AC3.2.1 and higher (and equivalent Plane and Rover versions).[/note]
+
+
 <h1>Configuration</h1>
 By default the RC input channels are:
 <ul>
@@ -19,8 +21,28 @@ By default the RC input channels are:
 	<li>Channel 3: Throttle input</li>
 	<li>Channel 4: Yaw input</li>
 </ul>
-These can be changed by setting the <code>RCMAP_PITCH</code>, <code>RCMAP_ROLL</code>, <code>RCMAP_THROTTLE</code> and <code>RCMAP_YAW</code> parameters as shown below using the <em>Mission Planner</em>'s <strong>Config/Tuning | Full Parameter Tree</strong> (or Full Parameter List).
+These can be changed by setting the <code>RCMAP_PITCH</code>, <code>RCMAP_ROLL</code>, <code>RCMAP_THROTTLE</code> and <code>RCMAP_YAW</code> parameters using the <em>Mission Planner</em>'s <strong>Config/Tuning | Full Parameter Tree</strong> (or Full Parameter List) as shown below .
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/07/RCMAP_MPSetup.png"><img class="alignnone size-full wp-image-4625" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/07/RCMAP_MPSetup.png" alt="RCMAP_MPSetup" width="1023" height="576" /></a>
 
-After changing any of these parameters the flight controller should be rebooted and for multicopters, the <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_radio_control">RC calibration</a> and <a href="http://copter.ardupilot.com/wiki/initial-setup/esc-motor/">ESC calibration</a> should be re-done.
+After changing any of these parameters the flight controller should be rebooted. 
+
+[site_Copter]For multicopters, the <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_radio_control">RC calibration</a> and <a href="http://copter.ardupilot.com/wiki/initial-setup/esc-motor/">ESC calibration</a> should be re-done.
+&nbsp;[/site_Copter]
+
+Additional information about the <code>RCMAP</code> parameters can be found for the respective platforms in: <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#rcmap__parameters">Copter Parameters</a>, <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#rcmap__parameters">Plane Parameters</a> and <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#rcmap__parameters">Rover Parameters</a>.
+
+
+[site_Rover]
+<h1>Rover notes</h1>
+
+As a real example, if your aileron (steering) is on channel 1 and your elevator (throttle) is on channel 2, then the settings should be:
+<ul>
+	<li><code>RCMAP_ROLL=1</code></li>
+	<li><code>RCMAP_THROTTLE=2</code></li>
+</ul>
+
+<code>RCMAP_PITCH</code> and <code>RCMAP_YAW</code> can be whatever channels you want to make them as long as they are not channels 1 and 2. 
+
+For Rover you should also select the receiver channels that will be used to control the Waypoint select (<a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#learning_channel_apmrover2learn_ch">LEARN_CH</a>) and the Mode select (<a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#mode_channel_apmrover2mode_ch">MODE_CH</a>). As an example, the Gear switch (2-way) is on channel 5 and can be assigned to the <code>LEARN_CH</code> while the Flap switch (3-way) is on channel 6 and can be assigned to the <code>MODE_CH</code>.
+[/site_Rover]
