@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-gps-how-it-works 
-title: common-GPS How it Works 
+title: common-GPS - How it Works 
 id: 311 
 menu_order: 0 
 post_parent_id: 0 
@@ -10,9 +10,11 @@ post_parent_title:
 END METADATA 
 -->
 This page provide general information about GPS navigation.
+<!-- More -->
 
-<h3>The GPS system is a GNSS : Global Navigation Satellite System.</h3>
+<h1>Overview</h1>
 
+GPS system is a Global Navigation Satellite System (GNSS).
 
 <img alt="" src="https://mail.google.com/mail/u/0/?ui=2&amp;ik=874e42e97b&amp;view=att&amp;th=13f260e440902b5f&amp;attid=0.1.1&amp;disp=emb&amp;zw&amp;atsh=1" /><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/ag_GPS_Operation_New_low_res.jpg"><img class="alignnone size-full wp-image-6347" alt="ag_GPS_Operation_New_low_res" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/ag_GPS_Operation_New_low_res.jpg" width="468" height="346" /></a>
 
@@ -30,14 +32,15 @@ Military GPS receivers are able to decode the P(Y) code available on L1 and L2 c
 
 
 
-<h3>About GPS multipathing :</h3>
+<h1>GPS multipathing</h1>
 Multipathing is causing GPS position errors that are difficult to detect and compensate for. Multiple GNSS receivers are better suited to filter out multipathing thanks to a higher number of visible satellites at the same time.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/multi_path-full.jpg"><img class="alignnone size-full wp-image-6350" alt="multi_path-full" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/multi_path-full.jpg" width="717" height="539" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/Gps-multipath-efect.png"><img class="alignnone size-full wp-image-6352" alt="Gps-multipath-efect" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/Gps-multipath-efect.png" width="600" height="386" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/multipath.gif"><img class="alignnone size-full wp-image-6353" alt="multipath" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/multipath.gif" width="337" height="268" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/gdifcdgj.bmp"><img class="alignnone size-full wp-image-6342" alt="gdifcdgj" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/gdifcdgj.bmp" /></a>
 
 
 
-<h3>About GPS disturbed signal propagation :</h3>
+<h1>GPS disturbed signal propagation</h1>
+
 Ionospheric perturbations and magnetic storms (solar activity) can cause signal delays. This can be partially compensated using SBAS and L1 / L2 decoding.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/atmospheric_effects.gif"><img class="alignnone size-full wp-image-6354" alt="atmospheric_effects" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/atmospheric_effects.gif" width="330" height="178" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/bjicjgdh1.bmp"><img class="alignnone size-full wp-image-6361" alt="bjicjgdh" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/bjicjgdh1.bmp" /></a>
@@ -50,30 +53,35 @@ New channels (L2C, L5) for civil use will enhance signal acquisition and positio
 
 
 
-<h3>GPS performance data for different scenarios</h3>
+<h1>GPS performance data for different scenarios</h1>
+
 Those values can be thought as a basis to understand GPS limitations.
 
 As a general rule only clear sky view is safe enough for Auto missions !
 
 GPS 3D precision :
 
-Free Horizon (clear sky view) : 2.5 m
+<ul>
+	<li>Free Horizon (clear sky view): 2.5 m</li>
+	<li>Extreme Multipath (Backyards or between buildings flights): 26 m</li>
+	<li>Indoor: 55 m</li>
+</ul>
 
-Extreme Multipath (Backyards or between buildings flights) : 26 m
 
-Indoor : 55 m
 
 GPS Availability :
 
-Free Horizon (clear sky view) : 99%
+<ul>
+	<li>Free Horizon (clear sky view) : 99%</li>
+	<li>Extreme Multipath (Backyards or between buildings flights) : 83 %</li>
+	<li>Indoor : 14 %</li>
+</ul>
 
-Extreme Multipath (Backyards or between buildings flights) : 83 %
-
-Indoor : 14 %
 
 
 
-<h3>ABOUT DGPS CORRECTIONS :</h3>
+<h1>DGPS corrections</h1>
+
 DGPS corrections are using pseudorange data only. SBAS is a form of DGPS correction freely available from one or more geostationary satellites.
 
 Each region of the world has a localized SBAS system : WAAS for America, EGNOS for Europe, MSAS for Japan.
@@ -84,8 +92,10 @@ DGPS corrections give meter precision (free services) or decimeter precision (pa
 
 
 
-<h3>ABOUT RTK CORRECTIONS :</h3>
+<h1>RTK corrections</h1>
+
 RTK corrections are using carrier phase informations and needs costly advanced GPS as well as a RTK base station or a Network of RTK base stations broadcasting corrections over a modem or Internet through the RTCM protocol.
-RTK is easier to use with slow motion or static applications (like surveying or farming) and give centimeter or millimeter precision.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/RTK.jpg"><img alt="RTK" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/RTK.jpg" width="300" height="204" /></a>
+
+RTK is easier to use with slow motion or static applications (like surveying or farming) and give centimeter or millimeter precision.

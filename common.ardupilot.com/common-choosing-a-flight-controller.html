@@ -1,0 +1,37 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-choosing-a-flight-controller 
+title: common-Choosing a Flight Controller 
+id: 4911 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This topic aims to help you select a flight controller board. <!-- more -->
+[tip]At time of writing (August 2015) <a href="common-pixhawk-overview/">Pixhawk</a> is highly recommended for general use.  Developers creating UAV vision applications should consider <a href="common-navio-overview">NAVIO+</a>.[/tip]
+
+<h1>Overview</h1>
+
+There are three readily available autopilots that run ArduPilot, the <a href="common-pixhawk-overview">Pixhawk</a>, <a href="common-apm25-and-26-overview">APM2.6</a> and <a href="common-px4fmu-overview">PX4</a> (all sold by 3DRobotics).  In addition there are clones and small variants of these boards.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/09/ChooseAFlightController_titleImage.png"><img class="alignnone size-full wp-image-12732" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/09/ChooseAFlightController_titleImage.png" alt="ChooseAFlightController_titleImage" width="1023" height="354" /></a>
+
+[note]Although these boards have different CPU performance and even different sensors, the user experience is nearly identical and supported features are still very similar.[/note]
+
+There are also a number of completely original boards in various states of development, including some that run on Linux. For information about other flight controller options see <a href="common-autopilots">AutoPilot Hardware Options</a> and <a href="http://dev.ardupilot.com/wiki/supported-autopilot-controller-boards/">Supported Autopilot Control Boards</a> (dev wiki).
+
+
+<h1>Pixhawk vs PX4 vs APM2.6</h1>
+
+Out of these three boards, you should generally choose the <a href="http://store.3drobotics.com/products/3dr-pixhawk" target="_blank">Pixhawk</a> (<a href="wiki/common-pixhawk-overview/">see specs</a>).  This single board flight controller has an ARM CPU and is based on the earlier PX4 but includes many enhancements.  This is the latest and most advanced of the three boards, with the fastest CPU, most RAM, backup accelerometers and gyros, and supports backup compass and GPS.
+
+The <a href="common-px4fmu-overview">PX4</a> (see hardware overview of <a href="common-px4fmu-overview">FMU</a> and <a href="common-px4io-overview">I/O board</a> components) was the first ARM based board to run Copter.  Like the Pixhawk, it was developed in cooperation with <a href="https://pixhawk.org/" target="_blank">ETH's PX4 team</a>.  With a slightly slower CPU and less RAM than the Pixhawk, its main advantage over the other two boards is its small size.
+
+The <a href="common-apm25-and-26-overview">APM2.6</a> is the final edition of the traditional AVR CPU based ArduPilot flight controllers.  It is now reaching the its memory and CPU limits and does not support all ArduPilot vehicle types. [site_Rover]It is still supported for Rover.[/site_Rover]
+
+[site_Copter][warning]The APM2.6 board is no longer supported for Copter. From Copter 3.3 firmware (and later) no longer fits on APM boards. The last firmware builds that can be installed (AC v3.2.1) can be downloaded from here: <a title="DIY Drones Firmware" href="http://ardupilot.com/downloads/?did=121">APM2.x</a> and <a title="Copter 3.2.1 Firmware" href="http://ardupilot.com/downloads/?did=120">APM 1.0</a>. [/warning][/site_Copter]
+[site_Plane][note]The APM2.6 board is supported in Plane 3.3.0. It is likely that the next firmware version will no longer fit on the board, and support will be discontinued.[/note][/site_Plane]
+
+

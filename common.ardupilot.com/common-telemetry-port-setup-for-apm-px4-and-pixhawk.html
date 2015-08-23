@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-telemetry-port-setup-for-apm-px4-and-pixhawk 
-title: common-Telemetry Port Setup for APM PX4 and Pixhawk 
+title: common-Telemetry Port Setup for Pixhawk and PX4 
 id: 1094 
 menu_order: 0 
 post_parent_id: 0 
@@ -9,55 +9,46 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Px4 and Pixhawk can each have two Telemetry Ports</h3>
-<ul>
-	<li>As of Copter version 3.1 firmware, there are patches to enable uartD in rover/plane/copter.
-<ul>
-	<li>This enables the secondary telemetry port on Pixhawk, and also allows for a secondary telemetry port on PX4 and SITL.</li>
-	<li>The patches include some parameter changes, so may require some mods in MissionPlanner and other GCS implementations.</li>
-</ul>
-</li>
-	<li>Specifically:
-<ul>
-	<li>the SR3_* parameters are now SR1_*</li>
-	<li>there are additional SR2_* parameters for boards that have a secondary telemetry port</li>
-	<li>the SR0_* parameters are unchanged</li>
-	<li>the SERIAL3_BAUD parameter is now named SERIAL1_BAUD.</li>
-	<li>there is a new SERIAL3_BAUD parameter on boards with a secondary telemetry port</li>
-	<li>the SERIAL0_BAUD parameter on rover and plane is unchanged</li>
-</ul>
-</li>
-	<li>The changes make it easier to setup an OSD system properly on PX4 and Pixhawk.</li>
-	<li>The changes also make it easier to connect an on-board computer via MAVLink to the second telemetry port.</li>
-</ul>
+This article shows how to enable the second telemetry port on Pixhawk and PX4 and configure the ports in Mission Planner.<!-- more -->
 
-<hr style="font-style: normal" />
+[note]Support for the second port was added in Copter 3.1 and equivalent Rover/Plane firmware.[/note]
 
-<h3>Enable 2nd Telemetry Port on Pixhawk</h3>
-<ul>
-	<li>On a Pixhawk there are two 6 pin DF13 serial ports marked as "telemetry".</li>
-	<li>One is "<strong>telemetry 1</strong>" and the other is "<strong>telemetry 2</strong>".</li>
-	<li>Use "<strong>telemetry 1</strong>" for higher power devices (up to 1A), such as the 3DR RFD900 telemetry radio.</li>
-	<li>Both ports will be active for communication.</li>
-</ul>
+
+<h1>Enable 2nd Telemetry Port on Pixhawk</h1>
+
+On a Pixhawk there are two 6 pin DF13 serial ports marked as "telemetry" (TELEM 1 and TELEM 2). Both ports will be active for communication.
+
+Use <strong>TELEM 1</strong> for higher power devices (up to 1A), such as the <a href="common-rfd900">3DR RFD900 telemetry radio</a>.
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PixhawkTelem.jpg"><img class="alignnone size-full wp-image-1112" alt="PixhawkTelem" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PixhawkTelem.jpg" width="600" height="507" /></a>
 
 
 
-<h3>Enable 2nd Telemetry Port on PX4</h3>
-<ul>
-	<li>On a PX4v1 you can enable the second telemetry port by creating a empty file named "<strong>uartD.en</strong>" in the APM directory on your SD card.</li>
-	<li>That changes the 5 pin DF13 (FMU USART2) connector on the corner of the PX4IO board from being 3 PWM outputs to being a second telemetry port.</li>
-</ul>
+<h1>Enable 2nd Telemetry Port on PX4</h1>
+
+On a PX4v1 you can enable the second telemetry port by creating a empty file named <strong>uartD.en</strong> in the APM directory on your SD card. This changes the 5 pin DF13 (FMU USART2) connector on the corner of the PX4IO board from being 3 PWM outputs to being a second telemetry port.
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4IOtelem.jpg"><img class="alignnone size-full wp-image-1110" alt="PX4IOtelem" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4IOtelem.jpg" width="652" height="476" /></a>
 
 
+<h1>Set-up through the Mission Planner</h1>
 
-<h3>Permanently adjusting the telemetry rates for OSD</h3>
+The telemetry port is configured using parameters, which you can edit though your GCS. Using <em>Mission Planner</em> open the <strong>Config/Tuning | Full Parameter List</strong> page.
+
+The parameters to change for each port are listed below. These are documented with the parameter in Mission Planner and in the Parameter documentation on each wiki:
 <ul>
-	<li>Copter defaults the telemetry rates to zero to try to keep CPU loads down.</li>
-	<li>If you change the rates via the <strong>REQUEST_DATA_STREAM</strong> MAVLink message Copter <strong>DOES</strong> <strong>NOT</strong> save the rate changes.</li>
-	<li>If you change the <strong>SR1_*</strong> and <strong>SR2_*</strong> parameters directly in the Advanced Parameter List Copter <strong>DOES</strong> save the rate changes .</li>
-	<li>Changing the SR1 and SR2 parameters directly will enable you to set the desired messages on the port used for OSD.</li>
-	<li>Those values will then persist over reboots.</li>
+	<li>Telem1: <code>SERIAL1_BAUD</code>, <code>SERIAL1_PROTOCOL</code>, <code>BRD_SER1_RTSCTS</code></li>
+	<li>Telem2: <code>SERIAL2_BAUD</code>, <code>SERIAL1_PROTOCOL</code>, <code>BRD_SER1_RTSCTS</code></li>
 </ul>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png"><img class="alignnone  wp-image-2531" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png" alt="Telemetry_FrSky_MPSetup" width="751" height="346" /></a>
+
+You can also set the desired stream rates for messages on the ports (the telemetry rates to zero to try to keep CPU loads down) by setting <code>SR1_*</code> and <code>SR2_*</code> parameters in the <em>Advanced Parameter List</em>.  Due to CPU resource limitations, the actual rate of the data sent and saved may be lower than the rate requested. 
+
+The data can also be changed in the Mission Planner's <strong>Software | Planner</strong> screen's <strong>Telemetry</strong> drop-down.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png"><img class="alignnone size-full wp-image-2210" alt="MissionPlanner_TelemetryRate" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/MissionPlanner_TelemetryRate.png" width="1024" height="575" /></a>
+
+[warning]If you change the rates using the <code>REQUEST_DATA_STREAM</code> MAVLink message Copter <strong>DOES NOT</strong> save the rate changes and they will not persist over a reboot.[/warning]
+
+

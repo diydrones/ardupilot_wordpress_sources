@@ -15,59 +15,55 @@ This article provides an overview of the the fundamental principles of antenna d
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Cupoblique.jpg"><img class="alignnone size-full wp-image-2194" alt="Cupoblique" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Cupoblique.jpg" width="220" height="200" /></a>      <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/SideDlinkw.jpg"><img class="alignnone size-full wp-image-2195" alt="SideDlinkw" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/SideDlinkw.jpg" width="400" height="186" /></a>
 
-[note]The information has been provided by Joe Noci as an extension of this discussion: <a href="http://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile">433 UHF LRS Antenna "Turn Stile"</a>[/note]
 
-<h3>First some fundamentals.</h3>
-<ul>
-	<li>When I speak of antenna radiation it also includes the reverse, that is, the antenna 'collecting' radiated energy from the ether.</li>
-	<li>Any piece of wire will radiate energy when connected to a source of RF ( Your transmitter or receiver).</li>
-	<li>How WELL it radiates that applied energy  is dependent on only two factors-
+
+<h1>Antenna fundamentals</h1>
+
+When we speak of antenna radiation it also includes the reverse, that is, the antenna 'collecting' radiated energy.
+
+Any piece of wire will radiate energy when connected to a source of RF ( Your transmitter or receiver). How WELL it radiates that applied energy  is dependent on only two factors:
 <ul>
 	<li>That the antenna is resonant at the same frequency as the radio signal applied and</li>
-	<li>That the feedpoint of the antenna is matched to the impedance of the attached transmitter energy source.</li>
+	<li>That the feedpoint of the antenna is matched to the impedance of the attached transmitter energy source.
+[tip]Maximum energy transfer between source and load ( the antenna) occurs ONLY when the load and source impedance's are equal.[/tip]</li>
 </ul>
-</li>
-</ul>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/CrossAntenna.jpg"><img class="alignnone size-full wp-image-2196" alt="CrossAntenna" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/CrossAntenna.jpg" width="300" height="256" /></a>
+
+How well the antenna radiates that energy in any or all directions, if the above conditions are met, is then only dependent on the antenna design, shape, or style. For example:
 <ul>
-	<li>Maximum energy transfer between source and load ( the antenna) occurs ONLY when the load and source impedance's are equal.</li>
-	<li>How well the antenna radiates that energy in any or all directions, if the above conditions are met, is then only dependent on the antenna design, shape, or style.
-<ul>
-	<li>For example, a simple vertical 1/4 wave radiator will radiate a doughnut shaped pattern, in all direction of the compass, with low energy upwards and downwards, in the direction of the antenna element.</li>
+	<li>A simple vertical 1/4 wave radiator will radiate a doughnut shaped pattern, in all direction of the compass, with low energy upwards and downwards, in the direction of the antenna element.</li>
 	<li>A yagi type antenna, on the other hand, ( such as your VHF or UHF TV antenna) focuses the energy in a single direction, as would a torch.</li>
 </ul>
-</li>
-	<li>Antennas do not have gain.
+
+
+Antennas do not have gain:
 <ul>
 	<li>They focus the energy to a greater or lesser extent, in a direction of design, but do this by robbing energy from other radiating directions.</li>
 	<li>Your torch puts more light out the lens end, with nothing out the rear end.</li>
 	<li>If you remove the reflector from behind the torch bulb, the light is radiated in all directions, omnidirectionally, but is much weaker at any distant point than the focused beam.</li>
 </ul>
-</li>
-</ul>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/TrackerHelical.jpg"><img class="alignnone size-full wp-image-2197" alt="TrackerHelical" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/TrackerHelical.jpg" width="320" height="223" /></a>
-<h3>Antenna radiation is polarized</h3>
+
+
+
+<h1>Antenna radiation is polarized</h1>
+
+That is to say, the radiated electromagnetic wave has a net polarization plane. This is usually either linear or circular (elliptical polarization is also found, but that is simply a mix of the two other types)
 <ul>
-	<li>That is to say, the radiated electromagnetic wave has a net polarization plane.
-<ul>
-	<li>This is usually either linear or circular.</li>
-	<li>Elliptical polarization is also found, but that is merely a mix of the two former types.</li>
-	<li>A 1/4 wave vertical antenna will radiate linearly, with vertical polarization.
-<ul>
-	<li>Placed on its side it will radiate horizontal polarization.</li>
+  <li>A 1/4 wave vertical antenna will radiate linearly, with vertical polarization. Placed on its side it will radiate horizontal polarization.</li>
+  <li> A Helical antenna (looks like a coil of wire wound in a screw fashion) wound clockwise when viewed from behind will radiate clockwise circular polarization, and vise versa.</li>
 </ul>
-</li>
-	<li> A Helical antenna ( looks like a coil of wire wound in a screw fashion) wound clockwise when viewed from behind will radiate clockwise circular polarization, and vise versa.</li>
-</ul>
-</li>
-	<li>For reception of maximum energy, the transmitting and receiving antennae must be identically polarized.
+
+For reception of maximum energy, the transmitting and receiving antennae must be identically polarized.
 <ul>
 	<li>There is a massive loss of signal ( easily some 30dB, although the theoretical loss is infinite) if one attempts to receive a horizontally polarized signal with a vertically polarized antenna.</li>
 	<li>Similarly, there are massive losses if trying to receive a circularly polarized signal with an antenna of the opposite circular sense.</li>
 	<li>The odd man out is that there is only a 3db loss between an antenna that is circularly polarized and one that is linear.</li>
 </ul>
-</li>
-	<li>Why would one use circular polarization?
+
+You would use circular polarization if:
 <ul>
 	<li>If the two antennas in question could not be made to maintain similar attitudes, such as one in a pitching , rolling aircraft, then there would be unacceptable signal losses as the aircraft banks and pitches.</li>
 	<li>So you could use a vertical on the aircraft, and a helical or turnstile, or similar, on the ground segment.</li>
@@ -75,8 +71,9 @@ This article provides an overview of the the fundamental principles of antenna d
 	<li>Or you could gain back the 3db loss by fitting a similar circularly polarized antenna on the aircraft, giving the best of both worlds.</li>
 	<li>But you actually gain more than that with circular polarization at both ends.</li>
 </ul>
-</li>
-	<li>Assume first that the two antennas are simple vertical monopoles, radiating vertically polarized signals.
+
+
+Assume first that the two antennas are simple vertical monopoles, radiating vertically polarized signals.
 <ul>
 	<li>When you are flying, at the flying club, etc, you are probably near some metal structures, the 'hanger' , cars and other vehicles, etc.</li>
 	<li>All these structures reflect the same energy you are trying to receive.</li>
@@ -85,16 +82,18 @@ This article provides an overview of the the fundamental principles of antenna d
 	<li>Your receiver ( and antenna) does not know or care where the received energy comes from, so it receives this reflected energy as well.</li>
 	<li>These multitude of received waves add constructively and destructively with the main received wave, causing large, short duration, signal drop-outs - a sort of 'flutter' in the signal.</li>
 </ul>
-</li>
-	<li>If both antenna are circularly polarized, however, the picture is quite different.
+
+If both antenna are circularly polarized, however, the picture is quite different:
 <ul>
 	<li>When the circular polarized waveform is reflected , it REVERSES its polarization.</li>
 	<li>When this reversed polarized signal arrives at your receiving antenna it is largely rejected and hugely attenuated, so interfering minimally with the main received signal.</li>
 </ul>
-</li>
-</ul>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Ant_in_Bay.jpg"><img class="alignnone size-full wp-image-2198" alt="Ant_in_Bay" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Ant_in_Bay.jpg" width="250" height="187" /></a>      <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/ACantBay.jpg"><img class="alignnone size-full wp-image-2199" alt="ACantBay" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/ACantBay.jpg" width="300" height="151" /></a>
-<h3>On to Issues of resonance and matching</h3>
+
+
+
+<h1>Resonance and matching issues</h1>
 <ul>
 	<li>Most simple linear antenna are either of the monopole or dipole form.
 <ul>
@@ -150,20 +149,21 @@ This article provides an overview of the the fundamental principles of antenna d
 	<li><strong>Baluns</strong> can be constructed from coax cable, but the accuracy required in coax cable length ( they are normally length multiples of 1/4 wavelength) is very critical, especially in the GHz range - 0.5mm can have a great effect.</li>
 	<li>The <strong>turnstile</strong> is not new - it is some 50 to 60 years old, and is well researched and published.
 <ul>
-	<li>Up to the VHF and lower UHF region , the coax balun, with embedded impedance match transmission line transformer, is used, along these lines:</li>
-</ul>
+	<li>Up to the VHF and lower UHF region , the coax balun, with embedded impedance match transmission line transformer, is used, along these lines:
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/turnstile.jpg"><img class="alignnone size-full wp-image-2200" alt="turnstile" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/turnstile.jpg" width="300" height="201" /></a>
 </li>
 </ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/turnstile.jpg"><img class="alignnone size-full wp-image-2200" alt="turnstile" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/turnstile.jpg" width="300" height="201" /></a>
-<ul>
+</li>
+
 	<li>For the higher microwave frequencies, a plumbing type version is more appropriate.
 <ul>
-	<li>This is called the <strong style="color: #000000;font-style: normal">spilt tube</strong> or <strong style="color: #000000;font-style: normal">split sheath</strong> <strong style="color: #000000;font-style: normal">balun</strong>, and looks like this when used as a feed for a pair of crossed dipoles.</li>
-</ul>
+	<li>This is called the <strong style="color: #000000;font-style: normal">spilt tube</strong> or <strong style="color: #000000;font-style: normal">split sheath</strong> <strong style="color: #000000;font-style: normal">balun</strong>, and looks like this when used as a feed for a pair of crossed dipoles.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Oblique.jpg"><img class="alignnone size-full wp-image-2201" alt="Oblique" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Oblique.jpg" width="320" height="290" /></a>      <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Slit.jpg"><img class="alignnone size-full wp-image-2202" alt="Slit" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Slit.jpg" width="320" height="290" /></a>
 </li>
 </ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Oblique.jpg"><img class="alignnone size-full wp-image-2201" alt="Oblique" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Oblique.jpg" width="320" height="290" /></a>      <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Slit.jpg"><img class="alignnone size-full wp-image-2202" alt="Slit" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Slit.jpg" width="320" height="290" /></a>
-<ul>
+</li>
+
 	<li>The balun and feed match consists of an outer and an inner tube.
 <ul>
 	<li>The ratio of diameters D/d is chosen to give the desired impedance:</li>
@@ -179,12 +179,12 @@ This article provides an overview of the the fundamental principles of antenna d
 	<li>The one element is typically around 0.21 wavelength per half, while the other is around 0.25 wavelength.</li>
 	<li>One short and one long element penetrate the outer tube and are connected to the inner tube.</li>
 	<li>While the opposite pair of elements are connected only to the outer tube.</li>
-	<li>The outer tube is split or slotted ( 0.5mm width slot). The slot is approx 0.23 wavelength long.</li>
-</ul>
+	<li>The outer tube is split or slotted ( 0.5mm width slot). The slot is approx 0.23 wavelength long.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/End.jpg"><img class="alignnone size-full wp-image-2203" alt="End" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/End.jpg" width="320" height="290" /></a>     <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Teflon.jpg"><img class="alignnone size-full wp-image-2204" alt="Teflon" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Teflon.jpg" width="320" height="290" /></a>
 </li>
 </ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/End.jpg"><img class="alignnone size-full wp-image-2203" alt="End" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/End.jpg" width="320" height="290" /></a>     <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Teflon.jpg"><img class="alignnone size-full wp-image-2204" alt="Teflon" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/Teflon.jpg" width="320" height="290" /></a>
-<ul>
+</li>
+
 	<li>The relationship in length between the two dipoles is critical.
 <ul>
 	<li>Typically this would be measured on a network analyser and the feed impedance of each element set to say R+j45 ohms ( longer dipole) and the other to R-j45 ohms.</li>
@@ -213,8 +213,38 @@ This article provides an overview of the the fundamental principles of antenna d
 	<li><strong style="color: #000000;font-style: normal">For those interested:</strong></li>
 	<li><strong style="color: #000000;font-style: normal">References are - RSGB VHF/UHF Manual - page 8.45</strong></li>
 	<li><strong style="color: #000000;font-style: normal">Modern Antenna Design - Page 255</strong></li>
-	<li>Here are some images of my <strong>split sheath balun</strong> crossed dipoles..</li>
-</ul>
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5434.jpg"><img class="alignnone size-full wp-image-2205" alt="IMG_5434" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5434.jpg" width="320" height="203" /></a>   <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5435.jpg"><img class="alignnone size-full wp-image-2206" alt="IMG_5435" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5435.jpg" width="320" height="354" /></a>
+	<li>Here are some images of my <strong>split sheath balun</strong> crossed dipoles.
 
-&nbsp;
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5434.jpg"><img class="alignnone size-full wp-image-2205" alt="IMG_5434" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5434.jpg" width="320" height="203" /></a>   <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5435.jpg"><img class="alignnone size-full wp-image-2206" alt="IMG_5435" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/IMG_5435.jpg" width="320" height="354" /></a></li>
+</ul>
+
+
+
+
+<h1>Understanding dB, Watts and dBm</h1>
+
+The <a href="https://en.wikipedia.org/wiki/Watt">Watt (W)</a> is the standard <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI unit</a> for measuring power.
+
+The <a href="https://en.wikipedia.org/wiki/Decibel">decibel (dB)</a> is a logarithmic ratio that can be used to describe the non-linear differences between signal power values across a range (a positive or negative difference means a gain or a loss of the signal). For example, you can use a negative dB value to describe the non-linear rate of signal loss as as it travels through a conductive medium. The <tt>dB</tt> unit is based on log<sub>10</sub> (the "Log" function on a scientific calculator).
+
+<a href="https://en.wikipedia.org/wiki/DBm">dBm</a> is an abbreviation for the power ratio in decibels (dB) of the measured power referenced to one milliwatt (mW). To put it another way, the dBm value is the number of dB by which a value exceeds 1mW: 0dBm is 1mW, 1dBm is 1.259mW etc). 
+
+The basic conversion equations are below:
+<ul>
+	<li><strong>Watt to dBm</strong>: <pre>10<tt>*</tt>log<sub>10</sub>(<tt>[signal in watt]*</tt>1000)</pre></li>
+	<li><strong>dBm to Watt</strong>: <pre>(10^(<tt>[ratio in dBm]</tt>/10))/1000</pre></li>
+</ul>
+
+Power calculations expressed in dB or dBm can use simple addition and subtraction. For example, consider a radio with an output of 60mW which is connected to an antenna with a gain of 14dBi using a 7m cable (attenuation 25dB per 100m). We can calculate the output power as shown:
+
+<strong>TX_Power</strong>= 60mW = <strong>0.06W</strong> = <strong>17.78dBm</strong> (using conversions above) 
+<strong>Cable_Loss</strong> = 25dB/100m = 0.25dB per meter * 7 metres = <strong>1.75dB</strong>
+<strong>Antenna_Gain</strong> = <strong>14dBi</strong>
+<strong>Output_Power</strong> = <strong>TX_Power</strong> - <strong>Cable_Loss</strong> + <strong>Antenna_Gain</strong>
+<strong>Output_Power</strong> = <strong>17.78</strong> - <strong>1.75</strong> + <strong>14</strong> = <strong>30.03dB</strong> = <strong>1W</strong> (using conversions above)
+
+
+
+<h1>Acknowledgements</h1>
+
+Much of this antenna information has been provided by Joe Noci as an extension of this discussion: <a href="http://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile">433 UHF LRS Antenna "Turn Stile"</a>.

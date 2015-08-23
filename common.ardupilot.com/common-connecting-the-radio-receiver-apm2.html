@@ -1,0 +1,37 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-connecting-the-radio-receiver-apm2 
+title: common-Connecting the Radio Receiver (APM2) 
+id: 4929 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This topic shows how to connect the RC inputs to the APM2.x controller board.
+
+<!-- more -->
+<h1>Connecting a Receiver</h1>
+
+Connect your RC receiver "S" (signal) pins to the "S" pins on Inputs of APM using a (minimum 5 pin) <a href="http://store.3drobotics.com/products/jumper-cable-6-pin-to-6-pin-individual-female-15cm" target="_blank">jumper cable</a>. You must connect at least channels 1 ~ 5.  Channels 6 ~ 8 are optional. 
+
+<img class="alignnone size-full wp-image-4400" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/Screen-shot-2013-04-19-at-12.03.27-AM.png" alt="Screen shot 2013-04-19 at 12.03.27 AM" width="197" height="146" />
+
+Your RC receiver will require power. Normally this is done by using one 2 or 3 wire connector between the APM Inputs and one channel output on the receiver. See <a href="common-apm25-and-26-overview/#powering_the_apm_2526_board">APM Power Details</a> for limitations and important warnings.
+
+
+<img class="alignnone size-full wp-image-2876" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/APM_2_5_RC_IN_enc.jpg" alt="APM 2.55 RC IN" width="900" height="500" />
+
+
+<h1>Connecting a PPM Sum Receiver</h1>
+
+PPM receivers transmit all the channel information above through a single port (some will transmit additional channels - for example the FrSky D8RSP receiver outputs 7 PWM channels, while in CPPM mode it will output 8).
+
+On APM2 you can use PPM input by putting a <a href="https://www.sparkfun.com/products/9044" target="_blank">jumper</a> on the RC inputs for channel 2 and 3 (just the signal pins). PPM input from the receiver should be fed into channel 1.
+
+<img class="alignnone size-full wp-image-2877" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/APM_2_5_RC_PPM_IN_enc.jpg" alt="APM 2.5 RC PPM IN" width="900" height="500" />
+
+If you need to rearrange the channel order when using PPM and are unable to do this from the transmitter, you can do this with the RCMAP Advanced parameters. Read more about them <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#RCMAP__Parameters">here (Copter)</a>.
+
+[site_Copter][note]Copter 2.8.1 and earlier versions required you use a transmitter/receiver combination that outputs at least 8 channels of ppm information. This is resolved in version 2.9 so receivers like this should work.[/note][/site_Copter]

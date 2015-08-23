@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: xbee-radios 
-title: Using Xbee radios for telemetry with APM 
+title: Archived:Using Xbee radios for telemetry with APM 
 id: 1603 
 menu_order: 900 
 post_parent_id: 13872 
@@ -16,8 +16,7 @@ END METADATA
 
 <h2>Hooking up your Xbee wireless modules</h2>
 
-Adding wireless telemetry is not difficult and can extend the capabilities of your UAV immensely. We recommend
-<a href="https://www.sparkfun.com/categories/222.html">900Mhz Xbees</a>. If you are in Europe, where 900Mhz is not allowed, you can use a 2.4Ghz Xbee kit instead. Instructions for that are <a href="http://diydrones.com/profiles/blogs/uk-eu-2-4-ghz-telemetry-kit">here
+Adding wireless telemetry is not difficult and can extend the capabilities of your UAV immensely. We recommend <a href="https://www.sparkfun.com/categories/222.html">900Mhz Xbees</a>. If you are in Europe, where 900Mhz is not allowed, you can use a 2.4Ghz Xbee kit instead. Instructions for that are <a href="http://diydrones.com/profiles/blogs/uk-eu-2-4-ghz-telemetry-kit">here
 </a>.
 
 [warning]On APM 2, you cannot use the Xbee while your APM board is connected to the USB port.[/warning]
@@ -33,7 +32,7 @@ That's because the Xbee and USB share the same serial port, with some clever mul
 
 Connect the XtremeBee adapter (with the Xbee plugged in) to APM 2 as shown above. Your adapter should be in "Master" mode. ("Master" and "Slave" just reverse the TX and RX pins).
 
-We recommend the <a href="http://store.3drobotics.com/products/telemetry-cable-for-apm-1-x-and-apm-2-0">3DR four-wire Xbee cable</a>, which comes with the official Wireless Telemetry kit shown above. It is designed to connect the XtreamBee adapter to APM, as it will provide the neatest and safest connection.
+We recommend the 3DR four-wire Xbee cable, which comes with the official Wireless Telemetry kit shown above. It is designed to connect the XtreamBee adapter to APM, as it will provide the neatest and safest connection.
 
 
 <h3>APM 2.5</h3>
@@ -61,7 +60,7 @@ Although difficult to see, by default there are two small jumpers between the up
 <h3>(Optional) Rolling your own Xbee telemetry setup</h3>
 You can make your own telemetry kit if you'd like. The first thing to keep in mind is that you should use Xbee modules in a different frequency range than your RC equipment.
 
-In general, we recommend 900Mhz Xbee modules, but in some countries 900Mhz is not approved. In those cases you can use 2.4Ghz Xbee modules. In that configuration, we use these <a href="http://www.sparkfun.com/commerce/product_info.php?products_id">Xbee Pro wireless modules</a>
+In general, we recommend 900Mhz Xbee modules, but in some countries 900Mhz is not approved. In those cases you can use 2.4Ghz Xbee modules. In that configuration, we use <em>Xbee Pro wireless modules</em>
 
 Setup can be a little tricky, so please see the comments below in this manual to see how other people have done it. In particular, we do not recommend the DIY Drones XtreamBee adapter for those modules. Instead, try the
 
@@ -73,19 +72,16 @@ Setup can be a little tricky, so please see the comments below in this manual to
 
 All Xbee modules need adapters to work with APM. You have two choices:
 <ul>
-	<li>A DIY Drones <a href="http://store.3drobotics.com/product_p/br-0015-01.htmXtreemBee">XtreamBee adapters</a> on the aircraft side, and a
-<a href="https://store.3drobotics.com/product_p/br-0015-02.htm">USB adapter board </a>on the ground/laptop side with a USB cable.</li>
-	<li>If you already have an <a href="http://store.3drobotics.com/FTDI_Cable_3_3V_p/ttl-232r-3v3.htm">FTDI cable</a>, get two DIY Drones
-<a href="http://store.3drobotics.com/product_p/br-0015-01.htmXtreemBee">XtreamBee adapters
-</a>
-.</li>
+	<li>A DIY Drones XtreamBee adapters on the aircraft side, and a <em>USB adapter board </em> on the ground/laptop side with a USB cable.</li>
+	<li>If you already have an FTDI cable, get two DIY Drones XtreamBee adapters.</li>
 </ul>
+
+
 <h2>Setting up the Xbee modules</h2>
 If you have the DIY Drones Telemetry Kit, your Xbee modules are already set up and ready to go. But if you're setting up your own, here are some instructions:
 
 The Xbee modules ship with a default of 9600bps, which you must change to match the APM's serial speed of 57600 bps; set your Xbee modules to match this speed. (If you want to use a different speed, you can change that by entering the line
-<code>#define SERIAL3_BAUD [whatever baud rate you want]
-</code> in the APM_Config.h file.)
+<code>#define SERIAL3_BAUD [whatever baud rate you want]</code> in the APM_Config.h file.)
 
 Connect each one of the them to the USB adapter board, plug the USB cable into your PC, and use <a>Digi's X-CTU utility </a>(Mac/Linux users see section below on an alternative utility from motosenso) to select the right serial port and communicate with them. Remember to initially set the utility to 9600bps to contact the new Xbee modules, and than after you've changed the speed, change the utility's serial speed accordingly. You should also give the modules unique Network IDs (VIDs) so they will be paired. Just use any 3-digit number, and just make sure you have set it the same on both modules. (Note: If you will be flying near other UAV planes make sure to verify the Network IDs are unique and not used by others in your vicinity.)
 

@@ -1,0 +1,106 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-magnetic-interference 
+title: common-Magnetic Interference 
+id: 4893 
+menu_order: 0 
+post_parent_id: 4501 
+post_parent_stub: common-advanced-configuration 
+post_parent_title: common-Advanced Configuration 
+END METADATA 
+-->
+This article covers general information related to magnetic interference.
+<!-- more -->
+
+
+<h1>Overview</h1>
+
+Magnet Interference on a compass can have a serious impact on navigation on all vehicle types. 
+
+This article explains what hardware changes you can make to reduce magnetic interference on the compass, along with supporting theoretical discussion. Information on how to set-up your compass can be found on <a href="common-compass-setup-advanced">Advanced Compass Setup</a>.
+
+[site_Copter]On Copter magnetic interference can cause circling (also known as "toiletbowling") in Loiter, RTL, AUTO flight modes.[/site_Copter]
+
+See also <a href="http://en.wikipedia.org/wiki/Magnetic_declination">Magnetic Declination</a> (wikipedia)
+
+
+
+<h1>Hardware changes to reduce magnetic interference on the compass</h1>
+
+<ol>
+	<li>The best way method is to use an <a href="wiki/common-external-magnetometer-for-improved-performance/">external compass</a> or <a href="wiki/common-installing-3dr-ublox-gps-compass-module/">GPS+Compass</a> module mounted on a mast up and away from magnetic source of interference including the power distribution board (PDB).</li>
+	<li>Keep the wires between the PDB, ESCs and battery as short as possible.  The wires from the ESCs to the motors are less important because they are AC and produce less interference.</li>
+	<li>Twist the wires between the PDB, ESC and battery and use grounded shielding where possible.</li>
+	<li>Replace the PDB and ESCs with a 4-in-1 ESC because they tend to poroduce less interference probably because their wires are shorter and closer together and they also have an aluminum plate on top which may help reduce the interference.</li>
+	<li>Add aluminum shielding (even gutter tape) around the wires from the ESC to the motors may reduce the AC interference.  Aluminum will not help reduce the primary DC interference from the PDB, ESCs and the wires connecting them.</li>
+</ol>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3281_dimg2.jpg"><img class="alignnone size-full wp-image-5596" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3281_dimg2.jpg" alt="3281_dimg2" width="400" height="228" /></a>
+
+
+
+<h1>Maxwell's Equations - The Magnetic Field on the Axis of a Current Loop</h1>
+
+<table>
+<tbody>
+<tr>
+<td>Geometric details (from <a href="http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/curloo.html#c2" target="_blank">this web page.</a>)
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/loopa.gif"><img class="alignnone size-full wp-image-6977" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/loopa.gif" alt="loopa" width="252" height="291" /></a></td>
+<td>The application of the <a href="http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/biosav.html#c1" target="_blank">Biot-Savart law</a> on the centerline of a <a href="http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/curloo.html#c1" target="_blank">current loop</a> involves integrating the z-component.
+<img src="http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/imgmag/loopa2.gif" alt="" />
+The symmetry is such that all the terms in this element are constant except the distance element dL, which when integrated just gives the circumference of the circle. The magnetic field is then:
+<img src="http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/imgmag/loopa3.gif" alt="" /></td>
+</tr>
+</tbody>
+</table>
+
+
+There are 3 things to get from this drawing and the equation for the magnetic field B as you move away from a current loop along the Z axis:
+
+<ol>
+	<li>The magnetic field increases as a function of the enclosed loop area Pi R^2
+<ul>
+	<li>Big loop = big magnetic field</li>
+	<li>Reduce the magnetic field by twisting the loop to close it. aka twist the wires together and keep your return path close to the source</li>
+	<li>In the case where you have a PDB and 4 ESCs you have 4 loops that start at the Deans connector on the PDB, go out to the ESC and return back to the Deans connector.  In the case of the 4 in 1 ESC the current flow is much more concentrated in one area and you don't have the big loops so consequently you decrease the magnetic field.</li>
+</ul>
+</li>
+	<li>The magnetic field increases as a function of current
+<ul>
+	<li>Where there is the option, you can deliver the same power and decrease the magnetic field by increasing the voltage and decreasing the current.</li>
+</ul>
+</li>
+	<li>The magnetic field decreases as a function of the cube of the distance
+<ul>
+	<li>It is more complicated when you are close to the loop but when z &gt;&gt; R the denominator goes to z^3</li>
+</ul>
+</li>
+</ol>
+There is one more thing and that is that the direction of the magnetic field depends on the direction that the current flows so when you rotate a battery it changes the magnetic field produced by the current flowing in the battery.
+
+
+It can't be stated enough that minimizing the enclosed loop areas and moving the magnetometer away from the current will help things work better and "yes", power distribution boards with big circular thick high current PC traces on them produce significant semi-spherical fields as large or larger than their diameter.
+
+
+
+
+<h1>Natural and Artificial Magnetic Anomalies Warning</h1>
+
+[note]The following information has not been objectively tested to determine it's impact on a vehicle's compass accuracy in flight.[/note]
+<ol>
+	<li>Many things can distort the earth's magnetic field in the area you are flying:
+<ul>
+	<li>Steel framed or reinforced concrete buildings, bridges and roadways, iron pipes and culverts, high power electric lines, heavy equipment, trucks and automobiles, steel tanks, electric motors and even computers.</li>
+	<li>Flying between steel framed or reinforced high rise buildings will distort the magnetic field in addition to causing GPS multi-pathing.</li>
+</ul>
+</li>
+	<li>Safe distances for compass calibration
+<ul>
+	<li>6" (15 cm) minimum: Metal rim glasses, pen/pencil, metal watch band, pocket knife, metal zipper/buttons, belt buckle, batteries, binoculars, cell phone, keys, camera, camcorder, survey nails, metal tape measure.</li>
+	<li>18" (50 cm) minimum: Clipboard, data collector, computer, GPS antenna, 2-way radio, hand gun, hatchet, cell phone case with magnetic closure.</li>
+	<li>6 ft (2 m) minimum: Bicycle, fire hydrant, road signs, sewer cap or drain, steel pole, ATV, guy wire, magnets, chain-link fence, bar-wire fence, data collectors
+that use a magnet to hold the stylus.</li>
+	<li>15 ft (5 m) minimum: Electrical box, small car/truck, powerline, building with concrete &amp; steel.</li>
+	<li>30 ft (10 m) minimum: Large truck, metal building, heavy machinery.</li>
+</ul>
+</li>
+</ol>

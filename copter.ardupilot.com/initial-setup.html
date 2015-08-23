@@ -11,28 +11,13 @@ END METADATA
 -->
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Quad_Color6.jpg"><img class="size-full wp-image-7511" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Quad_Color6.jpg" alt="SONY DSC" width="4489" height="1261" /></a>
 
-This section covers the First Time setup of the flight controller including mounting to the frame, connecting it to the receiver and ESCs and then performing initial configuration and calibration.  This section assumes that you've already <a href="wiki/choosing-a-frame/">chosen and built a frame</a> and have <a href="wiki/choosing-a-flight-controller/">selected your flight controller</a>.
+First-time setup of the autopilot includes downloading and installing the <em>Mission Planner</em> GCS, mounting the flight controller to the frame, connecting it to the receiver, power and motors, and then performing initial configuration and calibration.
 
-<ol>
-	<li><a href="common-install-mission-planner">Install Mission Planner</a> (Windows, Mac) or <a href="http://planner2.ardupilot.com/" target="_blank">APM Planner</a> (Windows, Mac, Linux) on your desktop or laptop computer which will be used to install Copter on your flight controller and to perform the required calibration and configuration.</li>
-	<li><a href="common-mounting-the-flight-controller">Mounting the flight controller to the frame</a> and <a href="common-vibration-damping">Vibration Damping</a>.</li>
-	<li>Flight Controller specific instructions for connecting Pixhawk, <a href="connecting-the-apm2">APM2</a> and <a href="http://copter.ardupilot.com/wiki/px4fmu-plus-px4io-wiring/">PX4</a> to the radio receiver, ESCs, etc
-<ul>
-	<li><a href="common-powering-the-pixhawk">Powering the Pixhawk</a>, PX4 or APM2</li>
-	<li><a href="common-installing-3dr-ublox-gps-compass-module">Mounting the GPS with Compass module</a></li>
-	<li><a href="connecting-your-rc-input-and-motors">Connecting the radio receiver</a></li>
-	<li><a href="connecting-the-escs-and-motors">Connect the ESCs/Motors</a></li>
-</ul></li>
-	<li><a href="common-load-firmware-apm">Load Copter Firmware onto APM</a>, <a href="wiki/common-loading-firmware-onto-pixhawk/">Pixhawk</a> or <a href="common-load-firmware-px4">PX4</a>: Load your autopilot with the latest copter firmware.</li>
-	<li><a href="configuring-hardware">Hardware Configuration</a>: Use Mission Planner to configure radio control, calibrate the compass and accelerometer, and select your copter's orientation.</li>
-	<li><a href="esc-motor">ESC Calibration</a>: ESCs must be calibrated before they can be used. This section guides you through calibrating ESCs automatically and manually.</li>
-	<li><a href="motor-setup">Motor Setup</a>: This page shows you how to test the spin directions of the motors, set them correctly, and attach propellers.</li>
-</ol>
+[note]This section assumes that you've already <a href="choosing-a-frame">chosen and built a frame</a> and have <a href="choosing-a-flight-controller">selected your flight controller</a>. [/note]
+
+For more information on each of these tasks (sorted by flight controller within the sections) see the topics below:
+
+[pagelist_navmenu]
 
 
-
-<h1>Example builds</h1>
-<a href="dji-f330-flamewheel">DJI F3300 FlameWheel Assembly Instructions</a>
-
-
-Done all the above?  Then you're ready for the <a title="First Flight" href="flying-arducopter">First Flight</a>.
+The next section (<a title="First Flight" href="flying-arducopter">First Flight</a>) explains how to start flying using Copter, and further tuning and configuration required for new systems.
