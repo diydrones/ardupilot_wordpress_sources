@@ -19,19 +19,40 @@ More information on this sensor including how to upgrade the sensor's firmware u
 
 [warning]To use this flow sensor to perform optical flow loiter as seen in the following video, you will need to purchase a separate range finder. Our testing has been performed using the <a title="Pulse Light unit" href="http://pulsedlight3d.com/">Pulsed Light unit</a> [/warning]
 
-https://www.youtube.com/watch?v=LP8kl4hGfMw
-<h1>Connecting to the Pixhawk</h1>
+[embed width="800px"]https://www.youtube.com/watch?v=LP8kl4hGfMw[/embed]
+
+
+
+<h1>Upgrade the PX4Flow sensor's firmware</h1>
+
+The PX4Flow firmware must be updated prior to connecting to the Pixhawk:
+<ol>
+	<li>Download and unzip the <a href="http://ardupilot.com/downloads/?did=118" target="_blank">PX4Flow-KLT firmware from the downloads area</a></li>
+	<li><a href="http://qgroundcontrol.org/downloads" target="_blank">Download, install and start QGround Control</a></li>
+	<li>Select <em>PX4 Autopilot</em> from the splash screen
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade1.png"><img class="alignnone size-medium wp-image-4953" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade1-300x165.png" alt="PX4Flow_FirmUpgrade1" width="300" height="165" /></a></li>
+	<li>Press the <strong>Config</strong> button to open the <em>Firmware Upgrade</em> screen
+[caption id="attachment_4956" align="alignnone" width="1040"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade2.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade2.png" alt="QGroundControl: Firmware Upgrade Screen" width="1040" height="639" class="size-full wp-image-4956" /></a> QGroundControl: Firmware Upgrade Screen[/caption]
+
+</li>
+</li>
+	<li>Click <strong>Advanced</strong>, then set Port to "&lt;Automatic&gt;", Board to "PX4FLOW v1.1"</li>
+	<li>Push the <strong>Select File</strong> button and find the <strong>.px4</strong> file downloaded from step #1</li>
+	<li>Push the "Flash" firmware and then push the small reset button on the edge of the px4flow sensor near the sonar.</li>
+</ol>
+
+
+<h1>Connect to the Pixhawk</h1>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk.png"><img class="alignnone size-large wp-image-2973" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk-1024x567.png" alt="OptFlow_Pixhawk" width="584" height="323" /></a>
 
 The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
-
-
-
 <h1>Mounting to the Frame</h1>
-
 Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#flow_sensor_yaw_alignment_flow_orient_yaw">FLOW_ORIENT_YAW</a> parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
 
-<strong>NOTE</strong>: The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW </code> to -9000.
+[note]The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW </code> to -9000.[/note]
+
+
 <h1>Setup through the Mission Planner</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup.png"><img class="alignnone size-large wp-image-2974" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup-1024x575.png" alt="OptFlow_MPSetup" width="584" height="327" /></a>
 

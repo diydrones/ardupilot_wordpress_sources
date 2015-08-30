@@ -34,128 +34,128 @@ The CHDK PTP interface is described below:
 <h1>Port Mapping</h1>
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Ports.jpg"><img class="alignnone size-full wp-image-2830" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/09/Ports.jpg" alt="Ports" width="974" height="306" /></a>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px;">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px;">
 <tbody>
 <tr>
 <th colspan="6">Telemetry UART (Auto Pilot)</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">6</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
+<td style="text-align: center">4</td>
+<td style="text-align: center">5</td>
+<td style="text-align: center">6</td>
 </tr>
 <tr>
-<td style="text-align: center;">5V</td>
-<td style="text-align: center;">TX</td>
-<td style="text-align: center;">RX</td>
-<td style="text-align: center;">CTS</td>
-<td style="text-align: center;">RTS</td>
-<td style="text-align: center;">GND</td>
+<td style="text-align: center">5V</td>
+<td style="text-align: center">TX</td>
+<td style="text-align: center">RX</td>
+<td style="text-align: center">CTS</td>
+<td style="text-align: center">RTS</td>
+<td style="text-align: center">GND</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px" cellspacing="0">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px" cellspacing="0">
 <tbody>
 <tr>
 <th colspan="4">I2C (3V3)</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
+<td style="text-align: center">4</td>
 </tr>
 <tr>
-<td style="text-align: center;">GND</td>
-<td style="text-align: center;">SCA</td>
-<td style="text-align: center;">SCL</td>
-<td style="text-align: center;">3V3</td>
+<td style="text-align: center">GND</td>
+<td style="text-align: center">SCA</td>
+<td style="text-align: center">SCL</td>
+<td style="text-align: center">3V3</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px" cellspacing="0">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px" cellspacing="0">
 <tbody>
 <tr>
 <th colspan="4">Digital IO</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
+<td style="text-align: center">4</td>
 </tr>
 <tr>
-<td style="text-align: center;">GND</td>
-<td style="text-align: center;">D2</td>
-<td style="text-align: center;">D8</td>
-<td style="text-align: center;">D7</td>
+<td style="text-align: center">GND</td>
+<td style="text-align: center">D2</td>
+<td style="text-align: center">D8</td>
+<td style="text-align: center">D7</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px" cellspacing="0">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px" cellspacing="0">
 <tbody>
 <tr>
 <th colspan="4">Analog IO</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
+<td style="text-align: center">4</td>
 </tr>
 <tr>
-<td style="text-align: center;">GND</td>
-<td style="text-align: center;">A1</td>
-<td style="text-align: center;">A2</td>
-<td style="text-align: center;">A3</td>
+<td style="text-align: center">GND</td>
+<td style="text-align: center">A1</td>
+<td style="text-align: center">A2</td>
+<td style="text-align: center">A3</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px" cellspacing="0">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px" cellspacing="0">
 <tbody>
 <tr>
 <th colspan="3">Optocoupled IO (LANC-C Control)</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
 </tr>
 <tr>
-<td style="text-align: center;">V+ LAN-C(5-9V)</td>
-<td style="text-align: center;">LAN-C Line</td>
-<td style="text-align: center;">GND LAN-C</td>
+<td style="text-align: center">V+ LAN-C(5-9V)</td>
+<td style="text-align: center">LAN-C Line</td>
+<td style="text-align: center">GND LAN-C</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div style="float: left; margin-right: 5px;">
-<table style="height: 80px;" width="200px" cellspacing="0">
+<div style="float: left;margin-right: 5px">
+<table style="height: 80px" width="200px" cellspacing="0">
 <tbody>
 <tr>
 <th colspan="3">Optocoupled IO (Contact Closure Triggering)</th>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">3</td>
 </tr>
 <tr>
-<td style="text-align: center;">NC</td>
-<td style="text-align: center;">Shutter</td>
-<td style="text-align: center;">Ground</td>
+<td style="text-align: center">NC</td>
+<td style="text-align: center">Shutter</td>
+<td style="text-align: center">Ground</td>
 </tr>
 </tbody>
 </table>
@@ -218,16 +218,16 @@ Take a look at the most important piece of code from the file "<a href="https://
 
 <pre>        case MAVLINK_MSG_ID_RC_CHANNELS_RAW: //RC INPUT BYPASSED BY APM:
         {
-          drone_chan[0] = mavlink_msg_rc_channels_raw_get_chan5_raw(&msg);
-          drone_chan[1] = mavlink_msg_rc_channels_raw_get_chan6_raw(&msg);
-          drone_chan[2] = mavlink_msg_rc_channels_raw_get_chan7_raw(&msg);
-          drone_chan[3] = mavlink_msg_rc_channels_raw_get_chan8_raw(&msg);
+          drone_chan[0] = mavlink_msg_rc_channels_raw_get_chan5_raw(&amp;msg);
+          drone_chan[1] = mavlink_msg_rc_channels_raw_get_chan6_raw(&amp;msg);
+          drone_chan[2] = mavlink_msg_rc_channels_raw_get_chan7_raw(&amp;msg);
+          drone_chan[3] = mavlink_msg_rc_channels_raw_get_chan8_raw(&amp;msg);
         }</pre>
 
 The triggering is flagged by this small piece of code from the same file:
 
 <pre>#ifdef DRONE_OUT
-          if(cam_ctrl_state.shot <= 0 && (drone_servo[DRONE_OUT] > 1500)) cam_ctrl_state.shot = 1;
+          if(cam_ctrl_state.shot  1500)) cam_ctrl_state.shot = 1;
 #endif</pre>
 
 The flag "cam_ctrl_state.shot" is set to "1" so the board can shot and set it back to "0".
@@ -240,25 +240,25 @@ The shooting function uses some Attitude data as well:
 
 <pre>        case MAVLINK_MSG_ID_ATTITUDE:
         {
-          drone_pitch = ToDeg(mavlink_msg_attitude_get_pitch(&msg));
-          drone_roll = ToDeg(mavlink_msg_attitude_get_roll(&msg));
-          drone_yaw = ToDeg(mavlink_msg_attitude_get_yaw(&msg));
+          drone_pitch = ToDeg(mavlink_msg_attitude_get_pitch(&amp;msg));
+          drone_roll = ToDeg(mavlink_msg_attitude_get_roll(&amp;msg));
+          drone_yaw = ToDeg(mavlink_msg_attitude_get_yaw(&amp;msg));
         }
         break;
 
         case MAVLINK_MSG_ID_GPS_RAW_INT:
         {
-          drone_lat = mavlink_msg_gps_raw_int_get_lat(&msg) / 10000000.0f;
-          drone_lon = mavlink_msg_gps_raw_int_get_lon(&msg) / 10000000.0f;
-          drone_fix_type = mavlink_msg_gps_raw_int_get_fix_type(&msg);
-          drone_satellites_visible = mavlink_msg_gps_raw_int_get_satellites_visible(&msg);
+          drone_lat = mavlink_msg_gps_raw_int_get_lat(&amp;msg) / 10000000.0f;
+          drone_lon = mavlink_msg_gps_raw_int_get_lon(&amp;msg) / 10000000.0f;
+          drone_fix_type = mavlink_msg_gps_raw_int_get_fix_type(&amp;msg);
+          drone_satellites_visible = mavlink_msg_gps_raw_int_get_satellites_visible(&amp;msg);
         }
         break;
 
         case MAVLINK_MSG_ID_VFR_HUD:
         {
-            drone_heading = mavlink_msg_vfr_hud_get_heading(&msg); // 0..360 deg, 0=north
-            drone_alt_asl = mavlink_msg_vfr_hud_get_alt(&msg);
+            drone_heading = mavlink_msg_vfr_hud_get_heading(&amp;msg); // 0..360 deg, 0=north
+            drone_alt_asl = mavlink_msg_vfr_hud_get_alt(&amp;msg);
         }
         break;</pre>
 
@@ -268,13 +268,13 @@ In order to make it work fully, the Flight Control should implement specific mes
 
 <pre>        case MAVLINK_MSG_ID_DIGICAM_CONTROL: //MAV_CMD_DO_DIGICAM_CONTROL:
         {
-          cam_ctrl_state.session     = mavlink_msg_digicam_control_get_session(&msg);
-          cam_ctrl_state.zoom_pos    = mavlink_msg_digicam_control_get_zoom_pos(&msg);
-          cam_ctrl_state.focus_lock  = mavlink_msg_digicam_control_get_focus_lock(&msg);
-          cam_ctrl_state.shot        = mavlink_msg_digicam_control_get_shot(&msg);
-          cam_ctrl_state.command_id  = mavlink_msg_digicam_control_get_command_id(&msg);
-          cam_ctrl_state.extra_param = mavlink_msg_digicam_control_get_extra_param(&msg);
-          cam_ctrl_state.extra_value = mavlink_msg_digicam_control_get_extra_value(&msg);
+          cam_ctrl_state.session     = mavlink_msg_digicam_control_get_session(&amp;msg);
+          cam_ctrl_state.zoom_pos    = mavlink_msg_digicam_control_get_zoom_pos(&amp;msg);
+          cam_ctrl_state.focus_lock  = mavlink_msg_digicam_control_get_focus_lock(&amp;msg);
+          cam_ctrl_state.shot        = mavlink_msg_digicam_control_get_shot(&amp;msg);
+          cam_ctrl_state.command_id  = mavlink_msg_digicam_control_get_command_id(&amp;msg);
+          cam_ctrl_state.extra_param = mavlink_msg_digicam_control_get_extra_param(&amp;msg);
+          cam_ctrl_state.extra_value = mavlink_msg_digicam_control_get_extra_value(&amp;msg);
         }
         break; </pre>
 
@@ -286,4 +286,3 @@ The main control points are these ones:
 	<li>cam_ctrl_state.focus_lock: does lock or unlock the focus</li>
 	<li>cam_ctrl_state.shot: does shot the camera</li>
 </ul>
-

@@ -136,6 +136,7 @@ The radio firmware supports both the MAVLink 0.9 and the MAVLink 1.0 transmissio
 
 
 <h1>MAVLink reporting</h1>
+
 If you have MAVLINK set to 1, then the radio firmware will also look for MAVLink HEARTBEAT messages coming from the serial connection. If it sees a HEARTBEAT message then it knows that the MAVLink protocol is in use, and it will start injecting MAVLink 'RADIO' status packets into the the serial stream.
 
 The RADIO packets contain information about the RSSI (Received Signal Strength Indicator) level at both ends of the link, allowing the ground station or aircraft to take action in case the link quality falls too low.
@@ -198,7 +199,7 @@ Please carefully check the EIRP (Equivalent isotropically radiated power) power 
 
 For example, if your local rules allow for a maximum of 30dBm (1W) EIRP, then if you use a amplifier with a 12dB transmit gain, and an antenna with 3dBi gain, then you will need to set TXPOWER to at most 14.
 
-If you don't know how to calculate it, we've made a tutorial for you here: <a href="http://copter.ardupilot.com/wiki/common-db-watt-dbm/">Understanding dB, Watts and dBm</a>.
+If you don't know how to calculate it, we've made a tutorial for you here: <a href="common-antenna-design/#understanding_db_watts_and_dbm">Understanding dB, Watts and dBm</a>.
 
 
 

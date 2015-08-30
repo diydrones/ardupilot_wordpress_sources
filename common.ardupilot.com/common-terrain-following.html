@@ -70,3 +70,5 @@ When the autopilot has finished loading terrain data you should see "ter_pend" g
 The terrain following code "looks ahead" of the current position along the flight path to try to ensure that the aircraft climbs soon enough to avoid upcoming terrain. The amount of lookahead is controlled by the TERRAIN_LOOKAHD parameter, which defaults to 2000 meters. The lookahead is also limited by the distance to the next waypoint in AUTO mode, so you need to ensure that you don't have any legs of your mission which include climb rates your aircraft cannot achieve.
 
 The climb rate used in the terrain look ahead is based on the TECS_MAX_CLIMB parameter, combined with your current ground speed.
+
+<!-- [copywiki destination="copter,plane"] This prevents copying of the topic into the rover wiki - do not delete -->

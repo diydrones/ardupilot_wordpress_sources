@@ -19,15 +19,13 @@ The basic radio set-up is very similar to the <a href="assembly-instructions">M
 Differences compared to the Multirotor set-up are:
 <ul>
 	<li>APM Output Channels 1~4 are connected to servos and the servos draw significant power from the power rails. Ensure your ESC and/or voltage regulator can provide enough power for the APM electronics and 4 power hungry servos.</li>
-</ul>
-<ul>
 	<li>APM <strong>Output</strong> Channel 7 can be used as the (optional) external gyro gain</li>
 	<li>APM Channel 8 can be used for the motor throttle using the Rotor Speed Control (RSC) function. This requires the rotor control signal from the Tx to be sent to the Input Ch8, and the ESC or governor to be plugged in to the Output Ch8.</li>
 </ul>
 
 
 
-[note]Check that your ESC outputs 5V (and not 6V!). If it's 6V you will need to place a 5V regulator between the ESC and receiver (this is required because although servos are happy with 6V, you risk burning out the APM if you power them with 6V). See instructions <a href="http://copter.ardupilot.com/wiki/tradheli_5vregulator/" rel="nofollow">(Here!)</a>.[/note]
+[note]Check that your ESC outputs 5V (and not 6V!). If it's 6V you will need to place a 5V regulator between the ESC and receiver (this is required because although servos are happy with 6V, you risk burning out the APM if you power them with 6V).[/note]
 
 Connect up your Radio and ArduPilot Mega generally as shown in the diagram below for a Futaba radio system.
 

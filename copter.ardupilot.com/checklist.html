@@ -9,4 +9,33 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
+This page is provides a list of things to check following configuration, and before your first flight. 
+
+
+<h1>Summary Checklist</h1>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Copter-Checklist-1.jpg"><img class="alignnone size-full wp-image-7735" alt="Copter Checklist 1" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Copter-Checklist-1.jpg" width="448" height="1158" /></a>
+
+
+
+
+<h1>Configuration</h1>
+
+<ul>
+	<li>Spin up the propellers on the ground and check they are all moving <a href="connect-escs-and-motors-pixhawk/#attach_propellers">in the correct orientation</a>.</li>
+	<li>Check that your copter knows what level is. With the copter on a flat surface connect to Mission Planner and ensure the artificial horizon display shows level.</li>
+	<li>Check all failsafe settings are enabled.  Instructions are here for <a href="throttle-failsafe">radio</a>, <a href="failsafe-battery">battery</a>, <a href="gps-and-gcs-failsafes">gps/ekf</a> and <a href="ekf-inav-failsafe">gcs</a>.
+</li>
+</ul>
+
+
+
+<h1>Flying</h1>
+
+<ul>
+	<li>Make sure you have a GPS lock before flying if you intend to use any auto modes. Even if you're only flying in Stabilized mode this is a good idea so you can invoke Return To Launch if you get into trouble.</li>
+	<li>Test RTL before sending your copter off on an auto waypoint flight. This is to check that the compass and GPS are working, and that it knows where home is before heading off on a more complex flight.</li>
+	<li>Ensure that flight in Stabilize works well before you attempt any more complex flight modes. Ensure loiter works before trying RTL. Ensure RTL works before trying auto.</li>
+	<li>Once armed stand 3m-6m away from the arming point as when in RTL the copter will be returning to this point.</li>
+	<li>When testing more complex flight modes, be ready to switch back to Stabilize mode at any moment if it does anything strange. Stabilize or Acro are the only modes which can save you from a problem with the software or sensors. RTL is a good mode to save you from human error, but relies on the copter being able to locate and fly itself, so this should not be used as an emergency mode if other auto flight modes go wrong.</li>
+	<li>Be sure you have a way of knowing when your battery is getting low, and land before you have used more than 80% of your battery capacity.</li>
+</ul>

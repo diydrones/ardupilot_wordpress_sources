@@ -316,30 +316,6 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI sensing pin (ArduCopter:RSSI_PIN)</h2>
-
-<p>This selects an analog pin for the receiver RSSI voltage. It assumes the voltage is RSSI_RANGE for max rssi, 0V for minimum</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>-1</td><td>Disabled</td></tr>
-<tr><td> 0</td><td>APM2 A0</td></tr>
-<tr><td> 1</td><td>APM2 A1</td></tr>
-<tr><td> 2</td><td>APM2 A2</td></tr>
-<tr><td> 13</td><td>APM2 A13</td></tr>
-<tr><td> 103</td><td>Pixhawk SBUS</td></tr>
-</table>
-</ul>
-
-
-<h2>Receiver RSSI voltage range (ArduCopter:RSSI_RANGE)</h2>
-
-<p>Receiver RSSI voltage range</p>
-<ul>
-<li>Values: 3.3:3.3V, 5:5V</li>
-<li>Units: Volt</li>
-</ul>
-
-
 <h2>Yaw behaviour during missions (ArduCopter:WP_YAW_BEHAVIOR)</h2>
 
 <p>Determines how the autopilot controls the yaw during missions and RTL</p>
@@ -1275,6 +1251,15 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Throttle acceleration filter (ArduCopter:ACCEL_Z_FILT_HZ)</h2>
+
+<p>Filter applied to acceleration to reduce noise.  Lower values reduce noise but add delay.</p>
+<ul>
+<li>Range: 1.000 100.000</li>
+<li>Units: Hz</li>
+</ul>
+
+
 <h2>Roll axis stabilize controller P gain (ArduCopter:STB_RLL_P)</h2>
 
 <p>Roll axis stabilize (i.e. angle) controller P gain.  Converts the error between the desired roll angle and actual angle to a desired roll rate</p>
@@ -1315,7 +1300,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Autotune axis bitmask (ArduCopter:AUTOTUNE_AXIS_BITMASK)</h2>
+<h2>Autotune axis bitmask (ArduCopter:AUTOTUNE_AXES)</h2>
 
 <p>1-byte bitmap of axes to autotune</p>
 <ul>
@@ -1332,11 +1317,19 @@ DO NOT EDIT
 </ul>
 
 
-<h2>autotune_aggressiveness (ArduCopter:AUTOTUNE_AGGRESSIVENESS)</h2>
+<h2>Autotune aggressiveness (ArduCopter:AUTOTUNE_AGGR)</h2>
 
-<p>autotune_aggressiveness. Defines the bounce back used to detect size of the D term.</p>
+<p>Autotune aggressiveness. Defines the bounce back used to detect size of the D term.</p>
 <ul>
 <li>Range: 0.05 0.10</li>
+</ul>
+
+
+<h2>AutoTune minimum D (ArduCopter:AUTOTUNE_MIN_D)</h2>
+
+<p>Defines the minimum D gain</p>
+<ul>
+<li>Range: 0.001 0.006</li>
 </ul>
 
 
@@ -3874,6 +3867,14 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Stillness threshold for detecting if we are moving (INS_STILL_THRESH)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Threshold to tolerate vibration to determine if vehicle is motionless. This depends on the frame type and if there is a constant vibration due to motors before launch or after landing. Total motionless is about 0.05. Suggested values: Planes/rover use 0.1, multirotors use 1, tradHeli uses 5</p>
+<ul>
+<li>Range: 0.05 to 50</li>
+</ul>
+
+
 <h1>WPNAV_ Parameters</h1>
 
 
@@ -3997,6 +3998,78 @@ DO NOT EDIT
 <li>Range: -90 90</li>
 <li>Increment: 1</li>
 <li>Units: deg/s</li>
+</ul>
+
+
+<h1>ATC_ Parameters</h1>
+
+
+<h2>Yaw target slew rate (ATC_SLEW_YAW)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Maximum rate the yaw target can be updated in Loiter, RTL, Auto flight modes</p>
+<ul>
+<li>Range: 500 18000</li>
+<li>Increment: 100</li>
+<li>Units: Centi-Degrees/Sec</li>
+</ul>
+
+
+<h2>Acceleration Max for Yaw (ATC_ACCEL_Y_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Maximum acceleration in yaw axis</p>
+<ul>
+<li>Range: 0 72000</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 18000</td><td>Slow</td></tr>
+<tr><td> 36000</td><td>Medium</td></tr>
+<tr><td> 54000</td><td>Fast</td></tr>
+</table>
+<li>Increment: 1000</li>
+<li>Units: Centi-Degrees/Sec/Sec</li>
+</ul>
+
+
+<h2>Rate Feedforward Enable (ATC_RATE_FF_ENAB)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Controls whether body-frame rate feedfoward is enabled or disabled</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled</td></tr>
+</table>
+</ul>
+
+
+<h2>Acceleration Max for Roll (ATC_ACCEL_R_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Maximum acceleration in roll axis</p>
+<ul>
+<li>Range: 0 180000</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 72000</td><td>Slow</td></tr>
+<tr><td> 108000</td><td>Medium</td></tr>
+<tr><td> 162000</td><td>Fast</td></tr>
+</table>
+<li>Increment: 1000</li>
+<li>Units: Centi-Degrees/Sec/Sec</li>
+</ul>
+
+
+<h2>Acceleration Max for Pitch (ATC_ACCEL_P_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Maximum acceleration in pitch axis</p>
+<ul>
+<li>Range: 0 180000</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 72000</td><td>Slow</td></tr>
+<tr><td> 108000</td><td>Medium</td></tr>
+<tr><td> 162000</td><td>Fast</td></tr>
+</table>
+<li>Increment: 1000</li>
+<li>Units: Centi-Degrees/Sec/Sec</li>
 </ul>
 
 
@@ -5132,7 +5205,7 @@ DO NOT EDIT
 </ul>
 
 
-<h1>BATT_ Parameters</h1>
+<h1>BATT Parameters</h1>
 
 
 <h2>Battery monitoring (BATT_MONITOR)</h2>
@@ -5211,7 +5284,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Battery monitoring (BATT_2_MONITOR)</h2>
+<h2>Battery monitoring (BATT2_MONITOR)</h2>
 
 <p>Controls enabling monitoring of the battery's voltage and current</p>
 <ul>
@@ -5225,7 +5298,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Battery Voltage sensing pin (BATT_2_VOLT_PIN)</h2>
+<h2>Battery Voltage sensing pin (BATT2_VOLT_PIN)</h2>
 
 <p>Setting this to 0 ~ 13 will enable battery voltage sensing on pins A0 ~ A13. For the 3DR power brick on APM2.5 it should be set to 13. On the PX4 it should be set to 100. On the Pixhawk powered from the PM connector it should be set to 2.</p>
 <ul>
@@ -5240,7 +5313,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Battery Current sensing pin (BATT_2_CURR_PIN)</h2>
+<h2>Battery Current sensing pin (BATT2_CURR_PIN)</h2>
 
 <p>Setting this to 0 ~ 13 will enable battery current sensing on pins A0 ~ A13. For the 3DR power brick on APM2.5 it should be set to 12. On the PX4 it should be set to 101. On the Pixhawk powered from the PM connector it should be set to 3.</p>
 <ul>
@@ -5255,14 +5328,14 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Voltage Multiplier (BATT_2_VOLT_MULT)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Voltage Multiplier (BATT2_VOLT_MULT)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Used to convert the voltage of the voltage sensing pin (BATT_VOLT_PIN) to the actual battery's voltage (pin_voltage * VOLT_MULT). For the 3DR Power brick on APM2 or Pixhawk, this should be set to 10.1. For the Pixhawk with the 3DR 4in1 ESC this should be 12.02. For the PX4 using the PX4IO power supply this should be set to 1.</p>
 <ul>
 </ul>
 
 
-<h2>Amps per volt (BATT_2_AMP_PERVOL)</h2>
+<h2>Amps per volt (BATT2_AMP_PERVOL)</h2>
 
 <p>Number of amps that a 1V reading on the current sensor corresponds to. On the APM2 or Pixhawk using the 3DR Power brick this should be set to 17. For the Pixhawk with the 3DR 4in1 ESC this should be 17.</p>
 <ul>
@@ -5270,7 +5343,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>AMP offset (BATT_2_AMP_OFFSET)</h2>
+<h2>AMP offset (BATT2_AMP_OFFSET)</h2>
 
 <p>Voltage offset at zero current on current sensor</p>
 <ul>
@@ -5278,7 +5351,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Battery capacity (BATT_2_CAPACITY)</h2>
+<h2>Battery capacity (BATT2_CAPACITY)</h2>
 
 <p>Capacity of the battery in mAh when full</p>
 <ul>
@@ -5432,9 +5505,8 @@ DO NOT EDIT
 
 <p>altitude offset in meters added to barometric altitude. This is used to allow for automatic adjustment of the base barometric altitude by a ground station equipped with a barometer. The value is added to the barometric altitude read by the aircraft. It is automatically reset to 0 when the barometer is calibrated on each reboot or when a preflight calibration is performed.</p>
 <ul>
-<li>Range: -128 127</li>
-<li>Increment: 1</li>
 <li>Units: meters</li>
+<li>Increment: 0.1</li>
 </ul>
 
 
@@ -6568,6 +6640,86 @@ DO NOT EDIT
 <tr><td>0</td><td>Resume Mission</td></tr>
 <tr><td> 1</td><td>Restart Mission</td></tr>
 </table>
+</ul>
+
+
+<h1>RSSI_ Parameters</h1>
+
+
+<h2>RSSI Type (RSSI_RSSI_TYPE)</h2>
+
+<p>Radio Receiver RSSI type. If your radio receiver supports RSSI of some kind, set it here, then set its associated RSSI_XXXXX parameters, if any.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>1</td><td>AnalogPin</td></tr>
+<tr><td>2</td><td>RCChannelPwmValue</td></tr>
+</table>
+</ul>
+
+
+<h2>Receiver RSSI analog sensing pin (RSSI_RSSI_ANA_PIN)</h2>
+
+<p>This selects an analog pin where the receiver RSSI voltage will be read.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>APM2 A0</td></tr>
+<tr><td> 1</td><td>APM2 A1</td></tr>
+<tr><td> 13</td><td>APM2 A13</td></tr>
+<tr><td> 103</td><td>Pixhawk SBUS</td></tr>
+</table>
+</ul>
+
+
+<h2>Receiver RSSI voltage low (RSSI_RSSI_PIN_LOW)</h2>
+
+<p>This is the voltage value that the radio receiver will put on the RSSI_PIN when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a lower value than PIN_RANGE_HIGH. </p>
+<ul>
+<li>Range: 0 5.0</li>
+<li>Increment: 0.01</li>
+<li>Units: Volt</li>
+</ul>
+
+
+<h2>Receiver RSSI voltage low (RSSI_RSSI_PIN_HIGH)</h2>
+
+<p>This is the voltage value that the radio receiver will put on the RSSI_PIN when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a higher value than PIN_RANGE_LOW. </p>
+<ul>
+<li>Range: 0 5.0</li>
+<li>Increment: 0.01</li>
+<li>Units: Volt</li>
+</ul>
+
+
+<h2>Receiver RSSI channel number (RSSI_RSSI_CHANNEL)</h2>
+
+<p>The channel number where RSSI will be output by the radio receiver.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>5</td><td>Channel5</td></tr>
+<tr><td>6</td><td>Channel6</td></tr>
+<tr><td>7</td><td>Channel7</td></tr>
+<tr><td>8</td><td>Channel8</td></tr>
+</table>
+<li>Units: </li>
+</ul>
+
+
+<h2>Receiver RSSI PWM low value (RSSI_RSSI_CHAN_LOW)</h2>
+
+<p>This is the PWM value that the radio receiver will put on the RSSI_CHANNEL when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a lower value than RSSI_CHAN_HIGH. </p>
+<ul>
+<li>Range: 0 2000</li>
+<li>Units: Microseconds</li>
+</ul>
+
+
+<h2>Receiver RSSI PWM high value (RSSI_RSSI_CHAN_HIGH)</h2>
+
+<p>This is the PWM value that the radio receiver will put on the RSSI_CHANNEL when the signal strength is the strongest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a higher value than RSSI_CHAN_LOW. </p>
+<ul>
+<li>Range: 0 2000</li>
+<li>Units: Microseconds</li>
 </ul>
 
 

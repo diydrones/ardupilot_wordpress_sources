@@ -143,7 +143,7 @@ This is usually due to an airframe that it out of tune, either with one motor ti
 
 Although you can adjust those terms in the Mission Planner's PID configuration screen, the best solution is to solve it at the source. Eyeball each motor and see if it or the arm it is one is slightly tilted, and bend it back to vertical if so. Also ensure that the battery is centered on the quad and the center of gravity of the vehicle is as close to the center of the APM board as possible. It's also a great idea to redo the ESC calibration routine just in case.
 
-Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="ac2_props" rel="nofollow">here</a>.
+Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="connect-escs-and-motors-pixhawk/#attach_propellers" rel="nofollow">here</a>.
 
 
 
@@ -182,12 +182,6 @@ If for some reason, connecting power to the RC rail does not power your board, c
 <h4>In the "raw sensor view" of the Mission Planner, the Z accelerometer reading is always 1000, not 0, when it's on the bench</h4>
 That's normal. The Z accelerometer is showing the force of gravity (which is an acceleration, as you'll recall from high school physics). If you turn the quad upside down, you'll see that it reverses.
 
-
-
-<h4>I can't connect with the Mission Planner over USB</h4>
-If you are unable to load firmware or otherwise connect with AC2 via USB, please double-check that you have followed all the procedures <a href="common-apm-usb-driver" rel="nofollow">here</a>. If you are using Windows 7, the FTDI drivers should have been automatically loaded, but if not you must download them yourself as described in those instructions. Double check that you've selected the right COM port and 115200 as the baud rate in the Mission Planner.
-
-If you're still having trouble, check the troubleshooting guide <a href="http://diydrones.com/profiles/blogs/arduino-debugging-tips" rel="nofollow">here</a>. Finally, try another PC and/or another USB cable.
 
 
 
@@ -304,7 +298,7 @@ Or you can use a standoff with an extending screw 1/10" outboard of each corner 
 
 When a flight log is checked in RAW mode, X,Y and Z hovering ACCELs vibration on a log graph should at least be in the + to - 5 range and either of the above techniques can get them down to the plus to minus 1 range if they are just right.
 
-You can graph your Z-axis vibrations by enabling the "RAW" message type in the <a href="downloading-and-analyzing-data-logs-in-mission-planner" rel="nofollow">dataflash</a>, then take a short flight in Stabilize mode and finally download the logs and graph them with the mission planner. Below is an example of an extremely badly vibrating copter (top) and a nearly perfectly smooth copter (bottom). The Z-axis vibrations should not move up and down more than -5 to -15 or alt hold will not function correctly. 
+You can graph your Z-axis vibrations by enabling the "RAW" message type in the <a href="common-downloading-and-analyzing-data-logs-in-mission-planner" rel="nofollow">dataflash</a>, then take a short flight in Stabilize mode and finally download the logs and graph them with the mission planner. Below is an example of an extremely badly vibrating copter (top) and a nearly perfectly smooth copter (bottom). The Z-axis vibrations should not move up and down more than -5 to -15 or alt hold will not function correctly. 
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/BadVibrations1.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/BadVibrations1-300x118.png" alt="BadVibrations" width="300" height="118" class="alignnone size-medium wp-image-14175" /></a>
 

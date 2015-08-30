@@ -31,9 +31,9 @@ The wiki is a multi-site WordPress installation, with separate sites for the dif
 </ul>
 </li>
 </ul>
-Topics that are specific to a particular platform are created in the corresponding site. Topics that are common to all the platforms are created in the <a href="http://planner.ardupilot.com">Mission Planner Wiki</a> (with title prefix <em>common-</em>), and then automatically copied to plane, copter and rover wikis.
+Topics that are specific to a particular platform are created in the corresponding site. Topics that are common to all the platforms are created in the <a href="http://planner.ardupilot.com">Mission Planner Wiki</a> (with title prefix <em>common-</em>), and then automatically copied to plane, copter and rover wikis (see section <a href="#working_with_common_pages">working with common pages</a>).
 
-[warning]<a href="#working_with_common_pages">Common topics</a> must be created and edited <strong>only</strong> in the <a href="http://planner.ardupilot.com">Mission Planner</a> wiki — any changes you make in the other wikis will be overwritten when the master version is updated![/warning]
+[warning]<a href="#working_with_common_pages">Common topics</a> must be created and edited <strong>only</strong> in the <a href="http://planner.ardupilot.com">Mission Planner</a> wiki — any changes you make in the other wikis will be overwritten when the master version is updated! [/warning]
 
 Wiki articles are <a title="Creating a a new wiki page" href="#creating_a_new_wiki_page">created and edited</a> through the <em>WordPress Dashboard</em>, which becomes available <a href="#how_to_log_into_the_wiki">when you log in</a>. <em>Wiki Approvers</em> are automatically contacted to review and publish articles and changes, as discussed in <a title="How to get articles approved" href="#how_to_get_articles_approved">How to get articles approved</a>.
 
@@ -124,7 +124,8 @@ The title of the new page should be concise — informative enough that the read
 
 Information on how to use the wiki editor is provided in <a href="#editing_a_wiki_page">Editing a wiki page</a>.
 
-[note]New pages that are common to rover, copter, and plane should be created in the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Their title should be prefixed with <em>common-</em>. These titles will automatically be copied to the appropriate wikis.[/note]
+[note]New pages that are common to rover, copter, and plane should be created in the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Their title should be prefixed with <em>common-</em>. These titles will automatically be copied to the appropriate wikis. See section <a href="#working_with_common_pages">working with common pages</a>
+[/note]
 
 
 
@@ -178,6 +179,10 @@ Creating and editing common pages is similar to editing other pages except:
 	<li>Changes must be made to the copy on the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Changes made on rover, copter, plane wikis will be over-written when the "master" copy is next updated.</li>
 	<li>Vehicle-specific content can be added to the common topic using <code>site_Rover</code>, <code>site_Copter</code> and <code>site_Plane</code> shortcodes. This text will will only be displayed on the respective wikis and the common wiki (Mission Planner). For example, to display text only on Rover wiki do: <code>[[site_Rover]Rover specific text[/site_Rover]]</code></li>
 	<li>Always <a href="#how_to_link_to_other_topics">link to other common topics</a> using relative linking. This ensures that you will link to the correct common topic when the wiki article sis copied.</li>
+
+	<li>If a common page is not relevant to all wikis you can add the **copywiki** shortcode to the page, specifying the allowed target wikis in the destination field as a comma separated list:
+<pre>&#91;copywiki destination="copter,plane"&#93;</pre>[note]If the page already exists on the target wiki it will not be deleted (this must be done manually).[/note]</li>
+
 </ul>
 
 
@@ -283,7 +288,7 @@ The <strong>archived</strong> shortcode can have an optional reason (recommended
 <ul>
 	<li><strong>[[archived]This is the reason that the article was archived[/archived]]</strong> - with reason</li>
 	<li><strong>[[archived date=20150206]This is the reason that the article was archived[/archived]]</strong> - with optional date</li>
-         <li><strong>&#91;archived&#93;</strong> - no reason or date</li>
+         <li><strong>&#091;archived&#093;</strong> - no reason or date</li>
 </ul>
 The three formats render as:
 [archived]This is the reason that the article was archived[/archived]

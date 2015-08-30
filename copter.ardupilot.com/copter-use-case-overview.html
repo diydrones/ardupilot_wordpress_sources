@@ -1,0 +1,130 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: copter-use-case-overview 
+title: Copter Use-Case Overview 
+id: 9522 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article provides an overview of some of the main use cases for Copter. 
+<!-- more -->
+
+
+<h1>Overview</h1>
+
+The Copter autopilot provides a stable flying platform that enables precise manual and automated control over vehicle position, speed, orientation and actions. The supported control behaviours are made available using autopilot <a href="flight-modes">flight/control modes</a>:
+<ul>
+	<li>Manual flight modes like <a href="stabilize-mode">Stabilize</a>, <a href="altholdmode">Alt Hold</a> and <a href="loiter-mode">Loiter</a> provide different types of stabilisation and make vehicles easier to fly and position. Other manual modes like <a href="ac2_followme">Follow Me</a> and <a href="rtl-mode">RTL (Return-to-Launch)</a> automate tasks that would otherwise require complex manual adjustments.</li>
+	<li><a href="auto-mode">AUTO Mode</a> allows you to run complex missions that you can define using a <a href="common-choosing-a-ground-station">ground control station</a>.</li>
+	<li>A companion computer on the vehicle can communicate with/control Copter (for example, using <a href="http://python.dronekit.io/">DroneKit-Python</a>) and perform computationally intensive low-latency tasks like computer-vision.</li>
+</ul>
+
+This stability and precision, and the flexibility in terms of manual and automated control, make Copter the ideal platform for many UAV applications. 
+
+This article provides an overview of some of the main use cases, with special emphasis on those requiring photographic/video inspection or payload delivery in difficult-to-reach places.
+
+[tip]Additional use cases and information are covered in the section <a href="common-use-cases-and-applications">Use Cases and Applications</a>.[/tip]
+
+
+<h1>Still and Video Photography</h1>
+
+Copter allows you to easily get to locations and take pictures/video that would otherwise be difficult (or impossible) to reach. For this reason, photography applications are currently the most highly developed use-case. 
+
+Copter provides a stable platform for photography, with additional stability and independent control of camera position (relative to the vehicle) provided by brushless camera gimbals. Copter supports camera-friendly flight modes like <a href="ac2_followme">Follow Me</a> and allows you to control/maintain the camera target at a specific region of interest.
+
+Advanced systems like <a href="http://3drobotics.com/solo-drone/">3DR Solo</a> implement even more advanced vehicle/camera control ("smart shots") using <a href="http://python.dronekit.io/">DroneKit-Python</a> running on a Companion Computer.
+
+
+
+<h1>First Person View (FPV)</h1>
+
+<em>First Person View</em> allows you to fly your copter from the perspective of an actual on board pilot. This use case is discussed in the topic <a href="common-fpv-first-person-view">First Person View (FPV)</a>.
+
+
+
+<h1>Disaster response</h1>
+
+Copters can help save lives/provide relief in the event of major disasters (fires, flood, tornadoes, earthquakes, volcanic eruptions etc). 
+
+They are particularly useful for search and survey tasks, and for delivery of low-weight critical supplies, information and assistance. They can do this relatively cheaply without putting additional lives at risk (freeing up other resources to do actual recovery).
+
+
+
+<h1>Search (and rescue)</h1>
+
+Copter makes an excellent platform for locating missing individuals and groups. Vehicles can perform a grid search and take photographs for either on-board (using a companion computer) or later analysis. Copter can search in hard-to-reach areas, and may be used in large numbers due to their low cost.
+
+[tip]Fixed wing vehicles have much greater range than Copter, and may be more suitable for searching large areas with low ground-cover.[/tip]
+
+
+<h1>Agricultural applications</h1>
+
+Agricultural inspection is a growing field for UAV applications. Examples include:
+<ul>
+	<li>Tile and drainage inspections</li>
+	<li>Barn roof and silo inspections</li>
+	<li>Irrigation pivot inspections</li>
+	<li>Hail and cattle damage inspection for crop insurance claims</li>
+	<li>Scare off pest-wildlife that eat crops</li>
+	<li>Patrol for hunters on your private land</li>
+	<li>Locate missing cattle (This is where a thermal camera comes in handy.)</li>
+	<li>Video check-ins for landlords</li>
+</ul>
+
+[tip]This promises to be one of the most important and earliest adopted civilian uses of Multicopters. One benefit is that there are fewer restrictions when flying over private land.[/tip]
+
+
+
+
+<h1>Forest fire mitigation</h1>
+
+Copter has great potential for fire monitoring and detection (with an infrared camera, a Plane or Copter UAV can detect small camp fires even in heavy tree cover).
+
+
+
+<h1>Hazard/danger mitigation</h1>
+
+More generally, Copter and Plane are useful for other hazard mitigation as a cost-effective alternative to patrolling using airplanes, helicopters, or ground-based services.
+
+They are already being used for shark patrols in beach areas, and there is no reason they could not similarly be used in any other "patrol" activity.
+
+
+
+<h1>3D Mapping and GIS (Geographic Information Systems)</h1>
+
+Copter makes an effective 3D Mapping platform with a wide variety of potential applications. For more information see the topic <a href="common-3d-mapping">3D Mapping</a>.
+
+
+
+<h1>Inspection, Verification and Sample Collection</h1>
+
+Architectural and building inspection/verification are possibly the fastest growing UAV use case - due to the obvious benefits to being able to check construction quality and condition without having to create expensive scaffolding and other safety infrastructure. Copter is similarly useful for contour analysis, drainage and verifying adherence to plans.
+
+Copter is also useful for sample collection in difficult to reach or hazardous areas (this requires that the vehicle is fitted with a small probe or other sample device). The <a href="http://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-13-23300">Modcopter Sample Collection System</a> is an excellent government-backed student project for accessing a variety of samples.
+
+
+
+
+<h1>Payload Based Applications</h1>
+
+Copter is suitable for delivery of low-mass emergency supplies, including flotation devices, communications devices, shark repellent etc.
+
+There are active investigations into other commercial applications including crop spraying and package delivery.
+
+
+<h1>Other applications</h1>
+
+Copters are being used or considered in many other applications:
+<ul>
+	<li>Initial "pilot line" stringing for power lines from hilltop to hill top.</li>
+	<li>Painting, touch up and maintenance.</li>
+	<li>Tree trimming and spraying.</li>
+	<li>Building and home cleaning.</li>
+</ul>
+
+
+
+More detail and additional use case information is covered in the section <a href="common-use-cases-and-applications">Use Cases and Applications</a>.

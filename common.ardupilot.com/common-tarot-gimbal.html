@@ -39,9 +39,9 @@ One of the two "-" pins should be connected to the Pixhawk's AUX1 ground pin.
 Upon powering your vehicle, the gimbal will display a solid yellow light while it is starting and calibrating. Do not touch the gimbal while it is starting up. When the gimbal displays a blinking blue light, it is ready for flight. If the gimbal is not connected to the autopilot, it will perform basic stabilization without autopilot control, indicated by a solid blue light.
 
 <strong>LED meanings</strong>
-Solid yellow <span style="background-color: #ffff00;">   </span>  = calibrating
-Blinking blue <span style="background-color: #0000ff;"> </span> <span style="background-color: #0000ff;"> </span> <span style="background-color: #0000ff;"> </span>= ready, connected to autopilot
-Solid blue <span style="background-color: #0000ff;">   <span style="background-color: #ffffff;"> </span></span>= ready, not connected to autopilot
+Solid yellow <span style="background-color: #ffff00">   </span>  = calibrating
+Blinking blue <span style="background-color: #0000ff"> </span> <span style="background-color: #0000ff"> </span> <span style="background-color: #0000ff"> </span>= ready, connected to autopilot
+Solid blue <span style="background-color: #0000ff">   <span style="background-color: #ffffff"> </span></span>= ready, not connected to autopilot
 
 
 
@@ -99,7 +99,7 @@ Once powered the gimbal should point to it's Tilt Angle Min (i.e. straight down)
 
 <strong>Testing ROI</strong>
 
-<b>You must have GPS lock to test ROI.</b> The ROI feature points the vehicle and/or camera to point at a target. The instructions above describe setting up the APM/Pixhawk so that it only controls the Tilt (i.e. pitch) of the Tarot gimbal so when a <a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-ROI">Do-Set-ROI</a> command is received Copter will attempt to turn the vehicle's nose to point in the direction of the target and tilt camera depending upon the vehicle's distance and altitude. You can test the gimbal tilt moves correctly by connecting with the mission planner, then on the Flight Data screen's map, right-mouse-button-click on a point about 50m ahead of the vehicle (the <span style="color: #ff6600;">orange</span> and <span style="color: #ff0000;">red</span> lines show the vehicle's current heading), select "Point Camera Here" and input an altitude of -50 (meters). This should cause the gimbal to point down at about 45 degrees.
+<b>You must have GPS lock to test ROI.</b> The ROI feature points the vehicle and/or camera to point at a target. The instructions above describe setting up the APM/Pixhawk so that it only controls the Tilt (i.e. pitch) of the Tarot gimbal so when a <a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-ROI">Do-Set-ROI</a> command is received Copter will attempt to turn the vehicle's nose to point in the direction of the target and tilt camera depending upon the vehicle's distance and altitude. You can test the gimbal tilt moves correctly by connecting with the mission planner, then on the Flight Data screen's map, right-mouse-button-click on a point about 50m ahead of the vehicle (the <span style="color: #ff6600">orange</span> and <span style="color: #ff0000">red</span> lines show the vehicle's current heading), select "Point Camera Here" and input an altitude of -50 (meters). This should cause the gimbal to point down at about 45 degrees.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_BenchTestROI.png"><img class="alignnone size-full wp-image-2299" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_BenchTestROI.png" alt="Tarot_BenchTestROI" width="1192" height="830" /></a>
 

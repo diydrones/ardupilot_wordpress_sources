@@ -5,8 +5,8 @@ title: Copter Mission Command List
 id: 11907 
 menu_order: 10 
 post_parent_id: 1555 
-post_parent_stub: mission-planning-and-analysis 
-post_parent_title: Mission Planning 
+post_parent_stub: common-mission-planning 
+post_parent_title: common-Mission Planning 
 END METADATA 
 -->
 This page provides details of all the mission commands (i.e. <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink commands</a>) supported by Copter that can be run as part of a mission (i.e. <a href="wiki/auto-mode/">AUTO flight mode</a>).
@@ -187,7 +187,7 @@ Set a <a href="wiki/common-relay/">Relay</a> pin's voltage high or low.  The co
 <h3>Do-Repeat-Relay</h3>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatRelay.png"><img class="alignnone size-full wp-image-11955" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoRepeatRelay.png" alt="MissionList_DoRepeatRelay" width="1022" height="137" /></a>
 
-Toggle the <a href="wiki/common-using-the-relay-switch/">Relay</a> pin's voltage a specified number of times. In the example above, assuming the relay was off to begin with, it would be set high and then after 3 seconds it would be toggled low again.
+Toggle the <a href="common-relay">Relay</a> pin's voltage a specified number of times. In the example above, assuming the relay was off to begin with, it would be set high and then after 3 seconds it would be toggled low again.
 <p style="padding-left: 30px"><strong>First column is Relay number</strong> : 0 = First Relay, 1 = Second Relay
 <strong>Repeat #</strong> : how many times the relay should be toggled
 <strong>Delay(s)</strong> - Number of seconds between each toggle.</p>
