@@ -4,13 +4,16 @@ slug: rtl-mode
 title: RTL Mode 
 id: 1567 
 menu_order: 80 
-post_parent_id: 1556 
-post_parent_stub: flight-modes 
-post_parent_title: Flight Modes 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 In return to launch (RTL) mode, the copter navigates from its current position to hover above the home position. The behavior of RTL mode can be controlled by several adjustable parameters. This page describes how to use and customize RTL mode.
-<h3>Overview</h3>
+
+
+
+<h1>Overview</h1>
 When RTL mode is selected, the copter will return to the home location. The copter will first rise to RTL_ALT before returning home or maintain the current altitude if the current altitude is higher than RTL_ALT.  The default value for RTL_ALT is 15m.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/08/RTL.png"><img class="alignnone wp-image-9418" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/08/RTL.png" alt="RTL" width="560" height="420" /></a>
@@ -20,7 +23,10 @@ RTL is a GPS-dependent move, so it is essential that GPS lock is acquired before
 RTL will command the copter to return to the home position, meaning that it will return to the location where it was armed. <span style="color: #ff0000;">Therefore, the home position is always supposed to be your copter's actual GPS takeoff location, unobstructed and away from people. </span>For Copter if you get GPS lock and then ARM your copter, the home position is the location the copter was in when it was armed. This means if you execute an RTL in Copter, it will return to the location where it was armed.
 
 <span style="color: #ff0000;"><strong>Warning:</strong></span> In RTL mode the flight controller uses a barometer which measures air pressure as the primary means for determining altitude ("Pressure Altitude") and if the air pressure is changing in your flight area, the copter will follow the air pressure change rather than actual altitude (unless you are within 20 feet of the ground and have SONAR installed and enabled).
-<h3>Options (User Adjustable Parameters)</h3>
+
+
+
+<h1>Options (User Adjustable Parameters)</h1>
 <ul>
 	<li><strong>RTL_ALT:</strong> The minimum altitude the copter will move to before returning to launch.
 <ul>
@@ -53,7 +59,10 @@ RTL will command the copter to return to the home position, meaning that it will
 </ul>
 </li>
 </ul>
-<h3>Notes</h3>
+
+
+
+<h1>Notes</h1>
 <ul>
 	<li>Other navigation settings also have an influence over RTL mode:
 <ul>

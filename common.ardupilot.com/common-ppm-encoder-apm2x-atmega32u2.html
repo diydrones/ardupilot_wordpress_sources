@@ -4,20 +4,20 @@ slug: common-ppm-encoder-apm2x-atmega32u2
 title: common-PPM Encoder APM 2.x Atmega 32U2 (8 Channel PPM Encoder) 
 id: 302 
 menu_order: 30 
-post_parent_id: 312 
-post_parent_stub: common-apm25-and-26-overview 
-post_parent_title: common-APM 2.5 and 2.6 Overview 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 This article describes the PPM Encoder that is embedded in APM2.5/6 boards. It is provided for use in the (very unlikely) event that the encoder needs to be reprogrammed.
 
-<h3>How to flash the Atmega32U2 (PPM encoder) through USB</h3> 
+<h1>How to flash the Atmega32U2 (PPM encoder) through USB</h1> 
 
 If you every find yourself in a situation where your PPM encoder has become corrupted for some reason, or you want to upload a new version, you can. The PPM encoder (ATMega32-U2) has an special bootloader that allows you to flash it without needing a special SPI programmer. The 32U2 firmware controls the USB connection to the 2560 and is also used to convert radio PCM signals to a PPM signal for the 2560.  APM 2.5 modules shipped before March 4th 2013  have an older version of the firmware. Here is a discussion on the newer <a href="http://www.diydrones.com/profiles/blogs/new-arduppm-firmware-version-2-3-16-in-the-downloads-section" target="_blank">firmware</a>.
 
 
 
-<h3>What you need</h3>
+<h1>What you need</h1>
 <ul>
 	<li>Windows XP/Vista/7</li>
 	<li>USB cable</li>
@@ -28,7 +28,7 @@ If you every find yourself in a situation where your PPM encoder has become corr
 
 
 
-<h3>Putting the Atmega32U2 into programming (DFU) mode</h3>
+<h1>Putting the Atmega32U2 into programming (DFU) mode</h1>
 
 
 
@@ -78,7 +78,8 @@ If you every find yourself in a situation where your PPM encoder has become corr
 
 
 
-<h3>Using FLIP to upload the firmware</h3>
+<h1>Using FLIP to upload the firmware</h1>
+
 <ul>
 	<li>Open Flip by double clicking the flip icon:
 <img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/flip_icon.jpg" /></li>

@@ -4,9 +4,9 @@ slug: common-vrgimbal
 title: common-Archived:VR Gimbal Controller (3-Axis Open Source) 
 id: 1812 
 menu_order: 60 
-post_parent_id: 3495 
-post_parent_stub: common-archived-topics 
-post_parent_title: common-Archived Topics 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 [archived]
@@ -25,7 +25,9 @@ http://www.youtube.com/watch?feature=player_embedded&amp;v=KIqWXnAuKPo#t=25
 [note]We do not yet have an recommended affordable 3-axis gimbal for use with the VRGimbal.  Testing by the Ardupilot dev team has so far been limited to using a Tarot 2-axis gimbal.[/note]
 
 
+
 <h1>Connecting the VRGimbal to the Pixhawk</h1>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_Wiring1.png"><img class="alignnone  wp-image-1815" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/VRGimbal_Wiring1.png" alt="VRGimbal_Wiring1" width="1436" height="741" /></a>
 The IMU Sensor should be attached to the top or bottom of the camera so that the white arrow points forward.
 
@@ -38,13 +40,19 @@ The "RC2" pin (label on the underside of the board) should be connected to the P
 The gound pin which is on the edge of the board near "RC2" should be connected to the Pixhawk's AUX OUT 1 "-" pin (see image above).
 
 
+
 <h1>Operation</h1>
+
 Upon powering the gimbal, the green power light (bottom right in the image above) should turn on immediately.  The gimbal should not be touched within the first 10seconds after start-up as it will be performing an IMU calibration.  Once the calibration is done the red LED (immediately left of the green LED) will come on and the controller will attempt to stabilize the cmaera.
 
 <strong>LED meanings</strong>
 Solid Green LED = power on
 Solid Red LED = calibration complete, stabilizing camera
+
+
+
 <h1>Configuring the gimbal</h1>
+
 Use a mini USB cable to connect the Gimbal board to your computer (Windows only?). If this is the first time you have plugged in the dongle you will see a USB device installation window but it will likely fail (see "BAD" device driver screen shot below).
 
 

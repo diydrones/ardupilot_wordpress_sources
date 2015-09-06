@@ -10,20 +10,13 @@ post_parent_title:
 END METADATA 
 -->
 This article explains how to use AutoTune on Copter.
-
-
 <h1>Overview</h1>
-
 AutoTune attempts to automatically tune the Stabilize P and Rate P and D terms in order to provide the highest response without significant overshoot. Copter needs to be "basically" flyable in <a href="altholdmode">AltHold mode</a> before attempting to use AutoTune as the feature needs to be able to "twitch" the copter in the roll and pitch axis.
 
 [note]The AutoTune feature was introduced in Copter 3.1.[/note]
 
 http://www.youtube.com/watch?v=js2GzeRysAc
-
-
-
 <h1>How to invoke AutoTune</h1>
-
 <ol>
 	<li>Set up one flight mode switch position to be AltHold.</li>
 	<li>Set the <a href="wiki/channel-7-and-8-options/">Ch7 Opt or Ch8 Opt</a> to Autotune to allow you to turn the auto tuning on/off with the ch7 or ch8 switch.<img class="alignnone size-medium wp-image-9840" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/10/AutoTuneCh7Switch-300x179.png" alt="AutoTuneCh7Switch" width="300" height="179" /></li>
@@ -45,13 +38,10 @@ http://www.youtube.com/watch?v=js2GzeRysAc
 If you DO NOT like the new PIDS, switch ch7/ch8 LOW to return to the original PIDs. The gains will not be saved when you disarm.</li>
 </ol>
 If you find after performing an AutoTune that the vehicle feels overly twitchy when flying Stabilize, AltHold or PosHold (but ok in more autonomous modes like Loiter, RTL, Auto) try reducing the RC_FEEL parameter to 0.25.  This smooths out the pilot's input.
-
-
-
 <h1>Copter-3.3 changes</h1>
-
 Copter 3.3 adds some additional features:
 <ul>
+	<li>AutoTune can be setup as a flight-mode.  Switching into or out of the AutoTune flight mode responds in the same way as raising or lowering a ch7/ch8 aux switch high assigned the AutoTune function.</li>
 	<li>Yaw axis is also autotuned</li>
 	<li>AUTOTUNE_BITMASK allows control of which axis are to be tuned (useful if the vehicle's battery life is not long enough to complete all 3-axis)</li>
 	<li>AUTOTUNE_AGGR : Should be in the range of 0.05 to 0.10. Controls the threshold for D-term bounce back and P-term overshoot. This affects the tuning noise immunity (a higher value is more tolerant to flex in the frame or other disturbances that could trick the tuning algorithm).  High values also leads to a tune that rejects external disturbances better.  Lower values result in a tune that is more responsive to pilot input.</li>
@@ -62,27 +52,13 @@ Copter 3.3 adds some additional features:
 </ul>
 </li>
 </ul>
-
-
 <h1>AutoTuning notes</h1>
-
-
 <ul>
-	<li>AutoTune can r<strong>equest very large and fast changes in output</strong>s to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV). See this video showing a test which recreates a sync problem.
-
-https://www.youtube.com/watch?v=hBUBbeyLe0Q
-</li>
+	<li>AutoTune can r<strong>equest very large and fast changes in output</strong>s to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV). See this video showing a test which recreates a sync problem.https://www.youtube.com/watch?v=hBUBbeyLe0Q</li>
 	<li>AutoTune is sometimes unable to find a good tune for frames with very soft dampening on the APM or very flexible arms.</li>
 	<li>For best results the copter shouldn't be allowed to build up too much speed. This can be prevented by applying a quick correction between tests (twitches).</li>
 	<li>Be advised that AutoTune will engage in Stabilize, so don't accidentally flip your AutoTune switch until you are in AltHold and ready to begin the procedure.</li>
 </ul>
-
-
 [tip]When reporting issues with AutoTune please include a description of your frame and a dataflash log of the flight.[/tip]
-
 <h1>Dataflash logging</h1>
-
 ATUN (auto tune overview) and ATDE (auto tune details) messages are written to the dataflash logs. Some details of the contents of those messages can be found on the <a href="http://copter.ardupilot.com/wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/#message_details_copter_specific">Downloading and Analyzing Data Logs in Mission Planner</a> wiki page.
-
-
-

@@ -4,9 +4,9 @@ slug: common-3dr-radio-version-2
 title: common-3DR Radio v2 
 id: 2453 
 menu_order: 10 
-post_parent_id: 2447 
-post_parent_stub: common-telemetry-landingpage 
-post_parent_title: common-Telemetry (landing page) 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 The <a href="https://store.3drobotics.com/products/3dr-radio-set">3DR Radio</a> (version 2) is the easiest way to setup a telemetry connection between your APM/Pixhawk and a ground station. This article provides a basic user guide for how to connect and configure your radio.
@@ -49,12 +49,18 @@ The 3DR Radios have 2 status LEDs, one red and one green. The meaning of the dif
 	<li>Red LED flashing - transmitting data</li>
 	<li>Red LED solid - in firmware update mode</li>
 </ul>
+
+
+
 <h1>Connecting the radios</h1>
+
 The 3DR Radio v2 has interchangeable air and ground modules, meaning that you use them as a pair but it does not matter which one goes on the vehicle and which remains on the ground.
 
 The radio has a micro-USB port, and a DF13 six-position port. The following sections explain how to connect these to flight controllers and ground stations.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2.jpg"><img class="alignnone wp-image-1450" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2-300x155.jpg" alt="3DR Radio V2" width="300" height="155" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout.jpg"><img class="alignnone wp-image-1453" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout-1024x382.jpg" alt="3dr radio pinout" width="584" height="217" /></a>
+
+
 <h2>Connecting to Pixhawk</h2>
 Use the <a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">6 pin DF13 connector</a> that should have come with the radio to connect the 3DR radio to your Pixhawk's "Telem 1" ("Telem 2" or "Serial 4/5" can also be used but the default recommendation is "Telem1").
 
@@ -63,6 +69,8 @@ Use the <a href="http://store.3drobotics.com/products/df13-6-position-connector-
 Use the <a href="http://store.3drobotics.com/products/df13-6-position-to-5-position-connector-15-cm" target="_blank">6-to-5 pin DF13</a> connector to connect the 3DR radio to your APM2's Telem port. Because of the limited number of serial ports on the APM2.x, the telemetry radio cannot be used while the board is also plugged in with the micro USB port.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2.png"><img class="alignnone size-medium wp-image-2484" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2-300x181.png" alt="Telemetry_3DR_Radio_APM2" width="300" height="181" /></a>
+
+
 <h2>Connecting to a PC</h2>
 Connecting the 3DR radio to your Windows PC is as simple as connecting the micro USB cable (which should have been included with the radio) to your PC. The necessary drivers should be installed automatically and the radio will appear as a new "USB Serial Port" in the Windows Device Manager under Ports (COM &amp; LPT). The Mission Planner's COM Port selection drop-down should also contain the same new COM port.
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP.png"><img class="alignnone size-medium wp-image-2476" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP-300x123.png" alt="Telemetry_3drRadio_DeviceManagerAndMP" width="300" height="123" /></a>
@@ -72,6 +80,8 @@ To connect the radios:
 	<li>Select the new COM port, set the baud rate drop down (which appears between the COM port and Connect buttons) to 57600.</li>
 	<li>Press the <strong>Connect</strong> button and if the two radios connect successfully you should be able to lean your vehicle left and right and see it's attitude update on the MP's Flight Data screen's artificial horizon.</li>
 </ul>
+
+
 <h2>Connecting to an Android tablet</h2>
 Connecting the 3DR radio to an Android tablet using the L shaped micro USB cable (which should have been included with the radio). Then follow the directions in your <a title="common-Choosing a Ground Station" href="common-choosing-a-ground-station">preferred Ground Station app</a>.
 

@@ -1,0 +1,58 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: precision-landing-with-irlock 
+title: Precision Landing with IRLock 
+id: 15318 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to enable precision landing on Copter using the IRLock sensor.
+
+[note]This feature is (will be) supported from Copter 3.4[/note]
+<h1>Overview</h1>
+Copter 3.4 (not yet released) supports precision landing using the IRLock sensor. Using this system it is possible to land within 30cm of a visual target that is moving at less than 1m/s.
+
+https://youtu.be/rGFO73ZxADY
+
+
+<h1>Where to get it</h1>
+
+The <a href="http://irlock.com/products/ir-lock-filtered-pixy" target="_blank">IRLock sensor</a> and <a href="http://irlock.com/products/360-tracking-pod" target="_blank">IR pod (or beacon)</a> can be puchased from <a href="http://irlock.com/" target="_blank">irlock.com</a>.  The IRLock is a derivative of the <a href="http://charmedlabs.com/default/products/" target="_blank">Pixy camera</a> but has a different lens and comes pre-configured to work more easily as a landing detector.
+
+
+<h1>Connecting to the Pixhawk</h1>
+
+An <a href="https://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2" target="_blank">I2C cable</a> must be cut and used to connect the Pixhawk's I2C port (perhaps via an <a href="https://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a>) to the IRLock's I/O port.  Instructions are on the <a href="http://docs.irlock.com/#document-3" target="_blank">IRLock.com Getting Started</a> page or use the image below.
+
+[caption id="attachment_15319" align="alignnone" width="1788"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png"><img class="size-full wp-image-15319" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png" alt="IRLock sensor/Pixhawk Wiring" width="1788" height="986" /></a> IRLock sensor/Pixhawk Wiring[/caption]
+
+
+<h1>Mounting to the frame</h1>
+
+The <em>IRLock</em> sensor should be mounted to the underside of the frame with the camera lens pointing directly down.  The board should be oriented so that the white button on the board points towards the front of the vehicle (or to put it another way, the side closest to the camera lens should be towards the front of the vehicle).
+
+The image below shows the camera mounted on the <em>front</em> of a 3DR IRIS.  It might be better to mount on the underside of the vehicle!
+
+[caption id="attachment_15340" align="alignnone" width="800"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockMounting.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockMounting.png" alt="IRLock Mounted on Iris" width="800" height="600" class="size-full wp-image-15340" /></a> IRLock Mounted on Iris[/caption]
+
+<h1>Setup through the Mission Planner</h1>
+
+Set the following parameters through the Mission Planner (or other GCS) to enable the sensor.
+<pre>PLAND_ENABLED     1
+PLAND_TYPE        2</pre>
+[note]Remember to reboot the Pixhawk after making these changes.[/note]
+<h1>Flying and Testing</h1>
+Setup the vehicle with one of the flight modes set to LAND (as of the time this wiki page was written, the precision landing function only operates in LAND mode).
+
+Place the IR Pod on the ground and take-off to 10m roughly above the target.  Switch the vehicle to LAND.
+
+[tip]Be prepared to retake control if there are sudden unexpected movements (Change mode to Stabilize, AltHold or Loiter).[/tip]
+
+If the vehicle does not land directly on the target, download the dataflash logs and examine the PL messages.
+<ul>
+	<li>If the "Heal" field is not "1" then there may be a communication issue between the Pixhawk and IRLock sensor</li>
+	<li>If the bX, bY, eX or eY values do not appear smooth then the sensor may be picking up multiple targets.  Refer to the IRLock wiki page on how to adjust the sensitivity of the camera</li>
+</ul>

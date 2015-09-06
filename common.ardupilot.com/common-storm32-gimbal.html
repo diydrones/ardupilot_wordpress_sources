@@ -4,13 +4,14 @@ slug: common-storm32-gimbal
 title: common-SToRM32 Gimbal Controller 
 id: 4070 
 menu_order: 30 
-post_parent_id: 1850 
-post_parent_stub: common-cameras-and-gimbals 
-post_parent_title: common-Cameras and Gimbals 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 The <em>SToRM32-BGC</em> is a relatively low-cost 3-axis brushless gimbal controller that can communicate with ArduPilot (Copter, Plane and Rover) using MAVLink.
 <!--more-->
+
 With 3-axis control and MAVLink interface, the SToRM32 offers more capabilities and than the Tarot Gimbal.  MAVLink is a richer communications format that PWM and may be used in the future to provide additional information to the gimbal including centrefugal force corrections leading to better performance during aggressive maneuvers.
 
 Please refer to the <a href="http://www.olliw.eu/storm32bgc-wiki/Main_Page" target="_blank">SToRM32-BGC wiki pages</a> for more detailed information including where the gimbals can be purchased.  This gimbal has been tested with a <a href="http://www.hobbyking.com/hobbyking/store/__52136__DYS_Smart3_3_Axis_GoPro_Gimbal_with_AlexMos_Control_Board_BaseCam_.html" target="_blank">DYS 3-axis brushless gimbal</a>.
@@ -61,7 +62,8 @@ Set the <code>MNT_ANGMAX_PAN</code>, <code>MNT_ANGMIN_TIL</code>, <code>MNT_ANGM
 </ul>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams.png"><img class="alignnone size-large wp-image-4074" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/03/SToRM32_MP_MountParams-1024x806.png" alt="SToRM32_MP_MountParams" width="474" height="373" /></a>
 <h1>Set-up through the Mission Planner (SToRM32 serial protocol)</h1>
-The custom SToRM32 protocol was added as an alternative to the MAVLink protocol but only works with older gimbal firmware Ver 0.70.  To use the serial protocol use all the same settings as above except set the SERIALX_PROTOCOL to "8" (where "X" is "1", "2" or "4" depending upon which Pixhawk serial port the gimbal is connected to)
+The custom SToRM32 protocol was added as an alternative to the MAVLink protocol and has the same features.  To use the serial protocol use all the same settings as above except set the SERIALX_PROTOCOL to "8" (where "X" is "1", "2" or "4" depending upon which Pixhawk serial port the gimbal is connected to).
+When <a href="#configuring_the_gimbal">Configuring the Gimbal</a> controller the "MAVLink configuration" should be set to "no heartbeat".
 <h1>Testing the gimbal</h1>
 For instructions for testing the gimbal moves correctly please check the <a href="common-tarot-gimbal/#testing_the_gimbal_moves_correctly">similar section for the Tarot gimbal</a>.
 

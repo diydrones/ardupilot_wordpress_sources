@@ -4,18 +4,24 @@ slug: common-frsky-telemetry
 title: common-FrSky Telemetry 
 id: 2520 
 menu_order: 20 
-post_parent_id: 2447 
-post_parent_stub: common-telemetry-landingpage 
-post_parent_title: common-Telemetry (landing page) 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 This article describes how to transmit vehicle information from the autopilot and display it on an FrSky transmitter ("FrSky Telemetry").
+
+
+
 <h1>Overview</h1>
 An FrSky RC transmitter will not be able to display vehicle telemetry information "out of the box" because ArduPilot normally outputs data using the MAVLink protocol, while FrSky uses its own non-MAVLink protocol.
 
 This article explains a number of approaches for getting information from the autopilot to an FrSky transmitter (including the Taranis).
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
+
+
+
 <h1>Software/hardware solution</h1>
 ArduPilot provides a driver that can directly output the FrSky protocol. This section explains how you can connect and configure a Pixhawk to communicate with a D-Receiver or X-Receiver.
 
@@ -33,6 +39,8 @@ For the D-Receiver setup you will need:
 	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
 	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
 </ul>
+
+
 <h2>X-Receiver setup</h2>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png"><img class="alignnone wp-image-3127 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/Telemetry_FrSky_Pixhawk-SPORT.png" alt="Telemetry_FrSky_Pixhawk SPORT" width="1347" height="592" /></a>
 

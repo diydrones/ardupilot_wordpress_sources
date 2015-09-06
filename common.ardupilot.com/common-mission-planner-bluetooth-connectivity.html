@@ -4,9 +4,9 @@ slug: common-mission-planner-bluetooth-connectivity
 title: common-Mission Planner Bluetooth Connectivity 
 id: 2422 
 menu_order: 15 
-post_parent_id: 2447 
-post_parent_stub: common-telemetry-landingpage 
-post_parent_title: common-Telemetry (landing page) 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 The <a href="http://store.3drobotics.com/products/bluetooth-data-link" target="_blank">3DR Bluetooth Data Link</a> can be used to connect your APM2 or Pixhawk to your bluetooth enabled PC or Android Ground station at distances up to 50m.
@@ -113,6 +113,7 @@ When live data appears on the screen, you’re ready to start mission planning.
 You will need a FTDI to USB cable to change any of the configurations of the device (not supplied) It is not necessary to change anything in order for your BT device to function properly it will function quite well as supplied. This is for reference and your convenience only!
 
 To change the above you need a "Terminal" emulator program. You can not use "Putty" (a popular serial port tool)  because it will not accept "line" commands. The Bluetooth Modules read the input at a rate of once per second therefore you must use an emulator that will allow you to input an entire line before hitting "send". You can use the Arduino IDE to send commands to the com port if you are familiar with that. I use  "Advanced Serial Port Terminal" but any terminal emulator that allows you to type in a line of text before hitting send will work just a good.
+
 <h4>Change the Baud Rate:</h4>
 <span style="font-size: medium;font-family: verdana,geneva">The index  after the command AT+BAUD corresponds to the following baud rate:</span>
 
@@ -141,6 +142,8 @@ C----1382400bps</span>
 <span style="font-size: medium;font-family: verdana,geneva">The Bluetooth should reply:</span>
 
 <span style="font-family: verdana,geneva;font-size: medium">OKsetname</span>
+
+
 <h4>Change the Device PIN</h4>
 <span style="font-size: medium;font-family: verdana,geneva">The following example shows how to change the pairing code to 5566 In the terminal program, send the command (case sensitive):</span>
 

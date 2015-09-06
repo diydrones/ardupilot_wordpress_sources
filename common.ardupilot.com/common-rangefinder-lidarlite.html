@@ -4,9 +4,9 @@ slug: common-rangefinder-lidarlite
 title: common-LIDAR-Lite Rangefinder 
 id: 2540 
 menu_order: 40 
-post_parent_id: 2537 
-post_parent_stub: common-rangefinder-landingpage 
-post_parent_title: common-Rangefinders (landing page) 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and then technical info can be found <a href="http://kb.pulsedlight3d.com/support/home" target="_blank">here</a>.
@@ -18,6 +18,7 @@ The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</
 
 
 <h1>Connecting to the Pixhawk via I2C</h1>
+
 [warning]If you have a LIDAR-Lite that has a manufacture date label prior to February 2015 there are I2C interface communications issues that will cause unreliable operation of the sensor with Pixhawk and <em>will cause your vehicle to crash</em>. When using these versions of LIDAR-Lite please use the PWM alternative listed below for best results.[/warning]
 
 The cable is configured with a 6-position Molex CLIK Mate connector on one end and tinned leads on the opposite end.  You will need to solder the tinned ends to a modified <a href="http://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2-3-4" target="_blank">DF13 4-pin I2C cable</a> as shown below.
@@ -31,6 +32,9 @@ The power to the rangefinder should be supplied from a separate external BEC as 
 You may wish to also purchase an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter board</a> so that you can continue to connect an <a href="wiki/common-installing-3dr-ublox-gps-compass-module/" target="_blank">external GPS/Compass module</a>.
 
 [note]It is important to ensure that the ground from the BEC is connected to the ground on the servo rail.[/note]
+
+
+
 <h1>Connecting to Pixhawk via PWM</h1>
 As of the 3.3.x release of Plane and Copter you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
 

@@ -933,6 +933,15 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Disarm delay (ArduCopter:DISARM_DELAY)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Delay before automatic disarm in seconds. A value of zero disables auto disarm.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Units: Seconds</li>
+</ul>
+
+
 <h2>Angle Max (ArduCopter:ANGLE_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Maximum lean angle in all flight modes</p>
@@ -1004,6 +1013,17 @@ DO NOT EDIT
 <p>Allows setting the maximum acceptable compass and velocity variance</p>
 <ul>
 <li>Values: 0.6:Strict, 0.8:Default, 1.0:Relaxed</li>
+</ul>
+
+
+<h2>Crash check enable (ArduCopter:FS_CRASH_CHECK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This enables automatic crash checking. When enabled the motors will disarm if a crash is detected.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled</td></tr>
+</table>
 </ul>
 
 
@@ -1297,6 +1317,31 @@ DO NOT EDIT
 <p>Loiter position controller P gain.  Converts the distance (in the latitude direction) to the target location into a desired speed which is then passed to the loiter latitude rate controller</p>
 <ul>
 <li>Range: 0.500 2.000</li>
+</ul>
+
+
+<h2>Precision landing velocity controller P gain (ArduCopter:PRECLNDVEL_P)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision landing velocity controller P gain</p>
+<ul>
+<li>Range: 0.100 5.000</li>
+</ul>
+
+
+<h2>Precision landing velocity controller I gain (ArduCopter:PRECLNDVEL_I)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision landing velocity controller I gain</p>
+<ul>
+<li>Range: 0.100 5.000</li>
+</ul>
+
+
+<h2>Precision landing velocity controller I gain maximum (ArduCopter:PRECLNDVEL_IMAX)</h2>
+
+<p>Precision landing velocity controller I gain maximum</p>
+<ul>
+<li>Range: 0 1000</li>
+<li>Units: cm/s</li>
 </ul>
 
 
@@ -1705,6 +1750,59 @@ DO NOT EDIT
 
 
 <h2>RC dead-zone (HS4_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>dead zone around trim or bottom</p>
+<ul>
+<li>Range: 0 200</li>
+<li>Units: pwm</li>
+</ul>
+
+
+<h1>H_RSC_ Parameters</h1>
+
+
+<h2>RC min PWM (H_RSC_MIN)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>RC minimum PWM pulse width. Typically 1000 is lower limit, 1500 is neutral and 2000 is upper limit.</p>
+<ul>
+<li>Range: 800 2200</li>
+<li>Increment: 1</li>
+<li>Units: pwm</li>
+</ul>
+
+
+<h2>RC trim PWM (H_RSC_TRIM)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>RC trim (neutral) PWM pulse width. Typically 1000 is lower limit, 1500 is neutral and 2000 is upper limit.</p>
+<ul>
+<li>Range: 800 2200</li>
+<li>Increment: 1</li>
+<li>Units: pwm</li>
+</ul>
+
+
+<h2>RC max PWM (H_RSC_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>RC maximum PWM pulse width. Typically 1000 is lower limit, 1500 is neutral and 2000 is upper limit.</p>
+<ul>
+<li>Range: 800 2200</li>
+<li>Increment: 1</li>
+<li>Units: pwm</li>
+</ul>
+
+
+<h2>RC reverse (H_RSC_REV)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Reverse servo operation. Set to 1 for normal (forward) operation. Set to -1 to reverse this channel.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Reversed</td></tr>
+<tr><td>1</td><td>Normal</td></tr>
+</table>
+</ul>
+
+
+<h2>RC dead-zone (H_RSC_DZ)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>dead zone around trim or bottom</p>
 <ul>
@@ -3567,6 +3665,132 @@ DO NOT EDIT
 <tr><td>0</td><td>Internal</td></tr>
 <tr><td>1</td><td>External</td></tr>
 </table>
+</ul>
+
+
+<h2>Compass soft-iron diagonal X component (COMPASS_DIA_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_X in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass soft-iron diagonal Y component (COMPASS_DIA_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Y in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass soft-iron diagonal Z component (COMPASS_DIA_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Z in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass soft-iron off-diagonal X component (COMPASS_ODI_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_X in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass soft-iron off-diagonal Y component (COMPASS_ODI_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Y in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass soft-iron off-diagonal Z component (COMPASS_ODI_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Z in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron diagonal X component (COMPASS_DIA2_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_X in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron diagonal Y component (COMPASS_DIA2_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Y in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron diagonal Z component (COMPASS_DIA2_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Z in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron off-diagonal X component (COMPASS_ODI2_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_X in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron off-diagonal Y component (COMPASS_ODI2_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Y in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass2 soft-iron off-diagonal Z component (COMPASS_ODI2_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Z in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron diagonal X component (COMPASS_DIA3_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_X in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron diagonal Y component (COMPASS_DIA3_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Y in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron diagonal Z component (COMPASS_DIA3_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>DIA_Z in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron off-diagonal X component (COMPASS_ODI3_X)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_X in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron off-diagonal Y component (COMPASS_ODI3_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Y in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
+</ul>
+
+
+<h2>Compass3 soft-iron off-diagonal Z component (COMPASS_ODI3_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ODI_Z in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
+<ul>
 </ul>
 
 
@@ -5657,9 +5881,12 @@ DO NOT EDIT
 
 <h2>GNSS system configuration (GPS_GNSS_MODE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Bitmask for what GNSS system to use</p>
+<p>Bitmask for what GNSS system to use (all unchecked or zero to leave GPS as configured)</p>
 <ul>
-<li>Values: 0: Leave as currently configured 1: GPS 2: SBAS 4: Galileo 8: Beidou 16: IMES 32: QZSS 64: GLONASS</li>
+<li>Bitmask: 0:GPS, 1:SBAS, 2:Galileo, 3:Beidou, 4:IMES, 5:QZSS, 6:GLOSNASS</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Leave as currently configured 1</td></tr>
+</table>
 <li>RebootRequired: True</li>
 </ul>
 
@@ -5808,56 +6035,6 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Swash Roll Angle Max (H_ROL_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Maximum roll angle of the swash plate</p>
-<ul>
-<li>Range: 0 18000</li>
-<li>Increment: 100</li>
-<li>Units: Centi-Degrees</li>
-</ul>
-
-
-<h2>Swash Pitch Angle Max (H_PIT_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Maximum pitch angle of the swash plate</p>
-<ul>
-<li>Range: 0 18000</li>
-<li>Increment: 100</li>
-<li>Units: Centi-Degrees</li>
-</ul>
-
-
-<h2>Collective Pitch Minimum (H_COL_MIN)</h2>
-
-<p>Lowest possible servo position for the swashplate</p>
-<ul>
-<li>Range: 1000 2000</li>
-<li>Increment: 1</li>
-<li>Units: PWM</li>
-</ul>
-
-
-<h2>Collective Pitch Maximum (H_COL_MAX)</h2>
-
-<p>Highest possible servo position for the swashplate</p>
-<ul>
-<li>Range: 1000 2000</li>
-<li>Increment: 1</li>
-<li>Units: PWM</li>
-</ul>
-
-
-<h2>Collective Pitch Mid-Point (H_COL_MID)</h2>
-
-<p>Swash servo position corresponding to zero collective pitch (or zero lift for Assymetrical blades)</p>
-<ul>
-<li>Range: 1000 2000</li>
-<li>Increment: 1</li>
-<li>Units: PWM</li>
-</ul>
-
-
 <h2>Tail Type (H_TAIL_TYPE)</h2>
 
 <p>Tail type selection.  Simpler yaw controller used if external gyro is selected</p>
@@ -5892,17 +6069,6 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Manual Servo Mode (H_SV_MAN)</h2>
-
-<p>Pass radio inputs directly to servos for set-up. Do not set this manually!</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Disabled</td></tr>
-<tr><td>1</td><td>Enabled</td></tr>
-</table>
-</ul>
-
-
 <h2>Swashplate Phase Angle Compensation (H_PHANG)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Phase angle correction for rotor head.  If pitching the swash forward induces a roll, this can be correct the problem</p>
@@ -5922,61 +6088,11 @@ DO NOT EDIT
 </ul>
 
 
-<h2>External Motor Governor Setpoint (H_GOV_SETPOINT)</h2>
-
-<p>PWM passed to the external motor governor when external governor is enabled</p>
-<ul>
-<li>Range: 0 1000</li>
-<li>Increment: 10</li>
-<li>Units: PWM</li>
-</ul>
-
-
-<h2>Rotor Speed Control Mode (H_RSC_MODE)</h2>
-
-<p>Controls the source of the desired rotor speed, either ch8 or RSC_SETPOINT</p>
-<ul>
-<table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>None</td></tr>
-<tr><td> 1</td><td>Ch8 Input</td></tr>
-<tr><td> 2</td><td>SetPoint</td></tr>
-</table>
-</ul>
-
-
 <h2>Flybar Mode Selector (H_FLYBAR_MODE)</h2>
 
 <p>Flybar present or not.  Affects attitude controller used during ACRO flight mode</p>
 <ul>
 <li>Range: 0:NoFlybar 1:Flybar</li>
-</ul>
-
-
-<h2>Landing Collective Minimum (H_LAND_COL_MIN)</h2>
-
-<p>Minimum collective position while landed or landing</p>
-<ul>
-<li>Range: 0 500</li>
-<li>Increment: 1</li>
-<li>Units: pwm</li>
-</ul>
-
-
-<h2>RSC Ramp Time (H_RSC_RAMP_TIME)</h2>
-
-<p>Time in seconds for the output to the main rotor's ESC to reach full speed</p>
-<ul>
-<li>Range: 0 60</li>
-<li>Units: Seconds</li>
-</ul>
-
-
-<h2>RSC Runup Time (H_RSC_RUNUP_TIME)</h2>
-
-<p>Time in seconds for the main rotor to reach full speed.  Must be longer than RSC_RAMP_TIME</p>
-<ul>
-<li>Range: 0 60</li>
-<li>Units: Seconds</li>
 </ul>
 
 
@@ -5987,15 +6103,6 @@ DO NOT EDIT
 <li>Range: 0 1000</li>
 <li>Increment: 1</li>
 <li>Units: PWM</li>
-</ul>
-
-
-<h2>Critical Rotor Speed (H_RSC_CRITICAL)</h2>
-
-<p>Rotor speed below which flight is not possible</p>
-<ul>
-<li>Range: 0 1000</li>
-<li>Increment: 10</li>
 </ul>
 
 
@@ -7013,6 +7120,24 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Bus address of sensor (RNGFND_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Bus address of 2nd rangefinder (RNGFND2_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+</ul>
+
+
 <h1>TERRAIN_ Parameters</h1>
 
 
@@ -7074,6 +7199,29 @@ DO NOT EDIT
 <ul>
 <li>Range: -18000 +18000</li>
 <li>Increment: 1</li>
+</ul>
+
+
+<h1>PRECLAND_ Parameters</h1>
+
+
+<h2>Precision Land Type (PRECLAND_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision Land Type</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td> 1</td><td>CompanionComputer</td></tr>
+<tr><td> 2</td><td>IRLock</td></tr>
+</table>
+</ul>
+
+
+<h2>Precision Land horizontal speed maximum in cm/s (PRECLAND_SPEED)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision Land horizontal speed maximum in cm/s</p>
+<ul>
+<li>Range: 0 500</li>
 </ul>
 
 

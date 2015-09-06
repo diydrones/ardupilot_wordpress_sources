@@ -4,15 +4,18 @@ slug: prearm_safety_check
 title: Pre-Arm Safety Check 
 id: 6148 
 menu_order: 30 
-post_parent_id: 1540 
-post_parent_stub: flying-arducopter 
-post_parent_title: First Flight with Copter 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
 END METADATA 
 -->
 Copter includes a suite of Pre-arm Safety Checks which will prevent the vehicle from arming if any of a fairly large number of issues are discovered before take-off including missed calibration, configuration or bad sensor data. These checks help prevent crashes and fly-aways but they can also be disabled if necessary.
 
 https://www.youtube.com/watch?v=gZ3H2eLmStI
-<h3>Recognising which Pre-Arm Check has failed using the GCS</h3>
+
+
+<h1>Recognising which Pre-Arm Check has failed using the GCS</h1>
+
 The pilot will notice a pre-arm check failure because he/she will be unable to arm the copter and the LED will be flashing yellow.  To determine exactly which check has failed:
 <ol>
 	<li>Connect the Flight Controller to the ground station using a USB cable or <a href="wiki/common-telemetry-landingpage/">Telemetry</a>.</li>
@@ -20,7 +23,9 @@ The pilot will notice a pre-arm check failure because he/she will be unable to a
 	<li>Turn on your radio transmitter and attempt to arm the vehicle (regular procedure using throttle down, yaw right)</li>
 	<li>The first cause of the Pre-Arm Check failure will be displayed in red on the HUD window</li>
 </ol>
-<h3>Failure messages</h3>
+
+
+<h1>Failure messages</h1>
 RC failures (i.e. transmitter/receiver failures):
 <p style="padding-left: 30px;"><strong>RC not calibrated</strong> : the <a href="wiki/initial-setup/configuring-hardware/#Calibrate_radio_control">radio calibration</a> has not been performed.  RC3_MIN and RC3_MAX must have been changed from their default values (1100 and 1900) and for channels 1 to 4, the MIN must be less than 1300 and the MAX greater than 1700.</p>
 Barometer failures:
@@ -56,7 +61,9 @@ Parameter checks:
 <p style="padding-left: 30px;"><strong>Check ANGLE_MAX</strong> : the ANGLE_MAX parameter which controls the vehicle's maximum lean angle has been set below 10 degrees (i.e. 1000) or above 80 degrees (i.e. 8000).</p>
 <p style="padding-left: 30px;"><strong>ACRO_BAL_ROLL/PITCH</strong> : the ACRO_BAL_ROLL parameter is higher than the Stabilize Roll P and/or ACRO_BAL_PITCH parameter is higher than the Stabilize Pitch P value.  This could lead to the pilot being unable to control the lean angle in ACRO mode because the <a href="wiki/acro-mode/#Acro_Trainer">Acro Trainer stabilization</a> would overpower the pilot's input.</p>
 
-<h3>Disabling the Pre-arm Safety Check</h3>
+
+<h1>Disabling the Pre-arm Safety Check</h1>
+
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/MP_PreArmCheckDisable.png"><img class="alignnone size-full wp-image-10348" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/MP_PreArmCheckDisable.png" alt="MP_PreArmCheckDisable" width="1022" height="574" /></a>
 
 If you are confident that the pre-arm check failure is not a real problem you can disable the checks by:
