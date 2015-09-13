@@ -9,26 +9,31 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Copter supports "RC overrides" which allows ground stations (including the Mission Planner) to let you fly your vehicle with a computer joystick or gamepad instead of an RC controller.  Follow the instructions below to set it up.
+This article explains how you can fly with a Joystick/Gamepad via <em>Mission Planner</em>.
+<!--more-->
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_LogitechF310.jpg"><img class="alignnone size-full wp-image-12623" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_LogitechF310.jpg" alt="Joystick_LogitechF310" width="437" height="393" /></a>
 
-[note]We recommend that even if flying with a joystick, you should keep a regular transmitter/receiver connected and ready for use as a backup.  In future versions of Copter, after more failsafe testing has been completed we may change this recommendation.[/note]
+<h1>Overview</h1>
+
+This article demonstrates how to control Copter using a joystick/gamepad. The approach uses <em>Mission Planner</em> to set appropriate Remote Control (RC) overrides based on Joystick/Gamepad input.
+
+Other GCSs may also support "RC overrides" but they are not covered in this article.
+
+[caption id="attachment_12623" align="alignnone" width="437"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_LogitechF310.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_LogitechF310.jpg" alt="Logitech F310 Joystick" width="437" height="393" class="size-full wp-image-12623" /></a> Logitech F310 Joystick[/caption]
+
+[tip]Even if flying with a joystick, you should keep a regular transmitter/receiver connected and ready for use as a backup.  In future versions of Copter, after more failsafe testing has been completed we may change this recommendation.[/tip]
 
 
 
 <h1>What you will need</h1>
 
 You will need the following equipment:
-<ol>
-<ol>
+
 <ul>
-	<li>USB joystick or Gamepad such as the <a href="http://gaming.logitech.com/en-us/product/f310-gamepad" target="_blank">Logitech F310</a> (shown above)</li>
-	<li>a <a href="wiki/common-telemetry-landingpage/">telemetry connection</a> (such as the <a href="https://store.3drobotics.com/products/3dr-radio-set" target="_blank">3DR radio</a>) between your ground station and vehicle</li>
-	<li>a laptop computer at the field running Mission Planner (other GCSs may also support "RC overrides" but this wiki page only covers the mission planner method</li>
+	<li>USB joystick or Gamepad such as the <a href="http://gaming.logitech.com/en-us/product/f310-gamepad" target="_blank">Logitech F310</a> (shown above).</li>
+	<li>A <a href="common-telemetry-landingpage">telemetry connection</a> (such as the <a href="https://store.3drobotics.com/products/3dr-radio-set" target="_blank">3DR radio</a>) between your ground station and vehicle.</li>
+	<li>A laptop computer running <em>Mission Planner</em>.</li>
 </ul>
-</ol>
-</ol>
 
 
 
@@ -36,37 +41,28 @@ You will need the following equipment:
 
 <ul>
 	<li>Connect your USB joystick/gamepad to the laptop computer</li>
-	<li>open the Mission Planner's and on the Flight Data screen's "Actions" tab push the Joystick button</li>
-	<li>Ensure the Logitech joystick appears in the drop-down</li>
-	<li>The "Enable" button, once pushed, will tell the mission planner to start sending commands to the vehicle so for the initial setup do not push it.</li>
-	<li>On the "Roll" row, click the "Auto Detect" button and then waggle the control you wish to use for roll, left and right.</li>
-	<li>The channel can be reversed with the "Reverse" checkbox</li>
-	<li>The Expo number should be in the range of -100 to 100
-<ul>
-<ul>
-<ul>
-<ul>
-	<li>0 = no expo</li>
-	<li>100 = low response around the middle, very fast response at the edges</li>
-	<li>-100 = very fast response around the middle, less response at the edges (very few people use negative expo)</li>
-</ul>
-</ul>
-</ul>
-</ul>
-</li>
-	<li>Repeat for "Pitch", "Throttle" and "Rudder" and push the Save button</li>
-</ul>
+	<li>Open the <em>Mission Planner Flight Data</em> screen. On the <strong>Actions</strong> tab push the <strong>Joystick</strong> button
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_MPSetup.png"><img class="alignnone size-large wp-image-12625" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_MPSetup-1024x691.png" alt="Joystick_MPSetup" width="584" height="394" /></a>
-<ul>
-	<li>You will likely want to set-up other buttons for "Arm" and "Disarm"</li>
-	<li>Instead of setting up a stick or button for ch5 (the flight mode channel), it is better to set individual buttons to initiate a flight mode by selecting "Change Mode" and then push the "Settings" button and select the flight mode from the drop-down (see pic above)</li>
-	<li>When done, push the save button</li>
+</li>
+	<li>Ensure the Logitech joystick appears in the drop-down</li>
+	<li>The <strong>Enable</strong> button, once pushed, will tell the mission planner to start sending commands to the vehicle so for the initial setup do not push it.</li>
+	<li>On the "Roll" row, click the <strong>Auto Detect</strong> button and then waggle the control you wish to use for roll, left and right.</li>
+	<li>The channel can be reversed with the <em>Reverse</em> checkbox</li>
+	<li>The Expo number should be in the range of -100 to 100
+          <ul>
+	      <li>0 = no expo</li>
+	      <li>100 = low response around the middle, very fast response at the edges</li>
+	      <li>-100 = very fast response around the middle, less response at the edges (very few people use negative expo)</li>
+          </ul>
+</li>
+	<li>Repeat for <em>Pitch</em>, <em>Throttle</em> and <em>Rudder</em> and push the <strong>Save</strong> button</li>
+	<li>You will likely want to set-up other buttons for <em>Arm</em> and <em>Disarm</em></li>
+	<li>Instead of setting up a stick or button for ch5 (the flight mode channel), it is better to set individual buttons to initiate a flight mode by selecting <strong>Change Mode</strong> and then push the <strong>Settings</strong> button and select the flight mode from the drop-down (see pic above)</li>
+	<li>When done, push the <strong>Save</strong> button</li>
+        <li>In the <strong>CONFIG/TUNING | Full Parameter List</strong>, check that the <a href="arducopter-parameters/#my_ground_station_number_arducoptersysid_mygcs">SYSID_MYGCS</a> parameter matches the system ID of your GCS. This parameter limits which GCS can send override signals to the vehicle.
+[tip]For Mission Planner the default GCS system ID is 255. The default system ID for APM Mission Planner 2 is 252 (but the GCS will automatically set its ID to match <em>SYSID_MYGCS</em> for RC Override commands). <!-- there is a plan to get Copter to accept any connection if the SYSID_MYGCS is zero. Update this section when that happens: https://github.com/diydrones/ardupilot/issues/1515 --> [/tip]
+</li>
 </ul>
-
-
-We recommend that you continue to have your RC gear connected because it is possible to lose the telemetry connection in flight so you will need to be able to fall back to regular RC control or switch to "hardware manual" in the case of an autopilot failure. However, in most cases you can use the joystick/gamepad for all manual flying, never touching the RC transmitter.
-
-To set it up, do the following: Once the controller is plugged in, just select "Joystick" (circled in red below) and it will open a screen that will allow you to assign functions to different joystick/gamepad buttons.
 
 
 
@@ -76,16 +72,13 @@ Before flying for the first time you should test that all features work well.
 
 To check the above controls move in the correct direction:
 <ul>
-<ul>
-<ul>
-	<li>Click the "Enable" button on the Joystick setup screen to enable sending messages to the vehicle</li>
+	<li>Click the <strong>Enable</strong> button on the Joystick setup screen to enable sending messages to the vehicle</li>
 	<li>Connect your flight controller to the computer with a USB cable</li>
-	<li>Push the Mission Planner's Connect button</li>
-	<li>Go to the Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Radio Calibration screen and ensure the green bars all move in the correct direction.  Remember the bars move in the same direction as the sticks except for Pitch which moves in the opposite direction.</li>
-	<li>If any controls are reversed, check the "Reverse" checkbox on the Joystick setup screen.</li>
+	<li>Push the Mission Planner's <strong>Connect</strong> button</li>
+	<li>Go to the <strong>Initial Setup | Mandatory Hardware | Radio Calibration</strong> screen and ensure the green bars all move in the correct direction.  Remember the bars move in the same direction as the sticks except for Pitch which moves in the opposite direction.</li>
+	<li>If any controls are reversed, check the <strong>Reverse</strong> checkbox on the Joystick setup screen.</li>
 </ul>
-</ul>
-</ul>
+
 Next test you are able to arm, disarm and switch into the various flight modes (not need to connect the battery)
 
 
@@ -99,24 +92,25 @@ All of these tests should be performed on the ground with the battery disconnect
 
 <ol>
 	<li>Turn regular transmitter off</li>
-	<li>Connect with the mission planner, push Joystick window's "Enable" button and ensure RC overrides are being sent to the vehicle (use Radio Calibration screen) or Flight Data's status screen.</li>
+	<li>Connect with the mission planner, push Joystick window's <strong>Enable</strong> button and ensure RC overrides are being sent to the vehicle (use Radio Calibration screen) or Flight Data's status screen.</li>
 	<li>Arm vehicle, switch to Stabilize or Loiter mode and raise the throttle</li>
 	<li>Ensure the motors are spinning by checking the Flight Data screen's "ch1out" ~ "ch4out"</li>
-	<li>Push Joystick screen's "Disable" button</li>
+	<li>Push Joystick screen's <strong>Disable</strong> button</li>
 	<li>"Failsafe" should appear on the HUD and the vehicle should switch to "LAND" or "RTL"</li>
 	<li>Repeat the above test but at step #5 actually disconnect the joystick from the computer.  The results should be the same.</li>
 </ol>
 
-<p style="padding-left: 60px"><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_FailsafeTesting1.png"><img class="alignnone size-medium wp-image-12630" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_FailsafeTesting1-300x195.png" alt="Joystick_FailsafeTesting1" width="300" height="195" /></a></p>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_FailsafeTesting1.png"><img class="alignnone size-medium wp-image-12630" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_FailsafeTesting1-300x195.png" alt="Joystick_FailsafeTesting1" width="300" height="195" /></a>
+
 <strong>Simulate failing over to the regular transmitter/receiver</strong>
 
 <ol>
 	<li>Turn the regular transmitter on and ensure you can control the vehicle (perhaps by checking the Radio calibration page or the Flight Data screen's Status tab's "ch1in" ~ "ch8in").</li>
 	<li>With the regular transmitter leave the vehicle in AltHold mode and raise the throttle to mid</li>
-	<li>On the Joystick screen push the "Enable" button</li>
-	<li>Arm the vehicle in Stabilize mode and raise throttle to full (with the Joystick).</li>
+	<li>On the Joystick screen push the <strong>Enable</strong> button</li>
+	<li>Arm the vehicle in STABILIZE mode and raise throttle to full (with the Joystick).</li>
 	<li>Check the throttle is at full in the Flight Data screen's Status tab by checking "ch3in" is very high (around 1900 usually)</li>
-	<li>On the Joystick screen push the "Disable" button and check the "ch3in" has dropped to a mid value (around 1500)</li>
+	<li>On the Joystick screen push the <strong>Disable</strong> button and check the "ch3in" has dropped to a mid value (around 1500)</li>
 	<li>The vehicle should remain in it's current flight mode (Stabilize) but controls have been returned to the transmitter.  The pilot's inputs should be reflected in the "ch1in" ~ "ch8in" values.  Switch the vehicle to AltHold mode by moving the flight mode switch.</li>
 </ol>
 
@@ -124,18 +118,16 @@ All of these tests should be performed on the ground with the battery disconnect
 
 <strong>Simulate loss of radio contact</strong>:
 
-If radio contact is lost, the vehicle should respond as if the Joystick was "Disabled" or disconnected from the PC.  You can test this by repeating the test above but instead of pushing the "Disable" button on the Joystick screen, disconnect the radio.  In order to see the status of the vehicle you will need to connect two Mission Planner's separately (only possible on Pixhawk).  The Mission Planner with the Joystick should be connected through telemetry and the 2nd Mission Planner should be connected through a USB connection.
+If radio contact is lost, the vehicle should respond as if the Joystick was "Disabled" or disconnected from the PC.  You can test this by repeating the test above but instead of pushing the <strong>Disable</strong> button on the Joystick screen, disconnect the radio.  In order to see the status of the vehicle you will need to connect two Mission Planner's separately (only possible on Pixhawk).  The Mission Planner with the Joystick should be connected through telemetry and the 2nd Mission Planner should be connected through a USB connection.
 
 
 
 <h1>Reducing lag in the controls</h1>
 
 It is nearly impossible to make the Joystick as responsive as a regular transmitter but lag can be reduced by:
-
 <ul>
-	<li>reducing the rate of other telemetry data being sent between the vehicle and GCS from the MP's Config/Tuning &gt;&gt; Planner page</li>
-</ul>
+	<li>Reducing the rate of other telemetry data being sent between the vehicle and GCS from the MP's <strong>Config/Tuning | Planner</strong> page
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_ReduceLag_MPRates.png"><img class="alignnone size-medium wp-image-12636" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_ReduceLag_MPRates-300x168.png" alt="Joystick_ReduceLag_MPRates" width="300" height="168" /></a>
-<ul>
+</li>
 	<li>If using a 3DR radio or RFD900 radio these can be put into <a href="common-3dr-radio-advanced-configuration-and-technical-information/#low_latency_mode">Low Latency mode as described here</a>.</li>
 </ul>

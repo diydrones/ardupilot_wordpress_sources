@@ -1413,6 +1413,7 @@ DO NOT EDIT
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 <tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
+<tr><td> 9</td><td>Lidar</td></tr>
 </table>
 </ul>
 
@@ -1449,6 +1450,7 @@ DO NOT EDIT
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 <tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
+<tr><td> 9</td><td>Lidar</td></tr>
 </table>
 </ul>
 
@@ -1485,6 +1487,7 @@ DO NOT EDIT
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 <tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
+<tr><td> 9</td><td>Lidar</td></tr>
 </table>
 </ul>
 
@@ -1521,6 +1524,7 @@ DO NOT EDIT
 <tr><td> 5</td><td>GPS</td></tr>
 <tr><td> 7</td><td>Alexmos Gimbal Serial</td></tr>
 <tr><td> 8</td><td>SToRM32 Gimbal Serial</td></tr>
+<tr><td> 9</td><td>Lidar</td></tr>
 </table>
 </ul>
 
@@ -2960,6 +2964,17 @@ DO NOT EDIT
 <ul>
 <li>Range: 0 1000</li>
 <li>Units: meters</li>
+</ul>
+
+
+<h2>Relay ON value (CAM_RELAY_ON)</h2>
+
+<p>This sets whether the relay goes high or low when it triggers. Note that you should also set RELAY_DEFAULT appropriately for your camera</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Low</td></tr>
+<tr><td>1</td><td>High</td></tr>
+</table>
 </ul>
 
 
@@ -5885,7 +5900,16 @@ DO NOT EDIT
 <ul>
 <li>Bitmask: 0:GPS, 1:SBAS, 2:Galileo, 3:Beidou, 4:IMES, 5:QZSS, 6:GLOSNASS</li>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Leave as currently configured 1</td></tr>
+<tr><td>0</td><td>Leave as currently configured</td></tr>
+<tr><td> 1</td><td>GPS-NoSBAS</td></tr>
+<tr><td> 3</td><td>GPS+SBAS</td></tr>
+<tr><td> 4</td><td>Galileo-NoSBAS</td></tr>
+<tr><td> 6</td><td>Galileo+SBAS</td></tr>
+<tr><td> 8</td><td>Beidou</td></tr>
+<tr><td> 51</td><td>GPS+IMES+QZSS+SBAS (Japan Only)</td></tr>
+<tr><td> 64</td><td>GLONASS</td></tr>
+<tr><td> 66</td><td>GLONASS+SBAS</td></tr>
+<tr><td> 67</td><td>GPS+GLONASS+SBAS</td></tr>
 </table>
 <li>RebootRequired: True</li>
 </ul>
@@ -6845,6 +6869,8 @@ DO NOT EDIT
 <tr><td>4</td><td>PX4-I2C</td></tr>
 <tr><td>5</td><td>PX4-PWM</td></tr>
 <tr><td>6</td><td>BBB-PRU</td></tr>
+<tr><td>7</td><td>LightWareI2C</td></tr>
+<tr><td>8</td><td>LightWareSerial</td></tr>
 </table>
 </ul>
 
@@ -6962,7 +6988,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Powersave range (RNGFNDRNGFND_PWRRNG)</h2>
+<h2>Powersave range (RNGFND_PWRRNG)</h2>
 
 <p>This parameter sets the estimated terrain distance in meters above which the sensor will be put into a power saving mode (if available). A value of zero means power saving is not enabled</p>
 <ul>
@@ -6993,6 +7019,8 @@ DO NOT EDIT
 <tr><td>4</td><td>PX4-I2C</td></tr>
 <tr><td>5</td><td>PX4-PWM</td></tr>
 <tr><td>6</td><td>BBB-PRU</td></tr>
+<tr><td>7</td><td>LightWareI2C</td></tr>
+<tr><td>8</td><td>LightWareSerial</td></tr>
 </table>
 </ul>
 

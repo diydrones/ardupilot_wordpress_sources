@@ -24,7 +24,7 @@ This can be due to a number of mistakes:
 	<li>It's possible you've changed your throttle trim settings since you did your initial radio calibration. Trim the throttle down a few notches and try arming again.</li>
 	<li>Some ESCs have a minimum low threshold before they will arm. If you need to, trim down your radio throttle and redo radio calibration.</li>
 	<li>Redo your radio calibration in the Mission Planner. Make sure that the throttle channel (Ch 3) is being read properly and the values are around 1100 (low) and 1900 (high), more or less. Remember that your LiPo must be plugged in to power the RC gear.</li>
-	<li>If you've checked the previous things, it may be that you need to recalibrate your ESCs. Do it the manual way (<a href="esc-motor" rel="nofollow">here</a> to be sure).</li>
+	<li>If you've checked the previous things, it may be that you need to recalibrate your ESCs. Do it the manual way (<a href="esc-calibration" rel="nofollow">here</a> to be sure).</li>
 </ol>
 
 
@@ -45,7 +45,7 @@ This almost always means that you've configured it or set it up wrong. Check the
 	<li>Check the signal wires on the power distribution board to make sure they are oriented correctly. If you've reversed two, it will cause Copter to flip. This should be noticeable by doing the hand test as well. (It should have also shown up in the Motors test above)</li>
 	<li>Check that your props can't turn on their motor shafts, as if they weren't tightened down enough. If one can, despite its prop being tightened, that may mean that its motor shaft has been pushed down into the motor too far for the prop mount to get a grip. Take off the prop and and use a small allen wrench to loosen the little set screw that holds the shaft onto the motor. Then with pliers pull the shaft out until it's the same height as those of the other motors. Then tighten the set screw, and put the prop back and tighten it up again.</li>
 	<li>Was the quad stable and flat for the whole calibration routine at startup? Was it stable and flat during the setup process? (If need be, do it again)</li>
-	<li>Did you calibrate your ESCs? They should all start together when you advance the throttle. If need be, do it again manually, as described <a href="esc-motor" rel="nofollow">here</a>.</li>
+	<li>Did you calibrate your ESCs? They should all start together when you advance the throttle. If need be, do it again manually, as described <a href="esc-calibration" rel="nofollow">here</a>.</li>
 	<li>Did you setup and test your radio? Run test/radio to see. Pitch, Roll, Throttle and Yaw should all be 0 or near zero (60 or less). Move the pitch and roll stick to the lower right, you should see approximately 4500, 4500 in Channels 1 and 2.</li>
 	<li>Have you checked all your sensors in the Mission Planner to make sure the hardware is working right?</li>
 </ol>
@@ -143,7 +143,7 @@ This is usually due to an airframe that it out of tune, either with one motor ti
 
 Although you can adjust those terms in the Mission Planner's PID configuration screen, the best solution is to solve it at the source. Eyeball each motor and see if it or the arm it is one is slightly tilted, and bend it back to vertical if so. Also ensure that the battery is centered on the quad and the center of gravity of the vehicle is as close to the center of the APM board as possible. It's also a great idea to redo the ESC calibration routine just in case.
 
-Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="connect-escs-and-motors-pixhawk/#attach_propellers" rel="nofollow">here</a>.
+Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="connect-escs-and-motors/#attach_propellers" rel="nofollow">here</a>.
 
 
 
@@ -216,7 +216,7 @@ Check that you've switching the Mission Planner to the COM port assigned to your
 <ol>
 	<li>Have you set up your RC input in the Mission Planner setup process?</li>
 	<li>Check that your RC radio is talking properly to its receiver (typically, that will be shown by a green light on the receiver).</li>
-	<li>If those two check out, you probably just need to calibrate your ESCs (even if you've done that before, if you've erased your EEPROM and done a reset, you'll need to do it again. It's an easy procedure and the instructions are <a href="esc-motor" rel="nofollow">here.</a></li>
+	<li>If those two check out, you probably just need to calibrate your ESCs (even if you've done that before, if you've erased your EEPROM and done a reset, you'll need to do it again. It's an easy procedure and the instructions are <a href="esc-calibration" rel="nofollow">here.</a></li>
 	<li>Check that your radio channels are in right order (cabling and/or Mode-1, Mode-2)</li>
 	<li>Some ESCs are thrown off by some startup signals in Copter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
 </ol>

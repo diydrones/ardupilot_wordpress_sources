@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This article provides an overview of the <a href="https://store.3drobotics.com/products/px4fmu-1?taxon_id=42">PX4FMU</a> and <a href="https://store.3drobotics.com/products/px4io-1?taxon_id=42">PX4IO</a> Board Copter Wiring/Installation.
+This article provides an overview of the <a href="https://store.3drobotics.com/products/px4fmu-1">PX4FMU</a> and <a href="https://store.3drobotics.com/products/px4ioar-1-2">PX4IO</a> Board Copter Wiring/Installation.
 
 
 <h1>PX4FMU plus PX4IO Wiring Diagrams</h1>
@@ -137,36 +137,29 @@ This article provides an overview of the <a href="https://store.3drobotics.com/p
 
 
 
-<h1>Wiring your Motors for X or + mode configuration</h1>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg"><img class="size-full wp-image-3977 aligncenter" alt="FRAMES_QUAD_PX4" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg" width="650" height="415" /></a>
+<h1>Wiring your Motors and ESCs</h1>
+
+Motor wiring and order for different frame shapes is covered in the topic <a href="connect-escs-and-motors">Connect ESCs and Motors</a>.
 
 
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MOTORS_Hexa-octo-y6.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MOTORS_Hexa-octo-y6.jpg" alt="MOTORS_Hexa-octo-y6" width="800" height="1200" class="alignnone size-full wp-image-11214" /></a>
 
+<h1>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h1>
 
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_X8.jpg"><img class="size-full wp-image-4021 aligncenter" alt="FRAMES_X8" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_X8.jpg" width="503" height="300" /></a>
-
-
-
-<h1>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h1>	 	 
-<ul>	 	 
-<ul>	 	 
- <li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>	 	 
+You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.
 <ul>	 	 
  <li>An 8 Channel PPM Encoder is <a href="https://store.3drobotics.com/products/ppm-encoder">available from 3DRobotics</a>.</li>	 	 
  <li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>	 	 
  <li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>	 	 
-</ul>	 	 
-</li>	 	 
- <li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>	 	 
+</ul>	
+
+ 
+Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.	 
 <ul>	 	 
  <li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>	 	 
-</ul>	 	 
-</li>	 	 	 	 
-</ul>	 	 
-</ul>
+</ul>	
+
+
 
 [note]If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.[/note]
 

@@ -1,0 +1,41 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-parameter-reset 
+title: Parameter Reset 
+id: 5061 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows several ways to reset all parameters to their default values.
+
+
+<h1>Option #1: Using the Mission Planner</h1>
+
+Mission Planner has a dedicated <strong>Reset to Default</strong> button if the "Advanced View" feature is enabled.
+
+<ol>
+	<li>On the <em>Config/Tuning | Planner</em> page enable the <strong>Advanced View</strong> checkbox.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/09/ParamReset_MPAdvancedView.png"><img class="alignnone size-large wp-image-5062" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/09/ParamReset_MPAdvancedView-1024x577.png" alt="ParamReset_MPAdvancedView" width="474" height="267" /></a></li>
+
+
+	<li>Connect the flight controller to <em>Mission Planner</em>, and on the <strong>Config/Tuning | Full Parameter List</strong> or <strong>Full Parameter Tree</strong> page push the <strong>Reset to Default</strong> button.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/09/ParamReset_MPResetToDefault.png"><img class="alignnone size-large wp-image-5063" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/09/ParamReset_MPResetToDefault-1024x577.png" alt="ParamReset_MPResetToDefault" width="474" height="267" /></a></li>
+</ol>
+
+
+
+
+
+<h1>Option #2: Change the SYSID_SW_MREV parameter</h1>
+
+On any Ground Control Station (that can write parameters) you can reset parameters by setting the <code>SYSID_SW_MREV</code> parameter to zero. After writing the parameter, reboot the board.
+
+
+<h1>Option #3: Load another vehicle's firmware</h1>
+
+[tip]This method is not recommended because it's unnecessarily time consuming.[/tip]
+
+Upload the firmware for a completely different vehicle type (I.e. if you were using Copter, now upload the Plane firmware).  Reboot the board and let it sit for 30 seconds to clear the EEPROM.  Then upload the original firmware (i.e. Copter) to the flight controller.

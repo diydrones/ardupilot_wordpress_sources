@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: common-loading-firmware-onto-pixhawk 
-title: common-Loading Firmware onto Pixhawk 
+title: common-Loading Firmware onto Pixhawk/APM2.x/PX4 
 id: 1136 
 menu_order: 0 
 post_parent_id: 0 
@@ -9,23 +9,25 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-These instructions will show you how to download the latest firmware onto the Pixhawk.
+These instructions will show you how to download the latest firmware onto the Pixhawk, APM 2.x or PX4 controller.
 
-<h1>Connect Pixhawk to computer</h1>
+<h1>Connect controller to computer</h1>
 
-Once you've <a href="wiki/initial-setup/common-install-mission-planner/">installed the Mission Planner</a> onto your computer, connect the Pixhawk to your computer using the micro USB cable. Use a direct USB port on your computer, not a USB hub.<em> Click on images to enlarge.</em>
+Once you've <a href="common-install-mission-planner">installed the Mission Planner</a> onto your computer, connect the autopilot board to your computer using the micro USB cable as shown below. Use a direct USB port on your computer (not a USB hub).
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection.png"><img class="alignnone size-medium wp-image-1138" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection-300x189.png" alt="Pixhawk_USBConnection" width="300" height="189" /></a>
-
-Windows should automatically detect and install the correct driver software. If you get a message stating "driver not found" or "Failed to install driver", <a href="#re-installing_the_mission_planner_and_pixhawk_drivers">follow the instructions at the bottom of this page to reinstall the mission planner and drivers</a>.
-
+[caption id="attachment_1138" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection-300x189.png" alt="Pixhawk USB Connection" width="300" height="189" class="size-medium wp-image-1138" /></a> Pixhawk USB Connection[/caption] [caption id="attachment_5059" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/apm_micro_usb.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/apm_micro_usb-300x167.jpg" alt="APM USB Connection" width="300" height="167" class="size-medium wp-image-5059" /></a> APM USB Connection[/caption]
+[caption id="attachment_5101" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4FMU_PX4IO_USB.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/PX4FMU_PX4IO_USB-300x156.jpg" alt="PX4 USB Connection" width="300" height="156" class="size-medium wp-image-5101" /></a> PX4 USB Connection[/caption]
 
 
-<h1>Select the COM port</h1>
 
-Open the Mission Planner and select the com port drop-down on the upper-right corner of the screen (near the Connect button).  Select <strong>AUTO</strong> or <strong>PX4 FMU</strong>. Don't hit <strong>Connect</strong> just yet.
+Windows should automatically detect and install the correct driver software. 
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_ConnectWithMP.png"><img class="alignnone size-medium wp-image-1145" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_ConnectWithMP-300x130.png" alt="Pixhawk_ConnectWithMP" width="300" height="130" /></a>
+
+<h1>Connect to Mission Planner</h1>
+
+Open the <em>Mission Planner</em> and select the COM port drop-down on the upper-right corner of the screen (near the <strong>Connect</strong> button).  Select <strong>AUTO</strong> or the specific port for your board (<strong>PX4 FMU</strong> or <strong>Arduino Mega 2560</strong>). Set the Baud rate to <strong>115200</strong> as shown. Don't hit <strong>Connect</strong> just yet.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_ConnectWithMP.png"><img class="alignnone size-medium wp-image-1145" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_ConnectWithMP-300x130.png" alt="Pixhawk_ConnectWithMP" width="300" height="130" /></a> <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/connect-to-com-port.png"><img class="alignnone wp-image-1942" alt="Select APM COM port and set Baud rate." src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/connect-to-com-port.png" width="320" height="60" /></a>
 
 
 
@@ -33,36 +35,19 @@ Open the Mission Planner and select the com port drop-down on the upper-right co
 
 On the Mission Planner's <strong>Initial Setup | Install Firmware</strong> screen select the appropriate icon that matches your frame (i.e. Quad, Hexa).  Answer <strong>Yes</strong> when it asks you "Are you sure?".
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware.png"><img class="alignnone size-medium wp-image-1146" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware-300x158.png" alt="Pixhawk_InstallFirmware" width="300" height="158" /></a>
+[caption id="attachment_1146" align="alignnone" width="1089"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware.png" alt="Mission Planner: Install Firmware Screen" width="1089" height="575" class="size-full wp-image-1146" /></a> Mission Planner: Install Firmware Screen[/caption]
 
-After the Mission Planner detects which board you are using (i.e. Pixhawk) it will ask you to unplug the board, plug it back in and then press OK within a few seconds (during this brief period the bootloader accepts requests to upload new firmware).
+After the Mission Planner detects which board you are using (i.e. Pixhawk) it will ask you to unplug the board, plug it back in and then press <strong>OK</strong> within a few seconds (during this brief period the bootloader accepts requests to upload new firmware).
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware2.png"><img class="alignnone size-medium wp-image-1147" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware2-300x158.png" alt="Pixhawk_InstallFirmware2" width="300" height="158" /></a>
+[caption id="attachment_1147" align="alignnone" width="1089"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware2.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_InstallFirmware2.png" alt="Mission Planner: Install Firmware Prompt" width="1089" height="575" class="size-full wp-image-1147" /></a> Mission Planner: Install Firmware Prompt[/caption]
 
 If all goes well you will see some status appear on the bottom right including the words, "erase...", "program...", "verify.." and "Upload Done".  The firmware has been succesfully uploaded to the board.
 
-You can test the firmware is basically working by switching to the Mission Planner's Flight Data screen and pressing the <strong>Connect</strong> button.  The HUD should update as you tilt the board.
 
 
+<h1>Testing</h1>
 
-<h1>Re-Installing the Mission Planner and Pixhawk Drivers</h1>
+You can test the firmware is basically working by switching to the <em>Mission Planner Flight Data</em> screen and pressing the <strong>Connect</strong> button.  The HUD should update as you tilt the board. 
 
-If the driver failed to install correctly when the Pixhawk was first plugged in or you received the message "Error: No response from board" when uploading follow these instructions which may resolve the problem.
-<ol>
-	<li>Backup the Mission Planner's logs directory if there are dataflash or tlogs from earlier flights you would like to keep.  Normally the <strong>logs</strong> directory can be found in <strong>C:\Program Files (x86)\APM Planner\logs</strong> or <strong>C:\Program Files (x86)\Mission Planner\logs</strong>.</li>
-	<li>Uninstall the Mission Planner using the "Uninstall Mission Planner" application which can normally be found in your <strong>Start menu | All Programs | Mission Planner</strong> (or APM Planner).</li>
-	<li>Open a file explorer and delete the <strong>C:\Program Files (x86)\Mission Planner</strong> or <strong>C:\Program Files (x86)\APM Planner</strong> directories if they exist</li>
-	<li>Uninstall the Pixhawk driver:
-<ol>
-<ol>
-	<li>Open the <strong>Start | All Programs | Accessories | System Tools | Control Panel | Devices and Printers</strong></li>
-	<li>While the Pixhawk is still plugged in right-mouse-button click on the PX4 FMU device and select <strong>Properties</strong>, then select the <em>Hardware</em> tab and select <strong>Properties</strong></li>
-	<li>On the <em>General</em> tab select <strong>Change Settings</strong>, on the <em>Driver</em> tab select <strong>Uninstall</strong></li>
-	<li>On the <em>Confirm Device Uninstall</em> window click <strong>Delete the driver software for this device</strong> and press <strong>OK</strong>
+<a href="common-connect-mission-planner-autopilot">Connect Mission Planner to AutoPilot</a> has more information on connecting to Mission Planner.
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_UninstallDriver.png"><img class="alignnone size-large wp-image-1142" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/Pixhawk_UninstallDriver-1024x784.png" alt="Pixhawk_UninstallDriver" width="584" height="447" /></a></li>
-</ol>
-</ol>
-</li>
-<li><a href="wiki/initial-setup/common-install-mission-planner/">Re-install the mission planner</a> from the <a href="http://ardupilot.com/wp-content/plugins/download-monitor/download.php?id=82">latest MSI</a>.  This should install the latest mission planner and also automatically reinstall the latest Pixhawk drivers onto your computer.</li>
-</ol>
