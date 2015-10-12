@@ -176,7 +176,9 @@ Creating and editing common pages is similar to editing other pages except:
 <ul>
 	<li>The title of common pages must start with the text <em>common-</em>. For example, this page is <strong>common-Wiki Editing Guide</strong>.</li>
 	<li>Changes must be made to the copy on the <a title="Mission Planner" href="http://planner.ardupilot.com/">Mission Planner</a> wiki. Changes made on rover, copter, plane wikis will be over-written when the "master" copy is next updated.</li>
-	<li>Vehicle-specific content can be added to the common topic using <code>site_Rover</code>, <code>site_Copter</code> and <code>site_Plane</code> shortcodes. This text will will only be displayed on the respective wikis and the common wiki (Mission Planner). For example, to display text only on Rover wiki do: <code>[[site_Rover]Rover specific text[/site_Rover]]</code></li>
+	<li>Vehicle-specific content can be added to the common topic using <code>site</code> shortcode. This text will will only be displayed on the respective wikis and the common wiki (Mission Planner). For example, to display text only on Rover wiki do: <pre>[[site wiki="rover"]Rover specific text[/site]]</pre>
+If you need to display on multiple wikis you can specify each wiki in a comma-separated list: <pre>[[site wiki="plane,rover"]Rover and Plane specific text[/site]]</pre>
+To turn off the heading text specify <code>heading="off"</code>. To create an inline sentence (rather than a separate block) use <code>inline="on"</code>.</li>
 	<li>Always <a href="#how_to_link_to_other_topics">link to other common topics</a> using relative linking. This ensures that you will link to the correct common topic when the wiki article sis copied.</li>
 
 	<li>If a common page is not relevant to all wikis you can add the **copywiki** shortcode to the page, specifying the allowed target wikis in the destination field as a comma separated list:

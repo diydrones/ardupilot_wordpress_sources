@@ -16,7 +16,8 @@ This article provides high level information about how to power Pixhawk and conn
 <h1>Pixhawk Wiring Chart</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals.jpg"><img class="alignnone size-large wp-image-1475" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/connect-peripherals-729x1024.jpg" alt="connect peripherals" width="584" height="820" /></a>
 
-[site_Copter]Copter users should also see the <a href="http://copter.ardupilot.com/wiki/advanced-pixhawk-quadcopter-wiring-chart/">Advanced Pixhawk Quadcopter Wiring Chart</a>.[/site_Copter]
+[site wiki="copter"]Copter users should also see the <a href="http://copter.ardupilot.com/wiki/advanced-pixhawk-quadcopter-wiring-chart/">Advanced Pixhawk Quadcopter Wiring Chart</a>.[/site]
+
 <h1>Power Pixhawk</h1>
 Pixhawk is typically powered via its "power" port, as shown in the picture below. The power port simultaneously powers Pixhawk and reads voltage and current analog measurements produced by an optional power module. Information about powering the Pixhawk can be found in the topic <a href="common-powering-the-pixhawk">Powering the Pixhawk</a>.
 
@@ -39,8 +40,7 @@ The topic <a href="common-installing-3dr-ublox-gps-compass-module/#connecting_to
 <h1>Connect Motors</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs.jpg"><img class="alignnone size-medium wp-image-1481" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/main-outputs-300x221.jpg" alt="main outputs" width="300" height="221" /></a>
 
-[site_Copter]
-
+[site wiki="copter"]
 For Copter see <a href="http://copter.ardupilot.com/wiki/connect-escs-and-motors/">Connect ESCs and Motors</a>.
 
 In overview, for copters connect each signal wire from the PDB to the main output signal (S) pins by motor number:
@@ -50,9 +50,9 @@ In overview, for copters connect each signal wire from the PDB to the main outpu
 	<li>Pin 3 = Motor 3 - - Pin 7 = Motor 7</li>
 	<li>Pin 4 = Motor 4 - - Pin 8 = Motor 8</li>
 </ul>
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane"]
 For planes connect the control channel wires to the main output signal pins:
 <ul>
 	<li>Pin 1 = Aileron</li>
@@ -60,16 +60,20 @@ For planes connect the control channel wires to the main output signal pins:
 	<li>Pin 3 = Throttle</li>
 	<li>Pin 4 = Rudder</li>
 </ul>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover"]
 For Rovers connect the throttle and steering wires to the main output signal pins:
 <ul>
 	<li>Pin 3 = Throttle</li>
 	<li>Pin 1 = Steering</li>
 </ul>
-[/site_Rover]
+[/site]
+
+
+
 <h1>Connect other peripherals</h1>
+
 Depending on your hardware there may be any number of other peripherals attached, including sensors, cameras, grippers etc. These can be found as sub-pages of the topic <a href="common-optional-hardware">Optional Hardware</a>.
 
 Information about connecting these peripherals to Pixhawk is found in the respective pages.
