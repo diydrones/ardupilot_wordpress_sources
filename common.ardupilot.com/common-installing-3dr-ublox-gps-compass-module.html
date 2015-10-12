@@ -16,7 +16,7 @@ If you are installing a GPS without on-board compass follow the instructions fou
 
 <h1>Overview</h1>
 
-The <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR UBlox GPS + Compass module</a> is the recommended GPS for Pixhawk, PX4 and APM2.6 (and above) flight controllers using Plane, Rover and Copter.  These come set-up with <a href="wiki/common-ublox-gps/">the best known GPS configuration</a> and have been thoroughly tested by thousands of users.
+The <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR UBlox GPS + Compass module</a> is the recommended GPS for Pixhawk, PX4 and APM2.6 (and above) flight controllers using Plane, Rover and Copter.  These come set-up with <a href="common-ublox-gps/">the best known GPS configuration</a> and have been thoroughly tested by thousands of users.
 
 
 <img class="alignnone size-full wp-image-2598" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide.jpg" alt="GPS_TopAndSide" width="690" height="297" />
@@ -53,6 +53,7 @@ Note that a secondary external compass cannot be attached.
 
 
 <h1>Connecting to APM 2.6</h1>
+
 3DR uBlox GPS with Onboard Compass is compatible with APM 2.6 and includes two cables: one 4-position cable and one 5-position-to-6-position cable. To connect the GPS module to APM 2.6, connect the GPS port to the APM GPS port using the 5-position-to-6-position cable (use the top-entry port, not the side-entry port), and connect the GPS MAG port to the APM I<sup>2</sup>C port using the 4-position cable.
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/gps-to-apm-wiring-web.jpg"><img class="alignnone wp-image-2444" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/gps-to-apm-wiring-web.jpg" alt="Connect GPS to APM 2.6." width="500" height="430" /></a>
@@ -76,14 +77,14 @@ Next select your autopilot configuration, for Pixhawk and PX4, select the option
 
 To input a manual orientation for APM, select the Manual option at the bottom of the screen, and consider the following factors when selecting an orientation. Note: The information below does not apply to Pixhawk and PX4; for these autopilots, select the Pixhawk/PX4 option to assign the correct orientation.
 <ul>
-	<li>If the GPS / Magnetometer board is mounted in its correct direction (arrow pointing forward) and the Flight controller board is also mounted right side up with its arrow pointing forward, the (COMPASS_ORIENT) parameter will need to be set to (Roll 180) or "8" because the compass is upside down under the GPS modules antenna.</li>
+	<li>If the GPS / compass board is mounted in its correct direction (arrow pointing forward) and the Flight controller board is also mounted right side up with its arrow pointing forward, the (COMPASS_ORIENT) parameter will need to be set to (Roll 180) or "8" because the compass is upside down under the GPS modules antenna.</li>
 	<li>If the Flight controller board is put in an alternate orientation, the Orientation (i.e. COMPASS_ORIENT parameter) should be set according to the gps’s attitude to the flight controller.  So for example if both the Flight controller and the GPS+compass module were mounted on the bottom of the vehicle (a ridiculous example) then you would leave the Compass orientation as ROTATION_ROLL_180.  If however you wanted to mount the GPS+Compass right-side-up you would pick Orientation “ROTATION_NONE” because the original rotation was Roll 180, then you add the compass rotation which is another roll 180 = Roll 360 = no rotation.</li>
 </ul>
 
 
 
 <h1>Connecting to APM 2.5 / APM 2.0</h1>
-Please follow the instructions re how to connect an external compass to the <a href="wiki/common-external-magnetometer-for-improved-performance/#Instructions_for_APM_25">APM2.5</a> and <a href="wiki/common-external-magnetometer-for-improved-performance/#Instructions_for_the_APM20">APM2.0</a>.
+Please follow the instructions re how to connect an external compass to the <a href="common-external-magnetometer-for-improved-performance/#Instructions_for_APM_25">APM2.5</a> and <a href="common-external-magnetometer-for-improved-performance/#Instructions_for_the_APM20">APM2.0</a>.
 http://www.youtube.com/watch?v=niqvBmXeNjU
 
 [note]After connecting the external compass you will need to re-do the <a href="http://copter.ardupilot.com/wiki/configuring-hardware/#Calibrate_Compass">Live Calibration</a> and <a href="common-compass-setup-advanced/#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_mot">Compassmot</a> (if you had run this procedure for the internal compass)[/note]
@@ -94,9 +95,9 @@ http://www.youtube.com/watch?v=niqvBmXeNjU
 
 <ul>
 	<li>To connect GPS part of the this module to PX4, connect the GPS port to the PX4FMU’s GPS connector.</li>
-	<li>Connect the magnetometer lead on the module to the PX4IO’s I2C port.</li>
+	<li>Connect the compass lead on the module to the PX4IO’s I2C port.</li>
 	<li>The PX4IO board I2C port is the 4 pin connector located on the board side opposite the Servo Out connectors in the second row of connectors in and next to the board mounting hole.</li>
-	<li>When the external magnetometer is plugged into the PX4IO boards I2C port, it is automatically detected and used and the internal magnetometer is disabled.</li>
+	<li>When the external compass is plugged into the PX4IO boards I2C port, it is automatically detected and used and the internal compass is disabled.</li>
 </ul>
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4IOtopI2C.jpg"><img class="alignnone wp-image-1749" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4IOtopI2C.jpg" alt="PX4IO I2C port" width="400" height="292" /></a>
 

@@ -9,7 +9,14 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-The <a href="http://nicadrone.com/index.php?id_product=13&amp;controller=product" target="_blank">EPM688 from NicaDrone.com</a> is a small (less than 4cm x 4cm x 2cm) Electro Permanent Magnet gripper capable of 7kg of force meaning it can hold about 1kg of cargo.  The gripping and releasing of the cargo if accomplished by delivering a short pulse to an electromagnet which reverses it's field.  Objects that it grips onto should be metal or have the included <a href="http://nicadrone.com/index.php?id_product=15&amp;controller=product" target="_blank">thin steel target square</a> attached to them.
+This article shows how to use the <a href="http://nicadrone.com/index.php?id_product=13&amp;controller=product" target="_blank">Electro Permanent Magnet Gripper (EPM688)</a> with ArduPilot.
+<!--more-->
+
+
+
+<h1>Overview</h1>
+
+The <em>EPM688</em> (from NicaDrone.com) is a small (less than 4cm x 4cm x 2cm) Electro Permanent Magnet gripper capable of 7kg of force meaning it can hold about 1kg of cargo.  The gripping and releasing of the cargo if accomplished by delivering a short pulse to an electromagnet which reverses it's field.  Objects that it grips onto should be metal or have the included <a href="http://nicadrone.com/index.php?id_product=15&amp;controller=product" target="_blank">thin steel target square</a> attached to them.
 
 The device accepts a standard PWM servo input and uses a 5V power supply.  Significant amounts of power are only required for less than 1 second when it first grips or releases the cargo.
 
@@ -20,9 +27,9 @@ The device accepts a standard PWM servo input and uses a 5V power supply.  Sign
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Pixhawk.jpg"><img class="alignnone size-full wp-image-2817" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_Pixhawk.jpg" alt="EPM_Pixhawk" width="960" height="350" /></a>
 
-The EPM is connected to the Pixhawk in the same way as a <a href="wiki/common-servo/">servo</a>.
+The EPM is connected to the Pixhawk in the same way as a <a href="common-servo">servo</a>.
 <ul>
-	<li>If using Copter, Connect the EPM to AUX OUT 1, 2, 3 or 4.  MAIN OUT 1 ~ 8 cannot be used because the EPM does not accept the 400hz update rate.  AUX OUT 5 an 6 cannot be used because they are reserved for <a href="wiki/common-relay/">Relays</a>.</li>
+	<li>If using Copter, Connect the EPM to AUX OUT 1, 2, 3 or 4.  MAIN OUT 1 ~ 8 cannot be used because the EPM does not accept the 400hz update rate.  AUX OUT 5 an 6 cannot be used because they are reserved for <a href="common-relay">Relays</a>.</li>
 	<li>If using Plane or Rover where all pwm pins update at 50hz, any unused MAIN OUT or AUX OUT 1 ~ 4 may be used.</li>
 	<li>A BEC or ESC should be used that can provide 600milliamps of current at 5V for the short period that the gripper is first activated to latch onto the cargo.</li>
 </ul>
@@ -33,7 +40,7 @@ The EPM is connected to the Pixhawk in the same way as a <a href="wiki/common-se
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_APM2.png"><img class="alignnone size-full wp-image-2799" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/12/EPM_APM2.png" alt="EPM_APM2" width="676" height="398" /></a>
 
-The EPM is connected to the APM2 in the same way as a <a href="wiki/common-servo/">servo</a>.
+The EPM is connected to the APM2 in the same way as a <a href="common-servo">servo</a>.
 <ul>
 	<li>If using Copter, connect the EPM's signal wire to either A10 or A11 on the left side of the APM.</li>
 	<li>If using Plane or Rover A10, A11 or any available RC1 ~ RC8 connectors on the back of the APM may be used.</li>
@@ -105,7 +112,7 @@ On-board tactile push button: Allows toggle testing the EPM on/off  having only
 
 Full bridge Thyrisotor drive circuit increases efficiency and reduces capacitor size .
 
-Reduced magnetic interference allows mounting within 5cm of a magnetometer (please test it with your application)
+Reduced magnetic interference allows mounting within 5cm of a compass (please test it with your application)
 
 
 <a href="http://opengrab.googlecode.com/files/Electropermanent_Magnets_Knaian.pdf" target="_blank">Paper by Ara Nerses Knaian</a>
@@ -126,7 +133,7 @@ Turning the EPM on and off and ensure the magfield length does not change by mor
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/mag_field.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/mag_field-1024x534.jpg" alt="mag_field" width="584" height="304" /></a>
 
-In addition to magnetic interference, if a weak BEC is used a voltage drop may be noticed.  For example the BEC in a 3DR ESC leads to a drop of 0.4V when the EPM is activated.  This is normally not a concern because the BEC should only be powering the servo rail of the Pixhawk/APM2 and so the CPU's voltage should be unaffected.  This can be tested by graphing the "hwvoltage" field in the same way the "magfield" was checked above.  Ideally this test should be performed when connected via <a href="wiki/common-telemetry-landingpage/">Telemetry </a>because a USB cable will also provide power the CPU and may hide any voltage disturbance.
+In addition to magnetic interference, if a weak BEC is used a voltage drop may be noticed.  For example the BEC in a 3DR ESC leads to a drop of 0.4V when the EPM is activated.  This is normally not a concern because the BEC should only be powering the servo rail of the Pixhawk/APM2 and so the CPU's voltage should be unaffected.  This can be tested by graphing the "hwvoltage" field in the same way the "magfield" was checked above.  Ideally this test should be performed when connected via <a href="common-telemetry-landingpage">Telemetry </a>because a USB cable will also provide power the CPU and may hide any voltage disturbance.
 
 
 

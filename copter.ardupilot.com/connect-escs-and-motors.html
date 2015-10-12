@@ -12,7 +12,16 @@ END METADATA
 This article explains how to connect the ESCs, Motors and Propellers for Pixhawk, PX4, and APM 2.x.
 <!--more-->
 
-<h1>Connect motor PWM signal outputs</h1>
+<h1>Connect motor PWM signal outputs (Pixhawk/PX4)</h1>
+
+Connect the power (+), ground (-), and signal (s) wires for each ESC to the controller main output pins by motor number. Find your frame type below to determine the assigned order of the motors.
+
+[caption id="attachment_15423" align="alignnone" width="459"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg" alt="Pixhawk Output pins showing colours for connecting a Quad frame" width="459" height="167" class="size-full wp-image-15423" /></a> Pixhawk Output pins (numbered). First 4 pins are colour-coded for connecting a Quad frame[/caption]
+
+[warning]The APM PDB described in the following section is not compatible with the Pixhawk or PX4.[/warning]
+
+
+<h1>Connect motor PWM signal outputs (APM2)</h1>
 
 There are two methods of connecting the motor outputs: connect the electronic speed controllers (ESCs) to autopilot controller board directly or use a power distribution board (PDB).
 
@@ -24,11 +33,8 @@ When using a PDB, connect the power (+), ground (-), and signal (s) wires for ea
 
 When connecting the ESCs directly to autopilot board, connect the power (+), ground (-), and signal (s) wires for each ESC to the controller main output pins by motor number. Find your frame type below to determine the assigned order of the motors.
 
-[caption id="attachment_15423" align="alignnone" width="459"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg" alt="Pixhawk Output pins showing colours for connecting a Quad frame" width="459" height="167" class="size-full wp-image-15423" /></a> Pixhawk Output pins (numbered). First 4 pins are colour-coded for connecting a Quad frame[/caption]
 
 [caption id="attachment_15422" align="alignnone" width="458"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/APM_outputs.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/APM_outputs.jpg" alt="APM Output Pins (numbered)" width="458" height="427" class="size-full wp-image-15422" /></a> APM Output Pins (numbered)[/caption]
-
-
 
 <h1>Motor order diagrams</h1>
 
@@ -82,7 +88,7 @@ Propellers come in many varieties and are suited to different needs.
 
 <h1>Testing motor spin directions</h1>
 
-If you have completed the <a href="configuring-hardware/#Calibrate_radio_control">Radio</a> and <a href="esc-calibration">ESC calibration</a>, you can check that your motors are spinning in the correction direction:
+If you have completed the <a href="radio-control-calibration">Radio</a> and <a href="esc-calibration">ESC calibration</a>, you can check that your motors are spinning in the correction direction:
 <ol>
 	<li>Make sure there are no propellers on your copter!</li>
 	<li>Turn transmitter on and ensure the flight mode switch is set to Stabilize.</li>

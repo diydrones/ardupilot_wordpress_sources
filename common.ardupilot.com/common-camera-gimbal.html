@@ -22,17 +22,23 @@ The examples shown below use Copter screen shots, but work exactly the same for 
 A camera's shutter can be triggered from the APM once connected with a servo or "relay". The act of triggering the shutter can be controlled through your receiver's channel 7 switch or automatically during missions.
 
 For best performance, ensure that after you add the extra weight of the camera gimbal your copter still hovers ideally at 50% throttle but certainly no more than 70% throttle while in Stabilize mode because an underpowered copter also has less power to recover from disturbances.
+
+
 <h1>Camera mount and build</h1>
+
 The camera needs to be mounted securely to the gimbal, but in such a way that reduces/dampens vibrations from the motor. It is difficult to achieve both aims at the same time!
 
 Common methods for mounting the camera on the gimbal include using: soft foam, stiff foam, neoprene tubes (mount camera on tube side), surgical tube, rubber bands, nylon bolt (direct stiff attachment) and velcro. Tubes have been used mostly on traditional helicopters. We make no specific recommendation here as there is no single obvious "best choice" and to some extent this depends on the airframe. That said, using velcro and rubber bands (for extra security) is quick to set up and can give reasonable results.
-<h1>Connecting the Servos to a Pixhawk</h1>
+
+
+<h1>Connecting the servos to a Pixhawk</h1>
+
 Connect the gimbal to Pixhawk's auxiliary output pins. Connect tilt (pitch) to aux out signal (s) pin 1, roll to aux out signal (s) pin 2, and ground to an aux out ground (-) pin.
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gimbal-control-connect2.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gimbal-control-connect2.jpg" alt="gimbal control connect2" width="350" height="124" /></a>
 
 
 
-<h1>Connecting the Servos to a PX4</h1>
+<h1>Connecting the servos to a PX4</h1>
 
 <ol>
 	<li>The Camera Gimbal Servo connections are located on (FMU USART2) on the PX4IO board.</li>

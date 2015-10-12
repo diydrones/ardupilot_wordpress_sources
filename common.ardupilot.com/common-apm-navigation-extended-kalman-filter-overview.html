@@ -9,18 +9,18 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Copter and Plane can use an Extended Kalman Filter (EKF) algorithm to estimate vehicle position, velocity and angular orientation based on rate gyroscopes, accelerometer, magnetometer, GPS, airspeed and barometric pressure measurements.
+Copter and Plane can use an Extended Kalman Filter (EKF) algorithm to estimate vehicle position, velocity and angular orientation based on rate gyroscopes, accelerometer, compass, GPS, airspeed and barometric pressure measurements.
 
 The advantage of the EKF over the simpler complementary filter algorithms, is that by fusing all available measurements it is better able to reject measurements with significant errors. This makes the vehicle less susceptible to faults that affect a single sensor. EKF also enables measurements from optional sensors such as optical flow and laser range finders to be used to assist navigation.
 
 
 <h1>Commonly modified parameters:</h1>
 
-<a href="http://dev.ardupilot.com/extended-kalman-filter/#ahrs_ekf_use"><strong>AHRS_EKF_USE</strong></a> : set to "1" to enable the EKF, "0" to disable and rely on DCM for attitude control, inertial nav (Copter-3.2.1) or ahrs dead reckoning (Plane) for position control.  In Copter-3.3, this feature is forced to "1" and cannot be changed.
+<a href="http://dev.ardupilot.com/extended-kalman-filter/#ahrs_ekf_use">AHRS_EKF_USE</a> : set to "1" to enable the EKF, "0" to disable and rely on DCM for attitude control, inertial nav (Copter-3.2.1) or ahrs dead reckoning (Plane) for position control.  In Copter-3.3, this feature is forced to "1" and cannot be changed.
 
-<strong><a href="http://dev.ardupilot.com/extended-kalman-filter/#ekf_alt_noise">EKF_ALT_NOISE</a></strong> : Default is "1.0".  Lower number reduces reliance on accelerometers, increases reliance on baro.
+<a href="http://dev.ardupilot.com/extended-kalman-filter/#ekf_alt_noise">EKF_ALT_NOISE</a>: Default is "1.0".  Lower number reduces reliance on accelerometers, increases reliance on barometer.
 
-<a href="http://dev.ardupilot.com/extended-kalman-filter/#ekf_gps_type"><strong>EKF_GPS_TYPE</strong></a> : Controls how GPS is used.
+<a href="http://dev.ardupilot.com/extended-kalman-filter/#ekf_gps_type">EKF_GPS_TYPE</a>: Controls how GPS is used.
 <ul>
 	<li>0 : use 3D velocity &amp; 2D position from GPS</li>
 	<li>1 : use 2D velocity &amp; 2D position (GPS velocity does not contribute to altitude estimate)</li>

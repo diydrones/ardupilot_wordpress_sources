@@ -92,18 +92,16 @@ Power the vehicle and the "HC-06" device should appear.  Click on it and enter 
 The device will appear under "PAIRED DEVICES"
 
 If using DroidPlanner:
-<blockquote>
 <ul>
-	<li><em>open the Droid Planner settings, and select Telemetry Connection Type, Bluetooth.</em></li>
-	<li><em>In the main DroidPlanner interface, select Connect, and select the paired Bluetooth device.</em></li>
+	<li>open the Droid Planner settings, and select Telemetry Connection Type, Bluetooth.</li>
+	<li>In the main DroidPlanner interface, select Connect, and select the paired Bluetooth device.</li>
 </ul>
-</blockquote>
+
 If using AndroPilot:
-<blockquote>
 <ul>
-	<li><em> a "bluetooth" button should appear on the screen, click it</em></li>
+	<li>a "bluetooth" button should appear on the screen, click it</li>
 </ul>
-</blockquote>
+
 When live data appears on the screen, you’re ready to start mission planning.
 
 
@@ -114,44 +112,48 @@ You will need a FTDI to USB cable to change any of the configurations of the dev
 
 To change the above you need a "Terminal" emulator program. You can not use "Putty" (a popular serial port tool)  because it will not accept "line" commands. The Bluetooth Modules read the input at a rate of once per second therefore you must use an emulator that will allow you to input an entire line before hitting "send". You can use the Arduino IDE to send commands to the com port if you are familiar with that. I use  "Advanced Serial Port Terminal" but any terminal emulator that allows you to type in a line of text before hitting send will work just a good.
 
-<h4>Change the Baud Rate:</h4>
-<span style="font-size: medium;font-family: verdana,geneva">The index  after the command AT+BAUD corresponds to the following baud rate:</span>
+<h2>Change the baud rate</h2>
 
-<span style="font-size: medium;font-family: verdana,geneva">1----1200bps
+The index  after the command AT+BAUD corresponds to the following baud rate:
+
+1----1200bps
 2----2400bps
 3----4800bps
 4----9600bps
 5----19200bps
 6----38400bps
 7----57600bps
-8----115200bps</span>
+8----115200bps
 
 There are additional baud rates. Warning! do not set these baud rates unless you have a special fast UART chip. If you don't know do not use these rates they are beyond the standard PC UART speed and once set you will loose communication with the device and the only way to contact the device after that will be with a high speed UART.  (these are for reference only)
 
-<span style="font-size: medium;font-family: verdana,geneva">9----230400bps
+9----230400bps
 A----460800bps
 B----921600bps
-C----1382400bps</span>
+C----1382400bps
 
-<span style="font-size: medium;font-family: verdana,geneva">The change of Baud rate takes effect immediately after the command is sent. So if you want to keep configuring the Bluetooth module, you need to set the Baud rate of your terminal program to the new Baud rate the Bluetooth is using. To test it, send AT again, you should receive 'OK'</span>
-<h4>Change the Device Name</h4>
-<span style="font-size: medium;font-family: verdana,geneva">This example show you how to change the name of the Bluetooth module to Ardupilot: In the terminal program, send the command (case sensitive):</span>
-
-<span style="font-family: verdana,geneva;font-size: medium">AT+NAMEArdupilot</span>
-
-<span style="font-size: medium;font-family: verdana,geneva">The Bluetooth should reply:</span>
-
-<span style="font-family: verdana,geneva;font-size: medium">OKsetname</span>
+The change of Baud rate takes effect immediately after the command is sent. So if you want to keep configuring the Bluetooth module, you need to set the Baud rate of your terminal program to the new Baud rate the Bluetooth is using. To test it, send AT again, you should receive 'OK'
 
 
-<h4>Change the Device PIN</h4>
-<span style="font-size: medium;font-family: verdana,geneva">The following example shows how to change the pairing code to 5566 In the terminal program, send the command (case sensitive):</span>
+<h2>Change the Device Name</h2>
 
-<span style="font-family: verdana,geneva;font-size: medium">AT+PIN5566</span>
+This example show you how to change the name of the Bluetooth module to Ardupilot: In the terminal program, send the command (case sensitive):
 
-<span style="font-size: medium;font-family: verdana,geneva">The Bluetooth should reply:</span>
+<pre>AT+NAMEArdupilot</pre>
 
-<span style="font-family: verdana,geneva;font-size: medium">OKsetPIN</span>
+The Bluetooth should reply:
+
+<pre>OKsetname</pre>
+
+
+<h2>Change the Device PIN</h2>
+The following example shows how to change the pairing code to 5566 In the terminal program, send the command (case sensitive):
+
+<pre>AT+PIN5566</pre>
+
+The Bluetooth should reply:
+
+<pre>OKsetPIN</pre>
 
 
 

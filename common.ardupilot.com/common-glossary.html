@@ -26,11 +26,11 @@ END METADATA
 
 <strong>APM (AutoPilot Mega)</strong>: Flight Controller providing capabilities for stabilized flight, position maintenance and automated mission (waypoint) path following.
 
-<strong>Copter</strong>: Rotary-wing autopilot software for the APM electronics
+<strong>Copter</strong>: Rotary-wing autopilot software variant of the ArduPilot project.
 
-<strong>Plane</strong>: Fixed-wing autopilot software for the APM electronics.
+<strong>Plane</strong>: Fixed-wing autopilot software variant of the ArduPilot project.
 
-<strong>Rover</strong>: Ground and water autopilot software for the APM electronics
+<strong>Rover</strong>: Ground and water autopilot software variant of the ArduPilot project.
 
 <strong>BEC</strong>: Battery Elimination Circuit. A voltage regulator found in ESCs (see below) and as a stand-alone product. Designed to provide constant 5v voltage for RC equipment, autopilots and other onboard electronics.
 
@@ -52,9 +52,9 @@ END METADATA
 
 <strong>GCS</strong>: Ground Control Station. Software running on a computer on the ground that receives telemetry information from an airborne UAV and displays its progress and status, often including video and other sensor data. Can also be used to transmit in-flight commands to the UAV.
 
-<strong>Hard Iron magnetic distortion</strong>: distortions that arise from magnets or magnetized metals on the airframe that affect the compass. These distortions remain in the same location relative to the compass for all heading orientations. These distortions can be mostly compensated for by adding constant offsets to the values returned from the 3d magnetometer.
+<strong>Hard Iron magnetic distortion</strong>: distortions that arise from magnets or magnetized metals on the airframe that affect the compass. These distortions remain in the same location relative to the compass for all heading orientations. These distortions can be mostly compensated for by adding constant offsets to the values returned from the 3d magnetometer (compass).
 
-<strong>HIL (Hardware-in-the-loop simulation)</strong>: Doing a simulation where software running on another computer generates data that simulates the data that would be coming from an autopilot's sensors. The autopilot is running and doesn't "know" that the data is simulated, so it responds just as it would to real sensor data. Hardware-in-the-loop uses the physical autopilot hardware connected to a simulator, as opposed to simulating the autopilot in software, too. In an "open loop" simulation, the software simulator feeds data to the hardware autopilot; in a "closed loop" simulation, the hardware feeds data back to the sofware simulator, too.
+<strong>HIL (Hardware-in-the-loop simulation)</strong>: Doing a simulation where software running on another computer generates data that simulates the data that would be coming from an autopilot's sensors. The autopilot is running and doesn't "know" that the data is simulated, so it responds just as it would to real sensor data. Hardware-in-the-loop uses the physical autopilot hardware connected to a simulator, as opposed to simulating the autopilot in software, too. In an "open loop" simulation, the software simulator feeds data to the hardware autopilot; in a "closed loop" simulation, the hardware feeds data back to the software simulator, too.
 
 <strong>I2C</strong>: A serial bus that allows multiple low speed peripherals, such as sensors, to be connected to a microprocessor. See <a href="http://en.wikipedia.org/wiki/I%C2%B2C" rel="nofollow">this</a> for more.
 
@@ -92,7 +92,7 @@ END METADATA
 
 <strong>PIC</strong>: Pilot in Command. Refers to a FAA requirement that UAVs stay under a pilot's direct control if they are flying under the recreational exemption to COA approval. See Line of Sight above. (Not to be confused with the PIC processor series by Microchip)
 
-<strong>PID</strong>: Proportional/Integral/Derviative control method. A machine control algorithm that allows for more accurate sensor-motion control loops and less overcontrol. See <a href="http://en.wikipedia.org/wiki/PID_controller" rel="nofollow">this</a> for more.
+<strong>PID</strong>: Proportional/Integral/Derivative control method. A machine control algorithm that allows for more accurate sensor-motion control loops and less overcontrol. See <a href="http://en.wikipedia.org/wiki/PID_controller" rel="nofollow">this</a> for more.
 
 <strong>POI</strong>: Point of Interest. Designates a spot that a UAV should keep a camera pointed towards.
 

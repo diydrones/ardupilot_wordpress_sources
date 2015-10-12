@@ -55,8 +55,6 @@ RATE_RLL_I and I_MAX are also important. You should be able to increase I and ge
 Moving the control link out on the servo horn will have the exact same effect as increasing the PID terms, so it's not a solution. You'll find you just have to back off the rate PID's to avoid shake again. And then you can get into a situation where you don't have enough resolution on the servo.
 
 One part of this situation is the fact that the Rate I term is not a classic I-term, but a "leaky" I term. It bleeds down 2% every 100ms... it's complicated but it's there for a few reasons. One of these reasons is because if we use a standard I-term, and you leave your heli sitting on off-level ground, the swash will slowly tip over as the I-term builds up. If you spool up, the heli will tip over. It's not fun. The problem with this is it really limits how much control movement we can get out of the I-term. It's sort of a lesser of two evils. If we could use a regular I-term, it would help. But we can't... well, we’re working on something but it will only work if you are using the Ch8 rotor speed controller so make sure you have this set up properly.
-
-
 <h3>Rudder Tuning</h3>
 At the same time, think about adding some RATE_YAW_FF. Maybe try using 0.040 here. You might expect to back-off on the RATE_YAW_P just a bit as RATE_YAW_FF increases. Start with a RATE_YAW_P value of 0.25 (default) and move downward to say P=0.120 or even P=0.100. Try I = 0.02 and D = 0.002
 
@@ -85,10 +83,7 @@ For a 600 size heli the rudder (yaw) settings may look like this:
 </tr>
 </tbody>
 </table>
-
 You’re not finished fiddling with this yet but what you will find is that these settings make the yaw control much stronger then on previous versions of the software and also help reduce the very small oscillation it used to have.
-
-
 <h3>Acro Mode Tuning</h3>
 The AXIS_ENABLE parameter should be set to 1 otherwise Acro mode will be unflyable. AXIS_ENABLE basically turns on a 3-D "heading lock" gyro mode that works very well.
 
@@ -99,18 +94,8 @@ ACRO_BAL_PITCH and ACRO_BAL_ROLL: These create a "virtual dihedral" which attemp
 ACRO_TRAINER: This is in addition to ACRO_BAL_ROLL and prevents the heli from rolling past 45°. You can push it a bit beyond but it won't go too far. If you don’t want it, just turn it off.
 
 If you want to speed up the angular rate, you will want to play with ACRO_P which defaults to 4.5 which gives you a rate of 202°/s. Set at 6 will give about 270°/s and 8 will give about 360°/s. The gyros have a full scale of 2,000°/s
-
-But keep in mind Acro mode with 2.9 will always feel a bit weird because it's all done in "earth-frame". That means for example, that your yaw stick will always attempt to make the heli spin on an axis parallel to the earth surface. So, if you were to roll the heli on its side and then give it yaw, it will actually respond with pitch because when it's on it's right side, if you enter a right yaw command, the nose will "pitch" up in order to rotate about the earth-frame yaw axis.
-
-We hope to bring true body-frame Acro soon which is what you'd be used to.
-
-Also remember, that in Acro mode, you CANNOT pitch up or down past 90° vertical. This is another limitation of the earth-frame controller.
-
-
 <h3>Stabilization Mode Tuning</h3>
 One of the things you should look at is your STAB_PIT_P and STAB_RLL_P numbers? These were probably quite low in version 2.7.3, probably less than 1, and they should now be 3.5 to 4.5. This is a really big factor in getting the servo movement you are expecting.
-
-
 <h3>Throttle Tuning</h3>
 THR_MID convert's the pilot's throttle input (0~1000) to the motor output (130~1000). It has two different scales so that the pilot's 0~500 input maps to the 130~THR_MID value...then another scale so pilot's 501~1000 input is mapped to the THR_MID~1000 output for the motor.
 
@@ -177,10 +162,10 @@ For a 600 size heli a possible throttle set up could be:
 </tr>
 </tbody>
 </table>
-
-
 <h3>Aerobatics in Acro Mode</h3>
-If you're any good at heli aerobatics you should try the Acro mode use these settings:
+Acro Mode in APM:Copter now supports full acrobatic flight!  The function is similar to any other acrobatic FBL controller available on the market.  The performance might not be suitable for helicopter competition, but it certainly adequate for sport flying.
+
+Many maneuvers have been fully tested, loops, rolls, inverted flight, etc.  Caution should be exercised if aggressive 3D type maneuvers are attempted, such as tic-tocs, etc.  While the control algorithms are fine, it's unproven if the system is able to maintain it's orientation relative the ground.  In other FBL controllers, if this were to happen, the controller would simply turn off the self-leveling function but the acrobatic flight can continue as normal.  But with APM:Copter, this could lead to loss of control even in Acro mode. We will attempt to remedy this situation in the future so that all maneuvers can be performed.
 
 ACRO_BAL_PITCH = 50 ACRO_BAL_ROLL = 50 ACRO_P = 4.5 ACRO_TRAINER = 0 AXIS_ENABLE = 1
 
@@ -191,5 +176,3 @@ ACRO_BAL_ROLL is like a faked "dihedral" effect. It makes the copter return to l
 ACRO_TRAINER is an addition thing that makes the heli not want to roll past 45°.
 
 AXIS_ENABLE turns the whole angle-lock thing on. Sort of like Futaba AVCS in all 3 axes. Without it, it's pure rate control and your experience will be pretty bad.
-
-But you must note that with the current Acro mode, you cannot pitch past vertical, it won't do it! And all commands are in Earth Frame. If you pull back to pitch it up vertical and then yaw, it will actually spin into a roll because the earth frame yaw vector is always vertical. You can roll upside down but you cannot pitch past vertical which is a limitation of the controller.

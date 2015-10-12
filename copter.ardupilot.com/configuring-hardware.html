@@ -9,90 +9,10 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-As part of first time setup, you'll need to configure some required hardware components using <em>Mission Planner</em>. These instructions describe the process for selecting frame orientation and configuring the RC transmitter/receiver, compass, and accelerometer.
+As part of first time setup, you'll need to configure some required hardware components. The linked articles describe the process for selecting frame orientation and configuring the RC transmitter/receiver, compass, and accelerometer using <em>Mission Planner</em> and how to configure the ESCs.
 <!-- more -->
-<h1>Select frame type</h1>
-On the <em>Mission Planner</em>'s Initial Setup screen select <strong>Mandatory Hardware | Frame Type</strong>. Select the frame for your copter. The default configuration is<strong> X</strong>. If you want one of the arms to serve as the exclusive front-facing direction, select the <strong>Plus</strong> configuration. For Tricopters, Traditional Helis and Y6s, the frame type is ignored.
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/select-frame-type1.png"><img class="alignnone size-full wp-image-9415" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/select-frame-type1-e1377904351353.png" alt="select frame type" width="600" height="261" /></a>
-
-[note]For an H-Frame quadcopter use the option to set the frame type to '3' in the <em>Advanced Parameter</em> Tab. To apply the H-frame configuration, swap the left rear and right rear props and reverse the motor direction for each of those motors (by swapping any two motor wires). Repeat the same process for the front two motors.[/note]
+[pagelist_navmenu]
 
 
-<h1>Calibrate compass</h1>
-To perform the basic compass calibration you should:
-<ul>
-	<li>Under <strong>Intial Setup | Mandatory Hardware</strong> select <strong>Compass</strong>. Select the correct orientation for your setup.</li>
-	<li>Ensure the <strong>Enable</strong> and <strong>AutoDec</strong> check boxes are checked</li>
-	<li>Click the "Live Calibration" button</li>
-	<li>Next select your autopilot configuration, for Pixhawk and PX4, select the option Pixhawk/PX4 with the image of the Pixhawk. For APM 2.6, select APM with External Compass with the image of the GPS with Compass module. These options will automatically enter the correct orientation for the board. Ensure that you have mounted the GPS with Compass with the arrow facing toward the front of the vehicle and in the same direction as the arrow on the autopilot.
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png"><img class="alignnone wp-image-2250" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/calibrate-compass.png" alt="calibrate compass" width="400" height="210" /></a></li>
-	<li>A window should pop-up informing you that you have 60 seconds in which to rotate the APM/PX4 around all axis, press <strong>OK</strong></li>
-	<li>A countdown window should appear to show that the mission planner is collecting compass data</li>
-	<li>During these next 60 seconds you should hold the copter in the air and rotate it slowly so that each side (front, back, left, right, top and bottom) points down towards the earth for a few seconds in turn.
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg"><img class="wp-image-7535" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/compass-dance.jpg" alt="When calibrating the compass, move copter into each position shown." width="400" height="134" /></a></li>
-	<li>Upon completion, another window will pop up showing you the new offsets that it calculated.</li>
-	<li>For APM, as long as all three values are between -150 and 150 the offsets are good.  Press <strong>OK</strong>.</li>
-	<li><strong>Note</strong>, for PX4 and Pixhawk values may be greater than 150 and less than -150. Press <strong>OK</strong>.</li>
-</ul>
-Check out <a href="https://www.youtube.com/watch?v=DmsueBS0J3E" target="_blank">this video</a> for an example of performing compass calibration.
-
-More details on this and other compass set-up procedures "<a href="common-compass-setup-advanced/#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_motors">compassmot</a>" can be found <a href="common-compass-setup-advanced">here</a>.
-
-General discussion on magnetic interference and ways to reduce it can be found <a href="common-magnetic-interference">here</a>.
-
-
-<h1>Calibrate accelerometer</h1>
-Under Initial Setup, Mandatory Hardware, select Accel Calibration from the left-side menu.
-
-This process will require you to place your copter in the positions shown below in sequence. The level position is the most important to get right as this will be the attitude that your controller considers level while flying.
-
-It is important not to move the copter immediately after pressing the key for each step. Check out <a href="https://vimeo.com/56224615" target="_blank">this video</a> for an example of how to hold the copter.<a href="http://vimeo.com/56224615">
-</a>
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-calib-positions.jpg"><img class="wp-image-7545" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-calib-positions.jpg" alt="Move copter into each position when instructed while calibrated accelerometer." width="600" height="97" /></a>
-
-When you're ready to perform the calibration, select <strong>Calibrate Accel</strong>.
-
-[caption id="attachment_15330" align="alignnone" width="474"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/AccelCalibration_MP.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/AccelCalibration_MP-1024x575.png" alt="Mission Planner: Calibrate Acceleration" width="474" height="266" class="size-large wp-image-15330" /></a> Mission Planner: Calibrate Acceleration[/caption]
-
-Mission Planner will prompt you to place the copter in each calibration position and press any key. Proceed through the required positions (it is not necessary to use the <strong>Click When Done</strong> button).
-
-[caption id="attachment_7547" align="alignnone" width="474"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-clibration-press-any-key.png"><img class="size-large wp-image-7547" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-clibration-press-any-key-1024x508.png" alt="Mission Planner: Accel clibration press any key" width="474" height="235" /></a> Mission Planner: Accel calibration press any key[/caption]
-
-When you've completed the calibration process, Mission Planner will display "Calibration Successful!" as shown below.
-
-[caption id="attachment_7548" align="alignnone" width="474"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibration-successful.png"><img class="size-large wp-image-7548" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibration-successful-1024x508.png" alt="Mission Planner: Calibration Successful" width="474" height="235" /></a> Mission Planner: Calibration Successful[/caption]
-<h1>Calibrate radio control</h1>
-Turn on transmitter. Verify that the transmitter is in Airplane mode (APM needs airplane mode regardless of the platform type being piloted) and all trims are centered.
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/radio_setup1.png"><img class=" wp-image-7392" style="border-color: #bbbbbb;background-color: #eeeeee" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/radio_setup1.png" alt="Recommended setup of RC channels on transmitter." width="150" height="146" /></a>
-
-For Mode 1 transmitters, the left stick will control pitch and yaw, the right stick will control throttle and roll.
-
-For Mode 2 transmitters, the left stick will control throttle and yaw; the right stick will control pitch and roll.
-
-For either type of transmitter, the transmitter's three-position switch should be attached to channel 5 and will control flight modes.
-
-Optionally the transmitter's tuning knob should control channel 6 for inflight tuning.  Channel 7 and Channel 8 switches can be used for controlling auxiliary functions.
-
-In <em>Mission Planner</em>, click on the green <strong>Calibrate Radio</strong> button in the lower right of the window. Mission Planner will call a dialog window to ensure radio control equipment is on, battery is not connected, and propellers are not attached. Select OK.
-
-[caption id="attachment_7549" align="alignnone" width="1150"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibrate-radio.png"><img class="size-full wp-image-7549" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/calibrate-radio.png" alt="Mission Planner: Select Calibrate Radio and OK to begin calibrating." width="1150" height="588" /></a> Mission Planner: Select Calibrate Radio and OK to begin calibrating.[/caption]
-
-Select <strong>OK</strong>; move the control sticks and toggle switches on your transmitter to their limits of travel and observe the results on the radio calibration bars. Red lines will appear across the calibration bars to indicate maximum and minimum values. Move the Ch 5 and 6 toggle switches through their range of positions (Ch 7 and 8 are not used for basic operations).
-Your transmitter should cause the following control changes:
-Channel 1: low = roll left, high = roll right.
-Channel 2: low = pitch forward, high=pitch back.
-Channel 3: low = throttle down (off), high = throttle up.
-Channel 4: low = yaw left, high = yaw right.
-
-[caption id="attachment_7559" align="alignnone" width="1034"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radio-calib-click-when-done.png"><img class="size-full wp-image-7559" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radio-calib-click-when-done.png" alt="Mission Planner: Once red bars are set, select Click When Done" width="1034" height="575" /></a> Mission Planner: Once red bars are set, select Click When Done[/caption]
-
-When the red bars for roll, pitch, throttle, yaw, and radio 5 (and optionally radio 6, 7 and 8) are set at the minimum and maximum positions, select <strong>Click when Done</strong>. Mission Planner will show a summary of the calibration data. Normal values are around 1100 for minimums and 1900 for maximums.  <strong>If the bars go in the opposite direction of the direction you're moving the sticks, that means that the channel is reversed on your RC transmitter side.</strong> Use your RC transmitter's channel-reverse function to reverse it at the transmitter sid. (see your RC gear's manual for that, if you're not familiar with the process)
-
-[caption id="attachment_7560" align="alignnone" width="435"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png"><img class="size-full wp-image-7560" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radi-calib-results.png" alt="Mission Planner: Radio Calibration Results" width="435" height="350" /></a> Mission Planner: Radio Calibration Results[/caption]
-<h1>Configure flight modes</h1>
-You should also <a href="flight-modes/#configure_flight_modes_settable_on_transmitter">configure the flight modes that can be selected from your Transmitter mode-selection switch</a>.
-<h1>Configure additional hardware (optional)</h1>
-<strong>Optional Hardware</strong> configuration for the battery monitor, sonar, airspeed sensor, optical flow, OSD, camera gimbal, and antenna tracker are detailed on the <a href="common-optional-hardware">Optional Hardware</a> page.
+In addition to mandatory calibration, you may also choose to <a href="common-optional-hardware">Configure Optional Hardware</a> including battery monitor, sonar, airspeed sensor, optical flow, OSD, camera gimbal, antenna tracker etc.

@@ -3809,6 +3809,15 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Compass calibration fitness (COMPASS_CAL_FIT)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This controls the fitness level required for a successful compass calibration. A lower value makes for a stricter fit (less likely to pass). This is the value used for the primary magnetometer. Other magnetometers get double the value.</p>
+<ul>
+<li>Range: 4 20</li>
+<li>Increment: 0.1</li>
+</ul>
+
+
 <h1>INS_ Parameters</h1>
 
 
@@ -4111,6 +4120,18 @@ DO NOT EDIT
 <p>Threshold to tolerate vibration to determine if vehicle is motionless. This depends on the frame type and if there is a constant vibration due to motors before launch or after landing. Total motionless is about 0.05. Suggested values: Planes/rover use 0.1, multirotors use 1, tradHeli uses 5</p>
 <ul>
 <li>Range: 0.05 to 50</li>
+</ul>
+
+
+<h2>Gyro Calibration scheme (INS_GYR_CAL)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Conrols when automatic gyro calibration is performed</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Never</td></tr>
+<tr><td> 1</td><td>Start-up only</td></tr>
+<tr><td> 2</td><td>Start-up and first arming (Copter only)</td></tr>
+</table>
 </ul>
 
 
@@ -4825,7 +4846,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>AHRS Velocity Complmentary Filter Beta Coefficient (AHRS_COMP_BETA)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>AHRS Velocity Complementary Filter Beta Coefficient (AHRS_COMP_BETA)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This controls the time constant for the cross-over frequency used to fuse AHRS (airspeed and heading) and GPS data to estimate ground velocity. Time constant is 0.1/beta. A larger time constant will use GPS data less and a small time constant will use air data less.</p>
 <ul>
@@ -4843,14 +4864,14 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Use NavEKF Kalman filter for attitude and position estimation (AHRS_EKF_USE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Use NavEKF Kalman filter for attitude and position estimation (AHRS_EKF_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This controls whether the NavEKF Kalman filter is used for attitude and position estimation and whether fallback to the DCM algorithm is allowed</p>
+<p>This controls whether the NavEKF Kalman filter is used for attitude and position estimation and whether fallback to the DCM algorithm is allowed. Note that on copters "disabled" is not available, and will be the same as "enabled - no fallback"</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td>1</td><td>Enabled</td></tr>
-<tr><td> 2</td><td>Enabled - No Fallback</td></tr>
+<tr><td>2</td><td>Enable EKF2</td></tr>
 </table>
 </ul>
 
@@ -4975,6 +4996,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5009,6 +5034,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5043,6 +5072,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5317,6 +5350,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5351,6 +5388,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5385,6 +5426,10 @@ DO NOT EDIT
 <tr><td>6</td><td>RC6</td></tr>
 <tr><td>7</td><td>RC7</td></tr>
 <tr><td>8</td><td>RC8</td></tr>
+<tr><td>9</td><td>RC9</td></tr>
+<tr><td>10</td><td>RC10</td></tr>
+<tr><td>11</td><td>RC11</td></tr>
+<tr><td>12</td><td>RC12</td></tr>
 </table>
 </ul>
 
@@ -5749,6 +5794,18 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Primary barometer (GND_PRIMARY)</h2>
+
+<p>This selects which barometer will be the primary if multiple barometers are found</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>FirstBaro</td></tr>
+<tr><td>1</td><td>2ndBaro</td></tr>
+<tr><td>2</td><td>3rdBaro</td></tr>
+</table>
+</ul>
+
+
 <h1>GPS_ Parameters</h1>
 
 
@@ -5767,6 +5824,8 @@ DO NOT EDIT
 <tr><td>7</td><td>HIL</td></tr>
 <tr><td>8</td><td>SwiftNav</td></tr>
 <tr><td>9</td><td>PX4-UAVCAN</td></tr>
+<tr><td>10</td><td>SBF</td></tr>
+<tr><td>11</td><td>GSOF</td></tr>
 </table>
 <li>RebootRequired: True</li>
 </ul>
@@ -5787,6 +5846,8 @@ DO NOT EDIT
 <tr><td>7</td><td>HIL</td></tr>
 <tr><td>8</td><td>SwiftNav</td></tr>
 <tr><td>9</td><td>PX4-UAVCAN</td></tr>
+<tr><td>10</td><td>SBF</td></tr>
+<tr><td>11</td><td>GSOF</td></tr>
 </table>
 <li>RebootRequired: True</li>
 </ul>
@@ -6123,6 +6184,16 @@ DO NOT EDIT
 <h2>Direct Drive VarPitch Tail ESC speed (H_TAIL_SPEED)</h2>
 
 <p>Direct Drive VarPitch Tail ESC speed.  Only used when TailType is DirectDrive VarPitch</p>
+<ul>
+<li>Range: 0 1000</li>
+<li>Increment: 1</li>
+<li>Units: PWM</li>
+</ul>
+
+
+<h2>External Gyro Gain for ACRO (H_GYR_GAIN_ACRO)</h2>
+
+<p>PWM sent to external gyro on ch7 when tail type is Servo w/ ExtGyro. A value of zero means to use H_GYR_GAIN</p>
 <ul>
 <li>Range: 0 1000</li>
 <li>Increment: 1</li>
@@ -6751,6 +6822,336 @@ DO NOT EDIT
 </ul>
 
 
+<h2>GPS preflight check (EKF_GPS_CHECK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>1 byte bitmap of GPS preflight checks to perform. Set to 0 to bypass all checks. Set to 255 perform all checks. Set to 3 to check just the number of satellites and HDoP. Set to 31 for the most rigorous checks that will still allow checks to pass when the copter is moving, eg launch from a boat.</p>
+<ul>
+<li>Bitmask: 0:NSats,1:HDoP,2:speed error,3:horiz pos error,4:yaw error,5:pos drift,6:vert speed,7:horiz speed</li>
+</ul>
+
+
+<h1>EK2_ Parameters</h1>
+
+
+<h2>Enable EKF2 (EK2_ENABLE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This enables EKF2. Enabling EKF2 only makes the maths run, it does not mean it will be used for flight control. To use it for flight control set AHRS_EKF_USE=3</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled</td></tr>
+</table>
+</ul>
+
+
+<h2>GPS mode control (EK2_GPS_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter controls use of GPS measurements : 0 = use 3D velocity &amp; 2D position, 1 = use 2D velocity and 2D position, 2 = use 2D position, 3 = use no GPS (optical flow will be used if available)</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>GPS 3D Vel and 2D Pos</td></tr>
+<tr><td> 1</td><td>GPS 2D vel and 2D pos</td></tr>
+<tr><td> 2</td><td>GPS 2D pos</td></tr>
+<tr><td> 3</td><td>No GPS use optical flow</td></tr>
+</table>
+</ul>
+
+
+<h2>GPS horizontal velocity measurement noise scaler (EK2_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the horizontal velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on these measurements.</p>
+<ul>
+<li>Range: 0.05 5.0</li>
+<li>Increment: 0.05</li>
+</ul>
+
+
+<h2>GPS vertical velocity measurement noise scaler (EK2_VELD_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the vertical velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on this measurement.</p>
+<ul>
+<li>Range: 0.05 5.0</li>
+<li>Increment: 0.05</li>
+</ul>
+
+
+<h2>GPS velocity measurement gate size (EK2_VEL_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the GPS velocity measurement innovation consistency check. Decreasing it makes it more likely that good measurements willbe rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>GPS horizontal position measurement noise (m) (EK2_POSNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise in the GPS horizontal position measurements. Increasing it reduces the weighting on these measurements.</p>
+<ul>
+<li>Range: 0.1 10.0</li>
+<li>Increment: 0.1</li>
+<li>Units: meters</li>
+</ul>
+
+
+<h2>GPS position measurement gate size (EK2_POS_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the GPS position measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>GPS glitch radius gate size (m) (EK2_GLITCH_RAD)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter controls the maximum amount of difference in horizontal position (in m) between the value predicted by the filter and the value measured by the GPS before the long term glitch protection logic is activated and an offset is applied to the GPS measurement to compensate. Position steps smaller than this value will be temporarily ignored, but will then be accepted and the filter will move to the new position. Position steps larger than this value will be ignored initially, but the filter will then apply an offset to the GPS position measurement.</p>
+<ul>
+<li>Range: 10 50</li>
+<li>Increment: 5</li>
+<li>Units: meters</li>
+</ul>
+
+
+<h2>GPS measurement delay (msec) (EK2_GPS_DELAY)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the number of msec that the GPS measurements lag behind the inertial measurements.</p>
+<ul>
+<li>Range: 0 500</li>
+<li>Increment: 10</li>
+<li>Units: milliseconds</li>
+</ul>
+
+
+<h2>Primary height source (EK2_ALT_SOURCE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter controls which height sensor is used by the EKF during optical flow navigation (when EKF_GPS_TYPE = 3). A value of will 0 cause it to always use baro altitude. A value of 1 will casue it to use range finder if available.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Use Baro</td></tr>
+<tr><td> 1</td><td>Use Range Finder</td></tr>
+</table>
+</ul>
+
+
+<h2>Altitude measurement noise (m) (EK2_ALT_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise in the altitude measurement. Increasing it reduces the weighting on this measurement.</p>
+<ul>
+<li>Range: 0.1 10.0</li>
+<li>Increment: 0.1</li>
+<li>Units: meters</li>
+</ul>
+
+
+<h2>Height measurement gate size (EK2_HGT_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the height measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Height measurement delay (msec) (EK2_HGT_DELAY)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the number of msec that the Height measurements lag behind the inertial measurements.</p>
+<ul>
+<li>Range: 0 500</li>
+<li>Increment: 10</li>
+<li>Units: milliseconds</li>
+</ul>
+
+
+<h2>Magnetometer measurement noise (Gauss) (EK2_MAG_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise in magnetometer measurements. Increasing it reduces the weighting on these measurements.</p>
+<ul>
+<li>Range: 0.01 0.5</li>
+<li>Increment: 0.01</li>
+</ul>
+
+
+<h2>Magnetometer calibration mode (EK2_MAG_CAL)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>EKF_MAG_CAL = 0 enables calibration based on flying speed and altitude and is the default setting for Plane users. EKF_MAG_CAL = 1 enables calibration based on manoeuvre level and is the default setting for Copter and Rover users. EKF_MAG_CAL = 2 prevents magnetometer calibration regardless of flight condition and is recommended if in-flight magnetometer calibration is unreliable.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Speed and Height</td></tr>
+<tr><td>1</td><td>Acceleration</td></tr>
+<tr><td>2</td><td>Never</td></tr>
+<tr><td>3</td><td>Always</td></tr>
+</table>
+</ul>
+
+
+<h2>Magnetometer measurement gate size (EK2_MAG_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the magnetometer measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Equivalent airspeed measurement noise (m/s) (EK2_EAS_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise in equivalent airspeed measurements. Increasing it reduces the weighting on these measurements.</p>
+<ul>
+<li>Range: 0.5 5.0</li>
+<li>Increment: 0.1</li>
+<li>Units: m/s</li>
+</ul>
+
+
+<h2>Airspeed measurement gate size (EK2_EAS_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the airspeed measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Range finder measurement noise (m) (EK2_RNG_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise in the range finder measurement. Increasing it reduces the weighting on this measurement.</p>
+<ul>
+<li>Range: 0.1 10.0</li>
+<li>Increment: 0.1</li>
+<li>Units: meters</li>
+</ul>
+
+
+<h2>Range finder measurement gate size (EK2_RNG_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 - 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Maximum valid optical flow rate (EK2_MAX_FLOW)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the magnitude maximum optical flow rate in rad/sec that will be accepted by the filter</p>
+<ul>
+<li>Range: 1.0 - 4.0</li>
+<li>Increment: 0.1</li>
+</ul>
+
+
+<h2>Optical flow measurement noise (rad/s) (EK2_FLOW_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the RMS value of noise and errors in optical flow measurements. Increasing it reduces the weighting on these measurements.</p>
+<ul>
+<li>Range: 0.05 - 1.0</li>
+<li>Increment: 0.05</li>
+<li>Units: rad/s</li>
+</ul>
+
+
+<h2>Optical Flow measurement gate size (EK2_FLOW_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<ul>
+<li>Range: 1 - 100</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Optical Flow measurement delay (msec) (EK2_FLOW_DELAY)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the number of msec that the optical flow measurements lag behind the inertial measurements. It is the time from the end of the optical flow averaging period and does not include the time delay due to the 100msec of averaging within the flow sensor.</p>
+<ul>
+<li>Range: 0 - 500</li>
+<li>Increment: 10</li>
+<li>Units: milliseconds</li>
+</ul>
+
+
+<h2>Rate gyro noise (rad/s) (EK2_GYRO_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of estimated error due to gyro measurement errors excluding bias. Increasing it makes the flter trust the gyro measurements less and other measurements more.</p>
+<ul>
+<li>Range: 0.001 0.05</li>
+<li>Increment: 0.001</li>
+<li>Units: rad/s</li>
+</ul>
+
+
+<h2>Accelerometer noise (m/s^2) (EK2_ACC_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of estimated error due to accelerometer measurement errors excluding bias. Increasing it makes the flter trust the accelerometer measurements less and other measurements more.</p>
+<ul>
+<li>Range: 0.05 1.0</li>
+<li>Increment: 0.01</li>
+<li>Units: m/s/s</li>
+</ul>
+
+
+<h2>Rate gyro bias process noise (rad/s) (EK2_GBIAS_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of gyro bias state error estimates. Increasing it makes rate gyro bias estimation faster and noisier.</p>
+<ul>
+<li>Range: 0.0000001 0.00001</li>
+<li>Units: rad/s</li>
+</ul>
+
+
+<h2>Rate gyro scale factor process noise (1/s) (EK2_GSCL_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the rate of gyro scale factor learning. Increasing it makes rate gyro scale factor estimation faster and noisier.</p>
+<ul>
+<li>Range: 0.0000001 0.00001</li>
+<li>Units: 1/s</li>
+</ul>
+
+
+<h2>Accelerometer bias process noise (m/s^2) (EK2_ABIAS_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of the vertical acelerometer bias state error estimate. Increasing it makes accelerometer bias estimation faster and noisier.</p>
+<ul>
+<li>Range: 0.00001 0.001</li>
+<li>Units: m/s/s</li>
+</ul>
+
+
+<h2>Magnetic field process noise (gauss/s) (EK2_MAG_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of magnetic field state error estimates. Increasing it makes magnetic field bias estimation faster and noisier.</p>
+<ul>
+<li>Range: 0.0001 0.01</li>
+<li>Units: gauss/s</li>
+</ul>
+
+
+<h2>Wind velocity process noise (m/s^2) (EK2_WIND_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This noise controls the growth of wind state error estimates. Increasing it makes wind estimation faster and noisier.</p>
+<ul>
+<li>Range: 0.01 1.0</li>
+<li>Increment: 0.1</li>
+</ul>
+
+
+<h2>Height rate to wind procss noise scaler (EK2_WIND_PSCALE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Increasing this parameter increases how rapidly the wind states adapt when changing altitude, but does make wind speed estimation noiser.</p>
+<ul>
+<li>Range: 0.0 1.0</li>
+<li>Increment: 0.1</li>
+</ul>
+
+
+<h2>GPS preflight check (EK2_GPS_CHECK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>1 byte bitmap of GPS preflight checks to perform. Set to 0 to bypass all checks. Set to 255 perform all checks. Set to 3 to check just the number of satellites and HDoP. Set to 31 for the most rigorous checks that will still allow checks to pass when the copter is moving, eg launch from a boat.</p>
+<ul>
+<li>Bitmask: 0:NSats,1:HDoP,2:speed error,3:horiz pos error,4:yaw error,5:pos drift,6:vert speed,7:horiz speed</li>
+</ul>
+
+
 <h1>MIS_ Parameters</h1>
 
 
@@ -6777,7 +7178,7 @@ DO NOT EDIT
 <h1>RSSI_ Parameters</h1>
 
 
-<h2>RSSI Type (RSSI_RSSI_TYPE)</h2>
+<h2>RSSI Type (RSSI_TYPE)</h2>
 
 <p>Radio Receiver RSSI type. If your radio receiver supports RSSI of some kind, set it here, then set its associated RSSI_XXXXX parameters, if any.</p>
 <ul>
@@ -6789,7 +7190,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI analog sensing pin (RSSI_RSSI_ANA_PIN)</h2>
+<h2>Receiver RSSI analog sensing pin (RSSI_ANA_PIN)</h2>
 
 <p>This selects an analog pin where the receiver RSSI voltage will be read.</p>
 <ul>
@@ -6802,9 +7203,9 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI voltage low (RSSI_RSSI_PIN_LOW)</h2>
+<h2>Receiver RSSI voltage low (RSSI_PIN_LOW)</h2>
 
-<p>This is the voltage value that the radio receiver will put on the RSSI_PIN when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a lower value than PIN_RANGE_HIGH. </p>
+<p>This is the voltage value that the radio receiver will put on the RSSI_ANA_PIN when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a lower value than RSSI_PIN_HIGH. </p>
 <ul>
 <li>Range: 0 5.0</li>
 <li>Increment: 0.01</li>
@@ -6812,9 +7213,9 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI voltage low (RSSI_RSSI_PIN_HIGH)</h2>
+<h2>Receiver RSSI voltage high (RSSI_PIN_HIGH)</h2>
 
-<p>This is the voltage value that the radio receiver will put on the RSSI_PIN when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a higher value than PIN_RANGE_LOW. </p>
+<p>This is the voltage value that the radio receiver will put on the RSSI_ANA_PIN when the signal strength is the strongest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a higher value than RSSI_PIN_LOW. </p>
 <ul>
 <li>Range: 0 5.0</li>
 <li>Increment: 0.01</li>
@@ -6822,7 +7223,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI channel number (RSSI_RSSI_CHANNEL)</h2>
+<h2>Receiver RSSI channel number (RSSI_CHANNEL)</h2>
 
 <p>The channel number where RSSI will be output by the radio receiver.</p>
 <ul>
@@ -6836,7 +7237,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI PWM low value (RSSI_RSSI_CHAN_LOW)</h2>
+<h2>Receiver RSSI PWM low value (RSSI_CHAN_LOW)</h2>
 
 <p>This is the PWM value that the radio receiver will put on the RSSI_CHANNEL when the signal strength is the weakest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a lower value than RSSI_CHAN_HIGH. </p>
 <ul>
@@ -6845,7 +7246,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Receiver RSSI PWM high value (RSSI_RSSI_CHAN_HIGH)</h2>
+<h2>Receiver RSSI PWM high value (RSSI_CHAN_HIGH)</h2>
 
 <p>This is the PWM value that the radio receiver will put on the RSSI_CHANNEL when the signal strength is the strongest. Since some radio receivers put out inverted values from what you might otherwise expect, this isn't necessarily a higher value than RSSI_CHAN_LOW. </p>
 <ul>
@@ -6902,8 +7303,8 @@ DO NOT EDIT
 
 <p>Scaling factor between rangefinder reading and distance. For the linear and inverted functions this is in meters per volt. For the hyperbolic function the units are meterVolts.</p>
 <ul>
-<li>Units: meters/Volt</li>
 <li>Increment: 0.001</li>
+<li>Units: meters/Volt</li>
 </ul>
 
 
@@ -6911,8 +7312,8 @@ DO NOT EDIT
 
 <p>Offset in volts for zero distance for analog rangefinders. Offset added to distance in centimeters for PWM and I2C Lidars</p>
 <ul>
-<li>Units: Volts</li>
 <li>Increment: 0.001</li>
+<li>Units: Volts</li>
 </ul>
 
 
@@ -6932,8 +7333,8 @@ DO NOT EDIT
 
 <p>Minimum distance in centimeters that rangefinder can reliably read</p>
 <ul>
-<li>Units: centimeters</li>
 <li>Increment: 1</li>
+<li>Units: centimeters</li>
 </ul>
 
 
@@ -6941,8 +7342,8 @@ DO NOT EDIT
 
 <p>Maximum distance in centimeters that rangefinder can reliably read</p>
 <ul>
-<li>Units: centimeters</li>
 <li>Increment: 1</li>
+<li>Units: centimeters</li>
 </ul>
 
 
@@ -6972,8 +7373,8 @@ DO NOT EDIT
 
 <p>The time in milliseconds that the rangefinder reading takes to settle. This is only used when a STOP_PIN is specified. It determines how long we have to wait for the rangefinder to give a reading after we set the STOP_PIN high. For a sonar rangefinder with a range of around 7m this would need to be around 50 milliseconds to allow for the sonar pulse to travel to the target and back again.</p>
 <ul>
-<li>Units: milliseconds</li>
 <li>Increment: 1</li>
+<li>Units: milliseconds</li>
 </ul>
 
 
@@ -6992,12 +7393,12 @@ DO NOT EDIT
 
 <p>This parameter sets the estimated terrain distance in meters above which the sensor will be put into a power saving mode (if available). A value of zero means power saving is not enabled</p>
 <ul>
-<li>Units: meters</li>
 <li>Range: 0 32767</li>
+<li>Units: meters</li>
 </ul>
 
 
-<h2>Distance (in cm) from the range finder to the ground (RNGFND_GNDCLEAR)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Distance (in cm) from the range finder to the ground (RNGFND_GNDCLEAR)</h2>
 
 <p>This parameter sets the expected range measurement(in cm) that the range finder should return when the vehicle is on the ground.</p>
 <ul>
@@ -7007,7 +7408,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Second Rangefinder type (RNGFND2_TYPE)</h2>
+<h2>Second Rangefinder type (RNGFND2_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>What type of rangefinder device that is connected</p>
 <ul>
@@ -7025,7 +7426,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Rangefinder pin (RNGFND2_PIN)</h2>
+<h2>Rangefinder pin (RNGFND2_PIN)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Analog pin that rangefinder is connected to. Set this to 0..9 for the APM2 analog pins. Set to 64 on an APM1 for the dedicated 'airspeed' port on the end of the board. Set to 11 on PX4 for the analog 'airspeed' port. Set to 15 on the Pixhawk for the analog 'airspeed' port.</p>
 <ul>
@@ -7048,25 +7449,25 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Rangefinder scaling (RNGFND2_SCALING)</h2>
+<h2>Rangefinder scaling (RNGFND2_SCALING)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Scaling factor between rangefinder reading and distance. For the linear and inverted functions this is in meters per volt. For the hyperbolic function the units are meterVolts.</p>
 <ul>
-<li>Units: meters/Volt</li>
 <li>Increment: 0.001</li>
+<li>Units: meters/Volt</li>
 </ul>
 
 
-<h2>rangefinder offset (RNGFND2_OFFSET)</h2>
+<h2>rangefinder offset (RNGFND2_OFFSET)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Offset in volts for zero distance</p>
 <ul>
-<li>Units: Volts</li>
 <li>Increment: 0.001</li>
+<li>Units: Volts</li>
 </ul>
 
 
-<h2>Rangefinder function (RNGFND2_FUNCTION)</h2>
+<h2>Rangefinder function (RNGFND2_FUNCTION)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Control over what function is used to calculate distance. For a linear function, the distance is (voltage-offset)*scaling. For a inverted function the distance is (offset-voltage)*scaling. For a hyperbolic function the distance is scaling/(voltage-offset). The functions return the distance in meters.</p>
 <ul>
@@ -7078,25 +7479,25 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Rangefinder minimum distance (RNGFND2_MIN_CM)</h2>
+<h2>Rangefinder minimum distance (RNGFND2_MIN_CM)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Minimum distance in centimeters that rangefinder can reliably read</p>
 <ul>
-<li>Units: centimeters</li>
 <li>Increment: 1</li>
+<li>Units: centimeters</li>
 </ul>
 
 
-<h2>Rangefinder maximum distance (RNGFND2_MAX_CM)</h2>
+<h2>Rangefinder maximum distance (RNGFND2_MAX_CM)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Maximum distance in centimeters that rangefinder can reliably read</p>
 <ul>
-<li>Units: centimeters</li>
 <li>Increment: 1</li>
+<li>Units: centimeters</li>
 </ul>
 
 
-<h2>Rangefinder stop pin (RNGFND2_STOP_PIN)</h2>
+<h2>Rangefinder stop pin (RNGFND2_STOP_PIN)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Digital pin that enables/disables rangefinder measurement for an analog rangefinder. A value of -1 means no pin. If this is set, then the pin is set to 1 to enable the rangefinder and set to 0 to disable it. This can be used to ensure that multiple sonar rangefinders don't interfere with each other.</p>
 <ul>
@@ -7118,16 +7519,16 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Sonar settle time (RNGFND2_SETTLE)</h2>
+<h2>Sonar settle time (RNGFND2_SETTLE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>The time in milliseconds that the rangefinder reading takes to settle. This is only used when a STOP_PIN is specified. It determines how long we have to wait for the rangefinder to give a reading after we set the STOP_PIN high. For a sonar rangefinder with a range of around 7m this would need to be around 50 milliseconds to allow for the sonar pulse to travel to the target and back again.</p>
 <ul>
-<li>Units: milliseconds</li>
 <li>Increment: 1</li>
+<li>Units: milliseconds</li>
 </ul>
 
 
-<h2>Ratiometric (RNGFND2_RMETRIC)</h2>
+<h2>Ratiometric (RNGFND2_RMETRIC)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This parameter sets whether an analog rangefinder is ratiometric. Most analog rangefinders are ratiometric, meaning that their output voltage is influenced by the supply voltage. Some analog rangefinders (such as the SF/02) have their own internal voltage regulators so they are not ratiometric.</p>
 <ul>
@@ -7148,7 +7549,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Bus address of sensor (RNGFND_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Bus address of sensor (RNGFND_ADDR)</h2>
 
 <p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
 <ul>
@@ -7158,6 +7559,306 @@ DO NOT EDIT
 
 
 <h2>Bus address of 2nd rangefinder (RNGFND2_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Second Rangefinder type (RNGFND3_TYPE)</h2>
+
+<p>What type of rangefinder device that is connected</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>Analog</td></tr>
+<tr><td>2</td><td>APM2-MaxbotixI2C</td></tr>
+<tr><td>3</td><td>APM2-PulsedLightI2C</td></tr>
+<tr><td>4</td><td>PX4-I2C</td></tr>
+<tr><td>5</td><td>PX4-PWM</td></tr>
+<tr><td>6</td><td>BBB-PRU</td></tr>
+<tr><td>7</td><td>LightWareI2C</td></tr>
+<tr><td>8</td><td>LightWareSerial</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder pin (RNGFND3_PIN)</h2>
+
+<p>Analog pin that rangefinder is connected to. Set this to 0..9 for the APM2 analog pins. Set to 64 on an APM1 for the dedicated 'airspeed' port on the end of the board. Set to 11 on PX4 for the analog 'airspeed' port. Set to 15 on the Pixhawk for the analog 'airspeed' port.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Not Used</td></tr>
+<tr><td> 0</td><td>APM2-A0</td></tr>
+<tr><td> 1</td><td>APM2-A1</td></tr>
+<tr><td> 2</td><td>APM2-A2</td></tr>
+<tr><td> 3</td><td>APM2-A3</td></tr>
+<tr><td> 4</td><td>APM2-A4</td></tr>
+<tr><td> 5</td><td>APM2-A5</td></tr>
+<tr><td> 6</td><td>APM2-A6</td></tr>
+<tr><td> 7</td><td>APM2-A7</td></tr>
+<tr><td> 8</td><td>APM2-A8</td></tr>
+<tr><td> 9</td><td>APM2-A9</td></tr>
+<tr><td> 11</td><td>PX4-airspeed port</td></tr>
+<tr><td> 15</td><td>Pixhawk-airspeed port</td></tr>
+<tr><td> 64</td><td>APM1-airspeed port</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder scaling (RNGFND3_SCALING)</h2>
+
+<p>Scaling factor between rangefinder reading and distance. For the linear and inverted functions this is in meters per volt. For the hyperbolic function the units are meterVolts.</p>
+<ul>
+<li>Units: meters/Volt</li>
+<li>Increment: 0.001</li>
+</ul>
+
+
+<h2>rangefinder offset (RNGFND3_OFFSET)</h2>
+
+<p>Offset in volts for zero distance</p>
+<ul>
+<li>Units: Volts</li>
+<li>Increment: 0.001</li>
+</ul>
+
+
+<h2>Rangefinder function (RNGFND3_FUNCTION)</h2>
+
+<p>Control over what function is used to calculate distance. For a linear function, the distance is (voltage-offset)*scaling. For a inverted function the distance is (offset-voltage)*scaling. For a hyperbolic function the distance is scaling/(voltage-offset). The functions return the distance in meters.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Linear</td></tr>
+<tr><td>1</td><td>Inverted</td></tr>
+<tr><td>2</td><td>Hyperbolic</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder minimum distance (RNGFND3_MIN_CM)</h2>
+
+<p>Minimum distance in centimeters that rangefinder can reliably read</p>
+<ul>
+<li>Units: centimeters</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Rangefinder maximum distance (RNGFND3_MAX_CM)</h2>
+
+<p>Maximum distance in centimeters that rangefinder can reliably read</p>
+<ul>
+<li>Units: centimeters</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Rangefinder stop pin (RNGFND3_STOP_PIN)</h2>
+
+<p>Digital pin that enables/disables rangefinder measurement for an analog rangefinder. A value of -1 means no pin. If this is set, then the pin is set to 1 to enable the rangefinder and set to 0 to disable it. This can be used to ensure that multiple sonar rangefinders don't interfere with each other.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Not Used</td></tr>
+<tr><td>50</td><td>Pixhawk AUXOUT1</td></tr>
+<tr><td>51</td><td>Pixhawk AUXOUT2</td></tr>
+<tr><td>52</td><td>Pixhawk AUXOUT3</td></tr>
+<tr><td>53</td><td>Pixhawk AUXOUT4</td></tr>
+<tr><td>54</td><td>Pixhawk AUXOUT5</td></tr>
+<tr><td>55</td><td>Pixhawk AUXOUT6</td></tr>
+<tr><td>111</td><td>PX4 FMU Relay1</td></tr>
+<tr><td>112</td><td>PX4 FMU Relay2</td></tr>
+<tr><td>113</td><td>PX4IO Relay1</td></tr>
+<tr><td>114</td><td>PX4IO Relay2</td></tr>
+<tr><td>115</td><td>PX4IO ACC1</td></tr>
+<tr><td>116</td><td>PX4IO ACC2</td></tr>
+</table>
+</ul>
+
+
+<h2>Sonar settle time (RNGFND3_SETTLE)</h2>
+
+<p>The time in milliseconds that the rangefinder reading takes to settle. This is only used when a STOP_PIN is specified. It determines how long we have to wait for the rangefinder to give a reading after we set the STOP_PIN high. For a sonar rangefinder with a range of around 7m this would need to be around 50 milliseconds to allow for the sonar pulse to travel to the target and back again.</p>
+<ul>
+<li>Units: milliseconds</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Ratiometric (RNGFND3_RMETRIC)</h2>
+
+<p>This parameter sets whether an analog rangefinder is ratiometric. Most analog rangefinders are ratiometric, meaning that their output voltage is influenced by the supply voltage. Some analog rangefinders (such as the SF/02) have their own internal voltage regulators so they are not ratiometric.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>No</td></tr>
+<tr><td>1</td><td>Yes</td></tr>
+</table>
+</ul>
+
+
+<h2>Distance (in cm) from the second range finder to the ground (RNGFND3_GNDCLEAR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the expected range measurement(in cm) that the second range finder should return when the vehicle is on the ground.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+<li>Units: centimeters</li>
+</ul>
+
+
+<h2>Bus address of 2nd rangefinder (RNGFND3_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Second Rangefinder type (RNGFND4_TYPE)</h2>
+
+<p>What type of rangefinder device that is connected</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>Analog</td></tr>
+<tr><td>2</td><td>APM2-MaxbotixI2C</td></tr>
+<tr><td>3</td><td>APM2-PulsedLightI2C</td></tr>
+<tr><td>4</td><td>PX4-I2C</td></tr>
+<tr><td>5</td><td>PX4-PWM</td></tr>
+<tr><td>6</td><td>BBB-PRU</td></tr>
+<tr><td>7</td><td>LightWareI2C</td></tr>
+<tr><td>8</td><td>LightWareSerial</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder pin (RNGFND4_PIN)</h2>
+
+<p>Analog pin that rangefinder is connected to. Set this to 0..9 for the APM2 analog pins. Set to 64 on an APM1 for the dedicated 'airspeed' port on the end of the board. Set to 11 on PX4 for the analog 'airspeed' port. Set to 15 on the Pixhawk for the analog 'airspeed' port.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Not Used</td></tr>
+<tr><td> 0</td><td>APM2-A0</td></tr>
+<tr><td> 1</td><td>APM2-A1</td></tr>
+<tr><td> 2</td><td>APM2-A2</td></tr>
+<tr><td> 3</td><td>APM2-A3</td></tr>
+<tr><td> 4</td><td>APM2-A4</td></tr>
+<tr><td> 5</td><td>APM2-A5</td></tr>
+<tr><td> 6</td><td>APM2-A6</td></tr>
+<tr><td> 7</td><td>APM2-A7</td></tr>
+<tr><td> 8</td><td>APM2-A8</td></tr>
+<tr><td> 9</td><td>APM2-A9</td></tr>
+<tr><td> 11</td><td>PX4-airspeed port</td></tr>
+<tr><td> 15</td><td>Pixhawk-airspeed port</td></tr>
+<tr><td> 64</td><td>APM1-airspeed port</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder scaling (RNGFND4_SCALING)</h2>
+
+<p>Scaling factor between rangefinder reading and distance. For the linear and inverted functions this is in meters per volt. For the hyperbolic function the units are meterVolts.</p>
+<ul>
+<li>Units: meters/Volt</li>
+<li>Increment: 0.001</li>
+</ul>
+
+
+<h2>rangefinder offset (RNGFND4_OFFSET)</h2>
+
+<p>Offset in volts for zero distance</p>
+<ul>
+<li>Units: Volts</li>
+<li>Increment: 0.001</li>
+</ul>
+
+
+<h2>Rangefinder function (RNGFND4_FUNCTION)</h2>
+
+<p>Control over what function is used to calculate distance. For a linear function, the distance is (voltage-offset)*scaling. For a inverted function the distance is (offset-voltage)*scaling. For a hyperbolic function the distance is scaling/(voltage-offset). The functions return the distance in meters.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Linear</td></tr>
+<tr><td>1</td><td>Inverted</td></tr>
+<tr><td>2</td><td>Hyperbolic</td></tr>
+</table>
+</ul>
+
+
+<h2>Rangefinder minimum distance (RNGFND4_MIN_CM)</h2>
+
+<p>Minimum distance in centimeters that rangefinder can reliably read</p>
+<ul>
+<li>Units: centimeters</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Rangefinder maximum distance (RNGFND4_MAX_CM)</h2>
+
+<p>Maximum distance in centimeters that rangefinder can reliably read</p>
+<ul>
+<li>Units: centimeters</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Rangefinder stop pin (RNGFND4_STOP_PIN)</h2>
+
+<p>Digital pin that enables/disables rangefinder measurement for an analog rangefinder. A value of -1 means no pin. If this is set, then the pin is set to 1 to enable the rangefinder and set to 0 to disable it. This can be used to ensure that multiple sonar rangefinders don't interfere with each other.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Not Used</td></tr>
+<tr><td>50</td><td>Pixhawk AUXOUT1</td></tr>
+<tr><td>51</td><td>Pixhawk AUXOUT2</td></tr>
+<tr><td>52</td><td>Pixhawk AUXOUT3</td></tr>
+<tr><td>53</td><td>Pixhawk AUXOUT4</td></tr>
+<tr><td>54</td><td>Pixhawk AUXOUT5</td></tr>
+<tr><td>55</td><td>Pixhawk AUXOUT6</td></tr>
+<tr><td>111</td><td>PX4 FMU Relay1</td></tr>
+<tr><td>112</td><td>PX4 FMU Relay2</td></tr>
+<tr><td>113</td><td>PX4IO Relay1</td></tr>
+<tr><td>114</td><td>PX4IO Relay2</td></tr>
+<tr><td>115</td><td>PX4IO ACC1</td></tr>
+<tr><td>116</td><td>PX4IO ACC2</td></tr>
+</table>
+</ul>
+
+
+<h2>Sonar settle time (RNGFND4_SETTLE)</h2>
+
+<p>The time in milliseconds that the rangefinder reading takes to settle. This is only used when a STOP_PIN is specified. It determines how long we have to wait for the rangefinder to give a reading after we set the STOP_PIN high. For a sonar rangefinder with a range of around 7m this would need to be around 50 milliseconds to allow for the sonar pulse to travel to the target and back again.</p>
+<ul>
+<li>Units: milliseconds</li>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Ratiometric (RNGFND4_RMETRIC)</h2>
+
+<p>This parameter sets whether an analog rangefinder is ratiometric. Most analog rangefinders are ratiometric, meaning that their output voltage is influenced by the supply voltage. Some analog rangefinders (such as the SF/02) have their own internal voltage regulators so they are not ratiometric.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>No</td></tr>
+<tr><td>1</td><td>Yes</td></tr>
+</table>
+</ul>
+
+
+<h2>Distance (in cm) from the second range finder to the ground (RNGFND4_GNDCLEAR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This parameter sets the expected range measurement(in cm) that the second range finder should return when the vehicle is on the ground.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+<li>Units: centimeters</li>
+</ul>
+
+
+<h2>Bus address of 2nd rangefinder (RNGFND4_ADDR)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This sets the bus address of the sensor, where applicable. Used for the LightWare I2C sensor to allow for multiple sensors on different addresses. A value of 0 disables the sensor.</p>
 <ul>
@@ -7272,6 +7973,14 @@ DO NOT EDIT
 <p>Scaling factor between sensor reading and RPM.</p>
 <ul>
 <li>Increment: 0.001</li>
+</ul>
+
+
+<h2>Maximum RPM (RPM_MAX)</h2>
+
+<p>Maximum RPM to report</p>
+<ul>
+<li>Increment: 1</li>
 </ul>
 
 

@@ -9,33 +9,32 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Copter supports retractable Landing Gear activated by a servo mechanism (like these sold by <a href="http://www.hobbyking.com/hobbyking/store/__63508__Quanum_600_Class_Quick_Release_Universal_Retractable_Gear_Set_680UC_Pro_Hexa_Copter_.html" target="_blank">Hobby King</a>). The gear can be manually retracted/deployed with an auxiliary switch and they can also be activated automatically (retract after take-off, deploy during landing).
+Copter supports retractable Landing Gear activated by a servo mechanism (like these sold by <a href="http://www.hobbyking.com/hobbyking/store/__63508__Quanum_600_Class_Quick_Release_Universal_Retractable_Gear_Set_680UC_Pro_Hexa_Copter_.html" target="_blank">Hobby King</a>). The gear can be manually retracted/deployed with an auxiliary switch and there are several automatic features which enhance operational safety.
+
+There is some simple logic controlling the operation beyond simply responding to retract/deploy commands from the controller.  If the APM:Copter system is booted up and the landing gear control switch is in the retract position, the landing gear will not retract.  This is done to prevent damage to the landing gear or airframe should the switch be accidentally left in the retract position on start-up.  In this case, the landing gear will not retract until the switch is first moved to the deploy position, and then the retract position.
+
+Furthermore, the landing gear will automatically deploy immediately upon entering Land mode, as well as the landing phase of RTL mode, or an auto-land in Auto mode.  This is especially important in the case of radio failsafe RTL events, where it would not be possible for the pilot to lower the gear manually.
+
+If assigned to a 3-position switch, the middle position will not cause a change in state of the landing gear.  In the future, this will be used for an automatic mode, but this is not enabled for AC3.3.
+
 <!--more-->[note]Support for landing gear was introduced in AC 3.3[/note]
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_HobbyKing.jpg"><img class="alignnone size-full wp-image-14431" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_HobbyKing.jpg" alt="LandingGear_HobbyKing" width="567" height="414" /></a>
-
-
 <h1>Connecting to the Pixhawk</h1>
-
 Most retractable landing gear will require just a single PWM cable to connected to one of the AUX outputs on the back of the Pixhawk (AUX1 ~ AUX4).
-  
+
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_Pixhawk.png"><img class="alignnone size-full wp-image-14433" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_Pixhawk.png" alt="LandingGear_Pixhawk" width="423" height="326" /></a>
 
 [note]The signal wire (usually white) should be connected to the lower most "S" pin.[/note]
-
-
 <h1>Setup through the Mission Planner</h1>
-
 Use the Mission Planner's Full Parameter List (or equivalent) to set the following parameters:
-
 <ul>
 	<li><code>RC<strong>n</strong>_FUNCTION to <strong>29</strong></code> "Landing Gear", where <strong>n</strong> is the number for the connected servo (e.g. <a href="arducopter-parameters/#servo_out_function_rc9_function">RC<strong>9</strong>_FUNCTION</a> for AUX1, <a href="arducopter-parameters/#servo_out_function_rc10_function">RC<strong>10</strong>_FUNCTION</a> for AUX2 etc.)</li>
 	<li><a href="arducopter-parameters/#landing_gear_servo_deployed_pwm_value_lgr_servo_deploy">LGR_SERVO_DEPLOY</a> — servo PWM value required to deploy the landing gear.</li>
 	<li><a href="arducopter-parameters/#landing_gear_servo_retracted_pwm_value_lgr_servo_rtract">LGR_SERVO_RTRACT</a> — servo PWM value required to retract the landing gear.</li>
 </ul>
+[caption id="attachment_14434" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup1.png"><img class="size-full wp-image-14434" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup1.png" alt="Mission Planner: Landing Gear Configuration" width="1024" height="575" /></a> Mission Planner: Landing Gear Configuration[/caption]
 
-[caption id="attachment_14434" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup1.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup1.png" alt="Mission Planner: Landing Gear Configuration" width="1024" height="575" class="size-full wp-image-14434" /></a> Mission Planner: Landing Gear Configuration[/caption]
+Set Ch7 or Ch8 Opt to "Landing Gear" in order to enable manual control.  When the switch is in the "low" position the gear will be deployed, "high" will be retracted, "middle" will be a neutral position that will not change state (will be used for automatic operation on a future release).
 
-Set Ch7 or Ch8 Opt to "Landing Gear" in order to enable manual control.  When the switch is in the "low" position the gear will be deployed, "high" will be retracted, "middle" will be in auto retract/deploy meaning the gear will retract after take-off and deploy before landing.
-
-[caption id="attachment_14432" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup2.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup2.png" alt="Mission Planner: Setting Manual Landing Gear Control" width="1024" height="767" class="size-full wp-image-14432" /></a> Mission Planner: Setting Manual Landing Gear Control[/caption]
+[caption id="attachment_14432" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup2.png"><img class="size-full wp-image-14432" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/LandingGear_PixhawkSetup2.png" alt="Mission Planner: Setting Manual Landing Gear Control" width="1024" height="767" /></a> Mission Planner: Setting Manual Landing Gear Control[/caption]

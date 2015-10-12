@@ -9,16 +9,12 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-To improve position hold accuracy in GPS denied environments Copter and Plane support the mouse sensor based <a href="http://www.ebay.com/sch/i.html?_from=R40&amp;_trksid=p2047675.m570.l1313.TR0.TRC0.H0.Xoptical+flow.TRS0&amp;_nkw=optical+flow&amp;_sacat=0">Optical Flow sensor.</a>
+To improve position hold accuracy in GPS denied environments Copter-3.2.1 for APM2.x boards supports the mouse sensor based <a href="http://www.ebay.com/sch/i.html?_from=R40&amp;_trksid=p2047675.m570.l1313.TR0.TRC0.H0.Xoptical+flow.TRS0&amp;_nkw=optical+flow&amp;_sacat=0">Optical Flow sensor</a> in a special OF_Loiter flight mode.
+[warning]For other boards and firmware versions please see the <a href="wiki/common-px4flow-overview/">PX4Flow wiki page</a>.[/warning]
 <!--more-->
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/BR-0016-01-2T.jpg" alt="" /><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/BR-0016-01-5T.jpg" alt="" />
-
-
-
 <h1>Connecting the sensor to the APM2.5</h1>
-
-Note: as of 15-Sep-2012, the code to support the optical flow on the APM2.5 has not yet been released.
 <ul>
 	<li>Connect VCC, GND, MISO, MOSI, SCLK and NCS pins as shown in the diagram below</li>
 	<li>Default mounting is lens pointing down, pins forward</li>
@@ -28,34 +24,20 @@ Note: as of 15-Sep-2012, the code to support the optical flow on the APM2.5 has 
 	<li>Cut and resolder the MISOLVL jumper on the back of the board to switch the MISO pin to work on 3.3v. This is critical to ensure the optical flow sensor does not interfere with the MPU6000.</li>
 </ul>
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_APM25_SolderBridge.jpg" alt="" />
-
-
 <h1>Connecting the sensor to the APM2</h1>
-
 <ul>
 	<li>Power, GND, NCS pins should be attached to A3</li>
 	<li>MISO, MOSI and SCLK pins should be directly soldered to the pins shown</li>
 	<li>Default mounting is lens pointing down, pins forward</li>
 </ul>
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_APM2.jpg" alt="" />
-
-
-
-
-
-
 <h1>Connecting the sensor to the APM1</h1>
-
 <ul>
 	<li>Directly solder wires to the top of the Oilpan as shown below</li>
 	<li>Default mounting is lens pointing down, pins forward</li>
 </ul>
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Optical_Flow_Sensor_v_1_0.jpg" alt="" />
-
-
-
 <h1>Testing the sensor</h1>
-
 <ul>
 	<li>Upload the test sketch to the APM:
 <ul>
@@ -74,11 +56,7 @@ Note: as of 15-Sep-2012, the code to support the optical flow on the APM2.5 has 
 	<li>type 'm' and move the camera back and forth and check that x,y values change. If they do not change, modify the focus of the lens by turning it left or right.</li>
 </ul>
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/OpticalFlow_test.jpg" alt="" />
-
-
-
 <h1>Capturing an image from the sensor</h1>
-
 In order to check that you have the lens properly focused you can capture an image directly from the sensor and display it using a simpler viewer written in Python.
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/ADNS3080ImageGrabber.jpg" alt="" />
@@ -96,9 +74,6 @@ In order to check that you have the lens properly focused you can capture an ima
 Note 1: After capturing images, you will need to reset the sensor (i.e. plug/unplug it) to restore it to the normal motion capture mode.
 
 Note 2: you should see the the AP_OpticalFlow_ADNS3080's menu and any errors appear in the Python Shell
-
-
-
 <h1>How it works</h1>
 The mouse sensor returns the average movement (in the x and y directions) of surface features that it sees. A single pixel move will not cause the sensor to return "1". It will return a higher value around 5. This value is referred to as the <strong>scaler </strong>below. In the example below, the value returned would be about 1.6 ( (-5+5+5) / 3)
 
@@ -120,19 +95,12 @@ The expected change in sensor values can be calculated directly from the change 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/expectedRollChangeFormula.png" alt="" />
 
 Once we have the x/y movements we can integrate these values over time with the current yaw to arrive at an estimate of position.
-
-
-
 <h1>Known issues</h1>
-
 <ul>
 	<li>The sensor only works in well lit environments</li>
 	<li>A fixed-focus lens is used meaning it cannot focus on objects closer than 30cm (1 foot).</li>
 	<li>Rotating the sensor will confuse the sensor</li>
 </ul>
-
-
-
 <h1>Acknowledgements:</h1>
 <ol>
 	<li><a href="http://www.diydrones.com/profile/MarkoKleineBerkenbusch">Marko Klein Berkenbusch's </a><a href="http://www.diydrones.com/profiles/blogs/quad-position-hold-with-mouse">position hold with mouse sensor

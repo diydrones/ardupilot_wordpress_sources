@@ -23,7 +23,7 @@ END METADATA
 <ul>
 	<li>MPU6000 as main accel and gyro</li>
 	<li>ST Micro 16-bit gyroscope</li>
-	<li>ST Micro 14-bit accelerometer/magnetometer</li>
+	<li>ST Micro 14-bit accelerometer/compass (magnetometer)</li>
 	<li>MEAS barometer</li>
 </ul>
 </li>
@@ -59,7 +59,7 @@ END METADATA
 
 <h1>Pixhawk connector assignments</h1>
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/64a09ed25796066acab3e37ea630969e.media_.700x1038.png"><img class="alignnone size-full wp-image-1888" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/64a09ed25796066acab3e37ea630969e.media_.700x1038.png" alt="64a09ed25796066acab3e37ea630969e.media.700x1038" width="700" height="1038" /></a>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/Pixhawk_with_legend.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/Pixhawk_with_legend.png" alt="Pixhawk_with_legend" width="700" height="1038" class="alignnone size-full wp-image-5111" /></a>
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawk-status-LEDs-definition.jpg"><img class="alignnone size-full wp-image-2186" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/pixhawk-status-LEDs-definition.jpg" alt="pixhawk status LEDs definition" width="700" height="154" /></a>
 
@@ -79,9 +79,12 @@ END METADATA
 
 <h1>Pixhawk connector diagram</h1>
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PixHawk_labelled.png"><img class="alignnone size-full wp-image-627" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PixHawk_labelled.png" alt="PixHawk_labelled" width="957" height="749" /></a>
-<strong>For all connectors pin 1 is on the right in the above image.</strong>
-<strong>Serial 1 (Telem 1), Serial 2 (Telem 2) and Serial 3 (GPS) Pins: <strong>6 = GND, <strong>5 = RTS, <strong>4 = CTS, <strong>3 = RX, <strong> 2 = TX, </strong></strong></strong></strong></strong>1 = 5V.</strong>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/PixHawk_labelled.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/09/PixHawk_labelled.png" alt="PixHawk_labelled" width="957" height="749" class="alignnone size-full wp-image-5113" /></a>
+
+
+
+<strong>For all connectors pin 1 is on the right in the above image</strong>
+<strong>Serial 1 (Telem 1) and Serial 2 (Telem 2) Pins: <strong>6 = GND, <strong>5 = RTS, <strong>4 = CTS, <strong>3 = RX, <strong> 2 = TX, </strong></strong></strong></strong></strong>1 = 5V.</strong>
 
 
 
@@ -402,7 +405,7 @@ The system's serial console runs on the port labeled SERIAL4/5. The pinout is st
 	<li>The NuttX real-time operating system, features high performance, flexibility, and reliability for controlling any autonomous vehicle.</li>
 	<li>A Unix/Linux-like programming environment, Integrated multithreading and autopilot functions such as Lua scripting of missions and flight behavior provide powerful development capabilities.</li>
 	<li>A custom PX4 driver layer ensures tight timing across all processes.</li>
-	<li>New peripheral options will include a digital airspeed sensor, support for an external multi-color LED indicator and an external magnetometer.</li>
+	<li>New peripheral options will include a digital airspeed sensor, support for an external multi-color LED indicator and an external compass.</li>
 	<li>All peripherals are automatically detected and configured.</li>
 	<li><strong>A very powerful 32-bit processor with an additional failsafe backup controller and extensive memory.</strong>
 <ul>
@@ -415,8 +418,8 @@ The system's serial console runs on the port labeled SERIAL4/5. The pinout is st
 	<li><strong>Advanced sensor profile</strong>
 <ul>
 	<li>3 axis 16-bit ST Micro L3GD20H gyro for determining orientation.</li>
-	<li>3 axis 14-bit accelerometer and magnetometer for determining outside influences and compass heading.</li>
-	<li>Provision for external magnetometer with automatic switch-over if desired.</li>
+	<li>3 axis 14-bit accelerometer and compass for determining outside influences and compass heading.</li>
+	<li>Provision for external compass with automatic switch-over if desired.</li>
 	<li>MEAS MS5611 barometric pressure sensor for determining altitude.</li>
 	<li>Built in voltage and current sensing for battery condition determination.</li>
 	<li>Connection for an externally mountable UBLOX LEA GPS for determining absolute position.</li>
@@ -446,7 +449,7 @@ The system's serial console runs on the port labeled SERIAL4/5. The pinout is st
 	<li>The provided external safety button enables safe motor activation / deactivation.</li>
 	<li>LED status indicators and driver for high brightness external multicolored LED to indicate flight status.</li>
 	<li>High-power, multi-tone piezo audio indicator also informs of current flight status.</li>
-	<li>Available high performance UBLOX GPS plus external Magnetometer in protective case.</li>
+	<li>Available high performance UBLOX GPS plus external compass in protective case.</li>
 	<li>Weight: 38g (1.31oz), Width: 50mm (1.96"), Thickness: 15.5mm (.613"), Length: 81.5mm (3.21")</li>
 </ul>
 </li>

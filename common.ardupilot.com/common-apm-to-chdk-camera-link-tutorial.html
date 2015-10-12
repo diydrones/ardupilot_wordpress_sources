@@ -39,6 +39,31 @@ The <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">CHDK Wiki</a> documen
 
 
 
+<h1>Cable for connecting to Pixhawk</h1>
+
+[note]See <a href="#chdk_cables_for_purchase">CHDK cables for purchase</a> if you just want to buy a cable. This section is useful if you want to create your own cable or understand what the cable needs to do.[/note]
+
+For Pixhawk you have to modify the APM cable in the following section, adding a circuit step the output pin signal voltage from 3.3 to 5 volts. This is required because the relay/servo output voltage is approximately 3.3V while CHDK needs 5V to trigger. 
+
+A circuit and PCB you can use are shown below. 5V should be supplied from a BEC (or from a BEC powering the central pin on the AUX output rail) because the servo rail itself is not powered.
+
+1 x BC547 or 2N3904
+1 x BC557 or 2N3906
+2 x 1 K
+1 x 220 ohm
+
+[caption width="640" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1581209"><img src="http://api.ning.com/files/6A05RJELsODapmzmxrkfVjh3WsYV3VM6gRNmnUfTqO8MDOtaCuWg6baF2UChPaKaq52lXT63W*i-uwbGNqEGfbEczIHGK3ER/3.3vto5vlogiclevelshifterwithtransistorsinproteus.jpg" width="640" height="345" alt="3V to 5V Shifter Circuit" class /></a> 3V to 5V Shifter Circuit[/caption]
+
+
+[caption width="704" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1594680"><img src="http://api.ning.com/files/iAT0B9wCR3AoT2PagGiqpRaMPAUgnytMSGSeJ7sSKh9gtRNuhdzj01dCdTkRLM2*x0pN58LfGHlqFbKfTThHXPkyjaetHNu-/Pixhawk_35_diag.png" width="704" height="773" alt="3V to 5V Shifter (PCB)" class /></a> 3V to 5V Shifter (PCB)[/caption]
+
+[note]The voltage stepper circuit and PCB above are <a href="http://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209">from the community discussion boards </a>.[/note]
+
+It is also possible to find pre-built stepper circuits like the <a href="https://www.sparkfun.com/products/10968">SparkFun 5V Step-Up Breakout - NCP1402</a> (not tested).
+
+
+
+
 <h1>Cable for connecting to APM</h1>
 
 A cable is needed to connect the APM board to the camera USB port. This section shows how to modify the USB cable that is supplied with the camera, replacing the standard USB connector with a 3-position header that can connect to the AMP output port.
@@ -62,29 +87,6 @@ If you have the crimp tool, crimp and insert the wires into the first and third 
 Cover the connector with heatshrink. Be careful with the hot air near the connector as it can cause the locking plastic pieces in the receptacle to deform.
 
 [caption id="attachment_638" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/10/Connector_Heatshrink-1024x682-300x199.jpg" alt="Connector covered with heatshrink" width="300" height="199" class="size-medium wp-image-638" /></a>ACHDK Camera Cable: Connector covered with Heatshrink[/caption]
-
-
-<h1>Cable for connecting to Pixhawk</h1>
-
-[note]See <a href="#chdk_cables_for_purchase">CHDK cables for purchase</a> if you just want to buy a cable. This section is useful if you want to create your own cable or understand what the cable needs to do.[/note]
-
-For Pixhawk you have to modify the APM cable above, adding a circuit step the output pin signal voltage from 3.3 to 5 volts. This is required because the relay/servo output voltage is approximately 3.3V while CHDK needs 5V to trigger. 
-
-A circuit and PCB you can use are shown below. 5V should be supplied from a BEC (or from a BEC powering the central pin on the AUX output rail) because the servo rail itself is not powered.
-
-1 x BC547 or 2N3904
-1 x BC557 or 2N3906
-2 x 1 K
-1 x 220 ohm
-
-[caption width="640" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1581209"><img src="http://api.ning.com/files/6A05RJELsODapmzmxrkfVjh3WsYV3VM6gRNmnUfTqO8MDOtaCuWg6baF2UChPaKaq52lXT63W*i-uwbGNqEGfbEczIHGK3ER/3.3vto5vlogiclevelshifterwithtransistorsinproteus.jpg" width="640" height="345" alt="3V to 5V Shifter Circuit" class /></a> 3V to 5V Shifter Circuit[/caption]
-
-
-[caption width="704" align="alignnone"]<a href="http://diydrones.com/xn/detail/705844:Comment:1594680"><img src="http://api.ning.com/files/iAT0B9wCR3AoT2PagGiqpRaMPAUgnytMSGSeJ7sSKh9gtRNuhdzj01dCdTkRLM2*x0pN58LfGHlqFbKfTThHXPkyjaetHNu-/Pixhawk_35_diag.png" width="704" height="773" alt="3V to 5V Shifter (PCB)" class /></a> 3V to 5V Shifter (PCB)[/caption]
-
-[note]The voltage stepper circuit and PCB above are <a href="http://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209">from the community discussion boards </a>.[/note]
-
-It is also possible to find pre-built stepper circuits like the <a href="https://www.sparkfun.com/products/10968">SparkFun 5V Step-Up Breakout - NCP1402</a> (not tested).
 
 
 <h1>Camera shutter configuration in Mission Planner</h1>
