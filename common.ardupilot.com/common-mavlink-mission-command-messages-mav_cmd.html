@@ -62,7 +62,7 @@ This allows users/developers to see both what is supported, and what protocol fi
 
 Other GCSs (APM Planner 2, Tower etc.) may support some other subset of commands/parameters and use alternative names/labels for them. In most cases the mapping should be obvious.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h1>Commands supported by Copter</h1>
 This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49">/ArduCopter/commands_logic.cpp</a>.
 
@@ -97,9 +97,9 @@ This list of commands was inferred from the command handler in <a href="https://
 <a href="#mav_cmd_do_gripper">MAV_CMD_DO_GRIPPER</a> (EPM enabled only)
 <a href="#mav_cmd_do_guided_limits">MAV_CMD_DO_GUIDED_LIMITS</a> (NAV_GUIDED only)
 <a href="#mav_cmd_nav_guided_enable">MAV_CMD_NAV_GUIDED_ENABLE</a> (NAV_GUIDED only)
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h1>Commands supported by Plane</h1>
 This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33">/ArduPlane/commands_logic.cpp</a>.
 
@@ -138,9 +138,9 @@ This list of commands was inferred from the command handler in <a href="https://
 
 
 
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover" heading="off"]
 <h1>Commands supported by Rover</h1>
 This list of commands was inferred from the command handler in <a href="https://github.com/diydrones/ardupilot/blob/master/APMrover2/commands_logic.cpp#L25">/APMrover2/commands_logic.cpp</a>.
 
@@ -163,9 +163,9 @@ This list of commands was inferred from the command handler in <a href="https://
 <a href="#mav_cmd_do_jump">MAV_CMD_DO_JUMP</a>
 
 <!-- MAV_CMD_DO_CONTROL_VIDEO (Camera enabled only). : his is hidden. It is in ROVER, PLANE, COPTER hanlders but not in the master handler. Confirmed not implemented in copter -->
-[/site_Rover]
+[/site]
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h1>Special Commands</h1>
 This section is for commands that may be relevant to missions, but but which are not mission commands (part of the mission).
 <h2>MAV_CMD_MISSION_START</h2>
@@ -291,7 +291,7 @@ This is not a "mission command" (it can't be used as a type of mission waypoint)
 </tr>
 </tbody>
 </table>
-[/site_Copter]
+[/site]
 <h1>Navigation commands</h1>
 Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints, and landing.
 
@@ -301,7 +301,7 @@ Supported by: Copter, Plane, Rover.
 
 Navigate to the specified position.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 The Copter will fly a straight line to the specified latitude, longitude and altitude. It will then wait at the point for a specified delay time and then proceed to the next waypoint.
 
@@ -359,9 +359,9 @@ Parameters 2-4 are not supported on Copter:
 
 [caption id="" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/WayPoint.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/WayPoint.png" alt="Copter: Mission Planner Settings for WAYPOINT command" width="1024" height="575" /></a> Copter: Mission Planner Settings for WAYPOINT command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 The vehicle will fly to the specified latitude, longitude and altitude. The waypoint is considered "complete" when Plane is within the specified radius of the target location, at which point Plane processes the next command.
 
@@ -412,9 +412,9 @@ The protocol additionally provides for the plane to circle the waypoint with a s
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover" heading="off"]
 <h3>Rover</h3>
 Change the target horizontal speed and/or the vehicle's throttle.
 
@@ -463,13 +463,13 @@ Change the target horizontal speed and/or the vehicle's throttle.
 </tr>
 </tbody>
 </table>
-[/site_Rover]
+[/site]
 <h2>MAV_CMD_NAV_TAKEOFF</h2>
 Supported by: Copter, Plane (not Rover).
 
 Takeoff (either from ground or by hand-launch). It should be the first command of nearly all Plane and Copter missions.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 The vehicle will climb straight up from it’s current location to the specified altitude. If the mission is begun while the copter is already flying, the vehicle will climb straight up to the specified altitude, if the vehicle is already above the altitude the command will be ignored and the mission will move onto the next command immediately.
 
@@ -522,9 +522,9 @@ The vehicle will climb straight up from it’s current location to the specified
 
 [caption id="" align="alignnone" width="1025"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/TakeOff.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/TakeOff.png" alt="Copter: Mission Planner Settings for TAKEOFF command" width="1025" height="575" /></a> Copter: Mission Planner Settings for TAKEOFF command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 The plane climbs to the specified altitude (at the specified pitch/climb angle) before proceeding to the next waypoint.
 
@@ -575,13 +575,13 @@ The plane is <em>only</em> attempting to climb at this point and can be pushed o
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_LOITER_UNLIM</h2>
 Supported by: Copter, Plane (not Rover).
 
 Loiter at the specified location for an unlimited amount of time.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Fly to the specified location and then loiter there indefinitely — where loiter means "wait in place" (rather than "circle"). If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
 
@@ -636,9 +636,9 @@ The mission will not proceed past this command while in AUTO mode. In order to b
 
 [caption id="" align="alignnone" width="1025"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterUnlimited.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterUnlimited.png" alt="Copter: Mission Planner Settings for LOITER_UNLIM command" width="1025" height="147" /></a> Copter: Mission Planner Settings for LOITER_UNLIM command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Fly to the specified location and then loiter there indefinitely — where loiter means "circle the waypoint". If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used. YOu can also specify the radius and direction for the loiter.
 
@@ -689,13 +689,13 @@ The mission will not proceed past this command while in AUTO mode. In order to b
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_LOITER_TURNS</h2>
 Supported by: Copter, Plane (not Rover).
 
 Loiter (circle) the specified location for a specified number of turns.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Loiter (circle) the specified location for a specified number of turns, and then proceed to the next command. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
 
@@ -754,9 +754,9 @@ This is the command equivalent of the <a href="http://copter.ardupilot.com/wiki/
 
 [caption id="" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTurns.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTurns.png" alt="Copter: Mission Planner Settings for LOITER_TURNS command" width="1024" height="145" /></a> Copter: Mission Planner Settings for LOITER_TURNS command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Loiter (circle) the specified location for a specified number of turns at the given radius, and then proceed to the next command. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
 
@@ -805,13 +805,13 @@ Loiter (circle) the specified location for a specified number of turns at the gi
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_LOITER_TIME</h2>
 Supported by: Copter, Plane (not Rover).
 
 Loiter at the specified location for a set time (in seconds).
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Fly to the specified location and then loiter there for the specified number of seconds — where loiter means "wait in place" (rather than "circle"). The timer starts when the waypoint is reached; when it expires the waypoint is complete. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used.
 
@@ -866,9 +866,9 @@ This is the mission equivalent of the <a href="http://copter.ardupilot.com/wiki/
 
 [caption id="" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTime.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_LoiterTime.png" alt="Copter: Mission Planner Settings for LOITER_TIME command" width="1024" height="146" /></a> Copter: Mission Planner Settings for LOITER_TIME command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Fly to the specified location and then loiter there for the specified number of seconds — where loiter means "circle the waypoint". The timer starts when the waypoint is reached; when it expires the waypoint is complete. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used. You can also specify the radius and direction for the loiter.
 
@@ -919,7 +919,7 @@ The radius of loiter is set in the <code>WP_LOITER_RAD</code> parameter.
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_RETURN_TO_LAUNCH</h2>
 Supported by: Copter, Plane, Rover.
 
@@ -927,7 +927,7 @@ Return to the <em>home location</em> or the nearest <a title="Rally Point" href=
 
 #HW TODO / Questions - Randy: Check that copter still uses RTL_ALT parameter and doesn't try to send information about height in the package.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-rally-points">Rally Point</a> if closer) and then land. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
 
@@ -984,9 +984,9 @@ This command takes no parameters and generally should be the last command in the
 
 [caption id="" align="alignnone" width="1025"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_RTL.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_RTL.png" alt="Copter: Mission Planner Settings for RETURN_TO_LAUNCH command" width="1025" height="147" /></a> Copter: Mission Planner Settings for RETURN_TO_LAUNCH command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-rally-points">Rally Point</a> if closer) and then "Loiter" (circle the point). The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
 
@@ -1039,9 +1039,9 @@ This command takes no parameters and generally should be the last command in the
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover" heading="off"]
 <h3>Rover</h3>
 Return to the <em>home location</em> (Rally Points are not supported on Rover).
 
@@ -1092,13 +1092,13 @@ This command takes no parameters and generally should be the last command in the
 </tr>
 </tbody>
 </table>
-[/site_Rover]
+[/site]
 <h2>MAV_CMD_NAV_LAND</h2>
 Supported by: Copter, Plane (not Rover).
 
 Land the vehicle at the current or a specified location.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 The copter will land at it's current location or at the lat/lon coordinates provided (if non-zero).  This is the mission equivalent of the <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/land-mode/">LAND flight mode</a>.
 
@@ -1155,9 +1155,9 @@ The motors will not stop on their own: you must exit AUTO mode to cut the engine
 
 [caption id="" align="alignnone" width="1025"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_Land.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_Land.png" alt="Copter: Mission Planner Settings for LAND command" width="1025" height="147" /></a> Copter: Mission Planner Settings for LAND command[/caption]
 
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 The plane will land at it's current location or at the (non-zero) lat/lon coordinates provided.  Information on the parameters used to control the landing are provided in <a href="http://plane.ardupilot.com/wiki/flying/flight-modes/#land">LAND flight mode</a>.
 
@@ -1208,13 +1208,13 @@ The plane will land at it's current location or at the (non-zero) lat/lon coordi
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT</h2>
 Supported by: Plane (not Copter, Rover).
 
 Continue on the current course and climb/descend to specified altitude. Move to the next command when the desired altitude is reached.
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Continue on the current course and climb/descend to specified altitude. Move to the next command when the desired altitude is reached.
 
@@ -1265,13 +1265,13 @@ Continue on the current course and climb/descend to specified altitude. Move to 
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_NAV_SPLINE_WAYPOINT</h2>
 Supported by: Copter (not Plane or Rover).
 
 Navigate to the target location using a spline path.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Fly to the target location using a <a href="http://en.wikipedia.org/wiki/Spline_%28mathematics%29" target="_blank">Spline path</a>, then wait (hover) for specified time before proceeding to the next command.
 
@@ -1334,7 +1334,7 @@ The Mission Planner screenshot shows the path the vehicle will take.
 	<li>The direction of travel as the vehicle passes through Spline Waypoint #3 is parallel to an imaginary line drawn between waypoints #2 and #4</li>
 	<li>Waypoint #5 is a straight line so the vehicle lines itself up to point towards waypoint #5 even before reaching waypoint #4.</li>
 </ul>
-[/site_Copter]
+[/site]
 
 
 
@@ -1345,7 +1345,7 @@ Enable <code>GUIDED</code> mode to hand over control to an external controller.
 
 See also <a href="#mav_cmd_do_guided_limits">MAV_CMD_DO_GUIDED_LIMITS</a> for information on how to apply time, altitude and distance limits on the external control.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Enable <code>GUIDED</code> mode to hand over control to an external controller. See <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/ac2_guidedmode/">Guided Mode</a> for more information.
 
@@ -1396,7 +1396,7 @@ Enable <code>GUIDED</code> mode to hand over control to an external controller. 
 </tr>
 </tbody>
 </table>
-[/site_Copter]
+[/site]
 
 
 
@@ -1408,7 +1408,7 @@ Supported by: Plane (not Copter or Rover).
 Mission command to wait for an altitude or downwards vertical speed. 
 
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Mission command to wait for an altitude or downwards vertical speed. This is meant for high altitude balloon launches, allowing the aircraft to be idle until either an altitude is reached or a negative vertical speed is reached (indicating early balloon burst). The wiggle time is how often to wiggle the control surfaces to prevent them seizing up.
 
@@ -1457,7 +1457,7 @@ Mission command to wait for an altitude or downwards vertical speed. This is mea
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
 
 
@@ -1468,7 +1468,7 @@ Supported by: Plane (not Copter or Rover).
 Begin loiter at the specified Latitude and Longitude. If Lat=Lon=0, then loiter at the current position. Don't consider the navigation command complete (don't leave loiter) until the altitude has been reached. Additionally, if the Heading Required parameter is non-zero the aircraft will not leave the loiter until heading toward the next waypoint.
 
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 This command enables auto-tuning on Plane.
 
@@ -1517,7 +1517,7 @@ This command enables auto-tuning on Plane.
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
 
 
@@ -1763,7 +1763,7 @@ Supported by: Copter (not Plane or Rover).
 
 Point (yaw) the nose of the vehicle towards a specified heading.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Point (yaw) the nose of the vehicle towards a specified heading.
 
@@ -1821,7 +1821,7 @@ If <code>param4=1</code> (relative): The change in heading (in degrees).</td>
 
 [caption id="" align="alignnone" width="1024"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionYaw.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_ConditionYaw.png" alt="Copter: Mission Planner Settings for CONDITION_YAW command" width="1024" height="170" /></a> Copter: Mission Planner Settings for CONDITION_YAW command[/caption]
 
-[/site_Copter]
+[/site]
 <h1>DO commands</h1>
 The "DO" or "Now" commands are executed once to perform some action. All the DO commands associated with a waypoint are executed immediately.
 <h2>MAV_CMD_DO_SET_MODE</h2>
@@ -1881,7 +1881,7 @@ Supported by: Copter, Plane, Rover.
 
 Change the target horizontal speed and/or throttle of the vehicle. The changes will be used until they are explicitly changed again or the device is rebooted.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Sets the desired maximum speed in meters/second (only). Both the speed-type and throttle settings are ignored.
 
@@ -1937,9 +1937,9 @@ speed m/s Speed type (0=Airspeed, 1=Ground Speed).
 [caption id="" align="alignnone" width="1020"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoChangeSpeed.png"><img class="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/03/MissionList_DoChangeSpeed.png" alt="Copter: Mission Planner Settings for DO_CHANGE_SPEED command" width="1020" height="143" /></a> Copter: Mission Planner Settings for DO_CHANGE_SPEED command[/caption]
 
 [note]From AC3.2 the speed parameter will be in the SECOND COLUMN, not the first column as in previous releases and shown above (this is to match the official MAVLINK protocol)[/note]
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Change the target horizontal speed (airspeed or groundspeed) and/or the vehicle's throttle.
 
@@ -1988,9 +1988,9 @@ Change the target horizontal speed (airspeed or groundspeed) and/or the vehicle'
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover" heading="off"]
 <h3>Rover</h3>
 Change the target horizontal speed and/or the vehicle's throttle.
 
@@ -2041,7 +2041,7 @@ The value of <code>param1</code> is ignored from v2.50 (earlier versions should 
 </tr>
 </tbody>
 </table>
-[/site_Rover]
+[/site]
 <h2>MAV_CMD_DO_SET_HOME</h2>
 Supported by: Copter, Plane, Rover.
 
@@ -2054,7 +2054,7 @@ Sets the home location either as the current location or at the location specifi
 </ul>
 [/note]
 
-[site_Copter] [warning]This command should not be used in AC3.2 <a href="https://github.com/diydrones/ardupilot/issues/1677" target="_blank">due to this issue</a>.  Instead <a href="wiki/common-rally-points/">Rally Points</a> can be used to control the position used for RETURN_TO_LAUNCH ("Home" is also used internally as the "origin" for all navigation calculations). The command is fixed in AC3.3.[/warning] [/site_Copter]
+[site wiki="copter" heading="off"] [warning]This command should not be used in AC3.2 <a href="https://github.com/diydrones/ardupilot/issues/1677" target="_blank">due to this issue</a>.  Instead <a href="wiki/common-rally-points/">Rally Points</a> can be used to control the position used for RETURN_TO_LAUNCH ("Home" is also used internally as the "origin" for all navigation calculations). The command is fixed in AC3.3.[/warning] [/site]
 
 <b>Command parameters</b>
 <table>
@@ -2335,7 +2335,7 @@ Supported by: Plane (not Copter, Rover).
 
 Mission command to prepare for a landing.
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Mission command to prepare for a landing.
 
@@ -2390,7 +2390,7 @@ The latitude/longitude are not used.
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_DO_SET_ROI</h2>
 Supported by: Copter, Plane, Rover.
 
@@ -2399,7 +2399,7 @@ Sets the region of interest (ROI) for a sensor set or the vehicle itself. This c
 #HW TODO / Questions - What is the frame - altitude above home or above terrain or relative to vehicle?
 #HW TODO / Questions - Is behaviour on all vehicles the same (except for Yaw). If so, merge 3 sections below.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Points the <a href="common-cameras-and-gimbals">camera gimbal</a> at the "region of interest", and possibly also rotates the nose of the vehicle if the mount type does not support a yaw feature.
 
@@ -2463,9 +2463,9 @@ If using AC3.1.5: The nose would point at the marker for only the period that th
 If using AC3.2: The nose would continue to point at the red marker until the end of the mission.  To "clear" the do-set-roi and cause the vehicle to return to it's default behaviour (i.e. pointing at the next waypoint) a second DO_SET_ROI command should be placed later in the mission with all zero for Lat, Lon and Alt.
 
 https://www.youtube.com/watch?v=W8NCFHrEjfU
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Points the <a href="common-cameras-and-gimbals">camera gimbal</a> at the "region of interest".
 
@@ -2518,9 +2518,9 @@ After setting the ROI, the camera will continue to follow it until the end of th
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover" heading="off"]
 <h3>Rover</h3>
 Points the <a href="common-cameras-and-gimbals">camera gimbal</a> at the "region of interest".
 
@@ -2571,7 +2571,7 @@ After setting the ROI, the camera will continue to follow it until the end of th
 </tr>
 </tbody>
 </table>
-[/site_Rover]
+[/site]
 <h2>MAV_CMD_DO_DIGICAM_CONFIGURE</h2>
 Supported by: Copter, Plane, Rover.
 
@@ -2816,7 +2816,7 @@ Supported by: Plane (not Copter or Rover).
 
 Mission command to enable the GeoFence.
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Mission command to enable the <a href="http://plane.ardupilot.com/geofencing/">GeoFence</a>.
 
@@ -2867,13 +2867,13 @@ Mission command to enable the <a href="http://plane.ardupilot.com/geofencing/">G
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_DO_PARACHUTE</h2>
 Supported by: Copter (not Plane or Rover).
 
 Mission command to trigger a parachute (if enabled).
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Mission command to trigger a parachute.
 
@@ -2922,13 +2922,13 @@ Mission command to trigger a parachute.
 </tr>
 </tbody>
 </table>
-[/site_Copter]
+[/site]
 <h2>MAV_CMD_DO_INVERTED_FLIGHT</h2>
 Supported by: Plane (not Copter or Rover).
 
 Change to/from inverted flight.
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 Change between normal and <a href="http://plane.ardupilot.com/wiki/flying/inverted-flight/">inverted flight</a>.
 
@@ -2979,13 +2979,13 @@ Change between normal and <a href="http://plane.ardupilot.com/wiki/flying/invert
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 <h2>MAV_CMD_DO_GRIPPER</h2>
 Supported by: Copter (not Plane or Rover).
 
 Mission command to operate EPM gripper.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 Mission command to operate EPM gripper.
 
@@ -3038,7 +3038,7 @@ Mission command to operate EPM gripper.
 </tr>
 </tbody>
 </table>
-[/site_Copter]
+[/site]
 
 
 <h2>MAV_CMD_DO_GUIDED_LIMITS</h2>
@@ -3046,7 +3046,7 @@ Supported by: Copter (not Plane or Rover).
 
 Set limits for external control.
 
-[site_Copter]
+[site wiki="copter" heading="off"]
 <h3>Copter</h3>
 This command sets time, altitude, and distance limits for external control (GUIDED mode). When these limits are exceeded, control will return from GUIDED mode to the mission. Setting any of these parameters to zero will remove the associated limit.
 
@@ -3095,7 +3095,7 @@ This command sets time, altitude, and distance limits for external control (GUID
 </tr>
 </tbody>
 </table>
-[/site_Copter]
+[/site]
 
 
 
@@ -3106,7 +3106,7 @@ Supported by: Plane (not Copter or Rover).
 
 Enable/disable autotune.
 
-[site_Plane]
+[site wiki="plane" heading="off"]
 <h3>Plane</h3>
 This command enables auto-tuning on Plane.
 
@@ -3155,7 +3155,7 @@ This command enables auto-tuning on Plane.
 </tr>
 </tbody>
 </table>
-[/site_Plane]
+[/site]
 
 
 

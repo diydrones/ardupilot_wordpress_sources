@@ -17,9 +17,9 @@ This article shows how you can enable up to 6 autopilot control/flight modes to 
 
 The mapping between switch position and flight mode is set in the <em>Mission Planner Flight Mode</em> screen.
 
-[site_Copter][caption id="attachment_10283" align="alignnone" width="1023"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png" alt="Mission Planner: Flight Mode Screen" width="1023" height="401" class="size-full wp-image-10283" /></a> Mission Planner: Flight Mode Screen (Copter).[/caption][/site_Copter]
-[site_Plane][caption id="attachment_5188" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Plane.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Plane.png" alt="Mission Planner: Flight Mode Screen (Plane)" width="1011" height="571" class="size-full wp-image-5188" /></a> Mission Planner: Flight Mode Screen (Plane)[/caption][/site_Plane]
-[site_Rover][caption id="attachment_5187" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Rover.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Rover.png" alt="Mission Planner: Flight Mode Screen (Rover)." width="1011" height="569" class="size-full wp-image-5187" /></a> Mission Planner: Flight Mode Screen (Rover).[/caption][/site_Rover]
+[site wiki="copter"][caption id="attachment_10283" align="alignnone" width="1023"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/MP_SetupFlightMode.png" alt="Mission Planner: Flight Mode Screen" width="1023" height="401" class="size-full wp-image-10283" /></a> Mission Planner: Flight Mode Screen (Copter).[/caption][/site]
+[site wiki="plane"][caption id="attachment_5188" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Plane.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Plane.png" alt="Mission Planner: Flight Mode Screen (Plane)" width="1011" height="571" class="size-full wp-image-5188" /></a> Mission Planner: Flight Mode Screen (Plane)[/caption][/site]
+[site wiki="rover"][caption id="attachment_5187" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Rover.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_FlightModesConfig_Rover.png" alt="Mission Planner: Flight Mode Screen (Rover)." width="1011" height="569" class="size-full wp-image-5187" /></a> Mission Planner: Flight Mode Screen (Rover).[/caption][/site]
 You can set up the flight modes available on the transmitter by doing the following:
 <ul>
 	<li>Turn on your RC transmitter</li>
@@ -27,8 +27,8 @@ You can set up the flight modes available on the transmitter by doing the follow
 	<li>Go to the <strong>Initial Setup | Mandatory Hardware | Flight Modes</strong> screen
 [note]As you move your transmitter's flight mode switch the green highlight bar will move to a different position.[/note]</li>
 	<li>Use the drop-down on each line to select the flight mode for that switch position.</li>
-	[site_Copter]<li>Ensure that at least one switch position is left assigned to STABILISE.</li>
-<li>Optionally check the <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/simpleandsuper-simple-modes//#Simple_Mode">Simple Mode</a> check-box for that switch position. If using AC3.1 or higher you can optionally set <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/simpleandsuper-simple-modes//#Super_Simple_Mode">Super Simple mode</a>. If both Simple mode and Super Simple mode checkboxes are checked Super Simple will be used.</li>[/site_Copter]
+	[site wiki="copter" heading="off"]<li>(Copter) Ensure that at least one switch position is left assigned to STABILISE.</li>[/site]
+[site wiki="copter" heading="off"]<li>(Copter) Optionally check the <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/simpleandsuper-simple-modes//#Simple_Mode">Simple Mode</a> check-box for that switch position. If using AC3.1 or higher you can optionally set <a href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/simpleandsuper-simple-modes//#Super_Simple_Mode">Super Simple mode</a>. If both Simple mode and Super Simple mode checkboxes are checked Super Simple will be used.</li>[/site]
 	<li>When finished press the <strong>Save Modes</strong> button.</li>
 </ul>
 
@@ -39,7 +39,7 @@ Some modes can also be invoked from the <a href="http://copter.ardupilot.com/wik
 
 The flight mode channel is the input radio channel that ArduPilot monitors for mode changes. 
 
-[site_Copter]On Copter this is always channel 5.  [/site_Copter][site_Plane]On Plane this is configurable using the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#flightmode_channel_arduplanefltmode_ch">FLTMODE_CH</a> parameter.  [/site_Plane][site_Rover]On Rover this is configurable using the <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#mode_channel_apmrover2mode_ch">MODE_CH</a> parameter[/site_Rover]
+[site wiki="copter" inline="on"]On Copter this is always channel 5.  [/site][site wiki="plane" inline="on"]On Plane this is configurable using the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#flightmode_channel_arduplanefltmode_ch">FLTMODE_CH</a> parameter.  [/site][site wiki="rover" inline="on"]On Rover this is configurable using the <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#mode_channel_apmrover2mode_ch">MODE_CH</a> parameter[/site]
 
 
 

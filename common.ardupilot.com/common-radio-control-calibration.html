@@ -30,12 +30,12 @@ There are two main transmitter configurations:
 <table><tr><td>[caption id="attachment_5182" align="alignnone" width="356"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/radio_setup_mode_1.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/radio_setup_mode_1.png" alt="Transmitter (Mode 1): Recommended Channels" width="356" height="348" class="size-full wp-image-5182" /></a> Transmitter (Mode 1): Recommended Channels[/caption]</td>
 <td>[caption id="attachment_5178" align="alignnone" width="356"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/radio_setup1.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/radio_setup1.png" alt="Transmitter (Mode 2): Recommended Channels" width="356" height="348" class="size-full wp-image-5178" /></a> Transmitter (Mode 2): Recommended Channels[/caption]</td></tr></table>
 
-[site_Rover]Rover users may prefer to control both throttle and roll from the same stick.[/site_Rover]
+[site wiki="rover"]Rover users may prefer to control both throttle and roll from the same stick.[/site]
 
 
 <h2>Channel mappings</h2>
 
-[site_Copter]
+[site wiki="copter"]
 Copter default channel mappings are:
 <ul>
 	<li><strong>Channel 1</strong>: Roll</li>
@@ -45,9 +45,9 @@ Copter default channel mappings are:
 	<li><strong>Channel 5</strong>: Flight modes</li>
 	<li><strong>Channel 6</strong>: (Optional) Inflight tuning or camera mount (mapped to transmitter tuning knob)</li>
 </ul>
-[/site_Copter]
+[/site]
 
-[site_Plane]
+[site wiki="plane"]
 Plane default channel mappings are:
 <ul>
 	<li><strong>Channel 1</strong>: Roll</li>
@@ -56,20 +56,22 @@ Plane default channel mappings are:
 	<li><strong>Channel 4</strong>: Yaw</li>
 	<li><strong>Channel 8</strong> (default): Flight modes. Mode selection can be mapped to any unused parameter with the <code>MODE_CH</code> parameter.</li>
 </ul>
-[/site_Plane]
+[/site]
 
-[site_Rover]
+[site wiki="rover"]
 Rover default channel mappings are:
 <ul>
 	<li><strong>Channel 1</strong>: Roll</li>
 	<li><strong>Channel 3</strong>: Throttle</li>
 	<li><strong>Channel 8</strong> (default): Flight modes. Mode selection can be mapped to any unused parameter with the <code>MODE_CH</code> parameter.</li>
 </ul>
-[/site_Rover]
+[/site]
 
 Unused channels can be mapped to control additional peripherals.
 
-[note]<ul>
+[note]
+&nbsp;
+<ul>
 	<li>The default channel mappings can be changed using the instructions in <a href="common-rcmap">RCMAP Input Channel Mapping</a>. </li>
 	<li>Once you've calibrated the flight mode you can use the instructions in <a href="common-rc-transmitter-flight-mode-configuration">RC Transmitter Flight Mode Configuration</a> to specify which vehicle modes are enabled by each switch position.</li>
 </ul>[/note]
