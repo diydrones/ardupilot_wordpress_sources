@@ -1,0 +1,33 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: sitl-simulator-software-in-the-loop 
+title: SITL Simulator (Software in the Loop) 
+id: 5335 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The SITL (software in the loop) simulator allows you to run Plane, Copter or Rover without any hardware. It is a build of the autopilot code using an ordinary C++ compiler, giving you a native executable that allows you to test the behaviour of the code without hardware.
+
+This article provides an overview of SITL's benefits and architecture.
+<h1>Overview</h1>
+SITL allows you to run ArduPilot on your PC directly, without any special hardware. It takes advantage of the fact that ArduPilot is a portable autopilot that can run on a very wide variety of platforms. Your PC is just another platform that ArduPilot can be built and run on.
+
+When running in SITL the sensor data comes from a flight dynamics model in a flight simulator. ArduPilot has a wide range of vehicle simulators built in, and can interface to several external simulators. This allows ArduPilot to be tested on a very wide variety of vehicle types. For example, SITL can simulate:
+<ul>
+	<li>multi-rotor aircraft</li>
+	<li>fixed wing aircraft</li>
+	<li>ground vehicles</li>
+	<li>camera gimbals</li>
+	<li>antenna trackers</li>
+	<li>a wide variety of optional sensors, such as Lidars and optical flow sensors</li>
+</ul>
+Adding new simulated vehicle types or sensor types is straightforward.
+
+A big advantage of ArduPilot on SITL is it gives you access to the full range of development tools available to desktop C++ development, such as interactive debuggers, static analyzers and dynamic analysis tools. This makes developing and testing new features in ArduPilot much simpler.
+<h1>Running SITL</h1>
+The APM SITL environment has been developed to run natively on on both Linux and Windows. For instructions see <a title="Setting up SITL on Linux" href="setting-up-sitl-on-linux">Setting up SITL on Linux</a> and <a href="/wiki/simulation-2/sitl-simulator-software-in-the-loop/sitl-native-on-windows/">Setting up SITL on Windows</a> for more information.
+<h1>SITL Architecture</h1>
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/ArdupilotSoftwareintheLoopSITL.png" alt="" />

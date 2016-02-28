@@ -1,0 +1,64 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: code-overview-adding-a-new-mavlink-message 
+title: Adding a new MAVLink Message (Code Overview) 
+id: 3892 
+menu_order: 60 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Data and commands are passed between the ground station (i.e mission planner, Droid Planner, etc) using the <a href="http://en.wikipedia.org/wiki/MAVLink" target="_blank">MAVLink protocol</a> over a serial interface. This page provides some high level advice for adding a new MAVLink message.
+
+These instructions have only been tested on Linux (to be precise a VM running Ubuntu on a Windows machine). Instructions for setting up a VM are on the <a href="wiki/setting-up-sitl-on-windows/">SITL page</a>. If you can run SITL, you should be able to follow the advice here. These instructions will not run natively on Windows or a Mac.
+
+
+<strong>Step #1:</strong> Ensure you have the latest ArduPilot code installed. Also check mavproxy. Mavproxy can be updated by running this command in a Terminal window:
+<pre>sudo pip install --upgrade mavproxy</pre>
+
+
+
+<strong>Step #2:</strong> Decide what type of message you want to add and how it will fit in with the existing <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink messages</a>.
+
+For example you might want to send a new new navigation command to the vehicle so that it can perform a trick (like a flip) in the middle of a mission (i.e. in AUTO mode).  In this case you would need a new MAV_CMD_NAV_TRICK similar to the MAV_CMD_NAV_WAYPOINT definition (search for "MAV_CMD_NAV_WAYPOINT" in the <a href="https://pixhawk.ethz.ch/mavlink/" target="_blank">MAVLink messages</a> page).
+
+Alternatively you may want to send down a new type of sensor data from the vehicle to the ground station.  Perhaps similar to the <a href="https://pixhawk.ethz.ch/mavlink/#SCALED_PRESSURE" target="_blank">SCALED_PRESSURE</a> message.
+
+
+
+<strong>Step #3:</strong> Add the new message definition to the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/GCS_MAVLink/message_definitions/common.xml" target="_blank">common.xml</a> or <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/GCS_MAVLink/message_definitions/ardupilotmega.xml" target="_blank">ardupilotmega.xml</a> file
+
+If this command will hopefully be added to the MAVLink protocol then it should be added to the ../ardupilot/libraries/GCS_MAVLink/message_definitions/common.xml file. If it is only for your personal use or only for use with Copter, Plane, Rover then it should be added to the ardupilotmega.xml file.
+
+
+
+<strong>Step #4:</strong> Regenerate the include files that will allow the new message to be recognised in the main code.
+First cd to the ardupilot directory and then run this command:
+<code>./libraries/GCS_MAVLink/generate.sh</code>
+
+If the generate completes successfully you should see that some of the following files have been updated.
+<pre>
+../libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/ardupilotmega.h
+../libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/version.h
+../libraries/GCS_MAVLink/include/mavlink/v1.0/common/version.h
+</pre>
+The version.h files should simply have a date &amp; time updated in the file but the ardupilotmega.h should have your new message defined.
+
+
+
+<strong>Step #5:</strong> Add functions to the main vehicle code to handle sending or receiving the command to/from the ground station.
+The top level of this code will most likely be in the vehicle's <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/GCS_Mavlink.cpp" target="_blank">GCS_MAVLink.cpp</a> file or in the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/GCS_MAVLink/GCS.h" target="_blank">../libraries/GCS_MAVLink/GCS</a> class.
+
+In the first example where we want to add support for a new navigation command (i.e. a trick) the following would be required:
+
+<ul>
+	<li>Extend the <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Mission" target="_blank">AP_Mission</a> library's <code>mission_cmd_to_mavlink()</code> and <code>mavlink_to_mission_cmd()</code> functions to convert the MAVProxy command into an AP_Mission::Mission_Command structure.</li>
+	<li>Add a new case to the vehicle's <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/commands_logic.cpp" target="_blank">commands_logic.cpp</a>'s <code>start_command()</code> and <code>verify_command()</code> functions to check for the arrival of the new <code>MAV_CMD_NAV_TRICK</code>. These should call two new functions that you create called <code>do_trick()</code> and <code>verify_trick()</code> (see below).</li>
+	<li>Create these two new functions,  do_trick() and verify_trick(), that somehow command the vehicle <em>to perform the trick</em> (perhaps by calling another function in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_auto.cpp" target="_blank">control_auto.cpp</a> that sets the auto_mode variable and then calls a new <code>auto_trick_start()</code> function).  The <code>do_trick()</code> function will be called when the command is first invoked.  The <code>verify_trick()</code> will be called at 10hz (or higher) repeatedly until the trick is complete.  The <code>verify_trick()</code> function should return true when the trick has been completed.</li>
+</ul>
+
+
+
+
+<strong>Step #6:</strong> Consider contributing your code back to the main code base. Email the <a href="https://groups.google.com/forum/#!forum/drones-discuss" target="_blank">drones-discuss email list</a> and/or <a href="wiki/submitting-patches-back-to-master/">raise a pull request</a>. If you raise a pull request it is best to separate the change into at least three separate commits. One commit for the changes to the .xml files (i.e Step #3), another for the generated files (i.e. Step #4) and then one or more commits for the changes to the vehicle code.

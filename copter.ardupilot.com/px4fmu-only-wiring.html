@@ -1,0 +1,126 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: px4fmu-only-wiring 
+title: Archived: Installing the PX4FMU on a QuadCopter 
+id: 16303 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[archived]This article is for creating a quadcopter using the PX4FMU only, which is one approach for creating a very small autopilot. <a href="http://arsovtech.com/?p=1447">Arsovtech</a> have created a small Pixhawk based board that is much more popular with the community. [/archived]
+<!--more-->
+
+
+<h3>Overview</h3>
+<strong>Bill Of Materials:</strong>
+<ul>
+	<li>Copter firmware version 3.1 and later supports only the combined system of the PX4 FMU and PX4 IO board; the FMU-only system is no longer supported. Purchase a PX4 FMU kit from 3DRobotics LINK_BROKEN and a PX4 I/O board LINK_BROKEN</li>
+	<li>A special cable that fits into the PX4's main "Multi" connector will allow you to perform the primary wiring and it is available from 3DRobotics LINK_BROKEN</li>
+	<li>If you choose, you can cut off the single pin connectors and solder directly to the necessary locations and trim back the excess wires.</li>
+	<li>Use the 4 supplied nylon standoffs to mount the PX4FMU to a piece of scrap plastic or fiberglass sheet the same size as the FMU.
+<ul>
+	<li>Mount the board to your copter with four 3/4" squares of Kyosho Zeal gel or double sided foam tape to provide vibration isolation.</li>
+</ul>
+</li>
+</ul>
+<strong>Mount your PX4-FMU board in a central location on top of your QuadCopter.</strong>
+<ul>
+	<li>The PX4FMU board Normally has the SD card on top.</li>
+	<li>It can sometimes be advantageous to mount the PX4FMU with the other side up for better LED observation.</li>
+	<li>If you do mount the PX4FMU board with the Component side up it will be necessary to set the "Board Orientation (AHRS_ORIENTATION)" parameter to "Roll 180" in the Advanced Parameter List in Mission Planner.</li>
+	<li>The arrow labeled "FRONT" should be facing to the front of the aircraft (also the large black board interconnect connector).</li>
+	<li>If you use the vibration dampers suggested above it is best to put a small O-ring on top of the damper and under the PX4 Board before fastening it "gently" down with the supplied nuts to prevent damage to the board.</li>
+	<li>In fact, these dampers may not provide adequate damping and you should review the Wiki section on vibration control.</li>
+</ul>
+<strong>Mount the GPS facing up with an unobstructed "view" of the sky</strong>.
+<ul>
+	<li>The GPS can be mounted on a short riser to give it the widest satellite access.</li>
+</ul>
+<h3>PX4-FMU Only Wiring Diagram for QuadCopters using a PPM-SUM receiver</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMUwire11.jpg"><img class="alignnone size-full wp-image-9295" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMUwire11.jpg" alt="PX4FMUwire1" width="800" height="1264" /></a>
+<h3>Wiring the PX4FMU Board to Your QuadCopter</h3>
+<ul>
+	<li><strong>Use heavy gauge wire to interconnect the ESC's Ground and power leads to a Battery Connector.</strong>
+<ul>
+	<li>A Power Distribution board can also be used.</li>
+</ul>
+</li>
+	<li><strong>Connect your BEC (5 volt power supply) power in leads to the battery input leads.</strong></li>
+	<li>
+<ul>
+	<li>Connect the the BEC Ground output to the PX4's Ground (Multi connector pin 15).</li>
+	<li>Connect the BEC Power output to the PX4's power In (Multi connector pin 1).</li>
+	<li><strong>NOTE!</strong> Instead of a separate BEC as shown, the power and ground leads (signal side) from one of your ESCs that contains a BEC can be wired to the Multi connectors pins 1 and 15 to provide PX4 board power.</li>
+</ul>
+</li>
+	<li><strong>The PPM-SUM receiver may be wired with a connecting cable as shown in the diagram above.</strong>
+<ul>
+	<li>Or the PPM-SUM signal and power and ground leads from the 15 pin DF13 "Multi" connector may be directly wired to a 3 pin servo/receiver connector.</li>
+	<li>Connect your PPM-Sum RC receivers signal wire to pin 6 of the Multi connector on the PX4 board.</li>
+	<li>Connect the PPM-SUM RC Receivers Ground lead to pin 15 of the Multi connector on the PX4 board.</li>
+	<li>Connect the PPM-SUM RC Receivers Power lead to pin 1 of the Multi connector on the PX4 board.</li>
+</ul>
+</li>
+	<li><strong>Wire the PX4 boards 4 servo out signals to the ESC control inputs.</strong>
+<ul>
+	<li>The wires can be put together with connectors as shown in the diagram or solder and heat shrink tubing can be used.</li>
+	<li>Wire PX4 PWM control 4 (Multi Connector pin 9) to The ESC signal in for Motor 4.</li>
+	<li>Wire PX4 PWM control 2 (Multi Connector pin 10) to The ESC signal in for Motor 2.</li>
+	<li>Wire PX4 PWM control 1 (Multi Connector pin 11) to The ESC signal in for Motor 1.</li>
+	<li>Wire PX4 PWM control 3 (Multi Connector pin 12) to The ESC signal in for Motor 3.</li>
+</ul>
+</li>
+	<li><strong>Run a wire from the PX4's Battery Monitor connection (Multi Connector pin 5) to the positive battery power lead.</strong></li>
+	<li><strong>Note! The cable that is supplied in the plastic envelope with the UBLOX GPS which has white 6 pin connectors on both ends is NOT the correct cable for the PX4</strong>.
+<ul>
+	<li>The correct longer cable is provided in a separate envelope and has a 5 pin "beige" connector on one end and a 6 pin white connector on the other end.</li>
+	<li>Plug the correct GPS cable's white 6 pin connector into the 6 pin socket on the GPS.</li>
+	<li>Plug the beige 5 pin connector into the PX4's 5 pin GPS socket which is next to the 15 pin DF13 Mini connector.</li>
+</ul>
+</li>
+	<li><strong>Plug the 2 pin connector attached to the lead supplied with the buzzer into the buzzer socket on the side of the PX4FMU board that has the SD card holder on it.</strong></li>
+	<li>In Mission Planner in the Complete Parameter List it will be necessary for you to set the <strong>BRD_SAFETYENABLE</strong> parameter to 0 = off.
+<ul>
+	<li>This is because the safety switch connects to the IO board's on board microcontroller and there is no switch for the PX4FMU only.</li>
+</ul>
+</li>
+</ul>
+<h3>PX4-FMU Only Wiring Schematic for QuadCopters using a PPM-SUM receiver</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMUWiring1PPMSUMrec1.jpg"><img class="alignnone size-full wp-image-5551" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4FMUWiring1PPMSUMrec1.jpg" alt="PX4FMUWiring1PPMSUMrec" width="800" height="600" /></a>
+
+&nbsp;
+<h3>Wiring your Motors for X or + mode configuration</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg"><img class="alignnone size-full wp-image-3977" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRAMES_QUAD_PX4.jpg" alt="FRAMES_QUAD_PX4" width="650" height="415" /></a>
+<h3>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h3>
+<ul>
+<ul>
+	<li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>
+<ul>
+	<li>An 8 Channel PPM Encoder is available from 3DRobotics <a href="http://store.3drobotics.com/products/8-channel-ppm-encoder-version-2">(Here!)</a>.</li>
+	<li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>
+	<li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>
+</ul>
+</li>
+	<li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>
+<ul>
+	<li>Connect the PPM-SUM signal output of the Encoder to the PX4FMU boards PPM sum signal input (Pin 6 of the 15 pin Multi connector).</li>
+	<li>Connect the PPM-SUM ground input of the Encoder to the PX4FMU boards ground connection (Pin 1 of the 15 pin Multi connector).</li>
+	<li>Connect the PPM-SUM power input of the Encoder to the PX4FMU boards power connection (Pin 15 of the 15 pin Multi connector).</li>
+</ul>
+</li>
+</ul>
+</ul>
+<h4>3DRobotics 8 Channel PPM-Sum Encoder</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PPMEncoderDesc.jpg"><img class="alignnone size-full wp-image-3865" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/03/PPMEncoderDesc.jpg" alt="PPMEncoderDesc" width="1152" height="564" /></a>
+<h3> There are Several Radio systems that support PPM-Sum or S-Bus directly</h3>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkySystem.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkySystem.jpg" alt="FRSky Transmitter Adapter and PPM-Sum Receiver" width="565" height="414" /></a>
+<h4>FRSky transmitter adapter module and PPM-Sum receiver</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkyTaranis.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
+<h4>FRSky PPM-Sum compatible transmitter</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/Turnigy9XR.jpg"><img class="size-full wp-image-4469" title="The Turnigy 9XR Transmitter can be used with the FRSky module" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/Turnigy9XR.jpg" alt="Turnigy9XR" width="565" height="414" /></a>
+<h4>Turnigy transmitter compatible with FRSky transmitter module</h4>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FutabaT8FG.jpg"><img class="size-full wp-image-4470" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/FutabaT8FG.jpg" alt="FutabaT8FG" width="350" height="437" /></a>
+<h4>Futaba transmitter compatible with Futaba S-Bus receivers</h4>
+<strong>You can also go to the PixHawk Link for even more options <a href="https://pixhawk.ethz.ch/px4/modules/peripherals#rc_transmitters"> (Here!)</a></strong>

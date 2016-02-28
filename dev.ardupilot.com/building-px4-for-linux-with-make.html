@@ -1,0 +1,125 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-px4-for-linux-with-make 
+title: Building ArduPilot for Pixhawk/PX4 on Linux with Make 
+id: 3618 
+menu_order: 65 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to build ArduPilot for Pixhawk 2, Pixhawk and PX4 on Linux with <em>Make</em>. <!--more -->
+[note]The commands for building Pixhawk 2 and Pixhawk are identical (<code>make px4-v2</code>). Building for PX4 is the same except that <code>make px4-v1</code> is used. [/note]
+
+<h1>Quick start</h1>
+For Ubuntu, follow these steps to build the code. For other distributions, see the advanced instructions below.
+
+<h2>Setup</h2>
+
+Install git:
+<pre>sudo apt-get -qq -y install git</pre>
+
+Clone the source:
+<pre>git clone https://github.com/diydrones/ardupilot.git</pre>
+
+Run the install-prereqs-ubuntu.sh script:
+<pre>ardupilot/Tools/scripts/install-prereqs-ubuntu.sh -y</pre>
+
+Reload the path (log-out and log-in to make permanent):
+<pre>. ~/.profile</pre>
+
+
+[note]The build should correctly initialise submodules. If the build fails you can try doing this manually by entering the following commands from the <strong>ardupilot</strong> directory:
+<pre>
+git submodule init
+git submodule update</pre>
+[/note]
+
+
+<h2>Build</h2>
+
+The commands below show how to build for Pixhawk2/Pixhawk on the different platforms. To build for PX4 replace <code>make px4-v2</code> with <code>make px4-v1</code>.
+
+Build for Copter:
+<pre>cd ardupilot/ArduCopter
+make px4-v2</pre>
+
+Build for Plane:
+<pre>cd ardupilot/ArduPlane
+make px4-v2</pre>
+
+Build for Rover:
+<pre>cd ardupilot/APMrover2
+make px4-v2</pre>
+
+Build for Antenna Tracker:
+<pre>cd ardupilot/AntennaTracker
+make px4-v2</pre>
+
+
+
+<h1>Advanced</h1>
+To build for a Pixhawk2/Pixhawk/PX4 target on Linux you need the following tools and git repositories:
+<ul>
+	<li>The gcc-arm cross-compiler from <a href="http://firmware.diydrones.com/Tools/PX4-tools/">here</a></li>
+	<li>The ardupilot git repository from <a href="https://github.com/diydrones/ardupilot">github.com/diydrones/ardupilot</a></li>
+	<li>gnu make, gawk and associated standard Linux build tools</li>
+	<li>On Ubuntu you will need to install the genromfs package.</li>
+</ul>
+
+<h2>Permissions</h2>
+You need to make your user a member of the dialout group:
+<pre>sudo usermod -a -G dialout $USER</pre>
+You will need to log out and then log back in for the group change to take effect.
+
+Also, it's worth mentioning here that you want to ensure that the modemmanager package is not installed and the modem-manager process is not running.
+
+
+<h2>Directory Layout</h2>
+The ardupilot, PX4NuttX and PX4Firmware git checkouts all need to be in the same directory. The makefile looks in the directory above the ardupilot directory to find the PX4NuttX and PX4Firmware trees.
+
+
+<h2>Compiler</h2>
+You need the specific gcc-arm cross-compiler linked above. You need to unpack it:
+<pre>tar -xjvf gcc-arm-none-eabi-4_6-2012q2-20120614.tar.bz2</pre>
+
+and then add the bin directory from the tarball to your $PATH by editing the $HOME/.bashrc file and adding a line like this to the end:
+<code>export PATH=$PATH:/home/<strong>your_username</strong>/bin/gcc-arm-none-eabi-4_6-2012q2/bin</code>
+
+
+<h2>ccache for faster builds</h2>
+
+Installing <em>ccache</em> will speed up your builds a lot. Once you install it (for example with "sudo apt-get install ccache") you should link the compiler into /usr/lib/ccache like this:
+<pre>cd /usr/lib/ccache
+sudo ln -s /usr/bin/ccache arm-none-eabi-g++
+sudo ln -s /usr/bin/ccache arm-none-eabi-gcc</pre>
+Then add /usr/lib/ccache to the front of your $PATH
+
+
+<h2>Building</h2>
+One you have the 3 git trees and compiler setup you do the build in your vehicle directory. For example, if building Plane then do this:
+<pre>cd ardupilot/ArduPlane
+make px4</pre>
+
+That will build two files <strong>ArduPlane-v1.px4</strong> and <strong>ArduPlane-v2.px4</strong>. The v1 file is for PX4v1, the v2 file is for PX4v2 (the Pixhawk).
+
+You can also build for just one board by using "make px4-v1" or "make px4-v2".
+
+The first time you build it will take quite a long time as it builds the px4 archives. Subsequent builds will be faster (especially if you setup ccache correctly).
+
+
+<h2>Loading firmware</h2>
+To load the firmware onto the board use
+<pre>make px4-v1-upload</pre>
+or
+<pre>make px4-v2-upload</pre>
+After it says "waiting for bootloader" plugin your PX4 on USB.
+
+If upload consistently fails in the erase step then check if you are running 'modemmanager' which can take control of the PX4 USB port. Removing modemmanager can help.
+
+
+<h2>Cleaning</h2>
+If there have been updates to the PX4NuttX or PX4Firmware git submodules you may need to do a full clean build. To do that use:
+<pre>make px4-clean</pre>
+that will remove the <em>PX4NuttX</em> archives so you can do a build from scratch

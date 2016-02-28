@@ -1,0 +1,54 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-for-erle-brain-2 
+title: Building for Erle-Brain 2 
+id: 6320 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+These instructions explain how to build ArduPilot on board the Erle-Brain 2.<!--more-->
+[note]Alternatively you can follow <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Software/APM/Setup.html" target="_blank">Erle-Robotics's instructions</a> on how to build from source on your PC.[/note]
+
+<h2>Connection and setup</h2>
+Give Erle-Brain Internet access by plugging the Ethernet wire into the RJ-45 connector.
+
+Connect to Erle-Brain 2:
+<pre><code class=" hljs perl">$ ssh erle<span class="hljs-variable">@erle</span>-brain-<span class="hljs-number">2</span>.<span class="hljs-keyword">local
+</span></code></pre>
+[tip] More info about connection methods in manufacturers <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Getting_started/Connecting_to_Erle-Brain_2/Ethernet_ZeroConf.html" target="_blank">documentation</a>[/tip]
+
+Clone the source:
+<pre>#Move to home
+cd ~/
+#Clone the repository in home
+git clone https://github.com/erlerobot/ardupilot.git</pre>
+
+
+<h2>Build</h2>
+Build for Copter:
+<pre>cd /home/erle/ardupilot/<strong>ArduCopter</strong>
+make erlebrain2 -j4</pre>
+This will build the firmware for a quadcopter.  If you wish to build for another frame type (such as hexacopter) append "-hexa" onto the end of the make command (i.e. make erlebrain2-hexa -j4).  The full list of available frames can be found in the <a href="https://github.com/diydrones/ardupilot/blob/master/mk/targets.mk#L3" target="_blank">targets.mk</a> file.
+
+[note]If building for Plane, Rover or Antenna Tracker replace the above "ArduCopter" with "ArduPlane", "APMrover2" or "AntennaTracker".[/note]
+
+<h2>Move firmware to the executable directory</h2>
+
+When you compile Copter (in <strong>~/ardupilot/ArduCopter</strong>) the executable <strong>ArduCopter.elf</strong> is created in the same folder. You need to move the executable to home (`~/`or `/home/erle/`) because there is a service in Erle-Brain 2 (called <strong>apm.service</strong>) which automatically launches the autopilot from those locations.
+
+<pre>#Assuming present working directory is: ~/ardupilot/ArduCopter
+sudo cp ArduCopter.elf ~/</pre>
+
+[tip]The service mentioned above, launches <strong>ArduCopter</strong> by default, using a bridge for sending telemetry data and GPS placed in <strong>ttyAMA0</strong> by default
+&nbsp;
+You can find additional information about the default launch process and launch configuration options at <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Software/APM/Setup.html" target="_blank">this link</a>[/tip]
+
+[tip]If you are unable to copy the executable it may be because the destination file is locked. This is because the autopilot is already running.  Use the following command to stop the running service:
+<pre><code class=" hljs ">systemctl stop apm.service</code></pre>
+Now copy the executable in home (`~`or `/home/erle/`) and restart the service in order to execute the new executable:
+<pre><code class=" hljs ">systemctl start apm.service</code></pre>
+Or simply, restart the board once you have copied the new executable
+[/tip]

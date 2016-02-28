@@ -1,0 +1,189 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: using-the-command-line-interpreter-to-configure-apmcopter 
+title: Using the Command Line Interface to Configure Copter 
+id: 4888 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[warning]The CLI is being phased out on all platforms. The features were massively cut down with AC3.1.5 and then it was removed for the APM2 completely anyway with AC3.2. All CLI functions are now available via regular MAVlink commands in the GCSs. This article has been moved to the dev wiki and may be considered deprecated.[/warning]
+
+You don't need to use the Mission Planner to set up Copter (and there are some advanced configuration options not covered by the Mission Planner). You can also use APM's built-in Command Line Interpreter (CLI) over a serial terminal, which will work on any computer and operating system. It is only available via the USB cable; it cannot be used via a Xbee/3DR wireless connection.
+
+You will also need to use the CLI for such functions as assigning your preferred flight modes to your RC transmitter's toggle switches. See the menu descriptions below for instructions.
+
+You can enter the CLI by hitting "Enter" three times in the Mission Planner Terminal screen.
+
+When you open it, it will look like this (with a more recent version number of the software displayed):
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/AC2_CLI.png"><img class="alignnone size-full wp-image-7299" alt="AC2_CLI" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/AC2_CLI.png" width="470" height="349" /></a>
+
+If you're not using Windows, you can also use the Serial Monitor built into Arduino (remember to select the right baud rate and enable CRs as shown here):
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/arduinoserialmon.png"><img class="alignnone size-full wp-image-7300" alt="arduinoserialmon" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/arduinoserialmon.png" width="457" height="173" /></a>
+
+Once you are in the CLI, you can type "help" at any menu and get a full list of available commands.
+
+There are three top-level menus: Setup, Test and Logs.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI1.png"><img class="alignnone size-full wp-image-7301" alt="CLI1" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI1.png" width="494" height="260" /></a>
+
+Each has sub-menus, whose command can also be seen by typing "help" when you are in that section.
+
+
+
+<h1>Setup Menu</h1>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI2.png"><img class="alignnone size-full wp-image-7302" alt="CLI2" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI2.png" width="252" height="375" /></a>
+
+CLI interactive setup - You must go through each item and set the values to match your hardware
+
+
+
+<h1>"setup" menu:commands:</h1>
+<ul>
+	<li><strong>erase</strong>: When installing ACM for the first time, run this to erase bad values from EEPROM -- just in case!</li>
+	<li><strong>reset</strong>: Performs factory reset and initialization of EEPROM values</li>
+	<li><strong>radio</strong>: Records the limits of ALL radio channels - very important!!!</li>
+	<li><strong>motors</strong>: Interactive setup of your ESC and motors. Enter this mode, then plug-in battery, move your RC transmitter's pitch/roll sticks in each direction to make the prop in that direction spin (so moving the stick up will make the front rotor spin on a quad, and moving it right will make the right rotor spin). For copters with more than four motors, it will spin groups of motors, with the one closest to the direction of the stick going fastest.</li>
+	<li><strong>level</strong>: Sets initial value of accelerometers - hold copter level</li>
+	<li><strong>modes</strong>: Sets the flight modes assigned to each switch position (you have 5 available). Use your aileron/roll stick on your RC transmitter to scroll through the options. Full right moves forward through the list; full left moves back. Hit enter to save your settings and exit this mode.</li>
+	<li><strong>frame</strong>: Sets your frame config: (x, +, v (Octo))</li>
+	<li><strong>current</strong>: Enables an AttoPilot current sensor: (on, off, milliamp hours)</li>
+	<li><strong>sonar</strong>: Enable sonar sensor. Sensor hooks to the "pitot" port which is an analog input (on, off).</li>
+	<li><strong>compass</strong>: Enables the compass (on, off)</li>
+	<li><strong>declination</strong>: Sets your local declination value -- lookup online for accuracy (decimal degrees)</li>
+	<li><strong>show</strong>: A formatted output of all the settings</li>
+</ul>
+
+
+
+<h1>Test Menu</h1>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI3.png"><img class="alignnone size-full wp-image-7303" alt="CLI3" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI3.png" width="229" height="451" /></a>
+
+
+
+<h1>"test" menu commands:</h1>
+<ul>
+	<li><strong>pwm</strong>: Outputs the pwm values of all 8 radio channels</li>
+	<li><strong>radio</strong>: Outputs the control values of all 8 radio channels in degrees x 100 or other value (see radio.pde)</li>
+	<li><strong>failsafe</strong>: (Not currently used)</li>
+	<li><strong>stabilize</strong>: Lets you test the stabilization with debugging output to the terminal (may spin the props -- not recommended for flying).</li>
+	<li><strong>gps</strong>: Outputs GPS data. Note: typically you must be outside to get GPS lock. It can take two minutes or more to achieve lock at first power on.</li>
+	<li><strong>adc</strong>: Outputs raw adc values</li>
+	<li><strong>imu</strong>: Outputs euler angles</li>
+	<li><strong>battery</strong>: Outputs voltage readings to analog in 0-3</li>
+	<li><strong>tune</strong>: (Not currently used)</li>
+	<li><strong>current</strong>: Outputs voltage and current from an AttoPilot current sensor. Motors will spin, so disconnect your four-wire cable or take off your props!</li>
+	<li><strong>relay</strong>: Toggles the relay</li>
+	<li><strong>waypoints</strong>: Dumps stored waypoint commands</li>
+	<li><strong>altitude</strong>: Displays output from onboard barometric pressure sensor</li>
+	<li><strong>sonar</strong>: Displays output from sonar sensor (if attached and enabled)</li>
+	<li><strong>compass</strong>: Outputs compass angles in degrees (0 = north)</li>
+	<li><strong>xbee</strong>: Outputs an XBEE sequence used for range testing</li>
+	<li><strong>eedump</strong>: Raw output of bytes in EEPROM</li>
+	<li><strong>rawgps</strong>: Outputs raw, unparsed GPS data</li>
+	<li><strong>mission</strong>: Writes a default mission to EEPROM (null, 'wp'). Choosing 'wp' option will send the copter 15 meters North and back again.</li>
+</ul>
+
+
+
+<h1>Logs Menu</h1>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI4.png"><img class="alignnone size-full wp-image-7304" alt="CLI4" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/CLI4.png" width="330" height="207" /></a>
+
+
+
+<h1>"logs" menu commands:</h1>
+<span style="color: #404042;font-size: 18px;font-weight: bold">Datalogging</span>
+
+You can use the on-board 16Mb datalogging memory to record information about your flight and the APM’s performance.
+
+Please note that before using the logging for the first time you must "erase" the logs using the CLI (see below). If you do not take this step then you will likely see a lot of invalid logs.
+
+Normally, the slider switch on the IMU shield should be towards the inside of the board, which is data logging/flight mode. But if you boot up with it towards the edge of the board, it will go into the CLI mode. Using the Arduino IDE serial monitor, you can type "logs" to manage and read your log files:
+
+
+
+<h1>Reading and analyzing logs with the Mission Planner</h1>
+The easiest way to download and analyze your log files is with the Mission Planner, which will allow you to graph data, generate KML files for Google Earth and otherwise manage the data flexibly.
+
+
+
+<h1>Reading logs through the CLI</h1>
+You can also download data files with the CLI. Enter it by typing <tt>logs</tt> in the CLI and hitting the enter key. Here are the available commands:
+<ul>
+	<li><strong>"dump <i>n</i>"</strong>: Dump log number <i>n</i>.</li>
+	<li><strong>"dump 0"</strong>: Dump and erase all logs.</li>
+	<li><strong>"erase"</strong>: Erase all logs.</li>
+	<li><strong>"enable <i>name</i>"</strong>: Enable logging <i>name</i>. Use "all" to enable everything.</li>
+	<li><strong>"disable <i>name</i>"</strong>: Disable logging <i>name</i>. Use "all" to disable everything.</li>
+</ul>
+Here are the field names that can be logged, with the default state shown:
+
+&nbsp;
+<table>
+<tbody>
+<tr>
+<td><strong>Log name</strong></td>
+<td><strong>Default</strong></td>
+<td><strong>Function</strong></td>
+</tr>
+<tr>
+<td>ATTITUDE_FAST</td>
+<td>DISABLED</td>
+<td>Logs basic attitude info to the dataflash at 50Hz (uses more space)</td>
+</tr>
+<tr>
+<td>ATTITUDE_MED</td>
+<td>DISABLED</td>
+<td>Logs basic attitude info to the dataflash at 10Hz (uses less space than LOG_ATTITUDE_FAST)</td>
+</tr>
+<tr>
+<td>GPS</td>
+<td>ENABLED</td>
+<td>Logs GPS info to the dataflash at 10Hz.</td>
+</tr>
+<tr>
+<td>PM</td>
+<td>DISABLED</td>
+<td>Logs IMU performance monitoring info every 20 seconds.</td>
+</tr>
+<tr>
+<td>CTUN</td>
+<td>ENABLED</td>
+<td>Logs control loop tuning info at 10 Hz. This information is useful for tuning servo control loop gain values.</td>
+</tr>
+<tr>
+<td>NTUN</td>
+<td>ENABLED</td>
+<td>Logs navigation tuning info at 10 Hz. This information is useful for tuning navigation control loop gain values.</td>
+</tr>
+<tr>
+<td>MODE</td>
+<td>DISABLED</td>
+<td>Logs changes to the flight mode upon occurrence.</td>
+</tr>
+<tr>
+<td>RAW</td>
+<td>DISABLED</td>
+<td>Logs raw accelerometer and gyro data at 50 Hz (uses more space).</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>ENABLED</td>
+<td>Logs new commands when they process.</td>
+</tr>
+<tr>
+<td>CURRENT</td>
+<td>DISABLED</td>
+<td>Logs current sensor if connected and enabled</td>
+</tr>
+<tr>
+<td>MOTORS</td>
+<td>DISABLED</td>
+<td>Logs motor commands</td>
+</tr>
+</tbody>
+</table>

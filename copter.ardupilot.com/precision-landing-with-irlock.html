@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: precision-landing-with-irlock 
-title: Precision Landing with IRLock 
+title: Precision Landing with IR-LOCK 
 id: 15318 
 menu_order: 0 
 post_parent_id: 0 
@@ -9,50 +9,49 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This article shows how to enable precision landing on Copter using the IRLock sensor.
+This article shows how to enable precision landing on Copter using the IR-LOCK sensor.
 
 [note]This feature is (will be) supported from Copter 3.4[/note]
 <h1>Overview</h1>
-Copter 3.4 (not yet released) supports precision landing using the IRLock sensor. Using this system it is possible to land within 30cm of a visual target that is moving at less than 1m/s.
+Copter 3.4 (not yet released) supports precision landing using the IR-LOCK sensor. Using this system, it is possible to land within 30cm of an IR beacon that is moving at less than 1m/s.
 
 https://youtu.be/rGFO73ZxADY
-
-
 <h1>Where to get it</h1>
+The <a href="http://irlock.com/collections/frontpage/products/ir-lock-sensor-precision-landing-kit" target="_blank">IR-LOCK sensor</a> can be purchased from <a href="http://irlock.com/" target="_blank">irlock.com</a>.  The IR-LOCK sensor is a modified version of the <a href="http://charmedlabs.com/default/pixy-cmucam5/" target="_blank">Pixy camera</a>, which comes pre-configured to work as an IR beacon detector. There are multiple IR beacons which are compatible with the sensor. The <a href="http://irlock.com/collections/shop/products/markone-beacon" target="_blank">MarkOne Beacon</a> can be reliably detected in <strong>all</strong> <strong>lighting conditions</strong>, with a detection range of <strong>15 meters</strong>. <a href="http://irlock.com/collections/shop/products/beacon" target="_blank">Beacon (V1.1)</a> is a more cost-effective option which can be reliably detected in <strong>most lighting conditions</strong>.
 
-The <a href="http://irlock.com/products/ir-lock-filtered-pixy" target="_blank">IRLock sensor</a> and <a href="http://irlock.com/products/360-tracking-pod" target="_blank">IR pod (or beacon)</a> can be puchased from <a href="http://irlock.com/" target="_blank">irlock.com</a>.  The IRLock is a derivative of the <a href="http://charmedlabs.com/default/products/" target="_blank">Pixy camera</a> but has a different lens and comes pre-configured to work more easily as a landing detector.
-
-
-<h1>Connecting to the Pixhawk</h1>
-
-An <a href="https://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2" target="_blank">I2C cable</a> must be cut and used to connect the Pixhawk's I2C port (perhaps via an <a href="https://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a>) to the IRLock's I/O port.  Instructions are on the <a href="http://docs.irlock.com/#document-3" target="_blank">IRLock.com Getting Started</a> page or use the image below.
+[caption id="attachment_16455" align="alignnone" width="937"]<img class="wp-image-16455 size-full" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/sensorandMarkers01.jpg" alt="IR-LOCK Sensor and IR Beacons" width="937" height="773" /> IR-LOCK Sensor and IR Beacons[/caption]
+<h1>Connecting to Pixhawk</h1>
+The IR-LOCK sensor can be connected directly to Pixhawk via an <a href="http://irlock.com/collections/shop/products/pixhawk-cable" target="_blank">I2C cable</a>. If you are using multiple I2C sensors, then you will need an <a href="http://www.amazon.com/Crius-Pixhawk-i2c-Splitter-Pixhawk-Controller/dp/B00LAWOUE4" target="_blank">I2C splitter</a>. More detailed instructions are included in the <a href="https://irlock.readme.io/docs" target="_blank">irlock.com Documentation</a>. The IR-LOCK sensor can also be <a href="https://irlock.readme.io/docs/interfacing-sensor-w-linux-and-python" target="_blank">connected via USB to a Linux system</a>, and sensor output can be retrieved in Python.
 
 [caption id="attachment_15319" align="alignnone" width="1788"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png"><img class="size-full wp-image-15319" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png" alt="IRLock sensor/Pixhawk Wiring" width="1788" height="986" /></a> IRLock sensor/Pixhawk Wiring[/caption]
-
-
+<h1>Building the firmware</h1>
+Since precision landing is not yet a default feature, you must use a <a href="https://irlock.readme.io/docs/download-links" target="_blank">pre-compiled firmware</a> provided by IR-LOCK, or the <a href="http://dev.ardupilot.com/wiki/building-the-code/" target="_blank">firmware must be re-built</a> with the precision landing feature enabled. If you are re-building, make sure that <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/APM_Config.h#L41" target="_blank">this line</a> in APM_Config.h is uncommented to look like below.
+<code>#define PRECISION_LANDING ENABLED </code>
 <h1>Mounting to the frame</h1>
+The IRLOCK sensor should be mounted to the underside of the frame with the camera lens pointing directly down toward the ground.  A mounting bracket for IRIS is sold <a href="http://irlock.com/collections/frontpage/products/sensor-bracket-for-iris" target="_blank">here</a> (and pictured below).  The sensor board should be oriented so that the white button on the board points towards the front of the vehicle (or to put it another way, the side closest to the camera lens should be towards the front of the vehicle).
 
-The <em>IRLock</em> sensor should be mounted to the underside of the frame with the camera lens pointing directly down.  The board should be oriented so that the white button on the board points towards the front of the vehicle (or to put it another way, the side closest to the camera lens should be towards the front of the vehicle).
+The image below shows the camera mounted on the <i>bottom</i> of a 3DR IRIS+. It is probably best to mount the sensor as close as possible to the Pixhawk, but successful tests have also been performed with various mounting locations.
 
-The image below shows the camera mounted on the <em>front</em> of a 3DR IRIS.  It might be better to mount on the underside of the vehicle!
+[caption id="attachment_16454" align="alignnone" width="1585"]<img class="wp-image-16454 size-full" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/IRISbracket03.jpg" alt="IR-LOCK Mounted on IRIS+" width="1585" height="617" /> IR-LOCK Sensor Mounted on Bottom of Iris+[/caption]
 
-[caption id="attachment_15340" align="alignnone" width="800"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockMounting.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockMounting.png" alt="IRLock Mounted on Iris" width="800" height="600" class="size-full wp-image-15340" /></a> IRLock Mounted on Iris[/caption]
-
-<h1>Setup through the Mission Planner</h1>
-
-Set the following parameters through the Mission Planner (or other GCS) to enable the sensor.
-<pre>PLAND_ENABLED     1
-PLAND_TYPE        2</pre>
+https://youtu.be/I8QF313F3bs
+<h1>Setup through Mission Planner</h1>
+Set the following parameters through the Mission Planner (or other GCS) to enable the precision landing feature.
+<ul>
+	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#precision_land_enableddisabled_and_behaviour_plnd_enabled">PLND_ENABLED</a>        1</li>
+	<li><a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#precision_land_type_plnd_type">PLND_TYPE</a>               2</li>
+</ul>
 [note]Remember to reboot the Pixhawk after making these changes.[/note]
 <h1>Flying and Testing</h1>
 Setup the vehicle with one of the flight modes set to LAND (as of the time this wiki page was written, the precision landing function only operates in LAND mode).
 
-Place the IR Pod on the ground and take-off to 10m roughly above the target.  Switch the vehicle to LAND.
+Place the IR beacon on the ground and take-off to approximately 10m above the target.  Switch the vehicle to LAND.  If everything is working properly, the copter should move toward the IR beacon.  A successful demo is shown below (using an older APM firmware).
 
 [tip]Be prepared to retake control if there are sudden unexpected movements (Change mode to Stabilize, AltHold or Loiter).[/tip]
 
-If the vehicle does not land directly on the target, download the dataflash logs and examine the PL messages.
+If the vehicle does behave appropriately, download the dataflash logs and examine the PL messages.
 <ul>
-	<li>If the "Heal" field is not "1" then there may be a communication issue between the Pixhawk and IRLock sensor</li>
-	<li>If the bX, bY, eX or eY values do not appear smooth then the sensor may be picking up multiple targets.  Refer to the IRLock wiki page on how to adjust the sensitivity of the camera</li>
+	<li>If the "Heal" field is not "1" then there may be a communication issue between the Pixhawk and IR-LOCK sensor</li>
+	<li>If the eX/eY values do not appear 'smooth' then the sensor may be picking up false targets.  Refer to the IR-LOCK <a href="https://irlock.readme.io/docs/interpreting-pl-logs" target="_blank">wiki page</a> for more trouble-shooting information.</li>
 </ul>
+https://youtu.be/IRfo5GcHniU

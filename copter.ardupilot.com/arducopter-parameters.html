@@ -110,11 +110,13 @@ DO NOT EDIT
 
 <h2>Throttle stick behavior (ArduCopter:PILOT_THR_BHV)</h2>
 
-<p>Bits for: Feedback starts from mid stick</p>
+<p>Bitmask containing various throttle stick options. Add up the values for options that you want.</p>
 <ul>
+<li>Bitmask: 0:Feedback from mid stick,1:High throttle cancels landing</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>None</td></tr>
-<tr><td>1</td><td>FeedbackFromMid</td></tr>
+<tr><td>1</td><td>Feedback from mid stick</td></tr>
+<tr><td>2</td><td>High throttle cancels landing</td></tr>
 </table>
 </ul>
 
@@ -145,11 +147,35 @@ DO NOT EDIT
 
 <h2>RTL Altitude (ArduCopter:RTL_ALT)</h2>
 
-<p>The minimum altitude the model will move to before Returning to Launch.  Set to zero to return at current altitude.</p>
+<p>The minimum relative altitude the model will move to before Returning to Launch.  Set to zero to return at current altitude.</p>
 <ul>
 <li>Range: 0 8000</li>
 <li>Increment: 1</li>
 <li>Units: Centimeters</li>
+</ul>
+
+
+<h2>RTL cone slope (ArduCopter:RTL_CONE_SLOPE)</h2>
+
+<p>Defines a cone above home which determines maximum climb</p>
+<ul>
+<li>Range: 0.5 10.0</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>1</td><td>Shallow</td></tr>
+<tr><td>3</td><td>Steep</td></tr>
+</table>
+<li>Increment: .1</li>
+</ul>
+
+
+<h2>RTL speed (ArduCopter:RTL_SPEED)</h2>
+
+<p>Defines the speed in cm/s which the aircraft will attempt to maintain horizontally while flying home. If this is set to zero, WPNAV_SPEED will be used instead.</p>
+<ul>
+<li>Range: 0 2000</li>
+<li>Increment: 50</li>
+<li>Units: cm/s</li>
 </ul>
 
 
@@ -715,6 +741,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -753,6 +782,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -791,6 +823,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -829,6 +864,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -867,6 +905,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -905,6 +946,9 @@ DO NOT EDIT
 <tr><td> 26</td><td>AttCon Accel Limits</td></tr>
 <tr><td> 27</td><td>Retract Mount</td></tr>
 <tr><td> 28</td><td>Relay On/Off</td></tr>
+<tr><td> 34</td><td>Relay2 On/Off</td></tr>
+<tr><td> 35</td><td>Relay3 On/Off</td></tr>
+<tr><td> 36</td><td>Relay4 On/Off</td></tr>
 <tr><td> 29</td><td>Landing Gear</td></tr>
 <tr><td> 30</td><td>Lost Copter Sound</td></tr>
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
@@ -1024,26 +1068,6 @@ DO NOT EDIT
 <tr><td>0</td><td>Disabled</td></tr>
 <tr><td> 1</td><td>Enabled</td></tr>
 </table>
-</ul>
-
-
-<h2>Heli Stabilize Throttle Collective Minimum (ArduCopter:H_STAB_COL_MIN)</h2>
-
-<p>Helicopter's minimum collective position while pilot directly controls collective in stabilize mode</p>
-<ul>
-<li>Range: 0 500</li>
-<li>Increment: 1</li>
-<li>Units: Percent*10</li>
-</ul>
-
-
-<h2>Stabilize Throttle Maximum (ArduCopter:H_STAB_COL_MAX)</h2>
-
-<p>Helicopter's maximum collective position while pilot directly controls collective in stabilize mode</p>
-<ul>
-<li>Range: 500 1000</li>
-<li>Increment: 1</li>
-<li>Units: Percent*10</li>
 </ul>
 
 
@@ -1317,31 +1341,6 @@ DO NOT EDIT
 <p>Loiter position controller P gain.  Converts the distance (in the latitude direction) to the target location into a desired speed which is then passed to the loiter latitude rate controller</p>
 <ul>
 <li>Range: 0.500 2.000</li>
-</ul>
-
-
-<h2>Precision landing velocity controller P gain (ArduCopter:PRECLNDVEL_P)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Precision landing velocity controller P gain</p>
-<ul>
-<li>Range: 0.100 5.000</li>
-</ul>
-
-
-<h2>Precision landing velocity controller I gain (ArduCopter:PRECLNDVEL_I)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>Precision landing velocity controller I gain</p>
-<ul>
-<li>Range: 0.100 5.000</li>
-</ul>
-
-
-<h2>Precision landing velocity controller I gain maximum (ArduCopter:PRECLNDVEL_IMAX)</h2>
-
-<p>Precision landing velocity controller I gain maximum</p>
-<ul>
-<li>Range: 0 1000</li>
-<li>Units: cm/s</li>
 </ul>
 
 
@@ -2112,6 +2111,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2201,6 +2203,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2290,6 +2295,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2379,6 +2387,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2468,6 +2479,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2557,6 +2571,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2646,6 +2663,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2735,6 +2755,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2824,6 +2847,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2913,6 +2939,9 @@ DO NOT EDIT
 <tr><td>27</td><td>Parachute</td></tr>
 <tr><td>28</td><td>EPM</td></tr>
 <tr><td>29</td><td>LandingGear</td></tr>
+<tr><td>30</td><td>EngineRunEnable</td></tr>
+<tr><td>31</td><td>HeliRSC</td></tr>
+<tr><td>32</td><td>HeliTailRSC</td></tr>
 </table>
 </ul>
 
@@ -2974,6 +3003,47 @@ DO NOT EDIT
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Low</td></tr>
 <tr><td>1</td><td>High</td></tr>
+</table>
+</ul>
+
+
+<h2>Minimum time between photos (CAM_MIN_INTERVAL)</h2>
+
+<p>Postpone shooting if previous picture was taken less than preset time(ms) ago.</p>
+<ul>
+<li>Range: 0 10000</li>
+<li>Units: milliseconds</li>
+</ul>
+
+
+<h2>Maximum photo roll angle. (CAM_MAX_ROLL)</h2>
+
+<p>Postpone shooting if roll is greater than limit. (0=Disable, will shoot regardless of roll).</p>
+<ul>
+<li>Range: 0 180</li>
+<li>Units: Degrees</li>
+</ul>
+
+
+<h2>Camera feedback pin (CAM_FEEDBACK_PIN)</h2>
+
+<p>pin number to use for save accurate camera feedback messages. If set to -1 then don't use a pin flag for this, otherwise this is a pin number which if held high after a picture trigger order, will save camera messages when camera really takes a picture. A universal camera hot shoe is needed. The pin should be held high for at least 2 milliseconds for reliable trigger detection. See also the CAM_FEEDBACK_POL option</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>-1</td><td>Disabled</td></tr>
+<tr><td> 0-8</td><td>APM FeedbackPin</td></tr>
+<tr><td> 50-55</td><td>PixHawk FeedbackPin</td></tr>
+</table>
+</ul>
+
+
+<h2>Camera feedback pin polarity (CAM_FEEDBACK_POL)</h2>
+
+<p>Polarity for feedback pin. If this is 1 then the feedback pin should go high on trigger. If set to 0 then it should go low</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>TriggerLow</td></tr>
+<tr><td>1</td><td>TriggerHigh</td></tr>
 </table>
 </ul>
 
@@ -3221,33 +3291,94 @@ DO NOT EDIT
 </ul>
 
 
+<h1>IM_ Parameters</h1>
+
+
+<h2>Stabilize Mode Collective Point 1 (IM_STAB_COL_1)</h2>
+
+<p>Helicopter's minimum collective pitch setting at zero throttle input in Stabilize mode</p>
+<ul>
+<li>Range: 0 500</li>
+<li>Increment: 1</li>
+<li>Units: Percent*10</li>
+</ul>
+
+
+<h2>Stabilize Mode Collective Point 2 (IM_STAB_COL_2)</h2>
+
+<p>Helicopter's collective pitch setting at mid-low throttle input in Stabilize mode</p>
+<ul>
+<li>Range: 0 500</li>
+<li>Increment: 1</li>
+<li>Units: Percent*10</li>
+</ul>
+
+
+<h2>Stabilize Mode Collective Point 3 (IM_STAB_COL_3)</h2>
+
+<p>Helicopter's collective pitch setting at mid-high throttle input in Stabilize mode</p>
+<ul>
+<li>Range: 500 1000</li>
+<li>Increment: 1</li>
+<li>Units: Percent*10</li>
+</ul>
+
+
+<h2>Stabilize Mode Collective Point 4 (IM_STAB_COL_4)</h2>
+
+<p>Helicopter's maximum collective pitch setting at full throttle input in Stabilize mode</p>
+<ul>
+<li>Range: 500 1000</li>
+<li>Increment: 1</li>
+<li>Units: Percent*10</li>
+</ul>
+
+
+<h2>Acro Mode Collective Expo (IM_ACRO_COL_EXP)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Used to soften collective pitch inputs near center point in Acro mode.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>0.1</td><td>Very Low</td></tr>
+<tr><td>0.2</td><td>Low</td></tr>
+<tr><td>0.3</td><td>Medium</td></tr>
+<tr><td>0.4</td><td>High</td></tr>
+<tr><td>0.5</td><td>Very High</td></tr>
+</table>
+</ul>
+
+
 <h1>COMPASS_ Parameters</h1>
 
 
-<h2>Compass offsets on the X axis (COMPASS_OFS_X)</h2>
+<h2>Compass offsets in milligauss on the X axis (COMPASS_OFS_X)</h2>
 
 <p>Offset to be added to the compass x-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass offsets on the Y axis (COMPASS_OFS_Y)</h2>
+<h2>Compass offsets in milligauss on the Y axis (COMPASS_OFS_Y)</h2>
 
 <p>Offset to be added to the compass y-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass offsets on the Z axis (COMPASS_OFS_Z)</h2>
+<h2>Compass offsets in milligauss on the Z axis (COMPASS_OFS_Z)</h2>
 
 <p>Offset to be added to the compass z-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
@@ -3294,7 +3425,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Motor interference compensation type (COMPASS_MOTCT)</h2>
+<h2>Motor interference compensation type (COMPASS_MOTCT)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Set motor interference compensation type to disabled, throttle or current.  Do not change manually.</p>
 <ul>
@@ -3303,7 +3434,6 @@ DO NOT EDIT
 <tr><td>1</td><td>Use Throttle</td></tr>
 <tr><td>2</td><td>Use Current</td></tr>
 </table>
-<li>Increment: 1</li>
 </ul>
 
 
@@ -3337,7 +3467,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass orientation (COMPASS_ORIENT)</h2>
+<h2>Compass orientation (COMPASS_ORIENT)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>The orientation of the compass relative to the autopilot board. This will default to the right value for each board type, but can be changed if you have an external compass. See the documentation for your external compass for the right value. The correct orientation should give the X axis forward, the Y axis to the right and the Z axis down. So if your aircraft is pointing west it should show a positive value for the Y axis, and a value close to zero for the X axis. On a PX4 or Pixhawk with an external compass the correct value is zero if the compass is correctly oriented. NOTE: This orientation is combined with any AHRS_ORIENTATION setting.</p>
 <ul>
@@ -3396,30 +3526,33 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass2 offsets on the X axis (COMPASS_OFS2_X)</h2>
+<h2>Compass2 offsets in milligauss on the X axis (COMPASS_OFS2_X)</h2>
 
 <p>Offset to be added to compass2's x-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass2 offsets on the Y axis (COMPASS_OFS2_Y)</h2>
+<h2>Compass2 offsets in milligauss on the Y axis (COMPASS_OFS2_Y)</h2>
 
 <p>Offset to be added to compass2's y-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass2 offsets on the Z axis (COMPASS_OFS2_Z)</h2>
+<h2>Compass2 offsets in milligauss on the Z axis (COMPASS_OFS2_Z)</h2>
 
 <p>Offset to be added to compass2's z-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
@@ -3465,30 +3598,33 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass3 offsets on the X axis (COMPASS_OFS3_X)</h2>
+<h2>Compass3 offsets in milligauss on the X axis (COMPASS_OFS3_X)</h2>
 
 <p>Offset to be added to compass3's x-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass3 offsets on the Y axis (COMPASS_OFS3_Y)</h2>
+<h2>Compass3 offsets in milligauss on the Y axis (COMPASS_OFS3_Y)</h2>
 
 <p>Offset to be added to compass3's y-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
-<h2>Compass3 offsets on the Z axis (COMPASS_OFS3_Z)</h2>
+<h2>Compass3 offsets in milligauss on the Z axis (COMPASS_OFS3_Z)</h2>
 
 <p>Offset to be added to compass3's z-axis values to compensate for metal in the frame</p>
 <ul>
 <li>Range: -400 400</li>
 <li>Increment: 1</li>
+<li>Units: milligauss</li>
 </ul>
 
 
@@ -3522,21 +3658,21 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass device id (COMPASS_DEV_ID)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass device id (COMPASS_DEV_ID)</h2>
 
 <p>Compass device id.  Automatically detected, do not set manually</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 device id (COMPASS_DEV_ID2)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 device id (COMPASS_DEV_ID2)</h2>
 
 <p>Second compass's device id.  Automatically detected, do not set manually</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 device id (COMPASS_DEV_ID3)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 device id (COMPASS_DEV_ID3)</h2>
 
 <p>Third compass's device id.  Automatically detected, do not set manually</p>
 <ul>
@@ -3554,7 +3690,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass2 orientation (COMPASS_ORIENT2)</h2>
+<h2>Compass2 orientation (COMPASS_ORIENT2)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>The orientation of the second compass relative to the frame (if external) or autopilot board (if internal).</p>
 <ul>
@@ -3624,7 +3760,7 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass3 orientation (COMPASS_ORIENT3)</h2>
+<h2>Compass3 orientation (COMPASS_ORIENT3)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>The orientation of the third compass relative to the frame (if external) or autopilot board (if internal).</p>
 <ul>
@@ -3683,126 +3819,126 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Compass soft-iron diagonal X component (COMPASS_DIA_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron diagonal X component (COMPASS_DIA_X)</h2>
 
 <p>DIA_X in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass soft-iron diagonal Y component (COMPASS_DIA_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron diagonal Y component (COMPASS_DIA_Y)</h2>
 
 <p>DIA_Y in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass soft-iron diagonal Z component (COMPASS_DIA_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron diagonal Z component (COMPASS_DIA_Z)</h2>
 
 <p>DIA_Z in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass soft-iron off-diagonal X component (COMPASS_ODI_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron off-diagonal X component (COMPASS_ODI_X)</h2>
 
 <p>ODI_X in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass soft-iron off-diagonal Y component (COMPASS_ODI_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron off-diagonal Y component (COMPASS_ODI_Y)</h2>
 
 <p>ODI_Y in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass soft-iron off-diagonal Z component (COMPASS_ODI_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass soft-iron off-diagonal Z component (COMPASS_ODI_Z)</h2>
 
 <p>ODI_Z in the compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron diagonal X component (COMPASS_DIA2_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron diagonal X component (COMPASS_DIA2_X)</h2>
 
 <p>DIA_X in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron diagonal Y component (COMPASS_DIA2_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron diagonal Y component (COMPASS_DIA2_Y)</h2>
 
 <p>DIA_Y in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron diagonal Z component (COMPASS_DIA2_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron diagonal Z component (COMPASS_DIA2_Z)</h2>
 
 <p>DIA_Z in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron off-diagonal X component (COMPASS_ODI2_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron off-diagonal X component (COMPASS_ODI2_X)</h2>
 
 <p>ODI_X in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron off-diagonal Y component (COMPASS_ODI2_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron off-diagonal Y component (COMPASS_ODI2_Y)</h2>
 
 <p>ODI_Y in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass2 soft-iron off-diagonal Z component (COMPASS_ODI2_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass2 soft-iron off-diagonal Z component (COMPASS_ODI2_Z)</h2>
 
 <p>ODI_Z in the compass2 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron diagonal X component (COMPASS_DIA3_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron diagonal X component (COMPASS_DIA3_X)</h2>
 
 <p>DIA_X in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron diagonal Y component (COMPASS_DIA3_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron diagonal Y component (COMPASS_DIA3_Y)</h2>
 
 <p>DIA_Y in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron diagonal Z component (COMPASS_DIA3_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron diagonal Z component (COMPASS_DIA3_Z)</h2>
 
 <p>DIA_Z in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron off-diagonal X component (COMPASS_ODI3_X)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron off-diagonal X component (COMPASS_ODI3_X)</h2>
 
 <p>ODI_X in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron off-diagonal Y component (COMPASS_ODI3_Y)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron off-diagonal Y component (COMPASS_ODI3_Y)</h2>
 
 <p>ODI_Y in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
 </ul>
 
 
-<h2>Compass3 soft-iron off-diagonal Z component (COMPASS_ODI3_Z)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Compass3 soft-iron off-diagonal Z component (COMPASS_ODI3_Z)</h2>
 
 <p>ODI_Z in the compass3 soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]</p>
 <ul>
@@ -3823,7 +3959,7 @@ DO NOT EDIT
 
 <h2>IMU Product ID (INS_PRODUCT_ID)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Which type of IMU is installed (read-only). </p>
+<p>Which type of IMU is installed (read-only).</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Unknown</td></tr>
@@ -4119,7 +4255,7 @@ DO NOT EDIT
 
 <p>Threshold to tolerate vibration to determine if vehicle is motionless. This depends on the frame type and if there is a constant vibration due to motors before launch or after landing. Total motionless is about 0.05. Suggested values: Planes/rover use 0.1, multirotors use 1, tradHeli uses 5</p>
 <ul>
-<li>Range: 0.05 to 50</li>
+<li>Range: 0.05 50</li>
 </ul>
 
 
@@ -4130,7 +4266,30 @@ DO NOT EDIT
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Never</td></tr>
 <tr><td> 1</td><td>Start-up only</td></tr>
-<tr><td> 2</td><td>Start-up and first arming (Copter only)</td></tr>
+</table>
+</ul>
+
+
+<h2>Accel cal trim option (INS_TRIM_OPTION)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Specifies how the accel cal routine determines the trims</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Don't adjust the trims</td></tr>
+<tr><td>1</td><td>Assume first orientation was level</td></tr>
+<tr><td>2</td><td>Assume ACC_BODYFIX is perfectly aligned to the vehicle</td></tr>
+</table>
+</ul>
+
+
+<h2>Body-fixed accelerometer (INS_ACC_BODYFIX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>The body-fixed accelerometer to be used for trim calculation</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>1</td><td>IMU 1</td></tr>
+<tr><td>2</td><td>IMU 2</td></tr>
+<tr><td>3</td><td>IMU 3</td></tr>
 </table>
 </ul>
 
@@ -4212,7 +4371,7 @@ DO NOT EDIT
 
 <p>Loiter maximum jerk in cm/s/s/s</p>
 <ul>
-<li>Range: 500 2000</li>
+<li>Range: 500 5000</li>
 <li>Increment: 1</li>
 <li>Units: cm/s/s/s</li>
 </ul>
@@ -4330,6 +4489,17 @@ DO NOT EDIT
 </table>
 <li>Increment: 1000</li>
 <li>Units: Centi-Degrees/Sec/Sec</li>
+</ul>
+
+
+<h2>Angle Boost (ATC_ANGLE_BOOST)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Angle Boost increases output throttle as the vehicle leans to reduce loss of altitude</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled</td></tr>
+</table>
 </ul>
 
 
@@ -5141,95 +5311,7 @@ DO NOT EDIT
 <tr><td> 4</td><td>SToRM32 MAVLink</td></tr>
 <tr><td> 5</td><td>SToRM32 Serial</td></tr>
 </table>
-</ul>
-
-
-<h2>MAVLink Mount's roll angle offsets (MNT_OFF_JNT_X)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's roll angle offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians</li>
-</ul>
-
-
-<h2>MAVLink Mount's pitch angle offsets (MNT_OFF_JNT_Y)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's pitch angle offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians</li>
-</ul>
-
-
-<h2>MAVLink Mount's yaw angle offsets (MNT_OFF_JNT_Z)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's yaw angle offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians</li>
-</ul>
-
-
-<h2>MAVLink Mount's roll velocity offsets (MNT_OFF_ACC_X)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's roll velocity offsets</p>
-<ul>
-<li>Range: 0 2</li>
-<li>Units: m/s</li>
-</ul>
-
-
-<h2>MAVLink Mount's pitch velocity offsets (MNT_OFF_ACC_Y)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's pitch velocity offsets</p>
-<ul>
-<li>Range: 0 2</li>
-<li>Units: m/s</li>
-</ul>
-
-
-<h2>MAVLink Mount's yaw velocity offsets (MNT_OFF_ACC_Z)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's yaw velocity offsets</p>
-<ul>
-<li>Range: 0 2</li>
-<li>Units: m/s</li>
-</ul>
-
-
-<h2>MAVLink Mount's roll gyro offsets (MNT_OFF_GYRO_X)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's roll gyro offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians/sec</li>
-</ul>
-
-
-<h2>MAVLink Mount's pitch gyro offsets (MNT_OFF_GYRO_Y)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's pitch gyro offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians/sec</li>
-</ul>
-
-
-<h2>MAVLink Mount's yaw gyro offsets (MNT_OFF_GYRO_Z)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's yaw gyro offsets</p>
-<ul>
-<li>Range: 0 0.5</li>
-<li>Units: radians/sec</li>
-</ul>
-
-
-<h2>MAVLink Mount's rate gain (MNT_K_RATE)</h2><em>Note: This parameter is for advanced users</em><br>
-
-<p>MAVLink Mount's rate gain</p>
-<ul>
-<li>Range: 0 10</li>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5489,6 +5571,29 @@ DO NOT EDIT
 </ul>
 
 
+<h1>LOG Parameters</h1>
+
+
+<h2>DataFlash Backend Storage type (LOG_BACKEND_TYPE)</h2>
+
+<p>0 for None, 1 for File, 2 for dataflash mavlink, 3 for both file and dataflash</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>File</td></tr>
+<tr><td>2</td><td>MAVLink</td></tr>
+<tr><td>3</td><td>BothFileAndMAVLink</td></tr>
+</table>
+</ul>
+
+
+<h2>Maximum DataFlash File Backend buffer size (in kilobytes) (LOG_FILE_BUFSIZE)</h2>
+
+<p>The DataFlash_File backend uses a buffer to store data before writing to the block device.  Raising this value may reduce "gaps" in your SD card logging.  This buffer size may be reduced depending on available memory.  PixHawk requires at least 4 kilobytes.  Maximum value available here is 64 kilobytes.</p>
+<ul>
+</ul>
+
+
 <h1>BATT Parameters</h1>
 
 
@@ -5710,7 +5815,18 @@ DO NOT EDIT
 
 <p>User-defined serial number of this vehicle, it can be any arbitrary number you want and has no effect on the autopilot</p>
 <ul>
-<li>Range: -32767 to 32768 (any 16bit signed number)</li>
+<li>Range: -32767 32768</li>
+</ul>
+
+
+<h2> Enable use of UAVCAN devices (BRD_CAN_ENABLE)</h2>
+
+<p>Enabling this option on a Pixhawk enables UAVCAN devices. Note that this uses about 25k of memory</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>1</td><td>Enabled</td></tr>
+</table>
 </ul>
 
 
@@ -5867,7 +5983,6 @@ DO NOT EDIT
 <tr><td>7</td><td>Airborne2G</td></tr>
 <tr><td>8</td><td>Airborne4G</td></tr>
 </table>
-<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5904,7 +6019,6 @@ DO NOT EDIT
 <tr><td>1</td><td>Enabled</td></tr>
 <tr><td>2</td><td>NoChange</td></tr>
 </table>
-<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5914,7 +6028,6 @@ DO NOT EDIT
 <ul>
 <li>Range: -100 90</li>
 <li>Units: Degrees</li>
-<li>RebootRequired: True</li>
 </ul>
 
 
@@ -5924,8 +6037,8 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>send to first GPS</td></tr>
-<tr><td> 1</td><td>send to 2nd GPS</td></tr>
-<tr><td> 127</td><td>send to all</td></tr>
+<tr><td>1</td><td>send to 2nd GPS</td></tr>
+<tr><td>127</td><td>send to all</td></tr>
 </table>
 </ul>
 
@@ -5948,8 +6061,8 @@ DO NOT EDIT
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
-<tr><td>1</td><td>log at 1MHz</td></tr>
-<tr><td>5</td><td>log at 5MHz</td></tr>
+<tr><td>1</td><td>log every sample</td></tr>
+<tr><td>5</td><td>log every 5 samples</td></tr>
 </table>
 <li>RebootRequired: True</li>
 </ul>
@@ -5957,9 +6070,9 @@ DO NOT EDIT
 
 <h2>GNSS system configuration (GPS_GNSS_MODE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Bitmask for what GNSS system to use (all unchecked or zero to leave GPS as configured)</p>
+<p>Bitmask for what GNSS system to use on the first GPS (all unchecked or zero to leave GPS as configured)</p>
 <ul>
-<li>Bitmask: 0:GPS, 1:SBAS, 2:Galileo, 3:Beidou, 4:IMES, 5:QZSS, 6:GLOSNASS</li>
+<li>Bitmask: 0:GPS,1:SBAS,2:Galileo,3:Beidou,4:IMES,5:QZSS,6:GLOSNASS</li>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Leave as currently configured</td></tr>
 <tr><td> 1</td><td>GPS-NoSBAS</td></tr>
@@ -5972,7 +6085,49 @@ DO NOT EDIT
 <tr><td> 66</td><td>GLONASS+SBAS</td></tr>
 <tr><td> 67</td><td>GPS+GLONASS+SBAS</td></tr>
 </table>
-<li>RebootRequired: True</li>
+</ul>
+
+
+<h2>Save GPS configuration (GPS_SAVE_CFG)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Determines whether the configuration for this GPS should be written to non-volatile memory on the GPS. Currently working for UBlox 6 series and above.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Do not save config</td></tr>
+<tr><td>1</td><td>Save config</td></tr>
+<tr><td>2</td><td>Save only when needed</td></tr>
+</table>
+</ul>
+
+
+<h2>GNSS system configuration (GPS_GNSS_MODE2)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Bitmask for what GNSS system to use on the second GPS (all unchecked or zero to leave GPS as configured)</p>
+<ul>
+<li>Bitmask: 0:GPS,1:SBAS,2:Galileo,3:Beidou,4:IMES,5:QZSS,6:GLOSNASS</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Leave as currently configured</td></tr>
+<tr><td> 1</td><td>GPS-NoSBAS</td></tr>
+<tr><td> 3</td><td>GPS+SBAS</td></tr>
+<tr><td> 4</td><td>Galileo-NoSBAS</td></tr>
+<tr><td> 6</td><td>Galileo+SBAS</td></tr>
+<tr><td> 8</td><td>Beidou</td></tr>
+<tr><td> 51</td><td>GPS+IMES+QZSS+SBAS (Japan Only)</td></tr>
+<tr><td> 64</td><td>GLONASS</td></tr>
+<tr><td> 66</td><td>GLONASS+SBAS</td></tr>
+<tr><td> 67</td><td>GPS+GLONASS+SBAS</td></tr>
+</table>
+</ul>
+
+
+<h2>Automatic GPS configuration (GPS_AUTO_CONFIG)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Controls if the autopilot should automatically configure the GPS based on the parameters and default settings</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disables automatic configuration</td></tr>
+<tr><td>1</td><td>Enable automatic configuration</td></tr>
+</table>
 </ul>
 
 
@@ -5988,6 +6143,22 @@ DO NOT EDIT
 <tr><td>2</td><td>ShowSlips</td></tr>
 <tr><td>3</td><td>ShowOverruns</td></tr>
 </table>
+</ul>
+
+
+<h2>Scheduling main loop rate (SCHED_LOOP_RATE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This controls the rate of the main control loop in Hz. This should only be changed by developers. This only takes effect on restart</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>50</td><td>50Hz</td></tr>
+<tr><td>100</td><td>100Hz</td></tr>
+<tr><td>200</td><td>200Hz</td></tr>
+<tr><td>250</td><td>250Hz</td></tr>
+<tr><td>300</td><td>300Hz</td></tr>
+<tr><td>400</td><td>400Hz</td></tr>
+</table>
+<li>RebootRequired: True</li>
 </ul>
 
 
@@ -6177,7 +6348,9 @@ DO NOT EDIT
 
 <p>Flybar present or not.  Affects attitude controller used during ACRO flight mode</p>
 <ul>
-<li>Range: 0:NoFlybar 1:Flybar</li>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>NoFlybar 1</td></tr>
+</table>
 </ul>
 
 
@@ -6503,6 +6676,17 @@ DO NOT EDIT
 <h1>EKF_ Parameters</h1>
 
 
+<h2>Enable EKF1 (EKF_ENABLE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This enables EKF1 to be disabled when using alternative algorithms. When disabling it, the alternate EKF2 estimator must be enabled by setting EK2_ENABLED = 1 and flight control algorithms must be set to use the alternative estimator by setting AHRS_EKF_TYPE = 2.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled</td></tr>
+</table>
+</ul>
+
+
 <h2>GPS horizontal velocity measurement noise scaler (EKF_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the horizontal velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on these measurements.</p>
@@ -6736,7 +6920,7 @@ DO NOT EDIT
 
 <h2>GPS glitch radius gate size (m) (EKF_GLITCH_RAD)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter controls the maximum amount of difference in horizontal position (in m) between the value predicted by the filter and the value measured by the GPS before the long term glitch protection logic is activated and an offset is applied to the GPS measurement to compensate. Position steps smaller than this value will be temporarily ignored, but will then be accepted and the filter will move to the new position. Position steps larger than this value will be ignored initially, but the filter will then apply an offset to the GPS position measurement.</p>
+<p>This parameter controls the maximum amount of difference in horizontal position (in m) between the value predicted by the filter and the value measured by the GPS before the long term glitch protection logic is activated and the filter states are reset to the new GPS position. Position steps smaller than this value will be temporarily ignored, but will then be accepted and the filter will move to the new position. Position steps larger than this value will be ignored initially, but the filter will then apply an offset to the GPS position measurement.</p>
 <ul>
 <li>Range: 10 50</li>
 <li>Increment: 5</li>
@@ -6748,7 +6932,7 @@ DO NOT EDIT
 
 <p>This parameter sets the RMS terrain gradient percentage assumed by the terrain height estimation. Terrain height can be estimated using optical flow and/or range finder sensor data if fitted. Smaller values cause the terrain height estimate to be slower to respond to changes in measurement. Larger values casue the terrain height estimate to be faster to respond, but also more noisy. Generally this value can be reduced if operating over very flat terrain and increased if operating over uneven terrain.</p>
 <ul>
-<li>Range: 1 - 50</li>
+<li>Range: 1 50</li>
 <li>Increment: 1</li>
 </ul>
 
@@ -6757,7 +6941,7 @@ DO NOT EDIT
 
 <p>This is the RMS value of noise and errors in optical flow measurements. Increasing it reduces the weighting on these measurements.</p>
 <ul>
-<li>Range: 0.05 - 1.0</li>
+<li>Range: 0.05 1.0</li>
 <li>Increment: 0.05</li>
 <li>Units: rad/s</li>
 </ul>
@@ -6767,7 +6951,7 @@ DO NOT EDIT
 
 <p>This parameter sets the number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 - 100</li>
+<li>Range: 1 100</li>
 <li>Increment: 1</li>
 </ul>
 
@@ -6776,7 +6960,7 @@ DO NOT EDIT
 
 <p>This is the number of msec that the optical flow measurements lag behind the inertial measurements. It is the time from the end of the optical flow averaging period and does not include the time delay due to the 100msec of averaging within the flow sensor.</p>
 <ul>
-<li>Range: 0 - 500</li>
+<li>Range: 0 500</li>
 <li>Increment: 10</li>
 <li>Units: milliseconds</li>
 </ul>
@@ -6786,7 +6970,7 @@ DO NOT EDIT
 
 <p>This parameter sets the number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 - 100</li>
+<li>Range: 1 100</li>
 <li>Increment: 1</li>
 </ul>
 
@@ -6795,7 +6979,7 @@ DO NOT EDIT
 
 <p>This parameter sets the magnitude maximum optical flow rate in rad/sec that will be accepted by the filter</p>
 <ul>
-<li>Range: 1.0 - 4.0</li>
+<li>Range: 1.0 4.0</li>
 <li>Increment: 0.1</li>
 </ul>
 
@@ -6835,7 +7019,7 @@ DO NOT EDIT
 
 <h2>Enable EKF2 (EK2_ENABLE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This enables EKF2. Enabling EKF2 only makes the maths run, it does not mean it will be used for flight control. To use it for flight control set AHRS_EKF_USE=3</p>
+<p>This enables EKF2. Enabling EKF2 only makes the maths run, it does not mean it will be used for flight control. To use it for flight control set AHRS_EKF_TYPE=2. A reboot or restart will need to be performed after changing the value of EK2_ENABLE for it to take effect.</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Disabled</td></tr>
@@ -6846,7 +7030,7 @@ DO NOT EDIT
 
 <h2>GPS mode control (EK2_GPS_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter controls use of GPS measurements : 0 = use 3D velocity &amp; 2D position, 1 = use 2D velocity and 2D position, 2 = use 2D position, 3 = use no GPS (optical flow will be used if available)</p>
+<p>This controls use of GPS measurements : 0 = use 3D velocity &amp; 2D position, 1 = use 2D velocity and 2D position, 2 = use 2D position, 3 = use no GPS (optical flow will be used if available)</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>GPS 3D Vel and 2D Pos</td></tr>
@@ -6857,59 +7041,61 @@ DO NOT EDIT
 </ul>
 
 
-<h2>GPS horizontal velocity measurement noise scaler (EK2_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS horizontal velocity measurement noise (m/s) (EK2_VELNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the horizontal velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on these measurements.</p>
+<p>This sets a lower limit on the speed accuracy reported by the GPS receiver that is used to set horizontal velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then the parameter value will be used. Increasing it reduces the weighting of the GPS horizontal velocity measurements.</p>
 <ul>
 <li>Range: 0.05 5.0</li>
 <li>Increment: 0.05</li>
+<li>Units: m/s</li>
 </ul>
 
 
-<h2>GPS vertical velocity measurement noise scaler (EK2_VELD_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS vertical velocity measurement noise (m/s) (EK2_VELD_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the scaler that is applied to the speed accuracy reported by the receiver to estimate the vertical velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then a speed acuracy of 1 is assumed. Increasing it reduces the weighting on this measurement.</p>
+<p>This sets a lower limit on the speed accuracy reported by the GPS receiver that is used to set vertical velocity observation noise. If the model of receiver used does not provide a speed accurcy estimate, then the parameter value will be used. Increasing it reduces the weighting of the GPS vertical velocity measurements.</p>
 <ul>
 <li>Range: 0.05 5.0</li>
 <li>Increment: 0.05</li>
+<li>Units: m/s</li>
 </ul>
 
 
-<h2>GPS velocity measurement gate size (EK2_VEL_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>GPS velocity innovation gate size (EK2_VEL_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the GPS velocity measurement innovation consistency check. Decreasing it makes it more likely that good measurements willbe rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the GPS velocity measurement innovation consistency check. Decreasing it makes it more likely that good measurements willbe rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
 <h2>GPS horizontal position measurement noise (m) (EK2_POSNE_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in the GPS horizontal position measurements. Increasing it reduces the weighting on these measurements.</p>
+<p>This sets the GPS horizontal position observation noise. Increasing it reduces the weighting of GPS horizontal position measurements.</p>
 <ul>
 <li>Range: 0.1 10.0</li>
 <li>Increment: 0.1</li>
-<li>Units: meters</li>
+<li>Units: m</li>
 </ul>
 
 
 <h2>GPS position measurement gate size (EK2_POS_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the GPS position measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the GPS position measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
 <h2>GPS glitch radius gate size (m) (EK2_GLITCH_RAD)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter controls the maximum amount of difference in horizontal position (in m) between the value predicted by the filter and the value measured by the GPS before the long term glitch protection logic is activated and an offset is applied to the GPS measurement to compensate. Position steps smaller than this value will be temporarily ignored, but will then be accepted and the filter will move to the new position. Position steps larger than this value will be ignored initially, but the filter will then apply an offset to the GPS position measurement.</p>
+<p>This controls the maximum radial uncertainty in position between the value predicted by the filter and the value measured by the GPS before the filter position and velocity states are reset to the GPS. Making this value larger allows the filter to ignore larger GPS glitches but also means that non-GPS errors such as IMU and compass can create a larger error in position before the filter is forced back to the GPS position.</p>
 <ul>
-<li>Range: 10 50</li>
+<li>Range: 10 100</li>
 <li>Increment: 5</li>
-<li>Units: meters</li>
+<li>Units: m</li>
 </ul>
 
 
@@ -6917,39 +7103,40 @@ DO NOT EDIT
 
 <p>This is the number of msec that the GPS measurements lag behind the inertial measurements.</p>
 <ul>
-<li>Range: 0 500</li>
+<li>Range: 0 250</li>
 <li>Increment: 10</li>
-<li>Units: milliseconds</li>
+<li>Units: msec</li>
 </ul>
 
 
 <h2>Primary height source (EK2_ALT_SOURCE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter controls which height sensor is used by the EKF during optical flow navigation (when EKF_GPS_TYPE = 3). A value of will 0 cause it to always use baro altitude. A value of 1 will casue it to use range finder if available.</p>
+<p>This parameter controls which height sensor is used by the EKF. If the selected optionn cannot be used, it will default to Baro as the primary height source. Setting 0 will use the baro altitude at all times. Setting 1 uses the range finder and is only available in combination with optical flow navigation (EK2_GPS_TYPE = 3). Setting 2 uses GPS.</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
 <tr><td>0</td><td>Use Baro</td></tr>
 <tr><td> 1</td><td>Use Range Finder</td></tr>
+<tr><td> 2</td><td>Use GPS</td></tr>
 </table>
 </ul>
 
 
 <h2>Altitude measurement noise (m) (EK2_ALT_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in the altitude measurement. Increasing it reduces the weighting on this measurement.</p>
+<p>This is the RMS value of noise in the altitude measurement. Increasing it reduces the weighting of the baro measurement and will make the filter respond more slowly to baro measurement errors, but will make it more sensitive to GPS and accelerometer errors.</p>
 <ul>
 <li>Range: 0.1 10.0</li>
 <li>Increment: 0.1</li>
-<li>Units: meters</li>
+<li>Units: m</li>
 </ul>
 
 
 <h2>Height measurement gate size (EK2_HGT_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the height measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the height measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
@@ -6957,9 +7144,9 @@ DO NOT EDIT
 
 <p>This is the number of msec that the Height measurements lag behind the inertial measurements.</p>
 <ul>
-<li>Range: 0 500</li>
+<li>Range: 0 250</li>
 <li>Increment: 10</li>
-<li>Units: milliseconds</li>
+<li>Units: msec</li>
 </ul>
 
 
@@ -6969,34 +7156,36 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.01 0.5</li>
 <li>Increment: 0.01</li>
+<li>Units: gauss</li>
 </ul>
 
 
 <h2>Magnetometer calibration mode (EK2_MAG_CAL)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>EKF_MAG_CAL = 0 enables calibration based on flying speed and altitude and is the default setting for Plane users. EKF_MAG_CAL = 1 enables calibration based on manoeuvre level and is the default setting for Copter and Rover users. EKF_MAG_CAL = 2 prevents magnetometer calibration regardless of flight condition and is recommended if in-flight magnetometer calibration is unreliable.</p>
+<p>EKF_MAG_CAL = 0 enables calibration when airborne and is the default setting for Plane users. EKF_MAG_CAL = 1 enables calibration when manoeuvreing. EKF_MAG_CAL = 2 prevents magnetometer calibration regardless of flight condition, is recommended if the external magnetic field is varying and is the default for rovers. EKF_MAG_CAL = 3 enables calibration when the first in-air field and yaw reset has completed and is the default for copters. EKF_MAG_CAL = 4 enables calibration all the time. This determines when the filter will use the 3-axis magnetometer fusion model that estimates both earth and body fixed magnetic field states. This model is only suitable for use when the external magnetic field environment is stable.</p>
 <ul>
 <table><th>Value</th><th>Meaning</th>
-<tr><td>0</td><td>Speed and Height</td></tr>
-<tr><td>1</td><td>Acceleration</td></tr>
+<tr><td>0</td><td>When flying</td></tr>
+<tr><td>1</td><td>When manoeuvring</td></tr>
 <tr><td>2</td><td>Never</td></tr>
-<tr><td>3</td><td>Always</td></tr>
+<tr><td>3</td><td>After first climb yaw reset</td></tr>
+<tr><td>4</td><td>Always</td></tr>
 </table>
 </ul>
 
 
 <h2>Magnetometer measurement gate size (EK2_MAG_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the magnetometer measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the magnetometer measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
 <h2>Equivalent airspeed measurement noise (m/s) (EK2_EAS_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This is the RMS value of noise in equivalent airspeed measurements. Increasing it reduces the weighting on these measurements.</p>
+<p>This is the RMS value of noise in equivalent airspeed measurements used by planes. Increasing it reduces the weighting of airspeed measurements and will make wind speed estimates less noisy and slower to converge. Increasing also increases navigation errors when dead-reckoning without GPS measurements.</p>
 <ul>
 <li>Range: 0.5 5.0</li>
 <li>Increment: 0.1</li>
@@ -7006,10 +7195,10 @@ DO NOT EDIT
 
 <h2>Airspeed measurement gate size (EK2_EAS_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the airspeed measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the airspeed measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
@@ -7019,25 +7208,26 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.1 10.0</li>
 <li>Increment: 0.1</li>
-<li>Units: meters</li>
+<li>Units: m</li>
 </ul>
 
 
 <h2>Range finder measurement gate size (EK2_RNG_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 - 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
 <h2>Maximum valid optical flow rate (EK2_MAX_FLOW)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the magnitude maximum optical flow rate in rad/sec that will be accepted by the filter</p>
+<p>This sets the magnitude maximum optical flow rate in rad/sec that will be accepted by the filter</p>
 <ul>
-<li>Range: 1.0 - 4.0</li>
+<li>Range: 1.0 4.0</li>
 <li>Increment: 0.1</li>
+<li>Units: rad/s</li>
 </ul>
 
 
@@ -7045,7 +7235,7 @@ DO NOT EDIT
 
 <p>This is the RMS value of noise and errors in optical flow measurements. Increasing it reduces the weighting on these measurements.</p>
 <ul>
-<li>Range: 0.05 - 1.0</li>
+<li>Range: 0.05 1.0</li>
 <li>Increment: 0.05</li>
 <li>Units: rad/s</li>
 </ul>
@@ -7053,10 +7243,10 @@ DO NOT EDIT
 
 <h2>Optical Flow measurement gate size (EK2_FLOW_GATE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This parameter sets the number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
+<p>This sets the percentage number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted.</p>
 <ul>
-<li>Range: 1 - 100</li>
-<li>Increment: 1</li>
+<li>Range: 100 1000</li>
+<li>Increment: 25</li>
 </ul>
 
 
@@ -7064,27 +7254,27 @@ DO NOT EDIT
 
 <p>This is the number of msec that the optical flow measurements lag behind the inertial measurements. It is the time from the end of the optical flow averaging period and does not include the time delay due to the 100msec of averaging within the flow sensor.</p>
 <ul>
-<li>Range: 0 - 500</li>
+<li>Range: 0 250</li>
 <li>Increment: 10</li>
-<li>Units: milliseconds</li>
+<li>Units: msec</li>
 </ul>
 
 
 <h2>Rate gyro noise (rad/s) (EK2_GYRO_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of estimated error due to gyro measurement errors excluding bias. Increasing it makes the flter trust the gyro measurements less and other measurements more.</p>
+<p>This control disturbance noise controls the growth of estimated error due to gyro measurement errors excluding bias. Increasing it makes the flter trust the gyro measurements less and other measurements more.</p>
 <ul>
-<li>Range: 0.001 0.05</li>
-<li>Increment: 0.001</li>
+<li>Range: 0.0001 0.01</li>
+<li>Increment: 0.0001</li>
 <li>Units: rad/s</li>
 </ul>
 
 
 <h2>Accelerometer noise (m/s^2) (EK2_ACC_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of estimated error due to accelerometer measurement errors excluding bias. Increasing it makes the flter trust the accelerometer measurements less and other measurements more.</p>
+<p>This control disturbance noise controls the growth of estimated error due to accelerometer measurement errors excluding bias. Increasing it makes the flter trust the accelerometer measurements less and other measurements more.</p>
 <ul>
-<li>Range: 0.05 1.0</li>
+<li>Range: 0.01 1.0</li>
 <li>Increment: 0.01</li>
 <li>Units: m/s/s</li>
 </ul>
@@ -7092,7 +7282,7 @@ DO NOT EDIT
 
 <h2>Rate gyro bias process noise (rad/s) (EK2_GBIAS_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of gyro bias state error estimates. Increasing it makes rate gyro bias estimation faster and noisier.</p>
+<p>This state  process noise controls growth of the gyro delta angle bias state error estimate. Increasing it makes rate gyro bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.0000001 0.00001</li>
 <li>Units: rad/s</li>
@@ -7110,7 +7300,7 @@ DO NOT EDIT
 
 <h2>Accelerometer bias process noise (m/s^2) (EK2_ABIAS_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of the vertical acelerometer bias state error estimate. Increasing it makes accelerometer bias estimation faster and noisier.</p>
+<p>This noise controls the growth of the vertical accelerometer delta velocity bias state error estimate. Increasing it makes accelerometer bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.00001 0.001</li>
 <li>Units: m/s/s</li>
@@ -7119,7 +7309,7 @@ DO NOT EDIT
 
 <h2>Magnetic field process noise (gauss/s) (EK2_MAG_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of magnetic field state error estimates. Increasing it makes magnetic field bias estimation faster and noisier.</p>
+<p>This state process noise controls the growth of magnetic field state error estimates. Increasing it makes magnetic field bias estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.0001 0.01</li>
 <li>Units: gauss/s</li>
@@ -7128,16 +7318,17 @@ DO NOT EDIT
 
 <h2>Wind velocity process noise (m/s^2) (EK2_WIND_PNOISE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>This noise controls the growth of wind state error estimates. Increasing it makes wind estimation faster and noisier.</p>
+<p>This state process noise controls the growth of wind state error estimates. Increasing it makes wind estimation faster and noisier.</p>
 <ul>
 <li>Range: 0.01 1.0</li>
 <li>Increment: 0.1</li>
+<li>Units: m/s/s</li>
 </ul>
 
 
 <h2>Height rate to wind procss noise scaler (EK2_WIND_PSCALE)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>Increasing this parameter increases how rapidly the wind states adapt when changing altitude, but does make wind speed estimation noiser.</p>
+<p>This controls how much the process noise on the wind states is increased when gaining or losing altitude to take into account changes in wind speed and direction with altitude. Increasing this parameter increases how rapidly the wind states adapt when changing altitude, but does make wind velocity estimation noiser.</p>
 <ul>
 <li>Range: 0.0 1.0</li>
 <li>Increment: 0.1</li>
@@ -7146,9 +7337,35 @@ DO NOT EDIT
 
 <h2>GPS preflight check (EK2_GPS_CHECK)</h2><em>Note: This parameter is for advanced users</em><br>
 
-<p>1 byte bitmap of GPS preflight checks to perform. Set to 0 to bypass all checks. Set to 255 perform all checks. Set to 3 to check just the number of satellites and HDoP. Set to 31 for the most rigorous checks that will still allow checks to pass when the copter is moving, eg launch from a boat.</p>
+<p>This is a 1 byte bitmap controlling which GPS preflight checks are performed. Set to 0 to bypass all checks. Set to 255 perform all checks. Set to 3 to check just the number of satellites and HDoP. Set to 31 for the most rigorous checks that will still allow checks to pass when the copter is moving, eg launch from a boat.</p>
 <ul>
 <li>Bitmask: 0:NSats,1:HDoP,2:speed error,3:horiz pos error,4:yaw error,5:pos drift,6:vert speed,7:horiz speed</li>
+</ul>
+
+
+<h2>Bitmask of active IMUs (EK2_IMU_MASK)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>1 byte bitmap of IMUs to use in EKF2. A separate instance of EKF2 will be started for each IMU selected. Set to 1 to use the first IMU only (default), set to 2 to use the second IMU only, set to 3 to use the first and second IMU. Additional IMU's can be used up to a maximum of 6 if memory and processing resources permit. There may be insufficient memory and processing resources to run multiple instances. If this occurs EKF2 will fail to start.</p>
+<ul>
+<li>Range: 1 127</li>
+</ul>
+
+
+<h2>GPS accuracy check scaler (%) (EK2_CHECK_SCALE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This scales the thresholds that are used to check GPS accuracy before it is used by the EKF. A value of 100 is the default. Values greater than 100 increase and values less than 100 reduce the maximum GPS error the EKF will accept. A value of 200 will double the allowable GPS error.</p>
+<ul>
+<li>Range: 50 200</li>
+<li>Units: %</li>
+</ul>
+
+
+<h2>Non-GPS operation position uncertainty (m) (EK2_NOAID_NOISE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This sets the amount of position variation that the EKF allows for when operating without external measurements (eg GPS or optical flow). Increasing this parameter makes the EKF attitude estimate less sensitive to vehicle manoeuvres but more sensitive to IMU errors.</p>
+<ul>
+<li>Range: 0.5 50.0</li>
+<li>Units: m/s</li>
 </ul>
 
 
@@ -7931,10 +8148,22 @@ DO NOT EDIT
 </ul>
 
 
-<h1>PRECLAND_ Parameters</h1>
+<h1>PLND_ Parameters</h1>
 
 
-<h2>Precision Land Type (PRECLAND_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Precision Land enabled/disabled and behaviour (PLND_ENABLED)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision Land enabled/disabled and behaviour</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td> 1</td><td>Enabled Always Land</td></tr>
+<tr><td> 2</td><td>Enabled Strict</td></tr>
+</table>
+</ul>
+
+
+<h2>Precision Land Type (PLND_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Precision Land Type</p>
 <ul>
@@ -7946,11 +8175,36 @@ DO NOT EDIT
 </ul>
 
 
-<h2>Precision Land horizontal speed maximum in cm/s (PRECLAND_SPEED)</h2><em>Note: This parameter is for advanced users</em><br>
+<h2>Precision Land horizontal speed maximum in cm/s (PLND_SPEED)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Precision Land horizontal speed maximum in cm/s</p>
 <ul>
 <li>Range: 0 500</li>
+</ul>
+
+
+<h2>Precision landing velocity controller P gain (PLND_VEL_P)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision landing velocity controller P gain</p>
+<ul>
+<li>Range: 0.100 5.000</li>
+</ul>
+
+
+<h2>Precision landing velocity controller I gain (PLND_VEL_I)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Precision landing velocity controller I gain</p>
+<ul>
+<li>Range: 0.100 5.000</li>
+</ul>
+
+
+<h2>Precision landing velocity controller I gain maximum (PLND_VEL_IMAX)</h2>
+
+<p>Precision landing velocity controller I gain maximum</p>
+<ul>
+<li>Range: 0 1000</li>
+<li>Units: cm/s</li>
 </ul>
 
 
@@ -7984,6 +8238,22 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Minimum RPM (RPM_MIN)</h2>
+
+<p>Minimum RPM to report</p>
+<ul>
+<li>Increment: 1</li>
+</ul>
+
+
+<h2>Minimum Quality (RPM_MIN_QUAL)</h2>
+
+<p>Minimum data quality to be used</p>
+<ul>
+<li>Increment: 0.1</li>
+</ul>
+
+
 <h2>Second RPM type (RPM2_TYPE)</h2>
 
 <p>What type of RPM sensor is connected</p>
@@ -8000,4 +8270,46 @@ DO NOT EDIT
 <p>Scaling factor between sensor reading and RPM.</p>
 <ul>
 <li>Increment: 0.001</li>
+</ul>
+
+
+<h1>ADSB_ Parameters</h1>
+
+
+<h2>Enable ADSB (ADSB_ENABLE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Enable ADS-B</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Disabled</td></tr>
+<tr><td>1</td><td>Enabled</td></tr>
+</table>
+</ul>
+
+
+<h2>ADSB based Collision Avoidance Behavior (ADSB_BEHAVIOR)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>ADSB based Collision Avoidance Behavior selector</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>None</td></tr>
+<tr><td>1</td><td>Loiter</td></tr>
+<tr><td>2</td><td>LoiterAndDescend</td></tr>
+</table>
+</ul>
+
+
+<h1>NTF_ Parameters</h1>
+
+
+<h2>LED Brightness (NTF_LED_BRIGHT)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>Select the RGB LED brightness level. When USB is connected brightness will never be higher than low regardless of the setting.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Off</td></tr>
+<tr><td>1</td><td>Low</td></tr>
+<tr><td>2</td><td>Medium</td></tr>
+<tr><td>3</td><td>High</td></tr>
+</table>
 </ul>

@@ -1,0 +1,27 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: finding-the-particular-commit-which-introduced-a-bug 
+title: Finding the Particular Commit which Introduced a Bug 
+id: 6187 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to perform a firmware binary <a href="https://en.wikipedia.org/wiki/Bisection_method">bisection search</a>. This is an efficient technique to find the particular build/commit that introduced a reproducible bug.<!--more-->
+
+[tip]Knowing the build in which a defect was first introduced can help identify possible causes of the problem, and inform analysis of logs and other debug techniques. [/tip]
+
+Firmware builds are available from <a href="http://firmware.diydrones.com/">firmware.diydrones.com</a> for each vehicle-type: <a href="http://firmware.diydrones.com/Copter/">Copter</a>, <a href="http://firmware.diydrones.com/Plane/">Plane</a>, <a href="http://firmware.diydrones.com/Rover">Rover</a>, <a href="http://firmware.diydrones.com/AntennaTracker/">AntennaTracker</a>. To perform a bisection search:
+<ol>
+	<li>First test the firmware build half-way between the known working and failing builds. The result gives you a new "known working" or "known failing" build and halves the number of builds that must be tested. </li>
+	<li>Repeat this test process, each time halving the size of the test range, until the problem build has been identified.</li>
+</ol>
+
+Once you have identified the problem issue, note the build number and include this in your bug report.
+
+[note]<ul>
+	<li>The autotest system generates a new firmware build for every commit to the source tree (this is a slight simplification, as commits may be batched if they arrive while a previous build is being tested). This means that if an error is reproducible it is possible to identify the specific commit(s) in which it first occurs.</li>
+	<li>Given the number of ArduPilot firmware builds it should be possible to locate the problem build/commit within around 10 tests (at time of writing).</li>
+</ul>[/note]

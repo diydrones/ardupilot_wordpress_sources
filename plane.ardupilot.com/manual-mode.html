@@ -1,0 +1,17 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: manual-mode 
+title: MANUAL Mode 
+id: 8721 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Regular RC control, no stabilization. All RC inputs are passed through to the outputs. The only ways in which the RC output may be different from inputs are as follows:
+<ul>
+	<li>if a configured failsafe or geofence triggers, and Plane takes control</li>
+	<li>if the <a href="arduplane-parameters/#VTail_output_PlaneVTAIL_OUTPUT">VTAIL_OUTPUT</a> option is enabled, then a software VTAIL mixer is applied on the output</li>
+	<li>if the <a href="arduplane-parameters/#Elevon_output_PlaneELEVON_OUTPUT">ELEVON_OUTPUT</a> option is enabled, then a software Elevon mixer is applied on the output</li>
+</ul>

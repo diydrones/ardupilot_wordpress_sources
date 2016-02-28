@@ -1,0 +1,35 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: speed-turn-parameter-tuning 
+title: Speed Turn Parameter Tuning 
+id: 4396 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The speed-scaling parameters are used to set the percentage reduction in throttle when turning around a waypoint and the distance before a target when the Rover will start to slow down.
+<!-- more -->
+
+The two parameters are listed below:
+<table>
+<tbody>
+<tr>
+<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Target_speed_reduction_while_turning_APMrover2SPEED_TURN_GAIN">APMrover2:SPEED_TURN_GAIN</a></code></td>
+<td>Range 0-100 Units: percent Increment 1 (50)</td>
+<td>The percentage to reduce the throttle while turning. If this is 100% then the target speed is not reduced while turning. If this is 50% then the target speed is reduced in proportion to the turn rate, with a reduction of 50% when the steering is maximally deflected.</td>
+</tr>
+<tr>
+<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Distance_to_turn_to_start_reducing_speed_APMrover2SPEED_TURN_DIST">APMrover2:SPEED_TURN_DIST</a></code></td>
+<td>Range 0-100 Units: meters Increment .1 (50)</td>
+<td>The distance to the next turn at which the rover reduces its target speed by the SPEED_TURN_GAIN.</td>
+</tr>
+</tbody>
+</table>
+
+The parameters are set in the <em>Mission Planner</em> <strong>CONFIG/TUNING | Basic Tuning</strong> page:
+[caption id="attachment_4388" align="alignnone" width="1025"]<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2015/06/MissionPlanner_Rover_Basic_Tuning.png"><img src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2015/06/MissionPlanner_Rover_Basic_Tuning.png" alt="Mission Planner: Rover Basic Tuning" width="1025" height="576" class="size-full wp-image-4388" /></a> Mission Planner: Rover Basic Tuning[/caption]
+
+[note]All parameters may be adjusted in the "Advanced Parameter List" in Mission Planner). All the Rover user settable parameters are listed in <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/">APMrover2 Parameters</a>.[/note]
+

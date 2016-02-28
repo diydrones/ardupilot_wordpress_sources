@@ -1,0 +1,87 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: how-to-use-the-auth-command-to-sign-a-pixhawk-board-with-your-certificate-of-authenticity 
+title: How to use the "auth" command to sign a Pixhawk Board with your Certificate of Authenticity 
+id: 4350 
+menu_order: 900 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The essence of this process is an RSA private/public key pair and a signing process that uses these keys to put some unique information onto every PX4 board.
+
+<h1>Public/Private Key/s, SD Card, and Logging</h1>
+The "auth" command will
+
+<ul>
+	<li>read a properly prepared public/private key data from the SD card</li>
+	<li>use the key off the SD card to create the Certificate-Of-Authenticity (COA) in the One-Time_programmable (OTP) ROM.</li>
+	<li>log the results to a log file on the SD card, for your records.  (optional)</li>
+</ul>
+
+
+
+<h1>Bootloader</h1>
+The bootloader must identify itself as revision 4 or  later for this to work.
+
+eg: px_uploader.py should say something like: "Found board xxxx bootloader rev 4 on /xxxxxxx "
+
+
+
+<h1>Firmware</h1>
+
+The firmware must contain a directory Firmware/src/systemcmds/auth and have a recent "auth.c".
+<ul>
+	<li>typically made and uploaded with "make px4fmu-v1_auth upload", or similar.</li>
+	<li>verify you have a suitable version of the firmware loaded on your PX4 by connecting to the nsh in the usual way, and typing 'auth'[enter]</li>
+	<li>the "auth" command can do a bunch of stuff related to reading/writing/verifying/signing/logging of OTP data.    It's the main tool you'll use ( see below).  It can read/write public/private key data from SD card, or it can use a "hardcoded" TEST version.</li>
+</ul>
+
+
+
+<h1>Preparing SD card (one time only)</h1>
+
+
+<ul>
+	<li>Using a tool on linux or OSX called <em>ssh-keygen</em> make a new "pair" of 1024bit RSA keyfiles like this:
+	<pre>ssh-keygen -t rsa -b 1024  -f rsa1024</pre></li>
+	<li>Generating public/private rsa key pair.</li>
+	<li>Enter passphrase (empty for no passphrase):  [just press enter]</li>
+	<li>Enter same passphrase again: [just press enter, again]</li>
+	<li>Your identification has been saved in rsa1024.   [warning]This is your *PRIVATE* key  - do not share this file.  back it up and keep it safe.[/warning]</li>
+	<li>Your public key has been saved in rsa1024.pub.   [tip]This is your *PUBLIC* key  - share it with all GCS makers, etc.[/tip]</li>
+	<li>Format the private key file to suit the PX4:</li>
+	<li>Copy the rsa1024 to a new file, called "privatekey.txt"</li>
+	<li>Edit the file with a text editor to remove the first and last lines of the file (they say "<code>-----BEGIN RSA PRIVATE KEY-----</code>" and "<code>-----END RSA PRIVATE KEY-----</code>") and save it.</li>
+	<li>Copy the <strong>privatekey.txt</strong> to a SD card which you will insert into a PX4 that is setup as per above.  Do not use this method for the public key.  See below.</li>
+	<li>Make the public key file on the SD card:
+          <ul>
+	    <li>With the SD card inserted, and the PX4 booted, use the <em>nsh shell</em>, and type:
+<pre>auth -m</pre>
+this will use the <strong>privatekey.txt</strong> on the SD card, and create a <strong>publickey.txt</strong> on the SD card (this file is needed for many of the auth commands to work).</li>
+        </ul>
+       </li>
+</ul>
+
+
+
+<h1>Validate it works</h1>
+
+<ul>
+	<li>There are lots of options to the "auth" command that you can use to test your configuration.
+[warning]The only really *hazardous* options are <code>-w</code> and <code>-k</code>.  Avoid these till you are sure everything else seems to be going well.[/warning]</li>
+[warning]If you use the <code>-d</code> option, it will overwrite your carefully prepared "<strong>privatekey.txt</strong>" and <strong>publickey.txt</strong> with test versions. e.g., try <code>auth -t -l</code> , which will read both the private and public files, use the private key to make a temporary COA, display it, and then verify that temporary certificate can be correctly verified with the public key, all without writing anything to the OTP  (it will write it to the SD card at COA.*  because of the <code>-l</code> option) and it will also log stuff to the <strong>OTPCertificates.log</strong> file.[/warning]</li>
+	<li>It is a good idea to reboot each time you use the 'auth' command, as it's very aggressive on RAM usage.</li>
+	<li>When you are sure you have everything OK, run <code>auth -k -l</code>  (it will write a new COA to OTP, and lock it) and optionally <code>auth -v</code> to verify it worked.</li>
+</ul>
+
+
+<h1>Automate running the 'auth' script  from the SD card</h1>
+
+<ul>
+	<li>Make an "etc" folder on the SD card if one is not already there.</li>
+	<li>Make a rc, or <strong>rc.txt</strong> file ( either works ) on the SD card, in the <em>/etc</em> folder if one is not already there.</li>
+	<li>Edit the <strong>rc.txt</strong> file, and put the <code>auth -k -l</code> command in the file as you wish it to be run.</li>
+	<li>(When booted with this card inserted it will make the PX4 flash the OTP area with the COA and log the results to <strong>OTPCertificates.log</strong>)</li>
+</ul>

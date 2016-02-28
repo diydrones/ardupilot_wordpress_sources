@@ -1,0 +1,232 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-for-bebop-on-linux 
+title: Building for Bebop on Linux 
+id: 6345 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+These instructions clarify how to build ArduPilot for the <a href="http://www.parrot.com/en/produits/bebop-drone/" target="_blank">Bebop</a> flight controller board on a Linux machine. More details on the Bebop can be found <a href="http://copter.ardupilot.com/wiki/parrot-bebop-autopilot/" target="_blank">here</a>. <!--more-->
+[tip]The instructions for running ArduPilot on <strong>Bebop 2</strong> <a href="/building-for-bebop-2">can be found here</a>.[/tip][warning]Making the changes described in this article will void your warranty! Parrot's technical support will not help you with this hack or to recover your original software.[/warning][warning]
+Hacking a commercial product is risky! This software is still evolving, and you may well find issues with the vehicle ranging from poor flight to complete software freeze.
+
+That said, it is almost always possible to recover a drone and members of the ardupilot dev team can likely help people hacking or recovering their Bebop on <a href="https://groups.google.com/forum/#!forum/bebop-ardupilot">this google group</a>. Prepare to spend some time, patience and develop some hardware/software skills. [/warning]
+<h1>Upgrading the firmware</h1>
+As of Nov 2015, the Bebop ships with a version of Linux that cannot run ArduPilot and must be upgraded. In order to upgrade it, you will need to download a custom version <a href="https://github.com/Parrot-Developers/ardupilot/releases/download/bebop-v0.0/bebopdrone_update.plf" target="_blank">here</a>.
+
+In order to upgrade to this version:
+<ol>
+	<li>Power up your Bebop</li>
+	<li>Connect to its Wi-Fi network (BebopDrone-XXXX)</li>
+	<li>Connect to it via ftp
+<pre>ftp 192.168.42.1</pre>
+</li>
+	<li>go to the eMMC directory
+<pre>cd internal_000</pre>
+</li>
+	<li>Upload the update file
+<pre>put bebopdrone_update.plf</pre>
+</li>
+	<li>Connect to the Bebop by telnet
+<pre>telnet 192.168.42.1</pre>
+</li>
+	<li>Sync and reboot
+<pre>sync
+reboot</pre>
+</li>
+	<li>Wait for the Bebop to perform the update (this could take several minutes)
+[note]Don't shutdown your Bebop during this time[/note]</li>
+	<li>When the update is complete you can connect again via Wi-Fi and telnet and verify the update by checking the software version indicates 0.0.0 (not an official release)
+<pre>cat version.txt</pre>
+</li>
+</ol>
+<h1>Build ArduCopter for Bebop</h1>
+[tip]You can skip this step if you just want to try out the (experimental) binary version.[/tip]
+
+The following steps show how to build a custom version of the Copter software for Bebop:
+<h2>Install armhf toolchain</h2>
+<h3>On Ubuntu from 12.04</h3>
+<ol>
+	<li>Install the official arm-linux-gnueabihf toolchain</li>
+	<li>
+<pre>sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf</pre>
+</li>
+</ol>
+<h3>On other Linux distributions</h3>
+<ol>
+	<li>Install the <em>arm-gnueabihf</em> tool chain that can be downloaded from <a href="https://releases.linaro.org/14.07/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.9-2014.07_linux.tar.bz2" target="_blank">here</a></li>
+	<li>Extract the tar archive (for instance in /opt)
+<pre>sudo tar -xjvf gcc-linaro-arm-linux-gnueabihf-4.9-2014.07_linux.tar.bz2 -C /opt/</pre>
+</li>
+	<li>Add the path to the toolchain to the PATH variable
+<pre>export PATH=/opt/gcc-linaro-arm-linux-gnueabihf-4.9-2014.07_linux/bin:$PATH</pre>
+</li>
+</ol>
+<h2>Download and compile ArduCopter</h2>
+<ol>
+	<li>You need to install git first (see <a href="https://git-scm.com/book/fr/v1/D%C3%A9marrage-rapide-Installation-de-Git" target="_blank">instructions here</a>)</li>
+	<li>Clone ardupilot repository
+<pre>git clone https://github.com/diydrones/ardupilot.git</pre>
+</li>
+	<li>Building the flight control firmware is nearly identical for <a href="wiki/building-px4-for-linux-with-make/">building for the Pixhawk</a> except the <code>make</code> command is:</li>
+	<li>
+<pre>cd ardupilot/ArduCopter
+make bebop</pre>
+</li>
+	<li>Strip the binary to reduce the memory footprint:
+<pre>arm-linux-gnueabihf-strip ArduCopter.elf -o arducopter</pre>
+</li>
+</ol>
+<h1>Uploading the firmware</h1>
+<ol>
+	<li>If you haven't built the firmware as described in the previous steps you can download a binary version <a href="https://github.com/Parrot-Developers/ardupilot/releases/download/bebop-v0.1/arducopter" target="_blank">here</a></li>
+	<li>Connect again by ftp and go to the eMMC directory</li>
+	<li>Put the arducopter binary
+<pre>put arducopter</pre>
+</li>
+	<li>Connect to the Bebop via telnet</li>
+	<li>Copy arducopter to /usr/bin and change permissions
+<pre>cp /data/ftp/internal_000/arducopter /usr/bin
+chmod +x /usr/bin/arducopter</pre>
+</li>
+</ol>
+<h1>Starting ArduPilot</h1>
+<ol>
+	<li>Connect via telnet</li>
+	<li>Kill the regular autopilot
+<pre>kk</pre>
+</li>
+	<li>Launch Copter
+<pre>arducopter -A udp:192.168.42.255:14550:bcast -B /dev/ttyPA1 -C udp:192.168.42.255:14551:bcast -l /data/ftp/internal_000/APM/logs -t /data/ftp/internal_000/APM/terrain</pre>
+</li>
+</ol>
+<h1>Changing the GPS configuration</h1>
+In order to get Bebop's GPS to send the NMEA frames that APM's NMEA driver understands, you need to change its configuration. To achieve this you will need to stop the in-build autopilot as described previously (and don't launch Copter yet):
+<ol>
+	<li>Download the <strong>gps_config</strong> file <a href="https://github.com/Parrot-Developers/ardupilot/releases/download/bebop-v0.0/gps_config.txt">here</a></li>
+	<li>Connect to the Bebop via ftp and go to the eMMC directory as indicated in the "Upgrading the firmware" section above</li>
+	<li>Put the config file
+<pre>put gps_config.txt</pre>
+</li>
+	<li>Connect to the Bebop via telnet</li>
+	<li>Copy <strong>gps_config.txt</strong> in /etc/
+<pre>cp /data/ftp/internal_000/gps_config.txt /etc/</pre>
+</li>
+	<li>Launch the GPS config updater
+<pre>libgps_cli</pre>
+</li>
+	<li>Wait for NMEA messages to be displayed in the console</li>
+	<li>Stop <strong>libgps_cli</strong> by typing <strong>Ctrl-C</strong></li>
+</ol>
+<h1>Launch Copter at startup</h1>
+It is a lot more convenient to automatically execute Copter startup than connect and do this manually. In order to do so, the startup scripts need to be hacked in the following way.
+
+[warning]This part is critical since you have to edit the startup script. If you do something wrong here, you could end up with a Bebop that can no longer boot properly. If this happens you will have to get a UART cable to recover.[/warning]
+
+The startup script is located at <strong>/etc/init.d/rcS</strong>. You will need to edit it to remove the lines launching the regular autopilot and replace them by launching Copter. The line in question is the following:
+<pre>DragonStarter.sh -out2null &amp;</pre>
+Replace this with:
+<pre>arducopter -A udp:192.168.42.255:14550:bcast -B /dev/ttyPA1 -C udp:192.168.42.255:14551:bcast -l /data/ftp/internal_000/APM/logs -t data/ftp/internal_000/APM/terrain &amp;</pre>
+In order to avoid editing the file manually, download <a href="https://github.com/Parrot-Developers/ardupilot/releases/download/bebop-v0.0/rcS" target="_blank">this</a> rcS file.
+<ol>
+	<li>Make a copy of the original rcS file for recovery purpose
+<pre>cp /etc/init.d/rcS /etc/rcS_backup</pre>
+</li>
+	<li>Connect to the Bebop via ftp and put the rcS file in the eMMC as described before for the other files.</li>
+	<li>Then copy it manually to overwrite <strong>/etc/init.d/rcS</strong> and change permissions
+<pre>cp /data/ftp/internal_000/rcS /etc/init.d/rcS
+chmod +x /etc/init.d/rcS</pre>
+</li>
+	<li>Sync and reboot
+<pre>sync
+reboot</pre>
+</li>
+	<li>In case you want to put your Bebop back to normal and use the normal autopilot and app again, just replace <strong>/etc/init.d/rcS</strong> with the backup file, sync and reboot
+<pre>cp /etc/rcS_backup /etc/init.d/rcS
+sync
+reboot</pre>
+</li>
+</ol>
+[note]If you put your software back to normal and use your Bebop with FreeFlight smartphone App, you might be asked to upgrade your software version. If you do so, you will have to repeat some of the previous steps, at least for the GPS config, copying arducopter and modifying the init scripts. Regarding the need to upgrade to a custom version, it will depend on whether some options will or won't be available in the following release. Informations to follow... [/note]
+<h1>Recovery</h1>
+<ol>
+	<li>In case something went wrong and you are not able to boot your Bebop anymore</li>
+	<li>The UART port is located under the Bebop's neck on the right side (facing the front camera)
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_1343011.jpg"><img class="alignnone size-large wp-image-6392" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_1343011-1024x768.jpg" alt="IMG_20151112_134301" width="474" height="356" /></a></li>
+	<li>You will have to pull back the polystyrene a bit but it shouldn't cause much damage</li>
+	<li>Get a UART cable like <a href="http://www.digikey.com/product-detail/en/TTL-232R-RPI/768-1204-ND/4382044" target="_blank">this one</a> or any FTDI 3 pin cable (GND TXD RXD)</li>
+	<li>Get headers like <a href="https://www.aimagin.com/2-54-mm-straight-male-single-pin-header-connectors.html" target="_blank">these ones</a> and plug them into the cable like this:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_135819.jpg"><img class="alignnone size-large wp-image-6393" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_135819-1024x768.jpg" alt="IMG_20151112_135819" width="474" height="356" /></a>
+[note]The color codes for the cable are usually:
+<ul>
+	<li>black = GND</li>
+	<li>yellow = RXD</li>
+	<li>orange = TXD</li>
+</ul>
+[/note]</li>
+	<li>Plug the cable into the Bebop like this:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_140205.jpg"><img class="alignnone size-large wp-image-6394" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/11/IMG_20151112_140205-1024x768.jpg" alt="IMG_20151112_140205" width="474" height="356" /></a>[note]Be careful about the pinout:
+<ul>
+	<li>black: front</li>
+	<li>yellow: middle</li>
+	<li>orange: back</li>
+</ul>
+[/note]</li>
+	<li>Install a UART terminal emulator like minicom and connect to a Bebop once it is powered up</li>
+	<li>Copy the backup rcS file back to its original place, sync and reboot:</li>
+	<li>
+<pre>mount -o remount,rw /
+cp /etc/rcS_backup /etc/init.d/rcS
+sync
+reboot</pre>
+</li>
+</ol>
+<h1>Flying</h1>
+FreeFlight 3 is not compatible with ArduPilot and you will therefore have to use <a href="http://copter.ardupilot.com/wiki/common-choosing-a-ground-station/" target="_blank">one of the supported GCS</a>. Connect to the Bebop via Wi-Fi and just start your GCS, it should connect automatically if you setup the link to UDP (in case it is needed).
+
+The <a href="http://www.parrot.com/usa/products/skycontroller/" target="_blank">SkyController</a> is not compatible with apm with its regular firmware. You would need to flash an alternative version in order to be able to control your Bebop with it (information about that is coming soon...).
+
+In order to pilot the Bebop manually, Mission Planner GCS users can use a <a href="http://copter.ardupilot.com/wiki/flying-with-a-joystickgamepad-instead-of-rc-controller/" target="_blank">gamepad as described here</a>.  Alternatively use the RCOutput UDP interface on port 777 on the Bebop, with a Linux PC (or board type Raspberry Pi) and a USB gamepad.
+<h1>Controlling the Bebop via RC over UDP on Linux</h1>
+<ol>
+	<li>In order to control the arducopter for Bebop via RC over UDP, you can either write an application using <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL_Linux/RCInput_UDP_Protocol.h" target="_blank">this protocol</a> and sending a packet every 10ms</li>
+	<li>Or use <a href="https://github.com/jberaud/joystick_remote" target="_blank">joystick_remote</a> Linux application</li>
+	<li>In order to do so, clone the git repository:
+<pre>git clone https://github.com/jberaud/joystick_remote.git</pre>
+</li>
+	<li>Build it
+<pre>cd joystick_remote
+make</pre>
+</li>
+	<li>Plug a USB gamepad (the list of supported gamepads is explained if you type joystick_remote --help)</li>
+	<li>In case your gamepad is not supported you can easily add support for it if you know its mapping</li>
+	<li>Connect to the Bebop via Wi-FI and launch the application:
+<pre>./joystick_remote -d /dev/input/js[X] -t [gamepad] -r 192.168.42.1:777</pre>
+where [X] is the device number of your joystick that you can easily find, usually 0 but sometimes 1 if your laptop already includes an input device like an accelerometer and [gamepad] is one of the supported gamepads.</li>
+	<li>so for an XBox 360 gamepad mapped on /dev/input/js0 the command line becomes
+<pre>./joystick_remote -d/dev/input/js0 -t xbox_360 -r 192.168.42.1:777</pre>
+</li>
+	<li>The flight modes have to be set in Copter's parameters in order to use the buttons to set the flight modes</li>
+</ol>
+<h1>Basic configuration and frame parameters</h1>
+<ol>
+	<li>In order to do the basic configuration and calibration, you can use any of the GCSs and perform
+<ul>
+	<li>Magnetometer Calibration</li>
+	<li>RC Calibration</li>
+	<li>Accelerometer Calibration</li>
+</ul>
+</li>
+	<li>Thanks to Leonard Hall, we have a very good set of tuning parameters that you can find <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/Frame_params/Parrot_Bebop.param" target="_blank">here</a></li>
+</ol>
+<h1>Known limitations</h1>
+<ul>
+	<li>The GPS of the Bebop isn't very good compared to a UBlox GPS and therefore the Bebop drifts significantly in Loiter, PosHold and other GPS modes</li>
+	<li>Mission run in Auto mode work reasonably well but we recommend you takeoff and land in a non-GPS mode such as AltHold or Stabilize.</li>
+	<li>Some work will be done to improve support for this GPS</li>
+	<li>The optical flow is currently under development</li>
+	<li>There is currently no support for video streaming and capture</li>
+</ul>

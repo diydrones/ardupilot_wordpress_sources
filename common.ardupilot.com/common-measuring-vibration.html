@@ -19,9 +19,9 @@ Flight controller accelerometers are sensitive to vibration. As accelerometer da
 These instructions explain how to measure the vibration levels. If you find they are out-of-tolerance then follow the advice found on the First Time Set-up sections <a href="common-vibration-damping">Vibration Damping</a>.
 
 
-<h1>Copter-3.3 and later versions</h1>
+<h1>Copter-3.3/Plane 3.4 (and later versions)</h1>
 
-[note]At time of writing (27 July 2015), Copter-3.3 is still a release candidate. Its changes are not yet present the official release of Copter, Plane and Rover. The changes here are expected to be in the next release of Plane and Rover.[/note]
+[note]These changes are present starting in Copter-3.3 and Plane 3.4. The changes are not present in Rover at time of writing (Rover 2.5).[/note]
 <ul>
 	<li>Perform a regular flight (i.e. not just a gentle hover) of at least a few minutes and <a href="common-downloading-and-analyzing-data-logs-in-mission-planner/#downloading_logs_via_mavlink">download the dataflash logs</a>.</li>
 	<li>Using the Mission Planner or other GCS graph the VIBE message's VibeX, VibeY and VibeZ values.  These show the standard deviation of the primary accelerometer's output in m/s/s.  The image below, taken from a 3DR IRIS, shows normal levels which are below 15m/s/s but occasionally peak to 30m/s/s.  Maximum acceptable values appear to be below 60m/s/s (see second picture below).</li>

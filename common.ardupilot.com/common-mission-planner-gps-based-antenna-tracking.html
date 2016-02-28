@@ -35,7 +35,7 @@ This is a list of the main components needed to build this tracking system (it i
 	<li>Servo controller card, like the <a href="https://www.pololu.com/product/1350" title="Maestro Servo Contoller Card">Maestro</a></li>
 	<li>Tripod (or other mounting device)</li>
 	<li>Battery</li>
-	<li>Telemetry Radios - like these <a href="https://store.3drobotics.com/products/3dr-radio-set" rel="nofollow">3DR Radios</a></li>
+	<li><a href="common-telemetry-landingpage">Telemetry Radios</a></li>
 	<li>(Optional, recommended:) BEC, cooling fan, battery low voltage device.</li>
 </ul>
 
@@ -52,7 +52,7 @@ The speed changes based on the diameter and number of teeth your gearing has. A 
 
 <h2>Antenna</h2>
 
-You need to decide which antennas you are going to use. Frequency is <strong>HUGE</strong> on this. In fact, frequency selection is a guide in and of itself. Some antennas claim usability in a range of frequencies but that is NOT always legit. 915Mhz (aka 900Mhz) is very specific and your antenna could be "tuned" by the factory to "best" receive at 912Mhz and your screwed. Read READ READ the description on the antenna you are looking at. For this guide I choose 1280Mhz (aka 1.2 or 1.3 Ghz) and 915Mhz patch antennas from <a href="http://www.l-com.com/home.aspx" rel="nofollow">L-COM</a>. If you use the <a href="common-3dr-radio-v1">3DR Radios</a> (as I did) you might be thinking "what about frequency hopping"? Your radio MIGHT try to go outside the "effective" bandwidth (frequency spread your antenna can use well) but if it does it notes the signal drop (aka <a href="http://en.wikipedia.org/wiki/Received_signal_strength_indication" rel="nofollow">RSSI</a>, Recieved Signal Strength Indicator) and will compensate for it. Don't worry about this, just make sure your antenna is within the correct frequency range you will be using.
+You need to decide which antennas you are going to use. Frequency is <strong>HUGE</strong> on this. In fact, frequency selection is a guide in and of itself. Some antennas claim usability in a range of frequencies but that is NOT always legit. 915Mhz (aka 900Mhz) is very specific and your antenna could be "tuned" by the factory to "best" receive at 912Mhz and your screwed. Read READ READ the description on the antenna you are looking at. For this guide I choose 1280Mhz (aka 1.2 or 1.3 Ghz) and 915Mhz patch antennas from <a href="http://www.l-com.com/home.aspx" rel="nofollow">L-COM</a>. You might be thinking "what about frequency hopping"? Your radio MIGHT try to go outside the "effective" bandwidth (frequency spread your antenna can use well) but if it does it notes the signal drop (aka <a href="http://en.wikipedia.org/wiki/Received_signal_strength_indication" rel="nofollow">RSSI</a>, Recieved Signal Strength Indicator) and will compensate for it. Don't worry about this, just make sure your antenna is within the correct frequency range you will be using.
 
 <h2>Servo</h2>
 
@@ -114,7 +114,7 @@ You could come up with another thing to use, but that would be tantamount to rei
 
 4) Connect your battery (assuming Li-Po here) to the Low Voltage detection device, pay attention to it.
 
-5) Connect your antennas to your 3DR radio (NEVER TURN ON RADIOS WITHOUT ANTENNA ATTACHED, buy new stuff if you did). Connect antenna to the Video Rx.
+5) Connect your antennas to your SiK Radio (NEVER TURN ON RADIOS WITHOUT ANTENNA ATTACHED, buy new stuff if you did). Connect antenna to the Video Rx.
 
 6) You will need to splice off the power from the 12V side of the battery connection to feed 12V of power to your Video Rx, get some solder and a wet sponge, do a good job on the connection. Connect the power to your Video Rx.
 

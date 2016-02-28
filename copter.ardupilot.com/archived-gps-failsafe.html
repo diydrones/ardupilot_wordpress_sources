@@ -1,0 +1,31 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: archived-gps-failsafe 
+title: Archived: GPS Failsafe 
+id: 16327 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page covers the set-up and testing of the GPS failsafe. 
+
+[archived]The GPS Failsafe was merged into/replaced by the <a href="ekf-inav-failsafe">EKF / DCM Check & Failsafe</a> in Copter 3.3. [/archived]
+
+<h1>Overview</h1>
+
+The GPS Failsafe is enabled by default but you can enable or disable it on the Mission Planner's Standard Parameter List, by set the FS_GPS_ENABLE parameter to 0 (Disable) or 1 (Land) or 2 (switch to AltHold).  It is highly recommended to leave it enabled and no known reason why it should ever be disabled.
+
+If you lose GPS lock or experience a GPS Glitch for 5 seconds while in a mode that requires the GPS (Auto, Guided, Loiter, RTL, Circle, Position or Drift) mode it will initiate a Land (or AltHold if FS_GPS_ENABLE is set to 2).
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/GPSFailsafeAltHold2.png"><img class="alignnone size-full wp-image-10258" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/GPSFailsafeAltHold2.png" alt="GPSFailsafeAltHold" width="1023" height="500" /></a>
+
+Additional information on the GPS failsafe and Glitch protection can be found <a href="gps-failsafe-glitch-protection">here</a>.
+
+<h1>Video</h1>
+
+Below is a video of a simulated GPS Failure resulting in the copter Landing.
+
+http://www.youtube.com/watch?v=sqofSFd0MuU
+

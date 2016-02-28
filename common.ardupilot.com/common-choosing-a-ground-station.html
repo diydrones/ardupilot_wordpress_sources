@@ -82,7 +82,7 @@ Tower includes features like follow-me, “dronies” (i.e. “selfies” but ta
 
 <tr>
 <td><strong>MAVProxy</strong></td> 
-<td><a href="https://raw.githubusercontent.com/Dronecode/MAVProxy/gh-pages/html/_static/images/mavproxy_linux.jpg"><img class="alignright thumbnail  wp-image-2922" src="https://raw.githubusercontent.com/Dronecode/MAVProxy/gh-pages/html/_static/images/mavproxy_linux.jpg" alt="ChooseAGCS_MAVProxy" width="150" /></a> Linux GCS often used by Plane developers.  Primarily a command line interface with graphical modules for map and mission editing. Written in Python, and extensible via python modules.
+<td><a href="http://dronecode.github.io/MAVProxy/html/_images/mavproxy_linux.jpg"><img class="alignright thumbnail  wp-image-2922" src="http://dronecode.github.io/MAVProxy/html/_images/mavproxy_linux.jpg" alt="ChooseAGCS_MAVProxy" width="150" /></a> Linux GCS often used by Plane developers.  Primarily a command line interface with graphical modules for map and mission editing. Written in Python, and extensible via python modules.
 
 <ul>
 <li><a href="http://dronecode.github.io/MAVProxy/html/index.html">Getting Started</a></li>
@@ -139,14 +139,21 @@ The $99 iDroneLink can be purchased from <a href="http://fightingwalrus.com/" ta
 
 <tr>
 <td><strong>QGroundControl</strong></td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_QGroundControl.png"><img class="alignright thumbnail wp-image-2923" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_QGroundControl-1024x618.png" alt="ChooseAGCS_QGroundControl" width="150" height="150" /></a> Developed for our sister autopilot system, the "Native PX4 stack" QGroundControl can connect and display attitude information and parameter lists but is not customised to work with the ArduPilot firmware as much as the other ground stations listed above.
+<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/QGroundControlTabletImage.jpg" rel="attachment wp-att-5705"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/QGroundControlTabletImage-150x150.jpg" alt="QGroundControlTabletImage" width="150" height="150" class="alignright size-thumbnail wp-image-5705" /></a>Developed for our sister autopilot system, the "Native PX4 stack" <em>QGroundControl</em> can connect and display attitude information and parameter lists but is not customised to work with the ArduPilot firmware as much as the other ground stations listed above.
 <ul>
-<li><a href="http://www.qgroundcontrol.org/users/start">Wiki</a></li>
-<li><a href="http://ardupilot.com/forum/viewforum.php?f=13">Support Forum</a></li>
+<li><a href="http://www.qgroundcontrol.org/">Website</a></li>
+<li><a href="https://groups.google.com/forum/#!forum/qgroundcontrol">Support Forum</a></li>
+<li><a href="https://gitter.im/mavlink/qgroundcontrol">Gitter</a></li>
 </ul>
-[warning]At time of writing (Feb 2015) <em>QGroundControl</em> is not recommended for use with ArduPilot - flying is supported (QGroundControl is a MAVLink compatible GCS) but the configuration screens for ArduPilot have been removed.[/warning]
+[warning]Januray 2016: Full support for ArduPilot firmware vehicles in QGroundControl is now in beta. This includes full Setup and Configuration, Mission Planning, Flight Display as well as streaming video. Also QGroundControl is now supported on Android tablets.
+
+<ul>
+<li>The Beta link in here: <a href="http://www.qgroundcontrol.org/apm">www.qgroundcontrol.org/apm</a></li>
+<li>Download link: <a href="http://www.qgroundcontrol.org/downloads">www.qgroundcontrol.org/downloads</a></li>
+</ul>
+[/warning]
 </td> 
-<td>Windows, Mac OS X, Linux</td> 
+<td>Windows, Mac OS X, Linux, Android</td> 
 <td><a href="http://www.qgroundcontrol.org/license">Open Source</a> (GPLv3)</td>
 </tr>
 
@@ -161,7 +168,7 @@ The $99 iDroneLink can be purchased from <a href="http://fightingwalrus.com/" ta
 For Android devices, you will need:
 <ul>
 	<li>Android based tablet that can act as a USB host. Google Nexus tablet are recommended, and the compatible hardware lists for the different GSCs are listed in the table above.</li>
-	<li><a href="https://store.3drobotics.com/products/3dr-radio-set">3DR Telemetry Radio System</a> (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
+	<li><a href="common-3dr-radio-version-2">SiK Telemetry Radio System</a> or similar (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
 	<li>USB OTG cable (typically less than $2 on <a href="http://www.ebay.com/sch/i.html?_trksid=m570.l3201&amp;_nkw=usb+otg+cable&amp;_sacat=0" target="_blank">ebay</a> and <a href="http://www.amazon.com/T-Flash-Adapter-Samsung-GT-i9100-GT-N7000/dp/B005FUNYSA/ref=sr_1_5?ie=UTF8&amp;qid=1376262351&amp;sr=8-5&amp;keywords=android+otg+cable">Amazon</a>).
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle.jpg"><img class="alignnone size-medium wp-image-2709" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle-300x168.jpg" alt="AndroidGCS_USB_dongle" width="300" height="168" /></a>
 </li>
@@ -171,7 +178,7 @@ For Android devices, you will need:
 For Desktop devices you will need:
 
 <ul>
-	<li><a href="https://store.3drobotics.com/products/3dr-radio-set">3DR Telemetry Radio System</a> (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
+	<li><a href="common-3dr-radio-version-2">SiK Telemetry Radio System</a> or <a href="common-telemetry-landingpage">similar</a> (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
 </ul>
 
 <h2>iPhone/iPad</h2>

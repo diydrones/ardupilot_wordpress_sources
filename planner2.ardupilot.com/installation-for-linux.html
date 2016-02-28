@@ -1,0 +1,40 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: installation-for-linux 
+title: Installing APM Planner for Linux 
+id: 371 
+menu_order: 40 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>1 System Requirements</h1>
+Ubuntu 14.04 or equivalent
+300 MB free space
+Internet connection to use maps
+<h2>2 Download</h2>
+Download the deb file for your machine:
+<p style="padding-left: 30px"><a href="http://ardupilot.com/downloads/?did=111" target="_blank">Ubuntu 14.04 amd64</a>
+<a href="http://ardupilot.com/downloads/?did=112">Ubuntu 14.04 i386</a>
+
+</p>
+
+<h1>3 Install Packages</h1>
+Open a terminal window and go to the location where you downloaded the .deb file from step 2 and type the following command:
+<code>sudo dpkg -i apmplanner*.deb</code>
+
+the installation will likely fail because of missing dependencies.  These dependencies can be installed with this command:
+<code>sudo apt-get -f install</code>
+
+Then retry the apmplanner installation again:
+<code>sudo dpkg -i apmplanner*.deb</code>
+<h1>4 Create a desktop icon</h1>
+Click on <a href="https://raw.githubusercontent.com/diydrones/apm_planner/master/debian/apmplanner2.desktop" target="_blank">this link to download the apmplanner2.desktop</a> file from github.  Set the properties on the file to "Allow executing file as program", then drag and drop the file to your start bar.
+
+<a href="http://planner2.ardupilot.com/wp-content/uploads/sites/7/2014/03/APM2Planner_InstallLinux_DesktopIcon.png"><img class="alignnone size-medium wp-image-373" src="http://planner2.ardupilot.com/wp-content/uploads/sites/7/2014/03/APM2Planner_InstallLinux_DesktopIcon-300x201.png" alt="APM2Planner_InstallLinux_DesktopIcon" width="300" height="201" /></a>
+
+Click on the new Icon and the APM Planner 2 should start.
+<h1>4 Common problems</h1>
+If you find the APM Planner 2 is unable to connect to the APM2/Pixhawk, it may be because of the modemmanager package.  Uninstall this package by entering the following command into a terminal window:
+<code>sudo apt-get --purge remove modemmanager</code>

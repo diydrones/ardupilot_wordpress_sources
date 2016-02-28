@@ -1,7 +1,7 @@
 <!-- 
 START METADATA - Only title should be translated 
 slug: ac2_followme 
-title: Follow Me Mode 
+title: Follow Me Mode (GSC Enabled) 
 id: 1541 
 menu_order: 150 
 post_parent_id: 0 
@@ -9,9 +9,11 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Follow Me mode makes it possible for you to have your copter follow you as you move, using a telemetry radio and a ground station. Mission Planner for Windows laptops, APM Planner for OS X laptops, and DroidPlanner for Android devices currently support Follow Me; however, it's easiest to use a phone or tablet as your Follow Me ground station.
+Follow Me mode makes it possible for you to have your copter follow you as you move, using a telemetry radio and a ground station. 
 
-Follow Me mode uses the Copter dynamic waypoint feature and MAVLink telemetry commands.
+[note]Unlike "proper" autopilot modes, this feature is implemented in the Ground Station. The ground station controls the movement by reading the vehicle position using MAVLink Telemetry and sending GUIDED mode instructions to move the vehicle appropriately. Currently this sort of functionality is supported by <em>Mission Planner</em> for Windows laptops, APM Planner for OS X laptops, and DroidPlanner for Android devices.
+[/note]
+
 
 <h1>What you'll need</h1>
 <ol>

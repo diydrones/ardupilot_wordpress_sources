@@ -1,0 +1,117 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-for-bebop-2 
+title: Building for Bebop 2 
+id: 6438 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+These instructions explain how to use ArduPilot for the <a href="http://www.parrot.com/usa/products/bebop2/">Bebop2</a> on a Linux machine. The Bebop 2 is based on the same architecture as the Bebop with a few noticeable changes, not the least being a much better quality GPS (UBlox GPS with a bigger antenna).
+
+<!--more-->
+
+[warning]Making the changes described in this article will void your warranty! Parrot's technical support will not help you with this hack or to recover your original software.[/warning]
+
+[warning]
+Hacking a commercial product is risky! This software is still evolving, and you may well find issues with the vehicle ranging from poor flight to complete software freeze.
+
+That said, it is almost always possible to recover a drone and members of the ardupilot dev team can likely help people hacking or recovering their Bebop on <a href="https://groups.google.com/forum/#!forum/bebop-ardupilot">this google group</a>. Prepare to spend some time, patience and develop some hardware/software skills. [/warning]
+<h1>Building ArduCopter for Bebop 2</h1>
+The instructions are exactly the same as <a href="http://dev.ardupilot.com/wiki/building-for-bebop-on-linux/#build_arducopter_for_bebop">the one used for Bebop</a>
+<h1>Uploading the Firmware</h1>
+<ol>
+	<li>Install adb (android debug tool):
+<pre>sudo apt-get install android-tools-adb</pre>
+</li>
+	<li>Connect to the Bebop2's WiFi network (BebopDrone-XXXX).</li>
+	<li>Enable adb server by pressing the power button 4 times.</li>
+	<li>Connect to the Bebop's adb server on port 9050:
+<pre>adb connect 192.168.42.1:9050</pre>
+</li>
+	<li>If the previous command returns an error, try again (press the power button 4 times and retry).</li>
+	<li>Remount the system partition as writeable:
+<pre>adb shell mount -o remount,rw /</pre>
+</li>
+	<li>Push the stripped arducopter binary to the Bebop2:
+<pre>adb push arducopter /usr/bin/</pre>
+</li>
+</ol>
+
+
+<h1>Starting ArduPilot</h1>
+<ol>
+	<li>Kill the regular autopilot:
+<pre>kk</pre>
+</li>
+	<li>Launch Copter:
+<pre>arducopter -A udp:192.168.42.255:14550:bcast -B /dev/ttyPA1 -C udp:192.168.42.255:14551:bcast -l /data/ftp/internal_000/APM/logs -t /data/ftp/internal_000/APM/terrain</pre>
+</li>
+</ol>
+
+
+<h1>Launch Copter at startup</h1>
+As for Bebop, modify the init script <strong>/etc/init.d/rcS_mode_default</strong>. Comment the following line:
+<pre>DragonStarter.sh -out2null &amp;</pre>
+Replace it with:
+<pre>arducopter -A udp:192.168.42.255:14550:bcast -B /dev/ttyPA1 -C udp:192.168.42.255:14551:bcast -l /data/ftp/internal_000/APM/logs -t /data/ftp/internal_000/APM/terrain &amp;</pre>
+<ol>
+	<li>Enable adb server by pressing the power button 4 times.</li>
+	<li>Connect to adb server as described before:
+<pre>adb connect 192.168.42.1:9050</pre>
+</li>
+	<li>Re-mount the system partition as writeable:
+<pre>adb shell mount -o remount,rw /</pre>
+</li>
+	<li>In order to avoid editing the file manually, you can download <a href="https://github.com/Parrot-Developers/ardupilot/releases/download/bebop-v0.1/rcS_mode_default">this one</a>.</li>
+	<li>Save the original one and push this one to the bebop</li>
+	<li>
+<pre>adb shell cp /etc/init.d/rcS_mode_default /etc/init.d/rcS_mode_default_backup
+adb push rcS_mode_default /etc/init.d/</pre>
+</li>
+	<li>Sync and reboot:
+<pre>adb shell sync
+adb shell reboot</pre>
+</li>
+</ol>
+<h1>Recovery</h1>
+For recovery, you can use the same cable as the one used on Bebop, see <a href="building-for-bebop-on-linux/#recovery">here</a>.
+<ol>
+	<li>Remove the two screws using a torx T6 screwdriver 
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144857.jpg" rel="attachment wp-att-6452"><img class="alignnone size-large wp-image-6452" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144857-1024x768.jpg" alt="IMG_20151221_144857" width="474" height="356" /></a></li>
+	<li>Remove the neck by pulling it towards the front of the Bebop
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144412.jpg" rel="attachment wp-att-6449"><img class="alignnone size-large wp-image-6449" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144412-1024x768.jpg" alt="IMG_20151221_144412" width="474" height="356" /></a></li>
+	<li>The UART connector is located on the right side<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144454.jpg" rel="attachment wp-att-6450"><img class="alignnone size-large wp-image-6450" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144454-1024x768.jpg" alt="IMG_20151221_144454" width="474" height="356" /></a></li>
+	<li>Plug the cable with the black wire at the front<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144527.jpg" rel="attachment wp-att-6451"><img class="alignnone size-large wp-image-6451" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/12/IMG_20151221_144527-1024x768.jpg" alt="IMG_20151221_144527" width="474" height="356" /></a></li>
+	<li>Connect to the bebop with the UART port using any terminal emulator</li>
+	<li>Copy the backup rcS file back to its place
+<pre>mount -o remount,rw /
+cp /etc/init.d/rcS_mode_default_backup /etc/init.d/rcS_mode_default</pre>
+</li>
+	<li>Sync and reboot
+<pre>sync
+reboot</pre>
+</li>
+</ol>
+<h1>Flying and RC over UDP</h1>
+Flying and RC over UDP instructions are the same as <a href="building-for-bebop-on-linux/#flying">the ones for Bebop</a>
+<h1>Basic configuration and frame parameters</h1>
+<ol>
+	<li>The set of tuning parameters can be found <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/Frame_params/Parrot_Bebop2.param">here</a>. These are not yet fully tuned for Bebop 2</li>
+	<li>In order to do the basic configuration and calibration, you can use any of the GCSs and perform:
+<ol>
+	<li>Magnetometer Calibration</li>
+	<li>RC Calibration</li>
+	<li>Accelerometer Calibration</li>
+</ol>
+</li>
+</ol>
+<h1>Additional information</h1>
+
+The loiter mode quality is very good compared to the first Bebop because of the (much better) UBlox GPS. It is now safe to takeoff and land in the mode you want.
+
+There is still no support for video yet and the optical flow and sonar are currently under development.
+
+This is a good time to participate and help improve them!

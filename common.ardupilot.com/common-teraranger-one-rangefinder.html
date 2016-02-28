@@ -1,0 +1,50 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-teraranger-one-rangefinder 
+title: common-TeraRanger One Rangefinder 
+id: 5689 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The <a href="http://teraranger.com/">TeraRanger One</a> rangefinder is a lightweight, high-performance distance measurement sensor based on infrared Time-of-Flight (ToF) technology. It is much faster than ultrasound and far smaller and lighter than laser-based systems. Its small size, high performance and low power consumption make it ideal for modern robotic applications, drone operations and automation.
+
+More technical information about ToF sensors can be found <a href="http://www.teraranger.com/products/teraranger-one/">here</a>.
+
+[note]This rangefinder is only supported on the Pixhawk via I2C protocol. Only the TeraRanger One sensor is compatible with this protocol.[/note]
+
+
+<h1>Connecting to the TeraRanger via I2C</h1>
+
+The TeraRanger One sensor can be easily connected to the Pixhawk with the <a href="http://www.teraranger.com/product/teraranger-i2c-adapter/">TeraRanger I2C adaptor</a>. Then it’s nearly a plug&play solution:
+<ol>
+	<li>Solder the alimentation for the TeraRanger I2C adaptor:
+[caption id="attachment_5829" align="alignnone" width="399"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerI2CAdapter-1.png" rel="attachment wp-att-5829"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerI2CAdapter-1.png" alt="TR-I2CAD Power Cables" width="399" height="265" class="size-full wp-image-5829" /></a> TR-I2CAD Power Cables[/caption]
+</li>
+
+	<li>Connect the I2C Adaptor to the Pixhawk via a DF13 4S cable include into the Pixhawk box, and the TR-One to the I2C Adaptor:
+[caption id="attachment_5699" align="alignnone" width="1654"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TR-One_Pixhawk.jpg" rel="attachment wp-att-5699"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TR-One_Pixhawk.jpg" alt="TR-One connection to Pixhawk with TR-I2CAD" width="1654" height="1004" class="size-full wp-image-5699" /></a> TR-One connection to Pixhawk with TR-I2CAD[/caption]</li>
+</ol>
+
+
+<h1>Setup in Mission Planner</h1>
+
+To use the TeraRanger One sensor as rangefinder, connect with <em>Mission Planner</em> and open the <strong>Config/Tunin</strong>g menu. Go into <the strong>Full Parameter List</strong> section and set: 
+<ul>
+	<li><code>RNGFND_MAX_CM</code>: 1400 (14m). This parameter sets the maximum distance that the TeraRanger One is used by the Pixhawk.</li>
+
+	<li><code>RNGFND_MIN_CM</code>: 20cm. This parameter set the minimum distance that the TeraRanger One is used by the Pixhawk.</li>
+
+	<li><code>RNGFND_TYPE</code>: 4</li>
+</ul>
+
+
+[caption id="attachment_5692" align="alignnone" width="596"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerOne_MissionPlannerSettings.png" rel="attachment wp-att-5692"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerOne_MissionPlannerSettings.png" alt="MissionPlanner Setup for using TR-One sensor on Pixhawk" width="596" height="342" class="size-full wp-image-5692" /></a> MissionPlanner Setup for using TR-One sensor on Pixhawk[/caption]
+
+
+<h1>Testing the sensor</h1>
+The distances read by the <em>TeraRanger One</em> sensor can be displayed on the <em>Mission Planner Flight Data</em> menu. You have to double click on the left bottom windows where quick values are displayed. Then choose “sonarrange”. 
+
+[caption id="attachment_5693" align="alignnone" width="590"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerOne_MissionPlannerEnableFlightData.png" rel="attachment wp-att-5693"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/TeraRangerOne_MissionPlannerEnableFlightData.png" alt="Mission Planner: Setting to display rangefinder data on the Flight Data screen" width="590" height="366" class="size-full wp-image-5693" /></a> Mission Planner: Setting to display rangefinder data on the Flight Data screen[/caption]

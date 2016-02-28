@@ -18,7 +18,7 @@ To establish a connection you must first choose the communication method/channel
 [note]The driver for your connection hardware must be present on Windows as this makes your connection's COM port and default data rate available to <em>Mission Planner</em>.[/note]
 <table><tr>
 <td>[caption id="attachment_1138" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/07/Pixhawk_USBConnection-300x189.png" alt="Pixhawk USB Connection" width="300" height="189" class="size-medium wp-image-1138" /></a> Pixhawk USB Connection[/caption]</td>
-<td>[caption id="attachment_4752" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/3DR_Radio_ConnectedToLaptop.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/3DR_Radio_ConnectedToLaptop-300x226.jpg" alt="Connection using 3DR Radio" width="300" height="226" class="size-medium wp-image-4752" /></a> Connection using 3DR Radio[/caption]</td>
+<td>[caption id="attachment_4752" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/3DR_Radio_ConnectedToLaptop.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/3DR_Radio_ConnectedToLaptop-300x226.jpg" alt="Connection using SiK Radio" width="300" height="226" class="size-medium wp-image-4752" /></a> Connection using SiK Radio from 3DR[/caption]</td>
 </tr></table>
 
 
@@ -26,7 +26,7 @@ On <em>Mission Planner</em>, the connection and data rate are set up using the d
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/MisionPlanner_ConnectButton.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/MisionPlanner_ConnectButton.png" alt="Mission Planner: Connect Button" width="307" height="71" class="alignnone size-full wp-image-4751" /></a>  
 
-Once you've attached the USB or Telemetry Radio, Windows will automatically assign your autopilot a COM port number, and that will show in the drop-down menu (the actual number does not matter). The appropriate data rate for the connection is also set (typically the USB connection data rate is 11520 and the 3DR radio connection rate is 57600).
+Once you've attached the USB or Telemetry Radio, Windows will automatically assign your autopilot a COM port number, and that will show in the drop-down menu (the actual number does not matter). The appropriate data rate for the connection is also set (typically the USB connection data rate is 11520 and the radio connection rate is 57600).
 
 Select the desired port and data rate and then press the <strong>Connect</strong> button to connect to the autopilot.  After connecting <strong>Mission Planner</strong> will download parameters from the autopilot and the button will change to <strong>Disconnect</strong> as shown:
 
@@ -42,8 +42,9 @@ Select the desired port and data rate and then press the <strong>Connect</strong
 If Mission planner is unable to connect:
 <ul>
 	<li>Check that the correct baud rate is used for the selected method (115200 on USB or 57600 on Radio/Telemetry)</li>
-	<li>Check that the connection's COM port exists in the Windows Device Manager's list of serial ports.</li>
+	<li>If using a COM port on Windows, check that the connection's COM port exists in the Windows Device Manager's list of serial ports.</li>
 	<li>If using a USB port, try a different physical USB port</li>
+        <li>if using a UDP or TCP connection, check that your firewall is not blocking the IP traffic. </li>
 </ul>
 
 You should also ensure that the autopilot controller board has appropriate ArduPilot firwmare installed and has booted correctly (on Pixhawk/PX4 there are useful <a href="common-leds-pixhawk">LEDs</a> and <a href="common-sounds-pixhawkpx4">Sounds</a> which can tell you the state of the autopilot).

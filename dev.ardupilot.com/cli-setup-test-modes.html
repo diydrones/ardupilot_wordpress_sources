@@ -1,0 +1,102 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: cli-setup-test-modes 
+title: Mission Planner CLI Setup Test modes 
+id: 4897 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Command Line Interpreter</h1>
+
+The Mission Planner Command Line interpreter is a serial terminal line editor that works similarly to the way the old DOS prompt operating systems used to work. If you want, you can set up and test APM is via a Command Line Interpreter (CLI). It is only available via the USB cable and it cannot be used via an Xbee or 3DR wireless telemetry connection. Open up the Terminal in the Mission Planner by selecting the Terminal tab (ensure that the serial baud rate is set for 115200). This will bring up the Terminal window, and it should automatically take you to the APM CLI menu (if not, click in the window and hit "Enter" three times): <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/mpterminalAPM1.png"><img class="size-full wp-image-1143" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/mpterminalAPM1.png" alt="mpterminalAPM" width="600" height="432" /></a> You can now enter commands by typing them at the command prompt. You can always type "exit" to leave any mode. In the following examples, I'll be using another serial terminal (in this case the Arduino Serial Monitor). You can use any terminal you want, but the Mission Planner terminal is the most straightforward. Here I'm typing "help" to see a list of available commands: 
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/help.png"><img class="size-full wp-image-1145" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/help.png" alt="help" width="283" height="160" /></a> Initial commands are:
+<ul>
+	<li><strong>"logs"</strong>: Log readback/setup mode. Used after flying)</li>
+	<li><strong>"setup"</strong>: Initial setup mode)</li>
+	<li><strong>"test"</strong>: Test mode)</li>
+</ul>
+
+
+
+<h1>Setup</h1>
+
+The Setup process configures APM for your particular RC radio settings and desired flight modes. Type "setup" and hit return to enter this mode. <strong>You MUST setup both radio and modes before you can fly. You should also test that you're getting GPS lock (using the gps command in the test mode), which usually means testing outside where the GPS module has a clear view of the sky.</strong> Allowed setup commands are:
+<ul>
+<ul>
+	<li><strong>"reset"</strong>: Resets APM to default settings</li>
+	<li><strong>"radio"</strong>: Sets up RC settings (see below)</li>
+	<li><strong>"modes"</strong>: Sets up flight control modes for each RC toggle switch position (see below)</li>
+	<li><strong>"compass"</strong>: Enables compass. Commands are "compass on" or "compass off"</li>
+	<li><strong>"declination"</strong>: Sets local magnetic declination for compass. You can find your local declination at <a href="http://www.ngdc.noaa.gov/geomag-web/" rel="nofollow">this web page</a>. Although it is given in minutes and seconds, enter it as a decimal. So <tt>14° 10' E</tt> would be entered as 14.10.</li>
+	<li><strong>"battery"</strong>: Enables battery monitoring. Enter options 0-4 (repeat to enter additional options):</li>
+</ul>
+</ul>
+<pre>     0 = Batt monitoring disabled
+     1 = Monitoring 3 cell battery
+     2 = Monitoring 4 cell battery
+     3 = Monitoring batt volts 
+     4 = Monitoring both volts and current</pre>
+<ul>
+	<li><strong>"show"</strong>: Shows all current settings in EEPROM</li>
+	<li><strong>"erase"</strong>: Erases EEPROM</li>
+</ul>
+
+
+
+<h1>Radio setup</h1>
+
+<i>Note: APM does not power the RC receiver or servos (although the RC equipment can power APM). If you have APM powered by USB, you must also connect an ESC/Lipo or receiver battery to the RC APM pins (typically, the ESC would be plugged into Out 3, while a receiver battery would typically be plugged into your receiver, which would send power to APM via the RC cables). If you do not separately power the RC system, APM will be unable to read any signals on its RC inputs.</i> In this mode you must move both sticks to all of their extremes, as follows: Move the right stick to the top right, then bottom right, then top left, then bottom left. Then repeat for the left stick. The order doesn't matter, but what's important is that you hit all four corners for each stick. Hold the stick in each corner for a second. Here's a screenshot of a typical Radio setup process: 
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/setup2.png"><img class="size-full wp-image-1146" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/setup2.png" alt="setup2" width="612" height="699" /></a> 
+
+<strong>Note</strong>: As shown above, the RC readings for the channels you have hooked up should be around 1,000-1,300 at the low end and around 1,900-2,000 at the high end. (Readings of exactly 1,000 and 2,000 mean that channel's not connected at all). If you are getting readings that are all around 1,500, there are three likely causes:
+<ol>
+	<li>You didn't move both sticks to all four corners of their range during the test, or did it too quickly.</li>
+	<li>Your RC connections are plugged in wrong, either upside down, on the wrong pins, or otherwise not making a connection</li>
+	<li>You have one of the early APM boards that may need to have its PPM firmware updated (this should not be a problem for any board shipped after mid-2010). Instructions for doing that are <a href="http://planner.ardupilot.com/wiki/common-ppm-encoder-8-channel-standalone-encoder/" rel="nofollow">here</a>.</li>
+</ol>
+
+
+
+<h1>Flight Control Modes</h1>
+
+Here's how to set your flight control modes: In the CLI, enter setup mode. Type "modes" and press return. You can now see the flight modes displayed as you move your control switch to each position. If you want to change your mode, use the rudder/aileron control stick on your radio. Just move the stick to the right or left and the mode will increment. Hitting Enter will exit the mode and save your changes. See this example:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/modes.png"><img class="size-full wp-image-1147" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/modes.png" alt="modes" width="641" height="529" /></a>
+
+
+
+
+<strong>Here's a video tutorial:</strong> http://www.youtube.com/watch?v=E7RE1B0lhk4&amp;feature=player_embedded/
+
+
+
+<h1>Checking for reversed servos</h1>
+Now is a good time to go back and see if any of the DIP switches need to be flip to reverse a servo. Instructions are <a href="http://plane.ardupilot.com/reversing-servos-and-setting-normalelevon-mode/" rel="nofollow">here</a>. And remember that if you're flying an elevon plane (flying wing or delta), you should set the mixing with the DIP switch, too. And if you're flying a regular plane and find that channel 1 and 2 are accidentally combined, that means you've accidentally got it in the elevon mode. Push the last DIP switch down to return to normal.
+
+
+
+<h1>Logs</h1>
+This mode allows you to read and manage flight log files in the onboard 16MB dataflash memory. NOTE: You must use erase before trying to use the logging function. Failure to do an erase first will cause problems and show false results.
+<ul>
+	<li><strong>"dump (n)"</strong>: Dump log "n"</li>
+	<li><strong>"erase"</strong>: Erase all logs</li>
+	<li><strong>"enable (name) or all"</strong>: Enable logging "name" or everything</li>
+	<li><strong>"disable (name) or all"</strong>: Disable logging "name" or everything</li>
+</ul>
+
+
+
+<h1>CLI APM Test Suite</h1>
+APM comes with a number of onboard tests. To use them, type "test" in the CLI, and "help" to see all the different tests:
+<ul>
+	<li><strong>"baro</strong>: Shows the data from the barometer</li>
+	<li><strong>"compass"</strong>: Shows the data from the magnetometer, if one is connected and enabled</li>
+	<li><strong>"ins"</strong>: tests the accelerometers and gyros</li>
+	<li><strong>"optflow"</strong>: Tests optical flow sensor</li>
+	<li><strong>"relay"</strong>: Tests the onboard relay (turns it on and off every five seconds; you should hear it faintly click)</li>
+	<li><strong>"shell"</strong>: Provides access to the NSH shell (Pixhawk only)</li>
+	<li><strong>"rangefinder"</strong>: Tests the rangefinder sensor</li>
+</ul>

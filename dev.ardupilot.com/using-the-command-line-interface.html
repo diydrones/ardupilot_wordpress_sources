@@ -1,0 +1,185 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: using-the-command-line-interface 
+title: Using the Command Line Interface 
+id: 4890 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[warning]The CLI is being phased out on all platforms. The features were massively cut down with AC3.1.5 and then it was removed for the APM2 completely anyway with AC3.2. All CLI functions are now available via regular MAVlink commands in the GCSs. This article has been moved to the dev wiki and may be considered deprecated.[/warning]
+
+<span style="color: #ff0000">MOVE ALL THE CLI INFO TO THIS PAGE </span>
+<span style="color: #ff0000">ALSO Mission Planer Terminal </span>
+<h1>Overview</h1>
+The Command Line Interface (CLI) is an alternative to the Configurator. It does most of what the Configurator does, but in a text interface. One reason to use this is that you may not be able to run the Configurator (if you're running Linux, for example, or a Mac without a Windows emulator). You may also prefer it because it's fast and clean. (There are also a few commands that are only available in the CLI).
+
+The way the CLI is used is by sliding the slider switch on the IMU board towards the servo connectors.
+
+<strong>Don't forget to return it to the other position before you fly!</strong>
+
+Now open the Arduino serial monitor, setting baud rate to 115200 baud and ensuring that "Carriage Returns" are enabled. You should see a command line on the monitor:
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/QuadCLI.png" alt="" />
+<h1>Available commands</h1>
+Commands that are supported from current CLI are:
+
+<strong>a - Activate/Deactivate compass</strong>
+
+Every second 'a' activates / deactivates your compass usage inside program. You also need to check that #define IsMAG is selected inside program
+
+<strong>c - Compass offset calibration</strong>
+
+Roll/Pitch/Move/Rock/Twist your quad on every direction, even upside down until offset numbers are not changing. After values are as desired hit 'Enter' to save values and to exit back to main menu
+
+<strong>e - ESC Max Throttle calibration</strong>
+
+Official Copter ESCs (and few others too, you can test) supports automatic max/min throttle calibrations.
+<ol>
+	<li>SAFETY! Disconnect your propellers first!</li>
+	<li>Activate this calibration</li>
+	<li>Disconnect your battery but keep USB cable connected</li>
+	<li>Move your throttle stick to "full"</li>
+	<li>Connect your battery and listen normal ESC beepboop.. reboot sounds
+<ol>
+	<li>After ESCs send Beep Beep sound, move your throttle to minimum</li>
+	<li>Listen final beep sound from ESCs</li>
+</ol>
+</li>
+	<li>Give small throttle to your APM:Copter to see that all motors spins same speed
+<ol>
+	<li>If they do not spin, redo calibration</li>
+</ol>
+</li>
+</ol>
+Hit 'Enter' to disarm all motors and to exit from ESC Calibration
+
+If you are not using the official APM:Copter ESCs, you can manually calibrate them one by one by connecting each ESC to your RC receiver's channel 3 output. Unplug your battery, move transmitter throttle stick to full, and reconnect the battery. Wait for the beeps to stop, then bring the throttle stick down to the minimum again. Repeat for all four ESCs.
+
+<strong>i - Initialize and calibrate Accel offsets</strong>
+
+Place your APM:Copter on level surface and reset its 0-Level with this command. It takes some seconds until samples will be collected. During calibration do not touch/move or in any other ways make your APM:Copter to move.
+
+<strong>m - Motor tester with AIL/ELE stick</strong>
+
+Users can easily test that their ESC/Motors are connected correctly. Move your AIL/ELE stick to up/down/left/right and corresponding motor should start pulsing slowly. Correct motor rotation directions are shown <a href="http://copter.ardupilot.com/wiki/connect-escs-and-motors/">here</a>.
+
+SAFETY! Disconnect propellers before doing your test.
+
+If your motors does not follow your stick input eg. stick to full right and left motors starts, change ESC cable on your Power Distributor PCB or in APM connectors depending where you have connected your ESCs.
+
+<strong>r - Reset Factory settings</strong>
+
+With every new revision you need to reset our EEPROM (just in case).
+
+<strong>t - Calibrate MIN Throttle value</strong>
+
+Read minimum throttle value from your radio. Place throttle at minimum and activate this test, Min throttle value is needed for all altitude hold features and general motor operations.
+
+<strong>s - Show settings</strong>
+
+Printout most important settings to your serial port.
+
+&nbsp;
+
+&nbsp;
+
+To use the CLI normally to prepare your quad for flight, you need to go through a small number of steps.
+<ul>
+	<li>Upload the code with the mission planner or Arduino.</li>
+	<li>In the terminal screen, hit "Enter" three times at startup if you're not automatically given the CLI entry prompt.</li>
+</ul>
+There are three menus in the CLI and you can type "help" at any time to see the available menus or commands. Typing "setup" will get you into the setup menu.
+<h1>SETUP MENU COMMANDS</h1>
+<ul>
+	<li>Type "reset" to erase the EEPROM and start from scratch. This is an important step to prevent bad/old values from being loaded into a updated firmware installation. Note, after you do this, you will have to run through the
+<a href="http://copter.ardupilot.com/wiki/esc-calibration/">ESC calibration process</a> again.</li>
+	<li>After rebooting the APM, connect your radio and enter "radio". You will be prompted to move your controls to their extremes and press the enter key to save the values. You should center your trims before running this command!</li>
+	<li>Run the "level" command with your copter on a perfectly level surface. Failing to do this step could lead to a very unstable copter.</li>
+	<li>Run "frame" to see what orientation you have setup for your copter. "x" is the default. "frame +" for example will enable a plus frame</li>
+	<li>Run "modes" to setup your flight modes. The roll stick selects modes, the yaw stick selects Simple mode on or off. Move your three position switch and set each mode. Press the enter key to save.</li>
+	<li>Enter "sonar on" to enable sonar</li>
+	<li>Enter "compass on" to enable compass</li>
+	<li>Enter "declination 14.25" to save the declination for the compass in decimal degrees.</li>
+	<li>Enter "exit" to leave setup.</li>
+</ul>
+<h1>TEST MENU COMMANDS</h1>
+<ul>
+	<li>Type "test" to enter the test menu from the top menu</li>
+	<li>Type "radio" to see the output of the radio values. Move the roll/pitch stick to the lower right and look for the value 4500, 4500 (or near that value.) Throttle should be 0 - 800. Yaw is -4500(left) and 4500 (right).</li>
+</ul>
+That's it. You should be ready to fly.
+
+AC2CLI
+<h2>Using the Command Line Interpreter (CLI) to configure APM:Copter</h2>
+You don't need to use the Mission Planner to set up APM:Copter (and there are some advanced configuration options not covered by the Mission Planner). You can also use APM's built-in Command Line Interpreter (CLI) over a serial terminal, which will work on any computer and operating system. It is only available via the USB cable; it cannot be used via a Xbee/3DR wireless connection.
+
+You will also need to use the CLI for such functions as assigning your preferred flight modes to your RC transmitter's toggle switches. See the menu descriptions below for instructions.
+
+You can enter the CLI by hitting "Enter" three times in the Mission Planner Terminal screen.
+
+When you open it, it will look like this (with a more recent version number of the software displayed):
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/AC2_CLI.png" alt="" />
+
+If you're not using Windows, you can also use the Serial Monitor built into Arduino (remember to select the right baud rate and enable CRs as shown here):
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/arduinoserialmon.png" alt="" />
+
+Once you are in the CLI, you can type "help" at any menu and get a full list of available commands.
+
+There are three top-level menus: Setup, Test and Logs.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/CLI1.png" alt="" />
+
+Each has sub-menus, whose command can also be seen by typing "help" when you are in that section.
+<h2>Setup Menu</h2>
+=
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/CLI2.png" alt="" />
+
+CLI interactive setup - You must go through each item and set the values to match your hardware
+<h1>"setup" menu:commands:</h1>
+<ul>
+	<li><strong>erase</strong>: When installing ACM for the first time, run this to erase bad values from EEPROM -- just in case!</li>
+	<li><strong>reset</strong>: Performs factory reset and initialization of EEPROM values</li>
+	<li><strong>radio</strong>: Records the limits of ALL radio channels - very important!!!</li>
+	<li><strong>motors</strong>: Interactive setup of your ESC and motors. Enter this mode, then plug-in battery, move your RC transmitter's pitch/roll sticks in each direction to make the prop in that direction spin (so moving the stick up will make the front rotor spin on a quad, and moving it right will make the right rotor spin). For copters with more than four motors, it will spin groups of motors, with the one closest to the direction of the stick going fastest.</li>
+	<li><strong>level</strong>: Sets initial value of accelerometers - hold copter level</li>
+	<li><strong>modes</strong>: Sets the flight modes assigned to each switch position (you have 5 available). Use your aileron/roll stick on your RC transmitter to scroll through the options. Full right moves forward through the list; full left moves back. Hit enter to save your settings and exit this mode.</li>
+	<li><strong>frame</strong>: Sets your frame config: (x, +, v (Octo))</li>
+	<li><strong>current</strong>: Enables an AttoPilot current sensor: (on, off, milliamp hours)</li>
+	<li><strong>sonar</strong>: Enable sonar sensor. Sensor hooks to the "pitot" port which is an analog input (on, off). See installation details <a href="http://copter.ardupilot.com/wiki/common-optional-hardware/common-rangefinder-landingpage/">here</a>.</li>
+	<li><strong>compass</strong>: Enables the compass (on, off)</li>
+	<li><strong>declination</strong>: Sets your local declination value -- lookup online for accuracy (decimal degrees)</li>
+	<li><strong>show</strong>: A formatted output of all the settings</li>
+</ul>
+<h2>Test Menu</h2>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/CLI3.png" alt="" />
+<h1>"test" menu commands:</h1>
+<ul>
+	<li><strong>pwm</strong>: Outputs the pwm values of all 8 radio channels</li>
+	<li><strong>radio</strong>: Outputs the control values of all 8 radio channels in degrees x 100 or other value (see radio.pde)</li>
+	<li><strong>failsafe</strong>: (Not currently used)</li>
+	<li><strong>stabilize</strong>: Lets you test the stabilization with debugging output to the terminal (may spin the props -- not recommended for flying).</li>
+	<li><strong>gps</strong>: Outputs GPS data. Note: typically you must be outside to get GPS lock. It can take two minutes or more to achieve lock at first power on.</li>
+	<li><strong>adc</strong>: Outputs raw adc values</li>
+	<li><strong>imu</strong>: Outputs euler angles</li>
+	<li><strong>battery</strong>: Outputs voltage readings to analog in 0-3</li>
+	<li><strong>tune</strong>: (Not currently used)</li>
+	<li><strong>current</strong>: Outputs voltage and current from an AttoPilot current sensor. Motors will spin, so disconnect your four-wire cable or take off your props!</li>
+	<li><strong>relay</strong>: Toggles the relay</li>
+	<li><strong>waypoints</strong>: Dumps stored waypoint commands</li>
+	<li><strong>altitude</strong>: Displays output from onboard barometric pressure sensor</li>
+	<li><strong>sonar</strong>: Displays output from sonar sensor (if attached and enabled)</li>
+	<li><strong>compass</strong>: Outputs compass angles in degrees (0 = north)</li>
+	<li><strong>xbee</strong>: Outputs an XBEE sequence used for range testing</li>
+	<li><strong>eedump</strong>: Raw output of bytes in EEPROM</li>
+	<li><strong>rawgps</strong>: Outputs raw, unparsed GPS data</li>
+	<li><strong>mission</strong>: Writes a default mission to EEPROM (null, 'wp'). Choosing 'wp' option will send the copter 15 meters North and back again.</li>
+</ul>
+<h2>Logs Menu</h2>
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/CLI4.png" alt="" />
+<h1>"logs" menu commands:</h1>
+See the <a href="http://copter.ardupilot.com/wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/">datalogging page</a> to better understand how to dump logs and how to set the types of data you want to record.

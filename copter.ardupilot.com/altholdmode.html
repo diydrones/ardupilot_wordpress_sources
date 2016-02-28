@@ -15,9 +15,9 @@ In altitude hold mode, Copter maintains a consistent altitude while allowing rol
 
 <h1>Overview</h1>
 
-When altitude hold mode (aka AltHold) is selected, the throttle is automatically controlled to maintain the current altitude. Roll, Pitch and yaw operate the same as in <a href="stabilize-mode">Stabilize mode</a> meaning that the pilot directly controls the roll and pitch lean angles and the heading.
+When altitude hold mode (aka AltHold) is selected, the throttle is automatically controlled to maintain the current altitude. Roll, Pitch and yaw operate the same as in <a href="http://copter.ardupilot.com/wiki/stabilize-mode/">Stabilize mode</a> meaning that the pilot directly controls the roll and pitch lean angles and the heading.
 
-Automatic altitude hold is a feature of many other flight modes (<a href="loiter-mode">Loiter</a>, <a href="sport-mode">Sport</a>, etc) so the information here pertains to those modes as well.
+Automatic altitude hold is a feature of many other flight modes (<a href="http://copter.ardupilot.com/wiki/loiter-mode/">Loiter</a>, <a href="http://copter.ardupilot.com/wiki/sport-mode/">Sport</a>, etc) so the information here pertains to those modes as well.
 
 [note]The flight controller uses a barometer which measures air pressure as the primary means for determining altitude ("Pressure Altitude") and if the air pressure is changing in your flight area due to extreme weather, the copter will follow the air pressure change rather than actual altitude (unless you are within 20 feet of the ground and have SONAR installed and enabled). Below 26 feet, SONAR (if enabled) will automatically provide even more accurate altitude maintenance.[/note]
 
@@ -50,7 +50,7 @@ The Throttle Accel PID gains convert the acceleration error (i.e the difference 
 
 <h1>Verifying AltHold performance with dataflash logs</h1>
 
-Viewing the altitude hold performance is best done by <a href="common-downloading-and-analyzing-data-logs-in-mission-planner">downloading a dataflash log</a> from your flight, then open it with the mission planner and graph the barometer altitude, desired altitude and inertial navigation based altitude estimate.  This data is found in slight different columns depending upon the version and board.
+Viewing the altitude hold performance is best done by <a href="http://copter.ardupilot.com/wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/">downloading a dataflash log</a> from your flight, then open it with the mission planner and graph the barometer altitude, desired altitude and inertial navigation based altitude estimate.  This data is found in slight different columns depending upon the version and board.
 
 APM running AC3.1: graph CTUN's BarAlt (baro alt), WPAlt (desired altitude) and the GPS message's RelAlt (inertial nav alt estimate)
 
@@ -65,8 +65,8 @@ The three should track well as shown below.
 <h1>Common Problems</h1>
 
 <ol>
-	<li>High vibrations can lead to the copter rapidly climbing as soon as altitude hold is engaged.  Check the <a href="common-measuring-vibration">Measuring Vibration</a> and <a href="common-vibration-damping">Vibration Dampening</a> wiki pages for details on how to measure and reduce vibrations.</li>
-	<li>Copter slowly descends or climbs until the pilot retakes control in stabilize.  Normally this is caused by not having the throttle stick in the mid position.  This commonly happens when the pilot is switching into AltHold from a manual flight mode (like Stabilize) on a copter that does not hover at mid throttle.  See the <a href="ac_throttlemid">wiki page related to setting the mid throttle position</a>.</li>
+	<li>High vibrations can lead to the copter rapidly climbing as soon as altitude hold is engaged.  Check the <a href="http://copter.ardupilot.com/wiki/common-measuring-vibration/">Measuring Vibration</a> and <a href="http://copter.ardupilot.com/wiki/common-vibration-damping/">Vibration Dampening</a> wiki pages for details on how to measure and reduce vibrations.</li>
+	<li>Copter slowly descends or climbs until the pilot retakes control in stabilize.  Normally this is caused by not having the throttle stick in the mid position.  This commonly happens when the pilot is switching into AltHold from a manual flight mode (like Stabilize) on a copter that does not hover at mid throttle.  See the <a href="http://copter.ardupilot.com/wiki/ac_throttlemid/">wiki page related to setting the mid throttle position</a>.</li>
 	<li>The motors seem to stop for a moment just as AltHold is engaged but then it soon recovers.  This normally occurs when the pilot enters AltHold while climbing rapidly.  The target altitude is set at the moment the pilot switches into alt hold but because the vehicle is rising quickly it flies above the target.  The aggressive altitude hold controller then responds by momentarily reducing the motors to near minimum until the copter begins falling back to the target altitude.  The workaround is to enter AltHold while the copter is flying at a stable altitude.</li>
 	<li>Air pressure changes cause the vehicle to drift up or down by a couple of meters over longer period of time or for the altitude shown on the GCS to be inaccurate by a couple of meters including occasional negative altitudes (meaning altitudes below the home altitude).</li>
 	<li>Momentary altitude loss of 1m ~ 2m when the copter levels out after a high speed forward flight.  This is caused by an aerodynamic effect which leads to a momentary low pressure bubble forming on the top of the copter where the flight controller is mounted which leads the altitude hold controller to believe it is climbing so it responds by descending.  There is no cure for this behaviour at the moment although increasing the <code>INAV_TC_Z</code> parameter to 7 (default is 5) reduces the effect but increases the change of Common Problem #1 listed above.</li>

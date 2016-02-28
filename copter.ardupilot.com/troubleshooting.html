@@ -14,17 +14,17 @@ END METADATA
 <h4>I can't get the motors to run and/or can't arm the ESCs</h4>
 This can be due to a number of mistakes:
 <ol>
-	<li>Have you completed the mandatory hardware configuration steps described <a href="configuring-hardware">here</a>?</li>
+	<li>Have you completed the mandatory hardware configuration steps described <a href="http://copter.ardupilot.com/wiki/configuring-hardware/">here</a>?</li>
 	<li>Are you in Acro, Stabilize or Simple mode? As a safety measure, the motors won't arm in other modes.</li>
 	<li>Are you using the APM 2.5 Power Module to power the APM board, as recommended? If not, and you're using one of your ESCs via the PDB to power the board, make sure the JP1 jumper is on.</li>
-	<li>Are you sure you're arming them right? When the motors are armed, the arm LED (green on APM1, yellow on APM 2) on the IMU will turn solid after the IMU calibration flashing (about 5 seconds). Review the <a href="arming_the_motors" rel="nofollow">arming guide</a> to make sure you're doing it right.</li>
+	<li>Are you sure you're arming them right? When the motors are armed, the arm LED (green on APM1, yellow on APM 2) on the IMU will turn solid after the IMU calibration flashing (about 5 seconds). Review the <a href="http://copter.ardupilot.com/wiki/arming_the_motors/" rel="nofollow">arming guide</a> to make sure you're doing it right.</li>
 	<li>Are your Yaw or Throttle channels reversed on your transmitter? Try moving the Yaw stick to the far left, instead of the right. If that works (green LED tuns solid after the IMU calibration, your Yaw is reversed. If not, try the same with the Throttle channel: push it to max and try full right yaw from there. If that works, your Throttle channel is reversed.</li>
 	<li>Is your RC gear in Mode 2? If not, you'll need to move the right stick (yaw) to the right and the left stick (throttle) to the top. (Or just switch back to Mode 2)</li>
 	<li>Some ESCs are thrown off by some startup signals in Copter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
 	<li>It's possible you've changed your throttle trim settings since you did your initial radio calibration. Trim the throttle down a few notches and try arming again.</li>
 	<li>Some ESCs have a minimum low threshold before they will arm. If you need to, trim down your radio throttle and redo radio calibration.</li>
 	<li>Redo your radio calibration in the Mission Planner. Make sure that the throttle channel (Ch 3) is being read properly and the values are around 1100 (low) and 1900 (high), more or less. Remember that your LiPo must be plugged in to power the RC gear.</li>
-	<li>If you've checked the previous things, it may be that you need to recalibrate your ESCs. Do it the manual way (<a href="esc-calibration" rel="nofollow">here</a> to be sure).</li>
+	<li>If you've checked the previous things, it may be that you need to recalibrate your ESCs. Do it the manual way (<a href="http://copter.ardupilot.com/wiki/esc-calibration/" rel="nofollow">here</a> to be sure).</li>
 </ol>
 
 
@@ -45,7 +45,7 @@ This almost always means that you've configured it or set it up wrong. Check the
 	<li>Check the signal wires on the power distribution board to make sure they are oriented correctly. If you've reversed two, it will cause Copter to flip. This should be noticeable by doing the hand test as well. (It should have also shown up in the Motors test above)</li>
 	<li>Check that your props can't turn on their motor shafts, as if they weren't tightened down enough. If one can, despite its prop being tightened, that may mean that its motor shaft has been pushed down into the motor too far for the prop mount to get a grip. Take off the prop and and use a small allen wrench to loosen the little set screw that holds the shaft onto the motor. Then with pliers pull the shaft out until it's the same height as those of the other motors. Then tighten the set screw, and put the prop back and tighten it up again.</li>
 	<li>Was the quad stable and flat for the whole calibration routine at startup? Was it stable and flat during the setup process? (If need be, do it again)</li>
-	<li>Did you calibrate your ESCs? They should all start together when you advance the throttle. If need be, do it again manually, as described <a href="esc-calibration" rel="nofollow">here</a>.</li>
+	<li>Did you calibrate your ESCs? They should all start together when you advance the throttle. If need be, do it again manually, as described <a href="http://copter.ardupilot.com/wiki/esc-calibration/" rel="nofollow">here</a>.</li>
 	<li>Did you setup and test your radio? Run test/radio to see. Pitch, Roll, Throttle and Yaw should all be 0 or near zero (60 or less). Move the pitch and roll stick to the lower right, you should see approximately 4500, 4500 in Channels 1 and 2.</li>
 	<li>Have you checked all your sensors in the Mission Planner to make sure the hardware is working right?</li>
 </ol>
@@ -101,7 +101,7 @@ Check the following:
 <h4>My Copter isn't as stable as I'd like or doesn't Loiter/Hold Altitude/Navigate reliably</h4>
 Every copter is different, and even the official kit can have differences in motor performance or balance depending on how you've put it together. So we've made it relatively easy to tweak many of the performance settings to turn your copter perfectly. That said, tuning is something of an art, so it helps to read a bit more before you start tweaking.
 
-There is a guide to PID tuning <a href="tuning" rel="nofollow">here</a>.
+There is a guide to PID tuning <a href="http://copter.ardupilot.com/wiki/tuning/" rel="nofollow">here</a>.
 
 
 
@@ -143,7 +143,7 @@ This is usually due to an airframe that it out of tune, either with one motor ti
 
 Although you can adjust those terms in the Mission Planner's PID configuration screen, the best solution is to solve it at the source. Eyeball each motor and see if it or the arm it is one is slightly tilted, and bend it back to vertical if so. Also ensure that the battery is centered on the quad and the center of gravity of the vehicle is as close to the center of the APM board as possible. It's also a great idea to redo the ESC calibration routine just in case.
 
-Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="connect-escs-and-motors/#attach_propellers" rel="nofollow">here</a>.
+Also make sure that you've got your forward-rotating and counter-rotating props on the right motors, as shown <a href="http://copter.ardupilot.com/wiki/connect-escs-and-motors/#attach_propellers" rel="nofollow">here</a>.
 
 
 
@@ -159,7 +159,7 @@ The most likely cause of this is your bullet connectors. After your initial setu
 
 If your wires are soldered without bullet connectors and you still see this issue, there are some other things that can cause this problem. Your motor may be going bad: either the bearings are going or your shaft is horribly bent. A motor with bad bearings takes more power to spin. In that situation, the ESC could be cutting out to protect itself. Or it maybe flying slow enough to stall the motor. Attach a current sensor between your battery and the motor and test the difference between a good motor and the bad one. If you are seeing higher draw in the bad one, replace or fix it.
 
-If you are using a Futaba tx/rx with more than 8 channels and purchased your APM before early 2013 you should upgrade your PPM encoder following the instructions <a href="common-ppm-encoder-apm2x-atmega32u2" rel="nofollow">here</a>. Below is a video pre-upgrade (i.e. twitches) and post (no twitches).
+If you are using a Futaba tx/rx with more than 8 channels and purchased your APM before early 2013 you should upgrade your PPM encoder following the instructions <a href="http://copter.ardupilot.com/wiki/common-ppm-encoder-apm2x-atmega32u2/" rel="nofollow">here</a>. Below is a video pre-upgrade (i.e. twitches) and post (no twitches).
 
 Another possible cause is the THR_MIN parameter's default of 130 is too low for your motors or ESCs. The THR_MIN parameter controls the minimum throttle that will be sent to the ESCs/motors to ensure they keep spinning while your throttle is above zero. If this parameter is too low it is possible for your motors to momentarily stop leading to a twitch. Try increasing this parameter to 150. You should be careful not to set this parameter too high (i.e. &gt;150 especially on a high powered copter). 
 
@@ -171,7 +171,7 @@ Motors will typically twitch once per second or so (often with a beep) while the
 
 
 <h4>The APM board works when it's plugged into the USB, but not when it's powered by the RC rail (ESC/Lipo)</h4>
-APM allows for both RC power or a separate battery run through APM's built-in power regulator as described <a href="common-apm25-and-26-overview" rel="nofollow">here</a>. A solder jumper called SJ1 determines which is used. By default from the factory, that jumper should be soldered which means APM will be powered by the RC rail.
+APM allows for both RC power or a separate battery run through APM's built-in power regulator as described <a href="http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/" rel="nofollow">here</a>. A solder jumper called SJ1 determines which is used. By default from the factory, that jumper should be soldered which means APM will be powered by the RC rail.
 
 If for some reason, connecting power to the RC rail does not power your board, check to see if that jumper is soldered. If it isn't, as shown below, just solder a blob of solder over the two pads to connect them.
 
@@ -190,7 +190,7 @@ First, remember that you cannot use wireless telemetry with APM 2 while the USB 
 
 Check that you've switching the Mission Planner to the COM port assigned to your Xbee that's connected to your PC and set the baud rate to 57600.
 
-Ensure that you've gone through the full Xbee configuration process described <a href="common-telemetry-xbee" rel="nofollow">here.</a> Run the test code at the bottom of that page to ensure that your Xbees are communicating. <strong>Remember that the Xbees must be programmed in X-CTU to run at 57k.</strong>
+Ensure that you've gone through the full Xbee configuration process described <a href="http://copter.ardupilot.com/wiki/common-telemetry-xbee/" rel="nofollow">here.</a> Run the test code at the bottom of that page to ensure that your Xbees are communicating. <strong>Remember that the Xbees must be programmed in X-CTU to run at 57k.</strong>
 
 If your Xbees suddenly stop working, it could be that a loose cable has led to a signal glitch that bricked the airborne one.
 
@@ -216,7 +216,7 @@ Check that you've switching the Mission Planner to the COM port assigned to your
 <ol>
 	<li>Have you set up your RC input in the Mission Planner setup process?</li>
 	<li>Check that your RC radio is talking properly to its receiver (typically, that will be shown by a green light on the receiver).</li>
-	<li>If those two check out, you probably just need to calibrate your ESCs (even if you've done that before, if you've erased your EEPROM and done a reset, you'll need to do it again. It's an easy procedure and the instructions are <a href="esc-calibration" rel="nofollow">here.</a></li>
+	<li>If those two check out, you probably just need to calibrate your ESCs (even if you've done that before, if you've erased your EEPROM and done a reset, you'll need to do it again. It's an easy procedure and the instructions are <a href="http://copter.ardupilot.com/wiki/esc-calibration/" rel="nofollow">here.</a></li>
 	<li>Check that your radio channels are in right order (cabling and/or Mode-1, Mode-2)</li>
 	<li>Some ESCs are thrown off by some startup signals in Copter 2.x. Try plugging in a USB cable first, to boot the board, and then plug in your LiPo after it's already up, or just ensure that the four-wire cable from your APM board to your power distribution board is disconnected during regular startup. See details <a href="http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround" rel="nofollow">here</a>.</li>
 </ol>
@@ -298,7 +298,7 @@ Or you can use a standoff with an extending screw 1/10" outboard of each corner 
 
 When a flight log is checked in RAW mode, X,Y and Z hovering ACCELs vibration on a log graph should at least be in the + to - 5 range and either of the above techniques can get them down to the plus to minus 1 range if they are just right.
 
-You can graph your Z-axis vibrations by enabling the "RAW" message type in the <a href="common-downloading-and-analyzing-data-logs-in-mission-planner" rel="nofollow">dataflash</a>, then take a short flight in Stabilize mode and finally download the logs and graph them with the mission planner. Below is an example of an extremely badly vibrating copter (top) and a nearly perfectly smooth copter (bottom). The Z-axis vibrations should not move up and down more than -5 to -15 or alt hold will not function correctly. 
+You can graph your Z-axis vibrations by enabling the "RAW" message type in the <a href="http://copter.ardupilot.com/wiki/common-downloading-and-analyzing-data-logs-in-mission-planner/" rel="nofollow">dataflash</a>, then take a short flight in Stabilize mode and finally download the logs and graph them with the mission planner. Below is an example of an extremely badly vibrating copter (top) and a nearly perfectly smooth copter (bottom). The Z-axis vibrations should not move up and down more than -5 to -15 or alt hold will not function correctly. 
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/BadVibrations1.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/BadVibrations1-300x118.png" alt="BadVibrations" width="300" height="118" class="alignnone size-medium wp-image-14175" /></a>
 
@@ -319,7 +319,7 @@ The "Distance to Home" is the distance from the mission planner's home location 
 
 
 <h4>Mission Planner displays Altitude of -21 million or NaN appearing in Advanced Parameter list</h4>
-You should not attempt to fly your copter in this state because <a href="altholdmode">AltHold</a> will not function at all. You should instead go into the Mission Planner's Terminal screen and reset your parameters by typing "setup", "reset", "Y" and rebooting your APM.
+You should not attempt to fly your copter in this state because <a href="http://copter.ardupilot.com/wiki/altholdmode/">AltHold</a> will not function at all. You should instead go into the Mission Planner's Terminal screen and reset your parameters by typing "setup", "reset", "Y" and rebooting your APM.
 
 The cause is a bug in the 2.9.1 accelerometer calibration routine that can save NaN to the AHRS AHRS Trim parameters if the calibration routine fails. This feeds into the inertial navigation routines and results in the bizarre altitude display in the mission planner. Note: you will likely have seen "Calibration failed (????)" after you attempted to calibrate the accelerometers values.
 

@@ -1,0 +1,43 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: apmcopter-programming-libraries 
+title: ArduPilot Programming Libraries 
+id: 1394 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The <a href="https://github.com/diydrones/ardupilot/tree/master/libraries" target="_blank" rel="nofollow">the libraries</a> are shared with Copter, Plane and Rover. Below is a high level list of libraries and their function.
+
+<strong>Core libraries:</strong>
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_AHRS" target="_blank" rel="nofollow">AP_AHRS</a> - attitude estimation using DCM or EKF</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_InertialNav" target="_blank" rel="nofollow">AP_Common</a> - core includes required by all sketches and libraries</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Math" target="_blank" rel="nofollow">AP_Math</a> - various math functions especially useful for vector manipulation</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AC_PID" target="_blank" rel="nofollow">AC_PID</a> - PID controller library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_InertialNav" target="_blank" rel="nofollow">AP_InertialNav</a> - inertial navigation library for blending accelerometer inputs with gps and baro data</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AC_AttitudeControl" target="_blank">AC_AttitudeControl</a> -</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_InertialNav" target="_blank" rel="nofollow">AP_WPNav</a> - waypoint navigation library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Motors" target="_blank">AP_Motors</a> - multicopter and traditional helicopter motor mixing</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/RC_Channel" target="_blank" rel="nofollow">RC_Channel</a> - a library to more convert pwm input/output from APM_RC into internal units such as angles</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL" target="_blank">AP_HAL</a>, <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL_AVR" target="_blank">AP_HAL_AVR</a>, <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL_PX4" target="_blank">AP_HAL_PX4</a> - libraries to implement the "Hardware abstraction layer" which presents an identical interface to the high level code so that it can more easily be ported to different boards.</li>
+</ul>
+
+
+<strong>Sensor libraries:</strong>
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_InertialSensor" target="_blank" rel="nofollow">AP_InertialSensor</a> - reads gyro and accelerometer data, perform calibration and provides data in standard units (deg/s, m/s) to main code and other libraries</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_RangeFinder" target="_blank" rel="nofollow">AP_RangeFinder</a> - sonar and ir distance sensor interfaced library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Baro" target="_blank" rel="nofollow">AP_Baro</a> - barometer interface library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_GPS" target="_blank" rel="nofollow">AP_GPS</a> - gps interface library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Compass" target="_blank" rel="nofollow">AP_Compass</a> - 3-axis compass interface library</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_OpticalFlow" target="_blank" rel="nofollow">AP_OpticalFlow</a> - optical flow sensor interface library</li>
+</ul>
+<strong>Other libraries:</strong>
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Mount" target="_blank" rel="nofollow">AP_Mount</a>, <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Camera" target="_blank" rel="nofollow">AP_Camera</a>, <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Relay" target="_blank" rel="nofollow">AP_Relay</a> - camera mount control library, camera shutter control libraries</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Mission" target="_blank">AP_Mission</a> - stores/retrieves mission commands from eeprom</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Buffer" target="_blank" rel="nofollow">AP_Buffer</a> - a simple FIFO buffer for use with inertial navigation</li>
+</ul>

@@ -1,0 +1,37 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: connecting-with-gcs 
+title: Connecting with GCS 
+id: 40 
+menu_order: 50 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains the different mechanisms for connecting the Antenna Tracker to a GCS (or even multiple GCSs at the same time).
+<!--more-->
+<h1>Overview</h1>
+There are a number ways that the Antenna Tracker's connection with the vehicle can be made accessible to a GCS:
+<ul>
+	<li>Connect a USB cable from the antenna tracker control board to the GCS machine</li>
+	<li>Connect a 2nd pair of radios between the antenna tracker control board and the GCS machine</li>
+	<li>Connect one additional radio and use the experimental multi-point SiK radio software</li>
+	<li>Connect a <a title="Companion Computer" href="http://dev.ardupilot.com/wiki/companion-computers/">companion computer</a> and set-up a WiFi access point</li>
+</ul>
+<img class="alignnone size-full wp-image-2754" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Connect_To_GCS.png" alt="AntennaTracker_Connect_To_GCS" width="652" height="274" />
+<h1>Connect with a USB cable</h1>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_ConnectToGCS_USBCable.png"><img class="alignnone size-large wp-image-2779" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_ConnectToGCS_USBCable-1024x541.png" alt="AntennaTracker_ConnectToGCS_USBCable" width="584" height="308" /></a>
+If the antenna controller is a Pixhawk you can simply connect your ground station computer to the Pixhawk using a long micro USB cable (<a href="http://www.ebay.com/sch/i.html?_odkw=long+micro+usb+cable&amp;_osacat=0&amp;_from=R40&amp;_from=R40&amp;_trksid=p2045573.m570.l1313.TR0.TRC0.H0.X3m+micro+usb+cable&amp;_nkw=3m+micro+usb+cable&amp;_sacat=0" target="_blank">like these from ebay</a> or use an <a href="http://store.3drobotics.com/products/usb-extension-cable-type-a" target="_blank">extension cable from 3DR</a>).
+
+On an APM2 the micro USB port and Telemetry port cannot be used at the same time which means that to connect with a USB cable, the radio must be moved to use UART2 (aka Serial2).  The UART2's TX, RX 5V and GND pins are on the right side of the APM2 as shown on <a href="http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/#Explanation_of_solder_jumper_options_on_the_bottom_of_the_board" target="_blank">this wiki page</a>.
+
+
+<h1>Connect a 2nd pair of radios</h1>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_ConnectToGCS_Radio.png"><img class="alignnone size-large wp-image-2775" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_ConnectToGCS_Radio-1024x433.png" alt="AntennaTracker_ConnectToGCS_Radio" width="584" height="246" /></a>
+
+A second pair of radios (or even a <a href="http://planner.ardupilot.com/wiki/common-mission-planner-bluetooth-connectivity/">bluetooth data link</a>) can be used to connect the Antenna Tracker controller to the PC running the ground station.  If using a <a href="http://planner.ardupilot.com/wiki/common-3dr-radio-version-2/">3DR radio</a> the Net IDs of the radios connecting the Antenna Tracker to the PC should be different to the Net IDs for the radio connecting the vehicle to the Antenna Tracker.
+
+
+<h1>Connect one more radio and use multi-point SiK radio software</h1>
+<h1>Connect a companion computer and set-up a wifi access point</h1>

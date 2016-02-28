@@ -1,0 +1,234 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: a-high-quality-bixler-1-1-build 
+title: High Quality Bixler 1.1 Build (APM2.x) 
+id: 5514 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article describes a well planned Bixler Build (by Dave Smith). 
+<!-- more-->
+
+<a href="http://api.ning.com/files/u325ipbpd7oqTtPXcbe06pO*YRgzw3pmmYp1bMm2Wg9DNb8LsLAgkd2DEDlgEKdYRKjFIMWOg1LkAG4u-fMpgy-Jp9ceEGXv/mainbix6.jpg" target="_self"><img src="http://api.ning.com/files/u325ipbpd7oqTtPXcbe06pO*YRgzw3pmmYp1bMm2Wg9DNb8LsLAgkd2DEDlgEKdYRKjFIMWOg1LkAG4u-fMpgy-Jp9ceEGXv/mainbix6.jpg" alt="" width="565" /></a>
+
+[tip]This wiki page is a work in progress and will be completed as the information becomes available (Ed:)[/tip]
+
+<h1>Overview</h1>
+
+I have seen some really horrific pictures on the internet of Bixlers with everything taped to the outside. After digging through the internet, I found the answers I needed to build my plane, but the learning curve was pretty steep.
+
+Hopefully I can help somebody out and save them a lot of frustration by logging my whole build.
+
+
+<h1>The equipment list</h1>
+
+<ol>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=18083" rel="nofollow">Bixler 1.1 ARF</a> (HobbyKing)</li>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=34108" rel="nofollow">Motor</a> (HobbyKing)</li>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=26497" rel="nofollow">ESC</a> (HobbyKing)</li>
+	<li> <a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=39470" rel="nofollow">SBEC</a> (HobbyKing) - (Optional)</li>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/__45206__HobbyKing_Programming_card_for_BlueSeries_Brushless_Speed_Controller_US_Warehouse_.html?strSearch=programming%20card" rel="nofollow">ESC Programmer</a> (HobbyKing)</li>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=43929" rel="nofollow">Motor mount</a> (HobbyKing) - (for spinning bigger props)</li>
+	<li>APM 2.6 with separate GPS/compass</li>
+	<li>Radio: Spektrum DX8</li>
+	<li>Receiver: AR6210, no satellite</li>
+	<li>Prop: APC 7-5. The HK 7-5 prop came with horrible adapter collars and I do not recommend them!</li>
+	<li><a href="https://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2-3" rel="nofollow">30cm 4 position cable</a> (store.3drobotics.com)</li>
+	<li><a href="https://store.3drobotics.com/products/df13-6-position-connector-30-cm" rel="nofollow">30cm 6 position cable</a> (store.3drobotics.com)</li>
+	<li><a href="http://www.digikey.com/product-detail/en/DF13-5S-1.25C/H2182-ND/241752">5 pin housing</a> (www.digikey.com)</li>
+	<li><a href="https://store.3drobotics.com/products/servo-extension-cable-female-female" rel="nofollow">Female-female jumpers (15cm x 7 qty) </a> (store.3drobotics.com)</li>
+</ol>
+
+
+
+<h1>Getting Started</h1>
+<ul>
+	<li>I am waiting on my new air-frame after an unfortunate incident with an electrical wire on a windy day.
+<ul>
+	<li>Part of the learning curve, which I will not elaborate upon thoroughly to spare you the anquish.</li>
+	<li>Before I knocked the tail off, I had my plane hitting waypoints, loitering, RTL, and auto-landing.</li>
+</ul>
+</li>
+	<li>For now, I will show you what I did with the electronics.
+<ul>
+	<li>I do not have telemetry yet, so I just used the stock PID settings and added some I gain. (More on that later.)</li>
+</ul>
+</li>
+	<li>About using an external SBEC: I chose to do this because I am an RC heli guy, and I often use servos that draw ridiculous current.
+<ul>
+	<li>If you power the servos separately from the motor, there is less chance of either one shutting down due to over-current draw.</li>
+	<li>But you also add a second electronic device that can fail.</li>
+	<li>When the motor is at max throttle and servos are fully deflected, such as on a windy day, the separate BEC gives you some headroom.</li>
+</ul>
+</li>
+	<li>I will post pics of the air-frame assembly when I receive it next week.</li>
+</ul>
+
+
+<h1>Programming the ESC</h1>
+
+<strong>Set up the programmer card as follows: </strong>
+<a href="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/205cdb8d-fae5-47fe-99bf-fcf541a96d87_zpsba9c68f8.jpg" target="_blank" rel="nofollow"><img src="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/205cdb8d-fae5-47fe-99bf-fcf541a96d87_zpsba9c68f8.jpg" alt="" /></a>
+<ol>
+	<li>Set the low voltage cutoff to its lowest setting to allow the APM failsafe feature do its job.</li>
+	<li>Don't worry about FWD vs REV; you can just switch two of the motor wires if the motor spins backwards.</li>
+	<li>Connect the ESC to the card and the motor (no prop).</li>
+	<li>Plug the ESC into a battery and you should get one tone from the motor, letting you know that programming is complete.</li>
+	<li>Disconnect the programming card and then the battery.</li>
+</ol>
+
+
+
+<h1>Wiring the ESC and BEC</h1>
+
+I chose to use EC3 connectors in my build, because all of my batteries have them. XT-60 are just fine.
+<ol>
+	<li>Cut the servo power lead off of the BEC at the connector.</li>
+	<li>Solder the BEC power cables along with the ESC power cables into your connector (this can be a little tricky).
+<ol>
+	<li>Get the solder hot in a connector and insert an ESC wire.</li>
+	<li>Keep the connection hot and slip the BEC power wire in next to it.</li>
+</ol>
+</li>
+	<li>I chose to run my servos at 5V  from the BEC.
+<ol>
+	<li>There is a jumper on the end of it that lets you select 5 or 6 V.</li>
+	<li>Before you reinstall the electronics secure the jumper on the BEC with a glob of hot glue or shoe goo.</li>
+</ol>
+</li>
+	<li>Pull the center (red) pin and wire from the ESC receiver connector.
+<ol>
+	<li>This disconnects the built in BEC from the ESC. You don't need it since it is only powering the motor.</li>
+	<li>Tuck the ESCs BEC wire away with heat shrink tubing over the end.</li>
+	<li>You will need access to it if you need to re-program the ESC.</li>
+</ol>
+</li>
+	<li>Add 100mm 14 gauge motor lead extensions with 3.5mm banana plugs to make it easier to wire the Bixler's motor later.</li>
+</ol>
+
+<strong>Here it is ready to go:</strong>
+<a href="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/7db2fd9a-9ee0-40a7-92d3-6fe473d97ce1_zps37b398da.jpg" target="_blank" rel="nofollow"><img src="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/7db2fd9a-9ee0-40a7-92d3-6fe473d97ce1_zps37b398da.jpg" alt="" /></a>
+
+
+
+<h1>Mount the APM and install the wiring</h1>
+
+<ol>
+	<li>Make a 45 x 100 mm mounting plate for the APM using 5mm plywood (or plastic or fiberglass board).</li>
+	<li>Use a 1" square of Kyosho Zeal Gel or Dubro foam under each corner of the flight controller to provide vibration suppression.</li>
+	<li>Zeal has high strength double sided adhesive, but if your pads do not, consider using "Welders Glue" available at Amazon or Lowes.
+<ol>
+	<li>Re Welder's Glue: it is contact cement. Lightly cover each surface you wish to bond and let them dry for about five minutes.</li>
+	<li>Then carefully align and put the two surfaces together and for immediate bonding.</li>
+	<li>I will also use Welder's Glue for assembling the foam air frame and building an access door in the fuselage.</li>
+</ol>
+</li>
+</ol>
+<strong>The APM mounted on the plate: (Pictured are the stock cables to the GPS. I will actually be using the 30cm cables)</strong>
+<a href="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/13968d8e-044e-4000-9768-11eb05257832_zps129a65ba.jpg" target="_blank" rel="nofollow"><img src="http://i1302.photobucket.com/albums/ag127/davesmith111/internet%20pics/13968d8e-044e-4000-9768-11eb05257832_zps129a65ba.jpg" alt="" /></a>
+
+
+
+<h1>Preparing the Fuselage</h1>
+
+<ol>
+	<li>For this build, the APM is mounted inverted and we want to get it level with the fuselage (level with the line of flight).</li>
+	<li>You can see that the wing has a positive angle of attack when the APM is level.</li>
+	<li>If you just stick the APM to the bottom or top of the fuselage it will not be level, which may affect performance.</li>
+	<li>I don't like to take chances, so, I removed some of the foam below the top inside of the fuselage to get the APM level:</li>
+</ol>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/APMcut_zps150b55d7.jpg"><img class="alignnone size-full wp-image-5571" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/APMcut_zps150b55d7.jpg" alt="APMcut_zps150b55d7" width="600" height="450" /></a>
+
+
+
+<h1>Component Placement</h1>
+
+<ol>
+	<li>Here is the APM set in place with some of the components.</li>
+	<li>At this point you should mark where your access panel will be.</li>
+</ol>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/B137BD6E-0007-4519-A3B4-FA1D15830A1E_zpslonqajyc.jpg"><img class="alignnone size-full wp-image-5572" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/B137BD6E-0007-4519-A3B4-FA1D15830A1E_zpslonqajyc.jpg" alt="B137BD6E-0007-4519-A3B4-FA1D15830A1E_zpslonqajyc" width="600" height="384" /></a>
+
+
+
+<h1>Trimming the Fuselage</h1>
+
+<ul>
+	<li>I originally cut too much and the fuselage was really weak.</li>
+	<li>No problem; with some hot glue you can easily fix any boo-boos.</li>
+	<li>In the picture below you want to cut the lower portion and leave the area I have labeled "Do Not Cut".</li>
+	<li>You will have ample room to access the APM Inputs and Outputs, as well as the USB port and other pins.</li>
+	<li>Cut straight through the foam so that the panel will open easily.</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/Smallpanel_zps67fcb0d3.jpg"><img class="alignnone size-full wp-image-5573" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/Smallpanel_zps67fcb0d3.jpg" alt="Smallpanel_zps67fcb0d3" width="600" height="450" /></a>
+<ul>
+	<li>Now match up the two halves to mark the cuts for the right side.</li>
+	<li>Cut a larger access panel out of the other (right) half of the fuselage so you can access the USB port on the APM.</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/0C9720F4-9E47-47F3-B20E-C5DD2A39FE0F_zps9b1dbc71.jpg"><img class="alignnone size-full wp-image-5574" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/0C9720F4-9E47-47F3-B20E-C5DD2A39FE0F_zps9b1dbc71.jpg" alt="0C9720F4-9E47-47F3-B20E-C5DD2A39FE0F_zps9b1dbc71" width="1024" height="768" /></a>
+<ul>
+	<li>Cut a bevel along the long axis of the large panel we already cut out.</li>
+	<li>I think that my picture is incorrect below; make this cut on the panel from the <strong style="color: #000000; font-style: normal;">right half of the fuselage</strong>.</li>
+	<li>This is not the edge where the two halves of the fuselage join, but the cut near the wing.</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/12AD7631-F2B7-43BC-9020-82F46E403F29_zpse7412aba.jpg"><img class="alignnone size-full wp-image-5575" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/12AD7631-F2B7-43BC-9020-82F46E403F29_zpse7412aba.jpg" alt="12AD7631-F2B7-43BC-9020-82F46E403F29_zpse7412aba" width="600" height="450" /></a>
+<ul>
+	<li>Now, make a Welder's glue hinge where the bevel (that we just cut) meets the fuselage.</li>
+	<li>This creates a hinge for the panel that is invisible and super cool.</li>
+	<li>Don't worry, custom foamies use this type of hinge for hundreds of flights.</li>
+	<li>Here is link to a YouTube video explaining how to make a Welder's hinge:</li>
+</ul>
+[embed width=800 height=600]http://www.youtube.com/watch?v=S-8PGFJqqMM[/embed]
+<ul>
+	<li>The panel should look like this when the Welder's hinge is complete:</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/F00F7556-92C3-4270-A4E1-412098A35B86_zpsl7qmp921.jpg"><img class="alignnone size-full wp-image-5576" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/F00F7556-92C3-4270-A4E1-412098A35B86_zpsl7qmp921.jpg" alt="F00F7556-92C3-4270-A4E1-412098A35B86_zpsl7qmp921" width="450" height="600" /></a>
+
+
+
+<h1>Assemble the Fuselage</h1>
+
+<ol>
+	<li>So now I am going to fast forward a little bit.</li>
+	<li>Follow the Bixler instructions and glue the halves of the fuselage together.</li>
+	<li>Again, I use Welder's glue, applying a thin bead to each half, letting them get tacky, and then assembling the halves.</li>
+	<li>Run the motor cables from the ESC to the motor before you assemble the two halves.</li>
+	<li>No worries if you don't, but it will save you the trouble of trying to attach the motor leads with needle nose pliers and hemostats.</li>
+	<li>You should also check the rotation of the motor so that you do not have to switch motor leads for a motor spinning in reverse.</li>
+</ol>
+
+
+<h1>COMPONENT Installation Details</h1>
+
+<ul>
+	<li>Below I have the fuselage glued together and the components glued in place.</li>
+	<li>I like hot glue for this detail.</li>
+	<li>Notice that I glued a 3mm carbon fiber rod across the access hatch for added rigidity.</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/Componentlayout_zpsf49f6f82.jpg"><img class="alignnone size-full wp-image-5577" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/Componentlayout_zpsf49f6f82.jpg" alt="Componentlayout_zpsf49f6f82" width="600" height="450" /></a>
+<ul>
+	<li>At this point, space is becoming a concern.</li>
+	<li>You will notice that we have put nothing in the nose so far, and all of our components are pretty tightly tucked under the wing.</li>
+	<li>I did this so that we can utilize bigger batteries in future builds.</li>
+	<li>This time around I am using an airspeed sensor which is recommended, but not necessary if you are on a first-time build budget.</li>
+	<li>To make space for batteries, I mounted the airspeed sensor board and receiver to the bottom of the canopy hatch:</li>
+</ul>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/022BA230-820B-4ED2-8140-B5FE05276BDC_zpsmpewtxbx.jpg"><img class="alignnone size-full wp-image-5578" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/022BA230-820B-4ED2-8140-B5FE05276BDC_zpsmpewtxbx.jpg" alt="022BA230-820B-4ED2-8140-B5FE05276BDC_zpsmpewtxbx" width="600" height="450" /></a>
+
+
+
+<h1>Complete The Construction</h1>
+
+<ol>
+	<li>Use a servo splitter cable for the ailerons, I got odd results when programming separate aileron servo on its own channel.</li>
+	<li>I am quite happy with this setup because you can get the CG perfect with Zippy 2200mAh Lipo batteries.</li>
+	<li>I mounted the GPS/Compass on the right wing after removing just a small amount of material.</li>
+	<li>I mounted it with hot glue and taped the cables in place with 3M Blenderm tape.</li>
+	<li>I like Blenderm because it sticks well and is flexible.</li>
+	<li>Having it sitting up high on the wing is not ideal, but I wanted to get it away from the fuselage and all of the current-carrying electronics.</li>
+</ol>
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/7A2D2812-250F-4E66-96CC-A90DCB6E8A3C_zps1bgdge2p.jpg"><img class="alignnone size-full wp-image-5579" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2014/01/7A2D2812-250F-4E66-96CC-A90DCB6E8A3C_zps1bgdge2p.jpg" alt="7A2D2812-250F-4E66-96CC-A90DCB6E8A3C_zps1bgdge2p" width="600" height="450" /></a>

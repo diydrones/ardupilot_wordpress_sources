@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Copter includes <em>current limiting</em> in order to protect the battery from damage and <em>voltage scaling</em> to compensate for the voltage drop as the battery is depleted.  Both of these features require the vehicle to have a <a href="wiki/common-powermodule-landingpage/">Power Module or other voltage and current monitor</a>.
+Copter includes <em>current limiting</em> in order to protect the battery from damage and <em>voltage scaling</em> to compensate for the voltage drop as the battery is depleted.  Both of these features require the vehicle to have a <a href="http://copter.ardupilot.com/wiki/common-powermodule-landingpage/">Power Module or other voltage and current monitor</a>.
 [note]Current limiting and voltage scaling were introduced in Copter 3.3.[/note]
 
 
@@ -30,6 +30,6 @@ If enabled, this feature will increase the roll, pitch and yaw control gains to 
 
 To enable set the MOT_THST_BAT_MAX to the battery's full charge voltage (i.e. 12.6 for a 3S battery).  Gains will be scaled to attempt to maintain the attitude control response seen at full charge.
 
-Set MOT_THST_BAT_MIN to the minimum battery voltage the vehicle would normally experience.  The gains will not be scaled up any more as the voltage falls below this level.  Setting this to the <a href="failsafe-battery">battery failsafe voltage</a> is a good start.
+Set MOT_THST_BAT_MIN to the minimum battery voltage the vehicle would normally experience.  The gains will not be scaled up any more as the voltage falls below this level.  Setting this to the <a href="http://copter.ardupilot.com/wiki/failsafe-battery/">battery failsafe voltage</a> is a good start.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/VoltageScaling_MPSetup.png"><img class="alignnone size-large wp-image-14457" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/05/VoltageScaling_MPSetup-1024x575.png" alt="VoltageScaling_MPSetup" width="474" height="266" /></a>

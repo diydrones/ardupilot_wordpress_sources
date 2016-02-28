@@ -1,0 +1,43 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: simulation-2sitl-simulator-software-in-the-loopusing-using-the-crrcsim-simulator 
+title: Using the CRRCSim simulator 
+id: 5505 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+You can optionally use the CRRCSim flight simulator with ArduPilot SITL. The main advantages of using CRRCSim is that it offers a lot more fixed wing models, and also offers a helicopter simulator.
+<h1>Installing CRRCSim</h1>
+The CRRCSim simulator has been modified for use by ArduPilot SITL. To install it on Linux you need to do the following:
+Add dependencies
+<pre>sudo apt-get install plib1.8.4-dev libjpeg-dev libsdl2-dev
+sudo apt-get install libportaudio-dev libcgal-dev #optional for audio/thermal support
+</pre>
+To download code and build
+<pre>git clone git://github.com/tridge/crrcsim-ardupilot.git
+cd crrcsim-ardupilot
+./autogen.sh
+./configure
+make
+sudo make install</pre>
+That will install crrcsim in /usr/local/bin. You may find you are missing some packages needed for CRRCSim at the configure stage.
+<h1>Running SITL with CRRCSim</h1>
+One crrcsim is installed you can launch it by running:
+<pre>crrcsim -i APM</pre>
+that starts CRRCSim with the APM protocol interface. You can then press ESCAPE to bring up the menu and choose and aircraft to simulate. Many of the aircraft will work with SITL, but for ones without motors (the gliders) you will need to choose a launch location on a slope.
+
+For fixed wing testing it is recommended you start with the "Sport" aircraft. That simulates a small nitro sport aircraft.
+
+For helicopter testing choose the "Heli-APM" model.
+
+After you have launched CRRCSim you need to start SITL. For fixed wing testing use the "-f CRRCSim" option to sim_vehicle.sh:
+<pre>cd ArduPlane
+sim_vehicle.sh -f CRRCSim --console --map</pre>
+<h2>Simulating a helicopter</h2>
+For helicopter testing with CRRCSim use "-f CRRCSim-heli"
+<pre>cd ArduCopter
+sim_vehicle.sh -f CRRCSim-heli --console --map</pre>
+The helicopter will have the RSC speed on channel 8.

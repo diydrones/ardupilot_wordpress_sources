@@ -1,0 +1,172 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: tecs-total-energy-control-system-for-speed-height-tuning-guide 
+title: TECS (Total Energy Control System) for Speed and Height Tuning Guide 
+id: 3503 
+menu_order: 40 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to tune the TECs system for speed and height control.<!--more-->
+
+
+
+<h1>Calibrate the airspeed sensor</h1>
+
+This only applies if you are using an airspeed sensor.
+
+A properly installed and calibrated airspeed sensor enables your model to fly with much better control over its airspeed, which in turn enables lower speeds to be used safely, extending endurance. For this reason if you are interested in maximising the climb performance and endurance of your aircraft, using an airspeed sensor and setting it up properly is worth the effort. Instructions on how to calibrate an airspeed sensor <a title="Calibrating an Airspeed Sensor" href="calibrating-an-airspeed-sensor">can be found here</a>.
+
+[note]<em>Glider Pilots:</em> Set <a href="#TECS_SPDWEIGHT">TECS_SPDWEIGHT</a> to 2.0, and you can also use an airspeed sensor and take advantage of TECS ability to control your airspeed.[/note]
+
+
+
+<h1>Tune the Pitch to Servo Loop</h1>
+
+The performance of the TECS speed and height controller is dependent on having the pitch to servo control loop tuned correctly. Before tuning TECS you need to have tuned the pitch loop following the instructions in <a href="roll-pitch-controller-tuning">Roll, Pitch and Yaw Controller Tuning</a>.
+
+
+
+<h1>Set initial parameters — throttle, pitch, airspeed and vertical speed limits</h1>
+
+If you have a properly calibrated airspeed sensor and a well tuned pitch to servo loop, then the throttle, pitch angle, airspeed and vertical speed limits limits are the final keys to getting the TECS algorithm to perform well.
+
+The following instructions are based around taking a series of measurements, whilst the plane is being flown at the speed set by <a href="arduplane-parameters/#target_airspeed_arduplanetrim_arspd_cm">TRIM_ARSPD_CM</a> which represents the speed that you are most likely going to be flying at. Flying these tests at <code>TRIM_ARSPD_CM</code> is impractical unless you have an assistant calling out airspeed, so where these instructions ask for the plane to be flown at <code>TRIM_ARSPD_CM</code>, fly at a speed in the middle zone between your <a href="#ARSPD_FBW_MIN">ARSPD_FBW_MIN</a> and <a href="#ARSPD_FBW_MAX">ARSPD_FBW_MAX</a> and that will be good enough for most applications. Those users wanting to extract maximum performance can dial the numbers in over a number of flights, using the log data.
+
+<ol>
+	<li>Set the maximum throttle percentage <a href="#THR_MAX">THR_MAX</a>. The maximum throttle should be set to a value that enables the aircraft to climb at its maximum pitch angle (default value of 20 degrees) at <code>TRIM_ARSPD_CM</code>. The default value of 75% should be OK for moderately powered aircraft. Low powered aircraft will need to increase it to 100%, high powered models (capable of vertical climbs) will need to reduce it.</li>
+	<li>Set the throttle percentage required to fly level at <code>TRIM_ARSPD_CM</code> by adjusting the <a href="#TRIM_THROTTLE">TRIM_THROTTLE</a> parameter. This can be determined initially by testing different throttle settings in FBWA mode.</li>
+	<li>Set the maximum and minimum airspeed limits (in metres/second) using the <code>ARSPD_FBW_MAX</code> and <code>ARSPD_FBW_MIN</code> parameters. <code>ARSPD_FBW_MAX</code> should be set to the maximum speed your aircraft is capable of in level flight with the throttle set to <code>THR_MAX</code>. <code>ARSPD_FBW_MIN</code> should be set to the slowest speed your aircraft can safely fly without stalling in level flight.</li>
+	<li>Set the maximum pitch angle <a href="#LIM_PITCH_MAX">LIM_PITCH_MAX</a> (in centi-degrees) your aircraft can fly with the throttle set to <code>THR_MAX</code>. This can be determined by performing maximum pitch angle climbs in FBWA with the throttle set to the maximum and checking the airspeed during climb. If the airspeed rises above TRIM_ARSPD during the climb, then either increase <code>LIM_PITCH_MAX</code> or reduce <code>THR_MAX</code>. If it falls below <code>ARSPD_FBW_MIN</code> during climb then either reduce <code>LIM_PITCH_MAX</code> or increase <code>THR_MAX</code>. Make sure you allow some margin for reduction in power due to reduced battery voltage or other effects. Remember that the amount of power from an electric power system at the end of flight will only be 80% of what you have at the start.</li>
+	<li>Set the minimum pitch angle <a href="#LIM_PITCH_MIN">LIM_PITCH_MIN</a> (in centi-degrees) your aircraft can fly with the throttle set to <a href="#THR_MIN">THR_MIN</a> that can be flown without over-speeding the aircraft.</li>
+	<li>Set the maximum climb rate <a href="#TECS_CLMB_MAX">TECS_CLMB_MAX</a> (in metres/second). This is the best climb rate that the aircraft can achieve with the throttle set to <code>THR_MAX</code> and flying at <code>TRIM_ARSPD_CM</code>. For electric aircraft make sure this number can be achieved towards the end of flight when the battery voltage has reduced. This can be measured in FBWA mode by performing climbs to height with the throttle set to <code>THR_MAX</code>.</li>
+	<li>Set the minimum sink rate <a href="#TECS_SINK_MIN">TECS_SINK_MIN</a> (in metres/second). This is the sink rate of the aircraft with the throttle set to <code>THR_MIN</code> and flown at <code>TRIM_ARSPD_CM</code>. This can be measured by closing the throttle in FBWA and gliding the aircraft down from height.</li>
+	<li>Set the maximum sink rate <a href="#TECS_SINK_MAX">TECS_SINK_MAX</a> (in metres/second). If this value is too large, the aircraft can over-speed on descent. This should be set to a value that can be achieved without exceeding the lower pitch angle limit and without exceeding <code>ARSPD_FBW_MAX</code>.</li>
+</ol>
+
+
+
+
+
+<h1>Flight Testing</h1>
+
+<ol>
+	<li>Place the aircraft into a loiter about a waypoint either using auto, RTL or guided mode. Check that the aircraft maintains height without noticeable pitching or height changes greater than 10m. If the aircraft appears to be oscillating in height then try increasing <a href="#TECS_TIME_CONST">TECS_TIME_CONST</a> in increments of 1 (do not increase to more than 10). If you need to increase to more than 10 to reduce the oscillation in height, then this normally indicates a problem with the pitch to servo loop tuning or the settings of the pitch angle and climb rate limits.</li>
+	<li>Verify that the <code>THR_MAX</code>, <code>LIM_PITCH_MAX</code> and <code>TECS_CLMB_MAX</code>, are set correctly. The setting of these parameters can be checked by commanding a positive altitude change of no less than 50m in loiter, RTL or guided mode. The objective is to set these parameters such that the throttle required to climb is about 80% of <code>THR_MAX</code>, the aircraft is maintaining airspeed, and the demanded pitch angle is about 5 degrees below <code>LIM_PITCH_MAX</code>.
+<ol>
+<ol>
+	<li>If speed drops below the desired value, and the throttle increases to and stays on <code>THR_MAX</code>, then either <code>TECS_CLMB_MAX</code> should be reduced or <code>THR_MAX</code> increased.</li>
+	<li>If the demanded pitch angle is constantly at the limit set by <code>LIM_PITCH_MAX</code>, then either the pitch angle limit <code>LIM_PITCH_MAX</code> needs to be increased or the maximum climb rate <code>TECS_CLMB_MAX</code> needs to be reduced.</li>
+</ol>
+</ol></li>
+	<li>Verify <code>LIM_PITCH_MIN</code> and TECS_CLMB_MIN are set correctly. The setting of these parameters can be checked by commanding a negative altitude change of no less than 50m in loiter, RTL or guided mode. The objective is to set these parameters such that the throttle is on <code>THR_MIN</code>, the airspeed is below <code>ARSPD_FBW_MAX</code> (or visually confirm that model is not gaining too much speed if an airspeed sensor is not being used), and the demanded pitch angle is about 5 degrees above <code>LIM_PITCH_MIN</code>.
+
+<ol>
+	<li>If the speed is too high, then <code>TECS_SINK_MAX</code> should be reduced .</li>
+	<li>If the demanded pitch angle is constantly at the limit set by <code>LIM_PITCH_MIN</code>, then either the pitch angle limit <code>LIM_PITCH_MIN</code> needs to be reduced (become more negative) or the maximum sink rate <code>TECS_SINK_MAX</code> needs to be reduced.</li>
+</ol>
+</li>
+
+	<li>If the height response oscillates you can try increasing the value of <a href="#TECS_PTCH_DAMP">TECS_PTCH_DAMP</a> in increments of 0.1 (don't go above 0.5 unless you know how to check for excessive noise in the nav_pitch signal using the mission planner tuning window) and then try increasing the value of <code>TECS_TIME_CONST</code> in increments of 1.0. 
+[note]If you are not using an airspeed sensor and you have problems with pitch and height oscillation using the default parameters, then it usually indicates that your pitch to servo loop has not been tuned properly or your model could have a significant thrust line misalignment where throttle changes cause noticeable pitch angle changes. Ideally you should improve your pitch loop tuning first, before adjusting <code>TECS_PTCH_DAMP</code> and <code>TECS_TIME_CONST</code> as described here.[/note]</li>
+	<li>If using airspeed sensing, adjust the value of <code>TRIM_THROTTLE</code> so that it matches the average amount of throttle required by the controller during constant height loiter. If not using airspeed sensing, adjust <code>TRIM_THROTTLE</code> to achieve a level flight speed you are happy with.</li>
+</ol>
+
+
+
+<h1>Fine Tuning</h1>
+
+The following parameters can be adjusted to fine-tune the controller response:
+
+<a id="THR_SLEWRATE" href="arduplane-parameters/#throttle_slew_rate_arduplanethr_slewrate">THR_SLEWRATE</a>: This is the maximum % change in throttle over one second . A setting of 100 means to not change the throttle by more than 100% of the full throttle range in one second. Reducing this value will reduce the amount of throttle 'surging' in windy conditions but will reduce controller accuracy and will produce oscillation in throttle, speed and height if reduced too much.
+
+<a id="TECS_THR_DAMP" href="arduplane-parameters/#controller_throttle_damping_tecs_thr_damp">TECS_THR_DAMP</a>: This is the damping gain for the throttle demand loop. Increase to add damping to correct for oscillations in speed and height. <strong>This gain has no effect if an airspeed sensor is not being used.</strong>
+
+<a id="TECS_INTEG_GAIN" href="arduplane-parameters/#controller_integrator_tecs_integ_gain">TECS_INTEG_GAIN</a>: This is the integrator gain on the control loop. Increasing this gain increases the speed at which speed and height offsets are trimmed out, but reduces damping and increases overshoot.
+
+<a id="TECS_RLL2THR" href="arduplane-parameters/#bank_angle_compensation_gain_tecs_rll2thr">TECS_RLL2THR</a>: Increasing this gain turn increases the amount of throttle that will be used to compensate for the additional drag created by turning. Ideally this should be set to approximately 10 x the extra sink rate in m/s created by a 45 degree bank turn. Increase this gain if the aircraft initially loses energy in turns and reduce if the aircraft initially gains energy in turns. Efficient high aspect-ratio aircraft (eg powered sailplanes) can use a lower value, whereas inefficient low aspect-ratio models (eg delta wings) can use a higher value. <strong>This gain has no effect if an airspeed sensor is not being used.</strong>
+
+<a id="TECS_SPDWEIGHT" href="arduplane-parameters/#weighting_applied_to_speed_control_tecs_spdweight">TECS_SPDWEIGHT</a>: This parameter adjusts the amount of weighting that the pitch control applies to speed vs height errors. Setting it to 0.0 will cause the pitch control to control height and ignore speed errors. This will normally improve height accuracy but give larger airspeed errors. Setting it to 2.0 will cause the pitch control loop to control speed and ignore height errors. This will normally reduce airspeed errors, but give larger height errors. The default value of 1.0 allows the pitch control to simultaneously control height and speed. [note]This parameter has no effect if an airspeed sensor is not being used.[/note][note]<em><strong>Glider Pilots</strong></em>: Set this parameter to 2.0 (The glider will adjust its pitch angle to maintain airspeed, ignoring changes in height).[/note]
+
+
+
+
+
+<h1>Advanced Parameters</h1>
+
+
+<a id="TECS_VERT_ACC" href="arduplane-parameters/#vertical_acceleration_limit_metressec2_tecs_vert_acc">TECS_VERT_ACC</a>: This is the maximum vertical acceleration either up or down that the controller will use to correct speed or height errors. The default value of 7 m/s/s (equivalent to +- 0.7 g) allows for reasonably aggressive pitch changes if required to recover from under-speed conditions.
+
+<a id="TECS_HGT_OMEGA" href="arduplane-parameters/#height_complementary_filter_frequency_radianssec_tecs_hgt_omega">TECS_HGT_OMEGA</a>: This is the cross-over frequency (in radians/second) of the complementary filter used to fuse vertical acceleration and barometric height to obtain an estimate of height rate and height. Increasing this frequency weights the solution more towards use of the barometer, whilst reducing it weights the solution more towards use of the accelerometer data.
+
+<a id="TECS_SPD_OMEGA" href="arduplane-parameters/#speed_complementary_filter_frequency_radianssec_tecs_spd_omega">TECS_SPD_OMEGA</a>: This is the cross-over frequency (in radians/second)of the complementary filter used to fuse longitudinal acceleration and airspeed to obtain an improved airspeed estimate. Increasing this frequency weights the solution more towards use of the airspeed sensor, whilst reducing it weights the solution more towards use of the accelerometer data.
+
+
+
+<h1>Complete Parameter List</h1>
+
+
+
+<a id="THR_MAX" href="arduplane-parameters/#maximum_throttle_arduplanethr_max">THR_MAX</a>: This is the maximum throttle % that can be used by the controller. For overpowered aircraft, this should be reduced to a value that provides sufficient thrust to climb at the maximum pitch angle PTCH_MAX.
+
+<a id="THR_MIN" href="arduplane-parameters/#minimum_throttle_arduplanethr_min">THR_MIN</a>: This is the minimum throttle % that can be used by the controller. For electric aircraft this will normally be set to zero, but can be set to a small non-zero value if a folding prop is fitted to prevent the prop from folding and unfolding repeatedly in-flight or to provide some aerodynamic drag from a turning prop to improve the descent rate.
+
+<a href="#THR_SLEWRATE">THR_SLEWRATE</a> (definition above)
+
+<a id="TRIM_THROTTLE" href="arduplane-parameters/#throttle_cruise_percentage_arduplanetrim_throttle">TRIM_THROTTLE</a>: This is the throttle % required for level flight at the normal cruise speed.
+
+<a id="ARSPD_FBW_MAX" href="arduplane-parameters/#maximum_airspeed_arduplanearspd_fbw_max">ARSPD_FBW_MAX</a>: This is the maximum airspeed (in metres/second) that the autopilot will use in auto-throttle modes. It should be set to the highest speed that the aircraft can achieve in level flight with the throttle set to <code>THR_MAX</code>. It must be sufficiently above the <code>ARSPD_FBW_MIN</code> value to allow the autopilot to accurately control altitude using airspeed (at least 50% above <code>ARSPD_FBW_MIN</code> is recommended). For electric aircraft, make sure this number is achievable at the end of flight when the battery voltage has reduced.
+
+<a id="ARSPD_FBW_MIN" href="arduplane-parameters/#minimum_airspeed_arduplanearspd_fbw_min">ARSPD_FBW_MIN</a>: This is the minimum indicated airspeed (in metres/second) that the speed controller will attempt to control to. This should be set to a speed that allows the aircraft to turn at the maximum bank angle without stalling.
+
+<a id="TECS_CLMB_MAX" href="arduplane-parameters/#maximum_climb_rate_metressec_tecs_clmb_max">TECS_CLMB_MAX</a>: This is the best climb rate (in metres/second) that the aircraft can achieve with the throttle set to <code>THR_MAX</code> and the airspeed set to the default value. For electric aircraft make sure this number can be achieved towards the end of flight when the battery voltage has reduced. The setting of this parameter can be checked by commanding a positive altitude change of 100m in loiter, RTL or guided mode. If the throttle required to climb is close to <code>THR_MAX</code> and the aircraft is maintaining airspeed, then this parameter is set correctly. If the airspeed starts to reduce, then the parameter is set to high, and if the throttle demand required to climb and maintain speed is noticeably less than <code>THR_MAX</code>, then either <code>TECS_CLMB_MAX</code> should be increased or <code>THR_MAX</code> reduced.
+
+<a id="TECS_SINK_MIN" href="arduplane-parameters/#minimum_sink_rate_metressec_tecs_sink_min">TECS_SINK_MIN</a>: This is the sink rate of the aircraft (in metres/second) with the throttle set to <code>THR_MIN</code> and flown at the same airspeed as used to measure <code>TECS_CLMB_MAX</code>.
+
+<a id="TECS_TIME_CONST" href="arduplane-parameters/#controller_time_constant_sec_tecs_time_const">TECS_TIME_CONST</a>: This is the time constant of the TECS control algorithm (in seconds). Smaller values make it faster to respond, larger values make it slower to respond.
+
+<a href="#TECS_THR_DAMP">TECS_THR_DAMP</a> (definition above)
+
+<a href="#TECS_INTEG_GAIN">TECS_INTEG_GAIN</a> (definition above)
+
+<a href="#TECS_VERT_ACC">TECS_VERT_ACC</a> (definition above)
+
+<a href="#TECS_HGT_OMEGA">TECS_HGT_OMEGA</a> (definition above)
+
+<a href="#TECS_SPD_OMEGA">TECS_SPD_OMEGA</a> (definition above)
+
+<a id="LIM_PITCH_MAX" href="arduplane-parameters/#maximum_pitch_angle_arduplanelim_pitch_max">LIM_PITCH_MAX</a>: This is the maximum pitch angle (in centidegrees) that the controller will demand. It should be set to a value that the aircraft can achieve whilst maintaining airspeed with the throttle set to <code>THR_MAX</code>.
+
+<a id="LIM_PITCH_MIN" href="arduplane-parameters/#minimum_pitch_angle_arduplanelim_pitch_min">LIM_PITCH_MIN</a>: This is the minimum pitch angle (in centidegrees) that the controller will demand. It should be set to a value that the aircraft can achieve without over-speeding with the throttle set to <code>THR_MIN</code>.
+
+<a href="#TECS_RLL2THR">TECS_RLL2THR</a> (definition above)
+
+<a href="#TECS_SPDWEIGHT">TECS_SPDWEIGHT</a> (definition above)
+
+<a id="TECS_PTCH_DAMP" href="arduplane-parameters/#controller_pitch_damping_tecs_ptch_damp">TECS_PTCH_DAMP</a>: This is the damping gain for the pitch demand loop. Increase to add damping to correct for oscillations in height. The default value of 0.0 will work well provided the pitch to servo controller has been tuned properly.
+
+<a id="TECS_SINK_MAX" href="arduplane-parameters/#maximum_descent_rate_metressec_tecs_sink_max">TECS_SINK_MAX</a>: This sets the maximum descent rate (in metres/second) that the controller will use. If this value is too large, the aircraft can over-speed on descent. This should be set to a value that can be achieved without exceeding the lower pitch angle limit and without over-speeding the aircraft.
+
+
+
+<h1>Algorithm Overview</h1>
+
+TECS stands for Total Energy Control System and for Plane refers to a new control algorithm that coordinates throttle and pitch angle demands to control the aircraft's height and airspeed. The underlying physics behind the operation of TECS is simple, but to understand how it works you need to understand the two types of mechanical energy that TECS controls. These are:
+
+<pre>Gravitational Potential Energy = mass x gravity x height</pre>
+and,
+<pre>Kinetic Energy = ½ x mass x speed²</pre>
+
+Gravitational Potential Energy is the energy stored in an object due to its height and is proportional to the height of the object. We all know intuitively that to raise the height of an object requires energy and that when an object falls energy is released. Similarly, to increase the height of our aircraft requires more energy, which means more throttle is required.
+
+Kinetic energy is the energy stored in an object due to its velocity and is proportional to velocity squared. An example is a rifle bullet, which although it doesn't weigh very much, has a lot of energy due to its high speed. Our aircraft don't travel at the speeds of rifle bullet, but they do require energy to be supplied to increase their speed.
+
+The total energy of the aircraft is the sum of the gravitational potential energy and the kinetic energy. The drag acting on an aircraft in flight is continually reducing its total energy, so the only way to maintain height and speed is to supply thrust using a motor or utilise energy from some other external source such as a rising air current. TECS calculates the total energy required based on the demanded speed and height and adjusts the throttle to maintain total energy at the demanded value.
+
+The other job of the TECS algorithm is to ensure that the balance between gravitational potential and kinetic energy is correct. For example if the aircraft is flying too slow and too high simultaneously, its total energy might be correct, but there is too much potential energy and not enough kinetic energy. TECS tries to maintain the correct balance between potential and kinetic energy by adjusting the demanded pitch angle. By lowering the nose energy is transferred from gravitational potential to kinetic energy or vice-versa.
+
+How much weighting is placed on kinetic energy or speed errors vs potential energy or height errors is controlled by the <code>TECS_SPDWEIGHT</code> parameter. At the default setting of 1.0, even weight is placed on speed and height errors. If <code>TECS_SPDWEIGHT</code> is set to 0.0 then the pitch angle demand will respond 100% to height errors and ignore speed and if set to 2.0 will respond 100% to speed errors and ignore height.
+
+If the airspeed measurement is not used (as selected by setting TECS_USE_ASPD = 0), then the pitch angle will be used 100% to control height and the throttle will be calculated from the demanded pitch angle.

@@ -1,0 +1,68 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: submitting-patches-back-to-master 
+title: Submitting Patches Back to Master 
+id: 2651 
+menu_order: 100 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Once you have a bug fix or new feature you would like to have included in the APM projects, you should submit a “<a href="https://help.github.com/articles/using-pull-requests" target="_blank">Pull Request</a>”.
+
+The main developers will see your changes in the <a href="https://github.com/diydrones/ardupilot/pulls" target="_blank">"Pulls" list,</a> review them and if all goes well they will be merged into master.
+
+
+
+<h2>Preparing commits</h2>
+Commits should be made to your fork/clone of the project in a new branch (i.e. not "master") that is up-to-date with the diydrones/ardupilot master branch does and not include any other changes. See <a href="http://dev.ardupilot.com/wiki/where-to-get-the-code/">Working with the ArduPilot Project Code</a> for instructions on how to correctly update your working branch.
+
+<strong>Commits should be small, and do just one thing.</strong> If a change touches multiple libraries then there should be a separate commit per library, and a separate commit per vehicle directory. This is true even if it means that intermediate commits break the build.
+
+Unix line endings (LF) are used. Git should take care of this automatically, but if you notice that you have a lot of files that show up as changed in <code>git status</code> but you didn't touch those files, you may need to <a href="https://help.github.com/articles/dealing-with-line-endings" target="_blank">check to see if local git settings regarding line endings are correct</a>.
+
+<strong>Well-written, concise comments are good</strong> and are encouraged.
+
+Do not submit patches with commented-out code, or code that is never reachable within <code>#define</code>s.
+
+Before submitting code to the official repository, <strong>clean up your local commit history</strong>. When submitting patches the convention is to <a href="https://help.github.com/articles/interactive-rebase" target="_blank">use an interactive rebase</a> (eg. "git rebase -i HEAD~10") to re-arrange patches and fold things together, so the patch set it "cleaned up" for submission. The idea is to present a logical set of patches for review. It can take a bit of effort to get used to interactive rebase, but it is definitely worth learning. Refer to <a href="http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html" target="_blank">online resources</a> to understand how to use this tool.
+
+Try to follow the style conventions of the existing code.  In particular, check that your <a href="wiki/editing-the-code/">editor uses 4 spaces instead of tab</a>.
+<h2>Log messages</h2>
+Commit messages should be of the form:
+<blockquote>Subsystem: brief description
+
+Longer description...</blockquote>
+Example:
+<blockquote>APM_Control: reduce the number of parameter saves in autotune
+
+don't save a parameter unless it has changed by 0.1%</blockquote>
+<h2>Before you submit a pull request</h2>
+Before submitting a pull request please do the following
+<ul>
+	<li>Use git rebase on current master. Your changes should not include any merges, and should contain just the patches you want as the last patches in your tree.</li>
+	<li>read your changes, doing your own review. The best way to do this is to use the "gitk" tool. Look over your own changes critically. Make sure they don't include anything you don't want to go into the pull request. It is best to read your changes at least several hours after you wrote the code, and preferably the next day. Look over them carefully and look for any bugs.</li>
+	<li>if you have access to a Linux build environment then build your modified tree using Tools/scripts/build_all.sh. That will test that all the builds for different boards and vehicle types work. If you don't have a Linux build environment then please test the build for APM2 and PX4 and rover, copter and plane if your changes may affect those environments.</li>
+	<li>test your changes in SITL if possible. If you can't run SITL then test your changes in a real vehicle.</li>
+</ul>
+<h2>Submitting pull requests</h2>
+To submit a patch for review and possible inclusion in the official repository, follow these directions:
+<ol>
+	<li>Clean up your local commit history with <code>git rebase -i</code> as described above.</li>
+	<li>Push your local branch to GitHub. If using the GitHub for Windows client, this screenshot shows what your commit/sync screen could look like:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_CommitChanges.png"><img class="size-medium wp-image-2657" alt="PullRequest_CommitChanges" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_CommitChanges-300x176.png" width="300" height="176" /></a>
+</li>
+	<li>Open your clone's repository on the GitHub web page and <a href="https://help.github.com/articles/using-pull-requests" target="_blank">Create a pull request on GitHub</a>. You'll be making a pull request from your fork/branch to the ardupilot/master repository. If using the GitHub for Windows client, one convenient way to navigate to the repository/branch is to click one one of your commits and click the "github" (view this commit on github.com) button:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_OpenCloneOnGitHubWebPage.png"><img class="size-medium wp-image-2659" alt="PullRequest_OpenCloneOnGitHubWebPage" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_OpenCloneOnGitHubWebPage-300x116.png" width="300" height="116" /></a>
+</li>
+	<li>On the right side of the web page select "Pull Request", and then select the green "New pull request" button:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_InitiatePullRequest1.png"><img class="size-medium wp-image-2661" alt="PullRequest_InitiatePullRequest1" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_InitiatePullRequest1-300x149.png" width="300" height="149" /></a>
+
+&nbsp;</li>
+	<li>The comparison should between diydrones:master and the the new branch you created for the feature but it has probably defaulted to your clone's master branch so click the "Edit" button and change it to the correct branch:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_InitiatePullRequest2.png"><img class="size-large wp-image-2664" alt="PullRequest_InitiatePullRequest2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/PullRequest_InitiatePullRequest2-1024x295.png" width="584" height="168" /></a></li>
+	<li>Check the list of change at the bottom of the page only includes your intended changes, then press "Click to create pull request for this comparison".</li>
+	<li>Let the dev team know! Post on the <a href="https://groups.google.com/forum/#!forum/drones-discuss" target="_blank">drones-discuss</a> mailing list so the discussion and code review is easily publicly available.</li>
+</ol>
+It is very common, especially for large changes, for the main developers to ask you to modify you pull request to fit in better with the existing code base or resolve some knock-on impact that you may not have known about.  Please don't take this the wrong way, we're definitely not trying to make your life difficult!

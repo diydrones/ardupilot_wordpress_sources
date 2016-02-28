@@ -1,0 +1,28 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: auto-mode 
+title: AUTO Mode 
+id: 8738 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+In AUTO mode the follow a mission (a set of GPS waypoints and other commands) set by your ground station configuration. When entering AUTO mode Plane will continue from whatever mission item it was last doing, unless you have reset the mission.
+
+When in AUTO Plane will by default allow the pilot to influence the flight of the plane by using "stick mixing", which allows for aileron, elevator and rudder input to steer the plane in a way that can override the autopilot control. Whether this is enabled is determined by the <a href="arduplane-parameters/#Stick_Mixing_PlaneSTICK_MIXING">STICK_MIXING</a> option. By default stick mixing behaves the same as <a href="fbwa-mode">FLY BY WIRE_A (FBWA)</a> mode.
+
+
+[warning]"Home" position is always supposed to be your Plane's actual GPS takeoff location:
+
+<ol>
+	<li>It is very important to acquire GPS lock before arming in order for RTL, Loiter, Auto or any GPS dependent mode to work properly.</li>
+	<li>For Plane the home position is the position of the Plane when you first get GPS lock whether it was armed or not.
+          <ul>
+	  <li>This means if you execute an RTL in Plane, it will return to the location where it was when it first acquired GPS lock.</li>
+	  <li>For Plane: Plug in the battery and let it acquire GPS lock where you want it to return to: (Not the Pits).</li>
+          </ul>
+          </li>
+</ol>
+[/warning]

@@ -1,0 +1,320 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: sitl-native-on-windows 
+title: Setting up SITL on Windows 
+id: 5577 
+menu_order: 20 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to build and run SITL <em>natively</em> on Windows. The specific commands were tested on <em>Windows 8.1</em> using <em>Cygwin 2.0.0</em>, <em>MAVProxy 1.4.19</em>, <em>Mission Planner 1.3.25</em>, and <em>AC3.3</em> (Copter).
+<!-- more -->
+
+<h1>Overview</h1>
+
+The <a href="sitl-simulator-software-in-the-loop">SITL (Software In The Loop)</a> simulator is a build of the ArduPilot code which allows you to run Plane, Copter or Rover without any hardware.
+
+SITL was originally developed on Linux, and but can now be built and run <em>natively</em> on both Linux or Windows. It can also be run on a virtual machine (Linux) hosted on Windows, Mac OSX, or Linux.
+
+These instructions explain how to build SITL <em>natively</em> on Windows, and how to interact with the simulator using <a href="http://tridge.github.io/MAVProxy/">MAVProxy</a> and/or <a href="http://planner.ardupilot.com/">Mission Planner</a>.
+
+[caption id="attachment_5582" align="alignnone" width="680"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxy_Map_GuidedCopter.png"><img class="size-full wp-image-5582" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxy_Map_GuidedCopter.png" alt="MAVProxy Map: Guiding a Simulated Copter" width="680" height="689" /></a> MAVProxy Map: Guiding a Simulated Copter[/caption]
+
+
+
+<h1>Installation steps</h1>
+
+<h2>Install MAVProxy</h2>
+
+<em>MAVProxy</em> is a fully-functioning but minimalist console-based GCS that is commonly used for testing and developing ArduPilot:
+<ul>
+	<li><a href="http://firmware.diydrones.com/Tools/MAVProxy/MAVProxySetup-latest.exe">Download MAVProxy for Windows</a> (latest build)</li>
+	<li>Install the executable, accepting the license and all other default settings.</li>
+</ul>
+Older builds can be obtained from <a href="http://firmware.diydrones.com/Tools/MAVProxy/">http://firmware.diydrones.com/Tools/MAVProxy/</a>.
+<h2>Install Cygwin</h2>
+<a href="http://www.cygwin.com/">Cygwin</a> provides the tools and libraries that allow us to rebuild ArduPilot on Windows.
+<ol>
+	<li>Download and run the <a href="https://cygwin.com/setup-x86.exe">Cygwin 32-bit installer</a>.
+[tip]The 32 bit version is preferred over the 64-bit version, which is missing one of our dependencies (procps)[/tip]</li>
+	<li>Accept the all the prompts (including default file locations) until you reach the <em>Select Packages</em> dialog.There are thousands of packages. The easiest way to find the packages is to search on the name. When you've found a needed package click on the <strong>Skip</strong> button to select it for download:
+
+[caption id="attachment_5578" align="alignnone" width="707"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/Cygwin-select-install-gpp.png"><img class="size-full wp-image-5578" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/Cygwin-select-install-gpp.png" alt="Cygwin Installer: Select Package Dialog" width="707" height="401" /></a> Cygwin Installer: Select Package Dialog[/caption]</li>
+	<li>Select the packages listed below (search using the text in the "Name" field):
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Category / Name / Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>autoconf</td>
+<td>Devel | autoconf: Wrapper scripts for autoconf commands</td>
+</tr>
+<tr>
+<td>automake</td>
+<td>Devel | automake: Wrapper scripts for automake and aclocal</td>
+</tr>
+<tr>
+<td>ccache</td>
+<td>Devel | ccache: A C compiler cache for improving recompilation</td>
+</tr>
+<tr>
+<td>g++</td>
+<td>Devel | gcc-g++ GNU Compiler Collection (C++)</td>
+</tr>
+<tr>
+<td>git</td>
+<td>Devel | git: Distributed version control system</td>
+</tr>
+<tr>
+<td>libtool</td>
+<td>Devel | libtool: Generic library support script</td>
+</tr>
+<tr>
+<td>make</td>
+<td>Devel | make: The GNU version of the 'make' utility</td>
+</tr>
+<tr>
+<td>gawk</td>
+<td>Interpreters | gawk: GNU awk, a pattern scanning and processing language</td>
+</tr>
+<tr>
+<td>libexpat</td>
+<td>Libs | libexpat-devel: Expat XML parswer library (development files)</td>
+</tr>
+<tr>
+<td>procps</td>
+<td>System | procps: System and process monitoring utilities (required for pkill)</td>
+</tr>
+</tbody>
+</table>
+</li>
+	<li>When all the packages are selected, click through the rest of the prompts and accept all other default options (including the additional dependencies).</li>
+	<li>Select <strong>Finish</strong> to start downloading the files.</li>
+</ol>
+
+
+<h2>Set up directories/paths in Cygwin</h2>
+To save having to set up paths every time you start SITL, it can be helpful to set up the path to the <strong>Tools/autotest</strong> directory.
+<ol>
+	<li>Open and then close the <em>Cygwin Terminal</em> from the desktop or start menu icon.
+[tip]This will create initialisation files for the user in the Cygwin home directory (and display their locations). For example, a user's home directory might be located at <strong>C:\cygwin\home\user_name\</strong>.[/tip]</li>
+	<li>Navigate the file system to the home directory and open the <strong>.bashrc</strong> files (e.g. <strong>C:\cygwin\home\user_name\.bashrc</strong>.</li>
+	<li>Add the following line to the end of <strong>.bashrc</strong>
+<pre>export PATH=$PATH:$HOME/ardupilot/Tools/autotest</pre>
+</li>
+</ol>
+The file will be loaded next time you open the <em>Cygwin terminal</em>.
+
+[tip]Cygwin will not be able to find <strong>sim_vehicle.sh</strong> if you omit this step. This will be reported as a "command not found" error when you try and build: <code>sim_vehicle.sh -j4 --map</code>[/tip]
+
+
+<h2>Download and make ArduPilot</h2>
+
+Open (reopen) <em>Cygwin Terminal</em> and clone the Github <a href="https://github.com/diydrones/ardupilot">ArduPilot repository:</a>
+<pre>git clone git://github.com/diydrones/ardupilot.git</pre>
+
+In the terminal navigate to the <em>ArduCopter</em> directory and run <strong>make</strong> as shown:
+<pre>cd ~/ardupilot/ArduCopter
+make sitl -j4</pre>
+The platform that is built depends on the directory where you run <strong>make</strong> (so this this will build <em>Copter</em>).
+
+[note]An additional component is required before you can build Plane - see next step![/note]
+
+
+
+<h2>JSBSim (Plane only)</h2>
+
+If you want to fly the fixed wing (Plane) simulator then you will need to use the JSBSim flight simulator. JSBSim is a sophisticated flight simulator that is used as the core flight dynamics system for several well known flight simulation systems. The reason we use JSBSim is that it provides a way to get extremely high frame rate simulation, which is essential for the register level sensor emulation that we use in the SITL build.
+
+Open the <em>Cygwin Terminal</em>, navigate to your home directory, and enter:
+<pre>
+git clone git://github.com/tridge/jsbsim.git
+cd jsbsim
+./autogen.sh
+make
+cp src/JSBSim.exe /usr/local/bin
+</pre>
+
+Now you can navigate to the ArduPlane directory and build Plane in the same way as described for Copter in the next section (<a href="#running_sitl_andmavproxy">Running SITL and MAVProxy</a>):
+<pre>
+cd ~/ardupilot/ArduPlane
+sim_vehicle.sh -j4 --map
+</pre>
+
+
+<h2>FlightGear 3D View (Optional)</h2>
+
+Developers can optionally install the <a href="http://www.flightgear.org/">FlightGear Flight Simulator</a> and use it (in view-only mode) to display a 3D simulation of the vehicle and its surroundings. This provides a much better visualization than the 2D maps and HUD flight displays provided by <em>MAVProxy</em> and <em>Mission Planner</em>.
+
+[note]FlightGear support is currently only in master (January 2016). It should appear in the <em>next</em> versions of the vehicle codelines (not present on current versions: Copter 3.3, Plane 3.4, Rover 2.5).[/note]
+
+[caption id="attachment_6501" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/FlighGear_Copter_Windows.png" rel="attachment wp-att-6501"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/FlighGear_Copter_Windows-300x294.png" alt="FlightGear: Simulated Copter at KSFO" width="300" height="294" class="size-medium wp-image-6501" /></a> FlightGear: Simulated Copter at KSFO (click for larger view).[/caption]
+
+SITL outputs <em>FlightGear</em> compatible state information on UDP port 5503. We highly recommend you start <em>FlightGear</em> before starting SITL (although this is not a requirement, it has been found to improve stability in some systems).
+
+
+The main steps are:
+
+<ol>
+	<li>Download <a href="http://www.flightgear.org/download/">FlightGear 3.4.0</a> for Windows and install in the <em>default location</em>. [warning]At time of writing <a href="https://github.com/diydrones/ardupilot/issues/3422">version 3.4.0 is required on Windows</a>.[/warning]</li>
+
+	<li>Open a new command prompt and run the appropriate batch file for your vehicle in <strong>/ardupilot/Tools/autotest/</strong>: <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/fg_plane_view.bat">fg_plane_view.bat</a> (Plane) and <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/fg_quad_view.bat">fg_quad_view.bat</a> (Copter). 
+
+This will start FlightGear.</li>
+
+	<li>Start SITL in Cygwin in the normal way. In this case we're specifying the start location as San Francisco airport (KSFO) as this is an interesting airport with lots to see:
+<pre>sim_vehicle.sh -j4 -L KSFO </pre>
+[note]<em>FlightGear</em> will always initially start by loading scenery at KSFO (this is hard-coded into the batch file) but will switch to the scenery for the simulated location once SITL is started. [/note][tip]If the vehicle appear to be hovering in space (no scenery) then <em>FlightGear</em> does not have any scenery files for the selected location. Choose a new location![/tip]
+</li>
+</ol>
+
+You can now takeoff and fly the vehicle as normal for <a href="copter-sitl-mavproxy-tutorial">Copter</a> or <a href="plane-sitlmavproxy-tutorial">Plane</a>, observing the vehicle movement including pitch, yaw and roll.
+
+
+
+<h2>Troubleshooting</h2>
+
+A very small number of users have reported build errors related to Windows not setting paths correctly. For more information see <a href="https://github.com/diydrones/ardupilot-wiki-issue-tracker/issues/156">this issue</a>. 
+
+
+
+<h1>Running SITL and MAVProxy</h1>
+
+<em>MAVProxy</em> is commonly used by developers to communicate with SITL. To build and start SITL for a 4-core CPU and then launch a <em>MAVProxy map</em>:
+<ol>
+	<li>Navigate to the target vehicle directory (in this case Copter) in the <em>Cygwin Terminal</em> and call <code>sim_vehicle.sh</code> to start SITL:
+<pre>cd ~/ardupilot/ArduCopter
+sim_vehicle.sh -j4 --map</pre>
+If you get a windows security alert for the the firewall, allow the connection.
+
+[tip]<a title="sim_vehicle.sh" href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/sim_vehicle.sh">sim_vehicle.sh</a> has many useful build options, ranging from setting the simulation speed through to choosing the initial vehicle location. These can be listed by calling it with the <code>-h</code> flag (and some are demonstrated in <a href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a>).[/tip]
+</li>
+	<li>SITL and <em>MAVProxy</em> will start. <em>MAVProxy</em> displays three windows:
+<ul>
+	<li>A command prompt in which you enter commands to SITL</li>
+	<li>A Console which displays current status and messages</li>
+	<li>A map that shows the current position of the vehicle and can be used (via right-click) to control vehicle movement and missions.</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/SITL_MAVProxyConsoleAndMap.png"><img class="size-large wp-image-5579" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/SITL_MAVProxyConsoleAndMap-1024x627.png" alt="SITL: Commands, Console and Map" width="474" height="290" /></a>
+
+[tip]It is useful to arrange the windows as shown above, so you can observe the status and send commands at the same time.[/tip]</li>
+	<li>Configure the vehicle by loading some standard/test parameters into the <em>MAVProxy command prompt</em>:
+<pre>param load ..\Tools\autotest\copter_params.parm</pre>
+</li>
+	<li>You can send commands to SITL from the command prompt and observe the results on the map.
+<ul>
+	<li>Change to GUIDED mode, arm the throttle, and then takeoff:
+<pre>mode guided 
+arm throttle
+takeoff 40</pre>
+Watch the altitude increase on the console.
+[note]Takeoff must start within 15 seconds of arming, or the motors will disarm.[/note]</li>
+	<li>Change to CIRCLE mode and set the radius to 2000cm
+<pre>mode circle
+param set circle_radius 2000
+</pre>
+Watch the copter circle on the map.</li>
+	<li>When you're ready to land you can set the mode to RTL (or LAND):
+<pre>mode rtl</pre>
+</li>
+</ul>
+</li>
+</ol>
+This is a very basic example. For links to more information on what you can do with SITL and MAVProxy see the section: <a href="#next_steps">Next Steps</a>.
+
+
+
+<h1>Adding additional GCS with MAVProxy</h1>
+
+You can attach multiple additional ground control stations to SITL from <em>MAVProxy</em>. The simulated vehicle can then be controlled and viewed through any attached GCS.
+
+First use the <code>output</code> command on the <em>MAVProxy command prompt</em> to determine where <em>MAVProxy</em> is sending packets:
+<pre>GUIDED&gt; output
+GUIDED&gt; 2 outputs
+0: 127.0.0.1:14550
+1: 127.0.0.1:14551</pre>
+This tells us that we can connect <em>Mission Planner</em> to either UDP port 14550 or 14551, as shown on the dialog below.
+
+[caption id="attachment_5584" align="alignnone" width="432"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Connect_UDP.png"><img class="size-full wp-image-5584" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Connect_UDP.png" alt="Mission Planner: Connecting to a UDP Port" width="432" height="347" /></a> Mission Planner: Connecting to a UDP Port[/caption]
+
+[tip]We could connect <em>APM Planner 2</em> to the remaining port. If we needed a third port, we could add it as shown:
+<pre>GUIDED&gt; output add 1: 127.0.0.1:14553</pre>
+[/tip]
+
+<em>Mission Planner</em> can then be used to control the simulated vehicle in exactly the same way as though it were a real vehicle. We can reproduce the previous "takeoff-circle-land" example as shown below:
+<ol>
+	<li>Change to GUIDED mode, arm the throttle, and then takeoff
+<ul>
+	<li>Open the <em>FLIGHT DATA</em> screen and select the <em>Actions</em> tab on the bottom left. This is where we can change the mode and set commands.
+
+[caption id="attachment_5583" align="alignnone" width="497"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Actions_GuidedModeArm.png"><img class="size-full wp-image-5583" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Actions_GuidedModeArm.png" alt="Mission Planner: Actions Tab (Set Mode, Arm/Disarm)" width="497" height="210" /></a> Mission Planner: Actions Tab (Set Mode, Arm/Disarm)[/caption]</li>
+	<li>Select <strong>Guided</strong> in the <em>Mode selection list</em> and then press the <strong>Set Mode</strong> button.</li>
+	<li>Select the <strong>Arm/Disarm</strong> button</li>
+	<li>Right-click on the map and select Takeoff. Then enter the desired takeoff altitude
+
+[caption id="attachment_5586" align="alignnone" width="390"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Map_takeoff.png"><img class="size-full wp-image-5586" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_Map_takeoff.png" alt="Mission Planner Map: Takeoff Command" width="390" height="297" /></a> Mission Planner Map: Takeoff Command[/caption]</li>
+</ul>
+[note]Takeoff must start within 15 seconds of arming, or the motors will disarm.[/note]</li>
+	<li>Change to CIRCLE mode on the <em>Action</em> tab and watch the copter circle on the map.</li>
+	<li>You can change the circle radius in the <em>CONFIG/TUNING</em> screen. Select <em>Full Parameters List</em>, then the <strong>Find</strong> button and search for <code>CIRCLE_MODE</code>. When you've changed the value press the <strong>Write Params</strong> button to save them to the vehicle.</li>
+	<li>When you're ready to land you can set the mode to RTL.</li>
+</ol>
+
+
+
+<h1>Running SITL with a GCS without MAVProxy</h1>
+
+It is also possible to interact with SITL without using <em>MAVProxy</em> at all using <strong>ArduCopter.elf</strong> (in the <strong>ArduCopter</strong> directory).
+
+Run the file in the <em>Cygwin Terminal</em>, specifying a home position and vehicle model as shown below:
+<pre>hamis_000@XPS12ultra ~/ardupilot/ArduCopter
+$ ./ArduCopter.elf --home -35,149,584,270 --model quad
+Started model quad at -35,149,584,270 at speed 1.0
+Starting sketch 'ArduCopter'
+Starting SITL input
+bind port 5760 for 0
+Serial port 0 on TCP port 5760
+Waiting for connection ....
+</pre>
+The command output shows that you can connect to SITL using TCP/IP at port 5760.
+
+In <em>Mission Planner</em> we first change the link type to TCP and then press the <strong>Connect</strong> button. Click through the <em>remote host</em> and <em>remote Port</em> prompts as these default to the correct values.
+
+[caption id="attachment_5585" align="alignnone" width="420"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_ConnectTCP.png"><img class="size-full wp-image-5585" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MissionPlanner_ConnectTCP.png" alt="Mission Planner: Connecting to SITL using TCP" width="420" height="441" /></a> Mission Planner: Connecting to SITL using TCP[/caption]
+
+Mission Planner will then connect and can be used just as before.
+
+[tip]<strong>ArduCopter.elf</strong> has other startup options, which you can use using the -h command line parameter:
+<pre>./ArduCopter.elf -h</pre>
+[/tip]
+
+
+
+<h1>Updating ArduPilot</h1>
+
+The ArduPilot source is cloned to the Windows Cygwin home directory (e.g. <strong>C:\cygwin\home\user_name\ardupilot</strong>). Developers can edit the source in <strong>ardupilot/</strong>, or update it using <code>git pull</code>.
+
+Similarly, the JSBSim source can be updated by calling <code>git pull</code> in the <strong>jsbsim/</strong> directory.
+
+
+<h1>Updating MAVProxy</h1>
+
+[warning]The <em>MAVProxy 1.4.19 </em>installer does not properly remove all parts of preceding installations. Before installing a new version you must first delete the old directory: C<strong>:\Program Files (x86)\MAVProxy\</strong>.[/warning]
+
+Simply <a href="http://firmware.diydrones.com/Tools/MAVProxy/MAVProxySetup-latest.exe">Download and Install MAVProxy for Windows</a> (this link always points to the latest version!)
+
+
+
+<h1>Next steps</h1>
+
+SITL and MAVProxy can do a whole lot more than shown here, including manually guiding the vehicle, and creating and running missions. To find out more:
+<ul>
+	<li>Read the <a href="http://tridge.github.io/MAVProxy/">MAVProxy documentation</a>.</li>
+	<li>See <a title="Using SITL for ArduPilot Testing" href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a> for guidance on flying and testing with SITL.</li>
+</ul>

@@ -1,0 +1,33 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: compass-calibration 
+title: Calibration: Compass Calibration 
+id: 135 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to use APM Planner to calibrate your autopilot's compass to work with your vehicle configuration. For other calibration tasks see <a href="http://planner2.ardupilot.com/wiki/autopilot-calibration/">Autopilot calibration</a>. 
+
+<h1>1 Prerequisites</h1>
+Before preforming setup, ensure that:
+<ul>
+	<li>The vehicle is completely built to flight condition.</li>
+	<li><a href="http://planner2.ardupilot.com/wiki/install-firmware/">Firmware has been loaded onto the autopilot.</a></li>
+	<li><a href="http://planner2.ardupilot.com/wiki/connect-autopilot/">Autopilot is connected to APM Planner.</a></li>
+</ul>
+<h2>2 Select option</h2>
+Under <strong>Orientation</strong>, <strong>select your autopilot</strong> configuration: Pixhawk/PX4, APM 2.5 and earlier, or APM 2.6 with 3DR GPS+Compass. Ensure that the option to <strong>Enable the compass</strong> and <strong>allow Auto Declination</strong> are selected as shown below.
+
+<a href="http://planner2.ardupilot.com/wp-content/uploads/sites/7/2013/12/calibrate-compass.png"><img src="http://planner2.ardupilot.com/wp-content/uploads/sites/7/2013/12/calibrate-compass.png" alt="calibrate compass" width="300" height="159" class="alignnone wp-image-340" /></a>
+To perform <strong>manual declination</strong>, follow the link to the <strong>Declination Website</strong>. Find the two numbers listed as the<strong> Magnetic Declination</strong> and input the first number in the <strong>Degrees</strong> field and the second number in the <strong>Minutes</strong> field.
+
+<h1>3 Calibrate</h1>
+Select <strong>Live Calibration</strong> to begin calibration. APM Planner will start a timer. During these next 60 seconds, hold your vehicle in the air and rotate it slowly so that each side (front, back, left, right, top and bottom) points down towards the earth for a few seconds in turn. <a href="https://www.youtube.com/watch?v=DmsueBS0J3E" target="_blank">Check out this video</a> for a demonstration of how to calibrate the compass. 
+
+When the calibration period ends, APM Planner will display the resulting offsets. For APM, all three values should be between -150 and 150. For PX4 and Pixhawk, values may be greater than 150 and less than -150.
+
+<h1>4 Advanced compass calibration (copters)</h1>
+For more information about <a href="http://copter.ardupilot.com/wiki/common-compass-setup-advanced/#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_motors">advanced compass calibration for copters, click here</a>. For a general discussion of <a href="http://copter.ardupilot.com/wiki/common-advanced-configuration/common-magnetic-interference/">ways to reduce magnetic interference on your copter, click here. </a>

@@ -517,22 +517,18 @@ This section lists the analog pins available on the Pixhawk. These are virtual p
 
 <strong>Virtual Pin 102</strong>: Servo power rail voltage. This is an internal measurement of the servo rail voltage made by the IO board within the Pixhawk. It has 3:1 scaling, allowing it to measure up to 9.9V.
 
-<strong>Virtual Pin 103</strong>: RSSI (Received Signal Strength Input) input pin voltage (SBus connector output pin). This is the voltage measured by the RSSI input pin on the SBUS-out connector (the bottom pin of the 2nd last servo connector on the 14 connector servo rail). Can alternatively serve as SBus out but not yet implemented.
+<strong>Virtual Pin 103</strong>: RSSI (Received Signal Strength Input) input pin voltage (SBus connector output pin). This is the voltage measured by the RSSI input pin on the SBUS-out connector (the bottom pin of the 2nd last servo connector on the 14 connector servo rail). 
+
+This can alternatively serve as SBus out by setting the <code>BRD_CAN_ENABLE</code> parameter (	<a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#enable_use_of_sbus_output_brd_sbus_out">Copter</a>, <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#enable_use_of_uavcan_devices_brd_can_enable">Plane</a>, <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#enable_use_of_uavcan_devices_brd_can_enable">Rover</a>).
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2.jpg"><img class="alignnone  wp-image-1718" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/pixhawk2-300x161.jpg" alt="pixhawk2" width="300" height="161" /></a>
 
 
-<h1>Pixhawk digital inputs</h1>
+<h1>Pixhawk digital outputs and inputs (Virtual Pins 50 - 55)</h1>
 
-The Pixhawk digital output pins on the FMU servo rail (the "AUX" pins) can also be used as digital input pins, using the same pin numbers as are used for outputs. This can be used for options that allow for digital input pins, such as the AUTO_TRIGGER_PIN in Rover.
+The Pixhawk has no dedicated digital output or input pins on its DF13 connectors, but you can assign up to 6 of the "AUX SERVO" connectors to be digital outputs/inputs. These are the first 6 of the 14 three-pin servo connectors on the end of the board. They are marked as AUX servo pins 1 - 6 on the silkscreen as seen above.
 
-The same rules for setting up BRD_PWM_COUNT apply for digital inputs and digital outputs.
-
-
-<h1>Pixhawk digital outputs (Virtual Pins 50 - 55)</h1>
-
-The Pixhawk has no dedicated digital output pins on its DF13 connectors, but you can assign up to 6 of the "AUX SERVO" connectors to be digital outputs. These are the first 6 of the 14 three-pin servo connectors on the end of the board. They are marked as AUX servo pins 1 - 6 on the silkscreen as seen above.
-
-To set the number of these pins that are available as digital outputs, set the BRD_PWM_COUNT parameter. On Pixhawk this defaults to 4, which means the first 4 AUX connectors are for servos (PWM) and the last 2 are for digital outputs. If you set BRD_PWM_COUNT to 0 then you would have 6 digital outputs and still have 8 PWM outputs on the rest of the connector.
+To set the number of these pins that are available as digital inputs/outputs, set the BRD_PWM_COUNT parameter. On Pixhawk this defaults to 4, which means the first 4 AUX connectors are for servos (PWM) and the last 2 are for digital inputs/outputs. If you set BRD_PWM_COUNT to 0 then you would have 6 virtual digital pins and still have 8 PWM outputs on the rest of the connector.
 
 The 6 possible pins are available for PIN variables as pin numbers 50 to 55 inclusive. So if you have BRD_PWM_COUNT at the default value of 4, then the two digital output pins will be pin numbers 54 and 55.
 
@@ -561,6 +557,9 @@ If BRD_PWM_CNT= 6 then
 53 = RC12
 54 = RC13
 55 = RC14
+
+
+By default, the pins are digital outputs as outlined above. A digital pin will instead be a digital input if it is assigned to a parameter that represents a digital input. For example, setting CAM_FEEDBACK_PIN to 50 will make pin 50 the digital input that receives a signal from the camera when a picture has been taken.
 
 
 

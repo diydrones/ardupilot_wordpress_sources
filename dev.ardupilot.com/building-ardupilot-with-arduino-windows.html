@@ -1,0 +1,231 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-ardupilot-with-arduino-windows 
+title: Building ArduPilot for APM2.x on Windows with Arduino 
+id: 3371 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to build ArduPilot for APM2.x targets on Windows, using the Arduino toolchain. <!--more -->
+[tip]An alternative approach is covered in <a href="building-ardupilot-for-apm2-x-on-windows-with-make">Building ArduPilot for APM2.x on Windows with Make</a>.[/tip][warning]
+Copter 3.3 firmware (and later) and builds after Plane 3.4.0 no longer fit on APM boards. Plane, Rover and AntennaTracker builds can still be installed at time of writing but you can no longer build APM2.x off the master branch (you will need to build off a supported release branch).
+&nbsp;
+The last Copter firmware that can be built on APM 2.x <a title="DIY Drones Firmware" href="http://ardupilot.com/downloads/?did=121">can be downloaded from here</a>.
+&nbsp;
+In addition to the above restrictions, this article covers:
+<ul>
+	<li>From Copter version 3.1 to version 3.2.1</li>
+	<li>From Plane version 2.76 to version 3.4.0</li>
+	<li>APM 2.0, 2.5, and 2.6 only</li>
+</ul>
+[/warning]
+
+
+<h1>Install Git-SCM</h1>
+
+<ol>
+	<li>Download and run the install file from: <a href="http://git-scm.com/download/win">http://git-scm.com/download/win</a></li>
+	<li>Follow the screenshots below to make your selections during install.
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image004.jpg"><img class="size-medium wp-image-3537" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image004.jpg" alt="image004" width="420" height="320" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image006.jpg"><img class="size-medium wp-image-3539" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image006.jpg" alt="image006" width="420" height="320" /></a></li>
+	<li>On the <em>Welcome screen</em> and then again on the <em>License screen</em> click the <strong>Next</strong> button
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image008.jpg"><img class="size-medium wp-image-3547" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image0081.jpg" alt="image008" width="420" height="320" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image018.jpg"><img class="size-medium wp-image-3548" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image018.jpg" alt="image018" width="420" height="320" /></a></li>
+	<li>On the <em>Select Components screen</em> click on the <strong>Next</strong> button, then click the <strong>Finish</strong> button
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image014.jpg"><img class="size-medium wp-image-3555" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image0141.jpg" alt="image014" width="420" height="320" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image016.jpg"><img class="size-medium wp-image-3558" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image016.jpg" alt="image016" width="420" height="320" /></a></li>
+	<li>Click the <strong>Next</strong> button in the <em>Replacing in Use Files Screen</em>, then wait for Git to finish loading
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image012.jpg"><img class="size-medium wp-image-3560" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image012.jpg" alt="image012" width="420" height="320" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image010.jpg"><img class="size-medium wp-image-3561" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image010.jpg" alt="image010" width="420" height="320" /></a></li>
+	<li>Select the <em>Checkout Windows</em> item and the <strong>Next</strong> button then Select the <em>Run Git from Windows</em> item and the <strong>Next</strong> button.</li>
+</ol>
+
+
+
+
+<h1>Download source</h1>
+
+<ol>
+	<li>In your C: drive, make a folder called GIT (<strong>C:\GIT</strong> on my computer). Navigate to the folder Windows Explorer
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image020.jpg"><img class="size-full wp-image-3566" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image020.jpg" alt="image020" width="628" height="484" /></a></li>
+
+
+	<li>Right click anywhere in the folder and click git bash
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image022.jpg"><img class="size-full wp-image-3567" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image022.jpg" alt="image022" width="628" height="677" /></a>
+
+This screen will come up
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image024.jpg"><img class="size-full wp-image-3569" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image024.jpg" alt="image024" width="630" height="325" /></a>
+
+</li>
+
+	<li>In this screen type
+<pre>git clone git://github.com/diydrones/ardupilot.git</pre>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image026.jpg"><img class="size-full wp-image-3570" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image026.jpg" alt="image026" width="626" height="323" /></a>
+
+When it is finished it should look like this….
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image028.jpg"><img class="size-full wp-image-3571" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image028.jpg" alt="image028" width="620" height="310" /></a>
+</li>
+
+</ol>
+
+
+
+<h1>Install MHV_AVR_Tools to its default location.</h1>
+
+<ol>
+	<li>Download and install the MHV_AVR Tools: <a title="http://firmware.diydrones.com/Tools/Arduino/MHV_AVR_Tools_20131101.exe" href="http://firmware.diydrones.com/Tools/Arduino/MHV_AVR_Tools_20131101.exe" target="_blank">http://firmware.diydrones.com/Tools/Arduino/MHV_AVR_Tools_20121007.exe</a>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image030.jpg"><img class="size-medium wp-image-3574" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image030.jpg" alt="image030" width="420" height="320" /></a> <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image038.jpg"><img class="size-medium wp-image-3575" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image038.jpg" alt="image038" width="420" height="320" /></a></li>
+	<li>Select the <strong>Next</strong> button in the setup wizard screen then select the <strong>Install</strong> button for <em>MHV AVR Tools</em>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image036.jpg"><img class="size-medium wp-image-3576" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image036.jpg" alt="image036" width="420" height="320" /></a> <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image034.jpg"><img class="size-medium wp-image-3577" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image034.jpg" alt="image034" width="420" height="320" /></a>
+</li>
+	<li>Check both items in the Choose <em>Components Screen</em> and select <strong>Next</strong> then select <strong>Next</strong> again to install to the default location
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image032.jpg"><img class="size-medium wp-image-3578" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image032.jpg" alt="image032" width="420" height="320" /></a>
+</li>
+	<li>Select the <strong>I Agree</strong> button on the <em>License Agreement screen</em>.</li>
+</ol>
+
+
+
+
+
+<h1>Install ArduPilot-Arduino</h1>
+
+Download and unzip the ArduPilot Arduino package: <a href="http://firmware.diydrones.com/Tools/Arduino/ArduPilot-Arduino-1.0.3-gcc-4.8.2-windows.zip" target="_blank">http://firmware.diydrones.com/Tools/Arduino/ArduPilot-Arduino-1.0.3-gcc-4.8.2-windows.zip</a>
+
+This can be unzipped directly to the <strong>C:</strong> drive or <strong>C:\Program Files\</strong>
+
+[note]This is a special ArduPilot Arduino package which contains gcc 4.8.2[/note]
+
+
+
+<h1>Configure Arduino</h1>
+
+<ol>
+	<li>Go to your Arduino folder
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image0401.jpg"><img class="size-full wp-image-3580" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image0401.jpg" alt="image040" width="609" height="378" /></a></li>
+
+
+	<li>Double click the Arduino icon
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image040.jpg"><img class="size-full wp-image-3491" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image040.jpg" alt="image040" width="171" height="34" /></a></li>
+
+
+	<li>When Arduino opens, go to the file menu
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image042.png"><img class="size-full wp-image-3581" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image042.png" alt="image042" width="427" height="514" /></a></li>
+
+
+	<li>Select preferences
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image044.png"><img class="size-full wp-image-3582" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image044.png" alt="image044" width="502" height="605" /></a>
+
+
+	<ul>
+          <li>Set Sketchbook location to your ArduPilot directory in your GIT folder.</li>
+	  <li>Set verbose for both compile and upload</li>
+	  <li>And DO NOT check for updates on start-up… (Remember, this is a special version just for ArduPilot.)</li>
+        </ul>
+
+</li>
+
+	<li>Click <strong>OK</strong> and close Arduino</li>
+</ol>
+
+
+
+
+
+<h1>Connect your APM to your USB</h1>
+
+<ol>
+	<li>Re-open ArduPilot and under the file tab, click on sketchbook, then the program you wish to load onto your APM2.x (for this example we will use Copter, though the others use the same methods.
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image047.jpg"><img class="size-full wp-image-3585" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image047.jpg" alt="image047" width="605" height="721" /></a></li>
+	<li>Once this is loaded, click on the ArduPilot tab, and select ArduPilot mega 2.x out of the HAL options.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image049.jpg"><img class="size-full wp-image-3587" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image049.jpg" alt="image049" width="605" height="706" /></a></li>
+	<li>Then click the “Tools” tab and select “Arduino Mega 2560 or Mega ADK” from the “Board” tab.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image051.jpg"><img class="size-full wp-image-3586" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image051.jpg" alt="image051" width="741" height="764" /></a></li>
+	<li>Next select the <em>Tools</em> tab again, and set the “Serial Port” to the one your APM is connected to.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image053.jpg"><img class="size-full wp-image-3588" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image053.jpg" alt="image053" width="645" height="782" /></a></li>
+	<li>In my case it was COM4, but check under device manager / Ports to find out on your system.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image055.jpg"><img class="size-full wp-image-3589" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image055.jpg" alt="image055" width="643" height="467" /></a></li>
+</ol>
+
+
+
+
+
+<h1>Configure Copter</h1>
+
+<ol>
+	<li>Click on the <strong>APM_Config.h</strong> file tab.</li>
+
+
+	<li>Set your frame type (e.g. <code>#define FRAME_CONFIG HEXA_FRAME</code>) in order to get the right image for your frame</li>
+
+
+	<li>Enable or disable the features you wish in this file.
+
+Ie if you want to compile with auto tune disabled, simply un-comment the line
+<pre>//# AUTOTUNE DISABLED // disable the auto tune functionality to save 7k of flash</pre>
+
+To disable Auto Tune which is enabled by default you would change it to:
+
+<pre># AUTOTUNE DISABLED // disable the auto tune functionality to save 7k of flash</pre>
+
+
+The commented out options are the NON-default and all that needs to be done is to un-comment them to use them instead.</li>
+
+	<li>Save this file and select the file Copter.
+
+At this point you are ready to compile.
+
+I would choose Verify for the first attempt.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image057.jpg"><img class="size-full wp-image-3594" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image057.jpg" alt="image057" width="643" height="765" /></a></li>
+
+</ol>
+
+
+
+
+
+<h1>Upload to your ArduPilot</h1>
+
+<ol>
+	<li>Then if all is well upload to the autopilot, as shown:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image058.png"><img class="size-full wp-image-3597" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image058.png" alt="image058" width="502" height="601" /></a>
+
+
+This may take a while…</li>
+
+	<li>You should end up with the message as shown below.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image061.jpg"><img class="size-full wp-image-3591" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/image061.jpg" alt="image061" width="639" height="764" /></a></li>
+
+
+	<li>Configure Your ArduPilot using planner, as normal.
+
+[warning]The code you have just compiled is now UN-TESTED in your configuration. Please use only for testing. If you are not confident, please just use mission planner to upload pre-compiled code.[/warning]</li>
+</ol>
+
+
+
+
+
+<h1>Updating your code</h1>
+
+Please ensure that the version of code on your PC is the latest version, use git to update your code to the latest code.

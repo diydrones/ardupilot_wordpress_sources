@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This article explains how to connect the <em>3DR Radio v1</em> to your flight controller. You should also read <a href="common-3dr-radio-version-2" title="common-3DR Radio v2">3DR Radio v2</a>, which contains a more detailed user guide and feature list. 
+This article explains how to connect the <em>3DR Radio v1</em> to your flight controller. You should also read <a href="common-3dr-radio-version-2">SiK Radio v2</a>, which contains a more detailed user guide and feature list. 
 <!--more-->
 
 [caption id="attachment_4008" align="alignnone" width="285"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR_Radio_Version1.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR_Radio_Version1.jpg" alt="3DR Radio v1" width="285" height="262" class="size-full wp-image-4008" /></a> 3DR Radio v1[/caption]
@@ -39,14 +39,14 @@ This article only covers the main difference between the two radios — connecti
 
 <h2>Connecting to Pixhawk</h2>
 
-The Pixhawk telemetry ports use a <a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">6 pin cable</a> instead of <a href="http://store.3drobotics.com/products/telemetry-adapter-cable-for-apm-2-5" target="_blank">5 pins used on the APM2</a>.  This allows flow control but unfortunately means that you will need to hack a cable to get a Version1 radio to a Pixhawk.  The connections required are shown below.
+The Pixhawk telemetry ports use a <em>DF13 6 pin connector cable (15cm)</em> instead of the 5 pins used on the APM2.  This allows flow control but unfortunately means that you will need to hack a cable to get a Version1 radio to a Pixhawk.  The connections required are shown below.
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3drRadioV1_pixhawk1.png"><img class="alignnone size-full wp-image-2043" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3drRadioV1_pixhawk1.png" alt="3drRadioV1_pixhawk" width="876" height="498" /></a>
 
 
 <h2>Connecting to APM 2.5</h2>
 
-Use the <a href="http://store.3drobotics.com/products/telemetry-adapter-cable-for-apm-2-5" target="_blank">included cable</a> and plug it into the telemetry port on APM 2.5 and on the 3DR radio side, plug the connector with the red cable on the +5v pin and the black cable on the end on GND as shown:
+Use the included cable and plug it into the telemetry port on APM 2.5 and on the 3DR radio side, plug the connector with the red cable on the +5v pin and the black cable on the end on GND as shown:
 
 [note]You cannot connect via the radios when your APM 2.x is also connected via USB (they share the same port) so make sure you disconnect your USB cable from the flight controller before attempting a wireless connection.[/note]
 

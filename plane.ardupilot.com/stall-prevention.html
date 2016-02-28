@@ -1,0 +1,78 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: stall-prevention 
+title: Stall Prevention 
+id: 6689 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Plane has logic to try to prevent stalls when in certain modes. This page describes how it works and how to configure it.
+
+<h1>Basic Idea</h1>
+One of the most common ways that users crash is through a stall. A stall happens when the airflow over the wing is not sufficient to hold the aircraft in the air. Stalls can happen at any speed, but the most common type of stall is a low speed stall, where the airflow is too slow to provide enough lift.
+
+The amount of airflow you need over the wing to hold the aircraft in the air depends (among other things) on the bank angle you are flying at. If you are banked over hard then you need to fly faster to get enough lift to stay in the air. This is because the lift is produced perpendicular to the wing, so when the wing is rolled over it provides only part of the lift to holding the aircraft up, and the rest of the lift goes into making the aircraft turn.
+
+When the <a href="arduplane-parameters/#enable_stall_prevention_arduplanestall_prevention">STALL_PREVENTION</a> parameter is set to 1 then two things are done:
+<ul>
+	<li>when in roll controlled modes the autopilot will monitor your demanded bank angle and airspeed and work out if you have sufficient margin above the stall speed to turn at the demanded bank angle. If you don't then the turn will be limited to the safe limit, but it will always allow a bank of at least 25 degrees (to ensure you can still manoeuvre if your airspeed estimate is badly off).</li>
+	<li>when in auto-throttle modes the autopilot will also raise the minimum airspeed in the <a href="tecs-total-energy-control-system-for-speed-height-tuning-guide">TECS system</a> to the level at which the current demanded bank angle can be safely achieved. So it will add more engine power or lower the nose to raise the airspeed so that the bank angle that the navigation controller is demanding can be achieved without a stall</li>
+</ul>
+
+
+<h1>Configuring stall prevention</h1>
+There are two key parameters that control stall prevention:
+<ul>
+	<li>The <a href="arduplane-parameters/#enable_stall_prevention_arduplanestall_prevention">STALL_PREVENTION</a> parameter. If this is set to zero then no stall prevention is done. This may be useful if you have no airspeed sensor and the synthetic airspeed estimate is not good enough</li>
+	<li>The <a href="arduplane-parameters/#minimum_airspeed_arduplanearspd_fbw_min">ARSPD_FBW_MIN</a> parameter, which is the configured minimum airspeed for level flight. It is this value that is scaled with the bank angle to calculate the safe airspeed for any demanded bank angle</li>
+</ul>
+
+<h1>Affected modes</h1>
+The following modes are affected by the bank angle limiting of the stall prevention code:
+<ul>
+	<li>FBWA</li>
+	<li>FBWB</li>
+	<li>AUTOTUNE</li>
+	<li>CIRCLE</li>
+	<li>RTL</li>
+	<li>AUTO</li>
+	<li>CRUISE</li>
+	<li>LOITER</li>
+	<li>GUIDED</li>
+        <li>TRAINING (from Plane 3.4)</li>
+</ul>
+
+In each of these modes the aircraft is either calculating a desired bank angle for the navigation code, or the user is inputting a desired bank angle via the aileron stick. In both cases the stall prevention code will limit the bank angle based on the amount of margin between <code>ARSPD_FBW_MIN</code> and the current airspeed.
+
+The following modes are affected by the automatic speed increase in TECS when the bank angle is limited by stall prevention:
+<ul>
+	<li>CIRCLE</li>
+	<li>RTL</li>
+	<li>AUTO</li>
+	<li>CRUISE</li>
+	<li>LOITER</li>
+	<li>GUIDED</li>
+</ul>
+These are all of the "auto throttle" modes, where the TECS controller controls pitch and throttle.
+
+
+<h1>Example Usage</h1>
+
+An example of how stall prevention works is in AUTO mode when making a turn for an automated landing. The landing approach will aim for an airspeed of <a href="arduplane-parameters/#airspeed_during_landing_approach_ms_tecs_land_arspd">TECS_LAND_ARSPD</a>, which is often quite low, and may be just above the stall speed. If the final turn is sharp (it is often 90 degrees) the plane may be trying to perform a sharp turn while dropping speed for landing. That could induce a stall. The stall prevention code means two things happen:
+<ul>
+	<li>the initial turn is kept shallow enough to prevent the stall</li>
+	<li>the target airspeed is kept high enough during the turn to allow the turn to complete, after which it is lowered</li>
+</ul>
+
+
+
+<h1>Nose Down in FBWA and AUTOTUNE</h1>
+
+The FBWA mode has an additional special feature to help prevent straight line stalls. It is often difficult for a pilot to judge the airspeed of a plane when it is coming head on, and so many pilots find themselves flying too slow when they are trying to fly gently in FBWA mode. This is especially true if the ArduPilot pitch controller is well tuned and manages to keep the nose up even when flying slowly.
+
+To make a level flight low speed stall less likely some additional down pitch is added in FBWA and AUTOTUNE modes based on the throttle position. The amount of down pitch added is based on the <a href="arduplane-parameters/#low_throttle_pitch_down_trim_arduplanestab_pitch_down">STAB_PITCH_DOWN</a> parameter, which defaults to 2 degrees. At zero throttle this full down pitch is added. If throttle is above <code>TRIM_THROTTLE</code> then no down pitch is added. Between those two values the down pitch is added in proportion to the throttle.
+
+This has the effect of slightly lowering the nose when you lower throttle in FBWA and AUTOTUNE modes, which makes the plane gain a bit of speed, and thus makes it less likely to stall. The value you need for <code>STAB_PITCH_DOWN</code> depends on how much drag your plane has. A very sleek model will need a smaller value. A high drag model will need a larger value.

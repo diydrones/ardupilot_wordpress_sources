@@ -1,0 +1,173 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: where-to-get-the-code 
+title: Working with the ArduPilot Project Code 
+id: 2631 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains where to get the ArduPilot code and how to submit changes to the project.
+
+<!-- more -->
+<h1>Overview</h1>
+The ArduPilot project uses <a href="http://git-scm.com/" target="_blank">git</a> for source code management and <a href="https://github.com/" target="_blank">GitHub</a> for source code hosting.
+
+Developers who want to contribute to ArduPilot will will fork the project, create a branch on their fork with new features, and then raise a pull request to get the changes merged into the "master" project. Developers who just want to use and build the latest code can do so by cloning and building the "master" repository.
+
+The ArduPilot project source code for Plane, Copter, Rover and Antenna Tracker are available on <a href="https://github.com/" target="_blank">GitHub</a> in the <a href="https://github.com/diydrones/ardupilot" target="_blank">https://github.com/diydrones/ardupilot</a> repository. Several additional projects are used for PX4 based platforms (ie. PX4v1 and Pixhawk): <a href="https://github.com/diydrones/PX4Firmware">PX4Firmware</a>, <a href="https://github.com/diydrones/PX4NuttX">PX4NuttX</a>, <a href="https://github.com/diydrones/uavcan">uavcan</a> — these are imported as <a href="http://dev.ardupilot.com/wiki/git-submodules/">Git Submodules</a> when you build the project.
+
+MissionPlanner is in the <a href="https://github.com/diydrones/MissionPlanner" target="_blank">diydrones/MissionPlanner</a> repository.
+
+[note]An older Google Code repository remains online for legacy reasons, but unless you specifically need older (APM 1.x) resources, you won't need to use it.[/note]
+<h1>Prerequisites</h1>
+The ArduPilot project uses <a href="http://git-scm.com/" target="_blank">git</a> for source code management.
+
+Git is available on all major OS platforms, and a variety of tools exist to make it easier to get started. First, you need to <a href="http://git-scm.com/downloads" target="_blank">download and install a client for your operating system</a>. If you're new to source code control systems, the <a href="https://windows.github.com/" target="_blank">GitHub for Windows</a> or <a href="https://mac.github.com/" target="_blank">GitHub for Mac</a> clients are well-documented and integrate well with GitHub and are a good place to start. This guide will use both the GitHub for Windows user interface as well as the command-line interface through an OSX/Linux Terminal.
+
+If you are working towards submitting code back to the official APM source code repository, you'll need to <a href="https://github.com/join" target="_blank">sign up for a free user account with Github</a>.
+<h1>Learning git</h1>
+This guide covers the basic git commands/concepts needed to work with the project: clone, branch, commit, push.
+
+If you want to know more about git there are many great resources online. Here are just a few you may find useful:
+<ul>
+	<li><a href="http://try.github.io/levels/1/challenges/1" target="_blank">Try Git</a>: browser-based interactive tutorial for learning git</li>
+	<li><a href="http://gitready.com/" target="_blank">Git Ready</a>: tutorials of varying difficulty levels</li>
+	<li><a href="http://git-scm.com/book/en/Getting-Started" target="_blank">Git SCM Book</a>: introduction and full documentation</li>
+</ul>
+<h1>Forking the main repository</h1>
+[tip]If you just want to build and test the project source code (without making changes) you can skip this step and just clone the main project repository (next section). [/tip]
+
+"Forking" is GitHub's term for copying a repository to your own account. The forked repository preserves information about the original project so you can fetch updates from it (and contribute changes back to it). If you want to contribute changes back to the main project you will need to first create your own fork of the main ArduPilot repository.
+
+To fork the main repository:
+<ul>
+	<li>Log into Github and go to <a href="https://github.com/diydrones/ardupilot" target="_blank">https://github.com/diydrones/ardupilot</a>.</li>
+	<li>At the upper right is a button, "Fork":
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Fork.jpg"><img class="size-medium wp-image-4053" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Fork-300x64.jpg" alt="APM-Git-Github-Fork" width="300" height="64" /></a>
+Click the <strong>Fork</strong> button and follow the directions.</li>
+</ul>
+When your are finished there will be a new repository within your account: <code>//github.com/your-github-account-name/ardupilot</code>
+
+This forked repository is what you will clone and work on locally when making changes to the code.
+<h1>Cloning the repository</h1>
+"Cloning" is git's term for making a copy of any repository on your own computer. You can clone either your own fork of the repository (if you want to make changes to the source code) or the main ArduPilot repository.
+
+The information/tools you need for cloning the project are on the right side of the screen on each Github repository home page.
+
+[caption id="attachment_4054" align="alignnone" width="197"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Clone.jpg"><img class="size-full wp-image-4054" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Clone.jpg" alt="Github section for cloning a repo" width="197" height="189" /></a> Github section for cloning a repo[/caption]
+
+<strong>OSX/Linux Terminal:</strong>
+<ul>
+	<li>Open a Terminal and navigate to the directory where you would like to clone the project</li>
+	<li>Clone your fork:
+<pre>git clone https://github.com/<code>your-github-account-name/ardupilot</code></pre>
+or the main project:
+<pre>git clone https://github.com/diydrones/ardupilot</pre>
+</li>
+</ul>
+<strong>Windows (GitHub GUI):</strong>
+<ul>
+	<li>Open the <a href="https://github.com/diydrones/ardupilot" target="_blank">diydrones/ardupilot</a> repository in your favorite web browser</li>
+	<li>Click on the "Clone in Desktop" button on the bottom right</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows1.png"><img class="size-medium wp-image-2645" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows1-300x246.png" alt="CloningTheRepository_Windows1" width="300" height="246" /></a>
+<ul>
+	<li>If you have not installed GitHub before:
+<ul>
+	<li>When brought to the windows.github.com page, push the "download" button on the top right<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows_DownloadGithub.png"><img class="size-medium wp-image-2647" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows_DownloadGithub-300x192.png" alt="CloningTheRepository_Windows_DownloadGithub" width="300" height="192" /></a></li>
+	<li>Save the <strong>GitHubSetup.exe</strong> somewhere on your machine and then run it and follow the instructions to install GitHub client</li>
+</ul>
+</li>
+</ul>
+<ul>
+	<li>On GitHub client click the right arrow button to view a list of recent commits or right-mouse-button click on the diydrones/ardupilot repository and "open in explorer".
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows_OpenGithub.png"><img class="size-medium wp-image-2648" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/CloningTheRepository_Windows_OpenGithub-300x106.png" alt="CloningTheRepository_Windows_OpenGithub" width="300" height="106" /></a></li>
+	<li>You can now also open the file in your favourite editor such as <a href="http://notepad-plus-plus.org/" target="_blank">NotePad++</a>, <a href="http://www.sublimetext.com/" target="_blank">Sublime Text</a> or <a href="http://acme.cat-v.org/" target="_blank">acme</a>.</li>
+</ul>
+<h1>Building the code</h1>
+ArduPilot supports building many different build targets (vehicles and autopilot hardware) on Linux, Windows and Mac OSX. For information about how to build for your particular target, see <a href="http://dev.ardupilot.com/wiki/building-the-code/">Building the code</a>.
+<h1>Making a branch and changing some code</h1>
+Branches are a way to isolate different paths of development, which can then be combined in a single (often named "master") branch. Refer to <a href="http://gitready.com/beginner/2009/01/25/branching-and-merging.html" target="_blank">this short guide</a> for more information, in particular the resources under the <a href="where-to-get-the-code/#learning_git">Learning Git</a> section. In this section of the tutorial, you'll make a branch and change some code.
+
+Branch names are up to you, but it can be helpful to choose short descriptive names. The branch name used for this tutorial is "apm_git_tutorial"
+
+<strong>OSX/Linux Terminal commands</strong>
+
+These commands assume your current working directory is the root of the repository you cloned.
+
+[tip]These same commands can be used in Windows too if you use a command line git client (e.g. The "Git Shell" utility that was installed with GitHub for Windows.[/tip]
+<ol>
+	<li>Create a branch.
+<pre>git checkout -b apm_git_tutorial</pre>
+</li>
+	<li>Change some code. For this tutorial, open the <strong>Tools/GIT_Test/GIT_Success.txt</strong> in your preferred text editor, and put your name at the end of the file. Save the file.</li>
+	<li>See that you've changed some files by checking the status:
+<pre>git status</pre>
+</li>
+	<li>Commit your work to the branch to add your changes to the git history:
+<pre>git add Tools/GIT_Test/Git_Success.txt
+git commit -m 'Added name to GIT_Success.txt'</pre>
+Please see below for further information regarding conventions for committing work that you expect to be integrated into the official releases. When you commit, you're required to add a log message explaining what you did in the commit. See <a href="/wiki/submitting-patches-back-to-master/">Submitting Patches Back to Master</a> for more information on how to do this, and for the purpose of this tutorial, you can just use a single line stating: "Added name to GIT_Success.txt":</li>
+	<li>Push your branch to GitHub. This will copy your work on your local branch to a new branch on GitHub. Pushing branches is a precondition for collaborating with others on GitHub or for submitting patches back to the official releases.  It is assumed origin is the remote name of your fork of the github repository.
+<pre>git push origin HEAD:apm_git_tutorial</pre>
+</li>
+</ol>
+<strong>Windows (GitHub GUI)</strong>
+
+In the Github GUI you used to clone the repository, you can create a branch and commit it.
+<ol>
+	<li>Create a branch. In the GitHub for Windows application, click on the 'master' button in the upper right corner of the window.
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Windows-Branch.jpg"><img class="alignnone size-full wp-image-4055" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/APM-Git-Github-Windows-Branch.jpg" alt="APM-Git-Github-Windows-Branch" width="258" height="88" /></a>
+Enter 'apm_git_tutorial' and click the "+ create branch: apm_git_tutorial" dropdown.
+
+[caption id="attachment_5807" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_CreateBranch.png"><img class="size-medium wp-image-5807" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_CreateBranch-300x143.png" alt="Create a new branch in Github for Windows" width="300" height="143" /></a> Create a new branch in Github for Windows[/caption]</li>
+	<li>Change some code. For this tutorial, open the <strong>Tools/GIT_Test/GIT_Success.txt</strong> in your preferred text editor, and put your name at the end of the file. Save the file.</li>
+	<li>The Git for Windows client shows the changed file and has a place where you can enter a summary and description of the change. For the purpose of this tutorial, you can just use a single line stating: "Added name to GIT_Success.txt"
+
+[caption id="attachment_5808" align="alignnone" width="1095"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_CommitingChange.png"><img class="size-full wp-image-5808" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_CommitingChange.png" alt="Github for windows: Commit Change" width="1095" height="603" /></a> Github for windows: Commit Change[/caption]
+
+[note]Please see <a href="/wiki/submitting-patches-back-to-master/">Submitting Patches Back to Master</a> for further information regarding conventions for committing work that you expect to be integrated into the official releases (this will include a much more detailed commit message). [/note]</li>
+	<li>Commit your work to the branch by pressing the <strong>Commit to apm_git_tutorial</strong> link.</li>
+	<li>Push your local branch to GitHub (pushing branches is a precondition for collaborating with others on GitHub or for submitting patches back to the official releases). In the client you can do this by pressing the <strong>Publish</strong> link:
+
+[caption id="attachment_5809" align="alignnone" width="1096"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_Publish_Push.png"><img class="size-full wp-image-5809" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/GitHubForWindowsClient_Publish_Push.png" alt="GitHub for Windows Client: Pushing changes" width="1096" height="602" /></a> GitHub for Windows Client: Pushing changes[/caption]</li>
+</ol>
+Congratulations! This is bulk of the normal process you'd follow when working on code to submit back to the official project. The next step is to <a href="/wiki/submitting-patches-back-to-master/">submit a pull request</a> so your changes can be considered for addition to the main project.
+<h1>Rebase-based workflow: keeping your code up to date</h1>
+As you develop, the (original) master branch of the ArduPilot repository is likely to be updated, and you should <a href="http://robots.thoughtbot.com/keeping-a-github-fork-updated" target="_blank">keep your fork and your local branches up to date</a>. Rebasing allows you to re-apply your changes on top of the latest version of the original repo, making it much easier for the project to merge them.
+
+The following commands can be used to rebase your fork of the project to the "upstream master" (main project repo). You can enter these commands direct into a Linux/OSX Terminal. If using GitHub for Windows, launch the "Git Shell" utility that was installed with GitHub for Windows application.
+<ol>
+	<li>Navigate to your ardupilot git repository.
+<pre>cd &lt;ardupilot-path&gt;</pre>
+</li>
+	<li>Ensure you are looking at your master branch
+<pre>git checkout master</pre>
+</li>
+	<li>Ensure your repository is connected to the upstream repository you forked from.
+<pre>git remote add upstream https://github.com/diydrones/ardupilot.git</pre>
+</li>
+	<li>Fetch changes from the upstream master.
+<pre>git fetch upstream</pre>
+</li>
+	<li>Rebase your current branch from the upstream master.
+<pre>git rebase upstream/master</pre>
+</li>
+	<li>Ensure your repository is connected to the your repository on github.
+<pre>git remote add origin https://github.com/<code>your-github-account-name</code>/ardupilot.git</pre>
+</li>
+	<li>Now push the updated master to your github repository
+<pre>git push origin master</pre>
+</li>
+</ol>
+<h1>Working with git submodules</h1>
+ArduPilot development for PX4 based platforms (ie. PX4v1 and Pixhawk) uses three additional repositories:
+<ul>
+	<li><a href="https://github.com/diydrones/PX4Firmware">PX4Firmware</a></li>
+	<li><a href="https://github.com/diydrones/PX4NuttX">PX4NuttX</a></li>
+	<li><a href="https://github.com/diydrones/uavcan">uavcan</a></li>
+</ul>
+These are <em>Git submodules</em> of the ArduPilot project, and are automatically fetched as part of a build when needed. For more information on working with these projects see <a href="http://dev.ardupilot.com/wiki/git-submodules/">Git Submodules</a>.

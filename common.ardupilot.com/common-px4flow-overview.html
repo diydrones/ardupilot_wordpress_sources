@@ -12,11 +12,8 @@ END METADATA
 This article describes the <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4FLOW (Optical Flow) Sensor</a>.
 <!--more-->
 
-[warning]The PX4FLOW is not supported in the current stable releases of Copter, Plane or Rover software, but is now supported as an experimental feature in Copter 3.3 beta. It is unlikely that it will ever be supported for use with the APM2.[/warning]
-
-
+[warning]The PX4FLOW is supported as an experimental feature starting from Copter 3.3. It is not supported in Plane or Rover.[/warning]
 <h1>Overview</h1>
-
 The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features and a rangefinder to determine aircraft ground velocity. Although the sensor has plus a built-in Maxbotix LZ-EZ4 sonar to measure height, this has not been reliable enough over a range of surfaces in testing, so its readings are not used and instead a separate <a href="wiki/common-optional-hardware/common-rangefinder-landingpage/">Range Finder</a> such as the <a href="wiki/common-optional-hardware/common-rangefinder-landingpage/common-rangefinder-lidarlite/">Lidar Lite</a> should also be attached to the vehicle.
 
 The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
@@ -43,7 +40,7 @@ The PX4Flow firmware must be updated prior to connecting to the Pixhawk:
 <h1>Connect to the Pixhawk</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk.png"><img class="alignnone size-large wp-image-2973" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_Pixhawk-1024x567.png" alt="OptFlow_Pixhawk" width="584" height="323" /></a>
 
-The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
+The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most cases an <a href="http://www.amazon.com/Crius-Pixhawk-i2c-Splitter-Pixhawk-Controller/dp/B00LAWOUE4" target="_blank">I2C splitter</a> should be used to allow other I2C devices (like the external RGB LED and GPS/Compass module's compass) to the same port.
 <h1>Mounting to the Frame</h1>
 Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#flow_sensor_yaw_alignment_flow_orient_yaw">FLOW_ORIENT_YAW</a> parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
 
@@ -88,6 +85,15 @@ Check the EKF5.meaRng message in the flashlog from your flow sensor calibration
 	<li>There is continuous range measurement.</li>
 	<li>It outputs a range on the ground that is 10cm of the expected value (remember that measured range will increase when you roll or pitch the vehicle because the laser is then measuring on a slant)</li>
 </ol>
+<h1>Pre-Arm checks</h1>
+To allow arming and taking off in Loiter without a GPS the GPS arming check should be turned off as shown below.  Unchecking "All" and "GPS" and leave all other options checked.
+
+<img class="alignnone size-large wp-image-5725" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_ArmingChecks-1024x384.png" alt="OptFlow_ArmingChecks" width="474" height="178" />
+
+Because optical flow requires good sonar/range finder data when the optical flow is enabled, an additional pre-arm check is enforced.
+<strong>While the vehicle is disarmed you should lift the vehicle straight up to at least 50cm but no higher than 2m</strong> (if the rangefinder sees a distance of over 2m you will need to restart the flight controller).
+The error message when arming fails this check is "<span style="color: #ff0000">PreArm: check range finder</span>"
+This check can be disabled by unchecking the "Parameter/Sonar" arming check.
 <h1>First Flight (Copter Only)</h1>
 <ol>
 	<li>Perform a short test flight  hovering in stabilise at small tilt angles at heights ranging from 50cm to 3m with <code>EKF_GPS_TYPE = 0</code> (we don't want the optical flow being used by the EKF at this stage)</li>

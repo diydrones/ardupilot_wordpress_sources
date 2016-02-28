@@ -1,0 +1,50 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-for-erle-brain 
+title: Building for Erle-Brain 
+id: 6318 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[warning]This page is under construction.[/warning]
+
+These instructions explain how to build ArduPilot on the Erle-Brain board.<!--more-->
+[tip]Alternatively you can follow Erle-Robotics's instructions on how to build from source found <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain/Software/Operating_Systems/Debian/APM_autopilot.html" target="_blank">here</a>.[/tip]
+
+
+<h2>Connection and setup</h2>
+Connect to Erle-Brain using microUSB:
+<pre><code class=" hljs bash"><span class="hljs-built_in">sudo</span> ifconfig eth6 <span class="hljs-number">192.168</span>.<span class="hljs-number">7.1
+</span></code></pre>
+<pre><code class=" hljs ruby">ssh root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.7</span>.<span class="hljs-number">2</span></code></pre>
+[tip]Check the interface Erle-Brain creates using <strong>ifconfig </strong>command. More info about how to connect in manufacturers <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain/Getting_Started/Connecting_to_Erle-Brain/Linux_&amp;_Mac_OS.html" target="_blank">documentation</a>[/tip]
+
+Give Erle-Brain Internet access connecting Ethernet wire into RJ45 connector and configure the interface:
+<pre><code class=" hljs ruby"><span class="hljs-variable">$ </span>sudo ifconfig eth<span class="hljs-number">0</span> up
+<span class="hljs-variable">$ </span>sudo dhclient eth<span class="hljs-number">0</span>
+<span class="hljs-comment">#Check if Erle BRain has Internet access</span>
+<span class="hljs-variable">$ </span>ping www.google.es
+<span class="hljs-comment"># press |ctrl| |c| to exit</span></code></pre>
+[tip]More info about in manufacturers <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain/Getting_Started/Internet_through_Ethernet.html" target="_blank">documentation</a>[/tip]
+
+Clone the source:
+<pre>cd 
+git clone https://github.com/erlerobot/ardupilot.git</pre>
+<h2>Build</h2>
+Build for Copter:
+<pre>cd /home/pi/ardupilot/<strong>ArduCopter</strong>
+make pxf -j4</pre>
+This will build the firmware for a quadcopter.  If you wish to build for another frame type (such as hexacopter) append "-hexa" onto the end of the make command (i.e. make -j4 pxf-hexa).  The full list of available frames can be found in the <a href="https://github.com/diydrones/ardupilot/blob/master/mk/targets.mk#L75" target="_blank">targets.mk</a> file.
+
+[note]If building for Plane, Rover or Antenna Tracker replace the above "ArduCopter" with "ArduPlane", "APMrover2" or "AntennaTracker".[/note]
+<h2>Move firmware to the executable directory</h2>
+Move the executable to the directory from where it is normally started:
+<pre>sudo cp ArduCopter.elf /<strong>~</strong></pre>
+[tip]If you are unable to copy the executable it may be because the destination file is locked because it is already running.  Use the following command to stop the running service
+<pre><code class=" hljs ">systemctl stop apm-copter.service</code></pre>
+[/tip]
+
+[tip] If you wish to configure the launch of APM, please check this <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain/Software/Operating_Systems/Debian/APM_autopilot.html" target="_blank">link</a>[/tip]

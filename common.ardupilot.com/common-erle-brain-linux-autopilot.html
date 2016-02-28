@@ -10,12 +10,109 @@ post_parent_title:
 END METADATA 
 -->
 This page presents the <a href="https://erlerobotics.com/blog/product/erle-brain/">Erle-Brain</a> Linux autopilot — an APM autopilot and <a title="Companion Computer" href="http://dev.ardupilot.com/wiki/companion-computers/">companion computer</a> in a single package.
-<!--more-->
-<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/brain-v1.1-focus.png"><img class="alignnone size-medium wp-image-5423" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/brain-v1.1-focus-265x300.png" alt="brain-v1.1-focus" width="265" height="300" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.00.37.png"><img class="alignnone size-medium wp-image-5431" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.00.37-226x300.png" alt="Erle-Brain composition" width="226" height="300" /></a>
+
+Currently there are two versions of this Linux based Autopilot and a shield:
+<ul>
+	<li><em>Erle-Brain 2</em>: The new generation of artificial robotic brains for drones and robots that use DroneCode Foundation Tools, ROS and many other tools.</li>
+        <li><em>PXFmini</em>: An open autopilot shield for the Raspberry Pi.</li>
+	<li><em>Erle-Brain 1 (<em>Discontinued</em>)</em>: The first Open-Source Linux Autopilot that runs APM and ROS natively.</li>
+</ul>
+
+Erle-Brain based drones can be assembled as discussed in the <a href="https://erlerobotics.com/docs/Robots/Erle-Copter/index.html">official documentation</a>. Erle-Brain based drones can also be purchased from the Erle Robotics official store in both <a href="https://erlerobotics.com/blog/product-category/robots/">ready to use</a> and <a href="https://erlerobotics.com/blog/product-category/robots/kits/">DIY kit</a> form.
 
 
-<h1>Overview</h1>
+<h1>Erle-Brain 2</h1>
+<a href="https://erlerobotics.com/blog/product/erle-brain-v2/">Erle-Brain 2</a> is the second generation of Linux-based artificial robotic brain for making robots and drones with official support for the Robot Operating System (ROS) and access to the app store.
+
+It combines an embedded Linux computer (Raspberry Pi 2) and a daughter board containing several sensors, IO and power electronics. It is a Linux embedded device that runs APM as well many other frameworks and services for robotic application development.
+
+Some <em>Erle-Brain 2</em> features include:
+<ul>
+	<li>Linux File Systems (<a href="http://erlerobotics.gitbooks.io/erle-robotics-erle-brain-a-linux-brain-for-drones/content/en/software/update.html">Debian and Ubuntu Snappy Core</a>)</li>
+	<li>WiFi-enabled</li>
+	<li>ROS focus (Indigo available)</li>
+	<li><a href="https://github.com/erlerobot?utf8=%E2%9C%93&amp;query=ros">ROS packages </a> for sensors and peripherials</li>
+	<li><a title="DroneKit" href="http://python.dronekit.io/">DroneKit-Python</a> support</li>
+	<li>Snappy Ubuntu app store supported</li>
+	<li>MAVProxy can automatically bridge MAVLink packets to your WiFi network.</li>
+	<li>Sensors: Gravity sensor, gyroscope, digital compass, Pressure sensor and tempertature sensor, ADC for battery sensing.</li>
+	<li>Optional WiFi and Bluetooth.</li>
+	<li>Optional Camera: MP Fixed focus lens, 2592 x 1944 pixel static images, supports 1080p30, 720p60 and 640x480p60/90 video record.</li>
+</ul>
+
+The following images show the main ports/features available to Erle-Brain version 2.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/erlebrain2_1.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/erlebrain2_1.png" alt="erlebrain2_1" width="708" height="963" class="alignnone size-full wp-image-5478" /></a>
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/erlebrain2_2.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/erlebrain2_2.jpg" alt="erlebrain2_2" width="737" height="953" class="alignnone size-full wp-image-5479" /></a>
+
+The next image shows the software characteristics that Erle-Brain 2 can handle:
+
+
+[caption id="attachment_5480" align="alignnone" width="620"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/dev_stack.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/dev_stack.jpg" alt="Erle-Brain v2 Development Stack" width="620" height="789" class="size-full wp-image-5480" /></a> Erle-Brain v2 Development Stack[/caption]
+
+
+<h2>Quick start</h2>
+
+The easiest way to get started is to SSH into Erle-Brain 2 and play around with it:
+<h3>If connected by WiFi:</h3>
+<pre><code class=" hljs perl">#password is <code>holaerle</code>.
+$ ssh erle<span class="hljs-variable">@erle</span>-brain-<span class="hljs-number">2</span>.<span class="hljs-keyword">local
+</span></code><code class=" hljs ruby"></code></pre>
+<h3>If connected by Ethernet<code></code></h3>
+<pre><code class=" hljs perl">#password is <code>holaerle</code>.
+<span class="hljs-keyword">$ </span>ssh erle<span class="hljs-variable">@erle</span>-brain-<span class="hljs-number">2</span>.<span class="hljs-keyword">local
+#Use ifconfig and nmap -sn commands to check the net 
+$ </span></code><code class=" hljs ruby">ssh erle<span class="hljs-variable">@192</span>.<span class="hljs-number">168</span>.*<span class="hljs-number">.*
+</span></code><code class=" hljs perl">#password is <code>holaerle</code>.</code></pre>
+Get more info in <a href="http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Erle-Brain_2/Intro.html" target="_blank">our docs</a>
+
+Erle-Brain can be purchased from the <a href="https://erlerobotics.com/blog/product/erle-brain-v2/" target="_blank">Erle Robotics store</a>.
+<h2>Hardware setup</h2>
+Typical hardware setup for flying drones is:
+
+<img class="alignnone" src="http://erlerobotics.com/docs/img/Artificial_Brains/Erle_Brain2/Hardware/Erle-Brain_Componentes.jpg" alt="" width="998" height="896" />
+
+If you wish more info about hardware connections, go to our <a href="http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Erle-Brain_2/Hardware/Typical_Hardware_Setup.html" target="_blank">docs</a>
+
+
+<h2>Building APM AutoPilot on Erle-Brain 2</h2>
+Run the following instructions in the bash command prompt to build APM on Erle-Brain 2:
+<pre>$ git clone http://github.com/erlerobot/ardupilot
+</pre>
+<pre>$ cd ardupilot/ArduCopter</pre>
+<pre>$ make erlebrain2 -j4</pre>
+<h2>Camera</h2>
+Camera images are fed into ROS directly using the <code>raspicam_node</code> that it's automatically launched. To be able to see the images, in your Erle-Brain 2:
+<pre><code class=" hljs sql">$ rosservice <span class="hljs-operator"><span class="hljs-keyword">call</span> /camera/start_capture</span></code></pre>
+On you Desktop computer (or wherever you wish to visualize the images), and after configuring appropriately the <code>ROS_MASTER_URI</code> environmental variable:
+<pre><code class=" hljs ruby">$ rosrun image_view image_view <span class="hljs-symbol">image:</span>=<span class="hljs-regexp">/camera/image</span> <span class="hljs-symbol">_image_transport:</span>=compressed
+
+</code></pre>
+Erle-Brain can be purchased from the <a href="https://erlerobotics.com/blog/product/erle-brain-v2/" target="_blank">Erle Robotics store</a>.
+
+<h1>PXFmini (Pixhawk Fire Cape Mini)</h1>
+
+The <a href="http://erlerobotics.com/blog/pxfmini" />PXFmini</a> is a low cost and open autopilot shield for the Raspberry Pi that allows you to create a ready-to-fly autopilot with support for Dronecode’s APM flight stack. The shield has been designed specially for the Raspberry Pi Zero but it is also pin to pin compatible with other models from the Raspberry Pi family.
+
+<img class="alignnone" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2016/01/pxfmini.jpg" alt="" width="100%" height="100%" />
+
+The PXFmini shield weighs only 15 grams and embeds all the power electronics necessary to comply with most of the existing components for drones through its I2C and UART ports. PXFmini includes 3 axes gravity sensor, 3 axes gyroscope, 3 axes digital compass, pressure sensor, temperature sensor and an ADC. It includes new JST GH connectors (adopted by the Dronecode Foundation) provide an amazing new experience.
+
+What's best, the PXFmini schematics are open for you to hack around and create your own robots based on the design. The board can be purchased <a href="https://erlerobotics.com/blog/product/pxfmini/" target="_blank">here</a>.
+
+
+<h2>Quick start</h2>
+
+All the documentation related to this product (specs, software, schematics,...) can be found in the Erle Robotics <a href="http://erlerobotics.com/docs/">documentation site</a>.
+This information is still being developed.
+
+
+<h1>Erle-Brain 1 (<em>Discontinued</em>)</h1>
+
 <em>Erle-Brain</em> combines an embedded Linux computer (the BeagleBone Black) and the PixHawk Fire cape — a daughter board containing several sensors, IO and power electronics. It is an open hardware Linux embedded device that runs APM as well many other frameworks and services for robotic application development.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/brain-v1.1-focus.png"><img class="alignnone size-medium wp-image-5423" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/brain-v1.1-focus-265x300.png" alt="brain-v1.1-focus" width="265" height="300" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.00.37.png"><img class="alignnone size-medium wp-image-5431" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.00.37-226x300.png" alt="Erle-Brain composition" width="226" height="300" /></a>
 
 Some <em>Erle-Brain</em> features include:
 <ul>
@@ -31,62 +128,61 @@ Some <em>Erle-Brain</em> features include:
 Erle-Brain can be purchased from the <a href="https://erlerobotics.com/blog/product/erle-brain/">Erle Robotics store</a>.
 
 https://www.youtube.com/watch?v=ZbcIjelaFgM
-<h1>Quick start</h1>
+<h2>Quick start</h2>
 The easiest way to get started is to SSH into Erle-Brain and play around with it:
-<h2>If connected by WiFi:</h2>
-<pre>ssh 11.0.0.1</pre>
-<h2>If connected by USB:</h2>
-<pre>ssh 192.168.7.2</pre>
-<h1>Hardware setup</h1>
-<h2>General setup</h2>
+<h3>If connected by WiFi:</h3>
+<pre>$ ssh 11.0.0.1</pre>
+<h3>If connected by USB:</h3>
+<pre>$ ssh 192.168.7.2</pre>
+<h2>Hardware setup</h2>
+<h3>General setup</h3>
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/HardwareSetUp.png"><img class="alignnone size-medium wp-image-5435" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/HardwareSetUp-300x225.png" alt="HardwareSetUp" width="300" height="225" /></a>
-<h2>RC out and in</h2>
+<h3>RC out and in</h3>
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/PWMsetup.png"><img class="alignnone size-medium wp-image-5434" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/PWM_setup-300x233.png" alt="PWM_setup" width="300" height="233" />
 </a>
 
 Please note that the GND is in the lower pin of the header:
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/PWMsetup.png"><img class="alignnone size-medium wp-image-5433" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/PWMsetup-300x234.png" alt="PWMsetup" width="300" height="234" /></a>
-<h2>Connecting the D4R-II receiver</h2>
+<h3>Connecting the D4R-II receiver</h3>
 Many might be interested in using this popular receiver so here's an image that shows how to do it:
 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/RCsetup.png"><img class="alignnone size-medium wp-image-5432" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/RCsetup-300x224.png" alt="RCsetup" width="300" height="224" /></a>
-<h1>Building APM AutoPilot on Erle-Brain</h1>
+<h2>Building APM AutoPilot on Erle-Brain</h2>
 Run the following instructions in the bash command prompt to build APM on Erle-Brain:
-<pre>sudo apt-get install gawk gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
-git clone http://github.com/erlerobot/ardupilot
-
-cd ardupilot/Copter
-make configure
-make pxf
+<pre>$ sudo apt-get install gawk gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 </pre>
+<pre>$ git clone http://github.com/erlerobot/ardupilot</pre>
+<pre>$ cd ardupilot/ArduCopter</pre>
+<pre>$ make configure</pre>
+<pre>$ make pxf</pre>
 <h1>Snappy Ubuntu Core store</h1>
-Erle-Brain comes with full support for <a href="http://www.ubuntu.com/things">Snappy Ubuntu Core</a>. Just <a href="http://erlerobotics.gitbooks.io/erle-robotics-erle-brain-a-linux-brain-for-drones/content/en/software/update.html">fetch one of the available images</a> (for the microSD card) and start developing <em>snaps</em>.
+Erle-Brain comes with full support for <a href="http://www.ubuntu.com/things">Snappy Ubuntu Core</a>. Just fetch one of the <a href="http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Operating_System_images/Ubuntu.html">available images</a> (for the microSD card) and start developing <em>snaps</em>.
 
 [note]
 <blockquote>Snappy Ubuntu Core is a new rendition of Ubuntu with transactional updates - a minimal server image with the same libraries as today’s Ubuntu, but applications are provided through a simpler mechanism. The snappy approach is faster, more reliable, and lets us provide stronger security guarantees for apps and users — that’s why we call them “snappy” applications.</blockquote>
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.39.07.png"><img class="alignnone wp-image-5437 size-large" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/04/Captura-de-pantalla-2015-04-03-a-las-11.39.07-1024x445.png" alt="Captura de pantalla 2015-04-03 a las 11.39.07" width="474" height="205" /></a>[/note]
 <h2>Snappy "hello world" example</h2>
 The bash commands below show how to install and run a basic "Hello World" app using <em>Snappy</em>:
-<pre>snappy-go install hello-world</pre>
-<pre>echo.hello-world.canonical 
+<pre>$ snappy-go install hello-world</pre>
+<pre>$ echo.hello-world.canonical 
 Hello World!</pre>
 Additional information about Snappy Ubuntu Core can be found <a href="http://erlerobotics.gitbooks.io/erle-robotics-erle-brain-a-linux-brain-for-drones/content/en/store/appinstall.html">here</a>.
 <h2>DroneKit</h2>
 3DR's Python DroneKit runs perfectly in Erle-Brain. Full documentation for the Kit and API can be found at the <a title="DroneKit-Python" href="http://python.dronekit.io/">python.dronekit.io</a>.
 
 The commands below summarise how to install the kit and its dependencies on Erle-Brain:
-<pre>sudo apt-get install pip python-numpy python-opencv python-serial python-pyparsing python-wxgtk2.8
-
-sudo pip install droneapi</pre>
+<pre>$ sudo apt-get install pip python-numpy python-opencv python-serial python-pyparsing python-wxgtk2.8
+</pre>
+<pre>$ sudo pip install droneapi</pre>
 <h2>DroneKit "hello world" example</h2>
 <pre># fetch the code
-git clone http://github.com/diydrones/droneapi-python.git
+$ git clone http://github.com/diydrones/droneapi-python.git
 
-cd droneapi-python/example
+$ cd droneapi-python/example
 
 # Start MAVProxy (install if not present)
-mavproxy.py --master=udp:192.168.7.2:6000
+$ mavproxy.py --master=udp:192.168.7.2:6000
 
 MANUAL&gt; module load droneapi.module.api 
 DroneAPI loaded 
@@ -106,4 +202,4 @@ APM: Non-Nav command ID updated to #255 idx=1
 waypoint 1
 AUTO&gt;</pre>
 <h1>Further documentation</h1>
-More information about Erle-Brain is available in <a href="http://erlerobotics.gitbooks.io/erle-robotics-erle-brain-a-linux-brain-for-drones/content/en/index.html">its official documentation</a> or from <a href="http://forum.erlerobotics.com">Erle Robotics forum</a>.
+More information about Erle-Brain is available in <a href="http://erlerobotics.com/docs/" target="_blank">its official documentation</a> or from <a href="http://forum.erlerobotics.com">Erle Robotics forum</a>.

@@ -1,0 +1,178 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: px4fmu-plus-px4io-wiring 
+title: Archived:PX4 Wiring QuickStart 
+id: 1983 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[archived date=20160226]The PX4 is end of life and is not generally available for purchase. This article is made available for existing users.[/archived]
+This article provides an overview of the <a href="https://store.3drobotics.com/products/px4fmu-1">PX4FMU</a> and <a href="https://store.3drobotics.com/products/px4io-1">PX4IO</a> Board Plane Wiring/Installation.
+
+
+<h1>PX4FMU plus PX4IO Wiring Diagram for Plane</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/04/ArduPlanePX4Wiring.jpg"><img class="alignnone size-full wp-image-1991" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/04/ArduPlanePX4Wiring.jpg" alt="PlanePX4Wiring" width="641" height="1203" /></a>
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/04/PX4IOWiringPlane3.jpg"><img class="alignnone size-full wp-image-5727" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/04/PX4IOWiringPlane3.jpg" alt="PX4IOWiringPlane" width="795" height="375" /></a>
+
+
+
+<h1>Assembly</h1>
+<ol>
+<ol>
+	<li><strong>Solder the right angle 9x3 pin connector that was included with your PX4 kit to the side of the PX4IO board that has "PX4 autopilot" printed on it.</strong>
+<ol>
+	<li>When you insert the 9 x 3 connector into the PX4IO board put it in with the plastic spacer on the connector facing to the back of the board, NOT down against the board.</li>
+</ol>
+</li>
+	<li><strong>Solder the small white PAP-02-VS 2 pin connector into the 2 holes directly behind the battery pads on the PX4IO board.</strong></li>
+	<li><strong>Install the PX4IO board on top of the PX4FMU board.</strong>
+<ol>
+	<li>Ensure all of the connector pins are straight and insertion is complete.</li>
+	<li>Mount the PX4-FMU + PX4-IO board stack in a central and level location on top of your Plane.</li>
+	<li>The PX4FMU board is normally on top.</li>
+	<li>It can be advantageous to mount the PX4IO board on top to provide for better Connector access.</li>
+	<li>If you do mount the PX4IO board on top it will be necessary to set the "Board Orientation (AHRS_ORIENTATION)" parameter to "Roll 180" in the Advanced Parameter List in Mission Planner.</li>
+	<li>The arrow labeled "FRONT" should be facing to the front of the aircraft.</li>
+	<li>The Micro SD memory card holder should face to the back of the Aircraft.</li>
+</ol>
+</li>
+	<li><strong>Use the included standoffs and hardware.</strong>
+<ol>
+	<li>Which ever side of which ever board is going to be on top but a black standoff through one of the mounting holes from the bottom and thread a black plastic nut onto it from the top.</li>
+	<li>Repeat the above for the remaining 3 holes.</li>
+	<li>Connect the PX4FMU and PX4IO board insuring no pins are bent on the board interconnection connector.</li>
+	<li>Thread 4 more of the black standoffs into the already installed black standoffs.</li>
+</ol>
+</li>
+	<li><strong>You will need additional vibration damping and you should also review the Wiki section on vibration control.</strong>
+<ol>
+	<li>At a minimum you should mount the standoffs to an intermediate plate.</li>
+	<li>Mount the plate to your airframe with 4 small (&lt;1")square pads of Kyosho "Zeal" gel or "Moon Gel" in the corners.</li>
+</ol>
+</li>
+	<li><strong>Mount the GPS facing up with an unobstructed "view" of the sky.</strong>
+<ol>
+	<li>Connect the GPS cable to the GPS connector on the PX4FMU board.</li>
+	<li>The GPS must be positioned so that it's cable will connect without strain to the PX4FMU's GPS connector.</li>
+	<li>The GPS can be mounted on a short riser to give it the widest satellite access.</li>
+</ol>
+</li>
+</ol>
+</ol>
+
+
+
+
+<h1>Wire the PX4FMU and PX4IO boards to Your Plane</h1>
+<ol>
+	<li><strong>Wire the PX4-IO board.</strong>
+<ol>
+	<li>The PX4IO board has a built in Power Supply which can connect to up to 18 volts.</li>
+	<li>Insert the white PAP-02-VS 2 pin connector with the black and red wires coming out of it into the mating power connector you soldered in previously on the PX4IO board.</li>
+	<li>Battery Plus is the(red wire) and should be soldered to your battery red power lead / connector.</li>
+	<li>Battery Ground is the(black wire) and should be soldered to your battery black battery (Ground) lead / connector.</li>
+	<li>The main power inputs of your ESC's will also need to connect to these wires and to a battery connector.</li>
+	<li>A Power Distribution board can also be used.</li>
+</ol>
+</li>
+	<li><strong>Connect your PPM-Sum RC receiver's 3 wire cable to the end of the 9 x 3 angle connector that is nearest the edge of the PX4IO board with the signal wire furthest from the board and the ground closest to the board.</strong></li>
+	<li><strong>Wire the PX4 boards servo out signals to your Servo / ESC control inputs.</strong>
+<ol>
+	<li>The ESCs BEC or a separate UBEC can supply servo power to the Servos via the PX4's Servo connector BUSS
+<ol>
+	<li>Run the 3 wire servo cables from the ESC (and its built in BEC) and Servos to the 3 x 9 Servo Connector on the PX4IO board.</li>
+	<li>Or, clip the power lead on the ESC and run power and ground from a separate UBEC to the bottom pins of the Servo connector.</li>
+</ol>
+</li>
+	<li>The PX4IO board connector for Servo 1 is at the edge of the connector next to the Battery power in wires.</li>
+	<li>Insert the Servo and Motor ESC signal wires arranged progressively from that edge, (1,2,3,4,etc).</li>
+	<li>You can put the ESC / Servo Signal wires into a single inline connector with the correct number of pins for your Plane.</li>
+	<li>The ESC / Servo Signal Wires / connector should be plugged into the top row (furthest from the board) of the PX4IO boards 3 x 9 Servo Connector.</li>
+</ol>
+</li>
+	<li><strong>Note, the cable that is supplied in the plastic envelope with the UBLOX GPS which has white 6 pin connectors on both ends is not the correct cable for the PX4FMU board.</strong>
+<ol>
+	<li>The correct longer cable is provided in a separate envelope and has a 5 pin "beige" connector on one end and a 6 pin white connector on the other end.</li>
+	<li>Plug the correct GPS cable's white 6 pin connector into the 6 pin socket on the GPS.</li>
+	<li>Plug the beige 5 pin connector into the PX4FMU board's 5 pin GPS socket which is next to the 15 pin DF13 Mini connector.</li>
+</ol>
+</li>
+	<li><strong>Plug the 2 pin connector attached to the lead supplied with the buzzer into the buzzer socket on the side of the PX4FMU board that has the SD card holder on it.</strong></li>
+	<li><strong>Connect the "Safety Button" to the Safety button connector on the PX4IO board on the opposite side of the board from the Battery pads.</strong></li>
+</ol>
+<strong>The PX4 must have its "Safety" mechanism disengaged before it can be armed.</strong>
+<ul>
+	<li><strong>PX4 Safety Button LED Indications:</strong>
+<ul>
+	<li>Fast Blinking indicates: Error Condition, Safety cannot be disengaged. Possibly not calibrated or sensor error.</li>
+	<li>Slow Blinking indicates: Safe condition. Safety can be disengaged by depressing Safety Button for 5 seconds.</li>
+	<li>LED Continuously on indicates: Safety has been disengaged. Depending on your parameter settings, throttle may be armed with Throttle down and to the right.  For details on throttle arming see: <a title="Arming Throttle" href="http://plane.ardupilot.com/wiki/arming-throttle/">Arming Throttle</a>.</li>
+	<li>When the LED is continuously on indicating Safety Disengaged it may be toggled back to a Safety engaged condition by depressing the Safety button for 5 seconds.</li>
+</ul>
+</li>
+</ul>
+<strong>Both the Safety engaged and Safety disengaged conditions require the button to be held down for 5 seconds to toggle them.</strong>. This is a safety mechanism to prevent accidental disarming during flight and accidental arming during transportation.
+
+
+
+<h1>Using a SiK telemetry radio with your PX4FMU plus PX4IO system.</h1>
+
+
+<ol>
+	<li>You will need a <a href="common-3dr-radio-version-2">SiK Radio</a>.</li>
+	<li>Plug the telemetry adapter cable's large black connector into the SiK Radio as shown above.</li>
+	<li>The telemetry radio is shown above<strong> incorrectly</strong> connected to the FMU USART2 socket at the corner of the PX4IO board.
+<ol>
+	<li><strong>Correctly</strong> plug the telemetry adapter cable's beige connector into the PX4IO boards <strong>FMU UART5</strong> socket.</li>
+	<li>FMU UART5 is the middle socket on the end of the PX4IO board as indicated by the <strong>red arrow</strong> above.</li>
+	<li>(FMU UARTx) means a port that is pass through connected directly from the PX4IO board to the PX4FMU.</li>
+</ol></li>
+</ol>
+
+
+
+<h1>Separate Servo power for high power applications</h1>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4io-bottom1.jpg"><img class="alignnone size-full wp-image-9915" alt="PX4io-bottom" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/04/PX4io-bottom1.jpg" width="729" height="529" /></a>
+<ol>
+	<li><strong>Using a separate power supply to provide power to the center servo power pins of the PX4IO board.</strong>
+<ol>
+	<li>If you are driving high power servos with your PX4IO board you will want to provide servo power separately.</li>
+	<li>In order to do this, remove the L1 Ferrite device circled in red on the image above.</li>
+	<li>Then run power from your separate power supply to one of the center pins of the Servo Connector.</li>
+	<li>And run the ground from your separate power supply to one of the servo connector pins nearest the edge of the board.</li>
+</ol>
+</li>
+</ol>
+
+
+
+<h1>Using a Standard RC Radio Receiver with an 8 channel PPM Encoder</h1>	 	 
+<ul>	 	 
+<ul>	 	 
+ <li><strong>You can use a standard radio receiver with an 8 channel PPM Encoder in place of the PPM-SUM receiver.</strong>	 	 
+<ul>	 	 
+ <li>An 8 Channel PPM Encoder is <a href="https://store.3drobotics.com/products/ppm-encoder">available from 3DRobotics</a>.</li>	 	 
+ <li>Solder a 3x8 Right angle connector from the top into one end of the 8 Channel PPM Encoder board.</li>	 	 
+ <li>With the 3x8 connector up and facing away from you, solder a 3x1 Right angle connector on the right edge of the 8 Channel PPM Encoder board.</li>	 	 
+</ul>	 	 
+</li>	 	 
+ <li><strong>Connect 5-8 output channels of your receiver to the inputs of the 8 Channel Encoder (signal wire furthest from board) with 5-8 female to female servo jumpers.</strong>	 	 
+<ul>	 	 
+ <li>Connect the PPM-SUM output of the Encoder with a 3 wire cable to the PX4IO boards PPM sum input (1x3 connector).</li>	 	 
+</ul>	 	 
+</li>	 	 	 	 
+</ul>	 	 
+</ul>
+
+[note]If you are using a 3DR PPM Encoder it is important to know that when you are calibrating your transmitter you will quite likely need to hook up your flight battery to the PX4IO because the USB port alone can't supply enough power.[/note]
+
+
+<h1>Compatible remote control (RC) receivers</h1>
+
+PX4 is compatible with PPM remote control (RC) receivers, Futaba S.Bus receivers, and Spektrum DSM,DSM2, and DSM-X Satellite receivers. For traditional single-wire-per-channel (PWM) receivers a PPM encoder can be used to convert the receiver outputs to PPM-SUM.  Information about compatible receivers and how they are connected can be found in <a href="common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems" target="_blank">this wiki page</a>. 
+
+[caption id="attachment_11140" align="alignnone" width="150"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis-150x150.jpg" alt="FRSky Taranis Transmitter" width="150" height="150" class="size-thumbnail wp-image-11140" /></a> FRSky Taranis Transmitter[/caption]

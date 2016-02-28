@@ -1,0 +1,194 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: style-guide 
+title: Ardupilot Style Guide 
+id: 5513 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+In order to improve the readability of the ArduPilot code and help new users pick up the code quickly please use the following styles. <!-- more -->
+[note]Some parts of the code may not conform due to historic reasons but new additions should![/note]
+
+<em>astyle</em> is our tool of choice for formatting the code.  Whilst we aren't doing it automatically at the moment in the Tools/CodeStyle directory there is an astylerc file that can be used to format the code automatically according to the guidelines below.
+<pre>astyle --options=Tools/CodeStyle/astylerc &lt;filename&gt;</pre>
+Remember any formatting changes to a file should be done as a separate commit.
+<h1>Case</h1>
+Variables and function names are lower case with words separated by an underscore.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>throttle_input</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>ThrottleInput</pre>
+<h1>Indentation</h1>
+<h2>Spaces</h2>
+Indent using 4 spaces everywhere. Do not use tabs.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>int foo()
+{
+    return 0;
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>int foo()
+{
+  return 0;
+}</pre>
+<h2>Case statements</h2>
+A case label should line up with its switch statement. The case statement is indented.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>switch (condition) {
+case foo_cond:
+    foo();
+    break;
+case bar_cond:
+    bar();
+    break;
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>switch (condition) {
+    case foo_cond:
+        foo();
+        break;
+    case bar_cond:
+        bar();
+        break;
+}</pre>
+<h1>Spacing</h1>
+<h2>Unary operators</h2>
+Do not place spaces around unary operators.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>i++;</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>i ++ ;</pre>
+<h2>Control statements</h2>
+Place spaces between control statements and their parentheses.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>if (condition) {
+    foo();
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>if(condition) {
+    foo();
+}</pre>
+<pre>if (condition){
+    foo();
+}</pre>
+<h2>Function calls</h2>
+Do not place spaces between a function and its parentheses, or between a parenthesis and its content.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>foo(a, 10);</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>foo (a, 10);</pre>
+<pre>foo(a, 10 );</pre>
+<h2>Trailing whitespaces</h2>
+Don't leave trailing whitespace on new code (a good editor can manage this for you). Fixing whitespace on existing code should be done as a separate commit (do not include with other changes).
+<h1>Line breaks</h1>
+<h2>Single statements</h2>
+Each statement should get its own line.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>x++;
+y++;
+if (condition) {
+    foo();
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>x++; y++;
+if (condition) foo();
+</pre>
+<h2>Else statement</h2>
+An <code>else</code> statement should go on the same line as a preceding close brace.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>if (condition) {
+    foo();
+} else {
+    bar();
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>if (condition) {
+    foo();
+}
+else {
+    bar();
+}</pre>
+<h1>Braces</h1>
+<h2>Function braces</h2>
+Functions definitions: place each brace on its own line. For methods inside a header file, braces can be inline.
+<h2>Control statements</h2>
+Control statements (<code>if</code>, <code>while</code>, <code>do</code>, <code>else</code>) should always use braces around the statements.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>if (condition) {
+    foo();
+} else {
+    bar();
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>if (condition)
+    foo();
+else 
+    bar();
+</pre>
+<h2>Other braces</h2>
+Place the open brace on the line preceding the code block; place the close brace on its own line.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>class My_Class {
+    ...
+};
+
+namespace AP_HAL {
+    ...
+}
+
+for (int i = 0; i &lt; 10; i++) {
+    ...
+}</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>class My_Class 
+{
+    ...
+};</pre>
+<h1>Names</h1>
+<h2>Private members</h2>
+Private members in classes should be prefixed with an underscore:
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>class My_Class {
+private:
+    int _field;
+};</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>class My_Class {
+private:
+    int field;
+};</pre>
+<h2>Class names</h2>
+Class names should capitalise each word and separate them using underscores.
+<p style="color: #008000;margin-bottom: 1px"><strong>Right:</strong></p>
+
+<pre>class AP_Compass { };</pre>
+<p style="color: #ff0000;margin-bottom: 1px"><strong>Wrong:</strong></p>
+
+<pre>class ap_compass { };</pre>
+<h1>Commenting</h1>
+Each file, function and method with public visibility should have a comment at the top describing what it does.

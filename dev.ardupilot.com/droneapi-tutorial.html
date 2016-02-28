@@ -1,0 +1,127 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: droneapi-tutorial 
+title: DroneKit Tutorial 
+id: 3920 
+menu_order: 900 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This tutorial is a basic introduction to using the python version of the DroneAPI.
+
+[note]This tutorial superseded (and is part of) the <a href="http://python.dronekit.io/">official DroneKit Python documentation</a>.[/note]
+
+This is a alpha-release for developer feedback, so please post any questions or problems encountered to our github <a href="https://github.com/dronekit/dronekit-python/issues">issue tracker</a>, if github is not suitable for some reason please send email to <a href="mailto:kevin@3drobotics.com">kevin@3drobotics.com</a>. I promise to quickly respond with fixes.
+<h1>Installing</h1>
+The DroneAPI is available in the public pypi repository.  Therefore on essentially any machine that can run python you can use the pip tool to install.
+<h2>Linux:</h2>
+If you are Ubuntu you can get pip (and other required dependencies) by running:
+<pre>sudo apt-get install pip python-numpy python-opencv python-serial python-pyparsing python-wxgtk2.8</pre>
+<pre>sudo pip install droneapi</pre>
+<h2>OS X:</h2>
+Install WXMac
+<pre>brew install wxmac</pre>
+Install the following python libraries
+<pre>pip install numpy pyparsing</pre>
+On OSX you need to uninstall python-dateutil since osx comes bundled with a version that is not supported for some dependencies
+<pre>pip uninstall python-dateutil</pre>
+Finally install the droneapi:
+<pre>pip install droneapi</pre>
+<h2>Windows:</h2>
+The windows installation is a little more involved, but not too hard.
+
+You could install the various python libraries by hand, but we think that it is easier to use the WinPython package. The steps to install this package and our add-on modules are:
+
+<strong>1.</strong> Run the correct <a href="http://sourceforge.net/projects/winpython/files/WinPython_2.7/2.7.6.4/">WinPython installer for your platform</a> (win32 vs win64)
+
+<strong>2.</strong> Register the python that came from <strong>WinPython</strong> as the preferred interpreter for your machine:
+
+Open the folder where you installed WinPython, run "<strong>WinPython Control Panel</strong>" and choose "<strong>Advanced/Register Distribution</strong>".
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/03/Screenshot-from-2014-09-03-083816.png"><img class="alignnone wp-image-4561 size-medium" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/03/Screenshot-from-2014-09-03-083816-300x149.png" alt="Winpython-install-step-1" width="300" height="149" /></a>
+<small>Screenshot of this step (click for larger version)</small>
+
+<strong>3.</strong> Run "<strong>WinPython Command Prompt</strong>" and run the following two commands:
+<pre>pip uninstall python-dateutil
+pip install droneapi
+</pre>
+<strong>4.</strong> Done!, You can now run "<strong>mavproxy.py --master=COM3</strong>" (etc...) as needed in the tutorial steps below...
+<h1>Hello world: a first real world example</h1>
+A few example applications are included with the droneapi-python package.
+<h2>Installing the example code</h2>
+For this tutorial you'll probably want the example files contained within the package source, to get those examples
+<pre>git clone <a href="http://github.com/dronekit/dronekit-python.git" target="_blank">http://github.com/dronekit/dronekit-python.git</a>
+</pre>
+Let's start by just running one of those, the first step is to change your current directory:
+<pre>cd droneapi-python/examples</pre>
+<h2>Starting MAVProxy</h2>
+When developing new DroneAPI python code the easiest approach is to run it inside of MAVProxy. So launch MAVProxy with the correct options for talking to your vehicle:
+
+<strong>Linux</strong>:
+<pre>mavproxy.py --master=/dev/ttyUSB0</pre>
+<strong>OSX</strong>:
+<pre>mavproxy.py --master=/dev/cu.usbmodem1</pre>
+<strong>Windows</strong>:
+<pre>mavproxy.py --master=com3:</pre>
+<strong>For other connection options see the MAVProxy <a href="http://dronecode.github.io/MAVProxy/html/getting_started/starting.html">documentation</a>.</strong>
+<h2>Loading the API</h2>
+The API includes a mavproxy <a href="http://dronecode.github.io/MAVProxy/html/advanced_modules/modules.html">module</a> to allow you to load (and reload) your custom application into mavproxy.
+
+To load the API module run:
+<pre>MANUAL&gt; module load <strong>droneapi.module.api</strong>
+DroneAPI loaded
+MANUAL&gt;
+</pre>
+We recommend adding this line to the mavproxy <a href="http://dronecode.github.io/MAVProxy/html/getting_started/mavinit.html">startup script in <strong>~/.mavinit.scr</strong></a>.
+<pre>echo "module load droneapi.module.api" &gt;&gt; ~/.mavinit.scr</pre>
+
+<h2>Running the example</h2>
+The first example we will run is a very small application that just reads some vehicle state and then changes the vehicle mode to AUTO (to start following prestored waypoints).
+
+[warning]For all of these examples, please run them initially with a vehicle at your desk with props removed.[/warning]
+
+<strong>It is probably best to take a look at <a href="https://github.com/dronekit/dronekit-python/blob/master/examples/vehicle_state/vehicle_state.py">the python code</a> before running it.</strong>
+<pre>MANUAL&gt; <strong>api start small_demo.py</strong>
+Mode: VehicleMode:MANUAL
+Location: Location:lat=21.2938874,lon=-157.8501416,alt=0.189999997616,is_relative=None
+Attitude: Attitude:-0.286077767611,-3.01412272453,0.261489063501
+GPS: GPSInfo:fix=1,num_sat=0
+...
+</pre>
+
+
+<h1>Follow-Me</h1>
+This is a significantly more complex example - showing closed-loop control of the vehicle. It will use a USB GPS attached to your laptop to have the vehicle follow you as you walk around a field.
+
+[warning]Run this example with caution - be ready to exit follow-me mode by switching the flight mode switch on your RC radio, this is especially true because there is currently a <a href="https://github.com/diydrones/ardupilot/issues/879">bug in the APM code which makes follow-me very 'twitchy/unstable' for some configurations</a>.[/warning]
+
+In practice, you don't really want to use this follow-me implementation, rather you can use this example as a starting point to build your own custom application.
+
+Before running this demo you'll need to make sure your computer has the <a href="http://www.catb.org/gpsd/">gpsd</a> service installed.
+
+<strong>Ubuntu</strong>:
+<pre> apt-get install gpsd gpsd-clients</pre>
+You can then plug in a USB GPS and run the <strong>"xgps"</strong> client to confirm that it is working. If you do not have a USB GPS you can use simulated data by running <strong>droneapi-python/examples/run-fake-gps.sh</strong>.
+
+Once your GPS is plugged in you can start follow-me by running the following command inside of MAVProxy:
+<pre>RTL&gt; api start follow_me.py
+RTL&gt; Going to: Location:lat=50.616468333,lon=7.131903333,alt=30,is_relative=True
+Got MAVLink msg: MISSION_ACK {target_system : 255, target_component : 0, type : 0}
+GUIDED&gt; Mode GUIDED
+Going to: Location:lat=50.616468333,lon=7.131903333,alt=30,is_relative=True
+Got MAVLink msg: MISSION_ACK {target_system : 255, target_component : 0, type : 0}
+...
+</pre>
+These debugging messages will appear every two seconds - when a new target position is sent to the vehicle, to stop follow-me either change the vehicle mode switch on your RC transmitter or type "<strong>api stop</strong>".
+
+The <a href="https://github.com/dronekit/dronekit-python/blob/master/examples/follow_me/follow_me.py">source code for this example</a> is a good starting point for your own application, from here you can use all python language features and libraries (OpenCV, classes, lots of packages etc...)
+
+<h1>Next steps</h1>
+Good next steps is to read the DroneAPI developers guide.
+
+
+<h1>Contact:</h1>
+Kevin Hester <a href="mailto:kevin@3drobotics.com">kevin@3drobotics.com</a>
+Issue tracking: <a href="https://github.com/dronekit/dronekit-python/issues">https://github.com/dronekit/dronekit-python/issues</a>

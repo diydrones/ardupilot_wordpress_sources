@@ -1,0 +1,41 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: troubleshooting-pixhawkpx4-boot 
+title: Troubleshooting Pixhawk/PX4 Boot 
+id: 5977 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to check if the Pixhawk/PX4 has booted properly.
+<!-- more -->
+
+The following tests can help you determine if boot has failed, and possible causes:
+<ul>
+	<li>Check the Pixhawk/PX4 <a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-pixhawk-overview/common-leds-pixhawk/">LEDs</a> and <a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-pixhawk-overview/common-sounds-pixhawkpx4/">Sounds</a> as these can immediately confirm a successful boot. If boot fails, these can broadly indicate the point of failure. </li>
+	<li>Check that the the board has appropriate ArduPilot firwmare installed.</li>
+	<li>Ensure the memory card is fully inserted into the Pixhawk/controller card socket.</li>
+	<li><strong>Check the boot log:</strong>
+            <ol>
+	      <li>Remove the SD card from from the board and insert into your regular computer</li>
+	      <li>open the <strong>APM/boot.log</strong> file and check that it contains the following lines
+<pre>
+Starting APM sensors
+Trying PX4IO board
+PX4IO board OK
+Starting ArduPilot
+<em id="__mceDel"><em id="__mceDel"><em id="__mceDel">rc.APM finished</em></em></em>
+</pre>
+            <ol>
+
+</ol>
+</li>
+	<li>If the file does not exist or the contents are different from above then reinstall the Copter/Plane/Rover firmware.</li>
+</ol>
+        </li>
+</ul>
+
+
+

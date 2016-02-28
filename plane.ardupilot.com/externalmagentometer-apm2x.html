@@ -1,0 +1,66 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: externalmagentometer-apm2x 
+title: Using an External Compass with APM 2.x 
+id: 1031 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+If you're having trouble with magnetic noise affecting your compass onboard the APM 2.5 board, you may want to switch to an external compass that you can mount further away from noise sources such as motors. This article explains how.
+<!-- more -->
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/BR-HMC5843-01-21.jpg" />
+
+
+<h1>Step-by-step instructions</h1>
+
+<ol>
+	<li>Purchase a <a href="https://store.3drobotics.com/products/hmc5883l-triple-axis-magnetometer">HMC5883L magnetometer breakout board</a>. Make sure the 3DR board is set to use 3.3volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts).  You will have to modify the 3DR board because it is shipped from 3DR with the 5 volt jumper set, as shown below.
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Mag_HMC5843_jumper1.jpg" />
+</li>
+
+	<li>Looking at the below picture, cut the jumper trace in the middle of the APM 2.5 board.  This disables the SDA line to the board’s internal compass, rendering it inert.
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APMCompassModification1.jpg" /></li>
+
+	<li>The APM 2.5 I2C connector needs a 4 pin DF13 connector (like <a href="https://store.3drobotics.com/products/df13-4-position-connector-10-cm">this one</a>). Cut off one and and strip and tin the four wires.</li>
+
+	<li>Connect the DF13’s 4 wires to the compass breakout board. Note that the wires will not be one to one.  Pin 1 on the DF13 connector will not go to pin 1 of the compass board.  The standard 3DR cable has one red wire and three black wires.  Substitute your wire colors accordingly.  Solder the wires as follows:  
+<ul>
+<li>Red wire on end of connector (+3.3v) goes to the VCC (or +3.3v) pad on the compass board (see labels on board for location). This is the wire closest to the interior on the APM 2.5 board.</li>
+<li>Wire next to red wire (SCL) goes to the SCL pad on the compass board.</li>
+<li>Wire next to wire next to red wire (SDA) goes to the SDA pad on compass board. </li>
+<li>Black wire on end of connector (ground) goes to ground pad on compass board.  This is the wire closest to the edge of the APM 2.5 board.</li>
+</ul></li>
+
+	<li>Mount the compass board on the top plate of your quad. Double-sided foam tape works well for this. The orientation of the board matters. In the picture below, we've mounted the board “components up with pins forward”.  Note which direction you mount the board – you will need to modify the software with this orientation, as explained in the next step.
+
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Quad_Top_View1.jpg" /></li>
+
+	<li>Modify, compile and load the software for your compass board orientation.  You must be able to load software from the Arduino IDE to complete this step.  In “APM_Config.h”, you will find a commented out statement like:
+
+<pre> //#define MAG_ORIENTATION     AP_COMPASS_COMPOENTS_DOWN_PINS_FORWARD</pre>
+
+
+For the orientation shown in the picture above, for example, you would add the following statement just below the commented out statement above as follows:
+
+<pre> #define MAG_ORIENTATION     AP_COMPASS_COMPONENTS_UP_PINS_FORWARD </pre>
+
+
+You can find a list of all possible orientations for the <code>MAG_ORIENTATION</code> flag in the <strong>AP_Compass_HMC5843.h</strong> library, including orientations for both the 3DR and Sparkfun boards.</li>
+
+	<li>If this is the first time loading software from the IDE, make sure the following statement is uncommented:
+
+<pre>#define CONFIG_APM_HARDWARE    APM_HARDWARE_APM2</pre></li>
+
+	<li>Save, Compile and Upload the modified software</li>
+
+	<li>Test the compass board and have fun flying with a now stable compass!</li>
+
+</ol>
+
+
+(This entry contributed by Lloyd DeForrest)

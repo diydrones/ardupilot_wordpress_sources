@@ -1,0 +1,75 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: interfacing-with-pixhawk-using-the-nsh 
+title: Interfacing with Pixhawk using the NSH 
+id: 3661 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to communicate with a Pixhawk using the <a href="http://nuttx.org/Documentation/NuttShell.html">NuttX Shell (NSH)</a> using either a serial or remote connection.
+<h1>Overview</h1>
+The Pixhawk runs the NuttX real-time operating system which includes the NuttX Shell terminal "NSH". This allows running some Unix style commands including "top" and "ls".
+
+NSH is very useful for diagnosing low level issues. Some of the things you can do with it include:
+<ul>
+	<li>Display performance counters with the <code>perf</code> command</li>
+	<li>Display px4io status information</li>
+	<li>Diagnose microSD errors</li>
+	<li>Diagnose sensor failures</li>
+	<li>Assist in debugging new drivers</li>
+</ul>
+This topic explains how to connect and send NSH commands from <em>MAVProxy</em> via remote and serial connections.
+<h1>Running NSH using Debug Cable and Serial5</h1>
+To use the NSH while Copter or Plane is running you can connect using Serial 4/5. To do this you will need an <a href="http://store.3drobotics.com/products/ftdi-cable-3-3v" target="_blank">FTDI 3.3V cable</a> and then modify a <a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 Position cable</a> so that it can be connected to the FTDI cable.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/Pixhawk_FTDICable_NSH.png"><img class="alignnone size-full wp-image-4038" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/04/Pixhawk_FTDICable_NSH.png" alt="Pixhawk_FTDICable_NSH" width="1264" height="552" /></a>
+
+You should then be able to plug the FTDI cable into your computer and connect with any Serial program including the Mission Planner's Terminal screen. Ensure to select the FTDI cable's COM port and set the Baud rate to 57600. You will need to press return for the "nsh&gt;" prompt to appear.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Pixhawk_NSH_MP.png"><img class="alignnone size-full wp-image-3666" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Pixhawk_NSH_MP.png" alt="Pixhawk_NSH_MP" width="541" height="564" /></a>
+<h1>Remote NSH over MAVLink</h1>
+ArduPilot also includes support to run nsh commands remotely via MAVLink over a USB, telemetry or WiFi link (this is an extension of the SERIAL_CONTROL protocol used for controlling a GPS or radio UART over MAVLink).
+[note]At time of writing Rover doesn't support NSH over MAVLink (because it doesn't support arming).[/note][tip]This can be used for nsh debugging when you don't have a serial5 cable setup.[/tip]
+<h2>Instructions to use with Mission Planner:</h2>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/NSH_MPTerminal.png"><img class="alignnone size-full wp-image-5845" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/NSH_MPTerminal.png" alt="NSH_MPTerminal" width="936" height="290" /></a>
+
+&nbsp;
+<ul>
+	<li>Connect Pixhawk to PC using a USB cable</li>
+	<li>Go to the Flight Data screen, select the correct COM port and baud (probalby 115200) and press the connect button</li>
+	<li>Go to the Terminal screen, set the left-most drop down to "NSH" and push Connect.</li>
+</ul>
+&nbsp;
+<h2>Setup instructions to access using MAVProxy:</h2>
+<ol>
+	<li>Load latest master onto a Pixhawk</li>
+	<li>Grab the latest <em>MAVProxy</em>
+<ul>
+	<li>If on Linux use:
+<pre>sudo pip install mavproxy</pre>
+</li>
+	<li>If on Windows <a href="http://firmware.diydrones.com/Tools/MAVProxy/">grab it here</a>.
+[note]If you are on Windows you will need to delete any old version of MAVProxy in <strong>c:\Program Files (x86)\MAVProxy</strong> first, as the installer does not properly cleanup old versions.[/note]</li>
+</ul>
+</li>
+	<li>Start <em>MAVProxy</em> as usual</li>
+	<li>Load the nsh module in <em>MAVProxy</em> with
+<pre>module load nsh</pre>
+</li>
+	<li>start the nsh shell with
+<pre>nsh start</pre>
+</li>
+	<li>Now run nsh commands as usual. Note that MAVLink is still running,
+so the map, <em>MAPVproxy console</em>, graphs etc all keep updating while in
+the nsh shell.
+[tip]A blank response to an NSH command may indicate low RAM memory on the autopilot board. Free up memory if possible. For example, on master you can save about 20Kb by disabling terrain following (set <code>TERRAIN_ENABLE=0</code>).[/tip]</li>
+	<li>To drop back to the normal <em>MAVProxy</em> prompt type a single "." on a
+line by itself</li>
+</ol>
+You can only start a shell when the system is disarmed. Once the shell is started you can arm if you like.
+[warning]In theory you could fly while doing nsh commands, but we don't recommend it. [/warning]
+
+This also works over a 3DR Radio link, although it is of course slower in output than when on a USB connection.

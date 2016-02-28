@@ -1,0 +1,52 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: startstop-switch 
+title: Start/Stop Switch 
+id: 577 
+menu_order: 300 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+For some robotics competitions, RC control is not allowed and the rover must be started in autonomous mode with an onboard switch. This article explains how to set up such a switch.
+
+<img class="alignnone size-full wp-image-565" style="color: #333333;font-style: normal" alt="IMG_5433" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5433.jpg" width="3456" height="2304" />
+
+
+
+[note]You don't necessarily need to use a switch for this. If you enable the <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Auto_mode_trigger_kickstart_acceleration_APMrover2AUTO_KICKSTART">AUTO_KICKSTART</a> function you can just kick your rover [not too hard!] and APM will register the acceleration and start the vehicle automatically. But if you don't want to kick your car, a switch is the way to go)[/note]
+
+
+<h1>Physical wiring</h1>
+
+The way this function works is that an APM port is assigned to the Start/Stop switch and APM will wait for that pin to be brought low (connected to ground). When this function is enabled, the Rover code will not send power to the rover's motor in Auto mode until that pin state is detected. So the rover will just stay stationary, waiting for you to flick the switch. Once you do so, it will perform its Auto mission as usual. You can stop the motion at any time by turning the switch back to the off position
+
+Any two-position switch will work, from a toggle (like <a href="https://www.sparkfun.com/products/9276">this one</a>) to a slider as shown.  There should only be two terminals. Wire one to the white wire of a RC servo cable and the other to the black wire as shown below. This way, when the switch is in the "on" position it connects the ground and signal pins.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5440.jpg"><img class="alignnone size-full wp-image-578" alt="IMG_5440" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5440.jpg" width="2274" height="1180" /></a>
+
+&nbsp;
+
+Plug that connector into any spare APM port, from A0-A8 (the ports above 8 are not digital pins and cannot be used). We typically use A4, since A0-A3 are used by the sonar sensors.
+
+
+<h1>Software setup</h1>
+
+You can enable this switch in the Advanced Parameters List by entering the number of the APM port you've connected the switch to in the <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Auto_mode_trigger_pin_APMrover2AUTO_TRIGGER_PIN">AUTO_TRIGGER_PIN</a> parameter. In the example below, we've entered 4 because the switch is plugged into port A4.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/autostart.png"><img class="alignnone size-full wp-image-579" alt="autostart" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/autostart.png" width="1189" height="87" /></a>
+
+&nbsp;
+
+&nbsp;
+
+If you're not using RC at all and can't switch modes manually, you may want to set your APM so that it boots into Auto mode at power-up (the auto-start function only works in Auto mode). You can do that by setting <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Initial_driving_mode_APMrover2INITIAL_MODE">INITIAL_MODE</a> to 10. All the other options for that parameter are listed <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Initial_driving_mode_APMrover2INITIAL_MODE">here</a>.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/initialmode.png"><img class="alignnone size-full wp-image-580" alt="initialmode" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/initialmode.png" width="1188" height="35" /></a>
+
+&nbsp;
+
+Once this is set up, all you need to do at robotics competitions is power on your rover, wait for GPS lock and when you get the green light, flick the switch. The rover should take it from there!
+
+[note]Depending on your failsafe settings, the rover may not move if you don't have GPS lock. Check for that before flicking the Auto Start switch)[/note]

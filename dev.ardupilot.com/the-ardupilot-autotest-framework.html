@@ -1,0 +1,33 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: the-ardupilot-autotest-framework 
+title: The ArduPilot Autotest Framework 
+id: 4952 
+menu_order: 40 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+ArduPilot has an automatic testing framework based on SITL. The autotest framework is what produces the web pages at <a href="http://autotest.diydrones.com">http://autotest.diydrones.com</a>
+
+You can also manually run the autotester from the command line. That is useful when you want to add features to the autotest or want to test some new flight code on your own machine with auto scripting.
+
+To use the autotester you need to first <a href="/wiki/setting-up-sitl-on-linux/">get SITL running</a>. After that you should run:
+<pre>cd ardupilot
+./Tools/autotest/autotest.py --help</pre>
+that will show you the command line options for the autotester. If you get any python errors it probably means you are missing some required packages. Go and check on the SITL setup page and see if you are missing anything.
+<h2>Test actions</h2>
+The autotester supports a long list of possible test scripts. If you run:
+<pre>./Tools/scripts/autotest.py --list</pre>
+you will see what test scripts you can run. You can then add those commands on the command line to run them. For example, to build the fixed wing code and then run a test flight do this:
+<pre>./Tools/scripts/autotest/autotest.py build.Plane fly.Plane</pre>
+the results (and log files) will be put in the ../buildlogs directory.
+
+You can also ask it to display a map while it is flying, which can make watching autotest a bit less boring! Run it like this:
+<pre>./Tools/scripts/autotest/autotest.py build.Plane fly.Plane --map</pre>
+you will actually see the map appear twice, once for when it loads the default parameters, and then for the real flight. Just close the first one.
+<h2>Changing the test scripts</h2>
+Each of the tests is in Tools/autotest. For the fixed wing tests look at Tools/autotest/arduplane.py.
+
+&nbsp;

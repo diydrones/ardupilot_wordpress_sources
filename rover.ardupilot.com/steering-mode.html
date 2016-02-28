@@ -1,0 +1,26 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: steering-mode 
+title: STEERING Mode 
+id: 4799 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Learning mode (sort of) plus obstacle avoidance.
+
+<ul>
+	<li>Steering mode is a bit like learning mode, except that the controls use the same steering, throttle and obstacle avoidance code as AUTO mode does.
+        <ul>
+	    <li>The steering controls the "navigation bearing", which is what AUTO uses to navigate.</li>
+	    <li>The throttle controls the target speed, just like AUTO does.</li>
+	    <li>When it sees an obstacle it tries to avoid it in the same way that AUTO does.</li>
+	    <li>It even does turn speed scaling.</li>
+        </ul>
+        </li>
+	<li>So you can use STEERING mode to test your rover while remaining fully in control.</li>
+	<li>Drive it at a obstacle, and it will avoid it, which is not only fun, it's great for tuning.</li>
+	<li>Momentary toggle (CH7) stores the current GPS position as a new waypoint.</li>
+</ul>

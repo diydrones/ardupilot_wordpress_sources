@@ -1,0 +1,196 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: code-overview-adding-a-new-parameter 
+title: Adding a New Parameter (Code Overview) 
+id: 3218 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Parameters can either be part of the main code or part of a library.
+
+
+<h1>Adding a parameter to the main code</h1>
+
+<strong>Step #1:</strong> Find a spare slot in the Parameters class's enum in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/Parameters.h" target="_blank">Parameters.h</a> and add your new parameter as shown below in <span style="color: #ff0000">red</span>.  Some things to be careful of:
+
+<ul>
+	<li>Try to add the parameter close to parameters that share a similar function or worst case add to the end of the "Misc" section.</li>
+	<li>Ensure that the section you are adding it to is not full.  You can check if the section is full by counting the number of parameters in the section and ensuring that the last element is less than the next sections first element.  I.e. the Misc section's first parameter is #20.  my_new_parameter is #36.  If the next section began at #36 we would not be able to add the new parameter here.</li>
+	<li>Do not add a parameter in the middle of a group thus causing the slots for existing parameters to change</li>
+	<li>Do not use slots with "deprecated" or "remove" comments beside them because some users may still have the defaults for these old parameters in their eeprom so your new parameter's default value could be set strangely.</li>
+</ul>
+
+<pre>    enum {
+        // Misc
+        //
+        k_param_log_bitmask = 20,
+        k_param_log_last_filenumber,            // *** Deprecated - remove
+                                                // with next eeprom number
+                                                // change
+        k_param_toy_yaw_rate,                           // THOR The memory
+                                                        // location for the
+                                                        // Yaw Rate 1 = fast,
+                                                        // 2 = med, 3 = slow
+
+        k_param_crosstrack_min_distance,    // deprecated - remove with next eeprom number change
+        k_param_rssi_pin,
+        k_param_throttle_accel_enabled,     // deprecated - remove
+        k_param_wp_yaw_behavior,
+        k_param_acro_trainer,
+        k_param_pilot_velocity_z_max,
+        k_param_circle_rate,
+        k_param_sonar_gain,
+        k_param_ch8_option,
+        k_param_arming_check_enabled,
+        k_param_sprayer,
+        k_param_angle_max,
+        k_param_gps_hdop_good,          // 35
+       <span style="color: #ff0000"><strong> k_param_my_new_parameter,       // 36</strong></span></pre>
+
+
+
+<strong>Step #2:</strong> Declare the variable within the Parameters class somewhere below the enum.  Possible types include AP_Int8, AP_Int16, AP_Float, AP_Int32 and AP_Vector3 (Note: unsigned integers are not currently supported).  The name of the variable should be the same as the new enum but with the "k_param_" prefix removed.
+<pre>        // 254,255: reserved
+    };
+
+    AP_Int16        format_version;
+    AP_Int8         software_type;
+
+    // Telemetry control
+    //
+    AP_Int16        sysid_this_mav;
+    AP_Int16        sysid_my_gcs;
+    AP_Int8         serial3_baud;
+    AP_Int8         telem_delay;
+
+    AP_Int16        rtl_altitude;
+    AP_Int8         sonar_enabled;
+    AP_Int8         sonar_type;       // 0 = XL, 1 = LV,
+                                      // 2 = XLL (XL with 10m range)
+                                      // 3 = HRLV
+    AP_Float        sonar_gain;
+    AP_Int8         battery_monitoring;         // 0=disabled, 3=voltage only,
+                                                // 4=voltage and current
+    AP_Float        volt_div_ratio;
+    AP_Float        curr_amp_per_volt;
+    AP_Int16        pack_capacity;              // Battery pack capacity less reserve
+    AP_Int8         failsafe_battery_enabled;   // battery failsafe enabled
+    AP_Int8         failsafe_gps_enabled;       // gps failsafe enabled
+    AP_Int8         failsafe_gcs;               // ground station failsafe behavior
+    AP_Int16        gps_hdop_good;              // GPS Hdop value below which represent a good position
+ <span style="color: #ff0000">   AP_Int16        my_new_parameter;                  // my new parameter's description goes here</span></pre>
+
+
+
+<strong>Step #3:</strong> Add the variable declaration to the var_info table in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/Parameters.cpp" target="_blank">Parameters.cpp</a>
+<pre>    // @Param: MY_NEW_PARAMETER
+    // @DisplayName: My New Parameter
+    // @Description: A description of my new parameter goes here
+    // @Range: -32768 32767
+    // @User: Advanced
+    GSCALAR(my_new_parameter, "MY_NEW_PARAMETER", MY_NEW_PARAMETER_DEFAULT),</pre>
+<div>The @Param ~ @User comments are used by the ground station (i.e. Mission Planner) to display advice to the user and limit the values that the user may set the parameter to.</div>
+<div>The parameter name (i.e. "MY_NEW_PARAMETER") is limited to 16 characters.</div>
+
+
+
+<strong>Step #4:</strong> Add the parameters default to <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/config.h" target="_blank">config.h</a>
+<pre>#ifndef MY_NEW_PARAMETER_DEFAULT
+ # define MY_NEW_PARAMETER_DEFAULT      100     // default value for my new parameter
+#endif</pre>
+You're done!  The new parameter can be access from the main code (not the libraries) as g.my_new_parameter.
+
+
+
+<h1>Adding a parameter to a library</h1>
+Parameters can also be added to libraries by following these steps which use the <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Compass" target="_blank">AP_Compass</a> library as an example.
+
+<strong>Step #1: </strong>Add the new class variable to the top level .h file (i.e. <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Compass/Compass.h" target="_blank">Compass.h</a>).  Possible types include AP_Int8, AP_Int16, AP_Float, AP_Int32 and AP_Vector3f.  Also add the default value you'd like for the parameter (we will use this in step #2)
+<pre><span style="color: #ff0000">#define MY_NEW_PARAM_DEFAULT         100</span>
+
+class Compass
+{
+public:
+    int16_t product_id;                         /// product id
+    int16_t mag_x;                      ///&lt; magnetic field strength along the X axis
+    int16_t mag_y;                      ///&lt; magnetic field strength along the Y axis
+    int16_t mag_z;                      ///&lt; magnetic field strength along the Z axis
+    uint32_t last_update;               ///&lt; micros() time of last update
+    bool healthy;                               ///&lt; true if last read OK
+
+    /// Constructor
+    ///
+    Compass();
+
+protected:
+    AP_Int8 _orientation;
+    AP_Vector3f _offset;
+    AP_Float _declination;
+    AP_Int8 _use_for_yaw;                       ///&lt;enable use for yaw calculation
+    AP_Int8 _auto_declination;                  ///&lt;enable automatic declination code
+    <span style="color: #ff0000">AP_Int16 _my_new_lib_parameter;              /// description of my new parameter</span>
+};</pre>
+
+
+
+<strong>Step #2:</strong>Add the variable to the var_info table in the .cpp file (i.e. <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Compass/Compass.cpp" target="_blank">Compass.cpp</a>) including @Param ~ @Increment comments to allow the GCS to display the description to the user and to control the min and max values set from the ground station.  When adding the new parameter be careful that:
+<blockquote>
+<ul>
+	<li>The slot (i.e. "9" below) is one higher than the previous variable.</li>
+	<li>the parameter's name (i.e. MY_NEW_P) length is less than 16 including the object's prefix that will be added.  I.e. the compass object's prefix is "COMPASS_".</li>
+</ul>
+</blockquote>
+<pre>const AP_Param::GroupInfo Compass::var_info[] PROGMEM = {
+    // index 0 was used for the old orientation matrix
+
+    // @Param: OFS_X
+    // @DisplayName: Compass offsets on the X axis
+    // @Description: Offset to be added to the compass x-axis values to compensate for metal in the frame
+    // @Range: -400 400
+    // @Increment: 1
+
+&lt;snip&gt;
+
+    // @Param: ORIENT
+    // @DisplayName: Compass orientation
+    // @Description: The orientation of the compass relative to the autopilot board.
+    // @Values: 0:None,1:Yaw45,2:Yaw90,3:Yaw135,4:Yaw180,5:Yaw225,6:Yaw270,7:Yaw315,8:Roll180
+    AP_GROUPINFO("ORIENT", 8, Compass, _orientation, ROTATION_NONE),
+
+<span style="color: #ff0000">    // @Param: MY_NEW_P
+    // @DisplayName: My New Library Parameter
+    // @Description: The new library parameter description goes here
+    // @Range: -32768 32767
+    // @User: Advanced
+    AP_GROUPINFO("MY_NEW_P", 9, Compass, _my_new_lib_parameter, MY_NEW_PARAM_DEFAULT),</span>
+
+    AP_GROUPEND
+};</pre>
+The parameter can be accessed from within the library as _my_new_lib_parameter.  Note that we made the parameter "protected" so it cannot be access from outside the class.  If we'd made it public then it would have been accessible to the main code as well as "compass._my_new_lib_parameter".
+
+
+
+<strong>Step #3: </strong>If the class is a completely new addition to the code (as opposed to an existing class like AP_Compass), it should be added to the main vehicle's var_info table in the <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/Parameters.cpp" target="_blank">Parameters.cpp</a> file (it's order in the var_info table is not important).  Below in <span style="color: #ff0000">red</span> where the Compass class appears.
+<pre>const AP_Param::Info var_info[] PROGMEM = {
+    // @Param: SYSID_SW_MREV
+    // @DisplayName: Eeprom format version number
+    // @Description: This value is incremented when changes are made to the eeprom format
+    // @User: Advanced
+    GSCALAR(format_version, "SYSID_SW_MREV",   0),
+&lt;snip&gt;
+<span style="color: #ff0000">
+    // @Group: COMPASS_
+    // @Path: ../libraries/AP_Compass/Compass.cpp
+    GOBJECT(compass,        "COMPASS_", Compass),</span>
+
+&lt;snip&gt;
+    // @Group: INS_
+    // @Path: ../libraries/AP_InertialSensor/AP_InertialSensor.cpp
+    GOBJECT(ins,            "INS_", AP_InertialSensor),
+
+    AP_VAREND
+};
+</pre>

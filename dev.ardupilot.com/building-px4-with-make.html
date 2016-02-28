@@ -1,0 +1,70 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-px4-with-make 
+title: Building ArduPilot for Pixhawk/PX4 on Windows with Make 
+id: 1310 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to build ArduPilot for Pixhawk 2, Pixhawk and PX4 on Windows with <em>Make</em>. <!--more -->
+[note]The commands for building Pixhawk 2 and Pixhawk are identical (<code>make px4-v2</code>). Building for PX4 is the same except that <code>make px4-v1</code> is used. [/note]
+
+<h1>Build instructions</h1>
+<ol>
+	<li>Install <a href="http://windows.github.com/" target="_blank">GitHub for Windows</a></li>
+	<li>Ensure your github settings are set to leave line endings untouched.
+  <ul>
+	<li>The "Git Shell (or Bash)" terminal was also installed when you installed Git.  Click on your new "Git Shell (or Bash)" Icon and type in the following in the Git "MINGW32" Terminal window: 
+        <pre>git config --global core.autocrlf false</pre></li>
+  </ul>
+ 
+  </li>
+	<li>Clone the ardupilot repository onto your machine:
+<ol>
+<ul>
+	<li>Go to the <a href="https://github.com/diydrones/ardupilot" target="_blank">GitHub/diydrones/ardupilot</a> web page and click the <strong>Clone in Desktop</strong> button</li>
+</ul>
+</ol>
+</li>
+	<li>Download and install the <em>PX4 toolchain</em> by running the <a href="http://firmware.diydrones.com/Tools/PX4-tools/px4_toolchain_installer_v14_win.exe">px4_toolchain_installer_v14_win.exe</a></li>
+	<li>Open the <em>PX4Console</em> and navigate to the target vehicle directory:
+<ul>
+	<li>Start the <em>PX4Console</em>. This can be found under <strong>Start | All Programs | PX4 Toolchain</strong> (Windows 7 machine) or you can directly run <strong>C:\px4\toolchain\msys\1.0\px4_console.bat</strong></li>
+	<li>Navigate to the vehicle-specific ArduPilot directory in the <em>PX4Console</em>. For example, to build Copter, navigate to:
+<pre>cd /c/Users/&lt;username&gt;/Documents/GitHub/ardupilot/ArduCopter</pre>
+</li>
+</ul>
+
+</li>
+	<li>Build the firmware by entering one of the following commands:
+
+<table>
+<tr><td><code>make px4-v2</code></td><td>Build the Pixhawk2/Pixhawk firmware (identical) for a quad</td></tr>
+<tr><td><code>make px4-v2-hexa</code></td><td>Build the Pixhawk firmware for a hexacopter. 
+    # Other supported suffixes include "octa", "tri" and "heli". 
+    # More can be found in "mk/tagets.mk" under FRAMES</td></tr>
+<tr><td><code>make px4</code></td><td>Build both PX4 and PixHawk firmware for a quadcopter</td></tr>
+<tr><td><code>make clean</code></td><td>"clean" the ardupilot directory</td></tr>
+<tr><td><code>make px4-clean</code></td><td>"clean" the PX4Firmware and PX4NuttX directories so the next build will completely rebuild them</td></tr>
+<tr><td><code>make px4-v2-upload</code></td><td>Build and upload the Pixhawk firmware for a quad (i.e. no need to do step #7 below)</td></tr>
+</table>
+The firmware will be created in the <strong>ArduCopter</strong> directory with the <strong>.px4</strong> file extension.</li>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4_ArduCopter_Build.png"><img class="size-full wp-image-3192 alignnone" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PX4_ArduCopter_Build.png" alt="PX4_ArduCopter_Build" width="677" height="186" /></a>
+</li>
+
+	<li>Upload the firmware using the <em>Mission Planner</em> <strong>Initial Setup | Install Firmware</strong> screen's <strong>Load custom firmware</strong> link</li>
+</ol>
+
+[note]ArduPilot imports addition projects (<a href="https://github.com/diydrones/PX4Firmware">PX4Firmware</a>, <a href="https://github.com/diydrones/PX4NuttX">PX4NuttX</a>, <a href="https://github.com/diydrones/uavcan">uavcan</a>) as <em>git submodules</em> when you build the project. If you built the project before the change to submodules you may get errors. See <a href="git-submodules">Git Submodules</a> for troubleshooting information.[/note]
+
+
+
+<h1>Hints for speeding up compile time</h1>
+
+Anti virus protection is likely to slow the compile times especially for PX4 so it is recommended that the folders containing the ArduPilot source code is excluded from your virus protections real-time scan.
+
+The first scan after a <code>make px4-clean</code> will be very slow as it rebuilds everything

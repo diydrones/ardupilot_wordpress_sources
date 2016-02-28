@@ -1,0 +1,380 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-for-beaglebone-black-on-linux 
+title: Building ArduPilot for BeagleBone Black on Linux 
+id: 3361 
+menu_order: 110 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Get your BeagleBone running Debian</h1>
+
+[caption id="attachment_3358" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_layout.jpg"><img class="size-medium wp-image-3358" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_layout-300x219.jpg" alt="BBB tiltle picture" width="300" height="219" /></a> BBB tiltle picture[/caption]
+
+You will need a microSD card of 4GB or greater and a 5VDC power supply of 1A or higher. You can also use a powered USB hub. It is highly recommended that you not use the USB port on a laptop, which has current limitations.
+
+Go to the BeagleBoard website and get the <a title="http://beagleboard.org/latest-images" href="http://beagleboard.org/latest-images">latest image</a>. You may find multiple images on the page. For ArduPilot on BeagleBone Black you have to download the <em><strong>Debian (BeagleBone Black - 2GB</strong></em><strong> eMMC)</strong> image. You can find it under <em><strong>BeagleBone Black (eMMC flasher)</strong></em><strong> </strong>header.
+
+For example, the current image is <a href="http://debian.beagleboard.org/images/BBB-eMMC-flasher-debian-7.5-2014-05-14-2gb.img.xz">BBB-eMMC-flasher-debian-7.5-2014-05-14-2gb</a>. The date (in this case 2014-05-14) and the version number (in this case 7.5) may change. Make sure you download the latest image.
+
+
+
+<h2>On Ubuntu/Mac OS X</h2>
+Verify Image with:
+<div>
+<pre>md5sum BBB-eMMC-flasher-debian-7.5-2014-05-14-2gb.img.xz
+74615fb680af8f252c034d3807c9b4ae  BBB-eMMC-flasher-debian-7.5-2014-05-14-2gb.img.xz</pre>
+</div>
+before plugging your SD card into your computer, type
+<pre> df -h</pre>
+this will list the current mounted drives.
+
+Now plug in your SD card and type
+<div>
+<pre>df -h</pre>
+</div>
+and see what the drive that was added is called.
+
+In my case it was /dev/sdd1
+
+in which case in the command below, the it is writtern dd of=/dev/sdd  replace this with the correct address for your SD card.
+
+[warning]IF YOU GET THIS WRONG YOU CAN WIPE YOUR HDD[/warning]
+
+then xzcat it to your SD card in your Ubuntu/Mac OS X machine
+<pre>xzcat BBB-eMMC-flasher-debian-7.1-2013-10-08.img.xz | dd of=/dev/sdd bs=1M</pre>
+when this is finished, remove the SD Card and place it into your BBB.
+
+
+
+<h2>On Windows</h2>
+Download Win32 disk imager from <a href="http://sourceforge.net/projects/win32diskimager/">here</a>. Insert your SD card, then start the application that you downloaded.
+
+Select the image that you downloaded and then press <strong>Write</strong>.
+
+when this is finished, remove the SD Card and place it into your BBB.
+
+
+<h2>Flashing the image to the eMMC</h2>
+Place the SD card in your BBB. Make sure you have removed Ethernet and all other USB devices from your BBB. Connect it to a wall adapter (5VDC 1A) or a powered USB hub.
+
+Press the boot button, and hold it down while booting, until all four blue lights are solid.
+
+Let go, and wait. It will take around 15 mins.
+
+The lights will flicker a lot at this stage, you will know it is complete when the four lights return to solid Blue (no flickering). Power down the BBB and remove the SD card.
+
+Connect the BeagleBone Black to your machine using the USB cord that's provided with it. Depending on your OS, install the required <a href="http://beagleboard.org/Getting%20Started#step2">drivers</a>.
+
+Now ssh into the BeagleBone Black by typing
+<pre> ssh <a href="mailto:root@192.168.1.3">root@192.168.7.2</a></pre>
+There is no password for the root user on the Debian image
+
+You could also connect the BBB to your local network over Ethernet and ssh to it.
+
+
+
+<h1>The PixHawk Fire Cape</h1>
+In order to run APM in the BeagleBone black you'll need to use the right set of sensors. Most of these sensors are included in the PixHawk Fire cape (PXF), an open hardware board available from <a href="https://erlerobotics.com/blog/product/pixhawk-fire-cape/">Erle Robotics store</a>.
+
+
+
+<h1>Making the rt kernel</h1>
+(taken from <a href="http://wiki.beyondlogic.org/index.php/BeagleBoneBlack_Building_Kernel">http://wiki.beyondlogic.org/index.php/BeagleBoneBlack_Building_Kernel</a>)
+
+modified for the RT version, and to simplify.
+
+
+
+<h2>Compiling the BeagleBone Black Kernel</h2>
+
+The following contains instructions for building the BeagleBone Black kernel on your PC with Ubuntu 13.04 O.S. 
+
+
+
+<h1>to make it simple, run</h1>
+
+<pre>sudo su</pre>
+you may need to put in your password here...
+
+if you do not have this already, make the following directory
+<pre>
+mkdir /home/YOUR_USERNAME/export</pre>
+mkdir /home/YOUR_USERNAME/export/rootfs</pre>
+
+
+
+<h1>Prerequisites</h1>
+
+<h2>ARM Cross Compiler</h2>
+
+To compile the linux kernel for the BeagleBone Black, you must first have an ARM cross compiler installed on your linux box. I use gcc-4.7-arm-linux-gnueabi-base that comes with Ubuntu 13.04. To install the compiler run:
+<pre>apt-get install gcc-arm-linux-gnueabi</pre>
+
+
+<h2>GIT</h2>
+The Beaglebone patches and build scripts are stored in a git repository. Install git:
+<pre>apt-get install git</pre>
+And configure with your identity.
+<pre>git config --global user.email "your.email@here.com"</pre>
+
+
+<h2>lzop Compression</h2>
+The kernel is compressed using lzo. Install the lzop parallel file compressor:
+<pre>apt-get install lzop</pre>
+
+
+<h2>uBoot mkimage</h2>
+The bootloader used on the BeagleBone black is <a href="http://www.denx.de/wiki/U-Boot">u-boot</a>. u-boot has a special image format called uImage. It includes parameters such as descriptions, the machine/architecture type, compression type, load address, checksums etc. To make these images, you need to have a mkimage tool that comes part of the u-Boot distribution. Download u-boot, make and install the u-boot tools:
+<pre>wget ftp://ftp.denx.de/pub/u-boot/u-boot-latest.tar.bz2
+tar -xjf u-boot-latest.tar.bz2</pre>
+<pre>cd u-boot-2013.10   (look to see what this is called, it may have changed)</pre>
+<pre>make tools  (don't work with last revision of u-boot need a revision)
+install tools/mkimage /usr/local/bin</pre>
+
+
+<h2>Compiling the BeagleBone Black Kernel</h2>
+Here we compile the BeagleBone Black Kernel, and generate an uImage file with the DTB blob appended to the kernel for ease of use.
+<pre>git clone git://github.com/beagleboard/kernel.git
+cd kernel
+git checkout 3.8-rt
+./patch.sh
+cp configs/beaglebone kernel/arch/arm/configs/beaglebone_defconfig
+wget http://arago-project.org/git/projects/?p=am33x-cm3.git\;a=blob_plain\;f=bin/am335x-pm-firmware.bin\;hb=HEAD -O kernel/firmware/am335x-pm-firmware.bin
+cd kernel
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- beaglebone_defconfig -j4
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage dtbs -j4
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage-dtb.am335x-boneblack -j4</pre>
+Now we build any kernel modules:
+<pre>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j4</pre>
+And if you have your rootfs ready, you can install them:
+<pre>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- INSTALL_MOD_PATH=/home/YOUR_USERNAME/export/rootfs modules_install</pre>
+
+
+<h1> Installing the RT kernel</h1>
+
+After you have made the Linux kernel...
+
+ensure you have Debian installed on the beaglebone and ssh into the Beaglebone from Linux....
+<pre>ssh <a href="mailto:root@192.168.1.3">root@192.168.1.3</a></pre>
+(my ip address, adjust for your beaglebone)
+
+Go to folder /boot/uboot/
+<pre>cd /boot/uboot/</pre>
+make sure there is a backup folder there. If not:
+<pre>mkdir backup</pre>
+then backup your zImage
+<pre>cp zImage uInitrd backup/</pre>
+then
+<pre>ls /lib/modules</pre>
+it should show 3.8.13-bone28 or similar.
+
+Now we need to go to our Ubuntu computers terminal. Ggo to your export folder that you made:
+<pre>cd /home/YOUR_USER_NAME/export/rootfs/lib/modules</pre>
+and run
+<pre>rsync -avz 3* <a href="mailto:root@192.168.1.3">root@192.168.1.3</a>:/lib/modules/</pre>
+then run
+<pre>rsync /home/proficnc/u-boot-2013.10/kernel/kernel/arch/arm/boot/zImage 192.168.1.3 :/boot/uboot/</pre>
+back on your Beaglebone run the following
+<pre> ls /lib/modules</pre>
+you should now have both the old file and the new rt folder.
+
+Now type:
+<pre>sync
+reboot</pre>
+
+
+<h2>Some useful tips</h2>
+
+<h1>Hooking up the sensors</h1>
+
+When hooking up your Sensor board it connects as follows (using SHORT wires)
+
+[caption id="attachment_3356" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_I2C.jpg"><img class="size-medium wp-image-3356" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_I2C-300x217.jpg" alt="i2c connection " width="300" height="217" /></a> i2c connection[/caption]
+
+
+<h1>I2c Debug</h1>
+
+To detect if the i2c is working, you can use the following command
+<pre>     i2cdetect -r 1</pre>
+[caption id="attachment_3357" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_I2C_check.jpg"><img class="size-medium wp-image-3357" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_I2C_check-300x187.jpg" alt="i2c check" width="300" height="187" /></a> i2c check[/caption]
+
+The numbers:  1e, 53, 69, 77 are the MAG, Gyro, Accel, and Baro.(not in that order)
+
+
+<h1>Hooking up your GPS</h1>
+
+To be added
+
+
+
+<h1>Hooking up your Receiver</h1>
+
+To be added
+
+
+
+<h1>Hooking up your servos</h1>
+
+To be added
+
+
+
+<h1>Hooking up your Airspeed sensor</h1>
+
+To be added
+
+
+
+<h1>Devices tested so far</h1>
+
+Responded with the Who Am I request on SPI
+1. MPU6000
+2. MPU9250 (may have compass issues due to soldering of jumper wire)
+3. MS5611 (SPI)
+
+Not responding on SPI
+1 LSM9DS0 ( soldering issue, no connection to I/O
+
+Responded to I2C detect
+1. CapeID EEPROM 0x54h AT24CS32
+2. CapeID COA_OTP 0x5Ch AT24CS32
+3. Crypto 0x64h ATSHA204
+4. Airspeed 0x28h MS4525DO-DS3AIXXXDS
+5. Compass Ext 0x1eh HMC5883L
+6. Power management 0x24 TPS65217C
+7. on-board EEProm 0x50h unknown
+8. HDMI core.... unused, do not enable 0x34
+
+Not responded to I2C test
+1. MS5611 (I2C) 0x76h
+2. RGB LED Driver 0x55h TCA62724 (is conflicting with non existent Cape eeprom)
+
+
+
+<h1>Adjusting the BBB clock</h1>
+
+<code>cpufreq-info</code> shows your current frequency
+
+[caption id="attachment_3355" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_clock_check.jpg"><img class="size-medium wp-image-3355" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/11/BBB_clock_check-300x190.jpg" alt="clock check" width="300" height="190" /></a> clock check[/caption]
+
+Edit /etc/default/cpufrequtils (you might need to create it if it doesn't exist). Specify the governor with the GOVERNOR variable:
+<pre>nano /etc/default/cpufrequtils</pre>
+add the following......
+<pre># valid values: userspace conservative powersave ondemand performance
+# get them from cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</pre>
+<pre>GOVERNOR="performance"</pre>
+CTRL-X to exit
+
+Y to save
+
+Reboot, and check to see that it has worked
+
+
+
+<h1>Installing and Making ArduPilot on BBB</h1>
+
+install git, make, gawk, g++, arduino-core on your BBB
+<pre>apt-get install git make gawk g++ arduino-core
+git clone git://github.com/diydrones/ardupilot.git</pre>
+then open
+<pre>cd ardupilot/ArduPlane</pre>
+or
+<pre> cd ardupilot/ArduCopter</pre>
+or
+<pre> cd ardupilot/APMRover2</pre>
+or
+<pre> cd ardupilot/AntennaTracker</pre>
+
+then
+<pre>make linux</pre>
+from this directory, run the tmp/Plane.elf (or Copter, or Rover)
+<pre> tmp/Plane.elf</pre>
+
+
+<h1>Connecting to GCS</h1>
+
+To be added……………
+
+
+
+<h1>Status</h1>
+
+The following table sumarizes the <em>driver development status</em>:
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ArduPilot running in the BBB (I2C connected sensors)</td>
+<td>Ok</td>
+</tr>
+<tr>
+<td>Device Tree for the PXF</td>
+<td>WIP</td>
+</tr>
+<tr>
+<td>MPU6000 SPI userspace driver</td>
+<td>Ok</td>
+</tr>
+<tr>
+<td>MPU9150 I2C userspace driver</td>
+<td>Ok</td>
+</tr>
+<tr>
+<td>LSM9DS0 SPI userspace driver</td>
+<td>Coded</td>
+</tr>
+<tr>
+<td>MPU9250 SPI userspace driver</td>
+<td>Coded</td>
+</tr>
+<tr>
+<td>MS5611 I2C/SPI userspace driver</td>
+<td>Coded</td>
+</tr>
+<tr>
+<td>GPIO userspace driver</td>
+<td>WIP</td>
+</tr>
+<tr>
+<td>I2CDriver multi-bus aware</td>
+<td>WIP</td>
+</tr>
+<tr>
+<td>AP_InertialSensor_Linux</td>
+<td>ToDo</td>
+</tr>
+<tr>
+<td>PRU PWM driver</td>
+<td> Ok (<a href="https://groups.google.com/forum/#!topic/beaglepilot/7DKcdm0AEPo">issue</a> with the PREEMPT_RT kernel)</td>
+</tr>
+<tr>
+<td>MPU6000 SPI kernel driver</td>
+<td>WIP</td>
+</tr>
+<tr>
+<td>MPU9150 I2C kernel driver</td>
+<td>ToDo</td>
+</tr>
+<tr>
+<td>LSM9DS0 SPI kernel driver</td>
+<td>ToDo</td>
+</tr>
+<tr>
+<td>MPU9250 SPI kernel driver</td>
+<td>ToDo</td>
+</tr>
+<tr>
+<td>MS5611 I2C/SPI kernel driver</td>
+<td>ToDo</td>
+</tr>
+</tbody>
+</table>
+<em>Status: <code>Ok</code>, <code>Coded</code> (needs test), <code>WIP</code> (work in progress), <code>Issue</code>, <code>ToDo</code></em>

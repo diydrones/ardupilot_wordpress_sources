@@ -1,0 +1,253 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: jtag 
+title: Debugging using JTAG 
+id: 270 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>Overview</h1>
+
+The JTAG interface on APM provides additional debugging features that can be useful when working on certain kinds of problems. This page describes how to configure your APM setup so that you can use JTAG to debug it.
+
+Note that enabling JTAG disables the ADC4, ADC5, ADC6 and ADC7 pins. These aren't normally used by APM, but if your application requires more than the low four ADC inputs, you won't be able to use JTAG.
+<h1>Hardware Required</h1>
+Obviously you will need an APM board. The JTAG signals are available on the oilpan, so we will assume you are using one as well. For other boards (e.g. Arduino Mega) see your board's documentation for the location of the relevant pins.
+
+To program the JTAG and OCD fuses in the ATMega1280 an ISP programmer of some sort is required. This article describes using the cheap and effective !BusPirate, but another programmer (e.g. STK500, GoodFET, etc.) could also be used.
+
+Last but not least, you will need an AVR JTAG unit. The Atmel JTAGICE mkii works well, but is expensive. This article was developed using the much cheaper JTAGICE mkii-CN from
+<a href="http://www.mcuzone.com/">http://www.mcuzone.com</a>
+obtained via eBay for about 1/3 the price of the Atmel unit. The JTAGICE can be used as a programmer as well.
+
+Note that the mkii-CN unit seems very sensitive to USB setup. If it misbehaves when connected to a hub, try connecting it directly to a port on your system.
+
+<h1>Software Required</h1>
+The AVRDUDE and AVaRICE tools are required, as well as avr-gdb.
+
+On Windows, all of the required tools should be installed by WinAVR. (TBD: verify whether AVaRICE comes with WinAVR)
+
+On Mac OS the use the MacPorts tool to install the tools. Fetch and install the MacPorts package, then use the following commands:
+<pre>sudo port selfupdate
+sudo port install avrdude
+sudo port install avarice
+sudo port install avr-gdb</pre>
+You can omit avr-gdb if you already have the AVR CrossPack installed.
+
+Most Linux systems have packages available for avrdude, avarice and avr-gdb. See your system management documentation for details on installing these, or ask a friend.
+
+
+<h1>Initial Setup</h1>
+Before debugging, the JTAG Enable and On Chip Debug Enable fuses must be programmed in the ATMega1280. By default both are disabled, and despite offering a tempting option in the boards.txt file, Arduino does not seem to provide a way to change them.
+
+Separate the APM and oilpan boards, and connect your ISP programmer to the AT1280 SPI header on the APM board. In the illustration here, the BusPirate breakout cable is being used. Note that the wire colours shown are for the cable supplied by !SparkFun; other vendors may use different colour-coding. Use the following table as a guide:
+<table>
+<tbody>
+<tr>
+<td>!BusPirate Pin</td>
+<td>ISP Pin</td>
+<td>Wire Colour</td>
+</tr>
+<tr>
+<td>1 (GND)</td>
+<td>6</td>
+<td>black</td>
+</tr>
+<tr>
+<td>3 (+5)</td>
+<td>2</td>
+<td>grey</td>
+</tr>
+<tr>
+<td>7 (CLK)</td>
+<td>3</td>
+<td>yellow</td>
+</tr>
+<tr>
+<td>8 (MOSI)</td>
+<td>4</td>
+<td>orange</td>
+</tr>
+<tr>
+<td>9 (CS)</td>
+<td>5</td>
+<td>red</td>
+</tr>
+<tr>
+<td>10 (MISO)</td>
+<td>1</td>
+<td>brown</td>
+</tr>
+</tbody>
+</table>
+Programmer type should be BusPirate.
+
+Here is a table of connections if you are using the JTAGICE mkII-CN debugger as an ISP programmer:
+<table>
+<tbody>
+<tr>
+<td>JTAGICE Pin</td>
+<td>ISP Pin</td>
+</tr>
+<tr>
+<td>TDO</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Vref</td>
+<td>2</td>
+</tr>
+<tr>
+<td>TCK</td>
+<td>3</td>
+</tr>
+<tr>
+<td>TDI</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SRST</td>
+<td>5</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+Programmer type should be jtagmkii. NOTE: this configuration has not been verified to work.
+
+Use this AVRDUDE command to program the fuses on the ATMega1280 to enable OCD and JTAG:
+<pre>avrdude -P 
+
+-c 
+
+-p m1280 -U hfuse:w:0x1a:m -v</pre>
+Replace
+<code></code>
+
+with the port to which your programmer is connected, and
+<code></code>
+
+with the programmer type.
+
+This should only take a few seconds, and you should see towards the end the following lines output:
+<pre>avrdude: safemode: lfuse reads as FF
+avrdude: safemode: hfuse reads as 1A
+avrdude: safemode: efuse reads as F5
+avrdude: safemode: Fuses OK</pre>
+These settings are persistent; unless you reflash the bootloader on your APM JTAG will remain permanently enabled.
+
+To revert to the default fuse settings, use:
+<pre>avrdude -P 
+
+-c 
+
+-p m1280 -U hfuse:w:0xda:m</pre>
+
+
+<h1>JTAG Hardware Setup</h1>
+On the oilpan, add a 2x3 header to the Expansion Ports pads, and a 1x7 header to the analog pads (GND-AN5).
+
+Connect your JTAG debugger as follows. Note that in the example here a SparkFun !BusPirate breakout cable is being connected to a JTAGICE mkii-CN. Your wire colours may vary; use the following table as a guide:
+<table>
+<tbody>
+<tr>
+<td>JTAG Pin</td>
+<td>Oilpan Pin</td>
+<td>Wire Colour</td>
+</tr>
+<tr>
+<td>TCK</td>
+<td>ADC4</td>
+<td>brown</td>
+</tr>
+<tr>
+<td>TMS</td>
+<td>ADC5</td>
+<td>green</td>
+</tr>
+<tr>
+<td>TDO</td>
+<td>ADC6</td>
+<td>orange</td>
+</tr>
+<tr>
+<td>TDI</td>
+<td>ADC7</td>
+<td>white</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>black, red</td>
+</tr>
+<tr>
+<td>Vref</td>
+<td>+5</td>
+<td>yellow</td>
+</tr>
+<tr>
+<td>SRST</td>
+<td>Reset</td>
+<td>blue</td>
+</tr>
+</tbody>
+</table>
+
+
+<h1>Software Setup</h1>
+Once the hardware setup is done, there are a variety of ways to debug using JTAG. The following steps cover just the basics.
+
+The bridge between the JTAG unit and your debugger is AVaRICE. Some setups will automatically launch the tool when the debugger starts, others require that you launch it manually. It is critical for successful APM debugging that the --capture argument is passed to AVaRICE, rather than attempting to download a new program.
+
+To start AVaRICE manually, assuming a JTAGICE mkii (or clone) connected via USB, use:
+<pre>avarice --mkII --capture --jtag usb :4242</pre>
+You should see output like:
+<pre>AVaRICE version 2.10, Dec 22 2010 21:38:18</pre>
+Defaulting JTAG bitrate to 250 kHz.
+
+JTAG config starting. Found a device: JTAGICEmkII Serial number: 00:a0:00:40:26:63 Reported JTAG device ID: 0x9703 Configured for device ID: 0x9703 atmega1280 JTAG config complete. Waiting for connection on port 4242.
+
+Note that AVaRICE will exit every time the the debugger disconnects, so be prepared to restart it regularly if your debugger doesn't manage it already. Once the "Waiting for connection" message is displayed, you are ready to connect with your debugger.
+
+
+<h1>Debugging Code Built by Arduino</h1>
+Arduino does its best to hide the dirty parts of the build process from the user. This can make it slightly difficult to find the files that you need for debugging. Hold down the SHIFT key while clicking the Verify button in the Arduino IDE, and you will see the commands executed by Arduino as it builds your sketch. Assuming that the build is successful, the last command listed (before the "Binary sketch…" line) will look something like this example taken from a Mac OS system:
+<pre>/Volumes/Data/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/avr-objcopy -O ihex -R .eeprom 
+/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf
+/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.hex</pre>
+The file that your debugger will want to load is the .elf file, in this case
+<code>
+/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf
+</code>
+
+The name of the file will depend on your sketch name, and the location will vary depending on your system, but it will remain the same for a given sketch until you quit and restart Arduino. Note that the directory containing the file is deleted and re-created every time you compile the sketch.
+
+To debug this file with avr-gdb, use Arduino to compile and upload the sketch to APM. Start AVaRICE as described above, then start GDB:
+<pre>avr-gdb /var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf</pre>
+You should see GDB start up:
+<pre>GNU gdb 6.8
+Copyright (C) 2008 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later 
+
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "--host=i386-apple-darwin9.8.0 --target=avr"...
+(gdb)</pre>
+At the (gdb) prompt, tell GDB to connect to AVaRICE:
+<pre>(gdb) target remote localhost:4242</pre>
+This will stop the program running on the APM and tell you where it stopped:
+<pre>Remote debugging using localhost:4242
+0x00002992 in AP_GPS_NMEA::read (this=0x8007aa)
+at /Volumes/Data/Users/msmith/work/Mike/ArduPilot/Sketchbook/libraries/AP_GPS/AP_GPS_NMEA.cpp:72
+72		numc = _port-&gt;
+available();
+(gdb)</pre>
+Use the 'continue' command to start the program running again, and hit control-C to stop it once more.
+
+At this point, GDB can be used normally. Other debuggers that are compatible with or build on GDB such as DDD or Insight can be used instead, as can plugins for various IDEs like Eclipse.

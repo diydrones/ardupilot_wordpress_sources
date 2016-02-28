@@ -1,0 +1,51 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: mavlink-routing-in-ardupilot 
+title: MAVLink Routing in ArduPilot 
+id: 5832 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This topic explains how MAVLink routing is handled in ArduPilot (AC3.3 and later).
+<h1>Overview</h1>
+A MAVLINK network is made up of <em>systems</em> (vehicles, GCS, antenna trackers etc.) which are themselves made up of components (Autopilot, camera system, etc.). The protocol defines two ids that can be specified in messages to control routing of the command to a required system and component:
+<ul>
+	<li><code>target_system</code>: System which should execute the command</li>
+	<li><code>target_component</code>: Component which should execute the command</li>
+</ul>
+By default a GCS will typically have a system id of 255, and vehicles have an ID of 1. In a system with multiple vehicles (or including an AntennaTracker), each system should be given a unique ID (<a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#mavlink_system_id_of_this_vehicle_arducoptersysid_thismav">SYSID_THISMAV</a>). A value of 0 for the <code>target_system</code> or <code>target_component</code> is considered a broadcast ID, and will be sent to all systems in the network/components on the target system.
+
+The routing on ArduPilot systems works in the following way:
+<ul>
+	<li>All received MAVLINK messages are checked by the <code><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.cpp">MAVLink_routing</a></code> class.</li>
+	<li>The class extracts the source system id (aka <em>sysid</em>) and component id (aka <em>compid</em>) and builds up a routing array which maps the channel (i.e. USB port, Telem1, Telem2) to the <em>&lt;sysid,compid&gt;</em> pair.</li>
+	<li>The class also extracts the target system id (<code>target_system</code>) and component id (<code>target_component</code>) and if these don’t match the vehicle’s <em>&lt;sysid,compid&gt;</em> the messages are forwarded to the appropriate channel using the array above.</li>
+	<li>Messages that don’t have a target <em>&lt;sysid,compid&gt;</em> are processed by the vehicle and then forwarded to each known system/component.</li>
+</ul>
+<h1>Detailed theory of MAVLink routing</h1>
+This information below is reproduced from the routing code in-source comments (<a href="https://github.com/diydrones/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.cpp">/libraries/GCS_MAVLink/MAVLink_routing.cpp</a>)
+<ol>
+	<li>When a flight controller receives a message it should process it locally if any of these conditions hold:
+<ol style="list-style-type: lower-alpha;">
+	<li>It has no <code>target_system</code> field</li>
+	<li>It has a <code>target_system</code> of zero</li>
+	<li>It has the flight controllers target system and has no <code>target_component</code> field</li>
+	<li>It has the flight controllers target system and has the flight controllers <code>target_component</code></li>
+	<li>It has the flight controllers target system and the flight controller has not seen any messages on any of its links from a system that has the messages <code>target_system</code>/<code>target_component</code> combination</li>
+</ol>
+</li>
+	<li>When a flight controller receives a message it should forward it onto another different link if any of these conditions hold for that link:
+<ol style="list-style-type: lower-alpha;">
+	<li>It has no <code>target_system</code> field</li>
+	<li>It has a <code>target_system</code> of zero</li>
+	<li>It does not have the flight controllers <code>target_system</code> and the flight controller has seen a message from the messages <code>target_system</code> on the link</li>
+	<li>It has the flight controllers <code>target_system</code> and has a <code>target_component</code> field and the flight controllers has seen a message from the <code>target_system</code>/<code>target_component</code> combination on the link</li>
+</ol>
+</li>
+</ol>
+[note]This proposal assumes that ground stations will not send command packets to a non-broadcast destination (sysid/compid combination) until they have received at least one package from that destination over the link. This is essential to prevent a flight controller from acting on a message that is not meant for it. For example, a <code>PARAM_SET</code> cannot be sent to a specific <em>&lt;sysid/compid&gt;</em> combination until the GCS has seen a packet from that <em>&lt;sysid/compid&gt;</em> combination on the link. 
+&nbsp;
+The GCS must also reset what<em>&lt;sysid/compid&gt;</em> combinations it has seen on a link when it sees a SYSTEM_TIME message with a decrease in time_boot_ms from a particular <em>&lt;sysid/compid&gt;</em>. That is essential to detect a reset of the flight controller, which implies a reset of its routing table.[/note]

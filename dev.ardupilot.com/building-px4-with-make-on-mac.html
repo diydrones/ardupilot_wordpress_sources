@@ -1,0 +1,67 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-px4-with-make-on-mac 
+title: Building ArduPilot for Pixhawk/PX4 on Mac with Make 
+id: 3335 
+menu_order: 50 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows how to build ArduPilot for Pixhawk 2, Pixhawk and PX4 on Mac OS X (ver 10.6 onwards) with <em>Make</em>. <!--more -->
+[note]The commands for building Pixhawk 2 and Pixhawk are identical (<code>make px4-v2</code>). To build for PX4 replace <code>make px4-v2</code> with <code>make px4-v1</code> in the instructions below. [/note]
+
+<ol>
+	<li>Install <a href="http://brew.sh" target="_blank">Homebrew </a>for Mac OS X</li>
+	<li>Install the following packages using brew
+
+	<pre>brew tap PX4/homebrew-px4
+brew update
+brew install genromfs
+brew install gcc-arm-none-eabi</pre>
+
+</li>
+	<li>Install the latest version of awk using brew (make sure <strong>/usr/local/bin</strong> takes precedence in your path):
+	<pre>brew install gawk</pre>
+</li>
+	<li>Install <em>pip</em> and <em>pyserial</em> using the following commands:
+<pre>sudo easy_install pip
+sudo pip install pyserial
+</pre>
+</li>
+	<li>Now create your directory and install all the software:
+	<pre>
+mkdir -p px4
+cd px4
+git clone https://github.com/diydrones/ardupilot.git
+</pre>
+[note]<a href="https://github.com/diydrones/PX4Firmware">PX4Firmware</a>, <a href="https://github.com/diydrones/PX4NuttX">PX4NuttX</a> and <a href="https://github.com/diydrones/uavcan">uavcan</a> are automatically imported as <a href="http://dev.ardupilot.com/wiki/git-submodules/">Git Submodules</a> when you build a vehicle.[/note]
+</li>
+
+
+	<li>Build the firmware by entering one of the following commands:
+
+<table>
+<tr><td><code>make px4-v2</code></td><td>Build the Pixhawk2/Pixhawk firmware (identical) for a quad</td></tr>
+<tr><td><code>make px4-v2-hexa</code></td><td>Build the Pixhawk firmware for a hexacopter. 
+    # Other supported suffixes include "octa", "tri" and "heli". 
+    # More can be found in "mk/tagets.mk" under FRAMES</td></tr>
+<tr><td><code>make px4</code></td><td>Build both PX4 and PixHawk firmware for a quadcopter</td></tr>
+<tr><td><code>make clean</code></td><td>"clean" the ardupilot directory</td></tr>
+<tr><td><code>make px4-clean</code></td><td>"clean" the PX4Firmware and PX4NuttX directories so the next build will completely rebuild them</td></tr>
+<tr><td><code>make px4-v2-upload</code></td><td>Build and upload the Pixhawk firmware for a quad (i.e. no need to do step #7 below)</td></tr>
+</table>
+The firmware will be created in the <strong>ArduCopter</strong> directory with the <strong>.px4</strong> file extension, ready to load onto the Pixhawk. For example if you build for px4-v2, <strong>ArduCopter-v2.px4</strong> will be created</li>
+
+	<li>Occasionally you should pull <em>PX4Firmware</em> and <em>PX4NuttX</em> updates. To make sure it compiles correctly, run the clean option in make:
+<pre>make px4-clean
+make px4-[frame type]</pre>
+
+The available frame types are: quad, tri, hexa, y6, octa, octa-quad, hell.
+</li>
+	<li>To make and upload to your vehicle do:
+<pre>make px4-quad-upload</pre></li>
+</ol>
+
+

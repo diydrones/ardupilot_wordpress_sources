@@ -1,0 +1,373 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: making-a-mavlink-wifi-bridge-using-the-raspberry-pi 
+title: Making a Mavlink WiFi bridge using the Raspberry Pi 
+id: 4737 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[note]This document is still a work in progress[/note]
+
+
+
+<h1>Overview</h1>
+
+This page will show you how to setup a Raspberry Pi (RPi) as a gateway to a 3DR Telemetry Radio. This will allow you to connect a computer or tablet via WiFi to the Raspberry Pi, and the Raspberry Pi will in turn forward the communication to a drone through a telemetry link.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/Mavlink_Wifi_Bridge.jpg"><img class="aligncenter size-large wp-image-4765" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/Mavlink_Wifi_Bridge-1024x477.jpg" alt="Mavlink_Wifi_Bridge" width="584" height="272" /></a>
+
+To accomplish this tutorial you will need the following items:
+<ul>
+	<li>Raspberry Pi with SD Card</li>
+	<li>A compatible Wifi dongle (not all dongles support AP mode)</li>
+	<li>3DR Telemetry Radio</li>
+	<li>A vehicle to connect to</li>
+</ul>
+If you don't want to mess around all the configuration steps described here you can also just go to the bottom of the page and download an SD Card image that you can load as described in the section <a href="http://dev.ardupilot.com/?post_type=wiki&amp;p=4737&amp;preview=true#Getting_the_Raspberry_Pi_up_and_running_with_Raspbian">Getting the Raspberry Pi up and running with Raspbian</a>. Just use the image provided at the bottom instead of the image from the Raspberri Pi Website.
+
+
+
+<h1>Getting the Raspberry Pi up and running with Raspbian</h1>
+
+First we need to get the Raspberry Pi up and running with Debian. This is accomplished by downloading the SD Card image from the Raspberry Pi website, and loading it into an SD Card.
+<ol>
+	<li>Go to the <a href="http://www.raspberrypi.org/downloads/">Raspberry Pi downloads page</a> and download the latest raspbian image (as of this writing: <a href="http://downloads.raspberrypi.org/raspbian_latest">2014-12-24-wheezy-raspbian.zip</a>)</li>
+	<li>Follow the guide specific to your operating system to prepare the SD Card with the image you downloaded:
+<ul>
+	<li><a href="http://www.raspberrypi.org/documentation/installation/installing-images/linux.md">Linux</a></li>
+	<li><a href="http://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a></li>
+	<li><a href="http://www.raspberrypi.org/documentation/installation/installing-images/mac.md">OS X</a></li>
+</ul>
+</li>
+	<li>Once you have the SD Card ready insert it into the RPi and boot it up</li>
+	<li>The first time you boot the RPi it will load the Raspberry Pi Configuration Utility, setup the following:
+<ul>
+	<li>Expand the file system (This allows you to use all of the free space on the SD Card)</li>
+	<li>Set your timezone</li>
+	<li>Make sure the boot option is set to boot to console</li>
+	<li>Enable SSH under "Advanced Options"</li>
+	<li>Finish the setup and reboot</li>
+</ul>
+</li>
+</ol>
+You now have the Raspberry Pi ready to setup MavProxy and to set it up as an access point so you can use it to create a local WiFi network. To avoid having to continue using a keyboard and monitor it is convenient to connect to the RPi using an SSH client. You can follow the steps on the page <a href="http://dev.ardupilot.com/wiki/raspberry-pi-via-mavlink/#Connecting_to_RPi_with_an_SSHTelnet_client" target="_blank">"Connecting to RPi with an SSH/Telnet client"</a> in order to achieve this.
+
+
+
+<h1>Setting up the Raspberry Pi as an access point</h1>
+
+Now we need to setup the the software that will allow the RPi to act as an access point. For the following steps make sure you have access to the internet from Raspberry Pi, this is needed in order to download the software packages. The easiest way to achieve this is to connect the RPi to an Ethernet connection.
+<h2>Installing hostapd and a dhcp server</h2>
+Now connect to the RPi through an SSH connection and type the following commands:
+<pre>sudo apt-get update
+sudo apt-get install hostapd isc-dhcp-server</pre>
+These commands install the software needed to setup the RPi as an access point, and to allow it to assign IP addresses to the computers that connect to it (DHCP Server). After you run these commands you may see the following lines in the output:
+<pre>[FAIL] Starting ISC DHCP server: dhcpd[....] check syslog for diagnostics. ... failed!
+ failed!</pre>
+Don't worry, this does not affect the functionality.
+
+Now we need to configure these two packages, first we will configure the DHCP Server
+<h2>Configure the DHCP Server</h2>
+The following steps will guide you through the configuration of the DHCP server. Next we need to edit the file <strong>/etc/dhcp/dhcpd.conf</strong>, this files allows the computers connected through WiFi to automatically get IP Addresses, DNS, and other information to allow them to connect through the RPi.
+<pre> sudo nano /etc/dhcp/dhcpd.conf</pre>
+Find the following lines and comment them out by adding a # in the beginning of the line:
+<pre>option domain-name "example.org";
+option domain-name-servers ns1.example.org, ns2.example.org;</pre>
+Make them so they look like this:
+<pre>#option domain-name "example.org";
+#option domain-name-servers ns1.example.org, ns2.example.org;</pre>
+In the same file, find the following lines and uncomment the "authoritative" line by removing the # at the beginning of the line:
+<pre># If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+#authoritative;</pre>
+Make the line so it looks like this:
+<pre># If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+authoritative;</pre>
+At the bottom of this same file, add the following lines:
+<pre>subnet 192.168.42.0 netmask 255.255.255.0 {
+	range 192.168.42.10 192.168.42.50;
+	option broadcast-address 192.168.42.255;
+	option routers 192.168.42.1;
+	default-lease-time 600;
+	max-lease-time 7200;
+	option domain-name "local";
+	option domain-name-servers 8.8.8.8, 8.8.4.4;
+}</pre>
+These lines configure the network address DNS servers and gateway information that the RPi will assign to the clients connecting to it. If you will use the RPi to bridge to another network through the ethernet connection, it is important that this address range does not conflict with the network the RPi is connected to through the ethernet connection. In other words, if your local network uses the address range 192.168.42.xx you need to select a different address range. Also the router address 192.168.42.1 will be the ip address of the RPi (we will set that up later on).
+
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+
+Now we will edit the file <strong>/etc/default/isc-dhcp-server</strong> in order to tell the server on what network interface it will be active. Type the following command:
+<pre>sudo nano /etc/default/isc-dhcp-server</pre>
+Find the line that says
+<pre>interfaces=""</pre>
+and change it to:
+<pre>interfaces="wlan0"</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+<h2>Setup the wlan0 interface as a static ip address</h2>
+We now have to setup the wireless interface on the RPi to have its own fixed IP address and set it up to take incoming connections, type the following commands:
+<pre>sudo ifdown wlan0
+sudo nano /etc/network/interfaces</pre>
+change the file so it matches the following:
+<pre>auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+
+iface wlan0 inet static
+  address 192.168.42.1
+  netmask 255.255.255.0
+
+#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+#iface default inet dhcp</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+
+This sets up a static IP address (192.168.42.1) to the wireless lan interface (wlan0). This configuration however will not take effect until the next reboot, so if you want to immediately assign this address you need to type the following:
+<pre>sudo ifconfig wlan0 192.168.42.1</pre>
+<h2>Configure the Access Point Details</h2>
+The next steps will set up our wireless network with a name and password, and will configure the hardware adapter to be used in access point (AP) mode. It is important to note that not all WiFi dongles support AP mode, please make sure that the dongle you are using supports this mode. <em>This has only been tested using the WiFi dongle sold by Adafruit. Check this with Craig</em>
+The configuration file we need to change is <strong>/etc/hostapd/hostapd.conf</strong>
+
+Type the following command:
+<pre>sudo nano /etc/hostapd/hostapd.conf</pre>
+This will create a new file. If there is already a file with that name already, change the contents to the lines below, otherwise add the following lines to the file:
+<pre>interface=wlan0
+driver=rtl871xdrv
+ssid=MavStation
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=MavLink_1 
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+
+This is telling the access point software to use the <strong>wlan0</strong> interface, and to setup a network called <strong>MavStation</strong> with the pass phrase <strong>MavLink1</strong>. Another important part of this file is the line:
+<pre>driver=rtl871xdrv</pre>
+If you are using a different dongle than the one we are using you may need to change this line to use a driver suitable for your dongle, you may want to try:
+<pre>driver=nl80211</pre>
+Make sure the file has no extra spaces or tabs at the beginning and ends of the lines, this file is very sensitive to this.
+
+Now we must tell the software to use the configuration file we just created. To do this we need to modify the file <strong>/etc/default/hostapd</strong>
+Type the following command:
+<pre>sudo nano /etc/default/hostapd</pre>
+Find the line that contains <strong>#DAEMON_CONF=""</strong> and change it to the following:
+<pre>DAEMON_CONF="/etc/hostapd/hostapd.conf"</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+<h2>Configure Network Address Translation (NAT)</h2>
+Setting up NAT allows the WiFi clients of the RPi to have their data tunneled through the ethernet connection on the RPi. To do this type the following command:
+<pre>sudo nano /etc/sysctl.conf</pre>
+Find the lines:
+<pre># Uncomment the next line to enable packet forwarding for IPv4
+#net.ipv4.ip_forward=1</pre>
+and uncomment it like this:
+<pre># Uncomment the next line to enable packet forwarding for IPv4
+net.ipv4.ip_forward=1</pre>
+This change will not be applied until the next boot, so to apply it immediately run the following command:
+<pre>sudo sh -c "echo 1 &gt; /proc/sys/net/ipv4/ip_forward"</pre>
+Now run the following commands to setup the routing tables between the wireless lan interface and the ethernet port:
+<pre>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT</pre>
+To check your changes to the tables you can use the following commands:
+<pre>sudo iptables -t nat -S
+sudo iptables -S</pre>
+In order to restore this changes after boot we need to save the configuration to a file so that we can use that later to restore the configuration. Type the following:
+<pre>sudo sh -c "iptables-save &gt; /etc/iptables.ipv4.nat"</pre>
+We now need to update the interface file again, type the following command:
+<pre>sudo nano /etc/network/interfaces</pre>
+And add the following line to the end of the file:
+<pre>up iptables-restore &lt; /etc/iptables.ipv4.nat</pre>
+The complete file should now look like this:
+<pre>auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+
+iface wlan0 inet static
+  address 192.168.42.1
+  netmask 255.255.255.0
+
+#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+#iface default inet dhcp
+
+up iptables-restore &lt; /etc/iptables.ipv4.nat</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+
+We are now almost ready to run the access point software. Before we do that though we need to update it to a version that supports our network adapter.
+<h2>Update hostapd</h2>
+The hostapd version installed by apt-get does not fully support the WiFi dongle we are using so we need to update it to a later version. Lets get the new version of hostapd by typing the follwing command:
+<pre>wget http://adafruit-download.s3.amazonaws.com/adafruit_hostapd_14128.zip</pre>
+Now lets unzip the files, swap them with the old version, and fix the permissions so we are able to run the software:
+<pre>unzip adafruit_hostapd_14128.zip
+sudo mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG
+sudo mv hostapd /usr/sbin
+sudo chmod 755 /usr/sbin/hostapd
+</pre>
+<h2>Setting up a daemon</h2>
+With everything installed and ready to go, we now have to set the system up as a program that will start when the system boots up. This is called a <strong>daemon</strong>. Type the following commands:
+<pre>sudo service hostapd start 
+sudo service isc-dhcp-server start</pre>
+You should now see the following output if everything runs well:
+<pre>pi@MavStation ~ $ sudo service hostapd start
+[ ok ] Starting advanced IEEE 802.11 management: hostapd.
+pi@MavStation ~ $ sudo service isc-dhcp-server start
+[ ok ] Starting ISC DHCP server: dhcpd.
+</pre>
+Now in order to set the services up so they run everytime the RPi boots, type the following:
+<pre>sudo update-rc.d hostapd enable 
+sudo update-rc.d isc-dhcp-server enable</pre>
+One last step is to remove WPASupplicant so it does not interfere with the Access Point, type the following commands:
+<pre>sudo mv /usr/share/dbus-1/system-services/fi.epitest.hostap.WPASupplicant.service ~/</pre>
+And finally reboot your RPi by typing the following:
+<pre>sudo reboot</pre>
+Your system is now setup as an access point. You should now see a WiFi Network called <strong>MavStation</strong> and you should be able to connect by using the pass phrase <strong>MavLink_1</strong> (if you chose to keep the same name and pass phrase)
+<h2>Important Considerations!</h2>
+You must make sure that the RPi is receiving enough power to handle both the WiFi Dongle and the Ethernet connection in case you want to use it as an router to another network. I had success powering it up with a 2A power supply.
+If you do not have enough power you may be able to connect to it, but when you try to browse a web page it may drop the connection and kill the network interfaces. Check /var/log/syslog for this type of entries:
+<pre>Dec 27 12:37:17 MavStation kernel: [  261.984400] ERROR::dwc_otg_hcd_urb_enqueue:505: Not connected
+Dec 27 12:37:18 MavStation dhclient: receive_packet failed on eth0: Network is down
+Dec 27 12:37:22 MavStation ntpd[2081]: Deleting interface #2 eth0, 10.0.1.21#123, interface stats: received=11, sent=16, dropped=0, active_time=237 secs</pre>
+Also if you are able to see the Wireless network but can't connect to it, that may also mean that the WiFi channel may be conflicting with another network. Try changing the channel on the file <strong>/etc/hostapd/hostapd.conf</strong>.
+<pre>channel=x</pre>
+Finally make sure that your WiFi dongle supports Access Point mode.
+
+
+
+<h1>Installing and configuring MavProxy</h1>
+
+With the RPi now working as an access point, we now need to configure it to connect to a drone. To accomplish this we will install <a href="http://dronecode.github.io/MAVProxy/html/index.html">MavProxy</a>, a minimalist but full featured ground control station.
+
+[tip]The official instructions to <a href="http://dronecode.github.io/MAVProxy/html/getting_started/download_and_installation.html#linux">install MAVProxy on Linux are here</a>.[/tip]
+
+First install some other modules that are needed. Type the following commands:
+<pre>sudo apt-get update
+sudo apt-get install python-opencv python-wxgtk python-pip python-dev
+</pre>
+Then use <em>pip</em> to install MavProxy and all its dependencies
+<pre>sudo pip install MAVProxy</pre>
+In order to allow serial connections to the RPi we need to disable the console and login prompt on the serial port. To do this we have to edit the file <strong>/etc/inittab</strong>. Type the following:
+<pre>sudo nano /etc/inittab</pre>
+Now go to the bottom of the file and look for the following lines:
+<pre>#Spawn a getty on Raspberry Pi serial line
+T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100</pre>
+and comment out the line like this:
+<pre>#Spawn a getty on Raspberry Pi serial line
+#T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong>
+
+Now we should be ready to test the connection to the drone.
+
+
+
+<h1>Connecting a 3DR Telemetry Radio to a Raspberry Pi</h1>
+
+[tip]The instructions here show how to connect the RPi using the 3DR Radio via a serial port. It is far simpler to connect to the radio via its USB port. The <a href="#configuring_mavproxy_to_always_run_and_listen_to_incoming_connections">configuration</a> is the same except that you need to specify <code>/dev/ttyUSB0</code> (USB connection) rather than <code>/dev/ttyAMA0</code> (UART).[/tip]
+
+In order to communicate with a vehicle we will use the serial connection on the RPi. The serial port UART goes to pins 8 (TXD) and 10 (RXD) on the P1 header. We also need to provide power to the 3DR Radio by wiring pins 1 (+5V) and pin 6 (GND).
+
+The 3DR Radio V2 pins 1 (+5V), 2 (RXD), 3 (TXD) and 6 (GND) are the corresponding pins to wire. Remember that the TXD on the Raspberry Pi needs to be wired to the RXD on the 3DR Radio.
+
+You can find more information on the pin out for the Raspberry Pi <a href="http://www.raspberrypi.org/pinout-for-gpio-connectors/" target="_blank">HERE</a>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/Screen-Shot-2014-12-28-at-12.48.45-AM.png"><img class="alignnone size-full wp-image-3813" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/Screen-Shot-2014-12-28-at-12.48.45-AM-1024x780.png" alt="RaspberryPi_3DRRadio_wiring" width="1024" height="780" /></a>
+
+
+
+<h1>Testing the MavProxy Connection</h1>
+
+Now we are ready to test the communication. To do this follow the instructions on the section <a href="http://dev.ardupilot.com/wiki/raspberry-pi-via-mavlink/#Testing_the_connection" target="_blank">"Testing the Connection"</a> in the Raspberry Pi via Mavlink page.
+
+
+
+<h1>Configuring MavProxy to always run and listen to incoming connections</h1>
+
+The next step to get this working is to setup MavProxy to run automatically with the RPi boots up. To do this MavProxy has a daemon mode that works similarly to the above configuration for the DHCP server. In order to set it up we will use a script and modify it to work with the RPi.
+
+<ol>
+	<li>Download the <a href="https://raw.githubusercontent.com/dronekit/dronekit-python/3222b2cdb71b8b4c5b924ee28fc5d3529be00e67/scripts/mavgateway">mavgateway file</a> (from Github) and then copy it over to to the RPi.</li>
+
+
+	<li>We now have to edit the file and change some aspects of it to make it compatible. Lets edit the file:
+<pre>nano mavgateway</pre></li>
+
+	<li>To setup the correct parameters to start MavProxy find the following line:
+<pre>DAEMON_ARGS="--master=/dev/ttyMFD1,115200 --out=udpin:0.0.0.0:14550 --daemon"</pre>
+<ul>
+	<li>If you're using a serial connection change it to this:
+<pre>DAEMON_ARGS="--master=/dev/ttyAMA0,57600 --out=udpin:0.0.0.0:14550 --daemon"</pre></li>
+	<li>If you're using a USB connection change it to this:
+<pre>DAEMON_ARGS="--master=/dev/ttyUSB0,57600 --out=udpin:0.0.0.0:14550 --daemon"</pre></li>
+</ul></li>
+
+
+
+
+
+	<li>Next we need to change the user that starts MavProxy, find this line:
+<pre>start-stop-daemon --start --background --make-pidfile --chuid edison --chdir /tmp --quiet --pidfile $PIDFILE --exec $DAEMON -- \</pre>
+And change it to:
+<pre>start-stop-daemon --start --background --make-pidfile --chuid pi --chdir /tmp --quiet --pidfile $PIDFILE --exec $DAEMON -- \</pre>
+Save the file by typing in <strong>Control-X</strong> then <strong>Y</strong> then <strong>return</strong></li>
+
+
+	<li>Now we need to move the file and set the correct permissions. Type the following commands:
+<pre>sudo mv mavgateway /etc/init.d/mavgateway
+sudo chown root:root mavgateway
+sudo chmod 755 mavgateway</pre></li>
+
+	<li>We are now ready to setup the daemon to run every time the RPi boots type this command:
+<pre>update-rc.d mavgateway defaults</pre></li>
+	<li>Reboot the RPi:
+<pre>sudo reboot</pre></li>
+</ol>
+
+
+
+
+
+
+<h1>Connecting to the MavGateway</h1>
+
+<h2>MavProxy</h2>
+Using MavProxy (replace <strong>xxx.xxx.xxx.xxx</strong> with the IP Address of the RPi):
+<pre>mavproxy.py –master=udpout:xxx.xxx.xxx.xxx:14550</pre>
+<h2>Using Mission Planner</h2>
+Using the latest beta version (1.3.17.1 build 1.1.5478.13250) you can now initiate a UDP connection. To do this select <strong>UDPCI</strong> from the connection type menu:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-20_01.png"><img class="alignnone size-full wp-image-4762" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-20_01.png" alt="2014-12-30_20-55-20_01" width="390" height="175" /></a>
+
+After that click connect, you will be presented with a screen to enter the IP Address of the RPi:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-21.png"><img class="alignnone size-full wp-image-4763" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-21.png" alt="2014-12-30_20-55-21" width="316" height="147" /></a>
+
+And enter the UDP Port on the next screen:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-21_01.png"><img class="alignnone size-full wp-image-4764" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/2014-12-30_20-55-21_01.png" alt="2014-12-30_20-55-21_01" width="316" height="146" /></a>
+<h2>Using APM Planner -- TBD</h2>
+<h2>Using a Tablet -- TBD</h2>
+
+
+
+<h1>SD Card Image file</h1>
+
+If you don't want to configure your own RPi, you can download this image file and restore it to an SD Card to use it on your own RPi from this <a title="SD Card Image" href="http://firmware.diydrones.com/Tools/MavStation/" target="_blank">link</a>.
+
+To restore <strong>this image</strong> to an SD Card you will need an SD Card with at least 16GB of space, just follow the same steps described in the section <a href="http://dev.ardupilot.com/wiki/making-a-mavlink-wifi-bridge-using-the-raspberry-pi/#Getting_the_Raspberry_Pi_up_and_running_with_Raspbian" target="_blank"> "Getting_the_Raspberry_Pi_up_and_running_with_Raspbian"</a>, but use this image instead of the OS image.
+
+
+
+<h1>References</h1>
+
+<a href="https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software">https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software</a>
+<a href="http://sirlagz.net/2013/02/10/how-to-use-the-raspberry-pi-as-a-wireless-access-pointrouter-part-3b/">http://sirlagz.net/2013/02/10/how-to-use-the-raspberry-pi-as-a-wireless-access-pointrouter-part-3b/</a>

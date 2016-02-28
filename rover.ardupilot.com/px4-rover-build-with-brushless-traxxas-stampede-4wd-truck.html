@@ -1,0 +1,81 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: px4-rover-build-with-brushless-traxxas-stampede-4wd-truck 
+title: PX4 Rover Build with Brushless Traxxas Stampede 4WD Truck 
+id: 4508 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to add Rover running on a PX4 to the <a href="https://traxxas.com/products/models/electric/67086stampede4x4vxl">Brushless Traxxas Stampede four wheel drive truck</a>.
+<!-- more -->
+
+
+
+<h1>Overview</h1>
+
+The <em>Brushless Traxxas Stampede four wheel drive truck</em> makes an excellent choice for a Rover. 
+
+The truck's ESC provides forward and reverse so some special considerations are necessary.
+
+<h1>Wiring diagram</h1>
+
+The wiring diagram below illustrates a method for directly powering the steering servo from the Stampede's ESC.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/PX4IOWiringRoverEscBec.jpg"><img class="alignnone size-full wp-image-2582" alt="PX4IOWiringRoverEscBec" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/PX4IOWiringRoverEscBec.jpg" width="794" height="374" /></a>
+
+
+<h1>No solder connection of ESC and steering servo power</h1>
+
+The photograph below illustrates a no solder method for connecting the ESC and steering servo power wire:
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4ServoPower1.jpg"><img class="alignnone size-full wp-image-2583" alt="RoverPX4ServoPower1" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4ServoPower1.jpg" width="1774" height="1164" /></a>
+
+<ul>
+	<li>Remove the power pin sockets from the end of the connectors that plug into the PX4 on the servo and ESC cables.</li>
+	<li>Strip them loose of the 3 wire cables and connect them with a small piece of wire or (wire wrap pin).</li>
+	<li>Put heat shrink tubing over the joined sockets and shrink it on with a heat gun. (Shown before connection).</li>
+</ul>
+
+
+<h1>RC Setup</h1>
+
+This truck uses the FRSky Delta 8 multi-protocol receiver which is compatible with Hitec and Futaba RC transmitters. The Delta 8 provides the required PPM-Sum communication with the PX4 using our own Futaba or Hitec transmitter.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4Stampede2.jpg"><img class="alignnone size-full wp-image-2587" alt="RoverPX4Stampede2" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4Stampede2.jpg" width="2314" height="1468" /></a></li>
+
+
+<h1>Mounting setup</h1>
+
+The 1/8" 6061 aluminum plate is excessive (and required heavier springs on the suspension) but functions well.
+<ul>
+	<li>In addition to the PX4 and receiver, the safety button and buzzer have also been mounted to the plate.</li>
+	<li>Slightly longer screws were used to install the plate and body mounting studs (a very simple installation).</li>
+	<li>The receiver is mounted with heavy duty Velcro and the PX4 will be remounted with Kyosho Zeal gel squares.</li>
+</ul>
+
+
+Cutouts for safety button access and the buzzer can be seen in the truck's body below.
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4Stampede1.jpg"><img class="alignnone size-full wp-image-2588" alt="RoverPX4Stampede1" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/RoverPX4Stampede1.jpg" width="2336" height="1568" /></a>
+
+
+This truck has reverse and it transitions at mid throttle PWM so some special setup and precautions are required.
+<ul>
+	<li>I set up my Hitec Aurora 9 transmitter so throttle (channel 3) was mapped to my right (self centering) elevator stick.</li>
+	<li>And since I didn't want to steer on the same stick as my throttle I mapped steering (channel 1) to the left rudder stick.</li>
+</ul>
+
+
+
+<h1>Problems</h1>
+
+There are still problems with this setup:
+<ul>
+	<li>Currently throttle reversing is not directly supported and when anything goes wrong the PX4 sets throttle PWM to zero.</li>
+	<li>Of course this results in the truck being set to full speed in reverse.</li>
+	<li>I have to pick up the truck and unplug the battery when this occurs (a very unsatisfactory situation).</li>
+	<li>I am trying to get a firmware fix for this which resets to mid throttle position rather than zero.</li>
+	<li>I am also hoping to be able to get functional reversing made available in the auto modes as well.</li>
+</ul>

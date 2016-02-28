@@ -1,0 +1,120 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building_with_make 
+title: Building ArduPilot for APM2.x with Make 
+id: 215 
+menu_order: 90 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to build the code for APM2.x with Make on Windows, Mac and Linux.<!--more-->
+
+[warning]Copter 3.3 firmware (and later) and builds after Plane 3.4.0 no longer fit on APM boards. Plane, Rover and AntennaTracker builds can still be installed at time of writing but you can no longer build APM2.x off the master branch (you will need to build off a supported release branch).
+&nbsp;
+The last Copter firmware that can be built on APM 2.x <a title="DIY Drones Firmware" href="http://ardupilot.com/downloads/?did=121">can be downloaded from here</a>.
+[/warning]
+
+<h1>Overview</h1>
+The preferred way for developers to build APM applications is using the Makefile system distributed with the repository. This Makefile system is the canonical way to build APM. APM applications can no longer be built with the standard Arduino IDE, as the APM build requires the Arduino IDE base libraries to be excluded from the build.
+
+For developers who would prefer not to use make, a modified Arduino IDE which emulates the custom APM build process is available.
+
+
+
+<h1>Requirements</h1>
+The APM makefiles will work out of the box for Mac OS and Linux users. Windows users can use the makefiles via a Unix compatibility system such as Mingw or Cygwin.
+
+
+
+<h1>Mac OS</h1>
+Mac OS system requirements are:
+<ul>
+	<li>An Arduino install of version 1.0 or greater. The Arduino installation provides an AVR compiler.</li>
+	<li>Apple Developer Tools (a free download from Apple). These provide command line utilities including GNU Make.</li>
+</ul>
+Arduino should be installed in a location that is indexed by Spotlight.
+
+
+
+<h1>Linux</h1>
+Follow the instructions on <a href="building-the-code-onlinux">this page</a> to build the code with Linux. Linux system requirements vary depending on the distribution. The following are essential:
+<ul>
+	<li>The GNU sed utility.</li>
+	<li>The GNU make utility, sometimes referred to as 'gmake'.</li>
+	<li>The GNU awk utility, often referred to as 'gawk'. <strong>Warning:</strong> Many Linux distributions do not come with 'gawk' by default. You can test for the presence of this tool with the 'which gawk' command.</li>
+	<li>The AVR-GCC toolchain.</li>
+</ul>
+&nbsp;
+
+There are various ways to get all of these utilities for your system. You may consult <a href="http://playground.arduino.cc/learning/linux">Arduino's Linux guide</a> for instructions on installing the AVR toolchain under Linux.
+
+
+
+<h1>Windows</h1>
+
+Follow the instructions on <a href="building-ardupilot-for-apm2-x-on-windows-with-make">Building ArduPilot for APM2.x on Windows with Make</a>. These instructions make use of the <em>PX4 Toolchain</em>'s development environment.
+
+
+
+<h1>Preparing</h1>
+Locally clone the APM repository from <a href="https://github.com/diydrones/ardupilot">https://github.com/diydrones/ardupilot</a>
+
+<pre>git clone https://github.com/diydrones/ardupilot.git</pre>
+
+
+<h1>Building</h1>
+
+To build a sketch for the default hardware platform you specified in <strong>config.mk</strong>, you can invoke <em>make</em> with no arguments in a sketch directory:
+<pre>$ cd ardupilot/ArduCopter
+$ make</pre>
+
+The output of the build is, by default, located in <strong>$TMPDIR/_sketchname_.build</strong>
+
+<pre>$ make
+%% param_table.o
+%% ArduCopter.cpp
+%% ArduCopter.o
+...
+%% ArduCopter.elf
+%% ArduCopter.eep
+%% ArduCopter.hex</pre>
+
+<h1>Uploading</h1>
+
+If you have configured the `PORT` variable properly, the `upload` target will use `avrdude` to upload a built APM application to AVR based platforms.
+<pre>$ cd ardupilot/Plane
+$ make upload</pre>
+For PX4 platforms, the `px4-upload` target will use the PX4 bootloader to perform an upload.
+
+
+
+<h1>Troubleshooting</h1>
+The build process itself attempts to diagnose problems that would prevent a successful build outside of code errors. It may emit the following diagnostics:
+
+<strong>WARNING: More than one copy of Arduino was found, using ...(Mac OS only)</strong>
+
+Spotlight found more than one copy of Arduino installed on your system. Check the path that is printed to ensure that the correct version is being used. To avoid this problem, either remove old versions of Arduino or specify the ARDUINO option when invoking the build system. Typically the installation that will be chosen is the one that was most recently launched.
+
+<strong>ERROR: must set BOARD before including this file.</strong>
+
+The sketch Makefile has not defined the BOARD variable. This is normally set to `atmega2560` for APM2.x builds.
+
+<strong>ERROR: Spotlight cannot find Arduino on your system.(Mac OS only)</strong>
+
+Arduino is not installed, or it is installed in a location that is not being indexed by Spotlight. You can either enable Spotlight for the location where Arduino is installed, or specify the location explicitly by setting the ARDUINO option as described above. Note that Spotlight indexing may take some time, so enabling it for the location containing Arduino may not immediately correct this issue.
+
+<strong>ERROR: Cannot find Arduino on this system</strong>
+
+(Linux and Windows only)Arduino was not found in one of the standard locations. Either move Arduino to a standard location, or specify its current location with the ARDUINO option in the <strong>config.mk</strong> file
+
+<strong>ERROR: cannot find the compiler tools anywhere on the path ...</strong>
+
+The compiler and related tools cannot be found. For Mac OS and Windows the tools are normally part of Arduino and this message indicates that the Arduino installation is damaged.
+
+For Linux systems, this means that the AVR tools are not installed in a standard location. Either set the TOOLPATH option to point to the directory containing the AVR tools, or install them in a standard location. Normally installing Arduino on a Linux system will result in a correct installation of the AVR tools.
+
+<strong>ERROR: cannot find gawk - you may need to install GNU awk</strong>
+
+(Linux and Windows only)The GNU awk utility is required, but it has not been installed or cannot be found. Check that `gawk --version` works at the command promp. You may need to specify its location explicitly with the AWK option.

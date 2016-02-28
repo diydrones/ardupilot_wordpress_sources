@@ -11,76 +11,111 @@ END METADATA
 -->
 This article describes how to transmit vehicle information from the autopilot and display it on an FrSky transmitter ("FrSky Telemetry").
 <!--more-->
-
-
-
-
 <h1>Overview</h1>
-An FrSky RC transmitter will not be able to display vehicle telemetry information "out of the box" because ArduPilot normally outputs data using the MAVLink protocol, while FrSky uses its own non-MAVLink protocol.
-
 This article explains a number of approaches for getting information from the autopilot to an FrSky transmitter (including the Taranis).
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg"><img class="alignnone size-full wp-image-11140" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/FRSkyTaranis.jpg" alt="FRSkyTaranis" width="560" height="372" /></a>
-
-
-
-<h1>Software/hardware solution</h1>
+<h1>Native FrSky Telemetry Support</h1>
 ArduPilot provides a driver that can directly output the FrSky protocol. This section explains how you can connect and configure a Pixhawk to communicate with a D-Receiver or X-Receiver.
 
-[note]<ul>
+[note]
+<ul>
 	<li>This feature is only officially supported on the Pixhawk (running AC3.2 or higher) but there is a <a href="http://diydrones.com/forum/topics/amp-to-frsky-x8r-sport-converter" target="_blank">DIY solution for the APM2.x here</a>.</li>
 	<li>These instructions are largely based upon information from the <a href="http://pixhawk.org/peripherals/telemetry/frsky" target="_blank">Pixhawk website</a>.</li>
-        <li>These instructions were written and tested for OpenTX 2.0.x. They have been re-validated against OpenTx 2.1.3 and AC 3.3rc12.</li>
-</ul>[/note]
-
+	<li>These instructions were written and tested for OpenTX 2.0.x. They have been re-validated against OpenTx 2.1.3 and AC 3.3.2.</li>
+</ul>
+[/note]
 
 
 <h2>D-Receiver setup</h2>
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png"><img class="alignnone size-full wp-image-2583" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png" alt="Telemetry_FrSky_Pixhawk" width="1128" height="592" /></a>
+<img class="" src="http://www.craftandtheoryllc.com/wp-content/uploads/2015/12/D4R-cable-connected.jpg" alt="" width="500" height="500" />
 
 For the D-Receiver setup you will need:
 <ul>
-	<li>FrSky D telemetry capable receiver/transmitter set <a href="https://store.3drobotics.com/products/copy-of-rtf-flysky-fs-th9x-rc">like this one from 3DRobotics</a>, OR</li>
-	<li>a FrSky D telemetry capable receiver such as the <a href="http://www.hobbyking.com/hobbyking/store/__24788__FrSky_D4R_II_4ch_2_4Ghz_ACCST_Receiver_w_telemetry_.html" target="_blank">FrSky D4R-II</a> (HobbyKing) and FrSky D telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
+	<li><strong>A FrSky D telemetry capable transmitter</strong>, such as such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
+	<li><strong>A FrSky D telemetry capable receiver</strong>, such as such as the <a href="http://www.hobbyking.com/hobbyking/store/__24788__FrSky_D4R_II_4ch_2_4Ghz_ACCST_Receiver_w_telemetry_.html" target="_blank">FrSky D4R-II</a> (HobbyKing)
+<ul>
+	[tip]FrSky D telemetry capable transmitter/receiver <em>sets</em> are available <a href="http://www.hobbyking.com/hobbyking/store/__67752__FrSky_2_4GHz_ACCST_TARANIS_X9D_PLUS_and_X8R_Combo_Digital_Telemetry_Radio_System_Mode_2_.html">like this one from HobbyKing</a>[/tip]</li>
+</ul>
+</li>
+	<li><strong>A cable</strong> to connect the Pixhawk to the D telemetry capable receiver (<a href="#d-receiver_cables">cable options are listed below</a>).</li>
+</ul>
+
+
+<h3>D-Receiver cables</h3>
+
+<h4>Craft and Theory Pixhawk to FrSky Telemetry Cable (D4R-II receiver)</h4>
+
+The <a href="http://www.craftandtheoryllc.com/product/pixhawk-to-frsky-telemetry-cable-d4r-ii-receiver/">Pixhawk to FrSky Telemetry Cable (D4R-II receiver)</a> from <em>Craft and Theory</em> is a cost effective "turnkey" cable solution. 
+
+[caption id="" align="alignnone" width="500"]<a href="http://www.craftandtheoryllc.com/product/pixhawk-to-frsky-telemetry-cable-d4r-ii-receiver/"><img class="" src="http://www.craftandtheoryllc.com/wp-content/uploads/2015/12/D4RPixhawkcable.jpg" alt="" width="500" /></a> Craft and Theory: Pixhawk to FrSky D4R-II receiver cable[/caption]
+
+
+<h4>DIY Cable for D receivers</h4>
+
+You can make your own cable using the following components:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk.png"><img class="alignnone wp-image-2583 size-large" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk-1024x537.png" alt="Telemetry_FrSky_Pixhawk" width="474" height="249" /></a>
+<ul>
 	<li>TTL-to-RS232 converter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=34" target="_blank">FrSky FUL-1</a> which is sold by many retailers <a href="http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR11.TRC1.A0.H0.Xfrsky+ful-1.TRS0&amp;_nkw=frsky+ful-1&amp;_sacat=0&amp;_from=R40" target="_blank">including these on ebay</a>.</li>
-	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
+	<li><a href="http://www.unmannedtechshop.co.uk/df13-6-position-connector-30cm/" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
 	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
 </ul>
 
 
 <h2>X-Receiver setup</h2>
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk-SPORT.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk-SPORT.png" alt="Telemetry_FrSky_Pixhawk-SPORT" width="1347" height="592" class="alignnone size-full wp-image-5143" /></a>
+<img class="" src="http://www.craftandtheoryllc.com/wp-content/uploads/2015/12/X4R-cable-connected.jpg" alt="" width="500" height="500" />
 
 For the X-Receiver setup you will need:
 <ul>
-	<li>FrSky X telemetry capable receiver such as the FrSky X4R, X6R or X8R .</li>
-	<li>FrSky X telemetry capable transmitter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
-	<li>TTL-to-RS232 converter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=34" target="_blank">FrSky FUL-1</a> which is sold by many retailers <a href="http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR11.TRC1.A0.H0.Xfrsky+ful-1.TRS0&amp;_nkw=frsky+ful-1&amp;_sacat=0&amp;_from=R40" target="_blank">including these on ebay</a>.</li>
-	<li>SPC cable such as <a href="http://www.frsky-rc.com/product/pro.php?pro_id=132"> SPC Cable </a></li>
-	<li><a href="http://store.3drobotics.com/products/df13-6-position-connector-15-cm" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
-	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
+	<li><strong>A FrSky X telemetry capable transmitter</strong>, such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=113" target="_blank">Taranis</a> which runs the <a href="https://github.com/opentx/opentx">OpenTX open source transmitter software</a>.</li>
+	<li><strong>A FrSky X telemetry capable receiver</strong>, such as the FrSky X4R, X4RSB, X6R or <a href="http://www.hobbyking.com/hobbyking/store/__41608__FrSky_X8R_8_16Ch_S_BUS_ACCST_Telemetry_Receiver_W_Smart_Port.html" target="_blank">X8R</a> (HobbyKing)
+<ul>
+	[tip]FrSky X telemetry capable transmitter/receiver <em>sets</em> are available <a href="http://www.hobbyking.com/hobbyking/store/__67753__FrSky_2_4GHz_ACCST_TARANIS_X9D_PLUS_and_X8R_Combo_Digital_Telemetry_Radio_System_Mode_1_.html">like this one from HobbyKing</a>[/tip]</li>
+</ul>
+</li>
+<li><strong>An X-receiver telemetry cable</strong> (<a href="#x-receiver_cables">cable options are listed below</a>).</li>
 </ul>
 
 
+<h3>X-Receiver cables</h3>
 
+<h4>Craft and Theory Pixhawk to FrSky Telemetry Cables</h4>
+
+Craft and Theory supply cost-effective all-in-one X-receiver cables with different connectors for the various X-receivers:
+<ul>
+	<li><a href="http://www.craftandtheoryllc.com/product/frsky-x4r-x4rsb-telemetry-cable-for-pixhawk/">Pixhawk to FrSky Telemetry Cable (X4R, X4RSB)</a>
+[caption id="" align="alignnone" width="500"]<a href="http://www.craftandtheoryllc.com/product/frsky-x4r-x4rsb-telemetry-cable-for-pixhawk/"><img class="" src="http://www.craftandtheoryllc.com/wp-content/uploads/2015/12/X4R-Pixhawk-cable1.jpg" alt="" width="500" /></a> Craft and Theory: Pixhawk to FrSky X4R/X4RSB receiver cable[/caption]
+</li>
+<li><a href="http://www.craftandtheoryllc.com/product/frsky-x6r-x8r-flvss-telemetry-cable-for-pixhawk/">Pixhawk to FrSky Telemetry Cable (X6R, X8R, FLVSS)</a>:
+[caption id="" align="alignnone" width="500"]<a href="http://www.craftandtheoryllc.com/product/frsky-x6r-x8r-flvss-telemetry-cable-for-pixhawk/"><img class="" src="http://www.craftandtheoryllc.com/wp-content/uploads/2015/12/X8R-Pixhawk-cable.jpg" alt="" width="500" /></a> Craft and Theory: Pixhawk to FrSky X6R and X8R receiver cable[/caption]
+</li>
+
+</ul>
+
+
+<h4>DIY Cable for X receivers</h4>
+You can make your own cable using the following components:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk-SPORT.png"><img class="alignnone wp-image-5143 size-large" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_Pixhawk-SPORT-1024x450.png" alt="Telemetry_FrSky_Pixhawk-SPORT" width="474" height="208" /></a>
+<ul>
+	<li>TTL-to-RS232 converter such as the <a href="http://www.frsky-rc.com/product/pro.php?pro_id=34" target="_blank">FrSky FUL-1</a> which is sold by many retailers <a href="http://www.ebay.com/sch/i.html?_trksid=p2050601.m570.l1313.TR11.TRC1.A0.H0.Xfrsky+ful-1.TRS0&amp;_nkw=frsky+ful-1&amp;_sacat=0&amp;_from=R40" target="_blank">including these on ebay</a>.</li>
+	<li>SPC cable such as <a href="http://www.frsky-rc.com/product/pro.php?pro_id=132"> SPC Cable </a></li>
+	<li><a href="http://www.unmannedtechshop.co.uk/df13-6-position-connector-30cm/" target="_blank">DF13 6 position connector</a> which will be cut and soldered to the TTL-to-RS232 converter</li>
+	<li><a href="http://www.molex.com/molex/products/family?key=picoblade&amp;channel=products&amp;chanName=family&amp;pageTitle=Introduction&amp;parentKey=wire_to_board_connectors" target="_blank">Molex Picoblade</a> 4 position telemetry wire which will be cut and soldered to the TTL-to-RS232 converter (should be included with the receiver)</li>
+</ul>
 <h2>FrSky Telemetry setup in Mission Planner</h2>
 To enable the FrSky Telemetry output on the Pixhawk's <em>Telem2</em> port, please connect with the <strong>Mission Planner</strong> and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set the <code>SERIAL2_PROTOCOL</code> parameter to "3" for D-Receiver and "4" for X-Receiver.
 [note]The information above is for ArduCopter 3.3. Prior to AC3.2 the values are 2 for D-Receiver and 3 for X-Receiver.[/note]
 [tip]<code>SERIAL2_BAUD</code> and <code>SERIAL1_BAUD</code> are not necessary for FrSky telemetry - it is a static value for D-Port (9600) and S-port (57600).[/tip]
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png"><img class="alignnone  wp-image-2531" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png" alt="Telemetry_FrSky_MPSetup" width="751" height="346" /></a>
-
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png"><img class="alignnone wp-image-2531" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/01/MP-Serial2_protocol.png" alt="Telemetry_FrSky_MPSetup" width="751" height="346" /></a>
 <h2>Transmitter set-up</h2>
-
 Please refer to the <a href="https://docs.google.com/document/d/1qlh09LzxtpPt7j_aqG8yiOu2yoYMzP9XA-PJA81rDJQ/edit#heading=h.36trni4byo5x" target="_blank">OpenTX manual</a> for how to control which values from the telemetry feed will be displayed on the transmitter's screen.
 
 [note]If upgrading to OpenTx 2.1 you will need to replace your OpenTx 2.0 configuration and "discover" your sensors. There are other minor "oddities" - for example T1 (flight mode) and Tt2 (number of sats) are both called TEMP (switching mode helps you identify which is which).[/note]
 
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup.png"><img class="alignnone size-medium wp-image-2533" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_FrSky_TXSetup-222x300.png" alt="Telemetry_FrSky_TXSetup" width="222" height="300" /></a>
-
-
 <h2>Protocol information</h2>
 This section outlines what values are being sent over the telemetry link, and how they are encoded.
 
@@ -227,23 +262,18 @@ Missing:
 This section contains hardware-only MAVLink to FrSky converter solutions.
 
 Please feel free to add your own solutions (<a href="https://github.com/diydrones/ardupilot/issues/new">or ask us to</a>).
-
-
 <h2>APM MavLink to FrSky SmartPort Converter (Airborne Projects)</h2>
 Airborne Project's <a href="https://www.airborneprojects.com/product/apm-mavlink-to-frsky-smartport-converter/">APM MavLink to FrSky SmartPort Converter</a> converts MAVLink messages to FrSkySmartPort format. It can directly be connected to the Taranis Radio. You only have to load the Taranis telemetry modules and configure in Mission Planner. No soldering required!
 
 [caption id="" align="alignnone" width="500"]<a href="https://www.airborneprojects.com/product/apm-mavlink-to-frsky-smartport-converter/"><img class="" src="https://www.airborneprojects.com/wp-content/uploads/2015/08/converter_1-500x500.jpg" alt="" width="500" height="500" /></a> Airborne Projects: APM MavLink to FrSky SmartPort Converter[/caption]
 
-The converter includes all needed cable. It features a hardware modified version of the Arduino Nano and be powered directly from the Taranis receiver.
+The converter includes all needed cables. It features a hardware modified version of the Arduino Nano and be powered directly from the Taranis receiver.
 
 For more information see the <a href="https://www.airborneprojects.com/wp-content/uploads/2015/08/GETTING-STARTED.pdf">QuickStart Guide</a> (www.airborneprojects.com).
-
-
 <h2>APM MavLink to FrSky SmartPort Converter (MavLink_FrSkySPort)</h2>
-
 The open source <a href="https://github.com/Clooney82/MavLink_FrSkySPort/wiki">MavLink_FrSkySPort</a> project uses the Teensy USB Development board to convert MAVLink messages to FrSkySmartPort format so that ArduPilot telemetry can be displayed on an FrSky transmitter.
 
-<a href="https://raw.githubusercontent.com/Clooney82/MavLink_FrSkySPort/s-c-l-v-rc-opentx2.1/images/Basic%20Wiring%20-%20Teensy3.jpg"><img src="https://raw.githubusercontent.com/Clooney82/MavLink_FrSkySPort/s-c-l-v-rc-opentx2.1/images/Basic%20Wiring%20-%20Teensy3.jpg" width="721" height="208" class="alignnone" /></a>
+<a href="https://raw.githubusercontent.com/Clooney82/MavLink_FrSkySPort/s-c-l-v-rc-opentx2.1/images/Basic%20Wiring%20-%20Teensy3.jpg"><img class="alignnone" src="https://raw.githubusercontent.com/Clooney82/MavLink_FrSkySPort/s-c-l-v-rc-opentx2.1/images/Basic%20Wiring%20-%20Teensy3.jpg" alt="" width="721" height="208" /></a>
 
 [note]This solution is one of the most versatile solutions available, and is the inspiration of many similar solutions (including <a href="#apm_mavlink_to_frsky_smartport_converter_airborne_projects">Airborne's abov</a>e). It is however not a "commercial" solution and does require some soldering.[/note]
 

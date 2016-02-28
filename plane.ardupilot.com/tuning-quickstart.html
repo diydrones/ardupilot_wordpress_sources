@@ -1,0 +1,60 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: tuning-quickstart 
+title: Tuning QuickStart 
+id: 8261 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article provides information to help you get started with airframe tuning. It includes an overview of the main steps, tools and concepts.
+<!-- more -->
+
+<h1>How to tune the airframe</h1>
+
+With the default PID settings, Plane will fly the majority of lightweight RC airframes (not full size, full speed airframes) safely, right out of the box. To fly well, with tight navigation and reliable performance in wind, you'll want to tune your autopilot. 
+
+The most important configuration is Roll and Pitch tuning, as this is essential for responsive and stable flight as well as effective navigation. The best way to tune the roll and pitch is to use <a href="automatic-tuning-with-autotune">Automatic Tuning with AUTOTUNE</a> (a flight mode that uses changes in flight attitude input by the pilot to learn the key values needed). 
+
+[tip]To use AUTOTUNE you must to be able to fly the aircraft.  Plane will fly the majority of lightweight RC airframes right out of the box. We also provide <a href="configuration-files-for-common-airframes">configuration values for many common aircraft</a> that you can use to get your aircraft flying before doing further tuning.
+&nbsp;
+If AUTOTUNE doesn't work with your plane, a fully manual approach is described in the <a href="roll-pitch-controller-tuning">Roll, Pitch and Yaw Controller Tuning Guide</a>.
+[/tip]
+
+After tuning the Roll, Pitch (and optionally yaw) you should tune the height controller using the <a href="tecs-total-energy-control-system-for-speed-height-tuning-guide">TECS tuning guide</a> and the horizontal navigation using the <a href="navigation-tuning">L1 controller tuning guide</a>. 
+
+Information on how to tune other aspects of Plane are linked from the <a href="common-tuning">Tuning landing page.</a>
+
+
+
+<h1>Mission Planner configuration screens</h1>
+
+The <em>Mission Planner</em> provides access to all configuration and tuning parameters through the CONFIG/TUNING section. The column on the left links to the full parameter set. The screen on the right lists some (but not all) of the more commonly modified parameters. You can use either side to make the same parameter change. Parameter updates are sent to the connected board as soon as you press "write params", many affect the current flight (if any) immediately, and are written to EEPROM so they survive power cycling.
+
+[caption id="attachment_4998" align="alignnone" width="806"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/missPlannTuningTECS.png"><img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/missPlannTuningTECS.png" alt="Mission Planner: CONFIG/TUNING Plane PIDs Screen" width="806" height="563" class="size-full wp-image-4998" /></a> Mission Planner: CONFIG/TUNING Plane Pids Screen[/caption]
+
+The starting point for Plane tuning is via the Plane PIDs screen shown above. This is where you can tune the Servo Roll and Servo Pitch PID gains to enable flight in FBW-A mode, and also enable tuning of the L1 Control for more accurate horizontal positioning.
+
+You can also load and save configuration files (to your PC) from the <em>Advanced Parameters</em> screen. Configuration files are versioned - an older parameter file found by Plane is ignored if the parameter version number is not current.
+
+You will note that several of these parameters are PID (Proportional, Integral, Differential) settings which are explained in the next section. 
+
+
+<h1>PID gain values</h1>
+
+The control of roll or pitch angle is adjusted using a <a href="https://en.wikipedia.org/wiki/PID_controller">Proportional-Integral-Derivative (PID) Controller</a>.
+
+The final control applied to the plane's control surface, is a combination of the effects of three gain values:
+<ul>
+	<li><em>Proportional gain (P)</em> is the simplest form of control, it is the "present" error. Autopilot wants 10 degrees of pitch, has 5 degrees, that is an error of 5: apply some amount of elevator (the amount applied for the amount of error is determined - scaled - by the P number). </li>
+	<li><em>Integral gain (I)</em> takes into consideration previous errors and is able to compensate for steady errors. It can be thought of as an automatic trim adjustment. The disadvantage with the "I" gain is that because it is always reacting to past errors, it reduces damping of the control loop as it is always playing 'catchup'. </li>
+	<li><em>Derivative gain (D)</em> adds damping because it feeds back the rate of change of the angle. It can also be thought of as attempting to anticipate a future changes in angle. The disadvantage of the "D" gain is that it increases the amount of noise driving the servo and if turned up too high will cause a rapid pitch or roll oscillation that can in some cases damage the aircraft.</li>
+</ul>
+
+Tuning P, PI or PID values can improve how quickly an observed error between desired attitude (pitch, speed, bearing, whatever) and actual attitude can be cancelled out, without undue oscillation.
+
+[tip]A simple configuration can just specify a P term (I and D is zero and <code>INT_MAX</code> is not used when I is zero).[/tip]
+
+Refer to the <a href="roll-pitch-controller-tuning" title="Roll, Pitch and Yaw Controller Tuning">Roll, Pitch and Yaw controller tuning guide</a> for more information

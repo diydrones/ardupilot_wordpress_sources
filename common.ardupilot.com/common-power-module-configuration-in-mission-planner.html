@@ -1,0 +1,96 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-power-module-configuration-in-mission-planner 
+title: common-Power Module Configuration in Mission Planner 
+id: 5767 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page explains how to configure and calibrate a Power Module (PM) to measure battery voltage and current consumption.
+<!-- more -->
+
+<h1>Overview</h1>
+
+A power module can be used to provide a stable power supply to the system, and to accurately measure the battery voltage/current in order to trigger a return to launch on low battery. ArduPilot is <a href="common-powermodule-landingpage">compatible with a number of power modules</a>.
+
+This article explains how to set up and configure power modules using <em>Mission Planner</em>. 
+
+
+<h1>Mission Planner Setup</h1>
+
+Battery measurement is primarily set up in the <em>Mission Planner</em>'s <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen.
+
+[caption id="attachment_4531" align="alignnone" width="1025"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_BatteryMonitorConfiguration.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MissionPlanner_BatteryMonitorConfiguration.png" alt="MissionPlanner: Battery Monitor Configuration" width="1025" height="621" class="size-full wp-image-4531" /></a> Mission Planner: Battery Monitor Configuration[/caption]
+
+
+
+<h2>Enable voltage and current sensing</h2>
+
+Enter the properties your module can measure, the type of module, the type of flight controller, and the battery capacity:
+    <ul>
+	<li><strong>Monitor:</strong> <em>Voltage and Current</em> or <em>Battery Volts</em></li>
+	<li><strong>Sensor:</strong> Supported power module, or "Other"</li>
+	<li><strong>APM ver:</strong> Flight controller (e.g. Pixhawk )</li>
+	<li><strong>Battery Capacity: </strong>Battery capacity in mAh</li>
+    </ul>
+
+The <strong>Sensor</strong> selection list offers a number of Power Modules (including popular models from 3DR and AttoPilot) which you can select to automatically configure your module. If your PM is not on the list then you can select <strong>Other</strong>, and then <a href="#calibration">perform a manual calibration</a> as described below.
+
+
+<h2>Calibration</h2>
+
+The bottom section of the the <em>Battery Monitor</em> screen allows you to calibrate the voltage/current measurement in order to verify that the measured voltage of the battery is correct. You can also set the <strong>Sensor</strong> selection list to <strong>Other</strong> and use the calibration process to configure an "unknown" power module.
+
+To calibrate the voltage reading:
+<ol>
+	<li>Check the voltage of your lipo battery with a hand-held volt meter or a <a href="http://www.hobbyking.com/hobbyking/store/__10080__Turnigy_130A_Watt_Meter_and_Power_Analyzer.html" target="_blank">power analyzer</a></li>
+	<li>Connect your APM/PX4 to your computer and plug in the lipo battery</li>
+	<li>Check the voltage through the <em>Mission Planner</em>'s <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen or on the Flight Data screen's HUD or <em>Status</em> tab.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MPCheckVoltage.png"><img class="alignnone size-medium wp-image-680" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/MPCheckVoltage-300x191.png" alt="MPCheckVoltage" width="300" height="191" /></a>
+</li>
+</ol>
+
+
+If you find the voltage is not correct (i.e. if off from the hand-held volt meter's reading by more than perhaps 0.2V) you can correct the APM/PX4's reading by doing the following:
+<ol>
+	<li>On <em>Mission Planner</em>'s <strong>INITIAL SETUP | Optional Hardware | Battery Monitor</strong> screen set the "Sensor" to "Other".</li>
+	<li>Enter the voltage according to the hand-held volt meter in the "Measured Battery Voltage" field</li>
+	<li>Press tab or click out of the field and the "Voltage Divider (Calced)" value will update and the "Battery voltage (Calced)" should now equal the measured voltage
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/CalibrateVoltage.png"><img class="alignnone size-full wp-image-681" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/CalibrateVoltage.png" alt="CalibrateVoltage" width="1024" height="575" /></a>
+</li>
+</ol>
+
+
+Using the power analyser you can also measure the current and compare to results displayed in the Mission Planner. 
+
+[note]Most current sensors are not very accurate at low currents (less than 3Amps). Typically you should perform current calibration at around 10A. The exception is PMs that use hall-effect sensors, like <a href="common-mauch-power-modules">those from Mauch</a>.[/note]
+
+This video shows the voltage and current calibration process using a Turnigy Power Analyser.
+
+http://www.youtube.com/watch?v=tEA0Or-1n18
+
+
+<h2>Enable Low Battery Alert</h2>
+
+You can set <em>Mission Planner</em> to alert you verbally when your battery is low (using a computerized voice). 
+
+Simply check the <strong>MP Alert on Low Battery</strong> checkbox and enter the warning you wish to hear, the voltage level and finally the percentage of remaining current.
+
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_001.png" alt="MP_battery_alarm_001" width="316" height="145" />
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_002.png" alt="MP_battery_alarm_002" width="316" height="145" />
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/MP_battery_alarm_003.png" alt="MP_battery_alarm_003" width="316" height="145" /></li>
+
+
+
+
+<h1>Connecting power module to alternative pins</h1> 
+
+The power module is generally plugged into the default port on the flight controller (ie. Pixhawk). If you wish to change where the power module is plugged into the controller, the pins used can be modified using the BATT_VOLT_PIN and BATT_CURR_PIN parameters.
+
+The list of available analog input pins that can be used are listed on the Hardware Options page for each board (<a href="common-pixhawk-overview/#pixhawk_analog_input_pins_virtual_pin_firmware_mapped_pin_id">Pixhawk</a>, <a href="common-apm25-and-26-overview/#analog_input_pins">APM2</a>).

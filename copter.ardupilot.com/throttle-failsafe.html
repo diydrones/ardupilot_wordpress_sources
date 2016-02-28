@@ -13,7 +13,7 @@ Copter supports Return-To-Launch in cases where contact between the Pilot's RC t
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/RadioFailsafe_Intro.jpg"><img class="alignnone size-large wp-image-12857" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/RadioFailsafe_Intro-1024x435.jpg" alt="RadioFailsafe_Intro" width="584" height="248" /></a>
 
-[note]Copter also support <a href="wiki/failsafe-battery/">Battery</a>, <a href="wiki/gps-and-gcs-failsafes/">GPS, Ground Station</a> and <a href="wiki/ekf-inav-failsafe/">EKF/DCM failsafes</a>.[/note]
+[note]Copter also support <a href="http://copter.ardupilot.com/wiki/failsafe-battery/">Battery</a>, <a href="http://copter.ardupilot.com/wiki/gps-and-gcs-failsafes/">GPS, Ground Station</a> and <a href="http://copter.ardupilot.com/wiki/ekf-inav-failsafe/">EKF/DCM failsafes</a>.[/note]
 <h3>When the failsafe will trigger</h3>
 If enabled and set-up correctly the radio failsafe will trigger if:
 <ul>
@@ -138,7 +138,7 @@ You can check your failsafe by performing the following tests with the Pixhawk/A
 	<li>Warning: unplug the APM so that it is powered down before reattaching the receiver's power</li>
 </ul>
 <h3>Using the receiver to set the flight mode (not recommended)</h3>
-Instead of setting up the receiver and flight controller as described above (i.e. "Low-Throttle" and "No Signal" methods) the receiver can be set-up to set channel 5 (flight mode channel) to a <a href="wiki/flight-modes/">flight mode </a>slot that has been set to RTL.  For example the receiver could be setup to move ch5's pwm value to 1700 which is "Flight Mode 5" which could then be set to RTL on the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Flight Modes screen.
+Instead of setting up the receiver and flight controller as described above (i.e. "Low-Throttle" and "No Signal" methods) the receiver can be set-up to set channel 5 (flight mode channel) to a <a href="http://copter.ardupilot.com/wiki/flight-modes/">flight mode </a>slot that has been set to RTL.  For example the receiver could be setup to move ch5's pwm value to 1700 which is "Flight Mode 5" which could then be set to RTL on the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Flight Modes screen.
 
 Although this mostly works it is not recommended because it will not trigger if the receiver loses power or if the wires between the receiver and flight controller are broken.
 <h3>Warning to Copter 3.1.5 and FRSky receiver users and users of other receivers that modify channel 5 during a failsafe event</h3>

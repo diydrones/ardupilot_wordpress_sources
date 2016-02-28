@@ -1,0 +1,108 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: setting-up-sitl-on-windows 
+title: SITL on Windows in a VMWare VM (Manual Setup) 
+id: 3624 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to <em>manually</em> set up the <a href="sitl-simulator-software-in-the-loop" title="SITL Simulator (Software in the Loop)">SITL ArduPilot Simulator</a> in a virtual machine environment on Windows, and connect it to a Ground Control Station running on the host computer. [tip]See <a title="Setting up SITL using Vagrant" href="http://dev.ardupilot.com/wiki/simulation-2/setting-up-sitl-using-vagrant/">Setting up SITL using Vagrant</a> for a more automated setup process.[/tip]
+<!--more-->
+
+
+<h1>Overview</h1>
+The SITL (Software In The Loop) simulator allows you to run Plane, Copter or Rover without any hardware. The simulator runs the normal ArduPilot code as a native executable on a Linux PC. SITL can also be run within a virtual machine on Windows, Mac OSX or Linux.
+
+This article shows how to manually set up SITL on a Linux environment hosted in a VMware virtual machine.
+
+[note]The instructions were tested on Windows 8 with VMware ver 7.1.0 build-2496824 and Ubuntu 14.10. [/note] <!-- HamishW: Note, I tried to test them on Ubuntu 14.02, but there is a problem with the VMWare tools for this version which means that shared folders do not work -->
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_SITL_running_Copter.png"><img class="size-large wp-image-3651" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_SITL_running_Copter-1024x736.png" alt="Ubuntu_SITL_running_Copter" width="584" height="419" /></a>
+
+
+<h1>Preconditions</h1>
+
+Please note that before attempting this you should already have <a href="wiki/where-to-get-the-code/">downloaded the code</a> to your machine and be able to <a href="wiki/building-ardupilot-with-arduino-windows/">build it with Arduino</a> or <a href="wiki/building-px4-with-make/">Make</a>.
+<h1>Step #1 - Install VMWare and create an Ubuntu Virtual Machine</h1>
+1. Download and install <a href="https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0" target="_blank">VMware</a> (look for VMware Player and VMware Player Plus for Windows)
+2. Download the <a href="http://www.ubuntu.com/download/desktop/thank-you?country=--&amp;version=14.04.2&amp;architecture=amd64" target="_blank">Ubuntu iso</a>
+3. Start VMware and create new ubuntu machine by selecting Player &gt; File &gt; New Virtual Machine
+<ul>
+	<li>Enter your Full name, user name and password for the virtual machine. you will use these later when you log onto this virtual machine</li>
+	<li>Name your virtual machine (i.e. Copter-SITL)</li>
+	<li>Specify Disk Capacity - leave Max disk size as default 20GB, and "Split virtual disk into multiple files" checked</li>
+	<li>On next page of "New Virtual Machine Wizard" click the "Customize Hardware.." button</li>
+	<li>On the Hardware tab set Memory: 3GB,Processors: 4,Hard Disk: 20GB,Network Adapter: NAT</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_VMSettings_Hardware.png"><img class="size-full wp-image-3633" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_VMSettings_Hardware.png" alt="Ubuntu_VMSettings_Hardware" width="677" height="588" /></a>
+<h1>Step #2 - Start the VM for the first time</h1>
+<ol>
+	<li>Power on the machine by double clicking on item just created in the VMware Player</li>
+	<li>Press "No" to any questions like "Cannot connect to the XXX device because no corresponding device is available on the host"</li>
+	<li>Enter your password when the login screen appears</li>
+	<li>Say "no" to any options to upgrade versions</li>
+	<li>Open firefox and make sure it can access some web page like www.diydrones.com
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_TestNetworkWithFirefox.png"><img class="size-medium wp-image-3636" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_TestNetworkWithFirefox-300x205.png" alt="Ubuntu_TestNetworkWithFirefox" width="300" height="205" /></a></li>
+	<li>Set the clock by double clicking on the top right corner, select your location on the map and "Set the time:" to "Automatically from the internet"
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_setTimezone.png"><img class="size-medium wp-image-3637" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_setTimezone-300x212.png" alt="Ubuntu_setTimezone" width="300" height="212" /></a></li>
+	<li>Setup a terminal short by clicking on the Dash Home icon on the top left, Type "terminal" and then drag the terminal applicatoin to the left start pane
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_TerminalShortcut.png"><img class="size-large wp-image-3638" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_TerminalShortcut-1024x488.png" alt="Ubuntu_TerminalShortcut" width="584" height="278" /></a></li>
+</ol>
+<h1>Step #3 - Setting up shared partition with Windows &amp; Ubuntu Virtual Machine</h1>
+1. Ensure the VM is powered down by select it's name, then select the drop-down beside the green play button and select "Power Off" if it's not greyed
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_PowerOff.png"><img class="size-medium wp-image-3640" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_PowerOff-300x200.png" alt="Ubuntu_PowerOff" width="300" height="200" /></a>
+2.On VMware Player select Player &gt; Manage &gt; Virtual Machine Settings... &gt; Options Tab &gt; Shared Folders
+<ul>
+	<li>check "Always enabled", Add</li>
+	<li>"Host Path" to folder one level above where you have installed ardupilot software</li>
+	<li>check "Enable this share"</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_VMSettings_SetupSharedFolder.png"><img class="size-full wp-image-3641" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/Ubuntu_VMSettings_SetupSharedFolder.png" alt="Ubuntu_VMSettings_SetupSharedFolder" width="676" height="588" /></a>
+3. Power on the VM, enter your login information
+4. Open Terminal window and type "ls /mnt/hgfs" and the share you set-up should be visible
+5. type "ln -s /mnt/hgfs/&lt;foldername&gt;" (where &lt;foldername&gt; is replaced with the name of the folder you set-up) to create a symbolic link to the shared folder from your home directory
+
+
+<h1>Step #4 - install packages on your VM</h1>
+
+[note]Most of these same dependencies will be installed when you do the next step (<a href="/wiki/setting-up-sitl-on-linux">SITL instructions for Linux</a>).[/note]
+
+Open up a terminal and type the following to update the list of packages in the software center:
+<pre>sudo apt-get update</pre>
+
+Then install the following packages (reply 'y' if it prompts you re additional disk space used)
+<pre>sudo apt-get install python-dev dos2unix python-wxgtk2.8 python-matplotlib python-opencv python-pip g++ g++-4.7 gawk git ccache
+
+sudo pip install pymavlink
+sudo pip install mavproxy</pre>
+
+
+If you wish to run Plane you will also need to install these packages:
+<pre>sudo apt-get install libexpat1-dev auto.conf libtool automake</pre>
+
+
+<h1>Step #5 - Follow the Linux instructions</h1>
+Now that you have a Linux VM you should follow the <a href="/wiki/setting-up-sitl-on-linux">SITL instructions for Linux</a>
+<h1>Connecting with the Mission Planner</h1>
+In addition to using the mavproxy ground station (the command line style ground station written in python) it should be possible to connect with the Mission Planner by appending the <code>--viewerip=XXX.X.X.X</code> to the end of the start up command where the Xs are replaced with your machine's IP address.  This address can be found by typing "ipconfig" into a command prompt.
+
+[note]You will likely see many more than one IP address listed so you may need to try a few different addresses to find one that works.[/note]
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/SITL_ipconfig.png"><img class="size-full wp-image-3684" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/SITL_ipconfig.png" alt="SITL_ipconfig" width="678" height="322" /></a>
+So for this example the following would then be entered into the terminal on the Ubuntu VM:
+<pre>./Tools/autotest/autotest.py build.Copter fly.Copter logs.Copter --map --viewerip=192.168.184.1</pre>
+Next connect with the mission planner after first setting the "COM Port" to "UDP".
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/SITL_connectWithMP.png"><img class="alignnone size-full wp-image-3681" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/12/SITL_connectWithMP.png" alt="SITL_connectWithMP" width="1022" height="717" /></a>
+
+
+<h1>Dataflash logs</h1>
+After the simulation is run, dataflash logs named "Copter.flashlog" or "CopterAVC.flashlog" will be created the "buildlogs" directory. This directory is created at the same level as the ardupilot directory (i.e. the top level directly that holds the "Copter", "Plane" and "libraries" directories). Because of the inconvenient name you'll need to change the file extension to ".log" before opening in Mission Planner.
+
+<h1>Next steps</h1>
+
+To get the most out of SITL we recommend you <a href="http://tridge.github.io/MAVProxy/">Learn MavProxy</a>.
+
+The topic <a href="using-sitl-for-ardupilot-testing" title="Using SITL for ArduPilot Testing">Using SITL for ArduPilot Testing</a> explains how to use the simulator, and covers topics like how to use SITL with Ground Stations other than Mission Planner and MAVProxy.

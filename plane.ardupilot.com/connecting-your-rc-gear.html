@@ -1,0 +1,178 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: connecting-your-rc-gear 
+title: Archived:APM2.x Wiring QuickStart 
+id: 951 
+menu_order: 2 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[archived date=20160226]The APM2.x is end of life and is not generally available for purchase. This article is made available for existing users.[/archived]
+This article explains how to write up Plane's essential components when using the <a href="common-apm25-and-26-overview">APM2.x Flight Controller</a>. The instructions for adding other hardware are covered in <a href="common-optional-hardware">Optional Hardware</a>.
+
+<!-- more -->
+<h1>Overview</h1>
+Turning a RC plane into a UAV is essentially just a matter of putting an autopilot between the RC receiver and the aircraft's servos, so the autopilot can take over control.
+
+The way we do that is to plug female-to-female cables from the RC receiver into APM2's inputs, and plug the servos (and motor controller for electric aircraft) into APM2's outputs.
+
+What you'll need:
+<ul>
+	<li>At least a 5-channel RC unit. 7 channels or more is highly recommended</li>
+	<li>Female-to female cables for each channel you'll be using. <a href="http://store.3drobotics.com/products/servo-extension-cable-female-female" rel="nofollow">These</a> are fine.</li>
+	<li>For APM2.0 you will need a power source. For electric aircraft, this is usually the ESC. For gas/nitro powered planes, your radio will need its own battery/BEC. ArduPilot Mega normally gets its power from the RC system.</li>
+	<li>For APM2.5 you can use the supplied APM Power Module for the power source. [warning]You still need an ESC or BEC to power the servos [/warning].</li>
+</ul>
+[note]You can also power APM 2 from the USB cable. However, this will not power the RC output pins, so if you want to see servos move while testing APM 2 on the bench, you'll need to connect a battery (through an ESC) to one of the output channels. It's fine to have both an ESC and the USB cable connected at the same time.[/note]
+<h1>Example Wiring Diagram</h1>
+Example Wiring Diagram for a Bixler plane with APM
+
+[caption id="attachment_5551" align="alignnone" width="1200"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/bixler2_wiring_v2-1200px.jpg"><img class="size-full wp-image-5551" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/bixler2_wiring_v2-1200px.jpg" alt="Example Wiring Diagram for a Bixler plane with APM" width="1200" height="806" /></a> Example Wiring Diagram for a Bixler plane with APM[/caption]
+<h1>Inputs</h1>
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/FRAMES_input_PLANE1.jpg" alt="" />
+
+Connect your RC receiver to APM2's Inputs with female-to-female cables in the order shown above. Each channel that you want APM to control should be connected to an Input on the APM board. Typically, the Mode Switch (APM Input 8 for !Plane) is connected to any RC receiver channel that you have assigned to a three-position toggle switch on your RC transmitter (for most people, that's channel 5).
+
+[note]These instructions are for Plane. Copter's mode switch goes to APM input 5, not input 8[/note]
+
+The ground (black) side of each connector should be on the outside, closest to the edge of the board, as shown here with either straight or right-angle connectors:
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/straight_connector_APM21.jpg" alt="" />
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/right-angle_connector_APM21.jpg" alt="" />
+
+See also <a href="common-connecting-the-radio-receiver-apm2">Connecting the Radio Receiver</a>.
+
+[note]Elevons (combined ailerons/elevator, as used in flying wings) are also supported' just connect them to the first two channels as you would to your RC receiver. You'll <a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/reversing-servos-and-setting-normalelevon-mode/">tell APM to do elevon mixing</a> in the Mission Planner setup process.[/note]
+
+If you're flying a V-tail, please see the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#VTail_output_PlaneVTAIL_OUTPUT">VTAIL_OUTPUT</a> option in the <a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/reversing-servos-and-setting-normalelevon-mode/">servo setup documentation</a>.
+<h1>Reassigning your RC transmitter stick channels:</h1>
+<ul>
+	<li>Although the default normal transmitter stick configuration is generally the best, Plane does allow you to reconfigure them.</li>
+	<li>To reassign the RC transmitter sticks to other than the default channels:
+<ul>
+	<li>Connect your APM's USB port to your computer and start Mission Planner and Select the "Connect" button on the upper right..</li>
+	<li>Select the "Configuration" tab then select "Advanced Params" and the Adv Parameter List".</li>
+	<li>Scroll down to the "RCMAP_ROLL, RCMAP_PITCH, RCMAP_THROTTLE and RCMAP_YAW" parameters.</li>
+	<li>These allow you to directly assign which radio channel (1-8) is assigned to each of the major flight functions.</li>
+</ul>
+</li>
+	<li>This is useful when you have a flight transmitter with unusual channel assignments.
+<ul>
+	<li>Or which does not allow easy channel reassignment at the transmitter</li>
+</ul>
+</li>
+	<li><strong>Additional information on these parameters may be found <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#RCMAP__Parameters">(Here!)</a></strong></li>
+</ul>
+<h1>Outputs</h1>
+Plug your servos and other devices you want APM to control into the matching Output connectors as shown below.
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_2_5_PLANE_4CH_enc.jpg"><img class="alignnone size-full wp-image-1551" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_2_5_PLANE_4CH_enc.jpg" alt="APM_2_5_PLANE_4CH_enc" width="1280" height="600" /></a>
+
+Four channel setup:
+<ol>
+	<li>Aileron</li>
+	<li>Elevator</li>
+	<li>Throttle</li>
+	<li>Rudder</li>
+</ol>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_2_5_PLANE_V_ELEVONS_enc.jpg"><img class="alignnone size-full wp-image-1552" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_2_5_PLANE_V_ELEVONS_enc.jpg" alt="APM_2_5_PLANE_V_ELEVONS_enc" width="1280" height="600" /></a>
+
+Elevon setup.  At this stage its not critical which channel is plugged into which elevon.  They can be swapped around later if needs be:
+<ol>
+	<li>Starboard (right) elevon</li>
+	<li>Port (left) elevon</li>
+	<li>Throttle</li>
+</ol>
+
+
+<h1>Powering the plane</h1>
+
+The easiest way to power the APM2.x is using a <a href="common-3dr-power-module">3DR Power Module</a> with a LiPo battery.
+
+The Power Module will not power servos and other peripherals. For more information/alternatives see <a href="common-powering-the-apm2">Powering the APM2</a>.
+
+
+<h2>Power Input</h2>
+
+<strong>Single</strong><strong> Supply</strong>
+<table>
+<tbody>
+<tr>
+<td>Power Options</td>
+<td>Nominal</td>
+<td>Abs MAX</td>
+<td>JP1 status</td>
+</tr>
+<tr>
+<td>Power on Output PWM connector</td>
+<td>5.37V +-0.5</td>
+<td>6V</td>
+<td>JP1 connected</td>
+</tr>
+</tbody>
+</table>
+<strong>Dual Supply
+</strong>
+<table>
+<tbody>
+<tr>
+<td>Power Options</td>
+<td>Nominal</td>
+<td>Abs MAX</td>
+<td>JP1 status</td>
+</tr>
+<tr>
+<td>Power on Output PWM connector</td>
+<td>5.00V +-0.5</td>
+<td>6V</td>
+<td>JP1 open</td>
+</tr>
+<tr>
+<td>Power on Input PWM connector</td>
+<td>5.00V +-0.25</td>
+<td>5.5V</td>
+<td>JP1 open</td>
+</tr>
+</tbody>
+</table>
+[note]If JP1 open, separate power is required on both Input PWM and Output PWM.[/note][warning]Do not exceed Abs MAX input voltages when connecting power supply or you will damage your board.[/warning][warning]Connecting USB when you have input voltages at the high end of the range (near Abs Max) can damage the board. Disconnect battery before connecting USB or test input voltages so they are within the normal specified range.[/warning]
+<h1>Installing it in your plane</h1>
+When you place APM in your aircraft, it is very important that it face the right way. The GPS connector should face forward, and the servo cables face back. The board must also be right side up, with the IMU shield at the top. Like this (note: there's a little arrow on the bottom of the shield that point to the front, too, in case you need a reminder at the field):
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM2_FWD1.jpg" alt="" />
+
+When putting APM in your plane, it's important to ensure that it's solidly mounted and doesn't move around in flight. It should also be as close as possible to level when the plane is in its flying orientation. Ideally, you'll want to have it as close to the center of gravity as you can (that's where vibration is the least) and mounted on foam tape onto a solid platform.
+<h1>Connecting GPS Module</h1>
+A GPS module provides enhanced positioning for autonomous flight. Connecting your GPS to your autopilot by following these steps.
+<h2>3DR GPS uBlox with Onboard Compass</h2>
+3DR GPS uBlox with Onboard Compass is intended for use with APM 2.5 (for external compass). It provides enhanced compass performance because of the freedom to situate the GPS unit in an optimal position independent of the location of the APM. Place your GPS on the outside of your plane with a clear view of the sky, as far as possible from the motor and ESC, with the arrow facing forward.
+
+<img class="wp-image-6229 alignnone" style="color: #333333;font-style: normal;line-height: 21px;margin-top: 0.4em;margin-right: 30px;margin-left: 30px" title="3DR GPS uBlox with Onboard Compass" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gps.jpg" alt="3DR GPS uBlox with Onboard Compass" width="200" height="200" />
+
+Connect the GPS module to the APM 2.6 using the two cables included with the GPS as shown below.
+
+<img class="alignnone  wp-image-6230" style="margin-top: 20px;margin-bottom: 20px" title="GPS with Compass Wiring Diagram" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gps-wiring-diagram.png" alt="GPS with Compass Wiring Diagram" width="507" height="384" />
+
+3DR GPS uBlox with Onboard Compass includes two connector cables: one 4-position cable and one 5-position-to-6-position cable. To connect the GPS module to APM 2.6, connect the GPS to the APM GPS port using the 5-position-to-6-position cable; connect the GPS to the APM I2C port using the 4-position cable.
+<h2>3DR GPS uBlox without Onboard Compass</h2>
+3DR GPS uBlox without Onboard Compass is intended for use with APM 2.5. To install your GPS module without compass, mount to the outside of your plane with a clear view of the sky and connect to the APM 2.5 GPS port using the 5-position-to-6-position connector cable.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/old-gps.jpg"><img class="alignnone  wp-image-6234" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/old-gps.jpg" alt="old gps" width="245" height="245" /></a>
+<h2>Tips on mounting the GPS module</h2>
+<ul>
+	<li>It doesn't matter which way the GPS module is oriented, as long as the square antenna side is facing up</li>
+	<li>It's best to mount the GPS as far away from radio transmission equipment (like your telemetry or video transmitters) as possible.</li>
+	<li>Ideally, the GPS module will have a clear view of the sky. On top of your plane is a good choice.</li>
+</ul>
+Here's an example of one way to mount APM (and the GPS module) in an EasyStar using the <a href="http://www.amazon.co.uk/Electronics-Chassis-Kit-Bixler-SkySurfer/dp/B00FNPACBO#">3D Robotics Electronics Chassis</a> for the <a href="http://www.hobbyking.com/hobbyking/store/__16544__Hobbyking_Bixler_EPO_1400mm_ARF_.html" rel="nofollow">HobbyKing Bixler</a>.
+
+<strong> Chassis:</strong>
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/EasyStarwithChassis1.jpg" alt="" />
+
+<strong>With equipment mounted:</strong>
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/photo21.jpg" alt="" />

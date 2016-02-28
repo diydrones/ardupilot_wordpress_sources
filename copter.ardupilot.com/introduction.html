@@ -9,58 +9,53 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-Copter combines personal multicopters with advanced, autopilot technology, providing an autonomous aircraft that anyone can use. Copter is developed and maintained by a dedicated group of volunteers from the open source community. Follow their continuing efforts and read about new project developments at <a href="http://diydrones.com" target="_blank">DIYDrones.com</a>.
+Copter is an advanced open-source autopilot system for multicopters, helicopters, and other rotor vehicles. 
+<!--more-->
 
-This manual will guide you through setup and configuration to your first flight.
+<h1>Overview</h1>
 
-1. <a href="what-is-a-multicopter-and-how-does-it-work">What is a Multicopter and How Does it Work</a>: New to multicopters? This page gives an overview of what makes a multicopter fly and provides some considerations for getting started.
+Copter is complete open-source autopilot solution for multi-rotor vehicles, offering both enhanced remote control flight (via a number of intelligent flight modes) and execution of fully autonomous missions. 
 
-2. <a href="what-you-need">What You Need</a>: All the components you'll need for an autonomous multicopter plus some recommendations for sensors and accessories.
+As part of the <a href="https://www.dronecode.org/dronecode-software-platform">DroneCode Software Platform</a> it works seamlessly with Ground Control Station software that can monitor vehicle telemetry and perform powerful mission planning activities. It also benefits from other parts of the DroneCode platform, including simulators, log analysis tools, and higher level APIs for vehicle management and control.
 
-3. <a href="safety-multicopter">Safety Information</a>: Copter is a powerful, flying robot and requires a conscious awareness for safety concerns. Don't skip this important section!
+Copter is on the cutting edge of aerial robotics and intended for those people who want to try advanced technology, leading edge techniques and new flight styles. It is already a preferred platform for numerous commercially available ready-to-fly vehicles, and can easily be added to enhance your own DIY multirotor craft.
 
-4. <a href="choosing-a-frame">Choosing a frame</a>: There are many choices (tri, quad, Y6, X8, tradheli, RTF vs Build-your-own), spend some time thinking about what you want it for and how much time and money you want to spend.
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/12/copter-introduction-diagram.png" alt="copter-introduction-diagram" width="799" height="604" class="alignnone size-full wp-image-16398" />
 
-5. <a href="common-choosing-a-flight-controller">Choosing a controller</a>: how to choose between the various Copter capable controllers
+<h1>Key features</h1>
 
-6. <a href="quick-start-guide">Quick Start Guide for RTFs</a>: Purchased a Ready-to-Fly Copter from 3D Robotics? This guide will get you in the air faster than you can say "unmanned aerial vehicle".
+Key features include:
 
-7. <a href="initial-setup">First Time Setup</a>: Complete instructions for setting up and configuring Copter
-
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/copter-diagram.png"><img class="alignnone  wp-image-7903" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/copter-diagram.png" alt="copter diagram" width="640" height="480" /></a>
-
-Copter is an easy-to-set-up and easy-to-fly platform for multirotors and helicopters. Its features go far beyond the basic manual control RC multicopters on the market today. Unlike RC-only multicopters, Copter is complete UAV solution, offering both remote control and autonomous flight, including waypoints, mission planning and telemetry displayed on a powerful ground station.
-
-Copter is on the cutting edge of aerial robotics and intended for those people who want to try advanced technology, leading edge techniques and new flight styles.
-
-<strong>Features include:</strong>
 <ul>
-	<li>High quality autolevel and auto altitude control – fly level and straight. Or fly the awesome "simple flight" mode, which makes Copter one of the easiest multicopters to fly. Don't worry about keeping an eye on your multicopter's orientation--let the computer figure it out! You just push the stick the way you want to go, and the autopilot figures out what that means for whatever orientation the copter is in, using its onboard compass. "Front", "back"...who cares? Just fly!</li>
-</ul>
-<ul>
-	<li>No programming required. Just use an easy-to-use desktop utility to load the software with one click and set up Copter with quick visual displays, a point-and-click mission planner and a full ground station option (see below).</li>
-</ul>
-<ul>
-	<li>Hundreds of GPS waypoints, free (the exact number depends on the memory of the hardware you're using; APM support 127 waypoints, but platforms based on PX4 can accommodate many times that). Just point and click waypoints in the Mission Planner, and APMCopter Copter will fly itself to them. No distance limits! You can script entire missions, including camera control!</li>
-</ul>
-<ul>
-	<li>"Loiter" anywhere. Just flip the toggle switch and your copter will hold its position using its GPS and altitude sensors.</li>
-</ul>
-<ul>
-	<li>Return to launch. Flip a switch to have Copter fly back to the launch location automatically.</li>
-</ul>
-<ul>
-	<li>Do all mission planning via a two-way wireless connection option. Waypoints, mode changing, even changing the gains of every control parameter can be done from your laptop, even while the copter is in the air!</li>
-</ul>
-<ul>
-	<li>Automatic takeoff and landing. Just flick a switch and watch Copter execute its mission completely autonomously, returning home to land by itself in front of you when it's done.</li>
+	<li><em>High quality auto-level and auto-altitude control</em>: Fly level and straight or use the awesome "simple flight" mode, which makes Copter one of the easiest multicopters to fly. 
+Don't worry about keeping an eye on your multicopter's orientation - just push the stick the way you want to go, and the autopilot figures out what that means for whatever orientation the copter is in, using its onboard compass. "Front", "back" ... who cares!</li>
+	<li><em>Automatic takeoff and landing</em>: Flick a switch and watch Copter execute its mission completely autonomously, returning home and landing by itself when it's done.</li>
+	<li><em>"Loiter" mode.</em>: Copter will hold its position using its GPS and altitude sensors.</li>
+	<li><em>Return to launch</em>: Flip a switch to have Copter fly back to the launch location automatically.</li>
+	<li><em>Fail safety:</em> Automatically detect when the vehicle loses transmitter contact (or is outside a defined geofence) and return to the launch point. Will also attempt to land safely if hardware failures are detected. </li>
+	<li><em>No programming required</em>: Use the desktop <em>Mission Planner</em> software to load the autopilot (with just one click) and set up Copter. The Mission Planner (and other compatible ground stations) deliver visual displays for vehicle state, settings and telemetry, including a point-and-click mission planning interface.</li>
+	<li><em>Missions with hundreds of GPS waypoints</em>: Just point and click waypoints in a Mission Planner, and Copter will fly itself to them. You cautomate entire missions, including camera control! The only distance limits are those of your vehicle power supply.</li>
+	<li><em>Mission planning while in flight</em>: Using a two-way wireless connection, waypoints, mode changing, even changing the gains of every control parameter can be done from your laptop or mobile device - even while Copter is in the air!</li>
+
 </ul>
 
+<h1>Getting started</h1>
 
-Due to the rich feature set and fully-autonomous capabilities of APM, the learning curve can appear somewhat intimidating. Fortunately, the APM suite of components has made this endeavor very straightforward and achievable.
+If you're using Copter on a ready-to-fly vehicle then it is likely that it will be already setup, configured and tuned, ready for your first flight. We recommend you <em>read your manufacturer's instructions</em>, particularly those related to safely, before flying. 
 
-Please do not be tempted to skip over steps and rush into flight. This is robotics and aviation combined--both of which are quite complex on their own. Follow the steps patiently, and you will have your robot safely up in the air.
+Once you're familiar with your vehicle's default setup you may want to configure your RC transmitter/vehicle to use more challenging <a href="flight-modes">flight modes</a>, or <a href="common-choosing-a-ground-station">choose a ground station</a> and start flying automated missions. 
 
-Autonomous robots, flying machines, high-energy power systems, driving rotating blades - you are in charge of these potential hazards. Always follow <a href="safety-multicopter">best safety practices</a> and pay close attention to safety warnings.
+[tip]Whether using an RTF or DIY vehicle, autonomous vehicles are potentially dangerous! Always follow <a href="safety-multicopter">best safety practices</a> and pay close attention to all safety warnings.[/tip]
+
+If you're working on a DIY project, this wiki has everything you need! You should start by reading this section in order to understand what a multicopter can do, and how to select a frame, flight controller board, and other essential components. You can then proceed to <a href="initial-setup">First Time Setup</a> to learn how to assemble your Copter and then <a href="flying-arducopter">First Flight</a> to learn how to configure and tune it.
+
+<h1>The development team</h1>
+
+Copter is developed and maintained by a dedicated group of volunteers from the open source community. Follow their continuing efforts and read about new project developments at <a href="http://diydrones.com" target="_blank">DIYDrones.com</a>.
 
 <em>All of us involved with this project care a great deal about the privacy and safety of those whom we share this planet with. Please be a good steward of this technology. It is the product of many evenings and weekends, we make it available for benevolent use. </em>
+
+<h1>Learn more about Copter</h1>
+
+To find out more about Copter and your main configuration decisions, please see the topics below:
+[pagelist_navmenu]

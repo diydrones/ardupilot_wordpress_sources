@@ -1,0 +1,69 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: solo 
+title: 3DR Solo (Developer Information) 
+id: 5848 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page provides instructions for developers working with the 3DR Solo Ready-to-fly copter.  The comprehensive <a href="http://dev.3dr.com/" target="_blank">3DR solo dev guide can be found here</a>.
+<!-- more -->
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/07/SoloControllerVehiclePC2.png"><img class="alignnone size-full wp-image-5849" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/07/SoloControllerVehiclePC2.png" alt="SoloControllerVehiclePC2" width="600px" /></a>
+<h1>Uploading custom firmware to the Pixhawk2</h1>
+<ul>
+<ul>
+	<li>Solo <a href="https://www.youtube.com/watch?v=WeOl7BficG0" target="_blank">can be flown with ardupilot/master</a> but when shipped by 3DR it runs a modified version of APM:Copter3.3.
+<ul>
+	<li>The firmware <a href="https://github.com/3drobotics/ardupilot-solo/releases">can be found on Github here</a>.</li>
+	<li>The source code can be found here: <a href="https://github.com/3drobotics/ardupilot-solo/" target="_blank">ardupilot</a>, <a href="https://github.com/3drobotics/PX4Firmware-solo" target="_blank">PX4Firmware</a>, <a href="https://github.com/diydrones/PX4NuttX">NuttX</a>.</li>
+</ul>
+</li>
+	<li><a href="wiki/building-the-code/">Compile instructions are the same as for master ardupilot for a Pixhawk</a> with the exception that the modified repos should be used.</li>
+	<li>After modifying/building the firmware, turn on the Solo and connect your PC's network to the Solo controller's access point using the same login/password used by the Solo app (by default these are something like: <code>SoloLink_XXXXXX/sololink</code>).</li>
+	<li>Use <em>scp</em> to copy the <strong>ArduCopter-v2.px4</strong> file from your PC to <strong>root@10.1.1.10:/firmware</strong> (i.e. the firmware directory on the IMX6 on the Solo vehicle).  Windows users in particular may want to install <a href="http://www.putty.org/" target="_blank">Putty</a> and use a command like below:</li>
+</ul>
+</ul>
+<pre>C:\Progra~2\PuTTY\pscp.exe -pw SSH-PASSWORD -scp ArduCopter-v2.px4 root@10.1.1.10:/firmware/</pre>
+[note]The SSH-PASSWORD should be replaced with the actual ssh password for your vehicle. This password has not yet been officially released by 3DR, but we expect it will be in the near future.[/note]
+<ul>
+	<li>Reboot the vehicle and the vehicle's IMX6 should load the firmware onto the Pixhawk2 (you should see the regular rainbow colours on the arm LEDs as the upload proceeds).</li>
+	<li>After uploading the firmware is moved to the <strong>/firmware/loaded</strong> directory.</li>
+</ul>
+
+
+<h1>Changing the controller mode</h1>
+<ul>
+	<li>ssh into the iMX6 board in your artoo (ssh root@10.1.1.1)</li>
+	<li>
+<pre>vi /firmware/cfg/stick-cfg-evt.cfg:</pre>
+<strong>Mode 1:</strong>
+<pre>throttle stick-id = 1, dir = 0
+roll stick-id = 2, dir = 0
+pitch stick-id = 3, dir = 1
+yaw stick-id = 0, dir = 0
+</pre>
+<strong>Mode 3:</strong>
+<pre>
+throttle stick-id = 1, dir = 0
+roll stick-id = 0, dir = 0
+pitch stick-id = 3, dir = 1
+yaw stick-id = 2, dir = 0
+</pre>
+<strong>Mode 4:</strong>
+<pre>
+throttle stick-id = 3, dir = 0
+roll stick-id = 0, dir = 0
+pitch stick-id = 1, dir = 1
+yaw stick-id = 2, dir = 0
+</pre></li>
+	<li>Copy <strong>/usr/bin/runStickCal.sh</strong> to a new file (in the same directory) called <strong>runStickMapper.sh</strong></li>
+	<li>Edit <strong>runStickMapper.sh</strong> and replace:
+<pre>stick-cal.py /dev/ttymxc1</pre>
+with
+<pre>stick-axis-cfg.py /dev/ttymxc1 /firmware/cfg/stick-cfg-evt.cfg</pre></li>
+</ul>
+<h1>User supplied teardown video</h1>
+https://youtu.be/qczQUKSmLV0

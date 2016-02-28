@@ -1,0 +1,57 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-compass-calibration-in-mission-planner 
+title: common-Compass Calibration in Mission Planner 
+id: 5520 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to perform basic compass calibration.<!--more-->
+[note]This article assumes that you're the most common configuration — a Pixhawk, PX4 or APM2.6 board with the compass mounted with the the arrow facing toward the front of the vehicle and in the same direction as the arrow on the autopilot. If you're using a different configuration see <a href="common-compass-setup-advanced">Advanced Compass Setup</a>.[/note][site wiki="rover"][tip]It's often better to do this test with the vehicle's motor running, to ensure that any magnetic interference from the motor is included in the compass calibration.[/tip][/site]
+
+<h1>Calibration steps</h1>
+
+<ol>
+	<li>Under <strong>Initial Setup | Mandatory Hardware</strong> select <strong>Compass</strong>.</li>
+	<li>Select your autopilot configuration to automatically enter the most important configuration information for your board:
+         <ul>
+	    <li>For Pixhawk and PX4, select the button <strong>Pixhawk/PX4</strong>.</li>
+	    <li>For APM 2.6, select <strong>APM with External Compass</strong>. </li>
+         </ul>
+[caption id="attachment_5521" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/MissionPlanner_CompassCalibration_MainScreen.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/MissionPlanner_CompassCalibration_MainScreen.png" alt="Mission Planner: Compass Calibration " width="1011" height="570" class="size-full wp-image-5521" /></a> Mission Planner: Compass Calibration [/caption]
+
+	You shouldn't need to do any more configuration, but you might want to confirm that the <strong>Enable compasses</strong>, <strong>Obtain declination automatically</strong> and <strong>Automatically learn offsets</strong> check boxes are checked.</li>
+	<li>Click the <strong>Live Calibration</strong> button.
+
+	A window should pop-up showing you the state of the live calibration.
+
+[caption id="attachment_5541" align="alignnone" width="827"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/MissionPlanner_CompassCalibration_LiveCalibrationScreen.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/MissionPlanner_CompassCalibration_LiveCalibrationScreen.png" alt="Mission Planner: Live Compass Calibration" width="827" height="472" class="size-full wp-image-5541" /></a> Mission Planner: Live Compass Calibration[/caption]
+</li>
+
+	<li>Hold the vehicle in the air and rotate it slowly so that each side (front, back, left, right, top and bottom) points down towards the earth for a few seconds in turn.
+[caption id="attachment_7545" align="alignnone" width="1000"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-calib-positions-e1376083327116.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/accel-calib-positions-e1376083327116.jpg" alt="Compass Calibration Positions (Shown for Copter, but true for all vehicles)" width="1000" height="162" class="size-full wp-image-7545" /></a> Compass Calibration Positions (shown for Copter, but true for all vehicles)[/caption]
+
+</li>
+	<li>The calibration will automatically complete when it has data for all the positions. At this point, another window will pop up telling you that it is saving the newly calculated offsets. These are displayed on the main screen below each associated compass.
+
+[note]In Copter-3.2.1 and later offsets are considered acceptable provided their combined "length" is less than 600 (i.e. <em>sqrt(offset_x^2+offset_y^2+offset_Z^2) < 600</em>). Prior to Copter 3.2.1 the recommendation was that the absolute value of each offset be less than 150 (i.e. <em>-150 < offset < 150</em>).[/note]
+
+</li>
+</ol>
+
+
+
+<h1>Additional information</h1>
+
+More information about compass configuration can be found in <a href="common-compass-setup-advanced">Advanced Compass Setup</a>. This includes instructions for how to set up additional compasses, non-standard compass alignments,[site wiki="copter" inline="on"] <a href="common-compass-setup-advanced/#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_motors">compassmot</a>, [/site]etc.
+
+General discussion on magnetic interference and ways to reduce it can be found in <a href="common-magnetic-interference">Magnetic Interference</a>.
+
+<h1>Video demonstration</h1>
+
+Video demonstration of compass calibration.
+
+https://youtu.be/DmsueBS0J3E

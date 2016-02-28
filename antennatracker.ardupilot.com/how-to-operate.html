@@ -1,0 +1,26 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: how-to-operate 
+title: How to Operate 
+id: 48 
+menu_order: 60 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page shows how to control the antenna tracker, mostly using the Mission Planner.
+
+<!--more-->
+<h1>Control Modes</h1>
+There are five modes that you can place the antenna tracker in:
+<ul>
+	<li><strong>Manual</strong>: the operator directly controls the pan and tilt of the antenna tracker to manually point it at the vehicle</li>
+	<li><strong>Stop</strong>: the tracker does not move</li>
+	<li><strong>Scan</strong>: the tracker automatically scans looking for the vehicle</li>
+	<li><strong>Auto</strong>: the tracker attempts to track the vehicle, scanning if it ever loses contact</li>
+	<li><strong>Servo_Test</strong>: the servos are moved to the pwm values specified by a do-set-servo mavlink command.  Used by the mission planner's extended tuning screen when the user pushes the "test" buttons.</li>
+</ul>
+The operator can set the current mode from the Mission Planner's Flight Data screen's Actions tab's Set Mode button.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Operation_SetMode.png"><img class="alignnone size-full wp-image-2769" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Operation_SetMode.png" alt="AntennaTracker_Operation_SetMode" width="1024" height="626" /></a>

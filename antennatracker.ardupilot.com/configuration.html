@@ -1,0 +1,76 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: configuration 
+title: Configuration 
+id: 46 
+menu_order: 40 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The antenna tracker requires much of the same basic configuration as Copter and Plane and then some specific configuration specific to the antenna tracker. Below are the details of this set-up.
+<!--more-->
+<h1>Setting the AHRS orientation</h1>
+If the flight controller board could not be mounted so that it's forward direction aligned with the antenna (as mentioned on the <a href="frame-assembly/">Assembling a frame page</a>) the AHRS_ORIENTATION parameter should be set from the Mission Planner's Config/Tuning &gt;&gt; Advanced Params screen.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_AHRSORIENTATION.png"><img class="alignnone size-medium wp-image-2729" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_AHRSORIENTATION-300x202.png" alt="AntennaTracker_Config_AHRSORIENTATION" width="300" height="202" /></a>
+Some commonly used values include:
+<ul>
+	<li>Pitch90 : the flight controller is pointing up at 90 degrees compared to the direction of the antenna</li>
+	<li>Pitch270 : the flight controller is pointing down at 90 degrees compared to the direction of the antenna</li>
+</ul>
+<h1>Accelerometer Calibration</h1>
+The <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_accelerometer" target="_blank">accelerometer calibration</a> is the same as for Copter meaning the flight controller board should be connected to the Mission planner and then the Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Accel Calibration routine should be run which involves holding the board in 6 separate orientations positions so that offsets and scaling can be calculated.
+<h1>Setting the Compass orientation</h1>
+If an external GPS+compass module is being used but the arrow on the case could not be aligned so as to point in the same direction as the antenna, the COMPASS_ORIENTATION parameter should be set.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_CompassOrientation.png"><img class="alignnone size-medium wp-image-2731" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_CompassOrientation-300x202.png" alt="AntennaTracker_Config_CompassOrientation" width="300" height="202" /></a>
+Some more commonly used values include:
+<ul>
+	<li>Yaw 90 : the arrow on the compass module is pointing off to the right at a 90 degree angle clockwise from the direction the antenna is pointing.</li>
+	<li>Yaw 270: the arrow is pointing to the left at 90degrees from the antenna. I.e. the arrow is rotated at 90deg counter-clocwise from where the antenna is pointed.</li>
+</ul>
+<h1>Compass Calibration</h1>
+The <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_compass" target="_blank">compass calibration</a> can be done using the same method as Copter.  Open the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Compass screen and push the "Live Calibration" button and rotate the board until the mission planner says it has captured enough points to correctly calculate the offsets.
+<h1>Setting the servo and range of movement</h1>
+For this section it is best to plug in the battery so that the servos are powered and push the "arming switch" if present.  Connect with the Mission Planner, go to the CONFIG/TUNING &gt;&gt; Extended Tuning page.
+<a href="http://antennatracker.ardupilot.com/wp-content/uploads/sites/9/2014/08/AT_MPExtendedTuning.png" rel="attachment wp-att-122"><img class="alignnone size-large wp-image-122" src="http://antennatracker.ardupilot.com/wp-content/uploads/sites/9/2014/08/AT_MPExtendedTuning-1024x575.png" alt="AT_MPExtendedTuning" width="474" height="266" /></a>
+<h2>Setting the Yaw servo's min and max pwm values</h2>
+The green "Test" buttons on this screen work in conjunction with the Min, Max field values and the slider position.  If the slider is pushed all the way to the left and the Test button is pushed, the pwm value in the "Min" field will be sent to the servo.  If the slider is pushed all the way to the right and the Test button is pushed, the pwm value in the Max field will be sent to the servo.
+
+If the Yaw (aka pan) servo's minimum and maximum pwm values are known, they can simply be entered into the Yaw Servo Min and Max fields.  If they are not know, you can discover them through experimentation.  For example to discover the minimum, push the slider all the way to the left and then enter progressively lower pwm values (pushing the Test button after each change) until you discover the lowest value that causes the servos to move. Repeat for the Max field by pushing the slider all the way to the right and entering progressively higher pwm values.
+
+Normally lower pwm values should cause the tracker to point to the right (i.e. clockwise), higher values will point to the left (i.e. counter-clockwise).  If this is not the case, the "Reverse" checkbox should be checked.  Note that changing this checkbox will not affect how the tracker operates when using the Test button.
+
+The Neutral field is the value that will be output to the servos when the tracker first begins controlling them after startup.
+<h2>Setting the Yaw servo's range of movement</h2>
+In this step we want to discover the heading change that comes from moving the servos between their minimum and maximum  values. One way to do this is to:
+<ul>
+	<li>Put the slider all the way to the left (if the Reverse checkbox is unchecked) or right (if the Reverse checkbox is checked) and push the Test button</li>
+	<li>Rotate the tracker so that it's heading (on the MP's Flight Data screen) shows close to "0" (i.e. North)</li>
+	<li>Return to the extended tuning page, push the slider all the way to the other extreme and push Test</li>
+	<li>The new heading back on the Flight Data screen is the range of movement and should be entered into the "Range of movement field".</li>
+</ul>
+<h2>Setting the Pitch servo's range of movement pwm values</h2>
+Repeat the procedures described above to discover the Yaw servo's min and max values except using the fields and buttons in the "Pitch Servo" section of the Extended Tuning screen.
+
+Lower pwm values should cause the tracker to aim down, higher pwm values to aim up.  If this is not the case, the "Reverse" checkbox should be checked.
+<h2>Setting the Pitch servo's range of movement</h2>
+Repeat the procedures used to discover the Yaw servo's range of movement except that the difference in the Pitch values shown on the Mission Planner's Flight Data screen should be used.
+<h2>Manually setting the parameters</h2>
+If the mission planner is not being used the parameters below can be updated manually:
+
+RC1_ parameters control the pan (aka yaw) servo
+
+RC1_MIN : min pwm value that can be sent to the pan servo
+RC1_MAX : max pwm value that can be sent to the pan servo
+RC1_REV : set to "-1" if the tracker rotates in the wrong direction
+
+RC2_ parameters control the tilt (aka pitch) servo
+RC2_MIN : min pwm value that can be sent to the tilt servo
+RC2_MAX : max pwm value that can be sent to the tilt servo
+RC2_REV : set to "-1" if the tracker tilts in the wrong direction (i.e. tilts down when vehicle is above tracker)
+
+[tip]For continuous rotation set YAW_RANGE equal to 360.  Make sure you hardware setup (i.e. the cabling) can handle the tracker turning continuous circles.[/tip]
+<h1>Tuning</h1>
+YAW2SRV_P, I and D values are set the pan control's gains.
+PITCH2SRV_P, I and D values are set the tilt control's gains.

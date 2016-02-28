@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This article explains how to connect the ESCs, Motors and Propellers for Pixhawk, PX4, and APM 2.x.
+This article explains how to connect the ESCs, Motors and Propellers for Pixhawk, PX4, APM 2.x. and Erle-Brain2.
 <!--more-->
 
 <h1>Connect motor PWM signal outputs (Pixhawk/PX4)</h1>
@@ -18,12 +18,19 @@ Connect the power (+), ground (-), and signal (s) wires for each ESC to the cont
 
 [caption id="attachment_15423" align="alignnone" width="459"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/Pixhwak_outputs.jpg" alt="Pixhawk Output pins showing colours for connecting a Quad frame" width="459" height="167" class="size-full wp-image-15423" /></a> Pixhawk Output pins (numbered). First 4 pins are colour-coded for connecting a Quad frame[/caption]
 
-[warning]The APM PDB described in the following section is not compatible with the Pixhawk or PX4.[/warning]
+
+<h1>Connect motor PWM signal outputs (Erle-Brain2)</h1>
+
+When connecting the ESCs directly to autopilot board, connect the power (+), ground (-), and signal (s) wires for each ESC to the controller main output pins by motor number. Find your frame type below to determine the assigned order of the motors.
+<img class="align right size-medium wp-image-4327" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/12/ErleBrain2PWM.jpg" alt="Screen shot 2013-04-17 at 12.27.40 PM" width="450" height="400" />
+[note]Be sure you connect the ESC connector in the right way. Signal goes on the top of the rail (white or orange color wire) and ground at the bottom (black or brown color wire)[/note]
 
 
 <h1>Connect motor PWM signal outputs (APM2)</h1>
 
 There are two methods of connecting the motor outputs: connect the electronic speed controllers (ESCs) to autopilot controller board directly or use a power distribution board (PDB).
+
+[warning]The APM power distribution board PDB described here is not compatible with the Pixhawk, PX4 or Erle.[/warning]
 
 When using a PDB, connect the power (+), ground (-), and signal (s) wires for each ESC to the PDB according to motor number. Find your frame type below to determine the assigned order of the motors. Then connect the signal wires from the PDB to the main output signal pins on the flight controller board (ensuring that the motor order numbers match the main output pin numbers on the controller). If you are using a power module, it is optional to connect the power and ground wires from the PDB to the flight controller board. If you would like to use these cables in addition to or instead of the power module or as a common point for low current servos, connect the ground (-) wire to a main output ground (-) pin and the power (+) wire to a main output power (+) pin.
 
@@ -35,6 +42,7 @@ When connecting the ESCs directly to autopilot board, connect the power (+), gro
 
 
 [caption id="attachment_15422" align="alignnone" width="458"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/APM_outputs.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/APM_outputs.jpg" alt="APM Output Pins (numbered)" width="458" height="427" class="size-full wp-image-15422" /></a> APM Output Pins (numbered)[/caption]
+
 
 <h1>Motor order diagrams</h1>
 
@@ -63,7 +71,7 @@ Use the diagram for your frame type, and wire the motors as shown.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/MOTORS_Tri.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/10/MOTORS_Tri.jpg" alt="MOTORS_Tri" width="722" height="370" class="alignnone size-full wp-image-15421" /></a>
 
-[note]If the direction of your tail servo is going the wrong way in response to yaw then either the RC7_REV or MOT_YAW_SV_REV parameter should be set to -1 (from 1), See <a href="tricopter">TriCopter setup page</a> for details.)[/note]
+[note]If the direction of your tail servo is going the wrong way in response to yaw then either the RC7_REV or MOT_YAW_SV_REV parameter should be set to -1 (from 1), See <a href="http://copter.ardupilot.com/wiki/tricopter/">TriCopter setup page</a> for details.)[/note]
 
 
 
@@ -88,7 +96,7 @@ Propellers come in many varieties and are suited to different needs.
 
 <h1>Testing motor spin directions</h1>
 
-If you have completed the <a href="radio-control-calibration">Radio</a> and <a href="esc-calibration">ESC calibration</a>, you can check that your motors are spinning in the correction direction:
+If you have completed the <a href="radio-control-calibration">Radio</a> and <a href="http://copter.ardupilot.com/wiki/esc-calibration/">ESC calibration</a>, you can check that your motors are spinning in the correction direction:
 <ol>
 	<li>Make sure there are no propellers on your copter!</li>
 	<li>Turn transmitter on and ensure the flight mode switch is set to Stabilize.</li>

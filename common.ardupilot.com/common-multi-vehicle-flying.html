@@ -18,13 +18,13 @@ This page shows how to monitor and control multiple vehicles using a single grou
 <ul>
 	<li>Multiple <a href="http://plane.ardupilot.com/">Planes</a> or <a href="http://copter.ardupilot.com/">Copters</a> or <a href="http://rover.ardupilot.com/">Rovers</a></li>
 	<li>An <a href="http://antennatracker.ardupilot.com/">Antenna Tracker </a>(a.k.a. Tracker) to combine the telemetry data from vehicles and send to the GCS.</li>
-	<li>Pairs of telemetry radios (i.e. <a href="wiki/common-optional-hardware/common-telemetry-landingpage/common-3dr-radio-version-2/">3DR radios</a>) for each vehicle (i.e. 2x number of vehicles) OR multi-point radios (like the <a href="wiki/common-rfd900/">RFD900</a>) in which case just 1 radio for each vehicle + 1 for the ground station.</li>
+	<li>Pairs of<a href="common-telemetry-landingpage">telemetry radios</a> for each vehicle (i.e. 2x number of vehicles) OR multi-point radios (like the <a href="wiki/common-rfd900/">RFD900</a>) in which case just 1 radio for each vehicle + 1 for the ground station.</li>
 	<li>GCS capable of displaying/controlling multiple vehicles (i.e. the <a href="http://planner.ardupilot.com/">Mission Planner</a>).</li>
 	<li>RC transmitter for each vehicle (optional).</li>
 </ul>
 <h1>Pre-Flight Setup</h1>
 <ul>
-	<li>If using 3DR radios, <a href="wiki/common-optional-hardware/common-telemetry-landingpage/common-3dr-radio-version-2/#configuring_using_the_mission_planner">set the NetID</a> of each pair of radios to a unique number.  I.e. if controlling 3 vehicles, set the <code>NetID</code> of one pair to "23", the 2nd pair to "24", the 3rd pair to "25".</li>
+	<li>If using SiK radios, <a href="common-3dr-radio-version-2/#configuring_using_the_mission_planner">set the NetID</a> of each pair of radios to a unique number.  I.e. if controlling 3 vehicles, set the <code>NetID</code> of one pair to "23", the 2nd pair to "24", the 3rd pair to "25".</li>
 	<li>Connect one of each radio pairs to the vehicle flight controllers (i.e. Pixhawk) using Telem1 or Telem2.</li>
 	<li>Connect the other pairs to the Tracker's controller (i.e. Pixhawk) using Telem1, Telem2 and Serial 4/5 ports.</li>
 	<li>If using Serial 4/5 set the Tracker's <code>SERIAL4_PROTOCOL</code> to "1" to enable MAVLink communication on that port.</li>

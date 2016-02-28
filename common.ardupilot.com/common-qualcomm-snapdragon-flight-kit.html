@@ -1,0 +1,322 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-qualcomm-snapdragon-flight-kit 
+title: common-Qualcomm Snapdragon Flight Kit 
+id: 5654 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The Snapdragon Flight platform is a high-end autopilot / onboard computer with a high quality camera.<!--more-->
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/QualcommFlightKit.jpg" rel="attachment wp-att-5655"><img class="alignnone size-full wp-image-5655" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/QualcommFlightKit.jpg" alt="QualcommFlightKit" width="293" height="196" /></a>
+<h1>Overview</h1>
+The <a href="http://shop.intrinsyc.com/products/snapdragon-flight-dev-kit" target="_blank">Qualcomm® Snapdragon Flight™ Kit (Developer’s Edition)</a> is small (58x40mm) but offers a lot of CPU power and two on-board cameras. It contains 4 ‘Krait’ ARM cores which run Linux (Ubuntu 14.04 Trusty, by default), and 3 ‘Hexagon’ DSP cores which run the QURT RTOS. In addition it includes Wi-Fi, Bluetooth connectivity, automotive-grade GPS and many more features.
+
+[warning]Due to some rather unusual licensing terms from Intrinsyc we cannot distribute binaries of ArduPilot (or any program built with the Qualcomm libraries). So you will have to build the firmware yourself: <a href="http://dev.ardupilot.com/wiki/building-for-qualcomm-snapdragon-flight-kit/" target="_blank">Building for Qualcomm Snapdragon Flight Kit</a> (Dev Wiki).[/warning]
+<h1>Specifications</h1>
+Detailed specifications are available on <a href="https://www.intrinsyc.com/snapdragon-embedded-development-kits/qualcomm-snapdragon-flight/">www.intrinsyc.com here</a> (behind a short survey).
+<ul>
+	<li><strong>System on Chip</strong>: Snapdragon 801
+<ul>
+	<li>CPU: Quad-core 2.26 GHz Krait</li>
+	<li>DSP: Hexagon DSP (QDSP6 V5A) – 801 MHz+256KL2 (running the flight code)</li>
+	<li>GPU: Qualcomm® Adreno™ 330 GPU</li>
+	<li>RAM: 2GB LPDDR3 PoP @931 MHz</li>
+	<li>Storage: 32GB eMMC Flash</li>
+</ul>
+</li>
+	<li><strong>Sensors</strong>
+<ul>
+	<li>MPU: Invensense MPU-9250 9-Axis Sensor, 3x3mm QFN</li>
+	<li>Barometer: Bosch BMP280 barometric pressure sensor</li>
+	<li>Optical Flow: Omnivision OV7251 on Sunny Module MD102A-200</li>
+	<li>Video: Sony IMX135 on Liteon Module 12P1BAD11 (4k@30fps 3840×2160 video capture to SD card with H.264 @ 100Mbits (1080p/60 with parallel FPV), 720p FPV)</li>
+	<li>GPS: Telit Jupiter SE868 V2 module</li>
+</ul>
+</li>
+	<li><strong>Power</strong>
+<ul>
+	<li>5VDC via external 2S-6S battery regulated down to 5V via APM adapter</li>
+</ul>
+</li>
+	<li><strong>Interfaces/Connectivity</strong>
+<ul>
+	<li>Wifi: Qualcomm® VIVE™ 1-stream 802.11n/ac with MU-MIMO † Integrated digital core</li>
+	<li>BT/WiFi: BT 4.0 and 2G/5G WiFi via QCA6234</li>
+	<li>802.11n, 2×2 MIMO with 2 uCOAX connectors on-board for connection to external antenna</li>
+	<li>uCOAX connector on-board for connection to external GPS patch antenna</li>
+	<li>CSR SiRFstarV @ 5Hz via UART</li>
+	<li>One USB 3.0 OTG port (micro-A/B)</li>
+	<li>Micro SD card slot</li>
+	<li>Gimbal connector (PWB/GND/BLSP)</li>
+	<li>ESC connector (2W UART)</li>
+	<li>I2C</li>
+	<li>60-pin high speed Samtec QSH-030-01-L-D-A-K expansion connector</li>
+	<li>2x BLSP (BAM Low Speed Peripheral)</li>
+</ul>
+</li>
+	<li><strong>Dimensions</strong>
+<ul>
+	<li>Weight ?</li>
+	<li>pcb = 57x40, pcb+connectors+camera=68x52</li>
+</ul>
+</li>
+</ul>
+More details can be found from the <a href="http://shop.intrinsyc.com/products/snapdragon-flight-dev-kit" target="_blank">Intrinsyc shop</a>.
+
+<h1>Connector pin assignments</h1>
+The Qualcomm Flight board has 4 DF13 6 pin UART connectors.
+[warning]The pinout is different from Pixhawk![/warning]
+
+The pinout for all of the UART is:
+<ul>
+	<li><strong>pin1</strong>: power</li>
+	<li><strong>pin2</strong>: TX</li>
+	<li><strong>pin3</strong>: RX</li>
+	<li><strong>pin5</strong>: GND</li>
+</ul>
+The 4 ports are called <strong>/dev/tty-1</strong>, <strong>/dev/tty-2</strong>, <strong>/dev/tty-3</strong> and <strong>/dev/tty-4</strong>. The first port is the one closest to the USB3 connector. The ports proceed counter-clockwise from there. So tty-2 is the one closest to the power connector.
+
+The <em>default assignment</em> of the ports is:
+<ul>
+	<li><strong>/dev/tty-1</strong>: RC input (Spektrum satellite only)</li>
+	<li><strong>/dev/tty-2</strong>: telemetry at 57600</li>
+	<li><strong>/dev/tty-3</strong>: RC output (see below)</li>
+	<li><strong>/dev/tty-4</strong>: GPS</li>
+</ul>
+3 of the 4 ports provide 3.3V power on <strong>pin1</strong>, while the <strong>/dev/tty-1</strong> provides 5V power (note that <strong>pin6</strong> is not ground, unlike on a Pixhawk). You will need to check whether your GPS can be powered off 3.3V. A uBlox GPS is recommended, although any ArduPilot compatible serial GPS can be used.
+
+<img class="alignnone size-full wp-image-5664" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/snapdragon_ports.png" alt="snapdragon_ports" width="596" height="492" />
+<h2>WiFi</h2>
+WLAN0, WLAN1 (+BT 4.0): U.FL connector: <a href="http://www.digikey.com/product-detail/en/FXP840.07.0055B/931-1222-ND/3877414" target="_blank">Taoglas adhesive antenna (DigiKey)</a>
+<h2>J9 / GPS</h2>
+<table>
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<td>3.3V</td>
+<td>Output (3.3V)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UART2_TX</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UART2_RX</td>
+<td>Input (3.3V)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>I2C2_SDA</td>
+<td>(3.3V)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GND</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>I2C2_SCL</td>
+<td>(3.3V)</td>
+</tr>
+</tbody>
+</table>
+<h2>J12 / Gimbal bus</h2>
+<table>
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<td>3.3V</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UART8_TX</td>
+<td>Output (3.3V)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UART8_RX</td>
+<td>Input (3.3V)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>APQ_GPIO_47</td>
+<td>(3.3V)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GND</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>APQ_GPIO_48</td>
+<td>(3.3V)</td>
+</tr>
+</tbody>
+</table>
+<h2>J13 / ESC bus</h2>
+<table>
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<td>5V</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UART6_TX</td>
+<td>Output (5V)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UART6_RX</td>
+<td>Input (5V)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>APQ_GPIO_29</td>
+<td>(5V)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GND</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>APQ_GPIO_30</td>
+<td>(5V)</td>
+</tr>
+</tbody>
+</table>
+<h2>J14 / Power</h2>
+<table>
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<td>5V DC</td>
+<td>Power input</td>
+</tr>
+<tr>
+<td>2</td>
+<td>GND</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>I2C3_SCL</td>
+<td>(5V)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>I2C3_SDA</td>
+<td>(5V)</td>
+</tr>
+</tbody>
+</table>
+<h2>J15 / Radio Receiver / Sensors</h2>
+<table>
+<tbody>
+<tr>
+<th>Pin</th>
+<th>Signal</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<td>3.3V</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UART9_TX</td>
+<td>Output</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UART9_RX</td>
+<td>Input</td>
+</tr>
+<tr>
+<td>4</td>
+<td>I2C9_SDA</td>
+<td>-</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GND</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>I2C9_SCL</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h1>ESC PWM Output</h1>
+To get signals to ESCs or servos you need to use a UART. The default setup is to send 4 PWM signals as serial data on <strong>/dev/tty-3</strong>.
+
+<a href="https://github.com/tridge/ardupilot/tree/hal-qurt/libraries/RC_Channel/examples/RC_UART">This firmware</a> will read the UART serial stream and output to the PWM output of the board you use. For example, you could use a Pixracer or Pixhawk board. It is designed to work with this firmware for any ArduPilot compatible board.
+
+[note]This is an interim solution until Qualcomm/Intrinsyc release an ESC add-on control board for the Qualcomm Flight.[/note]
+<h1>Logging</h1>
+Logs will appear in <strong>/var/APM/logs</strong> for QFLIGHT ARM port and in <strong>/usr/share/data/adsp/logs</strong> for the QURT port.
+
+You can copy the logs over WiFi using FTP, Samba, SCP or any other common file copying tool (the board runs Samba by default, so you can just add the log directory to the Samba config file to export it, and then drag and drop from Windows). On QFLIGHT you can also download logs over MAVLink.
+
+
+<h1>Record and display live video</h1>
+Recording and viewing live video from either of the two cameras is possible using the qcamvid application on the flight controller.
+<ul>
+	<li>Connect the ground station computer to the flight controller's wifi network (normally appears as <em>Atlanticus_XXXX</em>)</li>
+	<li>Use an ssh program such as <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank">Putty</a> to login into the board</li>
+	<li>Type the following to record 10 minutes of video from the front camera to /root/video.h264 (other options can be seen by typing <code>qcamvid -h</code>)
+<pre>qcamvid -c hires -t 600 -o /root/video.h264</pre></li>
+</ul>
+
+
+<ul>
+	<li>The video can also be viewed in real-time by installing a program such as <a href="http://www.videolan.org/vlc/index.html" target="_blank">VLC media player</a> on the ground station computer, and then opening the following network stream.
+<pre>rtsp://192.168.2.1:554/fpvview</pre>
+[caption id="attachment_5670" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/snapdragon_VLCMediaLiveVideoViewer.png" rel="attachment wp-att-5670"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/12/snapdragon_VLCMediaLiveVideoViewer-300x191.png" alt="VLC Player: Stream Live Video" width="300" height="191" class="size-medium wp-image-5670" /></a> VLC Media Player: Stream Live Video[/caption]
+</li>
+</ul>
+
+
+
+<h1>Additional information</h1>
+<ul>
+	<li><a href="https://youtu.be/ggNTjAhjnJk">ELC 2015 - Heterogeneous Multi-Core Architecture Support for Dronecode (Mark Charlebois, Qualcomm)</a> (Video)</li>
+	<li><a href="http://dev.ardupilot.com/wiki/building-for-qualcomm-snapdragon-flight-kit/" target="_blank">Building for Qualcomm Snapdragon Flight Kit</a></li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL_QURT/README.md">QURT Port</a> (Github)</li>
+	<li><a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL_Linux/qflight">QFlight Port</a> (Github).</li>
+</ul>

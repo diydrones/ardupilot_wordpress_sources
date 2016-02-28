@@ -12,11 +12,7 @@ END METADATA
 <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass" target="_blank">3DR uBlox</a> modules are shipped with a <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_GPS/config" target="_blank">custom configuration</a> that is compatible with Copter, Rover and Plane.  This article explains how you can reprogram the custom configuration if needed (this is not expected to be necessary for normal users).
 <!--more-->
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3DR-ublox.jpg" alt="" />
-
-
-
 <h1>Connection Option #1 - Mission Planner and Pixhawk as Passthrough</h1>
-
 The mission planner and pixhawk can pass through the communication between u-center and the GPS by doing the following:
 <ul>
 	<li>Connect to Pixhawk to your PC and connect with the Mission Planner</li>
@@ -38,7 +34,7 @@ http://www.youtube.com/watch?v=JIgs3UCLfd0
 <h1>Installing and Uploading the config using U-Center</h1>
 <ul>
 	<li>Download and install <a href="http://www.u-blox.com/en/evaluation-tools-a-software/u-center/u-center.html" target="_blank">uBlox's u-center software</a>   Note that this is Windows only.</li>
-	<li>Get the 3DR-Ublox.txt configuration file found <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_GPS/config" target="_blank">here</a>.</li>
+	<li>Get the 3DR-Ublox.txt configuration file for Ublox6 or 7 <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_GPS/config" target="_blank">here</a>.  For M8N the file is <a href="https://raw.githubusercontent.com/diydrones/ardupilot/master/libraries/AP_GPS/config/Marco-Ublox_M8N.txt" target="_blank">here</a>.</li>
 	<li>Run u-center and connect your uBlox to your computer.</li>
 	<li>Click the magic wand button to enable auto-bauding, then select your appropriate COM port by clicking the down arrow next to the Connect button. If the uBlox is connected to the port you selected, you should see the serial activity indicator blinking in the program's status bar in the lower right-hand corner of the window, it also shows the current baud rate.
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/COM-port-selection.png" alt="" /></li>

@@ -9,9 +9,11 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-In return to launch (RTL) mode, the copter navigates from its current position to hover above the home position. The behavior of RTL mode can be controlled by several adjustable parameters. This page describes how to use and customize RTL mode.
+RTL mode (Return To Launch mode) navigates Copter from its current position to hover above the home position. The behavior of RTL mode can be controlled by several adjustable parameters. This page describes how to use and customize RTL mode.
+
+
 <h1>Overview</h1>
-When RTL mode is selected, the copter will return to the home location. The copter will first rise to RTL_ALT before returning home or maintain the current altitude if the current altitude is higher than RTL_ALT.  The default value for RTL_ALT is 15m.
+When RTL mode is selected, the copter will return to the home location. The copter will first rise to <a href="arducopter-parameters/#rtl_altitude_arducopterrtl_alt">RTL_ALT</a> before returning home or maintain the current altitude if the current altitude is higher than <code>RTL_ALT</code>.  The default value for <code>RTL_ALT</code> is 15m.
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/08/RTL.png"><img class="alignnone wp-image-9418" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/08/RTL.png" alt="RTL" width="560" height="420" /></a>
 
@@ -19,58 +21,56 @@ RTL is a GPS-dependent move, so it is essential that GPS lock is acquired before
 
 RTL will command the copter to return to the home position, meaning that it will return to the location where it was armed. <span style="color: #ff0000">Therefore, the home position is always supposed to be your copter's actual GPS takeoff location, unobstructed and away from people. </span>For Copter if you get GPS lock and then ARM your copter, the home position is the location the copter was in when it was armed. This means if you execute an RTL in Copter, it will return to the location where it was armed.
 
-<span style="color: #ff0000"><strong>Warning:</strong></span> In RTL mode the flight controller uses a barometer which measures air pressure as the primary means for determining altitude ("Pressure Altitude") and if the air pressure is changing in your flight area, the copter will follow the air pressure change rather than actual altitude (unless you are within 20 feet of the ground and have SONAR installed and enabled).
+[warning]In RTL mode the flight controller uses a barometer which measures air pressure as the primary means for determining altitude ("Pressure Altitude") and if the air pressure is changing in your flight area, the copter will follow the air pressure change rather than actual altitude (unless you are within 20 feet of the ground and have SONAR installed and enabled).[/warning]
+
+
 <h1>Options (User Adjustable Parameters)</h1>
 <ul>
-	<li><strong>RTL_ALT:</strong> The minimum altitude the copter will move to before returning to launch.
+	<li><a href="arducopter-parameters/#rtl_altitude_arducopterrtl_alt">RTL_ALT</a>: The minimum altitude the copter will move to before returning to launch.
 <ul>
 	<li>Set to zero to return at the current altitude.</li>
 	<li>The return altitude can be set from 1 to 8000 centimeters.</li>
 	<li>The default return altitude Default is 15 meters (1500)</li>
 </ul>
 </li>
-	<li><strong>RTL_ALT_FINAL:</strong> The altitude the copter will move to at the final stage of "Returning to Launch" or after completing a Mission.
+	<li><a href="arducopter-parameters/#rtl_final_altitude_arducopterrtl_alt_final">RTL_ALT_FINAL</a>: The altitude the copter will move to at the final stage of "Returning to Launch" or after completing a Mission.
 <ul>
 	<li>Set to zero to automatically land the copter.</li>
 	<li>The final return altitude may be adjusted from 0 to 1000 centimeters.</li>
 </ul>
 </li>
-	<li><strong>RTL_LOIT_TIME:</strong> Time in milliseconds to loiter above the "Home" position before beginning final descent.
+	<li><a href="arducopter-parameters/#rtl_loiter_time_arducopterrtl_loit_time">RTL_LOIT_TIME</a>: Time in milliseconds to hover/pause above the "Home" position before beginning final descent.
 <ul>
 	<li>The "Loiter" time may be adjusted from 0 to 60,000 milliseconds.</li>
 </ul>
 </li>
-	<li><strong>WP_YAW_BEHAVIOR:</strong> Sets how the autopilot controls the "Yaw" during Missions and RTL.
+	<li><a href="arducopter-parameters/#yaw_behaviour_during_missions_arducopterwp_yaw_behavior">WP_YAW_BEHAVIOR</a>: Sets how the autopilot controls the "Yaw" during Missions and RTL.
 <ul>
 	<li>0 = Never change Yaw.</li>
 	<li>1 = Face Next Waypoint including facing home during RTL.</li>
 	<li>2 = Face Next Waypoint except for RTL (i.e. during RTL vehicle will remain pointed at it's last heading)</li>
 </ul>
 </li>
-	<li><strong>LAND_SPEED:</strong> The descent speed for the final stage of landing in centimeters per second.
+	<li><a href="arducopter-parameters/#land_speed_arducopterland_speed">LAND_SPEED</a>: The descent speed for the final stage of landing in centimeters per second.
 <ul>
 	<li>The landing speed is adjustable from 20 to 200 centimeters per second.</li>
 </ul>
 </li>
-	<li><strong>RTL_CLIMB_MIN:</strong> The vehicle will climb at least this many meters at the first stage of the RTL.  By default this value is zero.  (only Copter-3.3 and above)</li>
+	<li><a href="arducopter-parameters/#rtl_minimum_climb_arducopterrtl_climb_min">RTL_CLIMB_MIN</a>: The vehicle will climb at least this many meters at the first stage of the RTL.  By default this value is zero.  (only Copter-3.3 and above)</li>
 </ul>
 <h1>Notes</h1>
 <ul>
 	<li>Other navigation settings also have an influence over RTL mode:
 <ul>
-	<li>WPNAV_ACCEL</li>
-	<li>WPNAV_LOITER_SPEED</li>
-	<li>WPNAV_SPEED_DN</li>
-	<li>WPNAV_SPEED_UP</li>
+	<li><a href="arducopter-parameters/#waypoint_acceleration_wpnav_accel">WPNAV_ACCEL</a></li>
+	<li><a href="arducopter-parameters/#waypoint_descent_speed_target_wpnav_speed_dn">WPNAV_SPEED_DN</a></li>
+	<li><a href="arducopter-parameters/#waypoint_climb_speed_target_wpnav_speed_up">WPNAV_SPEED_UP</a></li>
 </ul>
 </li>
 	<li>To use RTL, GPS lock needs to be achieved (Blue GPS LED and Blue APM LED on solid not blinking) before arming and takeoff to establish the home or launch position.</li>
-	<li>Note on the UBLOX GPS module the LED is off while acguiring satellites and on blinking when satellites have been acquired.</li>
 	<li>Landing and re-arming the copter will reset home, which is a great feature for flying at airfields.</li>
 	<li>If you get lock for the first time while flying, your home will be set at the location of lock.</li>
-	<li>If you set the ALT_HOLD_RTL to a number at other than 0 it will go to and maintain that altitude while returning.</li>
-	<li>RTL uses the waypoint_speed to determine how fast it travels.</li>
-	<li>Once the copter arrives at the home location the copter will enter Loiter mode, timeout (AUTO_LAND), then land.</li>
-	<li>To prevent auto-landing, simply change modes with the control switch to clear the landing timer and resume normal flight.</li>
-	<li>The throttle stick controls the altitude while returning or loitering above home and not the motors directly.</li>
+	<li>If you set the <code>RTL_ALT</code> to a number at other than 0 it will go to and maintain that altitude while returning.</li>
+	<li>RTL uses <a href="arducopter-parameters/#waypoint_horizontal_speed_target_wpnav_speed">WPNAV_SPEED</a> to determine how fast it travels.</li>
+	<li>Once the copter arrives at the home location the copter will pause for <code>RTL_LOIT_TIME</code> miliseconds, timeout (AUTO_LAND), then land.</li>
 </ul>

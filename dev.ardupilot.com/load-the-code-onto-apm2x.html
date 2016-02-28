@@ -1,0 +1,69 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: load-the-code-onto-apm2x 
+title: Loading the code onto APM2.x 
+id: 1766 
+menu_order: 40 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>What you'll need:</h1>
+<ul>
+	<li>mini USB cable (for APM1) or micro USB cable (for APM2)</li>
+	<li>modified version of the Arduino IDE for <a href="http://firmware.diydrones.com/Tools/Arduino/" rel="nofollow">windows</a> or <a href="http://firmware.diydrones.com/Tools/Arduino/">macintosh</a></li>
+</ul>
+
+
+
+<h1>Setting up the software drivers</h1>
+
+First, download and install Arduino (see links above). If you've never used Arduino before, please use <a href="http://arduino.cc/en/Guide/HomePage" rel="nofollow">these setup instructions</a> to become familiar with Arduino basics.
+
+Next, set up the drivers for the USB interface to APM. Most people will use a regular USB-A to miniB cable (regular USB on one side, mini USB on the other) to connect to APM via the IMU shield, but if you're not using that shield you can use a FTDI cable. Pictures showing how to plug in these cables are below.
+
+When you plug APM or the FTDI cable the first time to your PC, Windows 7 should recognize the FTDI USB-to-serial chip and install the right drivers, but if it doesn't or if you're using an earlier version of Windows, you should download and install the appropriate driver for your Operating System from <a href="http://www.ftdichip.com/Drivers/VCP.htm" rel="nofollow">here</a>. Once you've done so, reboot your PC and plug in the cable again. It should be recognized and show up in your Windows Device Manger (which you can find in the Windows Control Panel) as shown below (your COM port will probably be a different number; it's assigned by Windows based on how many other devices you've connected). That's the COM port you'll use in Arduino and all other USB interactions with APM.
+
+<i>Note: if you're using the FTDI cable, you must go to the Control Panel/Device Manager and make a change to the COM port assigned to the FTDI/USB cable. Find the USB Serial Port entry as shown here (your FTDI may have been assigned to a different port than the 3 shown below; it doesn't matter what number it's given) and under Properties/Port Settings/Advanced, ensure that the "Set RTS On Close" box is checked, as shown below. Once you've made this change once, you won't have to do it again.</i>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/eighteen.png"><img class="size-full wp-image-1767" alt="eighteen" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/eighteen.png" width="926" height="616" /></a>
+
+
+
+<h1>Connecting the cable</h1>
+
+The FTDI or USB cable will provide sufficient power for desktop use, but will probably not drive more than two regular servos. If you want to drive more servos than that or if you're using digital servos, you'll need to have an additional power supply (usually an ESC connected to one of the APM servo outputs).
+
+If you're using a USB cable, connect it here:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_4805.jpg"><img class="size-full wp-image-1768" alt="IMG_4805" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_4805.jpg" width="800" height="712" /></a>
+
+
+
+If you're using an FTDI cable, connect it here, noting the marking for the black and green sides of the cable:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_4804.jpg"><img class="size-full wp-image-1769" alt="IMG_4804" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/IMG_4804.jpg" width="800" height="606" /></a>
+
+
+
+<h1>Setting the Sketchbook folder</h1>
+Next you must define the folder Arduino will use for its "sketches" (Arduino-talk for the set of files that compose a program) and libraries
+
+Create a folder someplace where you can find it, perhaps in your Documents folder or even on your desktop. (If you've been using Arduino, you probably have this set up somewhere already). Launch the Arduino IDE and open the <strong>Preferences</strong> dialog. Set the sketchbook location to the<tt>Sketchbook</tt> folder you created or are using. Here's where I have mine:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/sketchfile.png"><img class="size-full wp-image-1770" alt="sketchfile" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/sketchfile.png" width="458" height="341" /></a>
+
+Once you've changed that directory, you must close Arduino and restart it for it to be recognized.
+
+
+<h1>Setting the board type</h1>
+In our modified version of the Arduino IDE there is a new "ArduPilot" menu which allows you to select the board type.
+<ul>
+	<li>For Copter version 2.9.1 and earlier you should select the "None" from this menu and then ensure that under Tools, Board is "ArduinoMega 2560 or Mega ADK". If you are using an APM2 you will also need to uncomment line 5 from APM_Config.h (see bottom screenshot)</li>
+	<li>For versions later than 2.9.1 you should set the "ArduPilot", "HAL Board" to either "ArduPilot Mega 1" or "ArduPilot Mega 2.x" depending on which board you are programming.</li>
+</ul>
+[note]You will need to restart your Arduino IDE after changing the above.[/note]
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/ArduinoIDEmodified.png"><img class="size-full wp-image-1771" alt="ArduinoIDEmodified" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/ArduinoIDEmodified.png" width="1019" height="606" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/ArduinoAPMConfig.png"><img class="size-full wp-image-1772" alt="ArduinoAPMConfig" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/07/ArduinoAPMConfig.png" width="501" height="606" /></a>
+<div id="wikicommentcol"></div>

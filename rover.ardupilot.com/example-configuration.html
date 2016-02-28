@@ -1,0 +1,48 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: example-configuration 
+title: Example Configuration 
+id: 5447 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This topic provides additional recommended configuration for Rover vehicles during initial setup and testing. It assumes that the configuration is performed using <em>Mission Planner</em> (and that <em>Mission Planner</em> is already <a href="common-install-mission-planner">installed</a> and <a href="common-connect-mission-planner-autopilot">connected</a>).
+ 
+<ol>
+	<li>Go to the <strong>Config/Tuning</strong> tab.</li>
+	<li>Select the <strong>Planner</strong> item in the left menu and ensure the <strong>Advanced View</strong> item on the bottom right is checked.</li>
+	<li>Click on the <strong>Standard Params</strong> item in the left menu and install some conservative starting parameters.
+<ul>
+	<li>Set the <strong>Channel 7</strong> Option to <span style="color: #ff0000;"><strong>Learn Waypoint</strong></span> if it is not already set to it.</li>
+	<li>Reduce <strong>Target cruise speed in auto</strong> from 5.00 to <span style="color: #ff0000;"><strong>2.50</strong></span>.</li>
+	<li>Reduce <strong>Base throttle percentage</strong> from 50 to <span style="color: #ff0000;"><strong>30</strong></span>.</li>
+</ul>
+</li>
+	<li>Set a failsafe to turn your vehicle off (put it in HOLD mode) if you lose RC reception for 5 seconds.
+<ul style="font-weight: inherit;">
+	<li>Set <strong>Failsafe Action</strong> to <span style="color: #ff0000;"><strong>HOLD</strong></span>.</li>
+	<li>Set <strong>GCS failsafe enable</strong> to <span style="color: #ff0000;"><strong>Disabled </strong><span style="color: #000000;">unless you are using a 3DR Telemetry radio.</span></span></li>
+	<li>Set <strong>Throttle Failsafe Enable</strong> to <span style="color: #ff0000;"><strong>Enabled</strong> </span></li>
+	<li>Failsafe is preset to 5 seconds but can be adjusted in the <strong>Full Parameter List</strong> with the <strong>FS_TIMEOUT</strong> parameter.</li>
+</ul>
+</li>
+	<li> Select the <strong>Advanced Params</strong> item from the left menu and ensure the <strong>Board Orientation</strong> Item matches your setup.
+<ul>
+	<li>If your autopilot is mounted upside down (e.g. for improved connector access), set the orientation to <span style="color: #ff0000;"><strong>Roll 180</strong></span> (8).</li>
+	<li>If your autopilot is mounted right side up select <span style="color: #ff0000;"><strong>None</strong></span>.</li>
+</ul>
+</li>
+	<li>Scroll down to <strong>Compass Orientation</strong> and ensure it is set correctly for your compass. This should already have been set in <a href="common-compass-calibration-in-mission-planner">Compass Calibration</a>.
+</li>
+	<li>Scroll down to <strong>RC trim PWM (RC3_TRIM)</strong> and set it up for (reverse - centre - forward) throttle or not.
+<ul>
+	<li>Throttle is normally channel 3, if you have changed it to another channel go there instead.</li>
+	<li>If you have a centre loaded throttle with reverse, set this value to <span style="color: #ff0000;"><strong>1500</strong></span>. If not then leave it at <span style="color: #ff0000;"><strong>1100</strong></span>.</li>
+</ul>
+</li>
+	<li>The Minimum Throttle parameter (<tt>THR_MIN</tt>) is mostly useful for rovers with internal combustion motors, to prevent the motor from cutting out in auto mode.</li>
+	<li>The Maximum Throttle parameter (<tt>THR_MAX</tt>) can be used to prevent overheating a ESC or motor on an electric rover.</li>
+</ol>

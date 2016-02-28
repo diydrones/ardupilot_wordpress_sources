@@ -1,0 +1,54 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: motor-thrust-scaling 
+title: Motor Thrust Scaling 
+id: 16272 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Copter includes <em>motor thrust scaling </em>which compensates for the non-linear thrust output of most ESCs and motors.  <!--more-->
+
+[tip]The default curve should work for nearly all ESC/motor combinations. Normally the parameters should not be adjusted unless the vehicle's actual thrust curve has been measured.[/tip][note]Motor thrust scaling was introduced in Copter 3.3.[/note]
+
+<h1>Thrust Curves</h1>
+The curve is controlled by two parameters:
+<ul>
+	<li><strong>MOT_THST_EXPO</strong> controls the shape of the thrust curve with "0" meaning a completely linear curve and "1.0" being very curved (see pictures below).  The default is "0.65" (the image below incorrectly states the default is 0.5).</li>
+</ul>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/11/MotThstExpo_graphs2.png"><img class="alignnone wp-image-16280 size-full" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/11/MotThstExpo_graphs2.png" alt="MotThstExpo_graphs2" width="2538" height="621" /></a>
+<ul>
+	<li><strong>MOT_THST_MAX</strong> controls the point at which the thrust flattens out near it's maximum.  By default this is 0.95 meaning 95% of full throttle.</li>
+</ul>
+
+
+<h1>MatLab example code</h1>
+
+This MatLab example code can be used to calculate the appropriate value for <code>MOT_THST_EXPO</code> based on measured thrust values.
+
+Fill in the <code>thrust</code> array with the actual measured thrust values from the vehicle.  When Run, the <code>MOT_THST_EXPO</code> value will be printed.
+
+<pre> throttle_pwm = [1000; 1100; 1200; 1300; 1400; 1500; 1600; 1700; 1800; 1900; 2000];
+thrust = [0; 68.9; 203.1; 441.0; 785.8; 1177.3; 1655.0; 2118.8; 2673.0; 3153.8; 3490.2];
+% Set MOT_THST_MAX to 90% to remove saturated top end
+working_range = 1:9;
+thrust = thrust(working_range);
+
+% Normalise the throttle and thrust
+throttle_normalised = (throttle_pwm(working_range) - min(throttle_pwm(working_range)))./(max(throttle_pwm(working_range))-min(throttle_pwm(working_range)));
+thrust_normalised = thrust./max(thrust);
+% Perform a least squares fit to solve for a in thrust = (1-a)*throttle + a*throttle^2
+mdl = @(a,x)((1-a(1))*x + a(1)*x.^2);
+startingVals = [0.5];
+coefEsts = nlinfit(throttle_normalised, thrust_normalised, mdl, startingVals);
+disp(['MOT_THST_EXPO is : ', num2str(coefEsts)]);
+figure(2)
+hold on;
+plot(throttle_normalised, thrust_normalised, '*');
+xgrid = linspace(0,1,100);
+line(xgrid, mdl(coefEsts, xgrid), 'Color','g','LineWidth',4);
+xlabel('Normalised Throttle');
+ylabel('Normalised Thrust');
+</pre>

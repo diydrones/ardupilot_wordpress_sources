@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Overview</h3>
+<h1>Overview</h1>
 
 AC 3.0.1 (and higher) includes a simple "tin can" shaped fence centered on home that will attempt to stop your copter from flying too far away by initiating an RTL.  The maximum circular distance and altitude and the vehicle behaviour when the fence is reached can be configured using Mission Planner.
 
@@ -20,14 +20,16 @@ If the vehicle strays outside these borders it will switch into RTL or LAND.  A
 
 If the copter eventually flies 100m outside the configured fence distance, the vehicle will switch into LAND mode.  The idea being that it's clearly impossible to get the copter home so best to just bring it down.  The pilot can still retake control of course with the flight mode switches.  Like with the earlier fences, another fence is erected 20m out which will again switch the copter to LAND if it continues away from home.
 
-<h3>Enabling the Fence in Mission Planner</h3>
+
+
+<h1>Enabling the Fence in Mission Planner</h1>
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPSetup.png"><img class="alignnone size-full wp-image-8738" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPSetup.png" alt="Fence_MPSetup" width="955" height="329" /></a>
 
 The Fence can be set-up by doing the following:
 <ul>
 	<li>Connect your APM/PX4 to the Mission Planner</li>
-	<li>Go to the Software -&gt; GeoFence screen</li>
-	<li>Click the "Enable" button</li>
+	<li>Go to the <strong>Software | GeoFence</strong> screen</li>
+	<li>Click the <strong>Enable</strong> button</li>
 	<li>Leave the "Type" as "Altitude and Circle" (unless you want only an Altitude limit or only a Circular fence in which case you can select "Altitude" or "Circle")</li>
 	<li>Leave the Action as "RTL or Land"</li>
 	<li>Set "Max Alt" to the altitude limit you want (in meters)</li>
@@ -36,7 +38,7 @@ The Fence can be set-up by doing the following:
 
 
 
-<h3>Enabling the fence with Channel 7 or 8</h3>
+<h1>Enabling the fence with Channel 7 or 8</h1>
 It is not necessary to set-up a switch to enable or disable the fence but if you wish to control the fence with a switch please follow these steps:
 <ul>
 	<li>Go to the Mission Planner's Software &gt; Copter Pids screen and set either "Ch7 Opt" OR "Ch8 Opt" to Fence.</li>
@@ -45,11 +47,10 @@ It is not necessary to set-up a switch to enable or disable the fence but if you
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPCh78.png"><img class="alignnone size-full wp-image-8739" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/Fence_MPCh78.png" alt="Fence_MPCh78" width="1024" height="485" /></a>
 
 
-
-<h3>Warnings:</h3>
+<h1>Warnings:</h1>
 <ul>
 	<li>The minimum recommended fence radius is 30m</li>
-	<li>The fence requires the GPS to be functioning well so do not disable the <a href="wiki/prearm_safety_check/">GPS arming check</a> nor the <a href="gps-and-gcs-failsafes/#gps_failsafe">GPS failsafe</a> while the fence is enabled.  Conversely if you disable either of these checks, disable the Fence.</li>
+	<li>The fence requires the GPS to be functioning well so do not disable the <a href="prearm_safety_check">GPS arming check</a> nor the <a href="ekf-inav-failsafe">EKF failsafe</a> while the fence is enabled.  Conversely if you disable either of these checks, disable the Fence.</li>
 	<li>For the best results, ensure RTL is working on your vehicle.</li>
 	<li>With the Fence enabled, the pre-arm checks will require you have GPS lock before arming the vehicle.</li>
 	<li>If GPS failsafe is not enabled and the Fence is enabled and you loose GPS lock while flying the fence will be disabled.</li>
@@ -59,5 +60,5 @@ It is not necessary to set-up a switch to enable or disable the fence but if you
 
 
 
-<h3>Video overview of the Fence setup and Operation</h3>
-http://www.youtube.com/watch?v=HDnGdo54o-4
+<h1>Video overview of the Fence setup and Operation</h1>
+https://www.youtube.com/watch?v=HDnGdo54o-4

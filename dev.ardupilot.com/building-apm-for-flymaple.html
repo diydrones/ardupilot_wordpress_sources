@@ -1,0 +1,67 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-apm-for-flymaple 
+title: Building ArduPilot for Flymaple on Linux 
+id: 3784 
+menu_order: 110 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h1>About Flymaple</h1>
+<ul>
+	<li>The APMPilot firmware has been ported to run on <a style="font-style: normal" title="Flymaple" href="http://www.open-drone.org/flymaple">Flymaple</a></li>
+	<li>Flymaple is an inexpensive board based on a 75MHz ARM Cortex-M3 processor.</li>
+	<li>It includes 10DOF sensors (accelerometer, gyroscope, magnetometer and barometer).</li>
+</ul>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/IGP3165-600x6001.jpg"><img class="size-medium wp-image-3798" alt="_IGP3165-600x600" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/IGP3165-600x6001-300x300.jpg" width="300" height="300" /></a><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/500px-FlyMaple_PinOut.png"><img class="size-medium wp-image-3800" alt="500px-FlyMaple_PinOut" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/500px-FlyMaple_PinOut-300x274.png" width="300" height="274" /></a>
+
+
+
+<h1>How to build APM for Flymaple on Linux.</h1>
+<ul>
+	<li>You need a number of additional resources to build ardupilot for Flymaple.</li>
+	<li>I have assumed that you will install them in your home directory.</li>
+	<li>But they can really go anywhere provided you make the appropriate changes to PATH and config.mk</li>
+</ul>
+<pre>cd ~
+git clone https://github.com/mikemccauley/libmaple.git
+cd libmaple
+wget http://static.leaflabs.com/pub/codesourcery/gcc-arm-none-eabi-latest-linux32.tar.gz
+tar xvzf gcc-arm-none-eabi-latest-linux32.tar.gz
+export PATH=$PATH:~/libmaple/arm/bin
+cp main.cpp.example main.cpp
+make</pre>
+<ul>
+	<li>At this stage you can test your flymaple CPU and the upload process with 'make install'</li>
+	<li>This will upload a simple LED blinking program to your Flymaple board.</li>
+	<li>Now download ardupilot APM:</li>
+</ul>
+<pre>cd ~
+git clone https://github.com/diydrones/ardupilot.git
+cd ardupilot</pre>
+<ul>
+	<li>Now edit config.mk to be something like this:</li>
+</ul>
+<pre> #config.mk START
+ # Select maple_RET6 for Flymaple
+ BOARD = maple_RET6
+ # HAL_BOARD determines default HAL target.
+ HAL_BOARD ?= HAL_BOARD_FLYMAPLE
+ # The communication port used to communicate with the Flymaple
+ PORT = /dev/ttyACM0
+ # You must provide the path to the libmaple library directory:
+ LIBMAPLE_PATH = $(HOME)/libmaple
+ # Also, the ARM compiler tools MUST be in your current PATH like:
+ # export PATH=$PATH:~/libmaple/arm/bin
+ #config.mk END</pre>
+<ul>
+	<li>Now build APM for, say a rover:</li>
+</ul>
+<pre style="margin-bottom: 0in">cd APMrover2
+ make flymaple
+ make upload</pre>
+<ul>
+	<li>Documentation on how to wire up and configure APM on Flymaple for a buggy type rover are at: <a style="font-style: normal" title="FlymapleArduPilotHowTo.pdf" href="http://uav.tridgell.net/Flymaple/FlymapleArdupilotHowTo.pdf</a></li>
+</ul>

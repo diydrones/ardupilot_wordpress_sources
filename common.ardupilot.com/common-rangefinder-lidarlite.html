@@ -9,16 +9,45 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors" target="_blank">these distributors</a> and then technical info can be found <a href="http://lidarlite.com/docs/v2/" target="_blank">here</a>.
+The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors.html" target="_blank">these distributors</a> and then technical info can be found <a href="http://lidarlite.com/docs/v2/" target="_blank">here</a>.
 <!-- more -->
 
-[note]This rangefinder is only supported on the Pixhawk running APM:Copter or APM:Plane 3.3 or higher (as well as Rover 2.49 or higher).[/note]
+[note]This rangefinder is only supported on the Pixhawk and for the following vehicle platform versions (or later): Copter 3.3, Plane 3.3, and Rover 2.49. ArduPilot transparently supports both LIDAR-Lite v1 and v2.[/note]
 
 [embed width=700]https://www.youtube.com/watch?v=3I06AOwIQVY[/embed]
+<h1>Problems with the Lidar-Lite</h1>
+A number of problems have been found with the Lidar-Lite. Attempts to resolve these issues with the developers of the product have not been entirely successful. These notes serve as a warning to potential users.
 
+The problems are:
+<ul>
+	<li>lockups when using I2C with the older "black-label" Lidars</li>
+	<li>GPS interference with the older "black-label" Lidars</li>
+	<li>interference with other I2C devices when using "blue-label" Lidars</li>
+	<li>a 13m offset from true distance on both "blue-label" and "black-label" Lidars</li>
+</ul>
+<h2>Lockup on I2C</h2>
+The first issue (lockups on I2C with black-label lidars) is solved by either using the new blue-label Lidars or by using the PWM output method, preferably with a reset pin. The issue is not common, but it is relatively easy to reproduce in bench tests by covering the Lidars lenses. It appears to be more likely to happen when the Lidar is reading short distances. There are two manifestations of the issue - one is where the lockup is solved by sending a I2C reset command, the the other does not respond to an I2C reset.
+<h2>GPS Interference</h2>
+The older black-label Lidars cause significant GPS interference. This manifests as longer time to get GPS lock on power up and higher levels of GPS noise when lock is achieved resulting in lower GPS accuracy. Testing shows that the interference includes both a conducted and radiated component.
 
+Placing the Lidar as far away from the GPS as possible helps, but does not entirely eliminate the issue.
+
+Note that the GPS interference problem does not happen with the newer "blue-label" Lidars.
+<h2>I2C interference with blue-label Lidars</h2>
+The newer blue-label Lidars have been associated with interference problems on I2C with other I2C devices on the same bus. In particular, incorrect airspeed readings have been seen when used on the same I2C bus as a digital airspeed sensor. This issue does not occur in all aircraft, but when it does occur the results are quite dramatic, with airspeed readings being off by more than 10m/s.
+
+Although bench testing has reproduced the result we have not yet managed to capture a logic trace of it happening. The problem is solved by using the Lidar via PWM instead of I2C.
+<h2>A 13m offset on all Lidars</h2>
+Both the newer blue-label and older black-label Lidars have a problem where they will sometimes return a distance of approximately 13m greater than the true distance. This happens on both I2C and PWM. The problem is rare, but it has been recorded in several flight logs on several different aircraft. The problem has also been reproduced in extensive bench testing.
+
+When the problem happens the 13m offset usually locks in place, so all remaining readings from the Lidar for the rest of the flight will give a 13m offset. There have however been cases where the 13m offset disappears after a few seconds or minutes.
+
+The problem is much more likely to occur if the Lidar power supply fluctuates too much. The problem can be easily reproduced in a bench setup where the Lidar is initially powered at below 4V then the voltage raised.
+
+Unfortunately low supply voltage is not the only trigger for the problem, so ensuring a good power supply will reduce the probability of the issue but not eliminate it. Multiple flight logs where the supply voltage to the Lidar is being monitored show the problem can occur with a good power supply.
+
+There is no known workaround for this issue. Detailed traces of the issue have been provided to the makers of the device with no resolution. The issue has also been reproduced using the device makers own software and own recommended hardware setup.
 <h1>Connecting to the Pixhawk via I2C</h1>
-
 [warning]If you have a LIDAR-Lite that has a manufacture date label prior to February 2015 there are I2C interface communications issues that will cause unreliable operation of the sensor with Pixhawk and <em>will cause your vehicle to crash</em>. When using these versions of LIDAR-Lite please use the PWM alternative listed below for best results.[/warning]
 
 The cable is configured with a 6-position Molex CLIK Mate connector on one end and tinned leads on the opposite end.  You will need to solder the tinned ends to a modified <a href="http://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2-3-4" target="_blank">DF13 4-pin I2C cable</a> as shown below.
@@ -29,12 +58,9 @@ The power to the rangefinder should be supplied from a separate external BEC as 
 
 [note]The low pass filter shown in the diagram is required for first generation hardware (for hardware with manufacture dates prior to February 2015) - a <a title="PCB and Schematic for Low Pass Filter" href="http://123d.circuits.io/circuits/514802-lidar-lite">schematic and PCB design are provided here</a>. These should not be required in later versions of the LIDAR Lite (at which point the <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/RangeFinder_LIDARLite_Pixhawk_v2.png">diagram will change to this</a> and will have <a title="circuit diagram" href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/04/LIDAR-LitePixhawkConnectionCircuitDiagram.png">this circuit diagram</a>).[/note]
 
-You may wish to also purchase an <a href="http://store.3drobotics.com/products/pixhawk-i2c-splitter" target="_blank">I2C splitter board</a> so that you can continue to connect an <a href="wiki/common-installing-3dr-ublox-gps-compass-module/" target="_blank">external GPS/Compass module</a>.
+You may wish to also purchase an <a href="http://www.amazon.com/Crius-Pixhawk-i2c-Splitter-Pixhawk-Controller/dp/B00LAWOUE4" target="_blank">I2C splitter board</a> so that you can continue to connect an <a href="wiki/common-installing-3dr-ublox-gps-compass-module/" target="_blank">external GPS/Compass module</a>.
 
 [note]It is important to ensure that the ground from the BEC is connected to the ground on the servo rail.[/note]
-
-
-
 <h1>Connecting to Pixhawk via PWM</h1>
 As of the 3.3.x release of Plane and Copter you can connect your Lidar via PWM as an alternative to I2C. This works around a number of bugs in the I2C interface for the Lidar. The bugs include generating spurious pulses on the I2C bus and lockups of the Lidar in flight.
 
@@ -113,10 +139,7 @@ Set the <code>RNGFND_MAX_CM</code> parameter to 4000 (40m). This parameter repre
 <h1>Testing the sensor</h1>
 Distances read by the sensor can be seen in the Mission Planner's Flight Data screen's Status tab.  Look closely for "sonarrange".
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing.png"><img class="alignnone size-large wp-image-2546" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/RangeFinder_LIDARLite_Testing-1024x721.png" alt="RangeFinder_LIDARLite_Testing" width="584" height="411" /></a>
-
-
 <h1>Video guide</h1>
-
 The following video guide also shows how to set up the LIDAR-Lite (referencing this wiki article):
 
 [embed width=800]https://www.youtube.com/watch?v=FUT-ZsKGtxI[/embed]

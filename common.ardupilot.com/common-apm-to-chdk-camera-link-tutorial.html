@@ -118,9 +118,30 @@ The servo settings are not used for the relay configuration, and can be ignored.
 
 <h1>Creating and installing the CHDK script</h1>
 
-One of the simplest scripts you can use is <a href="http://www.event38.com/v/vspfiles/downloadables/E38_APM.bas" rel="nofollow">E38_APM.bas</a>, which simply waits on the relay signal and then takes a picture.
+One of the simplest scripts you can use is <strong>E38_APM.bas</strong>, which simply waits on the relay signal and then takes a picture (originally from www.event38.com):
+<pre>
+rem Event 38 APM Tie-In Script
+rem Free For Modification & Distribution
+@title E38_APM
+print "Script Started, Listening"
+sleep 1000
+goto "interval"
+:interval
+  p = get_usb_power
+  if p > 0 then goto "picture"
+  goto "interval"
+:picture
+  press "shoot_full"
+  sleep 50
+  release "shoot_full"
+  goto "interval"
+:terminate
+  print "Shut-Down Command Received"
+  sleep 1000
+  shut_down
+</pre>
 
-Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source <a href="http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script">KAP UAV Exposure Control Script</a> (v3.1). This was used as the basis for the <a href="http://store.3drobotics.com/products/3DR-Aero">3DR Aero Plane</a> <em>3DR EAI (Exposure-Aperture-ISO)</em> script described in the <a href="http://3drobotics.com/kb/aero-m/" title="Aero-M Operations Manual">Aero-M Operation Manual</a>.
+Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source <a href="http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script">KAP UAV Exposure Control Script</a> (v3.1). This was used as the basis for the <a href="https://3dr.com/kb/aero-m/">3DR Aero Plane</a> <em>3DR EAI (Exposure-Aperture-ISO)</em> script described in the <a href="http://3drobotics.com/kb/aero-m/" title="Aero-M Operations Manual">Aero-M Operation Manual</a>.
 
 The <a href="http://chdk.wikia.com/wiki/CHDK" title="CHDK">CHDK Wiki</a> explains how you set up CHDK and install and activate scripts for your particular camera. Installing scripts is usually as simple as copying them into the "scripts" directory on your SD card. You can then activate them by navigating to the menu <strong>Miscellaneous Stuff -&gt; Remote Parameters</strong> and making sure the <strong>Enable Remote</strong> setting is checked.
 

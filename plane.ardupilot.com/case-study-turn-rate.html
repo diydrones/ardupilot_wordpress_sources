@@ -1,0 +1,73 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: case-study-turn-rate 
+title: Log Analysis Case Study: Turn Rate Adjustment 
+id: 3155 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Analyzing flight logs can help you diagnose problems with your missions. This case study brings you an example of a flight where, by analyzing the log data, our resident expert, Andrew Tridgell, suggested adjusting the turn rate and increasing the maximum roll angle to correct the plane's failure to reach a waypoint as a result of turning too slowly. The original forum posts can be found <a href="http://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198" target="_blank"><strong>here</strong></a>.
+
+DIY Drones member Vishnu posted these logs of his X8 plane using APM code 2.73. He described an issue with auto take off where his throttle was maintaining 100% despite being set to 75%.
+<ul>
+	<li>5/26/2013 tlog file (803 KB) - Download from original blog post <a href="http://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198" target="_blank"><strong>here</strong></a>.</li>
+	<li><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/x8throttleslewrate100.param" target="_blank">x8 throttle slew rate 100 param file</a></li>
+	<li><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/Jakkur-Auto-take-off-and-land.txt" target="_blank">Jakkur Auto take off and land text file</a></li>
+</ul>
+By analyzing this data using <strong><a href="http://qgroundcontrol.org/mavlink/mavproxy_startpage#mavgraphpy" target="_blank">Mavgraph</a></strong>, Tridge was able to provide the following insight.
+
+<strong><em>May 29, 2013 DIYDrones; posted to Plane 2.x Software forum:</em></strong>
+
+"I've taken a look at your logs, and the biggest problem is that the RLL2SRV_P is not large enough and you have not given Plane enough authority over the turn rate.
+
+This is what your flight looked like:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/flight-path-image.png"><img class="size-full wp-image-3158" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/flight-path-image.png" alt="flight path image" width="600" height="600" /></a>
+
+You can see it did make the first waypoint, but then was turning much too slowly for the second waypoint.
+
+
+Let's look at a graph of the nav_roll (the roll the plane wants to achieve) and the actual roll. The red line represents the mission sequence number.
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/nav-output-and-roll-attitude.png"><img class="size-full wp-image-3159" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/nav-output-and-roll-attitude.png" alt="nav output and roll attitude" width="1333" height="738" /></a>
+
+In the takeoff nav_roll is small, as its flight is straight ahead. It then goes to -30 degrees, as that is the LIM_ROLL_CD you have specified. The problem is that the actual roll only goes to around -10 degrees. So the plane is not achieving the roll that APM is asking for.
+
+The reason for this is the RLL2SRV_* parameters you have chosen:
+
+RLL2SRV_D       0.000000
+RLL2SRV_I       0.000000
+RLL2SRV_IMAX    500.000000
+RLL2SRV_P       0.400000
+
+You have specified zero I term and a quite small P term for an aircraft like the X8. Let's have a look at the servo values that APM ended up using with those settings:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/controller-outputs-v-servo-outputs.png"><img class="size-full wp-image-3160" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/controller-outputs-v-servo-outputs.png" alt="controller outputs v servo outputs" width="1306" height="737" /></a>
+
+You can see that the APM was moving the first elevon only a small amount, and the second elevon by about 150. Now let's compare that to what happened when you switched to manual flight:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/roll-attitude-v-servo-outputs.png"><img class="size-full wp-image-3161" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/roll-attitude-v-servo-outputs.png" alt="roll attitude v servo outputs" width="1150" height="642" /></a>
+
+When you took manual control you rolled the plane left by 65 degrees. That compares to a maximum roll angle that you have allowed the APM to use of 30 degrees.
+
+You also used a lot more aileron movement than you have allowed the APM to use. To roll the plane over you used almost full left aileron, whereas the RLL2SRV_P gain of 0.4 with a 20 degree roll error only allowed the APM to move the aileron by 0.4*(20/45)*500 which is 89. So you moved the aileron more than 3 times as much as the APM did.
+
+The X8 has quite a lot of natural stability, which also means it needs quite a lot of elevon movement to get it to roll. If you only move the elevons a small way it will not be able to overcome its natural stability, and also won't overcome any wind, or slight trim errors.
+
+To fix it you need to make the following changes:
+<ul>
+	<li>Double your RLL2SRV_P to 0.8, perhaps higher based on testing</li>
+	<li>Change RLL2SRV_I to 0.1</li>
+	<li>Change RLL2SRV_IMAX to 1500</li>
+	<li>You also have a value for NAVL1_PERIOD which is too high for an X8. Change it to 18.</li>
+</ul>
+Your airspeed also doesn't look well calibrated:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/airspeed.png"><img class="size-full wp-image-3162" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/airspeed.png" alt="airspeed" width="1212" height="612" /></a>
+
+Have you checked your sensor for leaks? It is aligned correctly and clear of the airframe? The airspeed and ground speed should match on average when you loiter. You may need to adjust ARSPD_RATIO to be a bit larger.
+
+Cheers, Tridge"

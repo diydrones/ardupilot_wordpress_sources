@@ -9,27 +9,22 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<span style="color: #ff0000"><strong>Warning the SingleCopter (available since AC3.1) and CoaxCopter (available since AC3.2) are entirely new and experimental!
+<span style="color: #ff0000"><strong>Warning the SingleCopter (available since AC3.1) and CoaxCopter (available since AC3.2) are not regularly used and have not been extensively tested!
 </strong></span>
 
 <strong>As this is VERY new many of the Single copters shown here use either mil-spec or very simple stabilize mode controllers.</strong>
-
-
-
 <h3>The First Video of a SingleCopter using an APM 2.5</h3>
 http://vimeo.com/77850133
-
-
 <h3>SingleCopter</h3>
 <ul>
 	<li>A SingleCopter is an aerial vehicle with one central rotating propeller thrusting downward past 4 controllable vanes.</li>
 	<li>The 4 control vanes (one in each quadrant) permits the control of the vehicles roll, pitch and yaw.</li>
 	<li>The vanes also permit real time compensation for the motors direction of rotation.</li>
-	<li>Altitude is controlled by adjusting the motor / propeller speed.<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtolcustom2.jpg"><img alt="vtolcustom2" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtolcustom2.jpg" width="750" height="419" /></a></li>
+	<li>Altitude is controlled by adjusting the motor / propeller speed.<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtolcustom2.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtolcustom2.jpg" alt="vtolcustom2" width="750" height="419" /></a></li>
 </ul>
 <strong>An innovatively designed and quite successful hobbyist SingleCopter </strong>
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/P1060929.jpg"><img class="alignnone size-full wp-image-9983" alt="P1060929" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/P1060929.jpg" width="1600" height="1200" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/P1060929.jpg"><img class="alignnone size-full wp-image-9983" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/P1060929.jpg" alt="P1060929" width="1600" height="1200" /></a>
 <h4>Connecting the Flight Controller to the SingleCopter:</h4>
 <ul>
 	<li>Connect the APM, PX4 or Pixhawk servo output channels 1-4 to the SingleCopters 4 control fins as shown.</li>
@@ -37,18 +32,15 @@ http://vimeo.com/77850133
 	<li>The 4 fins are attached to four arms and it's a bit like a Plus quad.</li>
 	<li>Looking down on the APM from above as in the attached diagram. "servo1" would be attached to the APM's output channel #1, etc.</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/SingleCopterBothView1.jpg"><img class="alignnone size-full wp-image-10103" alt="SingleCopterBothView1" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/SingleCopterBothView1.jpg" width="800" height="600" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/SingleCopterBothView1.jpg"><img class="alignnone size-full wp-image-10103" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/SingleCopterBothView1.jpg" alt="SingleCopterBothView1" width="800" height="600" /></a>
 <h4>Load the Firmware</h4>
 <ul>
 	<li>For the time being, the user needs to compile the source code themselves.</li>
 	<li>Add this line to the APM_Config.h: <strong>#define FRAME_CONFIG SINGLE_FRAME</strong></li>
 	<li>In the near future this will be added as a downloadable binary to <strong>firmware.diydrones.com</strong> and likely as a Mission Planner loadable icon.</li>
 </ul>
-And another SingleCopter Video Showing results with a simple stabilize only flight controller:
-
-http://vimeo.com/32718903
-
-
+<h3>Configuration</h3>
+If digital servos are used the SV_SPEED parameter can be set to 125 (or even higher).  If slower analog servos are used set this parameter to 50.
 <h3>CoaxCopter</h3>
 <ul>
 	<li>A CoaxCopter is an aerial vehicle with two counter rotating central propellers thrusting downward past 2 controllable vanes (one side to side and the other from front to back) that permit control of roll and pitch.</li>
@@ -61,7 +53,7 @@ http://vimeo.com/32718903
 </ul>
 </li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtol.jpg"><img alt="vtol" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtol.jpg" width="309" height="150" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/mav_electric.jpg"><img alt="mav_electric" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/mav_electric.jpg" width="240" height="185" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtol.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/vtol.jpg" alt="vtol" width="309" height="150" /></a><a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/mav_electric.jpg"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/mav_electric.jpg" alt="mav_electric" width="240" height="185" /></a>
 <h4>Connecting the Flight Controller to the CoaxCopter:</h4>
 <ul>
 	<li>Connect the APM, PX4 or Pixhawk servo output channels 1 and 2 to the CoaxCopters two control fins servos as shown (Note: the diagram below is incorrect, "Servo3" should be "Servo1" and "Servo4" should be "Servo2").</li>
@@ -69,23 +61,15 @@ http://vimeo.com/32718903
 	<li>The two wide fins are attached to two cross arms and works a bit like the elevator and ailerons of a fixed wing plane.</li>
 	<li>Below is an illustration looking down on an APM/Pixhawk mounted on the frame.  Note the warning re Servo3 and Servo4 being mislabelled.</li>
 </ul>
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/CoaxCopterTopView1.jpg"><img class="alignnone size-full wp-image-10037" alt="CoaxCopterTopView1" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/CoaxCopterTopView1.jpg" width="800" height="600" /></a>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/CoaxCopterTopView1.jpg"><img class="alignnone size-full wp-image-10037" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/11/CoaxCopterTopView1.jpg" alt="CoaxCopterTopView1" width="800" height="600" /></a>
 <h4>Load the Firmware</h4>
 <ul>
-	<li><strong><span style="color: #ff0000">Warning CoaxCopter is not yet implemented do not attempt to use.</span></strong></li>
 	<li>For the time being, the user needs to compile the source code themselves.</li>
 	<li>Add this line to the APM_Config.h: <strong>#define FRAME_CONFIG COAX_FRAME</strong></li>
 	<li>In the near future this will be added as a downloadable binary to <strong>firmware.diydrones.com</strong> and likely as a Mission Planner loadable icon.</li>
 </ul>
-
-
-
 And a Video of a Research SingleCopter in action:
 
 http://www.youtube.com/watch?v=FFiPbyigxVI#t=40
-
-
-
-
 
 &nbsp;

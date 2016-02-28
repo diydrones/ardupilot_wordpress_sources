@@ -1,0 +1,68 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: debugging-with-gdb 
+title: Debugging with GDB 
+id: 4451 
+menu_order: 70 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page describes how to setup GDB on Linux to debug issues with a PX4 or Pixhawk.  The specific commands were tested on Ubuntu 13.10. GDB can also be set-up on Windows but <a href="http://stackoverflow.com/questions/711086/in-gdb-on-mingw-how-to-make-ctrl-c-stop-the-program" target="_blank">there is an issue passing the Ctrl-C command to GDB</a> which makes it difficult to use effectively.
+
+<h1>Introduction</h1>
+GDB (the GNU Debugger) "allows you to see what is going on `inside' another program while it executes or what another program was doing at the moment it crashed." which can be useful when investigating very low-level failures with the Pixhawk (it cannot be used with the APM1/APM2)
+
+This guide assumes that you have already successfully built the firmware on your machine following the instructions for <a href="wiki/building-px4-with-make/">Windows</a>, <a href="wiki/building-px4-with-make-on-mac/">Mac</a> or <a href="wiki/building-px4-for-linux-with-make/">Linux</a>.
+
+A <a href="http://www.blacksphere.co.nz/main/index.php/blackmagic" target="_blank">BlackMagic probe</a> is also required.  They can be purchased in the US from <a href="http://transition-robotics.com/products/black-magic-probe-mini" target="_blank">Transition Robotics</a>, <a href="http://www.tag-connect.com/BLACK-SPHERE-DBG" target="_blank">Tag-Connect</a> or <a href="http://1bitsquared.com/collections/frontpage/products/black-magic-probe" target="_blank">1 Bit Squared</a> or in NewZealand from <a href="http://shop.greenstage.co.nz/product/black-magic-debug-probe" target="_blank">Greenstage</a>.
+
+Alternative instructions for the set-up can be found on the PX4 wiki <a href="http://pixhawk.org/dev/jtag/start" target="_blank">here</a>.
+
+
+
+<h1>Connecting the probe to the Pixhawk</h1>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/DebuggingWithGDB_PixhawkBlackMagicProbe.png"><img class="alignnone size-full wp-image-4454" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/DebuggingWithGDB_PixhawkBlackMagicProbe.png" alt="DebuggingWithGDB_PixhawkBlackMagicProbe" width="1392" height="733" /></a>
+The BlackMagic probe should be connected to the Pixhawk's JTAG connector using the grey 10wire cable that came with the probe. Note that most Pixhawk come with no headers soldered onto the JTAG connector because it interferes with the case. Please contact <a title="Craig Elder" href="mailto:craig@3dr.com?Subject=Pixhawk%20with%20JTAG%20connectors" target="_blank">Craig Elder</a> to order a Pixhawk with the JTAG pins soldered.
+
+
+
+<h1>Installing GDB</h1>
+If using Ubuntu, GDB is likely already installed on your machine and it will likely work although we recommend using version 7.7 or higher because it includes python extensions.  On an Ubuntu machine you can find where your GDB is installed by typing:
+<code>which gdb</code>
+This will likely return <code>/usr/local/bin/arm-none-eabi-gdb</code>
+
+Next check it's version by calling it with the <code>--version</code> argument
+<code>/usr/local/bin/arm-none-eabi-gdb --version</code>
+
+If you wish to upgrade to 7.7 (or higher):
+<ul>
+	<li>download a later version from the <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank">GDB download page</a>.</li>
+	<li>when the download completes extract the compressed file to somewhere on your machine (i.e. /home/&lt;username&gt;/Documents)</li>
+	<li>open a terminal and change to the directory that was extracted (i.e. /home/&lt;username&gt;/Documents/gdb-7.7.1)</li>
+	<li>run the configuration script by typing <code>./configure --target arm-none-eabi</code></li>
+	<li>make gdb for your system by typing <code>make</code></li>
+	<li>install the newly built gdb into /usr/local/bin by typing <code>make install</code></li>
+</ul>
+
+
+
+<h1>Starting GDB and running some commands</h1>
+GDB requires both the binary file that's been uploaded to the board (i.e. Copter-v2.px4) which can normally be found in Copter, Plane or APMRover2 directory and the firmware.elf file that can be found in PX4Firmware/Build/px4fmu-v2_APM.build/firmware.elf.
+
+change to your PX4Firmware directory and type the following:
+<code>/usr/local/bin/arm-none-eabi-gdb Build/px4fmu-v2_APM.build/firmware.elf</code>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/DebuggingWithGDB-startGBD.png"><img class="alignnone size-full wp-image-4459" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/DebuggingWithGDB-startGBD.png" alt="DebuggingWithGDB-startGBD" width="724" height="744" /></a>
+
+Some useful commands:
+<code>r</code> -- restarts the process
+<code>b function-name</code> -- i.e. b setup -- sets a breakpoint at the start of the "setup" function. Note a class name can be prepended such as <code>b AC_AttitudeControl::init</code>
+<code>Ctrl-C</code> -- stops the code from executing so you can set breakpoints, etc
+<code>continue</code> -- continues the code from wherever it was stopped
+<code>show interrupted-thread</code> -- shows address where execution has stopped (see below)
+<code>info line * &lt;address&gt;</code> -- shows c++ line for a given address (i.e. from show interrupted-thread)
+<code>disassemble &lt;address&gt;</code> -- converts given address into assembler code
+<code>exit</code> -- exits from the GDB
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/GDB_commands2.png"><img class="alignnone size-full wp-image-4527" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/07/GDB_commands2.png" alt="GDB_commands2" width="800" height="600" /></a>

@@ -1,0 +1,100 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: learning-ardupilot-introduction 
+title: Learning ArduPilot — Introduction 
+id: 4659 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page introduces the basic structure of ArduPilot. Before you get started you should work out what code exploring system you will use. You could just use a web browser and look at <a href="https://github.com/diydrones/ardupilot/">https://github.com/diydrones/ardupilot/</a> but you will probably get a lot more out of it if you use a good programmers IDE that allows you to find function, structure and class definitions and shows the code in a structured manner.
+
+Some suggestions are:
+<ul>
+	<li>Eclipse on Windows, Linux or MacOS</li>
+	<li>Emacs on Linux, Windows or MacOS, with etags for finding code elements</li>
+	<li>Vim on emacs with ctags</li>
+</ul>
+There are a lot of other IDEs available, and many of them are sufficiently customisable that they can handle something like ArduPilot nicely. If you have a favourite and have worked out how to make ArduPilot development a great experience then please consider contributing a wiki page on how to use it.
+
+
+
+<h1>Basic structure</h1>
+
+The basic structure of ArduPilot is broken up into 5 main parts:
+<ul>
+	<li>vehicle directories</li>
+	<li>AP_HAL</li>
+	<li>libraries</li>
+	<li>tools directories</li>
+	<li>external support code</li>
+</ul>
+These will be described in detail below, but before moving on make sure you have <a href="/wiki/where-to-get-the-code">cloned all of the git repositories</a> you will need.
+
+
+
+<h2>Vehicle Directories</h2>
+
+The vehicle directories are the top level directories that define the firmware for each vehicle type. Currently there are 4 vehicle types - Plane, Copter, APMrover2 and AntennaTracker.
+
+Along with the *.cpp files, each vehicle directory contains a make.inc file which lists library dependencies. The Makefiles read this to create the -I and -L flags for the build.
+<h2>AP_HAL</h2>
+The AP_HAL layer (Hardware Abstraction Layer) is how we make ArduPilot portable to lots of different platforms. There is a top level AP_HAL in libraries/AP_HAL that defines the interface that the rest of the code has to specific board features, then there is a AP_HAL_XXX subdirectory for each board type, for example AP_HAL_AVR for AVR based boards, AP_HAL_PX4 for PX4 boards and AP_HAL_Linux for Linux based boards.
+
+
+
+<h3>Tools directories</h3>
+
+The tools directories are miscellaneous support directories. For examples, tools/autotest provides the autotest infrastructure behind the <a href="http://autotest.diydrones.com/">autotest.diydrones.com</a> site and tools/Replay provides our log replay utility.
+
+
+
+<h3>External support code</h3>
+
+On some platforms we need external support code to provide additional features or board support. Currently the external trees are:
+<ul>
+	<li><a href="https://github.com/diydrones/PX4NuttX"> PX4NuttX</a> - the core NuttX RTOS used on PX4 boards</li>
+	<li><a href="https://github.com/diydrones/PX4Firmware">PX4Firmware</a> - the base PX4 middleware and drivers used on PX4 boards</li>
+	<li><a href="https://github.com/diydrones/uavcan">uavcan</a> - the uavcan CANBUS implementation used in ArduPilot</li>
+	<li><a href="https://github.com/mavlink/mavlink">mavlink</a> - the mavlink protocol and code generator</li>
+</ul>
+
+[note]Most of these are imported as <a href="http://dev.ardupilot.com/wiki/git-submodules/">Git Submodules</a> when you build ArduPilot for PX4/Pixhawk.[/note]
+
+
+
+<h1>Build system</h1>
+
+The build system is based around make, but also supports the old arduino IDE for AVR builds. The makefiles are in the <a href="https://github.com/diydrones/ardupilot/tree/master/mk">mk/ directory</a>, and define build rules for each type of supported board
+
+To build a vehicle or other 'sketch' for a particular board target you would type "make TARGET", where TARGET is the board type. The following board types are currently available:
+<ul>
+	<li>make apm1 - the APM1 board</li>
+	<li>make apm2 - the APM2 board</li>
+	<li>make px4-v1 - the PX4v1</li>
+	<li>make px4-v2 - the Pixhawk (and <a href="http://www.auav.co/product-p/auavx2.htm" target="_blank">Arsov AUAV-X2</a>)</li>
+	<li>make pxf - the BBB+PXF cape combination</li>
+	<li>make navio - the RaspberryPi+NavIO cape combination</li>
+	<li>make linux - a generic Linux build</li>
+	<li>make flymaple - the FlyMaple board</li>
+	<li>make vrbain - the VRBrain boards</li>
+	<li>make sitl - the SITL software in the loop simulation</li>
+</ul>
+More ports are being added all the time, so check "make help" file for new targets.
+
+For each of these builds you can add additional qualifiers, and on some you can do a parallel build to speed things up. For example, in the Copter directory you could do:
+<pre>make apm2-octa -j8</pre>
+meaning do a build for OctaCopter on apm2 with an 8 way parallel build. You should also look into enabling <a href="http://ccache.samba.org">ccache</a> for faster builds.
+
+Some boards also support upload of firmware directly from make. For example:
+<pre>make px4-v2-upload</pre>
+will build and upload a sketch on a Pixhawk.
+
+There are also helper make targets for specific boards, such as:
+<ul>
+	<li>make clean - clean the build for non-px4 targets</li>
+	<li>make px4-clean - completely clean the build for PX4 targets</li>
+	<li>make px4-cleandep - cleanup just dependencies for PX4 targets</li>
+</ul>

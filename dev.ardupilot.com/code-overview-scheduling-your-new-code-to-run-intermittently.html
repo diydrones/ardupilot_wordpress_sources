@@ -1,0 +1,80 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: code-overview-scheduling-your-new-code-to-run-intermittently 
+title: Scheduling Code to Run Intermittently (Code Overview) 
+id: 3294 
+menu_order: 50 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page describes how you can schedule some new piece of code you have written to run intermittently.
+
+
+<h1>Running your code with the scheduler</h1>
+The most flexible way to run your code at a given interval is to use the scheduler.  This can be done by adding your new function to the <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L96" target="_blank">scheduler_tasks</a> array in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp" target="_blank">ArduCopter.cpp</a>.  Note that there are actually two task lists, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L788" target="_blank">the upper list</a> is for high speed CPUs (i.e. Pixhawk) and the <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L856" target="_blank">lower list</a> is for slow CPUs (i.e. APM2).
+
+Adding a task is fairly simple, just create a new row in the list (higher in the list means high priority).  The first column holds the function name, the 2nd is a number of 2.5ms units (or 10ms units in case of APM2).  So if you wanted the function executed at 400hz this column would contain "1", if you wanted 50hz it would contain "8".  The final column holds the number of microseconds (i.e. millions of a second) the function is expected to take.  This helps the scheduler guess whether or not there is enough time to run your function before the main loop starts the next iteration.
+<pre>/*
+  scheduler table - all regular tasks apart from the fast_loop()
+  should be listed here, along with how often they should be called
+  (in 10ms units) and the maximum time they are expected to take (in
+  microseconds)
+ */
+static const AP_Scheduler::Task scheduler_tasks[] PROGMEM = {
+    { update_GPS,            2,     900 },
+    { update_nav_mode,       1,     400 },
+    { medium_loop,           2,     700 },
+    { update_altitude,      10,    1000 },
+    { fifty_hz_loop,         2,     950 },
+    { run_nav_updates,      10,     800 },
+    { slow_loop,            10,     500 },
+    { gcs_check_input,	     2,     700 },
+    { gcs_send_heartbeat,  100,     700 },
+    { gcs_data_stream_send,  2,    1500 },
+    { gcs_send_deferred,     2,    1200 },
+    { compass_accumulate,    2,     700 },
+    { barometer_accumulate,  2,     900 },
+    { super_slow_loop,     100,    1100 },
+  <span style="color: #ff0000">    { my_new_function,      10,     200 },</span>
+    { perf_update,        1000,     500 }
+};</pre>
+
+
+
+<h1>Running your code as part of one of the loops</h1>
+Instead of creating a new entry in the scheduler task list, you can add your function to one of the existing timed loops.  There is no real advantage to this approach over the above approach except in the case of the fast-loop.  Adding your function to the fast-loop will mean that it runs at the highest possible priority (i.e. it is nearly 100% guaranteed to run at 400hz).
+
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L990" target="_blank">fast_loop</a> : runs at 100hz on APM2, 400hz on Pixhawk
+</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L370" target="_blank">fifty_hz_loop</a> : runs at 50hz</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L341" target="_blank">ten_hz_logging_loop</a>: runs at 10hz</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L405" target="_blank">three_hz</a>_loop: runs at 3.3hz</li>
+	<li>><a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L427" target="_blank">one_hz_loop</a> : runs at 1hz</li>
+</ul>
+
+
+So for example if you want your new code to run at 10hz you could add it to one of the case statements in the <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L341" target="_blank">ten_hz_logging_loop()</a> function found in <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/ArduCopter.cpp" target="_blank">ArduCopter.cpp</a>.
+<pre>// ten_hz_logging_loop
+// should be run at 10hz
+static void ten_hz_logging_loop()
+{
+    if (g.log_bitmask &amp; MASK_LOG_ATTITUDE_MED) {
+        Log_Write_Attitude();
+    }
+    if (g.log_bitmask &amp; MASK_LOG_RCIN) {
+        DataFlash.Log_Write_RCIN();
+    }
+    if (g.log_bitmask &amp; MASK_LOG_RCOUT) {
+        DataFlash.Log_Write_RCOUT();
+    }
+    if ((g.log_bitmask &amp; MASK_LOG_NTUN) &amp;&amp; mode_requires_GPS(control_mode)) {
+        Log_Write_Nav_Tuning();
+    }
+
+<span style="color: #ff0000">        // your new function call here
+        my_new_function();</span>
+}
+</pre>

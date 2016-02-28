@@ -1,0 +1,647 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: supported-autopilot-controller-boards 
+title: Supported AutoPilot Controller Boards 
+id: 5770 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Currently ArduPilot supports the following autopilot boards.
+<h1>Pixhawk</h1>
+Next-generation PX4, with more memory, improved sensors and a much easier-to-use design. See the <a href="https://store.3drobotics.com/products/3dr-pixhawk#product-description">product overview</a> (store) and <a href="http://planner.ardupilot.com/common-pixhawk-overview">Pixhawk Overview</a> (wiki) for more information.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a title="https://pixhawk.ethz.ch/px4/" href="https://store.3drobotics.com/products/3dr-pixhawk" target="_blank">store.3drobotics.com</a></td>
+</tr>
+<tr>
+<td><strong><a href="https://store.3drobotics.com/products/3dr-pixhawk#product-description">Specifications</a></strong></td>
+<td><strong>OS:</strong>
+NuttX
+<strong>CPU:</strong>
+32-bit STM32F427 Cortex M4 core with FPU
+32 bit STM32F103 failsafe co-processor
+<strong>Memory:</strong>
+168 MHz/256 KB RAM/2 MB Flash
+<strong>Sensors:</strong>
+ST Micro L3GD20 3-axis 16-bit gyroscope
+ST Micro LSM303D 3-axis 14-bit accelerometer / compass (magnetometer)
+Invensense MPU 6000 3-axis accelerometer/gyroscope
+MEAS MS5611 barometer
+<strong>Interfaces:</strong>
+5x UART (serial ports), one high-power capable, 2x with HW flow control
+2x CAN
+Spektrum DSM / DSM2 / DSM-X® Satellite compatible input up to DX8 (DX9 and above not supported)
+Futaba S.BUS® compatible input and output
+PPM sum signal
+RSSI (PWM or voltage) input
+I2C®
+SPI
+3.3 and 6.6V ADC inputs
+External microUSB port
+<strong>Power System:</strong>
+Ideal diode controller with automatic failover
+Servo rail high-power (7 V) and high-current ready
+All peripheral outputs over-current protected, all inputs ESD protected
+<strong>Weight and Dimensions:</strong>
+Weight: 38g (1.31oz)
+Width: 50mm (1.96")
+Thickness: 15.5mm (.613")
+Length: 81.5mm (3.21")</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://planner.ardupilot.com/common-pixhawk-overview/#specifications">Pixhawk Overview</a>, <a href="http://planner.ardupilot.com/wiki/common-powering-the-pixhawk/">Powering</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="http://3drobotics.com/wp-content/uploads/2014/02/px4fmuv2.4.3_schematic.pdf?_ga=1.192952366.2094807383.1416709590">Schematic</a>
+<a href="http://3drobotics.com/wp-content/uploads/2014/02/Pixhawk-Open-Hardware.zip?_ga=1.192952366.2094807383.1416709590">Layout</a></td>
+</tr>
+</tbody>
+</table>
+<h1>APM2.x</h1>
+<a href="https://store.3drobotics.com/products/apm-2-dot-6-plus-assembled-set-side-entry" target="_blank">APM2</a> is a popular AVR2560 8-bit autopilot.
+
+[note]APM 2.6 is compatible with Copter 3.2 and earlier only (to use APM:Copter version 3.3 and later, please purchase a Pixhaw)k. Plane and Rover have full support for APM 2.6 in all existing releases. This board is not recommended for any new users.[/note]
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="https://store.3drobotics.com/products/apm-2-dot-6-plus-assembled-set-side-entry">store.3drobotics.com</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+None
+<strong>CPU:</strong>
+AtMega 2560
+<strong>Memory:</strong><strong>Sensors:</strong>
+3-axis gyro, accelerometer
+High-performance Barometric pressure sensor
+MS5611-01BA03
+<strong>Interfaces:</strong>
+<strong>Power System:</strong>
+<a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-apm25-and-26-overview/">APM 2.5 and 2.6 Overview</a> (wiki)
+<strong>Weight and Dimensions:</strong>
+Weight:
+Width: 40.7 mm
+Thickness:
+Length: 66.5mm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-apm25-and-26-overview/">APM 2.5 and 2.6 Overview</a> (wiki)</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="http://3drobotics.com/wp-content/uploads/2014/02/APM_v25.pdf?_ga=1.160250046.2094807383.1416709590">APM schematic diagram </a>
+<a href="http://3drobotics.com/wp-content/uploads/2014/02/APM_v252_RELEASE.zip?_ga=1.160250046.2094807383.1416709590">APM board layout </a></td>
+</tr>
+</tbody>
+</table>
+<h1>PX4</h1>
+A 32 bit ARM based autopilot with many advanced features, using the <a title="http://nuttx.org/" href="http://nuttx.org/" target="_blank">NuttX</a> real-time operating system. See the <a href="https://store.3drobotics.com/products/px4fmu-1">product overview</a> (store) and <a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-px4fmu-overview/">PX4 Overview</a> (wiki) for more information.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a title="https://pixhawk.ethz.ch/px4/" href="https://store.3drobotics.com/products/px4fmu-1" target="_blank">store.3drobotics.com</a></td>
+</tr>
+<tr>
+<td>Specifications</td>
+<td><strong>OS:</strong>
+NuttX
+<strong>CPU:</strong>
+ARM Cortex-M4F microcontroller running at 168MHz with DSP and floating-point hardware acceleration.
+<strong>Memory:</strong>
+1024KB of flash memory, 192KB of RAM
+<strong>Sensors:</strong>
+MEMS accelerometer and gyro, compass and barometric pressure sensor.
+<strong>Interfaces:</strong>
+?
+<strong>Power System:</strong>
+?
+<strong>Weight and Dimensions:</strong>
+Weight: 8.10 g
+Width:
+Thickness:
+Length:</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://planner.ardupilot.com/wiki/other-project-and-common-topics/common-autopilots/common-px4fmu-overview/">PX4 Overview</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="https://pixhawk.ethz.ch/px4/modules/px4fmu">Module home page</a>
+<a href="https://pixhawk.ethz.ch/px4/_media/modules/px4fmu-manual-v1.6.pdf">Manual</a>
+<a href="https://pixhawk.ethz.ch/px4/_media/modules/px4fmu-schematic-v1.6.pdf">Schematics download</a>
+<a href="http://stuff.storediydrones.com/PX4FMUv1.6.zip">Eagle files for version 1.6 download</a>
+<a href="http://stuff.storediydrones.com/PX4FMUv1.7.zip">Eagle files for version 1.7 download</a></td>
+</tr>
+</tbody>
+</table>
+<h1>Arsov AUAV-X2</h1>
+<a href="http://www.auav.co/product-p/auavx2.htm" target="_blank">Arsov AUAV-X2</a> is a high quality, compact, light weight and cost effective alternative to the PX4 V2 or PixHawk autopilots. It is 100% compatible with the PX4 firmware.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://www.auav.co/product-p/auavx2.htm" target="_blank">www.auav.co</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+NuttX
+<strong>CPU:</strong>
+STM32F427VI ARM microcontroller
+STM32F100C8T6 ARM microcontroller
+<strong>Memory:</strong>
+<strong>Sensors:</strong>
+Gyroscope: ST Micro L3GD20
+Accelerometer: ST Micro LSM303D
+Gyro: Invensense MPU 6000
+MEAS MS5611 barometer
+<strong>Interfaces:</strong>
+3 x UART
+1 x CAN
+1 x I2C
+1 x SPI
+2 x ADC
+8 x PWM Receiver Inputs
+8 Spare IO Pins
+2 x JTAG connection specifically for the TC2030-CTX-NL 6-Pin cable
+micro SD card holder
+micro USB connector
+<strong>Power System:</strong>
+New power supply based on TPS63061 DC-DC Buck-Boost
+<strong>Weight and Dimensions:</strong>
+Weight:
+Width:
+Thickness:
+Length:</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://www.auav.co/v/PublicDownloads/AUAV_X2_Manual.pdf">Manual</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="https://github.com/PX4/Hardware/blob/master/README.md">License</a>
+<a href="http://www.auav.co/v/PublicDownloads/AUAV_X2_R01.zip">Main Board Design Files</a>
+<a href="http://www.auav.co/v/PublicDownloads/AUAV_Micro_IMU_V2.zip">mIMU Board Design Files</a></td>
+</tr>
+</tbody>
+</table>
+<h1>FlyMaple</h1>
+The <a href="http://www.open-drone.org/flymaple" target="_blank">FlyMaple</a> is a flight controller based on the Maple Project.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://www.amazon.com/Flymaple-A-flight-controller-DOF-IMU/dp/B00B0ROZ2Q">Amazon</a> (and web search)</td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong><strong>CPU:</strong>
+72MHz STM32F103RET6 ARM Cotex-M3 microcontroller (Based on Maple RET6)
+<strong>Memory:</strong>
+64KB SRAM
+512KB FLASH ROM
+<strong>Sensors:</strong>
+ITG3205 3-Axis gyroscope
+ADXL345 3-Axis accelerometer
+HMC5883 3-Axis compass
+BMP085 Barometer
+<strong>Interfaces:</strong>
+3x 6-Channel GPIO, used to control 6-channel ESC/Servo
+3x 8-Channel GPIO, used to capture RC receiver output
+2x USART (serial) ports ready for XBee and GPS devices
+2x I2C interfaces ready for ultrasonic sensor altimeters
+Arduino Shield compatible female head interface (AREF, GND引脚空挂?)
+SWD/JTAG debugger compatible
+<strong>Power System:</strong>
+7 - 12v External Power supply from the 2p JST connector
+Output Voltage: 3.3v/5v or External input power
+<strong>Weight and Dimensions:</strong>
+Weight: 15g
+Width: 50 mm
+Thickness: 12 mm
+Length: 50 mm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="building-apm-for-flymaple">Building ArduPilot for Flymaple on Linux</a> (Wiki)
+<a href="http://uav.tridgell.net/Flymaple/FlymapleArdupilotHowTo.pdf">FlymapleArdupilotHowTo.pdf</a> (Rover)</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="http://www.dfrobot.com/wiki/index.php?title=Flymaple_V1.1(SKU:DFR0188)">Wiki Doc</a>
+<a href="http://www.dfrobot.com/image/data/DFR0188/FlyMaple1_0%20sample%20code.zip">Maple Sample sketch</a>
+<a href="http://www.dfrobot.com/image/data/DFR0188/FlyMapleV1.1%20sch.pdf">Schematic</a>
+<a href="http://www.dfrobot.com/image/data/DFR0188/Sensor%20Datasheet.zip">Sensor datasheet zip</a>
+<a href="http://www.dfrobot.com/image/data/DFR0188/Top%20Assembly%20Drawing.pdf">Layout drawing</a>
+<a href="http://leaflabs.com/">Maple homepage </a></td>
+</tr>
+</tbody>
+</table>
+<h1>Erle-Brain 2 autopilot</h1>
+<a title="Erle-Brain" href="http://copter.ardupilot.com/wiki/common-autopilots/common-erle-brain-linux-autopilot/">Erle-Brain 2</a> An autopilot for making drones and robots powered by Debian/Ubuntu and with official support for the Robot Operating System (ROS). It has access to the first app store for drones and robots.
+[note]<a href="https://erlerobotics.com/blog/product/erle-brain-v2/" target="_blank">Erle-Brain 2</a> is a commercial artificial robotic brain that runs APM autopilot. It combines a Raspberry Pi 2, a sensor cape and other components in order to achieve a complete embedded Linux board.[/note]
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="https://erlerobotics.com/blog/product/erle-brain-v2/">https://erlerobotics.com/blog/product/erle-brain-v2/</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux Debian or Ubuntu
+<strong>CPU:</strong>
+900MHz quad-core ARM Cortex-A7 CPU
+<strong>Sensors:</strong>
+Gravity sensor, gyroscope, digital compass, Pressure sensor and tempertature sensor, ADC for battery sensing
+<strong>Interfaces:</strong>
+12x PWM, 1x RC IN, 1x Power Module Connector, 1x I2C connector, 1x UART connector, 4 USB ports, Full HDMI port, 10/100 Ethernet, Combined 3.5mm audio jack and composite.
+<strong>Camera (optional): </strong>5MP Fixed focus lens, 2592 x 1944 pixel static images, supports 1080p30, 720p60 and 640x480p60/90 video record
+<strong>Power System:</strong>
+Traditional Power modules
+<strong>Weight and Dimensions:</strong>
+Weight: 100 grams
+70x96x20mm (without camera)
+70x96x58.3mm (with camera),
+check <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Hardware/Dimensions_&amp;_weight.html" target="_blank">image</a></td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Getting_started/Operating_System/Available_images.html" target="_blank">
+</a><a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Intro.html" target="_blank">Intro</a><a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Getting_started/Operating_System/Available_images.html" target="_blank">
+Available images</a>
+<a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Hardware/Typical_Hardware_Setup.html" target="_blank">Typical Hardware Setup</a>
+<a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Software/APM/Setup.html" target="_blank"> APM Setup</a></td>
+</tr>
+</tbody>
+</table>
+<h1>Erle-Brain autopilot</h1>
+<a title="Erle-Brain" href="http://copter.ardupilot.com/wiki/common-autopilots/common-erle-brain-linux-autopilot/">Erle-Brain</a> An autopilot for making drones powered by Ubuntu and with official support for the Robot Operating System (ROS). It has access to the first app store for drones and robots.
+[note]Erle-Brain is a commercial autopilot. It combines a BeagleBone Black, the <a href="#pixhawk_fire_cape_pxf">PixHawk Fire Cape</a> (above) and other components.[/note]
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://erlerobotics.com/blog/product/erle-brain/">http://erlerobotics.com/blog/product/erle-brain/</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux Ubuntu
+<strong>CPU:</strong>
+Cortex-A8 @ 1 GHz,
+<strong>Memory:</strong>
+512 MB DDR3 with 4GB of flash memory (8bit Embedded MMC)
+<strong>Sensors:</strong>
+MPU6000, MPU9250, LSM9DS0, MS5611-01BA
+<strong>Interfaces:</strong>
+SPI, 3xI2C, 2xUART, CAN, Buzzer, Safety, 8 PWM channels, PPM, S.Bus, ADC, Specktrum, 2xUSB, Ethernet
+<strong>Power System:</strong>
+Traditional Power modules
+<strong>Weight and Dimensions:</strong>
+Weight: 110 grams
+Width: 75 cm
+Thickness PCB: 1.6 mm
+Length: 92 cm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://erlerobotics.com/blog/updating-the-software/">http://erlerobotics.com/blog/updating-the-software/</a>
+<a href="beaglepilot">BeaglePilot Project</a> (wiki)
+<a href="building-for-beaglebone-black-on-linux/">Building ArduPilot for BeagleBone Black on Linux</a> (wiki)</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="http://github.com/diydrones/PXF">http://github.com/diydrones/PXF</a>
+<a href="http://copter.ardupilot.com/wiki/common-autopilots/common-erle-brain-linux-autopilot/">http://copter.ardupilot.com/wiki/common-autopilots/common-erle-brain-linux-autopilot/</a></td>
+</tr>
+</tbody>
+</table>
+<h1>PixHawk Fire Cape (PXF)</h1>
+The PixHawk Fire Cape (PXF) is a daughter board for the <a title="BeaglePilot Project" href="http://dev.ardupilot.com/wiki/companion-computers/beaglepilot/">BeagleBone Black</a> (BBB) development board that allows to create a fully functional Linux autopilot for drones. The combination of BBB and PXF allows to a Linux computer is a fully functional autopilot (one example is the <a href="#erle-brain_autopilot">Erle-Brain autopilot</a>).
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://erlerobotics.com/blog/product/pixhawk-fire-cape/">http://erlerobotics.com/blog/product/pixhawk-fire-cape/</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux Debian, Linux Ubuntu
+<strong>CPU:</strong>
+<strong>Memory:</strong>
+<strong>Sensors:</strong>
+MPU6000, MPU9250, LSM9DS0, MS5611-01BA
+<strong>Interfaces:</strong>
+SPI, 3xI2C, 2xUART, CAN, Buzzer, Safety, 8 PWM channels, PPM, S.Bus, ADC, Specktrum
+<strong>Power System:</strong>
+Traditional Power modules
+<strong>Weight and Dimensions:</strong>
+Weight: 16 grams
+Width: 55 cm
+Thickness: 1.6 mm
+Length: 85 cm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://erlerobotics.com/blog/updating-the-software/">http://erlerobotics.com/blog/updating-the-software/</a>
+<a href="beaglepilot">BeaglePilot Project</a> (wiki)
+<a href="building-for-beaglebone-black-on-linux/">Building ArduPilot for BeagleBone Black on Linux</a> (wiki)</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="http://github.com/diydrones/PXF">http://github.com/diydrones/PXF</a></td>
+</tr>
+</tbody>
+</table>
+<h1>PixHawk Fire Mini Cape (PXFmini)</h1>
+The PixHawk Fire Mini Cape (PXFmini) is a daughter board designed for the low cost <a href="https://www.raspberrypi.org/blog/raspberry-pi-zero/">Raspberry Pi zero</a> that allows to create a fully functional Linux autopilot for drones. Inspired in the PXF cape, provides a minimalist approach which allows having a reduced size/lightweight and low-cost.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="https://erlerobotics.com/blog/product/pxfmini/">https://erlerobotics.com/blog/product/pxfmini/</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux Debian, Linux Ubuntu
+<strong>CPU:</strong>
+<strong>Memory:</strong>
+<strong>Sensors:</strong>
+MPU9250, MS5611-01BA, ADS1115
+<strong>Interfaces:</strong>
+2xI2C, 1xUART, 1xPPM-SUM, JST-GH type connectors
+8xPWM channels
+<strong>Power System:</strong>
+Traditional Power modules
+<strong>Weight and Dimensions:</strong>
+Weight: 15 grams
+Dimension: 31x73mm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Autopilot_shields/PXFmini/Intro.html">http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Autopilot_shields/PXFmini/Intro.html</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href=""></a>To be delivered in February 2016</td>
+</tr>
+</tbody>
+</table>
+<h1>BBBMINI Cape</h1>
+Low budget DIY Autopilot Cape for BeagleBone Black running ArduPilot on Linux.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td>DIY</td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong> Debian Linux
+<strong>CPU:</strong> Cortex-A8 @ 1 GHz<strong>
+</strong><strong>Memory:</strong> 512 MB DDR3 and 4GB of flash memory
+<strong>Sensors:</strong>
+MPU9250, MS5611, HC-SR04
+<strong>Interfaces:</strong>
+2 x SPI, I2C, 2 x UART, CAN, 12 x PWM channels + 3 x PWM for X-Quad configuration, PPM, S.Bus, Spektrum
+<strong>Power System:</strong>
+Power module / UBEC
+<strong>Weight and Dimensions:</strong>
+Weight: 36 grams
+Width: 55 mm
+Thickness: 1.6 mm
+Length: 86 mm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="https://github.com/mirkix/BBBMINI">https://github.com/mirkix/BBBMINI</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td><a href="https://github.com/mirkix/BBBMINI">https://github.com/mirkix/BBBMINI</a></td>
+</tr>
+</tbody>
+</table>
+<h1>APM1 (discontinued)</h1>
+An AVR2560 based autopilot with separate sensor board (aka "oilpan"). As with APM2 this is no longer supported by Copter. Not recommended for any new users.
+<h1>Closed boards</h1>
+The following boards are known to be closed (they do not publish their design files).
+<h2>Parrot Bebop Drone</h2>
+The <a href="http://www.parrot.com/usa/products/bebop-drone/" target="_blank">Bebop Drone</a> is a Wifi controlled quadrotor UAV that uses <a href="https://us.store.parrot.com/en/accessoires/247-main-board-3520410021619.html" target="_blank">this Linux autopilot</a> and which can run Copter firmware.
+
+From Copter 3.3 the Bebop can run ArduPilot. Instructions for converting a Bebop to run ardupilot are <a href="http://dev.ardupilot.com/wiki/building-for-bebop-on-linux/" target="_blank">here</a>.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="https://us.store.parrot.com/en/bebop-drone/297-bebop-drone-3520410023996.html#/color-red">Parrot Store</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux (Busybox)
+<strong>CPU:</strong>
+Parrot P7 dual-core CPU Cortex 9 with quad core GPU
+<strong>Memory:</strong>
+8GB flash
+<strong>Sensors:</strong>
+MPU6050 for accelerometers and gyroscope (I2C),
+AKM 8963 compass,
+MS5607 barometer,
+<a href="http://www.furuno.com/en/products/gnss-module/GN-87" target="_blank">Furuno GN-87F GPS</a>,
+Sonar,
+Optical-flow,
+HD camera
+<strong>Interfaces:</strong>
+1x UART serial ports, USB, Built-in Wifi
+<strong>Power System:</strong>
+<strong>Weight and Dimensions (with hull):</strong>
+Weight: 400 grams
+Width: 33 cm
+Thickness: 38 cm
+Length: 36 cm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="building-for-bebop-on-linux">Building for Bebop on Linux</a> (wiki)</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+[note]Some of this information was taken from the <a href="http://wiki.paparazziuav.org/wiki/Bebop" target="_blank">Paparazzi UAV wiki page on the Bebop</a>.[/note]
+<h2>NavIO+</h2>
+<a href="http://www.emlid.com/">NavIO+</a> is a sensor cape for the RaspberryPi2 from Emlid. Under rapid development.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://www.emlid.com/shop/navio-plus/">www.emlid.com/shop/navio-plus</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Linux Debian
+<strong>CPU:</strong>
+?
+<strong>Memory:</strong>
+?
+<strong>Sensors:</strong>
+MPU9250 9DOF IMU
+MS5611 Barometer
+U-blox M8N Glonass/GPS/Beidou
+ADS1115 ADC for power monitoring
+MB85RC FRAM storage
+HAT EEPROM
+PCA9685 PWM generator
+RGB LED
+<strong>Interfaces:</strong>
+13 PWM servo outputs
+PPM input
+UART, SPI, I2C for extensions
+<strong>Power System:</strong>
+Triple redundant power supply
+Power module connector
+<strong>Weight and Dimensions:</strong>
+Weight: 24g
+Width: 55mm
+Thickness: ?
+Length: 65mm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="http://docs.emlid.com/Navio-APM/hardware-setup-navio-plus/">Emlid Documentation site</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h2>VRBrain</h2>
+<a href="http://vrbrain.wordpress.com/" target="_blank">VRBrain</a> is a multipurpose controller board that comes loaded with a 32 bit version of Copter firmware. At time of writing the latest version is <a href="http://www.virtualrobotix.it/index.php/en/shop/autopilot/vrbrain5-detail">VR Brain 5</a>.
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="https://vrbrain.wordpress.com/store/">vrbrain.wordpress.com/store/</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+NuttX
+<strong>CPU:</strong>
+ARM CortexM4F microcontroller with DSP and FPU.
+<strong>Memory:</strong>
+1024KB flash memory, 192KB of RAM.
+<strong>Sensors:</strong>
+mems accelerometer and gyroscope.
+barometer with 10 cm resolution.
+2 SPI expansion BUS for optional IMU
+1 sonar input.
+<strong>Interfaces:</strong>
+8 RC Input standard PPM , PPMSUM , SBUS
+8 RC Output at 490 hz
+1 integrated high speed data flash for logging data
+1 Can bus 2 i2c Bus
+3 Serial port available one for GPS 1 for serial option 1 for serial telemetry.
+3 digital switch (ULN2003).
+Jtag support for onboard realtime debugger.
+1 Buzzer output.
+1 Input for control lipo voltage
+<strong>Power System:</strong>
+<strong>Weight and Dimensions:</strong>
+Weight: ?
+Width: 4 cm
+Thickness: ?
+Length: 6 cm</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td><a href="https://vrbrain.wordpress.com/quick-start-guide/">Quick Start Guide</a></td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h2>Qualcomm Snapdragon Flight Kit</h2>
+The <a href="http://shop.intrinsyc.com/products/snapdragon-flight-dev-kit" target="_blank">Qualcomm® Snapdragon Flight™ Kit (Developer’s Edition)</a> is small (58x40mm) but offers a lot of CPU power and two on-board cameras. It contains 4 'Krait' ARM cores which run Linux (Ubuntu 14.04 Trusty, by default), and 3 'Hexagon' DSP cores which run the QURT RTOS. In addition it includes Wi-Fi, Bluetooth connectivity, automotive-grade GPS and many more features.
+
+Information about using this board with ArduPilot can be found here: <a href="building-for-qualcomm-snapdragon-flight-kit">Building for Qualcomm Snapdragon Flight Kit</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL_QURT/README.md">QURT Port</a> (Github) and <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL_Linux/qflight">QFlight Port</a> (Github).
+
+[warning]Due to some rather unusual licensing terms from Intrinsyc we cannot distribute binaries of ArduPilot (or any program built with the Qualcomm libraries). So you will have to build the firmware yourself.[/warning]
+<table>
+<tbody>
+<tr>
+<td><strong>Purchase</strong></td>
+<td><a href="http://shop.intrinsyc.com/products/snapdragon-flight-dev-kit" target="_blank">shop.intrinsyc.com/products/snapdragon-flight-dev-kit</a></td>
+</tr>
+<tr>
+<td><strong>Specifications</strong></td>
+<td><strong>OS:</strong>
+Ubuntu Linux (Ubuntu 14.04 Trusty by default)
+<strong>System on a Chip: System-on-Chip:</strong>Snapdragon 801
+CPU: Quad-core 2.26 GHz Krait
+DSP: Hexagon DSP (QDSP6 V5A) – 801 MHz+256KL2 (running the flight code)
+GPU: Qualcomm® Adreno™ 330 GPU
+<strong>Memory:</strong>
+RAM: 2GB LPDDR3 PoP @931 MHz
+Storage: 32GB eMMC Flash
+<strong>Sensors:</strong>
+GPS: Telit Jupiter SE868 V2 module
+Omnivision OV7251 on Sunny Module MD102A-200 (Optic Flow camera - 640×480)
+Sony IMX135 on Liteon Module 12P1BAD11 (4K High Res camera)
+MPU: Invensense MPU-9250 9-Axis Sensor, 3x3mm QFN
+Baro: Bosch BMP280 barometric pressure sensor
+<strong>Interfaces:</strong>
+CSR SiRFstarV @ 5Hz via UART
+uCOAX connector on-board for connection to external GPS patch antenna
+BT/WiFi: BT 4.0 and 2G/5G WiFi via QCA6234
+Wifi: Qualcomm® VIVE™ 1-stream 802.11n/ac with MU-MIMO † Integrated digital core
+802.11n, 2×2 MIMO with 2 uCOAX connectors on-board for connection to external antenna
+One USB 3.0 OTG port (micro-A/B)
+Micro SD card slot
+Gimbal connector (PWB/GND/BLSP)
+ESC connector (2W UART)
+I2C
+60-pin high speed Samtec QSH-030-01-L-D-A-K expansion connector
+2x BLSP (BAM Low Speed Peripheral)
+USB
+<strong>Power System:</strong>
+5VDC via external 2S-6S battery regulated down to 5V via APM adapter
+<strong>Weight and Dimensions:</strong>
+Weight: ?
+Width: 58mm for pcb (68 with pcb+connectors+camera)
+Thickness: ?
+Length: 40mm for pcb (52 with pcb+connectors+camera)Additional information can be found at <a href="http://www.intrinsyc.com/qualcomm-snapdragon-flight-details/" target="_blank">www.intrinsyc.com/qualcomm-snapdragon-flight-details/</a> (behind short survey).</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td>?</td>
+</tr>
+<tr>
+<td><strong>Design files</strong></td>
+<td>?</td>
+</tr>
+</tbody>
+</table>

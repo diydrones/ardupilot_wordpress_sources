@@ -1,0 +1,99 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: plane-commands-in-guided-mode 
+title: Plane Commands in Guided Mode 
+id: 5840 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article lists the commands that are handled by Plane in GUIDED mode (for example, when writing GCS or Companion Computer apps in <a href="http://dronekit.io/">DroneKit</a>). Except where explicitly stated, most of these can also be called in other modes too.
+<!-- more -->
+[note]The list is inferred from Plane's <a href="https://github.com/diydrones/ardupilot/blob/master/ArduPlane/GCS_Mavlink.cpp">GCS_Mavlink.cpp</a> <!-- changelist 54c06cde025ea32614586cd4675f37af2a0e6383 -->[/note]
+
+
+<h1>Movement commands</h1>
+
+For movement, Plane uses:
+<a href="http://plane.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_waypoint">MAV_CMD_NAV_WAYPOINT</a> message encoded with the "current" parameter set to "2" to indicate that it is a guided mode "goto" message. 
+<a href="http://plane.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_condition_change_alt">MAV_CMD_CONDITION_CHANGE_ALT</a> message encoded with the "current" parameter set to "3" to indicate that it is a guided mode "altitude change" message. 
+
+
+<h1>MAV_CMDs</h1>
+
+These MAV_CMDs can be processed if packaged within a <a href="https://pixhawk.ethz.ch/mavlink/#COMMAND_LONG">COMMAND_LONG</a> message.
+
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_loiter_unlim">MAV_CMD_NAV_LOITER_UNLIM</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_return_to_launch">MAV_CMD_NAV_RETURN_TO_LAUNCH</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_roi">MAV_CMD_DO_SET_ROI</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_mission_start">MAV_CMD_MISSION_START</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_component_arm_disarm">MAV_CMD_COMPONENT_ARM_DISARM</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_servo">MAV_CMD_DO_SET_SERVO</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_repeat_servo">MAV_CMD_DO_REPEAT_SERVO</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_relay">MAV_CMD_DO_SET_RELAY</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_repeat_relay">MAV_CMD_DO_REPEAT_RELAY</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_fence_enable">MAV_CMD_DO_FENCE_ENABLE</a>
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_home">MAV_CMD_DO_SET_HOME</a>
+MAV_CMD_START_RX_PAIR
+MAV_CMD_PREFLIGHT_CALIBRATION
+MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS
+MAV_CMD_DO_SET_MODE
+MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN
+MAV_CMD_DO_LAND_START
+MAV_CMD_DO_GO_AROUND
+MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES
+<a href="http://plane.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_autotune_enable">MAV_CMD_DO_AUTOTUNE_ENABLE</a>
+
+
+These MAV_CMD commands can be sent as their own message type (not inside <code>COMMAND_LONG</code>):
+
+
+<a href="http://plane.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_digicam_configure">MAV_CMD_DO_DIGICAM_CONFIGURE</a>
+<a href="http://plane.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_digicam_control">MAV_CMD_DO_DIGICAM_CONTROL</a>
+MAV_CMD_DO_MOUNT_CONFIGURE
+<a href="http://plane.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_mount_control">MAV_CMD_DO_MOUNT_CONTROL</a>
+
+
+
+<h1>Other commands</h1>
+
+Below are other (non-MAV_CMD) commands that will be handled by Plane in GUIDED mode.
+
+[note]Most of these commands are not relevant to DroneKit-Python apps or are already provided through the API.[/note]
+
+
+<a href="https://pixhawk.ethz.ch/mavlink/#SET_MODE">SET_MODE</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_REQUEST_LIST">MISSION_REQUEST_LIST</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_REQUEST">MISSION_REQUEST</a>
+  MISSION_ACK:
+<a href="https://pixhawk.ethz.ch/mavlink/#PARAM_REQUEST_LIST">PARAM_REQUEST_LIST</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#PARAM_REQUEST_READ">PARAM_REQUEST_READ</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_CLEAR_ALL">MISSION_CLEAR_ALL</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_SET_CURRENT">MISSION_SET_CURRENT</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_COUNT">MISSION_COUNT</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_WRITE_PARTIAL_LIST">MISSION_WRITE_PARTIAL_LIST</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#MISSION_ITEM">MISSION_ITEM</a>
+MAVLINK_MSG_ID_FENCE_POINT
+MAVLINK_MSG_ID_FENCE_FETCH_POINT
+RALLY_POINT
+RALLY_FETCH_POINT
+<a href="https://pixhawk.ethz.ch/mavlink/#PARAM_SET">PARAM_SET</a>
+GIMBAL_REPORT
+<a href="https://pixhawk.ethz.ch/mavlink/#RC_CHANNELS_OVERRIDE">RC_CHANNELS_OVERRIDE</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#HEARTBEAT">HEARTBEAT</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#HIL_STATE">HIL_STATE</a>
+RADIO
+<a href="https://pixhawk.ethz.ch/mavlink/#RADIO_STATUS">RADIO_STATUS</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_DATA">LOG_REQUEST_DATA</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#LOG_ERASE">LOG_ERASE</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_LIST">LOG_REQUEST_LIST</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_END">LOG_REQUEST_END</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#SERIAL_CONTROL">SERIAL_CONTROL</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#GPS_INJECT_DATA">GPS_INJECT_DATA</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#TERRAIN_DATA">TERRAIN_DATA</a>
+<a href="https://pixhawk.ethz.ch/mavlink/#TERRAIN_CHECK">TERRAIN_CHECK</a>
+AUTOPILOT_VERSION_REQUEST
+<a href="https://pixhawk.ethz.ch/mavlink/#REQUEST_DATA_STREAM">REQUEST_DATA_STREAM</a>
+

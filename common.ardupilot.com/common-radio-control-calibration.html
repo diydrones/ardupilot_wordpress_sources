@@ -61,7 +61,7 @@ Plane default channel mappings are:
 [site wiki="rover"]
 Rover default channel mappings are:
 <ul>
-	<li><strong>Channel 1</strong>: Roll</li>
+	<li><strong>Channel 1</strong>: Steer</li>
 	<li><strong>Channel 3</strong>: Throttle</li>
 	<li><strong>Channel 8</strong> (default): Flight modes. Mode selection can be mapped to any unused parameter with the <code>MODE_CH</code> parameter.</li>
 </ul>
@@ -97,7 +97,9 @@ Connect the autopilot via USB and turn on your RC transmitter. Verify that the t
 
 Open Mission Planner's <strong>INITIAL SETUP | Mandatory Hardware | Radio Calibration</strong> screen. If your RC receiver (Rx) and transmitter (Tx) are bound, you should see the green bars move when you move the transmitter sticks.
 
-[caption id="attachment_5177" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration.png" alt="Radio Calibration Screen" width="1011" height="568" class="size-full wp-image-5177" /></a> Mission Planner: Radio Calibration Screen (Copter)[/caption]
+[site wiki="copter, rover" inline="on"][caption id="attachment_5177" align="alignnone" width="1011"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration.png" alt="Radio Calibration Screen" width="1011" height="568" class="size-full wp-image-5177" /></a> Mission Planner: Radio Calibration Screen (Copter)[/caption][/site]
+
+[site wiki="plane" inline="on"][caption id="attachment_5275" align="alignnone" width="1265"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration_Plane.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/10/MissionPlanner_RadioCalibration_Plane.png" alt="Mission Planner: Radio Calibration Screen (Plane)" width="1265" height="713" class="size-full wp-image-5275" /></a> Mission Planner: Radio Calibration Screen (Plane)[/caption][/site]
 
 
 [tip]If the bars are not moving then check what LED lights the receiver is displaying:
@@ -122,13 +124,13 @@ Mission Planner will display a prompt to check radio control equipment is on, ba
 	<li>Move the control sticks and toggle switches on your transmitter to their limits of travel and observe the results on the radio calibration bars. Red lines will appear across the calibration bars to indicate maximum and minimum values:
 [caption id="attachment_7559" align="alignnone" width="1034"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radio-calib-click-when-done.png"><img class="size-full wp-image-7559" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/radio-calib-click-when-done.png" alt="Mission Planner: Once red bars are set, select Click When Done" width="1034" height="575" /></a> Mission Planner: Input range marked with red lines[/caption]
 
-The green bars should move in the same direction as the transmitter sticks (except for Pitch where the bars move opposite to stick movements - low values are forward, high values are back).  If the green bars move in the wrong direction, reverse them using your RC transmitter's channel-reverse function (see your RC gear's manual for guidance).
+[tip]The green bars should move in the <strong>same direction</strong> as the transmitter sticks (except for Pitch where the bars move opposite to stick movements - low values are forward, high values are back).  If the green bars move in the wrong direction, reverse them using your RC transmitter's channel-reverse function (see your RC gear's manual for guidance).[/tip]
 
 You should also calibrate the channel you have selected for controlling vehicle mode, and any other channels you have connected to the autopilot. 
 
 [site wiki="rover"]Servos should move in the same direction when under autopilot control as they do in MANUAL mode. If not, select the <strong>Reverse</strong> checkbox for the associated channel. [/site]
 
-[site wiki="plane"]This screen is also where you set up elevon mode and servo reversal. For more information see <a href="http://plane.ardupilot.com/wiki/arduplane-setup/first-time-apm-setup/reversing-servos-and-setting-normalelevon-mode/">Normal/Elevon/VTail Mode & Reversing Servos</a>.[/site]</li>
+[site wiki="plane"]This screen is also where you set up elevon mode and servo reversal. For more information see <a href="http://plane.ardupilot.com/wiki/reversing-servos-and-setting-normalelevon-mode/">Normal/Elevon/VTail Mode & Reversing Servos</a>.[/site]</li>
 
 	<li>Select <strong>Click when Done</strong> when all required channels are set at the minimum and maximum positions. 
 

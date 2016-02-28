@@ -1,0 +1,24 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: building-the-code-on-mac 
+title: Building ArduPilot for APM2.x on MacOS with Arduino 
+id: 294 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[warning]Copter 3.3 firmware (and later) no longer fits on APM boards. The last firmware builds that can be installed (v3.2.1) can be downloaded from here: <a href="http://ardupilot.com/downloads/?did=121" title="DIY Drones Firmware">APM2.x</a>  and <a href="http://ardupilot.com/downloads/?did=120" title="Copter 3.2.1 Firmware">APM 1.0</a>. 
+
+<p>Plane, Rover and AntennaTracker builds can still be installed.</p>[/warning]
+
+To build the ardupilot source code on MacOS for AVR targets (such as the APM1 or APM2) you have two choices. The first option is to build using a modified version of the Arduino build environment. You can get it from <a title="http://firmware.diydrones.com/" href="http://firmware.diydrones.com/">http://firmware.diydrones.com/</a> under the Tools directory. 
+
+The second choice is to build using the 'make' tool on the command line. If using the Arduino tool, then after installing it, you need to do the following:
+<ul>
+	<li>Choose your board type under the ArduPilot menu</li>
+	<li>Set your Sketchbook location under File-&gt;Preferences to point at the root of your git checkout of the ardupilot sources</li>
+	<li>Stop and restart Arduino</li>
+</ul>
+

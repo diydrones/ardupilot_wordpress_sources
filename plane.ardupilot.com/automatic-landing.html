@@ -1,0 +1,177 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: automatic-landing 
+title: Automatic Landing 
+id: 970 
+menu_order: 6 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article explains how to land Plane as part of a mission plan and includes information about how a landing can be safely aborted.
+<!--more-->
+<h1>Configuring for Automatic Landing</h1>
+Plane can automatically land an aircraft, as part of a mission plan.
+
+To land the plane you need to add a <a href="common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_land">NAV_LAND</a> command to the end of your mission indicating the latitude, longitude and altitude of your desired touchdown point. In most cases, the altitude should be set to 0. During landing, the autopilot will shut down the throttle and hold the current heading when the plane reaches the flare point, controlled by the parameters described below.
+<h2>Key Parameters</h2>
+The key parameters that control automatic landing are:
+<ul>
+	<li><a href="arduplane-parameters/#landing_flare_altitude_arduplaneland_flare_alt">LAND_FLARE_ALT</a></li>
+	<li><a href="arduplane-parameters/#landing_flare_time_arduplaneland_flare_sec">LAND_FLARE_SEC</a></li>
+	<li><a href="arduplane-parameters/#landing_pitch_arduplaneland_pitch_cd">LAND_PITCH_CD</a></li>
+	<li><a href="arduplane-parameters/#airspeed_during_landing_approach_ms_tecs_land_arspd">TECS_LAND_ARSPD</a></li>
+	<li><a href="arduplane-parameters/#weighting_applied_to_speed_control_during_landing_tecs_land_spdwgt">TECS_LAND_SPDWGT</a></li>
+</ul>
+The meaning and recommended value of each of these parameters is described below.
+<h2>Setting the Flare Point</h2>
+The "flare" is the final stage of the landing when the autopilot cuts the throttle and raises the pitch, increasing drag and slowing the aircraft to sink onto the ground. The appropriate time to flare depends on the type of aircraft, and is controlled by the <a href="arduplane-parameters/#landing_flare_altitude_arduplaneland_flare_alt">LAND_FLARE_ALT</a> and <a href="arduplane-parameters/#landing_flare_time_arduplaneland_flare_sec">LAND_FLARE_SEC</a> parameters.
+
+The primary control of the flare is the <code>LAND_FLARE_SEC</code> parameter. This is the time in seconds before the aircraft would hit the ground if it continued with its current descent rate. So if the plane is descending at 2 meters/second and you set the <code>LAND_FLARE_SEC</code> to 3 then the aircraft would flare at an altitude of 6 meters above the ground. By using a time to impact to control the flare the aircraft is able to flare at a higher altitude if it is descending quickly, and at a lower altitude if it is descending slowly. That helps ensure the flare is able to produce a smooth touchdown.
+
+The second control is <code>LAND_FLARE_ALT</code>. That is an altitude above the ground in meters at which the aircraft will flare, regardless of its descent rate.
+
+The appropriate values for these two parameters depends on how the autopilot is estimating its altitude above the ground. If the autopilot has a good rangefinder (<a title="common-LIDAR-Lite Rangefinder" href="http://plane.ardupilot.com/wiki/common-rangefinder-lidarlite/">such as LIDAR</a>) then you can safely choose quite small numbers, and flare close to the ground. That will generally produce a better landing. A value for <code>LAND_FLARE_SEC</code> of 1.5 and <code>LAND_FLARE_ALT</code> of 2 is a good place to start with a LiDAR. If you are relying solely on a barometer for landing altitude then you will probably need higher values, to account for barometric error.
+<h2>Controlling the glide slope</h2>
+Another important factor in setting up the flare point is the glide slope. The glide slope is the ratio of the distance from the last waypoint to the landing point, and the height difference between the last waypoint and the landing point. For example, if the landing point is 300 meters from the last waypoint, and the last waypoint is 30 meters above the ground then the glide slope is 10%.
+
+If the glide slope is too steep then the aircraft will not be able to flare in time to avoid crashing, plus the autopilot may not be able to keep the plane on the approach slope accurately. It is recommended that you start with a glide slope of at most 10%. What glide slope your plane can handle will depend on how well your pitch controller tuning is, how good your TECS tuning is, and the landing speed you ask for.
+
+If you find your aircraft is not following the desired glide slope accurately then you should first check your pitch tuning in your logs, and ensure that the demanded and achieved pitch match within a couple of degrees during landing. If they don't then look at the documentation on pitch tuning (or possibly re-run AUTOTUNE). If the demanded and achieved pitch do match then you should check your TECS logs to ensure that the demanded and achieved airspeed are matching during landing. Have a look at the TECS tuning patch for more information.
+
+You should also be aware that many model aircraft can glide for long distances, and it may be that your requested glide slope and airspeed combination just isn't achievable.
+<h2>Landing Airspeed</h2>
+Automatic landing is greatly assisted by the use of an airspeed sensor. When using an airspeed sensor the landing approach speed (the speed before the flare) is controlled by the <a href="arduplane-parameters/#airspeed_during_landing_approach_ms_tecs_land_arspd">TECS_LAND_ARSPD</a> parameter, in meters/second.
+
+You need to choose a value for <code>TECS_LAND_ARSPD</code> that is above the stall speed of your aircraft, but low enough that the aircraft is able to lose altitude and land in a reasonable distance. Note that as the stall speed is dependent on the weight of your aircraft you will need to adjust the landing speed if you change the aircraft's weight significantly (such as by adding batteries or a camera).
+<h2>Controlling the approach</h2>
+During the landing approach the autopilot needs to balance the requested airspeed (set by <code>TECS_LAND_ARSPD</code>) and the requested glide slope and landing position (set by the previous waypoint and final landing point). The default configuration tries to balance these two demands equally, but for some aircraft you may want to prioritize one over the other.
+
+The priority of airspeed control versus height control is set using the <a href="arduplane-parameters/#weighting_applied_to_speed_control_during_landing_tecs_land_spdwgt">TECS_LAND_SPDWGT</a> parameter. A value of 1 (the default) means a balance between the two. A value closer to two gives a higher priority to airspeed and a value closer to zero gives a higher priority to height control. For example, if you are landing at a speed close to the stall speed you may wish to place a high priority on the airspeed control. To do that you should set <code>TECS_LAND_SPDWGT</code> to a value close to 2, such as 1.9.
+
+If what you want in a landing is precision in the position where it lands then you should set <code>TECS_LAND_SPDWGT</code> to a low number, such as 0.2 or even 0.0. In that case the plane will still try to achieve the target landing airspeed by using the throttle, but it will not try to control airspeed with pitch.
+
+If you are landing a glider (or any aircraft without a motor) then you should set <code>TECS_LAND_SPDWGT</code> to 2.0, so that airspeed is the priority and pitch will be used to control airspeed.
+<h2>Controlling the flare</h2>
+The final stage of the landing is called the "flare". During the flare the aircraft tries to retain a course along the line between the last waypoint and the landing waypoint, and it controls it's height solely using a target descent rate. Once the flare is started the throttle is set to <a href="arduplane-parameters/#minimum_throttle_arduplanethr_min">THR_MIN</a> (which is usually zero, meaning the motor is stopped).
+
+The main job of the flight controller in the flare is to try to achieve the descent rate specified in the <a href="arduplane-parameters/#sink_rate_for_final_landing_stage_tecs_land_sink">TECS_LAND_SINK</a> parameter. That defaults to 0.25 meters/second, which is a reasonable touchdown vertical speed for most models. To achieve that speed the TECS controller uses pitch control only as the motor has been forced to zero.
+
+The primary parameters which affect the ability of the aircraft to achieve the desired descent rate are <a href="arduplane-parameters/#landing_pitch_arduplaneland_pitch_cd">LAND_PITCH_CD</a>,  <a href="arduplane-parameters/#controller_sink_rate_to_pitch_gain_during_flare_tecs_land_damp">TECS_LAND_DAMP</a> and the main pitch tuning parameters.
+
+The <code>LAND_PITCH_CD</code> parameter sets the minimum pitch target in the flare (in centi-degrees). This parameter is very airframe specific and is designed to prevent the nose of the aircraft being too far down on touchdown causing issues with damaging the landing gear or breaking a propeller.  For most aircraft this should be a small positive number (such as 300, meaning 3 degrees), but for some belly landing aircraft a small negative number can be good, to allow the nose to be kept down a small amount to reduce the chance of stall if the flare happens too far off the ground.
+
+Note that the actual pitch of the aircraft can be quite a bit above <code>LAND_PITCH_CD</code> as the TECS controller tries to control the descent rate. The maximum pitch is controlled by the <a href="arduplane-parameters/#maximum_pitch_in_auto_flight_tecs_pitch_max">TECS_PITCH_MAX</a> parameter if it is non-zero, otherwise by the <a href="arduplane-parameters/#maximum_pitch_angle_arduplanelim_pitch_max">LIM_PITCH_MAX</a> parameter.
+
+The <code>TECS_LAND_DAMP</code> parameter is a damping constant for the pitch control during. A larger number will cause the pitch demand to change more slowly. This parameter can be used to reduce issues with sudden pitch changes when the flare happens.
+<h2>After the Flare</h2>
+After the plane flares it continues to navigate, but with zero throttle. The navigation direction is a line extrapolated forward through the landing point from the last waypoint. Note that the navigation roll will be limited to <a href="arduplane-parameters/#level_flight_roll_limit_arduplanelevel_roll_limit">LEVEL_ROLL_LIMIT</a> (which defaults to 5 degrees) to prevent wing strike, so if there is a significant cross-wind then it is likely that the aircraft will not be able to maintain the exact path.
+
+When the plane has stopped moving for <a href="arduplane-parameters/#landing_disarm_delay_arduplaneland_disarmdelay">LAND_DISARMDELAY</a> seconds (default 20 seconds) it will disarm the motor.
+<h2>Using a rangefinder</h2>
+If you have <a title="common-Rangefinders (landing page)" href="http://plane.ardupilot.com/wiki/common-rangefinder-landingpage/">fitted a rangefinder</a> to your aircraft then you can use it for much more accurate landing control. To allow the rangefinder to be used for landing you need to set the <a href="arduplane-parameters/#enable_rangefinder_for_landing_arduplanerngfnd_landing">RNGFND_LANDING</a> parameter to 1.
+
+When using a rangefinder for landing the altitude given by the rangefinder is used only in the landing approach and to determine the flare point, and is designed to allow the aircraft to more accurately follow the glide slope and to flare at the right time.
+
+[note]The effectiveness of a rangefinder can depend on the surface you are flying over, so it is a good idea to do some low passes in a flight mode such as FBWA first, then examine the logs to check that the rangefinder is working correctly.[/note]
+
+Also note that if you have a longer range rangefinder then it is a very good idea to set the minimum range of the rangerfinder well above zero. For example, the PulsedLight Lidar has a typical range of over 40 meters, and when it gets false readings it tends to read ranges of less than 1 meter. Setting <a href="arduplane-parameters/#rangefinder_minimum_distance_rngfnd_min_cm">RNGFND_MIN_CM</a> to 150 will discard any rangerfinder readings below 1.5 meters, and will greatly improve the robustness of the Lidar for landing.
+<h2>Improving the landing</h2>
+The key to a good landing is the autopilot knowing how far off the ground it is. With the default setup the only sensor available to detect altitude is the barometer. Unfortunately barometers suffer from three main types of error:
+<ul>
+	<li>barometric drift due to changes in atmospheric pressure</li>
+	<li>barometric drift due to changes in the temperature of the autopilot electronics</li>
+	<li>barometric error due to local pressure changes from airflow around the barometer</li>
+</ul>
+The ideal setup for good automatic landing is to have a <a href="/wiki/common-rangefinder-landingpage/">Lidar</a>. A Lidar can measure the distance to the ground very accurately, and doesn't suffer from drift. If you have a Lidar installed you can enable its use for landing with <code>RNGFND_LANDING=1</code>.
+
+If a Lidar isn't fitted then there are a few things you can do to minimise barometric error problems with auto-land
+<ul>
+	<li>perform a barometer calibration after the electronics have warmed up. The easiest way to do this with a Pixhawk is to disarm the plane with the safety switch. When the plane is disarmed it assumes it is on the ground and will zero the barometer to the current pressure.</li>
+	<li>try to prevent direct airflow over the autopilot that could cause speed related pressure changes</li>
+	<li>fly shorter flights, allowing for less time for airpressure changes. Check your logs and see if the landing is happening at zero altitude consistently</li>
+</ul>
+With planes that belly land it can also work well to setup the landing with a shallow pitch (in <code>LAND_PITCH_CD</code>) and set a slightly higher altitude to flare at. That will only work if your stall speed is low enough that gliding for a while will work reliably.
+<h1>Using DO_LAND_START</h1>
+Sometimes it is useful to trigger an automatic landing as part of an RTL (return to launch). To do this you need to do two things:
+<ul>
+	<li>add a <a href="common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_land_start">DO_LAND_START</a> mission item to your mission, just before the start of your landing sequence</li>
+	<li>set the <a href="arduplane-parameters/#rtl_auto_land_arduplanertl_autoland">RTL_AUTOLAND</a> parameter to 1 or 2</li>
+</ul>
+The way it works is that when the plane enters an RTL it checks to see if the parameter RTL_AUTOLAND is set to 1 or 2. If it is then the current mission is searched for a mission item of type DO_LAND_START. If one is found then the plane will automatically enter AUTO mode and land, starting at the part of the mission just after the <code>DO_LAND_START</code> marker.
+
+The exact behaviour depends on the <code>RTL_AUTOLAND</code> value:
+<ul>
+	<li>If <code>RTL_AUTOLAND=1</code> then the plane will first RTL as normal, then when it starts circling the return point (home or a rally point) it will then switch to the AUTO mission after the <code>DO_LAND_START</code> and land</li>
+	<li>If <code>RTL_AUTOLAND=2</code> then the plane will bypass the RTL completely and go straight to the landing sequence.</li>
+</ul>
+You can optionally include more than one <code>DO_LAND_START</code> mission item in your mission. If that is done then the latitude/longitude of the <code>DO_LAND_START</code> mission items is used to choose which landing sequence to use. The <code>DO_LAND_START</code> closest to the current location is used. This can be useful if you have multiple landing sequences for different wind conditions or different areas.
+<h1>How to manually abort an auto-landing</h1>
+A landing-abort mechanism is provided to allow you to abort a landing sequence in a safe, controlled, and expected way. Custom abort behaviour can be pre-programmed as part of the mission or you can use the default abort recovery mechanism. To enable, set param LAND_ABORT_THR=1.
+
+[note]This section describes the abort behaviour introduced in Plane 3.4.[/note]
+<h2>Abort triggers</h2>
+The are a number of ways trigger an auto-landing abort (all of them will only work while currently executing a <code>LAND</code> waypoint mission item):
+<ul>
+	<li><em>Send the <code>MAV_CMD_DO_GO_AROUND</code> command (using a GCS).</em> This will increment the mission index to the next command (the one after LAND) where you can customize any navigation behavior you want.</li>
+	<li><em>Mode change</em>. When switching out of AUTO mode while landing (for example to MANUAL/STABILIZE/FBWA) your mission index will automatically change depending on which abort flight behavior you have configured (see below). If you were to switch out of and back into AUTO quickly, then you would immediately start executing your alternate mission behavior.This is useful for cases where you want to manually abort and then continue the planned landing when you're ready. For example, you might switch to MANUAL/STABILIZE/FBWA in order to avoid an object on the runway and then go back into AUTO to restart the landing.</li>
+	<li><em>Throttle briefly &gt; 90%</em>. This will trigger one of the three abort flight behaviors while staying in AUTO mode.</li>
+</ul>
+<h2>Abort land flight behavior options</h2>
+The abort behaviour depends on the trigger method, your mission, and other factors.
+<h3>User-defined abort sequence</h3>
+If an abort is triggered using the <code>CMD_DO_GO_AROUND</code> command, the mission will increment to the command after the LAND command, and continue as normal. As the command sequence after LAND is arbitrary, this approach allows a fully customized abort sequence.
+
+[tip]A useful mission item to put directly after LAND is the <a href="common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_continue_and_change_alt">CONTINUE_AND_CHANGE_ALT</a> mission item with the first param either 0 or 1. This will cause the aircraft to climb to the desired altitude.[/tip]
+
+If an abort is triggered by changing modes or increasing throttle to &gt;90%, Plane will check if the command after LAND is <code>CONTINUE_AND_CHANGE_ALT</code>. If it is, then Plane will execute that command, and then continue the mission when it reaches the desired altitude.  Otherwise Plane will follow the default abort sequence below.
+<h3>Fallback/default abort sequence</h3>
+If an abort is triggered by changing modes (toggle out of AUTO to FBWA and then back to AUTO) or increasing throttle to &gt;90% and <code>CONTINUE_AND_CHANGE_ALT</code> is <strong>not found</strong> after the LAND command, then Plane will attempt to auto-climb to a safe altitude using best-available information.
+
+Plane uses <a href="arduplane-parameters/#maximum_throttle_for_takeoff_arduplanetkoff_thr_max">TKOFF_THR_MAX</a> for the throttle value. The target altitude and pitch used are the first values out of the following that are found/defined:
+<ol>
+	<li><code>LAND</code> command abort altitude (<code>param 1</code>).</li>
+	<li><code>TAKEOFF</code> command altitude and pitch value.</li>
+	<li>Default altitude of 30m and 10 degree pitch (used if the <code>LAND</code> abort altitude not defined and the mission has no <code>TAKEOFF</code> command).</li>
+</ol>
+The climb-out procedure is complete when the abort altitude is reached. Plane will then change the mission index to allow for a predictable landing approach:
+<ul>
+	<li>Jump to a <code>DO_LAND_START</code> command if there is one in the mission.</li>
+	<li>Otherwise decrement the mission index to restart the glide slope.</li>
+</ul>
+<h1>Reverse-Thrust Landing</h1>
+Some ESC's allow for reverse direction. When using reverse on the propeller it will generate a negative thrust which can be used to slow you down. During a steep landing approach this method can be used to maintain a good airspeed allowing you to land much more precisely even with a LiDAR Baro bump on the approach. To use this feature it is highly recommend to use an airspeed sensor  and a rangefinder (see above) for an accurate altitude.
+
+[note]Reverse-thrust landings are available starting from Plane v3.5.1.[/note]
+<h2>Key Parameters</h2>
+The key parameters that control reverse thrust landing in addition to the ones <a href="#key_parameters">listed in section 1.1</a> are:
+<ul>
+	<li>LAND_PF_ALT</li>
+	<li>LAND_PF_ARSPD</li>
+	<li>USE_REV_THRUST</li>
+	<li>TECS_APPR_SMAX</li>
+	<li><a href="arduplane-parameters/#rc_trim_pwm_rc3_trim">RC3_TRIM</a></li>
+	<li><a href="arduplane-parameters/#minimum_throttle_arduplanethr_min">THR_MIN</a></li>
+</ul>
+<h2>Determining your max glide slope angle</h2>
+For a steep landing approach, the limitation is how well you can maintain your desired airspeed. This is determined by your aircraft's ability to create reverse thrust (motor+prop combo) and its resistance to slowing down (aircraft mass). In most cases extreme steepness is unnecessary, but possible. With an over-sized motor and lightweight aircraft you can come in as steep as 60 degrees.
+
+To determine your max, set TECS_APPR_SMAX very high as to not limit you (e.g. 99). Next, plan a mission with a steeper than normal approach. Try 15 degrees and go up from there. Watch your airspeed on the approach, it should be able to easily maintain <a href="arduplane-parameters/#airspeed_during_landing_approach_ms_tecs_land_arspd">TECS_LAND_ARSPD</a>. If not, you're coming in too steep for the negative-thrust-to-mass ratio of your aircraft.
+
+[tip]Keep in mind that whatever value you determine as your maximum may not be acceptable in all wind conditions. It is best to be a little conservative.[/tip]
+<h2>Setting up the Pre-Flare</h2>
+With a rangefinder and airspeed sensors installed, at the pre-flare point we will have an accurate airspeed and altitude reading. This gives us a good idea of our momentum and stable "initial conditions" to the final flare. Set LAND_PF_ALT to a fairly high point (for example 10m) and adjust from there. Next set LAND_PF_ARSPD to a value just above your stall speed.
+
+When LAND_PF_ALT is reached the airspeed demand will instantly go from <a href="arduplane-parameters/#airspeed_during_landing_approach_ms_tecs_land_arspd">TECS_LAND_ARSPD</a> to LAND_PF_ARSPD. This will cause the TECS controller to slam on the brakes with some increase reverse thrust.
+
+The goal is to set LAND_PF_ALT to an altitude where it achieves LAND_PF_ARSPD (just before killing the throttle at LAND_FLARE_ALT) at a somewhat low altitude - e.g. 1 or 2m.
+<h2>Flare</h2>
+Now that you are starting the flare with a stable and predictable airspeed, it's much easier to <a href="automatic-landing/#controlling_the_flare">control the flare</a>. If you've already tuned your flare for an auto-land without reverse thrust you'll want to retune it. You'll notice you're coming in much slower.
+<h2>Other benefits of reverse-thrust landings</h2>
+<h3>LiDAR baro bump is handled better</h3>
+On a long duration flight the baro drift will cause an altitude offset that is not detectable until the LiDAR detects the ground (at which point the aircraft "snaps" to the glide-slope). This causes an increased airspeed moments before your flare, causing a touch-down beyond the intended land point. With reverse-thrust the "snap" still happens, but the TECS controller automatically changes the throttle demand to maintain the desired airspeed.
+<h3>Determining actual stall speed of your aircraft</h3>
+Unless you really know what you're doing, stall speed can be hard to estimate. To be sure of the value you normally need to slowly decrease your airspeed until you stall - with the consequent problem that now you have a stalled plane falling out of the sky.
+
+With LAND_PF_ALT and LAND_PF_ARSPD you can check your stall speed much lower to the ground. To know the exact moment it stalls, check your logs for when roll and roll_desired diverge.

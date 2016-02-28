@@ -1,0 +1,134 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: airspeed 
+title: Using an Airspeed Sensor 
+id: 965 
+menu_order: 300 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Plane supports the use of an airspeed sensor, which can help in windy condition, slow flight and autonomous landings. It is not recommended for most new users, however, as it does require additional tuning and adds one more layer of control to set up.
+<!-- more -->
+The following sections explain how to wire sensors to the flight controller. After you install an airspeed sensor don't forget to <a href="http://plane.ardupilot.com/wiki/calibrating-an-airspeed-sensor/">calibrate it</a>!
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/BR-0004-03-2T1.jpg" alt="" /> <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png"><img class="wp-image-5953" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png" alt="full assembly" width="100" height="222" /></a>
+
+
+<h1>Pixhawk Digital Airspeed Pin</h1>
+
+A digital airspeed sensor is available for Pixhawk from <a href="https://store.3drobotics.com/products/pixhawk-airspeed-sensor-kit">store.3dr.com</a>. Connect the airspeed sensor to Pixhawk's I2C port (or I2C splitter module). Using the rubber tubing, connect the longer extension on the pitot tube to the cone that protrudes from the top of the airspeed sensor board (off the off-white, square section protruding off the top of the board), and connect the shorter extension on the pitot tube to the cone protruding from the base of the board.
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png"><img class="wp-image-5953" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png" alt="full assembly" width="100" height="222" /></a>
+
+To enable the digital airspeed sensor, connect Pixhawk to Mission Planner (or APM Planner for OS X), and select the <strong>Advanced Parameter List</strong> under the Configuration tab. Locate the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#airspeed_pin_arspd_pin">ARSPD_PIN</a> parameter and set to <strong>65</strong>. Select <strong>Write Params</strong> to apply. Ensure that you have also enabled the airspeed sensor in the setup section (<strong>Mission Planner | Hardware | Optional Hardware | Airspeed</strong>) as discussed below.
+
+
+<h1>Analog Airspeed sensor</h1>
+
+The way this <a href="https://store.3drobotics.com/products/airspeed-kit-with-mpxv7002dp">airspeed sensor</a> works is that the top tube is "active" (measures air pressure from the pitot tube that is open at the front and has air driven into it by airspeed) and the bottom one is "static" (measures ambient air pressure from tube with intakes on the side).
+
+Connect the active sensor port using silicon tube to the straight tube exiting from the rear of the pitot tube. The angled tube is the static part connecting to the static port of the sensor (the port on the sensor closest to the PCB breakout board)
+
+<h2>PX4/Pixhawk Analog Airspeed Pin and Wiring</h2>
+
+For the PX4
+<ul>
+	<li>Hardware PIN 11 is available on the PX4 for Air Speed use.</li>
+	<li>The "airspeed" pin 11 is located on a 3 pin DF13 connector on the PX4IO board but is directly connected to the ADC on the PX4FMU.</li>
+	<li>This pin can take voltages up to 6.6V (it has an internal voltage divider).</li>
+	<li>The FMU-Pres (air pressure) 3 pin connector is on the end of the PX4IO board opposite the power in connector.
+<ul>
+	<li>Wire the air speed sensor's signal wire to pin 2 (the center pin) of the FMU-PRES connector.</li>
+	<li>Wire pin 1 (towards the center of the board) to the sensors VCC (5 volts) input.</li>
+	<li>Wire pin 3 (nearest the edge of the board) to the air speed sensors ground.</li>
+</ul>
+</li>
+	<li>Assign the airspeed sensor to an appropriate "PIN" in Mission Planner - Configuration - Advanced Params - Adv Parameter List.
+<ul>
+	<li>Set the <code>ARSPD_PIN</code> parameter to 11 in the Advanced Parameter List and select "Write Parameters".</li>
+</ul>
+</li>
+</ul>
+
+For the Pixhawk
+
+<ul>
+	<li>The "airspeed" pin 15 is located on a 3 pin DF13 connector on the Pixhawk board.</li>
+	<li>This pin can take voltages up to 6.6V (it has an internal voltage divider).</li>
+	<li>The air pressure connector (labeled ADC 6.6V) is a 3 pin connector is on the top right of the Pixhawk.
+<ul>
+	<li>Wire the air speed sensor's signal wire to pin 2 (the center pin) of the FMU-PRES connector.</li>
+	<li>Wire pin 1 (towards the center of the board) to the sensors VCC (5 volts) input.</li>
+	<li>Wire pin 3 (nearest the edge of the board) to the air speed sensors ground.</li>
+</ul>
+</li>
+	<li>Assign the airspeed sensor to an appropriate "PIN" in Mission Planner - Configuration - Advanced Params - Adv Parameter List.
+<ul>
+	<li>Set the <code>ARSPD_PIN</code> parameter to 15 in the Advanced Parameter List and select "Write Parameters".</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>APM 2</h2>
+
+Plug it into the pins on the "A0" port, as shown:
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/IMG_53441.jpg" alt="" />
+
+
+
+
+<h1>Software configuration</h1>
+
+You need to enable the airspeed sensor in <strong>Mission Planner | Hardware | Optional Hardware | Airspeed</strong>.
+
+[note]Oscillation between zero and small values (2-3) is normal. The airspeed varies with the square root of the pressure, so for differential pressures near zero it varies quite a bit with very small pressure changes, while at flying speeds it takes much greater pressure changes to produce a similar change in speed. If you see mostly 0, 1, 2, with an occasional bounce to 3 or 4, consider it normal. You will not see that sort of variability at flying speeds. As a check, you can take the fleshy part of your fingertip and press it against the pitot tube to raise the airspeed reading up to say 15 m/s. It is easy to see that holding a significant constant differential pressure like this the reading does not bounce around (if you keep constant pressure).[/note]
+
+
+Once you have the airspeed sensor connected, you can use it to control aircraft speed in auto modes. Change the "Cruise" setting in the Tuning screen of either APM Planner (shown) or Mission Planner:
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_Planner_v2_0_9__chriss-air-3__192_168_1_24_.png"><img class="alignnone  wp-image-6203" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM_Planner_v2_0_9__chriss-air-3__192_168_1_24_.png" alt="APM_Planner_v2_0_9__chriss-air-3__192_168_1_24_" width="607" height="443" /></a>
+
+
+
+<h1>Installing the Pitot Tubes</h1>
+
+When you place the airspeed sensor in your aircraft, use the pitot tube set in the kit (the kit comes with a single tube to measure both static and total pressure). In the case of the <em>EasyStar</em>, you'll need to push it through the foam in the cockpit so it points straight into the airstream. Make sure the holes in the side of the tube are not covered. They should be at least 1 centimeter out past the nose. First connect the two tubes coming out the back to the airspeed sensor. The tube coming straight out the back should go into the top port and the tube exiting at an angle should connect to the bottom port on the airspeed sensor. Drill or cut a small hole in the foam and push it through to the front.
+
+<img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/pitotinstalled1.jpg" alt="" />
+
+If you are using Plane in an aircraft with the propeller in the nose, the pitot tube must be mounted out on one wing, at least a foot from the fuselage to be outside the prop flow.
+
+
+
+<h1>Checking operation</h1>
+
+You can check the airspeed reading with Mission Planner or another ground station. Just blow on the pitot tube and observe the response. In still air oscillation between zero and small values (2-3) is normal. The airspeed varies with the square root of the pressure, so for differential pressures near zero it varies quite a bit with very small pressure changes, while at flying speeds it takes much greater pressure changes to produce a similar change in speed. If you see mostly 0, 1, 2, with an occasional bounce to 3 or 4, consider it normal. You will not see that sort of variability at flying speeds.
+
+
+<h1>Calibration</h1>
+
+The airspeed sensor reading is automatically zeroed by the APM during initialisation, so it is good practice during windy conditions to place a loose fitting cover over the pitot tube that shields the front hole and the four small side holes from the wind. This cover should be fitted prior to power on and removed before flight. If you forget to do this, you can always place the cover and repeat the airspeed auto-zero using the Mission Planners PREFLIGHT_CALIBRATE =&gt; Do Action.
+
+The airspeed reading scale factor is adjusted using the ARSPD_RATIO parameter. Plane has an automatic calibration function that will adjust the value of ARSPD_RATIO automatically provided the plane is flown with frequent direction changes. A normal model flying field circuit pattern or loiter will achieve the required direction changes, cross-country flying will not. To enable automatic airspeed sensor calibration, set the value of ARSPD_AUTOCAL to 1.
+
+
+
+<h1>The user can assign the connection pin for the Air Speed Sensor</h1>
+
+<ul>
+	<li>To assign the Airspeed Sensor to a specific pin, hook up your flight controller to your PC via USB. Start Mission Planner and select the <strong>Connect</strong> button on the upper right of the page.</li>
+	<li>Select the <em>Configuration</em> tab then <strong>Advanced Params</strong> and then the <strong>Adv Parameter List</strong>. Scroll down the List to the <code>ARSPD_PIN</code> parameter and select the pin you wish to use.</li>
+	<li>The analog pin number that the airspeed sensor is connected to:
+<ul>
+	<li>Set this to 0..9 for the APM2 analog pins.</li>
+	<li>Set to 64 on an APM1 for the dedicated airspeed port on the end of the board.</li>
+	<li>Set to 11 on PX4 for the analog airspeed port.</li>
+	<li>Set to 65 on the PX4 for an EagleTree I2C airspeed sensor. After you have selected the pin, select the "Update Parameters" tab and close <em>Mission Planner</em>.</li>
+</ul>
+</li>
+	<li><strong>Additional information on setting the Airspeed sensor pin can be found <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#Airspeed_pin_ARSPD_PIN">(Here!)</a></strong></li>
+</ul>

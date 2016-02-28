@@ -1,0 +1,174 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: raspberry-pi-via-mavlink 
+title: Communicating with Raspberry Pi via MAVLink 
+id: 3812 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page explains how to connect and configure a Raspberry Pi (RPi) so that it is able to communicate with a Pixhawk flight controller using the MAVLink protocol over a serial connection. This can be used to perform additional tasks such as image recognition which simply cannot be done by the Pixhawk due to the memory requirements for storing images.
+<!-- more -->
+
+<h1>Connecting the Pixhawk and RPi</h1>
+
+<img class="alignnone size-full wp-image-5534" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_Pixhawk_wiring1.png" alt="RaspberryPi_Pixhawk_wiring" width="1092" height="569" />
+Connect the Pixhawk's TELEM2 port to the RPi's Ground, TX and RX pins as shown in the image above.  The red V+ cable can go to the RPi's +5v pin, which . More details on the individual RPi's pin functions can be found <a href="http://elinux.org/RPi_Low-level_peripherals" target="_blank">here</a>.
+<h1>Connecting to RPi with an SSH/Telnet client</h1>
+[note]These steps assume that you have already <a href="http://www.raspberrypi.org/downloads" target="_blank">set-up your RPi</a> so that it is running Raspbian.
+To avoid the requirement to plug a keyboard, mouse and HDMI screen into your RPi it is convenient to be able to connect from your Desktop/Laptop computer to your RPi using an SSH/Telnet client such as <a href="http://www.putty.org/" target="_blank">PuTTY</a>.[/note]
+<ol>
+	<li>Connect the RPi to your local network by one of the following methods:
+<ul>
+	<li>Connecting an Ethernet LAN cable from the RPi board to your Ethernet router, or</li>
+	<li><a href="http://pingbin.com/2012/12/setup-wifi-raspberry-pi/" target="_blank">Use a USB dongle to connect your RPi to the local wireless network</a>, or</li>
+	<li>Connect the Ethernet LAN cable between the RPi and your desktop/laptop computer. Open the control panel's Network and Sharing Center, click on the network connection through which your desktop/laptop is connected to the internet, select properties and then in the sharing tab, select "Allow other networks to connect through this computer's Internet connection"
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_EthernetBridge.png"><img class="alignnone size-large wp-image-3847" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_EthernetBridge-1024x649.png" alt="RaspberryPi_EthernetBridge" width="584" height="370" /></a></li>
+</ul>
+</li>
+	<li>Determine the RPi's IP address:
+<ul>
+	<li>If you have access to the RPi's terminal screen (i.e.you have a screen, keyboard, mouse connected) you can use the /sbin/ifconfig command.</li>
+	<li>If your Ethernet router has a web interface it may show you the IP address of all connected devices</li>
+</ul>
+</li>
+	
+    <li>Connect with <a href="http://www.putty.org/" target="_blank">Putty</a>:
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_Putty.png"><img class="alignnone size-full wp-image-3848" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_Putty.png" alt="RaspberryPi_Putty" width="466" height="385" /></a>
+If all goes well you should be presented with the regular login prompt to which you can enter the username/password which defaults to pi/raspberry</li>
+</ol>
+
+
+
+
+<h1>Install the required packages on the Raspberry Pi</h1>
+Log into the RPi board (default username password is pi/raspberry) and check that its connection to the internet is working:
+<pre>ping google.com</pre>    OR    
+<pre>ping 173.194.126.196</pre>
+
+If the first fails but the second succeeds then there is a problem with the DNS server that your RPi is attempting to use.  Please edit the /etc/resolv.conf file and add the IP address of a nearby DNS server.  During the creation of this wiki, the first two parts of the desktop machine's IP address plus ".1.1" worked.  To stop other processes from later updating this file you may wish to run the <code>chattr +i /etc/resolv.conf</code> command (this can be undone later with <code>chattr -i /etc/resolv.conf</code>). That sets the "immutable" bit on resolv.conf to prevent other software from updating it.
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_DNS.png"><img class="alignnone size-medium wp-image-3861" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_DNS-300x131.png" alt="RaspberryPi_DNS" width="300" height="131" /></a>
+After the internet connection is confirmed to be working install these packages:
+<!-- note libxml2-dev libxslt-dev dependencies were added in https://github.com/diydrones/ardupilot-wiki-issue-tracker/issues/166 but have not been tested -->
+<pre>
+sudo apt-get update    #Update the list of packages in the software center
+sudo apt-get install screen python-wxgtk2.8 python-matplotlib python-opencv python-pip python-numpy python-dev libxml2-dev libxslt-dev
+sudo pip install pymavlink
+sudo pip install mavproxy
+</pre>
+
+[note]The packages are <a href="wiki/setting-up-sitl-on-windows/">mostly the same as when setting up SITL</a>. Reply Reply 'y' when prompted re additional disk space.[/note]
+
+
+
+<h1>Disable the OS control of the serial port</h1>
+
+Use the Raspberry Pi configuration utility for this.
+
+Type:
+<pre>sudo raspi-config</pre>
+And in the utility, select "Advanced Options":<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/Capture.png"><img class="alignnone size-full wp-image-5527" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/Capture.png" alt="Capture" width="839" height="229" /></a>
+
+And then "Serial" to disable OS use of the serial connection:<img class="alignnone size-full wp-image-5528" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/Capture2.png" alt="Capture2" width="839" height="219" />
+
+Reboot the Raspberry Pi when you are done.
+
+
+
+<h1>Testing the connection</h1>
+
+To test the RPi and Pixhawk are able to communicate with each other first ensure the RPi and Pixhawk are powered, then in a console on the RPi type:
+
+<pre>sudo -s
+mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --aircraft MyCopter
+</pre>
+
+Once MAVProxy has started you should be able to type in the following command to display the <code>ARMING_CHECK</code> parameters value
+<pre>
+param show ARMING_CHECK
+param set ARMING_CHECK 0
+arm throttle
+</pre>
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_ArmTestThroughPutty.png"><img class="alignnone size-full wp-image-3852" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_ArmTestThroughPutty.png" alt="RaspberryPi_ArmTestThroughPutty" width="675" height="793" /></a>
+
+[note]If you get an error about not being able to find log files or if this example otherwise doesn't run properly, make sure that you haven't accidentally assigned these files to another username, such as Root.[/note]
+
+Entering the following at the Linux command line will ensure that all files belong to the standard Pi login account:
+<pre>sudo chown -R pi /home/pi</pre>
+
+
+
+<h1>Configure MAVProxy to always run</h1>
+
+To setup MAVProxy to start whenever the RPi is restarted open a terminal window and edit the <strong>/etc/rc.local</strong> file, adding the following lines just before the final "exit 0" line:
+<pre>
+(
+date
+echo $PATH
+PATH=$PATH:/bin:/sbin:/usr/bin:/usr/local/bin
+export PATH
+cd /home/pi
+screen -d -m -s /bin/bash mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --aircraft MyCopter
+) &gt; /tmp/rc.log 2&gt;&amp;1
+exit 0
+</pre>
+
+Whenever the RPi connects to the Pixhawk, three files will be created in the /home/pi/MyCopter/logs/YYYY-MM-DD directory:
+<ul>
+	<li><strong>mav.parm</strong> : a text file with all the parameter values from the Pixhawk</li>
+	<li><strong>flight.tlog</strong> : a telemetry log including the vehicles altitude, attitude, etc which can be opened using the mission planner (and a number of other tools)</li>
+	<li><strong>flight.tlog.raw</strong> : all the data in the .tlog mentioned above plus any other serial data received from the Pixhawk which might include non-MAVLink formatted messages like startup strings or debug output</li>
+</ul>
+
+
+
+If you wish to connect to the MAVProxy application that has been automatically started you can log into the RPi and type:
+<pre>screen -x</pre>
+To learn more about using MAVProxy please read the <a href="http://tridge.github.io/MAVProxy/">MAVProxy documentation</a>.
+
+It is also worth noting that MAVProxy can do a lot more than just provide access to your Pixhawk. By writing python extension modules for MAVProxy you can add sophisticated autonomous behaviour to your vehicle. A MAVProxy module has access to all of the sensor information that your Pixhawk has, and can control all aspects of the flight. To get started with MAVProxy modules please have a look at the <a href="https://github.com/tridge/MAVProxy/tree/master/MAVProxy/modules">existing modules</a> in the MAVProxy source code.
+
+
+<h1>Installing DroneKit on RPi</h1>
+
+[tip]The most up-to-date instructions for <a href="http://python.dronekit.io/guide/getting_started.html#installing-dronekit">Installing DroneKit on Linux</a> are in the DroneKit-Python documentation. This information is a summary, and might go out of date.[/tip]
+
+To install DroneKit-Python dependencies (most of which will already be present from when you installed MAVProxy) and set DroneKit to load when MAVProxy starts:
+<!-- note libxml2-dev libxslt-dev dependencies were added in https://github.com/diydrones/ardupilot-wiki-issue-tracker/issues/166 but have not been tested -->
+<pre>
+sudo apt-get install python-pip python-dev python-numpy python-opencv python-serial python-pyparsing python-wxgtk2.8 libxml2-dev libxslt-dev
+sudo pip install droneapi
+echo "module load droneapi.module.api" >> ~/.mavinit.scr
+</pre>
+
+Then open the MAVProxy terminal in the location where your DroneKit script is located and start an example:
+<pre>
+MANUAL> api start vehicle_state.py
+</pre>
+
+[note]If you get a warning that droneapi module has not loaded, you can do so manually in MAVProxy:
+<pre>MANUAL> module load droneapi.module.api</pre>
+[/note]
+
+
+
+<h1>Connecting with the Mission Planner</h1>
+
+The Pixhawk will respond to MAVLink commands received through Telemetry 1 and Telemetry 2 ports (see image at top of this page) meaning that both the RPi and the regular ground station (i.e. Mission planner, etc) can be connected. In addition it is possible to connect the Mission Planner to the MAVProxy application running on the RPi <a href="wiki/setting-up-sitl-on-windows/#Connecting_with_the_Mission_Planner">similar to how it is done for SITL</a>.
+
+Primarily this means adding an <code>--out &lt;ipaddress&gt;:14550</code> to the MAVProxy startup command with the being the address of the PC running the mission planner.  On windows the <code>ipconfig</code> can be used to determine that IP address. On the computer used to write this wiki page the MAVProxy command became:
+<pre>mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --out 192.168.137.1:14550 --aircraft MyCopter</pre>
+
+Connecting with the mission planner is shown below:
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_MissionPlanner.png"><img class="alignnone size-full wp-image-3858" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_MissionPlanner.png" alt="RaspberryPi_MissionPlanner" width="1024" height="737" /></a>
+
+
+<h1>Example projects</h1>
+
+<a href="http://diydrones.com/profiles/blogs/fpv-setup-with-raspberry-pi" target="_blank">FPV with raspberry Pi</a>
+
+Can't get it to work? Try posting your question in the <a href="http://ardupilot.com/forum/viewforum.php?f=69" target="_blank">APM Forum's APM Code section</a>.

@@ -9,51 +9,58 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/copter-diagram.png"><img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/06/copter-diagram.png" alt="copter diagram" width="640" height="480" /></a>
-
-
+This article provides an overview of the main components you will need when building a Copter-based multicopter.
 
 <h1>Multicopter frame including motors, ESCs and propellers</h1>
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/copters-image.jpg"><img class="alignleft  wp-image-5960" title="3DR Copters: Quad, Hexa, and Y6" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/copters-image-e1370020537204.jpg" alt="3DR Copters: Quad, Hexa, and Y6" width="360" height="184" /></a>3DR Copter models are available from the <a href="http://store.3drobotics.com/" target="_blank">3D Robotics Store</a>. These copters are fast, agile, and proven to work with APM autopilot technology. For new users and basic missions, the Quad copter is the best option for simplicity and economy. The Y6 is more stable, has a compact design great for front-mounted cameras, and offers in-flight redundancy to withstand a single motor failure. 3DR Copters come in DIY (do-it-yourself) and RTF (ready-to-fly) versions to fit every level of operator.
+There are numerous frames, ESCs and motors available. Some components you might consider are discussed in <a href="choosing-a-frame">Choosing a Multicopter Frame</a> and the <a href="common-common-airframe-builds">Detailed Vehicle Builds</a>.
 
 Many other designs and configurations including Traditional Helicopters are also supported.
 
 
 <h1>6+ channel RC transmitter and receiver</h1>
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/spektrum-dx8.png"><img class="alignleft  wp-image-5962" title="RC Transmitter and Receiver" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/spektrum-dx8.png" alt="RC Transmitter and Receiver" width="168" height="168" /></a>
+You'll need a radio control transmitter to manually control your Copter and to activate its flight modes. You can use any RC transmitter/receiver system with at least six channels. Some of the options are discussed in the topic <a href="common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems">Compatible RC Transmitter and Receiver Systems (Pixhawk/PX4)</a>.
 
-You'll need a radio control setup to manually control your copter and to activate its automatic modes. You can use any RC transmitter/receiver system with at least six channels. At $54, the <a href="http://hobbyking.com/hobbyking/store/__8992__Turnigy_9X_9Ch_Transmitter_w_Module_8ch_Receiver_Mode_2_v2_Firmware_.html" target="_blank">Turnigy 9x</a> is a popular economy choice. If you'd prefer a higher quality device, we like the <a href="http://www3.towerhobbies.com/cgi-bin/wti0001p?&amp;I=LXTTM1&amp;P=0" target="_blank">Futaba 7C</a> or the high-end <a href="http://www.horizonhobby.com/products/dx8-8ch-transmitter-with-ar8000-tm1000-no-servos-SPM8800" target="_blank">Spektrum DX8</a>.
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/spektrum-dx8.png"><img class="wp-image-5962" title="RC Transmitter and Receiver" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/spektrum-dx8.png" alt="RC Transmitter and Receiver" width="168" height="168" /></a>
 
 
-<h1>Autopilot hardware with GPS module</h1>
+<h1>Flight Controller board (Autopilot hardware)</h1>
 
-Your copter's autopilot determines its capabilities for autonomous flight. 3D Robotics offers both the APM and PX4 series of autopilot hardware. APM is a reliable, Arduino-compatible platform flying for tens of thousands of users worldwide; it is a solid choice for most mission requirements. PX4 is a newer, more powerful autopilot featuring more memory, although it is not Arduino-compatible. Currently, the functionality of both series are comparable, but the capabilities of PX4 are set to expand more in the future with the progression of the Copter code. A GPS module is essential for providing the autopilot with location data that allows the autopilot to interact with the real world. 3D Robotics offers the <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass" target="_blank">uBlox GPS</a> ($89); we recommend this as it has superior performance and has the external compass sensor that is required with APM 2.6, to allow placement away from magnetic interference.
+Copter's autopilot board determines its capabilities for autonomous flight. At time of writing (December 2015) <a href="common-pixhawk-overview/">Pixhawk</a> is highly recommended for general use.
 
-<a href="http://store.3drobotics.com/products/3dr-pixhawk" target="_blank">Pixhawk is available for $199 </a>from the 3D Robotics Store with GPS sold separately. The remote mounted <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR GPS / compass module</a> provides improved interference control. Pixhawk is the newest and most powerful autopilot and it has been specifically optimized for our use. It is highly recommended for all new applications.
+Developers creating UAV vision applications should consider using a separate Companion Computer, or a Linux based autopilot board (e.g. <a href="common-navio-overview">NAVIO+</a> or <a href="common-erle-brain-linux-autopilot">Erle-Brain</a>) which is capable of running both Copter and the image processing code.
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/pixhawk_store.jpg"><img class="alignnone  wp-image-5964" title="Pixhawk Set" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/pixhawk_store.jpg" alt="Pixhawk Set" width="170" height="170" /></a>
+For more options, see the topic <a href="common-choosing-a-flight-controller">Choosing a Flight Controller</a>.
 
-<a href="https://store.3drobotics.com/products/px4fmu-1" target="_blank">PX4FMU</a> ($199) and <a href="https://store.3drobotics.com/products/px4ioar-1-2">PX4IO</a> ($100) from the 3D Robotics Store with GPS sold separately. The remote mounted <a href="http://store.3drobotics.com/products/3dr-gps-ublox-with-compass">3DR GPS / compass module</a> provides improved interference control.
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/PX4FMU_PX4IO-kit.jpg"><img class="alignleft  wp-image-5964" style="float: left;margin-left: 35px;margin-right: 35px" title="PX4 Set" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/PX4FMU_PX4IO-kit-e1370023030522-232x300.jpg" alt="PX4 Set" width="139" height="180" /></a>
 
+<h1>GPS module</h1>
+
+Your Copter will <em>require</em> a GPS module. The recommended module is <a href="common-installing-3dr-ublox-gps-compass-module">3DR UBlox GPS + Compass Module</a> which also includes an a compass. You can check out <a href="common-positioning-landing-page">other GPS solutions here</a>. 
+
+<img class="alignnone size-full wp-image-2598" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/GPS_TopAndSide.jpg" alt="GPS_TopAndSide" width="690" height="297" />
 
 <h1>LiPo batteries and charger</h1>
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/battery2.jpg"><img class="alignleft  wp-image-5965" title="LiPo battery" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/battery2.jpg" alt="LiPo battery" width="180" height="135" /></a>Copter requires a rechargeable lithium polymer (LiPo) battery. A good rule of thumb is to use 1,000 mAH (milliamp hours) per motor. For a Quad copter, a<a href="http://hobbyking.com/hobbyking/store/__9185__Turnigy_4000mAh_3S_20C_Lipo_Pack.html" target="_blank"> 4,000 mAH LiPo like this one</a> would work well. While your copter can use only one battery at a time, we recommend having at least two batteries in stock; more batteries means more flight time. You'll also need a <a href="http://hobbyking.com/hobbyking/store/__24289__Turnigy_2S_3S_Balance_Charger_Direct_110_240v_Input_USA_Warehouse_.html" target="_blank">charging station for your batteries such as this one</a>.
 
 
-<h1>Ground station with Mission Planner software</h1>
+<h1>Ground Control Station</h1>
 
-<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/groundstation-with-MP.png"><img class="alignleft  wp-image-5966" title="Ground Station with Mission Planner" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/groundstation-with-MP-300x214.png" alt="Ground Station with Mission Planner" width="180" height="128" /></a>Configuring your missions is easy with Mission Planner: free, open-source software compatible with Copter. You'll need to install Mission Planner on a ground station computer. Using Mission Planner in the field makes changing your mission parameters fast and easy, so we recommend selecting a laptop or tablet as your ground station.
+The (free and open source) <a href="http://planner.ardupilot.com/">Mission Planner</a> is required if you're going to be loading new versions of Copter onto the flight controller, and for first-flight tuning and calibration. It runs on a PC and can also be used for planning missions.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/groundstation-with-MP.png"><img class="wp-image-5966" title="Ground Station with Mission Planner" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/05/groundstation-with-MP-300x214.png" alt="Ground Station with Mission Planner" width="180" height="128" /></a>
+
+Once your Copter is configured, you may find it more convenient to choose a different ground station - running on the tablet, phone or computer of your choice. The main options are discussed in the topic <a href="common-choosing-a-ground-station">Choosing a Ground Station</a>.
 
 
 
-We also recommend:
+<h1>Telemetry Radio</h1>
 
-<h1>3DR Radio Telemetry</h1>
+A telemetry radio allows your Copter to communicate with your ground station from the air using the MAVLink protocol. This allows you to interact with your missions in real time and receive streaming data from your copter's cameras and other components. This adds considerable convenience to your missions!
+
+We recommend the telemetry radio solutions linked from the <a href="common-telemetry-landingpage">Telemetry Landing Page</a>. Remember that if using the <a href="common-3dr-radio-version-2" target="_blank">SIK Radio</a> you will need the version at the permitted frequency for your country - 915 Mhz (Americas) and 433 Mhz (Europe). 
+
 
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Telemetry_store.jpg"><img class="wp-image-12806 size-medium align" title="3DR Radio Telemetry Kit" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2013/07/Telemetry_store-300x300.jpg" alt="" width="300" height="300" /></a>
-If you're going to add one extra component to your UAV copter system, we recommend the <a href="https://store.3drobotics.com/products/3dr-radio-set" target="_blank">3DR Radio Telemetry Kit ($100)</a>. A 3DR radio allows your Copter to communicate with your ground station from the air using the Mavlink protocol. This allows you to interact with your missions in real time and receive streaming data from your copter's cameras and other components. 3DR Radio will add considerable convenience to your missions and provide greatly enhanced functionality for your payloads. <a href="https://store.3drobotics.com/products/3dr-radio-set" target="_blank">3DR Radio</a> comes in 915 Mhz (Americas) and 433 Mhz (Europe) and other areas disallowing 915 Mhz.

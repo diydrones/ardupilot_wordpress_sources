@@ -1,0 +1,110 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: setting-up-sitl-on-linux 
+title: Setting up SITL on Linux 
+id: 18 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page describes how to setup the <a title="SITL Simulator (Software in the Loop)" href="sitl-simulator-software-in-the-loop">SITL (Software In The Loop)</a> on Linux. The specific commands were tested on Ubuntu 12.10, 13.04 and 14.10.
+<!--more-->
+<h1>Overview</h1>
+The SITL simulator allows you to run Plane, Copter or Rover without any hardware. It is a build of the autopilot code using an ordinary C++ compiler, giving you a native executable that allows you to test the behaviour of the code without hardware.
+
+SITL runs natively on Linux and Windows. See the separate <a href="/wiki/simulation-2/sitl-simulator-software-in-the-loop/sitl-native-on-windows/">windows installation page</a> for a windows install.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/04/SITL_Linux.png"><img class="alignnone size-full wp-image-3874" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/04/SITL_Linux.png" alt="SITL_Linux" width="808" height="693" /></a>
+<h1>Install steps</h1>
+Please follow each of the steps below.
+<h2>Download ardupilot</h2>
+If you don't have a copy of the ardupilot git repository then open a terminal and run:
+<pre>git clone git://github.com/diydrones/ardupilot.git</pre>
+<h2>JSBSim (Plane only)</h2>
+If you want to fly the fixed wing (Plane) simulator then you will need to use the JSBSim flight simulator. JSBSim is a sophisticated flight simulator that is used as the core flight dynamics system for several well known flight simulation systems.
+
+In the same directory (your home directory) run this commands:
+<pre>git clone git://github.com/tridge/jsbsim.git
+sudo apt-get install libtool automake autoconf libexpat1-dev</pre>
+If you are getting an error message saying you need a newer version of JSBSim then you can update it like this:
+<pre>cd jsbsim
+git pull
+./autogen.sh --enable-libraries
+make</pre>
+<h2>Install some required packages</h2>
+If you are on a debian based system (such as Ubuntu or Mint) then run this:
+<pre>sudo apt-get install python-matplotlib python-serial python-wxgtk2.8 python-lxml
+sudo apt-get install python-scipy python-opencv ccache gawk git python-pip python-pexpect
+sudo pip install pymavlink MAVProxy</pre>
+Or if you are on a RPM based system (such as Fedora) run this:
+<pre>yum install opencv-python wxPython python-pip pyserial scipy python-lxml python-matplotlib python-pexpect python-matplotlib-wx</pre>
+<h2>Add some directories to your search path</h2>
+Add the following lines to the end of your ".bashrc" in your home directory (notice the . on the start of that filename. Also, this is a hidden file, so if you're using a file manager, make sure to turn on "show hidden files"). Note the order, it is important to have jsbsim/src before autotest in case you're running a virtual machine.
+<pre>export PATH=$PATH:$HOME/jsbsim/src
+export PATH=$PATH:$HOME/ardupilot/Tools/autotest 
+export PATH=/usr/lib/ccache:$PATH</pre>
+Then reload your PATH by using the "dot" command in a terminal
+<pre>. ~/.bashrc</pre>
+<h2>Start SITL simulator</h2>
+To start the simulator first change directory to the vehicle directory. For example, for the fixed-wing code change to <strong>ardupilot/ArduPlane</strong>.
+
+Then start the simulator using <strong>sim_vehicle.sh</strong>. The first time you run it you should use the -w option to wipe the virtual EEPROM and load the right default parameters for your vehicle.
+<pre>sim_vehicle.sh -w</pre>
+After the default parameters are loaded you can start the simulator normally:
+<pre>sim_vehicle.sh --console --map --aircraft test</pre>
+[tip]<a title="sim_vehicle.sh" href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/sim_vehicle.sh">sim_vehicle.sh</a> has many useful build options, ranging from setting the simulation speed through to choosing the initial vehicle location. These can be listed by calling it with the <code>-h</code> flag (and some are demonstrated in <a href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a>).[/tip]
+<h2>Load a mission</h2>
+Let's also load a test mission.  From within MAVProxy type:
+<pre>wp load ../Tools/autotest/ArduPlane-Missions/CMAC-toff-loop.txt</pre>
+that is a mission which flies in a loop around my local flying field. Now let's takeoff!
+
+Run the command "arm throttle" followed by "mode auto"
+<pre>arm throttle
+mode auto</pre>
+Your virtual aircraft should now takeoff.
+<h2>Learn MAVProxy</h2>
+To get the most out of SITL you really need to learn to use MAVProxy. Have a read of the <a href="http://tridge.github.io/MAVProxy/">MAVProxy documentation</a>. Enjoy flying!
+<h2>Updating MAVProxy and pymavlink</h2>
+New versions of MAVProxy and pymavlink are released quite regularly. If you are a regular SITL user you should update every now and again using this command
+<pre>sudo pip install --upgrade pymavlink MAVProxy</pre>
+<h2>Using a different JSBSim model</h2>
+If using the JSBSim plane simulator you can specify a different JSBSim model than the default Rascal110 by specifying the model name using the -f parameter to sim_vehicle.sh, like this:
+<pre>sim_vehicle.sh -f jsbsim:MyModel --console --map</pre>
+the model should be in the <strong>Tools/autotest/aircraft/</strong> directory.
+
+
+
+<h2>FlightGear 3D View (Optional)</h2>
+
+Developers can optionally install the <a href="http://www.flightgear.org/">FlightGear Flight Simulator</a> and use it (in view-only mode) to display a 3D simulation of the vehicle and its surroundings. This provides a much better visualization than the 2D maps and HUD flight displays provided by <em>MAVProxy</em> and <em>Mission Planner</em>.
+
+[note]FlightGear support is currently only in master (January 2016). It should appear in the <em>next</em> versions of the vehicle codelines (not present on current versions: Copter 3.3, Plane 3.4, Rover 2.5).[/note]
+
+[caption id="attachment_6501" align="alignnone" width="300"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/FlighGear_Copter_Windows.png" rel="attachment wp-att-6501"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/FlighGear_Copter_Windows-300x294.png" alt="FlightGear: Simulated Copter at KSFO" width="300" height="294" class="size-medium wp-image-6501" /></a> FlightGear: Simulated Copter at KSFO (click for larger view).[/caption]
+
+SITL outputs <em>FlightGear</em> compatible state information on UDP port 5503. We highly recommend you start <em>FlightGear</em> before starting SITL (although this is not a requirement, it has been found to improve stability in some systems).
+
+The main steps (tested on Ubuntu Linux 14.04 LTS) are:
+
+<ol>
+	<li>Install FlightGear from the terminal:
+<pre>sudo apt-get install flightgear</pre></li>
+
+	<li>Open a new command prompt and run the appropriate shell file for your vehicle in <strong>/ardupilot/Tools/autotest/</strong>: <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/fg_plane_view.sh">fg_plane_view.sh</a> (Plane) and <a href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/fg_quad_view.sh">fg_quad_view.sh</a> (Copter). 
+
+This will start <em>FlightGear</em>.</li>
+
+	<li>Start SITL in the terminal in the normal way. In this case we're specifying the start location as San Francisco airport (KSFO) as this is an interesting airport with lots to see:
+<pre>sim_vehicle.sh -j4 -L KSFO </pre>
+[note]<em>FlightGear</em> will always initially start by loading scenery at KSFO (this is hard-coded into the batch file) but will switch to the scenery for the simulated location once SITL is started. [/note][tip]If the vehicle appear to be hovering in space (no scenery) then <em>FlightGear</em> does not have any scenery files for the selected location. Choose a new location![/tip]
+</li>
+</ol>
+
+You can now takeoff and fly the vehicle as normal for <a href="copter-sitl-mavproxy-tutorial">Copter</a> or <a href="plane-sitlmavproxy-tutorial">Plane</a>, observing the vehicle movement including pitch, yaw and roll.
+
+
+
+<h1>Next steps</h1>
+After installation, see <a title="Using SITL for ArduPilot Testing" href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a> for guidance on flying and testing with SITL.

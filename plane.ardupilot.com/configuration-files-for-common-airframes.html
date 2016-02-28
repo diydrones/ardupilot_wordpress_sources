@@ -1,0 +1,243 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: configuration-files-for-common-airframes 
+title: Configuration Values for Common Airframes 
+id: 982 
+menu_order: 60 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This page provides some approximate configuration values for common airframes.<!--more-->
+
+[note]These values are good enough to “get you off the ground”.  For optimum performance you will still need to tune these parameters for your aircraft.[/note]
+
+<h1>Configuration values - not complete files</h1>
+
+We do not not provide complete configuration files because we do not want to encourage  sharing complete configuration files between APM users. 
+
+Sharing configuration files is  often a bad idea because the correct settings for a specific plane are dependent on a lot more factors than just what base airframe type is being used:
+<ul>
+	<li>the right tuning values depends on what type of servos you have installed (different servos respond at different speeds), and which hole in the servo horns you connect the control arms to</li>
+	<li>the right values also depend on your RC transmitter setup, especially the range of movement of each control axis</li>
+	<li>the right tuning values also depend on what motor and battery you have installed, and depends a lot on the total takeoff weight of your aircraft. If one user has a camera installed and another user doesn't then they will probably need different tuning values.</li>
+	<li>manufacturers often make changes to airframes, servos and motors without re-branding the airframe as a new model. Sometimes they even change the direction that servos move</li>
+	<li>different users have different optional sensors, which changes what configuration options are needed. For example, some users install an airspeed sensor or an external compass.</li>
+	<li>new APM firmware releases frequently change the defaults for some critical parameters to avoid problems found by users. If you load a config file from a user of an older firmware then that will revert those changes</li>
+</ul>
+For all of these reasons you should not just download a configuration file from another user and expect it to work.
+
+<h1>So what can you do?</h1>
+If another user has tuned a similar aircraft, then you can look in their configuration file to find the key tuning parameter they used, and manually put those values into your APM as a starting point for tuning. The key parameters you should look for are:
+<ul>
+	<li><a href="arduplane-parameters/#Proportional_Gain_RLL2SRV_P">RLL2SRV_P</a></li>
+	<li><a href="arduplane-parameters/#Proportional_Gain_PTCH2SRV_P">PTCH2SRV_P</a></li>
+	<li><a href="arduplane-parameters/#L1_control_period_NAVL1_PERIOD">NAVL1_PERIOD</a></li>
+</ul>
+Setting those to an approximately correct value will give you a reasonable starting point for tuning your airframe. After that you should follow the <a href="roll-pitch-controller-tuning/">tuning guide</a>.
+
+Also note that the Plane parameters default to zero 'I' values. The reason for this is that you need to tune the P value first, then tune the I value. If you put in a non-zero I value when the P value is a long way off the aircraft may oscillate badly and could crash.
+
+Once you have good P values then you should raise the I values a bit, as described in the tuning guide. That will allow APM to cope better with wind. For example, once the P values are setup correctly then setting the following will help with most aircraft:
+<ul>
+	<li>RLL2SRV_I: 0.05</li>
+	<li>PTCH2SRV_I: 0.05</li>
+</ul>
+
+
+
+<h1>HobbyKing Bixler v1 or v2</h1>
+
+Bixler v2 has a slightly bigger wing and sturdier fuselage.
+
+[caption id="attachment_7810" align="alignnone" width="565"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/BIXLERMODE21654232.jpg"><img class="size-full wp-image-7810" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/BIXLERMODE21654232.jpg" alt="Bixler" width="565" height="414" /></a> HobbyKing Bixler[/caption]
+
+<ul>
+	<li>Bixler 1: In ARF form from HobbyKing's <a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=18083" rel="nofollow">USA warehouse</a> or <a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=16544" rel="nofollow">rest of world</a></li>
+	<li>Bixler 2 kit: <a href="http://www.hobbyking.com/hobbyking/store/__31048__Hobbyking_Bixler_2_EPO_1500mm_w_Optional_Flaps_KIT_US_Warehouse_.html" rel="nofollow">USA Warehouse</a> and <a href="http://www.hobbyking.com/hobbyking/store/__27169__Hobbyking_Bixler_2_EPO_1500mm_w_Optional_Flaps_KIT_.html" rel="nofollow">rest of world</a></li>
+</ul>
+
+
+
+<h2>Key parameters</h2>
+
+<ul>
+	<li>RLL2SRV_P: 0.9</li>
+	<li>PTCH2SRV_P: 1.0</li>
+	<li>NAVL1_PERIOD: 18</li>
+</ul>
+
+
+
+<h2>Bixler Tips</h2>
+
+See <a href="http://diydrones.com/profiles/blogs/mounting-an-apm-on-a-bixler2-upside-down-using-ahrs-orientation">this posting</a> for how to fit an APM to a Bixler2. Also see <a href="a-high-quality-bixler-1-1-build">High Quality Bixler 1.1 Build (APM2.x)</a>.
+
+<ol>
+	<li>Heavy Bixler's fly much faster and are prone to tip stalling if slowed up too much, so keep things as light as possible! A stall in FBWA can be tricky to get out of. Autopilots do not handle stalls well.</li>
+	<li>Set manual level with a little bit of positive pitch - take your time to set this, fly and repeat as many times as it takes to get a super stable cruising speed with the lowest throttle setting possible. It takes a little while to work out what pitch and throttle combination give the most stable cruising flight. Set closer to 50% throttle for cruise (but obviously depends on your set up).</li>
+	<li>Perform some test flights in FBWA mode and figure out minimum throttle setting /speed that is still stable. You can "feel" a tip stall coming with enough practice. To recover from the stall, change quickly to Manual mode and then: wings level and pull out slowly. Test with enough height to see how fast the plane needs to be going in each mode. Also be sure to always add sufficient throttle when heading downwind to keep airspeed up.</li>
+	<li>If you prefer to keep the airframe flat you can, in FBWA mode, use only rudder for turning. APM does a great job of keeping the the plane level in turns (with proper speed of course).</li>
+	<li>Make sure that target throttle in full autopilot mode is 10% above throttle settings that were figured out using methods above for mission cruising.</li>
+	<li>If setting a target speed in auto make sure it's fast enough for the plane and its payload.</li>
+
+</ol>
+
+
+<h1>Skywalker</h1>
+[caption id="attachment_7811" align="alignnone" width="450"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/SKYWALKER2.jpg"><img class="size-full wp-image-7811" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/SKYWALKER2.jpg" alt="Skywalker" width="450" height="335" /></a> Skywalker[/caption]
+
+Available in <a href="http://www.fpvflying.com/products/Skywalker-platform-for-UAV-FPV.html" rel="nofollow">foam</a> or <a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=15236" rel="nofollow">fibreglass</a>. Current versions have longer wings (1.9m instead of 1.68m).
+
+The skywalker has relatively small ailerons for the size of the aircraft, so you will probably need quite high gains. The following parameters will be a good starting point for most users:
+<ul>
+	<li>RLL2SRV_P: 1.8</li>
+	<li>PTCH2SRV_P: 1.5</li>
+	<li>NAVL1_PERIOD: 20</li>
+</ul>
+
+
+
+<h1>HobbyKing Skyfun</h1>
+
+[caption id="attachment_7812" align="alignnone" width="600"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/skyfun2.jpg"><img class="size-full wp-image-7812" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/skyfun2.jpg" alt="Skyfun" width="600" height="360" /></a> Skyfun[/caption]
+
+Available <a href="http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idProduct=9614" rel="nofollow">here</a>
+
+The SkyFun and FunJet are similar, and are quite "twitchy" planes. A small amount of elevon movement goes a long way! The following values should be a good starting point:
+<ul>
+	<li>RLL2SRV_P: 0.4</li>
+	<li>PTCH2SRV_P: 0.45</li>
+	<li>NAVL1_PERIOD: 17</li>
+</ul>
+<h1>Multiplex EasyStar</h1>
+[caption id="attachment_7813" align="alignnone" width="450"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/easystar2.jpg"><img class="size-full wp-image-7813" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/easystar2.jpg" alt="Easystar" width="450" height="324" /></a> Easystar[/caption]
+
+Available <a href="http://www3.towerhobbies.com/cgi-bin/wti0001p?&amp;I=LXFRU7&amp;P=ML" rel="nofollow">here</a>
+
+The easystar is unusual in not having ailerons. If you are buying a new plane it would be better to get a bixler2, which is a similar size and cost, but flies a lot better.
+
+If you do want to fly an easystar then you will need to set a KFF_RDDRMIX, along with the other key parameters. For example:
+<ul>
+	<li>RLL2SRV_P: 0.55</li>
+	<li>PTCH2SRV_P: 0.6</li>
+	<li>KFF_RDDRMIX: 0.5</li>
+	<li>NAVL1_PERIOD: 20</li>
+</ul>
+<h1>Borojet Maja</h1>
+[caption id="attachment_7814" align="alignnone" width="450"]<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/maja2.jpg"><img class="size-full wp-image-7814" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/maja2.jpg" alt="Borojet Maja" width="450" height="300" /></a> Borojet Maja[/caption]
+
+Available <a href="http://bormatec.com/index.php/prod-engl-men/blog-2-columns" rel="nofollow">here</a>.
+
+The following parameters should be a good starting point:
+<ul>
+	<li>RLL2SRV_P: 1.4</li>
+	<li>PTCH2SRV_P: 1.3</li>
+	<li>NAVL1_PERIOD: 16</li>
+</ul>
+<h1>TELINK Toro900 flying wing</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/toto9002.png"><img class="alignnone size-full wp-image-7815" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/toto9002.png" alt="toto900" width="400" height="300" /></a>
+
+Available <a href="http://www.telink.eu/en-detail-100207-toro-900-tuning-professional-arf.html" rel="nofollow">here</a>
+
+The following values should be a good starting point:
+<ul>
+	<li>RLL2SRV_P: 1.2</li>
+	<li>PTCH2SRV_P: 2</li>
+	<li>NAVL1_PERIOD: 18</li>
+</ul>
+<h1>SkyWalker X8</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/X8.jpg"><img class="alignnone size-medium wp-image-4745" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/X8-300x219.jpg" alt="X8" width="300" height="219" /></a>
+
+The X8 varies a lot in how people set it up, but you usually need parameters around this range:
+<ul>
+	<li>RLL2SRV_P: 0.8</li>
+	<li>PTCH2SRV_P: 0.5</li>
+	<li>NAVL1_PERIOD: 19</li>
+</ul>
+<h1>Phoenix Tiger60</h1>
+<img class="alignnone" src="http://photos.tridgell.net/d/55232-2/PHOTO_20130319_100703.jpg" alt="" width="491" height="276" />
+
+The Tiger60 is usually flown as a nitro plane, plus it has relatively small ailerons and elevator surfaces. A good starting point will be the following parameters:
+<ul>
+	<li>RLL2SRV_P: 1.2</li>
+	<li>PTCH2SRV_P: 1.2</li>
+	<li>NAVL1_PERIOD: 15</li>
+	<li>THR_PASS_STAB: 1</li>
+	<li>THR_SUPP_MAN: 1</li>
+	<li>THR_SLEWRATE: 30</li>
+</ul>
+<h1>HotDog</h1>
+<img class="alignnone" src="http://photos.tridgell.net/d/54579-2/IMG_20121126_080740.jpg" alt="" width="363" height="272" />
+
+The HotDog is a fun sports plane that flies like it is "on rails". The one in the picture has an OS25 Nitro engine. It flies well with the following parameters:
+<ul>
+	<li>RLL2SRV_P: 0.35</li>
+	<li>PTCH2SRV_P: 0.6</li>
+	<li>NAVL1_PERIOD: 14</li>
+	<li>THR_PASS_STAB: 1</li>
+	<li>THR_SUPP_MAN: 1</li>
+	<li>THR_SLEWRATE: 30</li>
+</ul>
+<h1>Boomerang 60</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Boomerang60.jpg"><img class="alignnone size-medium wp-image-3889" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Boomerang60-300x168.jpg" alt="Boomerang60" width="300" height="168" /></a>
+
+The Boomerang is a classic high wing trainer aircraft, and like the Tiger60 has relatively small control surfaces. The following parameters will be a good starting point:
+<ul>
+	<li>RLL2SRV_P: 1.1</li>
+	<li>PTCH2SRV_P: 1.2</li>
+	<li>NAVL1_PERIOD: 20</li>
+	<li>THR_PASS_STAB: 1</li>
+	<li>THR_SUPP_MAN: 1</li>
+	<li>THR_SLEWRATE: 30</li>
+</ul>
+<h1>Mugin</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Mugin.jpg"><img class="alignnone size-medium wp-image-3890" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Mugin-300x94.jpg" alt="Mugin" width="300" height="94" /></a>
+
+The Mugin is a large, fast aircraft. Make sure you have a long enough runway for landing!
+
+The following parameters should be a good starting point:
+<ul>
+	<li>RLL2SRV_P: 1.0</li>
+	<li>PTCH2SRV_P: 1.3</li>
+	<li>NAVL1_PERIOD: 19</li>
+	<li>THR_PASS_STAB: 1</li>
+	<li>THR_SUPP_MAN: 1</li>
+	<li>THR_SLEWRATE: 30</li>
+</ul>
+<h1>PA Addiction</h1>
+<a href="http://photos.tridgell.net/d/55220-2/PHOTO_20130309_212952.jpg"><img class="alignnone size-medium wp-image-3890" src="http://photos.tridgell.net/d/55220-2/PHOTO_20130309_212952.jpg" alt="Mugin" width="300" height="94" /></a>
+
+The Precision Aerobatics AddictionX is a fun 3D aircraft. It flies quite slowly, but can do extremely rapid rolls and loops due to its huge control surfaces. The APM flies it fine with the right parameters. The following parameters will be a good start:
+<ul>
+	<li>RLL2SRV_P: 0.35</li>
+	<li>PTCH2SRV_P: 0.6</li>
+	<li>PTCH2SRV_D: 0.04</li>
+	<li>NAVL1_PERIOD: 13</li>
+</ul>
+<h1>RipMax AcroWot</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/AcroWot.png"><img class="alignnone size-medium wp-image-4733" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/AcroWot-300x196.png" alt="AcroWot" width="300" height="196" /></a>
+
+The AcroWot is an intermediate nitro sports plane, and a lot of fun to fly! With an OS55AX motor it flies well with the following parameters:
+<ul>
+	<li>RLL2SRV_P 1.0</li>
+	<li>PTCH2SRV_P: 0.9</li>
+	<li>NAVL1_PERIOD: 13</li>
+	<li>TRIM_THROTTLE: 35</li>
+</ul>
+<h1>TechPod</h1>
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/techpod.png"><img class="alignnone size-medium wp-image-4740" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/techpod-300x264.png" alt="techpod" width="300" height="264" /></a>
+
+The TechPod is a long endurance electric glider, ideal for longer distance photography.
+
+It flies well with the following parameters:
+<ul>
+	<li>RLL2SRV_P: 1.5</li>
+	<li>PTCH2SRV_P: 1.5</li>
+	<li>NAVL1_PERIOD: 17</li>
+	<li>ARSPD_FBW_MIN: 9</li>
+	<li>ARSPD_FBW_MAX: 20</li>
+	<li>TRIM_AIRSPEED_CM: 1200</li>
+</ul>
+For a more complete guide <a href="http://diydrones.com/profiles/blogs/tuning-the-techpod">see this review</a>.

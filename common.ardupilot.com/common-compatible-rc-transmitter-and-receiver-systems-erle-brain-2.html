@@ -1,0 +1,69 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-compatible-rc-transmitter-and-receiver-systems-erle-brain-2 
+title: common-Compatible RC Transmitter and Receiver Systems (Erle-Brain 2) 
+id: 5625 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article provides an overview of the RC Transmitter and Receiver Systems that can be used with Erle-Brain 2, along with guidance on how they are connected.
+<!-- more -->
+
+<h1>Overview</h1>
+
+Erle-Brain 2 is compatible with PPM-Sum RC receivers. For traditional single-wire-per-channel (PWM) receivers a <a href="http://www.hobbyking.com/hobbyking/store/catalog/62753.jpg" target="_blank">PPM encoder</a> can be used to convert the receiver outputs to PPM-SUM.
+
+<h1>Officially supported RCs</h1>
+
+<h3>Turnigy TGY-i6</h3>
+
+<img src="http://www.hobbyking.com/hobbyking/store/catalog/62709s5(1).jpg" style="width:50%" />
+
+This RC receiver comes with 6 pin output, one per each PPM channel. As Erle-Brain only accepts PPM-Sum input type, conversion from 8 PPM channel to one PPM-Sum is needed.
+
+This conversion is made using a PPM Encoder. This module sums up the 8 PPM channels into a PPM-Sum type, which is supported by Erle-Brain.
+
+For more information see the <a href="http://www.hobbyking.com/hobbyking/store/uploads/1022671243X1465900X53.pdf" target="_blank">manual</a> and the <a href="http://erlerobotics.com/docs/Robots/Common_Parts/Radio_Control.html" target="_blank">offial documentation</a>.
+
+<h4>Setting up connections</h4>
+
+Follow the next diagram to wire correctly RC receiver to the PPM Encoder:
+<img src="http://erlerobotics.com/docs/img/Robots/common_parts/ppmencoder_connection.png" style="width: 900px" />
+[note]This connection already done in Erle Kits.[/note]
+
+
+
+<h3>FlySky TH9x</h3>
+
+<img src="http://www.deep-deal.com/media/catalog/product/f/s/fs-th9x-9ch-radio-model-rc.jpg" style="width:40%" />
+
+This RC has 9 channels and is highly recommended if you need to control one or more optional components (for example  a gimbal or EPM).
+
+For more information, check out the <a href="http://www.hobbyking.com/hobbyking/store/uploads/358697369X13667X46.pdf" target="_blank">manual</a>. In order to connect this module, you only need to follow <a href="http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Erle-Brain_2/Hardware/RC_Input.html">this</a> official documentation section.
+
+[note]You'll also need a PPM encoder to use this RC under Erle-Brain2[/note] 
+
+
+<h1> Other RCs</h1>
+In addition to the officially supported RCs, you can connect any PPM-SUM type RC receiver.
+
+<h3>Turnigy Transmitter Compatible With FRSky Transmitter Module</h3>
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg"><img class="alignnone size-full wp-image-11142" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2014/01/Turnigy9XR.jpg" alt="Turnigy9XR" width="565" height="414" /></a>
+
+
+<h2>FRSky Transmitter Adapter Module and PPM-Sum Receiver</h2>
+
+The FR-Sky PPM Sum Receiver and conversion module below will work with Turnigy 9x, 9XR (above) and other RC transmitters.
+
+FRSky makes several receivers, only some of which are compatible with PPM-Sum. You can check for compatibility at <a href="http://www.frsky-rc.com/product/product.php?cate_id=12&amp;cate_name=Receivers">FRSky's web site</a>.
+
+The receiver shown is PPM-Sum compatible and is recommended (4 channel receivers still do 8 channel PPM-Sum).
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/1361165329.gif"><img class="alignnone size-full wp-image-1941" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/1361165329.gif" alt="1361165329" width="285" height="344" /></a><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/24788.jpg"><img class="alignnone size-full wp-image-1942" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/01/24788.jpg" alt="24788" width="330" height="391" /></a>
+
+
+[note]The list above is from <a href="https://pixhawk.org/peripherals/radio-control/futaba/start?s[]=sbus#sbussbus_2">pixhawk.org here</a>.[/note]

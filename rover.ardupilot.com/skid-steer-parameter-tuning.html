@@ -1,0 +1,37 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: skid-steer-parameter-tuning 
+title: Skid Steer Parameter Tuning 
+id: 4381 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+The skid-steer parameters are used to configure whether a Skid Steer vehicle uses a dual throttle skid steer transmitter or a conventional single throttle RC transmitter. 
+<!-- more -->
+There are two parameters, only one of which should be enabled (depending on the type of transmitter used).
+
+<table>
+<tbody>
+<tr>
+<td><code>
+<a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Skid_steering_output_APMrover2SKID_STEER_OUT">SKID_STEER_OUT</a>
+</code></td>
+<td>0=Disabled 1=SkidSteer</td>
+<td>Set this to 1 for skid steering controlled rovers (tank track style). When enabled, servo1 is used for the left track control, servo3 is used for right track control</td>
+</tr>
+<tr>
+<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Skid_steering_input_APMrover2SKID_STEER_IN">SKID_STEER_IN</a></code></td>
+<td>0=Disabled 1=SkidSteerRC</td>
+<td>Set this to 1 for skid steering input rovers (tank track style RC Transmitter). When enabled, servo1 is used for the left track control, servo3 is used for right track control</td>
+</tr>
+</tbody>
+</table>
+
+The options are set in the <em>Mission Planner</em> <strong>CONFIG/TUNING| Standard Params</strong> page:
+
+[caption id="attachment_227" align="alignnone" width="1023"]<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/04/MP_rover_parameter.jpg"><img src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/04/MP_rover_parameter.jpg" alt="Mission Planner: Rover Skid-Steer Parameters" width="1023" height="813" class="size-full wp-image-227" /></a> Mission Planner: Rover Skid-Steer Parameters[/caption]
+
+[note]All parameters may be adjusted in the "Advanced Parameter List" in Mission Planner). All the Rover user settable parameters are listed in <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/">APMrover2 Parameters</a>.[/note]

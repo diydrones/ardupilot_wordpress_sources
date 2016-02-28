@@ -1,0 +1,203 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: plane-sitlmavproxy-tutorial 
+title: Plane SITL/MAVProxy Tutorial 
+id: 5641 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This tutorial provides a basic walk-through of how to use <a href="sitl-simulator-software-in-the-loop">SITL</a> and <a href="http://tridge.github.io/MAVProxy/">MAVProxy</a> for <em>Plane</em> testing.
+<!-- more -->
+
+<h1>Overview</h1>
+
+The article is intended primarily for developers who want to test new Plane builds and bug fixes using SITL and <em>MAVProxy</em>. It shows how to take off, run missions, fly in <code>GUIDED</code> mode, set a geofence, and perform a number of other basic testing tasks.
+
+The tutorial is complementary to the topic <a href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a>.
+
+[note]<ul>
+	<li>We use <em>MAVProxy</em> here, but you can <a href="using-sitl-for-ardupilot-testing/#connecting_otheradditional_ground_stations">attach another ground station to SITL</a> if you prefer (similar instructions can be used in any GCS).</li>
+	<li>This tutorial is for Plane - see <a href="copter-sitl-mavproxy-tutorial">Copter</a> and Rover for similar tutorials on the other vehicles.</li>
+</ul>
+
+[/note]
+
+
+<h1>Preconditions</h1>
+
+The tutorial assumes you have already set up <a href="sitl-native-on-windows">SITL on Windows</a> or <a href="setting-up-sitl-on-linux">Linux</a> and that you have started SITL using the <code>--map</code> and <code>--console</code> options:
+<pre>cd ~/ardupilot/ArduPlane
+sim_vehicle.sh -j4 --map --console</pre>
+As part of the setup you should have loaded some standard/test parameters into the <em>MAVProxy Command Prompt</em>:
+<pre>param load ..\Tools\autotest\ArduPlane.parm</pre>
+The <em>MAVProxy Command Prompt</em>, <em>Console</em> and <em>Map</em> should be arranged conveniently so you can observe the status and send commands at the same time.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/SITL_MAVProxyConsoleAndMap.png"><img class="size-large wp-image-5579" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/SITL_MAVProxyConsoleAndMap-1024x627.png" alt="MAVProxy: Command Prompt, Console and Map" width="474" height="290" /></a>
+
+
+<h1>Taking off</h1>
+
+To take off with Plane you should use a mission (AUTO mode) that contains the <a href="http://planner.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_takeoff">MAV_CMD_NAV_TAKEOFF</a> command. Once you are airborne you can switch to other other <a href="http://plane.ardupilot.com/wiki/flying/flight-modes/">flight modes</a>.
+
+[note]At time of writing, Plane only supports automated takeoff in <code>AUTO</code> mode as part of a mission. If you want to change to <code>GUIDED</code> mode (or any other mode) then you first have to take off using a mission.[/note]
+
+First load the <strong>CMAC-circuit.txt</strong> test mission using the <code>wp load</code> command as shown below (this mission contains the takeoff command):
+<pre>
+wp load ..\Tools\autotest\CMAC-circuit.txt
+wp list
+</pre>
+
+Once the mission is loaded you can take off by arming the throttle and setting the mode to <code>AUTO</code> (the order of these operations does not matter):
+<pre>mode auto 
+arm throttle
+</pre>
+
+The plane should take off to an altitude of 40 metres and then proceed through the other mission waypoints (most of which have an altitude of 100m). You can stop/pause the mission at any time by changing the mode.
+
+
+<h2>Monitoring</h2>
+
+During takeoff you can watch the altitude increase on the console in the <em>Alt</em> field.
+
+Developers may find it useful to <strong>graph</strong> the takeoff by first entering the <code>gtakeoff</code> command.
+
+[caption id="attachment_5691" align="alignnone" width="474"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyGraphPlane_gtakeoff_40.png"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyGraphPlane_gtakeoff_40-1024x709.png" alt="MAVProxy: Plane Takeoff Graph (gtakeoff)" width="474" height="328" class="size-large wp-image-5691" /></a> MAVProxy: Plane Takeoff Graph (gtakeoff)[/caption]
+
+
+<h2>Troubleshooting</h2>
+The most common sources of difficulty taking off are:
+<ol>
+	<li>Using a mission that does not contain a takeoff command!</li>
+	<li>Attempting to takeoff when the vehicle is not armed. This can happen if the vehicle fails pre-arm checks.</li>
+</ol>
+You can list all <em>enabled</em> checks using the command <code>arm list</code>:
+<pre>LAND&gt; arm list
+LAND&gt; all
+params
+voltage
+compass
+battery
+ins
+rc
+baro
+gps
+</pre>
+You can enable and disable checks using <code>arm check n</code> and <code>arm uncheck n</code> respectively, where n is the name of the check. Use <code>n</code> value of of <code>all</code> to enables/disable all checks.
+
+
+<h1>Flying a mission</h1>
+
+You can load a mission at any time using the <code>wp load</code> command. The mission will start as soon as the vehicle is armed and you're in <code>AUTO</code> mode.
+
+The example below shows how to load and start one of the test missions, skip to the second waypoint using <code>wp set n</code>, and <em>loop</em> the mission:
+<pre>wp load ..\Tools\autotest\CMAC-circuit.txt
+mode auto
+wp set 2
+wp loop</pre>
+The <a href="http://dronecode.github.io/MAVProxy/html/uav_configuration/waypoints.html">MAVProxy Waypoints documentation</a> lists the full set of available commands (or you can get them using auto-completion by typing "wp" on the command line).
+
+If you want to create a waypoint mission, this is most easily done on the map:
+<ol>
+	<li>Right-click on the map and then select <strong>Mission | Draw</strong>.
+
+[caption id="attachment_5615" align="alignnone" width="645"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxyCopter_Mission_Draw.png"><img class="size-full wp-image-5615" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxyCopter_Mission_Draw.png" alt="MAVProxy: Draw Mission Menu" width="645" height="637" /></a> MAVProxy: Draw Mission Menu[/caption]</li>
+	<li>Left-click on the map where you want the points to appear.
+[note]Nothing visible will happen when you make the first click. After the second click, lines will join your points to show the path[/note].</li>
+	<li>When you're done, you can loop the mission by right-clicking on the map and selecting <strong>Mission | Loop</strong>.</li>
+</ol>
+
+This approach only allows you to create <a href="http://planner.ardupilot.com/wiki/common-planning-a-mission-with-waypoints-and-events/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_nav_waypoint">MAV_CMD_NAV_WAYPOINT</a> commands. You can edit missions and use other commands on Linux using the <em>misseditor</em> module (<code>module load misseditor</code>). This is currently broken on Windows. It is also possible to load other types of commands from files.
+
+
+
+<h1>Changing flight modes</h1>
+
+Plane supports a <a href="http://plane.ardupilot.com/wiki/flying/flight-modes/">number of flight modes</a>, which you can list in <em>MAVProxy</em> using the <code>mode</code> command:
+<pre>
+AUTO> mode
+(AUTO> ''LAND', 'AUTOTUNE', 'STABILIZE', 'AUTO', 'GUIDED', 'LOITER', 'MANUAL', 'FBWA', 'FBWB', 'CRUISE', 'INITIALISING', 'CIRCLE', 'ACRO'])
+</pre>
+
+You can set the mode by entering <code>mode MODENAME</code> on the <em>MAVProxy command prompt</em>.
+
+For example, the command below shows how to put Plane into <a href="http://plane.ardupilot.com/wiki/flying/flight-modes/#circle">CIRCLE mode</a> (this is like Loiter, except that the plane does not attempt to hold position).
+<pre>mode circle</pre>
+
+
+
+<h1>Guiding the vehicle</h1>
+
+Once you've taken off you can move the vehicle around the map in <code>GUIDED</code> mode. Plane will fly to a specified point, and then circle it.
+
+First change the mode:
+<pre>mode guided</pre>
+
+The easiest way to set a target point is to right-click on the map where you want to go, select <strong>Fly to</strong>, and then enter the target altitude.
+
+[caption id="attachment_5614" align="alignnone" width="545"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxyCopter_flyto.png"><img class="size-full wp-image-5614" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/05/MAVProxyCopter_flyto.png" alt="MAVProxy: Fly to Location" width="545" height="591" /></a> MAVProxy: Fly to Location[/caption]
+
+You can also enter the target position manually on the command line using the two formats below. If only the altitude is specified, the last specified LAT/LON will be used.
+<pre>guided ALTITUDE
+guided LAT LON ALTITUDE
+</pre>
+
+[note]Unlike with Copter, you can't do much with Plane in <code>GUIDED</code> mode because the mode does not support many commands. This mode is primarily useful for simply flying to a point.[/note]
+
+
+
+<h1>Setting a GeoFence</h1>
+
+A GeoFence is is a virtual barrier that Plane uses to constrain the movement of the vehicle (and move it to a safe location if control is lost). Plane allows you to specify an arbitrarily shaped region on the map for the fence, and an upper and lower altitude. If the fence is breached, Plane will fly to the centre of the fence and circle (or a rally poin)t. <a href="http://plane.ardupilot.com/wiki/flying/flight-modes/geofencing/">Geo-Fencing in Plane</a> describes the fence in more detail. 
+
+The fence behaviour is set using the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#action_on_geofence_breach_arduplanefence_action">Plane Fence Parameters</a>. You can list these with <code>param show</code>:
+<pre>
+GUIDED> param show fence*
+GUIDED> FENCE_ACTION     1.000000
+FENCE_AUTOENABLE 0.000000
+FENCE_CHANNEL    0.000000
+FENCE_MAXALT     0.000000
+FENCE_MINALT     0.000000
+FENCE_RETALT     0.000000
+FENCE_RET_RALLY  0.000000
+FENCE_TOTAL      7.000000
+</pre>
+
+Creating the fence is very similar to creating a waypoint mission:
+<ol>
+	<li>Right-click on the map and then select <strong>Fence | Draw</strong>.
+
+[caption id="attachment_5694" align="alignnone" width="816"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Draw.png"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Draw.png" alt="MAVProxy: Draw Fence Menu" width="816" height="693" class="size-full wp-image-5694" /></a> MAVProxy: Draw Fence Menu[/caption]</li>
+	<li>Left-click on the map at points where you want the fence "posts" to appear.
+[note]Nothing visible will happen when you make the first click. After the second click, lines will join your points to show the path[/note].</li>
+	<li>When you're done, you can loop the fence by right-clicking on the map.
+[caption id="attachment_5695" align="alignnone" width="474"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Draw_points.png"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Draw_points-1024x950.png" alt="MAVProxy: Draw Fence Points" width="474" height="440" class="size-large wp-image-5695" /></a> MAVProxy: Draw Fence Points[/caption]
+</li>
+	<li>The fence is initially disabled. To turn it on set the value to one:
+<pre>
+GUIDED> fence enable
+</pre>
+</li>
+	<li>Now lets make the plane cross the barrier. Assuming you are already flying you can use the following to make it fly straight ahead into the fence:
+<pre>
+GUIDED> mode cruise
+</pre></li>
+
+	<li>When the fence is crossed, the plane will fly to the centre of the fence region and then circle. The console shows that the breach has occurred.
+[caption id="attachment_5696" align="alignnone" width="834"]<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Breach.png"><img src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/06/MAVProxyPlane_Fence_Breach.png" alt="MAVProxy: Fence Breach shown on Console and Map" width="834" height="574" class="size-full wp-image-5696" /></a> MAVProxy: Fence Breach shown on Console and Map[/caption]
+</li>
+
+</ol>
+
+
+Instead of flying to the centre of the fence you can instead add a <a href="http://plane.ardupilot.com/wiki/common-rally-points/">rally point</a> to the map and fly to it by enabling the parameter <code>FENCE_RET_RALLY</code>.  
+
+
+
+<h1>Testing the vehicle</h1>
+
+<em>MAVProxy</em> allows you to list all the parameters affecting the vehicle and simulation using <code>param show *</code>, and to set any parameter using: <code>param set PARAM_NAME VALUE</code>. In addition to affecting the vehicle itself some parameters simulate the performance/failure of specific hardware components and the environment (for example, the wind). These can be listed using: <code>param show sim*</code>.
+
+The topic <a href="using-sitl-for-ardupilot-testing">Using SITL for ArduPilot Testing</a> explains more about how you can test using SITL.

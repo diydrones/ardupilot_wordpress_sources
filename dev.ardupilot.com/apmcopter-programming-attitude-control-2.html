@@ -1,0 +1,53 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: apmcopter-programming-attitude-control-2 
+title: Attitude Control (Copter Code Overview) 
+id: 1391 
+menu_order: 20 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+Between AC3.1.5 and AC 3.2 the attitude control logic was restructured as part of "the onion" project.  The new structure is shown below.
+
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/AC_CodeOverview_ManualFlightMode.png"><img class="size-full wp-image-4312" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/AC_CodeOverview_ManualFlightMode.png" alt="AC_CodeOverview_ManualFlightMode" width="922" height="504" /></a>
+
+On every update (i.e. 400hz on Pixhawk, 100hz on APM2.x) the following happens:
+<ul>
+	<li>the top level flight-mode.cpp's "update_flight_mode()" function is called.  This function checks the vehicle's flight mode (ie. "control_mode" variable) and then calls the appropriate &lt;flight mode&gt;_run() function (i.e. "<a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_stabilize.cpp#L20" target="_blank">stabilize_run</a>" for stabilize mode, "<a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_rtl.cpp#L23" target="_blank">rtl_run</a>" for RTL mode, etc).  The &lt;flight mode&gt;_run() function can be found in the appropriately named control_&lt;flight mode&gt;.cpp file (i.e. <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_stabilize.cpp" target="_blank">control_stabilize.cpp</a>, <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_rtl.cpp" target="_blank">control_rtl.cpp</a>, etc).</li>
+	<li>the &lt;flight mode&gt;_run function is responsible for converting the user's input (found in g.rc_1.control_in, g.rc_2.control_in, etc) into a lean angle, rotation rate, climb rate, etc that is appropriate for this flight mode.  For example <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_althold.cpp#L22" target="_blank">AltHold</a> converts the user's roll and pitch input into lean angles (in degrees), the yaw input is converted into a rotation rate (in degrees per second) and the throttle input is converted to a climb rate (in cm/s).</li>
+	<li>the last thing the &lt;flight mode&gt;_run function must do is pass these desired angles, rates etc into Attitude Control and/or Position Control libraries (these are both held in the <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AC_AttitudeControl" target="_blank">AC_AttitudeControl</a> folder).</li>
+	<li>The <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h" target="_blank">AC_AttitudeControl</a> library provides 5 possible ways to control the attitude of the vehicle, the most common 3 are described below.
+<ul>
+
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L98" target="_blank">angle_ef_roll_pitch_rate_ef_yaw()</a> : this accepts an "earth frame" angle for roll and pitch, and an "earth frame" rate for yaw.  For example providing this function roll = -1000, pitch = -1500, yaw = 500 means lean the vehicle left to 10degrees, pitch forward to 15degrees and rotate right at 5deg/second.</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L102" target="_blank">angle_ef_roll_pitch_yaw()</a> : this accepts "earth frame" angles for roll, pitch and yaw.  similar to above except providing yaw of 500 means rotate the vehicle to 5 degrees east of north.</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L108" target="_blank">rate_bf_roll_pitch_yaw()</a> : this accepts a "body frame" rate (in degrees/sec) for roll pitch and yaw.  For example providing this function roll = -1000, pitch = -1500, yaw = 500 would lead to the vehicle rolling left at 10deg/sec, pitching forward at 15deg/sec and rotating about the vehicle's z axis at 5 deg/sec.</li>
+
+</ul>
+</li>
+</ul>
+After any calls to these functions are made the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L114" target="_blank">AC_AttitudeControl::rate_controller_run()</a> is called.  This converts the output from the methods listed above into roll, pitch and yaw inputs which are sent to the <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Motors" target="_blank">AP_Motors</a> library via it's <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99" target="_blank">set_roll, set_pitch, set_yaw and set_throttle</a> methods. .
+<ul>
+	<li>The <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h" target="_blank">AC_PosControl</a> library allows 3D position control of the vehicle.  Normally only the simpler Z-axis (i.e. altitude control) methods are used because more complicated 3D position flight modes (i.e. <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/control_loiter.cpp#L30" target="_blank">Loiter</a>) make use of the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_WPNav/AC_WPNav.h" target="_blank">AC_WPNav</a> library.  In any case, some commonly used methods of this library include:
+
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L109" target="_blank">set_alt_target_from_climb_rate()</a> : this accepts a climb rate in cm/s and updates an absolute altitude target</li>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L171" target="_blank">set_pos_target()</a> : this accepts a 3D position vector which is an offset from home in cm</li>
+</ul>
+</li>
+</ul>
+If any methods in AC_PosControl are called then the flight mode code must also call the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L134" target="_blank">AC_PosControl::update_z_controller()</a> method.  This will run the z-axis position control PID loops and send low-level throttle level to the <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_Motors" target="_blank">AP_Motors</a> library.  If any xy-axis methods are called then <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L202" target="_blank">AC_PosControl::update_xy_controller()</a> must be called.
+<ul>
+	<li>The AP_Motors library holds the "motor mixing" code.  This code is responsible for converting the roll, pitch, yaw and throttle values received from the AC_AttitudeControl and AC_PosControl libraries into absolute motor outputs (i.e. PWM values).  So the higher level libs would make use of these functions:
+<ul>
+	<li><a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99" target="_blank">set_roll(), set_pitch(), set_yaw()</a> : accepts roll, pitch and yaw values in the range of -4500 ~ 4500.  These are not desired angles or even rates but rather just a value.  For example set_roll(-4500) would mean roll left as fast as possible.</li>
+	<li>set_throttle() : accepts an absolute throttle value in the range of 0 ~ 1000.  0 = motors off, 1000 = full throttle.</li>
+</ul>
+</li>
+</ul>
+There are different classes for each frame type (quad, Y6, traditional helicopter) but in each there is an "<a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L123" target="_blank">output_armed</a>" function which is responsible for implementing the conversion of these roll, pitch, yaw and throttle values into pwm outputs.  This conversion often includes implementing a "stability patch" which handles prioritising one axis of control over another when the input requests are outside the physical limits of the frame (i.e. max throttle and max roll is not possible with a quad because some motors must be less than others to cause a roll).  At the bottom of the "output_armed" function there is a call to the hal.rcout-&gt;write() which passes the desired pwm values to the AP_HAL layer.
+<ul>
+	<li>The <a href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL" target="_blank">AP_HAL</a> libraries (hardware abstraction layer) provides a consistent interface for all boards.  In particular the hal.rc_out_write() function will cause the specified PWM received from the AP_Motors class to appear on the appropriate pwm pin out for the board.</li>
+</ul>

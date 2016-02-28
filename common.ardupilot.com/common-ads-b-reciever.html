@@ -1,0 +1,65 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-ads-b-reciever 
+title: common-ADS-B Reciever 
+id: 5508 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+This article shows an <strong>experimental</strong> integration of an <a href="https://en.wikipedia.org/wiki/Automatic_dependent_surveillance_%E2%80%93_broadcast" target="_blank">Automatic Dependent Surveillance Broadcast</a> (ADS-B) receiver into Copter and Plane.
+
+[copywiki destination="copter,plane"]
+
+[warning]VERY EXPERIMENTAL!!! The current implementation is NOT READY FOR OBJECT AVOIDANCE USE. The hardware is not yet for sale. COMING SOON!
+
+We're posting it here to encourage further discussion and contribution[/warning]
+<h1>Overview</h1>
+ADS-B is an air traffic surveillance technology that enables aircraft to be accurately tracked by air traffic controllers and other pilots without the need for conventional radar.
+
+This article explains how to attach and configure a MAVLink based ADS-B receiver by <a href="http://www.uavionix.com/" target="_blank">uAvionix </a>called PING™. Please visit their website for technical specs including RF characteristics and connector pinout.
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/uAvionix.png"><img class="alignnone size-full wp-image-9538" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/uAvionix.png" alt="uAvionix" width="224" height="107" /></a>
+
+<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/ADS-B_PING.png"><img class="alignnone size-medium wp-image-9539" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/ADS-B_PING.png" alt="ADS-B_PING" width="230" height="168" /></a>
+
+This first implementation only supports Plane. Object avoidance is only active in AUTO mode.
+<h1>MAVLink</h1>
+The data is transmitted via the ADSB_VEHICLE message. When received by ArduPilot, it is reflected to all MAVLink serial ports. If you have a GCS or companion computer connected it will receive the forwarded packets automatically.
+<h2>Key parameters</h2>
+The key parameters that control the ADS-B packet parsing and object avoidance behavior options.
+<ul>
+	<li>ADSB_ENABLE</li>
+	<li>ADSB_BEHAVIOR</li>
+</ul>
+<h1>Vehicle Database</h1>
+When enabled, the ADS-B library will store information for up to 25 vehicles detected by the ADS-B receiver. Due to some experimental work in other features, such as EKF2, available RAM may be limited. It is important to note that when ADS-B is disabled (=0) then the memory is released, effectively freeing up about 1KB of RAM. When enabled, the detected vehicle list is checked once per second for potential conflicts.
+<h1>Vehicle detection and behavior</h1>
+The current ADS-B library is not considered to be fully-featured, more of a proof of concept. It is not intended to be used as-is for realistic object avoidance.  More work is needed to make it a robust tool for avoiding in a practical way.
+
+Current behavior is to check the detected vehicle list once per second and determine if any other aircraft is within 200m. The altitude is ignored. At that point, a behavior is performed in an effort to avoid it. The behavior persists until no vehicles are within 400m.
+
+Object avoidance behavior is dictated by one of three different ADSB_BEHAVIOR options:
+<ul>
+	<li>ADSB_BEHAVIOR=0, NONE. Objects are detected and the GCS is notified but no action is taken.</li>
+	<li>ADSB_BEHAVIOR=1, LOITER. If another vehicle is nearby, switch from AUTO to LOITER mode. When the vehicle leaves, switch back to AUTO and resume.</li>
+	<li>ADSB_BEHAVIOR=2, LOITER_AND_DESCEND. Same as (1) but decrease the altitude 1 m/s. If the other vehicle location persists, you will eventually loiter into the ground.</li>
+</ul>
+<h1>Simulation</h1>
+This includes a new ADS-B simulation component in SITL where you can have aircraft flying at you. Joy! To enable this you must have pymavlink v1.1.63. If you have an older version, use:
+<pre>sudo pip install --upgrade pymavlink MAVProxy</pre>
+When starting SITL use the following command:
+<pre>sim_vehicle.sh -A --adsb --console --map</pre>
+This also supports plugging in a hardware ADS-B receiver to your computer using a USB-to-Serial converter which will overlay real ADS-B traffic into the simulation.
+<h1>TODO</h1>
+<ol>
+	<li>Altitude is ignored so if a plane flies over at 35000' but within 200m horizontally, then yes you'll consider it a threat right now. Obviously that needs to change.</li>
+	<li>Automatically switching from LOITER to AUTO mode behavior can get goofy if you switch the modes externally while actively avoiding another vehicle. That is, AUTO -&gt; LOITER -&gt; AUTO works fine if only the ADS-B logic is doing the mode switching.</li>
+	<li>Add copter support</li>
+	<li>Add more complicated behaviors</li>
+	<li>Add realistic threat detection by calculating the vehicle's trajectory and computing a time-to-impact rather than a simple radius distance.</li>
+	<li>Add visualization to GCS</li>
+	<li>This implementation was intentionally simple to promote others to enhance it to suit their/everyones' needs. The limited number of params was simply to get the device driver rolling without committing to any particular param name. So, get to it!</li>
+</ol>

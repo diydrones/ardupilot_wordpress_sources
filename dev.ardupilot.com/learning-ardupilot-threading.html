@@ -1,0 +1,186 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: learning-ardupilot-threading 
+title: Learning ArduPilot - Threading 
+id: 4661 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<h2>Understanding ArduPilot threading</h2>
+Once you have learned the basic of the ArduPilot libraries it is time for you to understand how ArduPilot deals with threading. The setup()/loop() structure that was inherited from arduino may make it seem that ArduPilot is a single threaded system, but in fact it isn't.
+
+The threading approach in ArduPilot depends on the board it is built for. Some boards (such as the APM1 and APM2) don't support threads, so make do with a simple timer and callbacks. Some boards (PX4 and Linux) support a rich Posix threading model with realtime priorities, and these are used extensively by ArduPilot.
+
+There are a number of key concepts related to threading that you need to understand in ArduPilot:
+<ul>
+	<li>The timer callbacks</li>
+	<li>HAL specific threads</li>
+	<li>driver specific threads</li>
+	<li>ardupilot drivers versus platform drivers</li>
+	<li>platform specific threads and tasks</li>
+	<li>the AP_Scheduler system</li>
+	<li>semaphores</li>
+	<li>lockless data structures</li>
+</ul>
+<h1>The timer callbacks</h1>
+Every platform provides a 1kHz timer in the AP_HAL. Any code in ArduPilot can register a timer function which is then called at 1kHz. All registered timer functions are called sequentially. This very primitive mechanism is used as it is extremely portable, and yet very useful. You register a timer callback by calling the hal.scheduler-&gt;register_timer_process() like this:
+<pre>  hal.scheduler-&gt;register_timer_process(AP_HAL_MEMBERPROC(&amp;AP_Baro_MS5611::_update));</pre>
+that particular example is from the MS5611 barometer driver. The AP_HAL_MEMBERPROC() macro provides a way to encapsulate a C++ member function as a callback argument (bundling up the object context with the function pointer).
+
+When a piece of code wants something to happen at less than 1kHz then it should maintain it's own "last_called" variable and return immediately if not enough time has passed. You can use the hal.scheduler-&gt;millis() and hal.scheduler-&gt;micros() functions to get the time since boot in milliseconds and microseconds to support this.
+
+You should now go and modify an existing example sketch (or create a new one) and add a timer callback. Make the timer increment a counter then print the value of the counter every second in the loop() function. Modify your function so that it increments the counter  every 25 milliseconds.
+<h1>HAL specific threads</h1>
+On platforms that support real threads the AP_HAL for that platform will create a number of threads to support basic operations. For example, on PX4 the following HAL specific threads are created:
+<ul>
+	<li>The UART thread, for reading and writing UARTs (and USB)</li>
+	<li>The timer thread, which supports the 1kHz timer functionality described above</li>
+	<li>The IO thread, which supports writing to the microSD card, EEPROM and FRAM</li>
+</ul>
+Have a look in Scheduler.cpp inside each AP_HAL implementation to see what threads are created and what the realtime priority of each thread is.
+
+If you have a Pixhawk then you should also now setup a debug console cable and attach to the nsh console (the serial5 port). Connect at 57600. When you have connected, try the "ps" command ad you will get something like this:
+<pre>PID PRI SCHD TYPE NP STATE NAME
+ 0 0 FIFO TASK READY Idle Task()
+ 1 192 FIFO KTHREAD WAITSIG hpwork()
+ 2 50 FIFO KTHREAD WAITSIG lpwork()
+ 3 100 FIFO TASK RUNNING init()
+ 37 180 FIFO TASK WAITSEM AHRS_Test()
+ 38 181 FIFO PTHREAD WAITSEM &lt;pthread&gt;(20005400)
+ 39 60 FIFO PTHREAD READY &lt;pthread&gt;(20005400)
+ 40 59 FIFO PTHREAD WAITSEM &lt;pthread&gt;(20005400)
+ 10 240 FIFO TASK WAITSEM px4io()
+ 13 100 FIFO TASK WAITSEM fmuservo()
+ 30 240 FIFO TASK WAITSEM uavcan()</pre>
+In this example you can see the "AHRS_Test" thread, which is running the example sketch from libraries/AP_AHRS/examples/AHRS_Test. You can also see the timer thread (priority 181), the UART thread (priority 60) and the IO thread (priority 59).
+
+Additionally you can see the px4io, fmuservo, uavcan, lpwork, hpwork and idle tasks. More about those later.
+
+Other AP_HAL ports have more or less threads depending on what is needed.
+
+One common use of threads is to provide drivers a way to schedule slow tasks without interrupting the main autopilot flight code. For example, the AP_Terrain library needs to be able to do file IO to the microSD card (to store and retrieve terrain data). The way it does this is it calls the function hal.scheduler-&gt;register_io_process() like this:
+<pre>hal.scheduler-&gt;register_io_process(AP_HAL_MEMBERPROC(&amp;AP_Terrain::io_timer));</pre>
+The sets up the AP_Terrain::io_timer function to be called regularly. That is called within the boards IO thread, meaning it is a low realtime priority and is suitable for storage IO tasks. It is important that slow IO tasks like this not be called on the timer thread as they would cause delays in the more important processing of high speed sensor data.
+<h1>Driver specific threads</h1>
+It is also possible to create driver specific threads, to support asynchronous processing in a manner specific to one driver. Currently you can only create driver specific threads in a manner that is platform dependent, so this is only appropriate if your driver is intended to run only on one type of autopilot board. If you want it to run on multiple AP_HAL targets then you have two choices:
+<ul>
+	<li>you can use the register_io_process() and register_timer_process() scheduler calls to use the existing timer or IO threads</li>
+	<li>you can add a new HAL interface that provides a generic way to create threads on multiple AP_HAL targets (please contribute patches back)</li>
+</ul>
+An example of a driver specific thread is the ToneAlarm thread in the Linux port. See AP_HAL_Linux/ToneAlarmDriver.cpp
+<h1>ArduPilot drivers versus platform drivers</h1>
+You may notice some driver duplication in ArduPilot. For example, we have a MPU6000 driver in libraries/AP_InertalSensor/AP_InertialSensor_MPU6000.cpp, and another MPU6000 driver in PX4Firmware/src/drivers/mpu6000.
+
+The reason for this duplication is that the PX4 project already provides a set of well tested drivers for hardware that comes with PX4 boards, and we enjoy a good collaborative relationship with the PX4 project on developing and enhancing these drivers. So when we build ArduPilot for PX4 we take advantage of the PX4 drivers by writing small "shim" drivers which present the PX4 drivers with the standard ArduPilot library interface. If you look at libraries/AP_InertialSensor/AP_InertialSensor_PX4.cpp you will see a small shim driver that asks the PX4 what IMU drivers are available on this board and automatically makes all of them available as part of the ArduPilot AP_InertialSensor library.
+
+So if we have an MPU6000 on the board we use the AP_InertialSensor_MPU6000.cpp driver on non-PX4 platforms, and the AP_InertialSensor_PX4.cpp driver on PX4 based platforms.
+
+The same type of split can also happen for other AP_HAL ports. For example, we could use Linux kernel drivers for some sensors on Linux boards. For other sensors we use the generic AP_HAL I2C and SPI interfaces to use the ArduPilot "in-tree" drivers which work across a wide range of boards.
+<h1>Platform specific threads and tasks</h1>
+On some platforms there will be a number of base tasks and threads that will be created by the startup process. These are very platform specific so for the sake of this tutorial I will concentrate on the tasks used on PX4 based boards.
+
+In the "ps" output above we saw a number of tasks and threads that were not started by the AP_HAL_PX4 Scheduler code. Specifically they are:
+<ul>
+	<li>idle task - called when there is nothing else to run</li>
+	<li>init - used to start up the system</li>
+	<li>px4io - handle the communication with the PX4IO co-processor</li>
+	<li>hpwork - handle thread based PX4 drivers (mainly I2C drivers)</li>
+	<li>lpwork - handle thread based low priority work (eg. IO)</li>
+	<li>fmuservo - handle talking to the auxillary PWM outputs on the FMU</li>
+	<li>uavcan - handle the uavcan CANBUS protocol</li>
+</ul>
+The startup of all of these tasks is controled by the PX4 specific <a href="https://github.com/diydrones/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM">rc.APM script</a>. That script is run when the PX4 boots, and is responsible for detecting what sort of PX4 board we are using then loading the right tasks and drivers for that board. It is a "nsh" script, which is similar to a bourne shell script (though nsh is much more primitive).
+
+As an exercise, try editing the rc.APM script and adding some sleep and echo commands. Then upload a new firmware and connect to the debug console while the board is booting. Your echo commands should show up on the console.
+
+Another very useful way of exploring the startup of the PX4 is to boot without a microSD card in the slot. The <a href="https://github.com/diydrones/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rcS">rcS script</a>, which runs just before rc.APM, detects if a microSD is inserted and gives you a bare nsh console on the USB port if it isn't. You can then manually run all the steps of rc.APM yourself on the USB console to learn how it works.
+
+Try the following exercise after booting a Pixhawk without a microSD card and connecting to the USB console:
+<pre>tone_alarm stop
+uorb start
+mpu6000 start
+mpu6000 info
+mpu6000 test
+mount -t binfs /dev/null /bin
+ls /bin
+perf</pre>
+Try playing with the other drivers. Have a look in /bin to see what is available. The source code for most of these commands is in <a href="https://github.com/diydrones/PX4Firmware/tree/master/src/drivers">PX4Firmware/src/drivers</a>. Have a look through the mpu6000 driver to get an idea of what is involved.
+
+Given we are on the topic of threads and tasks, a brief description of threads in the PX4Firmware git tree is worth mentioning. If you look in the mpu6000 driver you will see a line like this:
+<pre>hrt_call_every(&amp;_call, 1000, _call_interval, (hrt_callout)&amp;MPU6000::measure_trampoline, this);</pre>
+that is the equivalent of the hal.scheduler-&gt;register_timer_process() function in the AP_HAL, but is PX4 specific and is also much more flexible. It says that it wants the HRT (high resolution timer) subsystem of the PX4 to call the MPU6000::measure_trampoline function every 1000 microseconds.
+
+Using hrt_call_every() is the common method used for regular events in drivers where the operations are very fast, such as SPI device drivers. The operations are typically run with interrupts disabled, and should take only a few tens of microseconds at most.
+
+If you compare this to the hmc5883 driver, you will instead see a line like this:
+<pre>work_queue(HPWORK, &amp;_work, (worker_t)&amp;HMC5883::cycle_trampoline, this, 1);</pre>
+that uses an alternative mechanism for regular events which is suitable for slower devices, such as I2C devices. What this does is add the cycle_trampoline function to a work queue within the hpwork thread that you saw above. Calls made within HPWORK workers should run with interrupts enabled and may take up to a few hundred microseconds. For tasks which will take longer than that the LPWORK work queue should be used, which runs them in the lower priority lpwork thread.
+<h1>The AP_Scheduler system</h1>
+The next aspect of ArduPilot threading and tasks to understand is the AP_Scheduler system. The AP_Scheduler library is used to divide up time within the main vehicle thread, while providing some simple mechanisms to control how much time is used for each operation (called a 'task' in AP_Scheduler).
+
+The way it works is that the loop() function for each vehicle implementation contains some code that does this:
+<ul>
+	<li>wait for a new IMU sample to arrive</li>
+	<li>call a set of tasks between each IMU sample</li>
+</ul>
+It is a table driven scheduler, and each vehicle type has a AP_Scheduler::Task table. To learn how it works have a look at the <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Scheduler/examples/Scheduler_test/Scheduler_test.cpp">AP_Scheduler/examples/Scheduler_test.cpp</a> sketch.
+
+If you look inside that file you will see a small table with a set of 3 scheduling tasks. Associated with each task are two numbers. The table looks like this:
+<pre>static const AP_Scheduler::Task scheduler_tasks[] PROGMEM = {
+ { ins_update, 1, 1000 },
+ { one_hz_print, 50, 1000 },
+ { five_second_call, 250, 1800 },
+};</pre>
+The first number after each function name is the call frequency, in units controlled by the ins.init() call. For this example sketch the ins.init() uses RATE_50HZ, so each scheduling step is 20ms. That means the ins_update() call is made every 20ms, the one_hz_print() function is called every 50 times (ie. once a second) and the five_second_call() is called every 250 times (ie. once every 5 seconds).
+
+The third number is the maximum time that the function is expected to take. This is used to avoid making the call unless there is enough time left in this scheduling run to run the function. When scheduler.run() is called it is passed the amount of time (in microseconds) available for running tasks, and if the worst case time for this task would mean it wouldn't fit before that time runs out then it won't be called.
+
+Another point to look at closely is the ins.wait_for_sample() call. That is the "metronome" that drives the scheduling in ArduPilot. It blocks execution of the main vehicle thread until a new IMU sample is available. The time between IMU samples is controlled by the arguments to the ins.init() call.
+
+Note that tasks in AP_Scheduler tables must have the following attributes:
+<ul>
+	<li>they should never block (except for the ins.update() call)</li>
+	<li>they should never call sleep functions when flying (an autopilot, like a real pilot, should never sleep while flying)</li>
+	<li>they should have predictable worst case timing</li>
+</ul>
+You should now go and modify the Scheduler_test example and add in your own tasks to run. Try adding tasks that do the following:
+<ul>
+	<li>read the barometer</li>
+	<li>read the compass</li>
+	<li>read the GPS</li>
+	<li>update the AHRS and print the roll/pitch</li>
+</ul>
+Look at the example sketches for each library that you worked with earlier in this tutorial to understand how to use each sensor library.
+<h1>Semaphores</h1>
+When you have multiple threads (or timer callbacks) you need to ensure that data structures shared by the two logical threads of execution are updated in a way that prevents corruption. There are 3 principle ways of doing this in ArduPilot - semaphores, lockless data structures and the PX4 ORB.
+
+AP_HAL Semaphores are just wrappers around whatever semaphore system is available on the specific platform, and provide a simple mechanism for mutual exclusion. For example, I2C drivers can ask for the I2C bus semaphore to ensure that only one I2C device is used at a time.
+
+Go and have a look at the hmc5883 driver in libraries/AP_Compass/AP_Compass_HMC5883.cpp and look for the _i2c_sem variable. Look at all the places it is used, and see if you can work out why it is needed.
+<h1>Lockless Data Structures</h1>
+The ArduPilot code also contains examples of using lockless data structures to avoid the need for a semaphore. This can be a lot more efficient than semaphores.
+
+Two examples of lockless data structures in ArduPilot are:
+<ul>
+	<li>the _shared_data structure in libraries/AP_InertialSensor/AP_InertialSensor_MPU9250.cpp</li>
+	<li>the ring buffers used in numerous places. A good example is libraries/DataFlash/DataFlash_File.cpp</li>
+</ul>
+Go and have a look at these two examples, and prove to yourself that they are safe for concurrent access. For DataFlash_File look at the use of the _writebuf_head and _writebuf_tail variables.
+
+It would be nice to create a generic ring buffer class which could be used instead of the separate ringbuffer implementations in several places in ArduPilot. If you want to contribute that then please do a pull request!
+<h1>The PX4 ORB</h1>
+Another example of this type of mechanism is the PX4 ORB. The ORB (Object Request Broker) is a way of providing data from one part of the system to another (eg. device driver -&gt; vehicle code) using a publish/subscribe model that is safe in a multi-threaded environment.
+
+The ORB provides a nice mechanism for declaring structures which will be shared in this way (all defined in <a href="https://github.com/diydrones/PX4Firmware/tree/master/src/modules/uORB/topics">PX4Firmware/src/modules/uORB/topics</a>). Code can then "publish" data to one of these topics, which is picked up by other pieces of code.
+
+An example is the publication of actuator values so the uavcan ESCs can be used on Pixhawk. Have a look at the _publish_actuators() function in AP_HAL_PX4/RCOutput.cpp. You will see that it advertises a "actuator_direct" topic, which contains the speed desired for each ESC. The uavcan code these watches for changes to this topic in <a href="https://github.com/diydrones/PX4Firmware/blob/master/src/modules/uavcan/uavcan_main.cpp">PX4Firmware/src/modules/uavcan/uavcan_main.cpp </a>and outputs the new values to the uavcan ESCs.
+
+Two other common mechanisms for communicating with PX4 drivers are:
+<ul>
+	<li>ioctl calls (see the examples in AP_HAL_PX4/RCOutput.cpp)</li>
+	<li>/dev/xxx read/write calls (see _timer_tick in AP_HAL_PX4/RCOutput.cpp)</li>
+</ul>
+Please talk to the ardupilot development team on the drones-discuss mailing list if you are not sure which mechanism to use for new code.

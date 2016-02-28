@@ -31,7 +31,7 @@ You will need the following equipment:
 
 <ul>
 	<li>USB joystick or Gamepad such as the <a href="http://gaming.logitech.com/en-us/product/f310-gamepad" target="_blank">Logitech F310</a> (shown above).</li>
-	<li>A <a href="common-telemetry-landingpage">telemetry connection</a> (such as the <a href="https://store.3drobotics.com/products/3dr-radio-set" target="_blank">3DR radio</a>) between your ground station and vehicle.</li>
+	<li>A <a href="http://copter.ardupilot.com/wiki/common-telemetry-landingpage/">telemetry connection</a> between your ground station and vehicle.</li>
 	<li>A laptop computer running <em>Mission Planner</em>.</li>
 </ul>
 
@@ -59,11 +59,14 @@ You will need the following equipment:
 	<li>You will likely want to set-up other buttons for <em>Arm</em> and <em>Disarm</em></li>
 	<li>Instead of setting up a stick or button for ch5 (the flight mode channel), it is better to set individual buttons to initiate a flight mode by selecting <strong>Change Mode</strong> and then push the <strong>Settings</strong> button and select the flight mode from the drop-down (see pic above)</li>
 	<li>When done, push the <strong>Save</strong> button</li>
-        <li>In the <strong>CONFIG/TUNING | Full Parameter List</strong>, check that the <a href="arducopter-parameters/#my_ground_station_number_arducoptersysid_mygcs">SYSID_MYGCS</a> parameter matches the system ID of your GCS. This parameter limits which GCS can send override signals to the vehicle.
+        <li>In the <strong>CONFIG/TUNING | Full Parameter List</strong>, check that the <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/#my_ground_station_number_arducoptersysid_mygcs">SYSID_MYGCS</a> parameter matches the system ID of your GCS. This parameter limits which GCS can send override signals to the vehicle.
 [tip]For Mission Planner the default GCS system ID is 255. The default system ID for APM Mission Planner 2 is 252 (but the GCS will automatically set its ID to match <em>SYSID_MYGCS</em> for RC Override commands). <!-- there is a plan to get Copter to accept any connection if the SYSID_MYGCS is zero. Update this section when that happens: https://github.com/diydrones/ardupilot/issues/1515 --> [/tip]
 </li>
 </ul>
 
+[note]If you get an error <strong>PreArm: RC not calibrated</strong> (following calibration) you will additionally need to manually change <code>RC1_MIN</code> to 1101 and <code>RC1_MAX</code> to 1901 (and then repeat for RC2_, RC3_ and RC4_ max/min parameters).
+&nbsp;
+This error is caused because <em>Mission Planner</em> maps the Joystick exactly to the 1100 - 1900 range, but the pre-arm checks assume that if the values are not at least 1 pwm off the century value, that calibration has not been done.[/note]
 
 
 <h1>Testing the controls before flying</h1>
@@ -129,5 +132,5 @@ It is nearly impossible to make the Joystick as responsive as a regular transmit
 	<li>Reducing the rate of other telemetry data being sent between the vehicle and GCS from the MP's <strong>Config/Tuning | Planner</strong> page
 <a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_ReduceLag_MPRates.png"><img class="alignnone size-medium wp-image-12636" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/01/Joystick_ReduceLag_MPRates-300x168.png" alt="Joystick_ReduceLag_MPRates" width="300" height="168" /></a>
 </li>
-	<li>If using a 3DR radio or RFD900 radio these can be put into <a href="common-3dr-radio-advanced-configuration-and-technical-information/#low_latency_mode">Low Latency mode as described here</a>.</li>
+	<li>If using a SiK Radio or RFD900 Radio these can be put into <a href="common-3dr-radio-advanced-configuration-and-technical-information/#low_latency_mode">Low Latency mode as described here</a>.</li>
 </ul>

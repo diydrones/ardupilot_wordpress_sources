@@ -1,0 +1,129 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: rover-apm2-setup 
+title: Archived:Rover APM2.x Wiring and Quick Start 
+id: 87 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+[archived date=20160226]The APM2.x is end of life and is not generally available for purchase. This article is made available for existing users.[/archived]
+This article explains how to set up Rover using the APM2.x autopilot.
+
+<h1>Overview</h1>
+The process of converting an RC car to a Rover consists of adding an autopilot board in between the RC receiver and the car's motor and steering servo. We recommend that the controller be powered by the included Power Module.
+
+[note]This tutorial assumes you're using a Mode 2 radio setup. If you're using Mode 1, the throttle will move to the other stick[/note]
+
+Rover is designed to use regular RC transmitters (not specialized RC car transmitters) with both throttle and steering on the right stick in Mode 1 or left stick in Mode 2 - typically the elevator stick. This is because RC cars can typically go both forwards and backwards and so the throttle should be spring-loaded to return to the mid-point. If however, you are not using a RC car motor controller (ESC) but rather a regular aircraft motor controller (ESC), which typically does not have a reverse function, you can put the throttle on the left stick as would normally be the case for an aircraft.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/rcsetup.jpg"><img class="size-full wp-image-405" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/rcsetup.jpg" alt="rcsetup" width="713" height="512" /></a>
+
+
+<h1>Powering Rover</h1>
+
+The easiest way to power the APM2.x is using a <a href="common-3dr-power-module">3DR Power Module</a> with a LiPo battery.
+
+The Power Module will not power servos and other peripherals. For more information/alternatives see <a href="common-powering-the-apm2">Powering the APM2</a>.
+
+
+
+<h1>RC Setup</h1>
+Connect your RC system to APM as shown below:
+
+<strong>Input Channels:</strong>
+<table>
+<tbody>
+<tr>
+<td><strong>RC Rx</strong></td>
+<td><strong>APM Input</strong></td>
+<td><strong>Function</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>Steering</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>Throttle</td>
+</tr>
+<tr>
+<td>5</td>
+<td>8</td>
+<td>Mode</td>
+</tr>
+<tr>
+<td>6</td>
+<td>7</td>
+<td>Record waypoint</td>
+</tr>
+</tbody>
+</table>
+<strong>Output Channels:</strong>
+
+For standard RC cars that use a servo to steer, use the Car settings. If, however, you have a treaded tank or some other vehicle that uses different speed motors on each side to steer, use the Skid Steer settings.
+<table>
+<tbody>
+<tr>
+<td><strong>APM Output</strong></td>
+<td><strong>Car</strong></td>
+<td><strong>Skid Steer</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Servo</td>
+<td>Left Motor</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Motor/ESC</td>
+<td>Right Motor</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h2>Reassigning your RC transmitter stick channels</h2>
+
+The default transmitter stick configuration should be suitable in almost all cases. If you do need to change them, then see <a href="common-rcmap">RCMAP Input Channel Mapping</a>.
+
+
+
+<h1>Installing it in your car</h1>
+The below shows a typical setup in a small rover, using APM2.x, 3DR radio telemetry and both sonar and IR sensors (instructions on setting them up are <a href="sonar-sensors">here)</a>. Note a few elements:
+<ul>
+	<li>The RC car's plastic body shell has been removed and a plywood sheet cut and drilled to fit on the mounting posts.</li>
+	<li>APM2.x has been raised up on a platform made of four <em>30mm nylon spacers</em>, four <em>5mm nylon screws</em>,  and a <em>Copter stack-up plate</em>. This is to ensure that the sensitive compass sensor on APM is as far as possible from the magnetic noise/interference of the car's electric motor.</li>
+	<li>APM, the GPS, 3DR radio and RC receiver are all powered by the APM Power Module (included with the APM set). The car's steering servo is powered by the car's speed controller. This is the standard setup and doesn't require any special settings or configuration, but for those wondering about power, that's the answer. Among other advantages, the use of the APM Power Module means that APM can do voltage and current sensing and report battery status to the Ground Station during the run, as well as data log it for after-run analysis.</li>
+	<li>A larger battery than the car was originally designed for is being used (because the rover is designed to travel long distances off-road), and it is mounted on velcro under the APM platform so it doesn't shift.</li>
+</ul>
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5429.jpg"><img class="size-full wp-image-399" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5429.jpg" alt="IMG_5429" width="800" height="534" /></a>
+
+Depending on the car frame you're using, you may wish to set up your gear differently. Almost any configuration can work, but just remember to keep APM's far from sources of magnetic interference as possible! The image below shows a top view of Tom Coyle's Slash Rover (winner of the Peloton Class at AVC 2013) with a Spektrum receiver, GPS, and external compass.
+
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/Slash-with-Spektrum-Receiver.jpg"><img class="size-full wp-image-1323" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/Slash-with-Spektrum-Receiver.jpg" alt="Slash with Spektrum Receiver" width="800" height="600" /></a>
+
+&nbsp;
+<h1>3DR GPS uBlox with Onboard Compass</h1>
+3DR GPS uBlox with Onboard Compass is intended for use with APM2.x  (for external compass). It provides enhanced compass performance because of the freedom to situate the GPS unit in an optimal position independent of the location of the APM.
+
+<img class="wp-image-6229" title="3DR GPS uBlox with Onboard Compass" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gps.jpg" alt="3DR GPS uBlox with Onboard Compass" width="200" height="200" />
+
+Place your GPS in an elevated position on your rover with the arrow facing forward (toward the front facing direction of your rover). Connect the GPS module to the APM using the two cables included with the GPS as shown below.
+
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gps-wiring-diagram.png"><img class="wp-image-6230" title="GPS with Compass Wiring Diagram" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/gps-wiring-diagram.png" alt="GPS with Compass Wiring Diagram" width="507" height="384" /></a>
+
+3DR GPS uBlox with Onboard Compass includes two connector cables: one 4-position cable and one 5-position-to-6-position cable. To connect the GPS module to APM, connect the GPS to the APM GPS port using the 5-position-to-6-position cable; connect the GPS to the APM I2C port using the 4-position cable.
+<h1>Slash Rover's GPS with external compass mount:</h1>
+<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/Slash-with-combo-GPS_compass-front-view.jpg"><img src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/02/Slash-with-combo-GPS_compass-front-view.jpg" alt="Slash with combo GPS_compass front view" width="450" height="600" /></a>
+<h1>3DR GPS uBlox without Onboard Compass</h1>
+<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/old-gps.jpg"><img class="wp-image-6234" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/old-gps.jpg" alt="old gps" width="245" height="245" /></a>
+
+3DR GPS uBlox without Onboard Compass is intended for use with APM2.x. To install your GPS module without compass, mount to the top of your rover and connect to the APM GPS port using the 5-position-to-6-position connector cable.
+
+<strong>Next step:</strong> <a href="rover-code-configuration">Load the Rover code and configure it</a>

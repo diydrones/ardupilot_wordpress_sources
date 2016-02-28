@@ -1,0 +1,28 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: learning-a-mission 
+title: Learning a Mission 
+id: 3422 
+menu_order: 30 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<a href="learning-mode">LEARNING</a> mode allows you to <em>teach</em> the Rover a mission by manually driving around recording the desired waypoints. <!--more-->
+
+[tip]This is the easiest way to create a mission on Rover. Alternatively you can <a href="common-planning-a-mission-with-waypoints-and-events">plan a mission using Mission Planner</a> or some other GCS.[/tip]
+
+
+To add waypoints in <em>Learning Mode</em>:
+<ul>
+<li>Make sure you have GPS lock (solid blue LED on APM).</li>
+<li>Turn on <em>Learning mode</em> using the mode switch.</li>
+<li>Drive around manually and flick the CH7 toggle when you want the autopilot to record a waypoint.</li>
+</ul>
+
+The waypoints will be added to the end of the current mission stored in the rover. Once you're done, you can switch into <a href="auto-mode">AUTO</a> mode and the Rover should retrace your steps, hitting all the waypoints you recorded.
+
+If you're connected to the <em>Mission Planner</em>, you can click <strong>Read WPs</strong> on the <em>Flight Planner</em> screen and it will show the recorded waypoints on a map.
+
+[note]You can erase the mission stored in the rover by toggling the CH7 switch while in <a href="manual-mode">Manual</a> mode.[/note]

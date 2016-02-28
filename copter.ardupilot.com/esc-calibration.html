@@ -11,7 +11,7 @@ END METADATA
 -->
 Electronic speed controllers are responsible for spinning the motors at the speed requested by the autopilot. Most ESCs need to be calibrated so that they know the minimum and maximum pwm values that the flight controller will send.  This page provides instructions for calibrating ESCs. 
 
-[note]Please complete <a href="radio-control-calibration">radio calibration</a> before performing ESC calibration.[/note]
+[note]Please complete <a href="common-radio-control-calibration">radio calibration</a> before performing ESC calibration.[/note]
 
 
 <h1>About ESC Calibration</h1>
@@ -19,8 +19,8 @@ ESC calibration will vary based on what brand of ESC you are using, so always re
 <ul>
 	<li>For 3DR ESCs can use the "All at once" method.</li>
 	<li>DJI Opto ESCs do not require and do not support calibration, so skip this page completely</li>
-	<li>Some brands of ESC do not allow calibration and will not arm unless you adjust your radio's throttle end-points so that the minimum throttle is around 1000 PWM.  Note that if you change the end-points on your TX you must re-do the <a href="radio-control-calibration">Radio Calibration</a>.</li>
-	<li>Begin this procedure only after you have completed the "<a href="radio-control-calibration">Calibrate radio control</a>" section of the <a href="configuring-hardware">Configuring Hardware </a>page and "<a href="connect-escs-and-motors">Connect ESCs and motors</a>" part of the <a href="assembly-instructions">Assembly Instructions</a>.  Next follow these steps:</li>
+	<li>Some brands of ESC do not allow calibration and will not arm unless you adjust your radio's throttle end-points so that the minimum throttle is around 1000 PWM.  Note that if you change the end-points on your TX you must re-do the <a href="common-radio-control-calibration">Radio Calibration</a>.</li>
+	<li>Begin this procedure only after you have completed the <a href="common-radio-control-calibration">radio control calibration</a> and <a href="connect-escs-and-motors">Connect ESCs and motors</a> part of the <a href="assembly-instructions">Assembly Instructions</a>.  Next follow these steps:</li>
 </ul>
 
 
@@ -86,7 +86,7 @@ Before calibrating ESCs, please ensure that your copter has NO PROPS on it and t
 Once you have calibrated your ESCs, you can test them by plugging in your LiPo.  Remember: no propellers!
 <ul>
 	<li>Ensure your transmitter's flight mode switch is set to “Stabilize Mode”.</li>
-	<li><a href="arming_the_motors">Arm your copter</a></li>
+	<li><a href="http://copter.ardupilot.com/wiki/arming_the_motors/">Arm your copter</a></li>
 	<li>Give a small amount of throttle.  All motors should spin at about same speed and they should start at the same time. If the motors do not all start at the same time and spin at the same speed, the ESC’s are still not properly calibrated.</li>
 	<li>Disarm your copter</li>
 </ul>
