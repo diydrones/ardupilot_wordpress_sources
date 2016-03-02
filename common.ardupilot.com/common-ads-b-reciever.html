@@ -9,12 +9,11 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This article shows an <strong>experimental</strong> integration of an <a href="https://en.wikipedia.org/wiki/Automatic_dependent_surveillance_%E2%80%93_broadcast" target="_blank">Automatic Dependent Surveillance Broadcast</a> (ADS-B) receiver into Copter and Plane.
+This article shows the<strong> experimental</strong> integration of an <a href="https://en.wikipedia.org/wiki/Automatic_dependent_surveillance_%E2%80%93_broadcast" target="_blank">Automatic Dependent Surveillance Broadcast</a> (ADS-B) receiver into Copter and Plane.
 
 [copywiki destination="copter,plane"]
 
-[warning]VERY EXPERIMENTAL!!! The current implementation is NOT READY FOR OBJECT AVOIDANCE USE. The hardware is not yet for sale. COMING SOON!
-
+[warning]The current implementation is not ready for object avoidance nor is the hardware available yet but coming soon!
 We're posting it here to encourage further discussion and contribution[/warning]
 <h1>Overview</h1>
 ADS-B is an air traffic surveillance technology that enables aircraft to be accurately tracked by air traffic controllers and other pilots without the need for conventional radar.
@@ -26,16 +25,25 @@ This article explains how to attach and configure a MAVLink based ADS-B receive
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/ADS-B_PING.png"><img class="alignnone size-medium wp-image-9539" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/11/ADS-B_PING.png" alt="ADS-B_PING" width="230" height="168" /></a>
 
 This first implementation only supports Plane. Object avoidance is only active in AUTO mode.
-<h1>MAVLink</h1>
-The data is transmitted via the ADSB_VEHICLE message. When received by ArduPilot, it is reflected to all MAVLink serial ports. If you have a GCS or companion computer connected it will receive the forwarded packets automatically.
-<h2>Key parameters</h2>
+<h1>Connection to flight controller</h1>
+The ADSB receiver comes with a DF13 serial cable that can be plugged directly into a Pixhawk serial port.
+
+The Ping sensor should be mounted so that the antenna is oriented vertically.
+<h1>Setup through the ground station</h1>
 The key parameters that control the ADS-B packet parsing and object avoidance behavior options.
 <ul>
-	<li>ADSB_ENABLE</li>
-	<li>ADSB_BEHAVIOR</li>
+	<li>ADSB_ENABLE - set to "1" to enable ADSB</li>
+	<li>ADSB_BEHAVIOR (see below)</li>
 </ul>
+Once operational aircraft within about 50km should appear on the ground station map.
+
+<img class="alignnone size-large wp-image-6040" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2015/11/ADSB_MissionPlanner-1024x608.png" alt="ADSB_MissionPlanner" width="474" height="281" />
+
+To test the systems you can compare with flights shown on <a href="https://www.flightradar24.com/" target="_blank">flighradar24.com</a>.
+
+The data is transmitted via the <a href="http://mavlink.org/messages/common#ADSB_VEHICLE" target="_blank">ADSB_VEHICLE message</a>. When received by ArduPilot, it is forwarded on to all MAVLink serial ports meaning that if you have a GCS or companion computer connected it will receive the forwarded packets automatically.
 <h1>Vehicle Database</h1>
-When enabled, the ADS-B library will store information for up to 25 vehicles detected by the ADS-B receiver. Due to some experimental work in other features, such as EKF2, available RAM may be limited. It is important to note that when ADS-B is disabled (=0) then the memory is released, effectively freeing up about 1KB of RAM. When enabled, the detected vehicle list is checked once per second for potential conflicts.
+When enabled, the ADS-B library will store information for up to 25 vehicles detected by the ADS-B receiver. Due to some experimental work in other features, such as EKF2, available RAM may be limited. It is important to note that when ADS-B is disabled (ADSB_ENABLE=0) then the memory is released, effectively freeing up about 1KB of RAM. When enabled, the detected vehicle list is checked once per second for potential conflicts.
 <h1>Vehicle detection and behavior</h1>
 The current ADS-B library is not considered to be fully-featured, more of a proof of concept. It is not intended to be used as-is for realistic object avoidance.  More work is needed to make it a robust tool for avoiding in a practical way.
 
@@ -48,7 +56,7 @@ Object avoidance behavior is dictated by one of three different ADSB_BEHAVIOR o
 	<li>ADSB_BEHAVIOR=2, LOITER_AND_DESCEND. Same as (1) but decrease the altitude 1 m/s. If the other vehicle location persists, you will eventually loiter into the ground.</li>
 </ul>
 <h1>Simulation</h1>
-This includes a new ADS-B simulation component in SITL where you can have aircraft flying at you. Joy! To enable this you must have pymavlink v1.1.63. If you have an older version, use:
+This includes a new ADS-B simulation component in SITL where you can have aircraft flying at you. Joy! To enable this you must have pymavlink v1.1.70. If you have an older version, use:
 <pre>sudo pip install --upgrade pymavlink MAVProxy</pre>
 When starting SITL use the following command:
 <pre>sim_vehicle.sh -A --adsb --console --map</pre>
@@ -57,9 +65,9 @@ This also supports plugging in a hardware ADS-B receiver to your computer using 
 <ol>
 	<li>Altitude is ignored so if a plane flies over at 35000' but within 200m horizontally, then yes you'll consider it a threat right now. Obviously that needs to change.</li>
 	<li>Automatically switching from LOITER to AUTO mode behavior can get goofy if you switch the modes externally while actively avoiding another vehicle. That is, AUTO -&gt; LOITER -&gt; AUTO works fine if only the ADS-B logic is doing the mode switching.</li>
-	<li>Add copter support</li>
+	<li>Add Copter vehicle avoidance behaviour (currently only reads data from sensor and forwards to ground station)</li>
 	<li>Add more complicated behaviors</li>
 	<li>Add realistic threat detection by calculating the vehicle's trajectory and computing a time-to-impact rather than a simple radius distance.</li>
 	<li>Add visualization to GCS</li>
-	<li>This implementation was intentionally simple to promote others to enhance it to suit their/everyones' needs. The limited number of params was simply to get the device driver rolling without committing to any particular param name. So, get to it!</li>
+	<li>This implementation was intentionally simple to promote others to enhance it to suit their/everyones' needs. The limited number of params was simply to get the device driver rolling without committing to any particular param name.</li>
 </ol>

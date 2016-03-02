@@ -11,17 +11,38 @@ END METADATA
 -->
 The RFD900 Radio Modem is a high powered 900Mhz, ISM band radio modem designed for long range serial communication.  Ranges of <a href="http://www.edgeresearchlab.org/our-projects/edge4-16-feb-2013/rfd900/" target="_blank">15km and much higher have been reported</a>.
 
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_RFD900.png"><img class="alignnone size-medium wp-image-2517" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_RFD900-300x228.png" alt="Telemetry_RFD900" width="300" height="228" /></a>
+[warning]These modems are high-power RF devices. It is suggested to provide separate +5 voltage to the modems. It is NOT suggested to power these modems directly from Autopilots telemetry port[/warning]
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_RFD900.png"><img class="alignnone  wp-image-2517" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_RFD900-300x228.png" alt="Telemetry_RFD900" width="239" height="182" /></a>
+
+<h1>Overview</h1>
 
 The hardware is closed source but the <a href="https://github.com/RFDesign/SiK" target="_blank">software is open</a> and is based on the same software that runs on the <a href="common-3dr-radio-version-2">SiK Radio</a> meaning configuration and setup is extremely similar and these radios can even be paired with a 900Mhz SiK radio (i.e. you may choose to use one RFD900 on the ground, and a SiK radio in the aircraft).
 
-The radio can be purchased or the <a href="http://store.rfdesign.com.au/rfd-900p-modem/" target="_blank">RFDesign Online store</a> and <a href="http://store.jdrones.com/jD_RD900_Telemetry_Bindle_p/rf900set01.htm" target="_blank">jDrones</a>.
+Users can either use radio modem unit itself and acquire antennas, cables as separate or by getting ready made telemetry sets as in below:
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/jDrones_RF900PlusSET_NoLogo.jpg" rel="attachment wp-att-6047"><img class=" wp-image-6047" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/jDrones_RF900PlusSET_NoLogo.jpg" alt="Long-range telemetry" width="323" height="204" /></a>
+
+Frequencies available:
+<ul>
+	<li>868Mhz ISM for EU area</li>
+	<li>900Mhz ISM for US area</li>
+</ul>
+Ready made sets are available:
+
+Ready made set includes antennas, connecting cables for Pixhawk and APM 2.x autopilots, usb cable for ground unit. FTDI adapter, power filtering, adapter PCBs and strong protective casing
+<ul>
+	<li><a href="http://store.jdrones.com/jD_RD900Plus_Telemetry_Bundle_p/rf900set02.htm">jDrones Store, RF900Mhz Set</a></li>
+	<li><a href="http://store.jdrones.com/jD_RD868Plus_Telemetry_Bundle_p/rf868set02.htm">jDrones Store, RF868Mhz Set</a></li>
+</ul>
+The radio and antennas as separate units are available:
+<ul>
+	<li><a href="http://store.rfdesign.com.au/rfd-900p-modem/">RFDesign Store, 900Mhz</a></li>
+	<li><a href="http://store.rfdesign.com.au/rfd-868-modem/">RFDesign Store, 868Mhz</a></li>
+</ul>
 
 
-
-<h1>Details</h1>
-
-Key Features:
+<h1>Key Features</h1>
 <ul>
 	<li>Long range &gt;40km depending on antennas and GCS setup</li>
 	<li>2 x RP-SMA RF connectors, diversity switched.</li>
@@ -36,7 +57,17 @@ Key Features:
 	<li>License free use in Australia, Canada, USA, NZ.</li>
 </ul>
 
-Interfaces:
+<h1>Status LEDs</h1>
+
+The radios have 2 status LEDs, one red and one green. The meaning of the different LED states is:
+<ul>
+	<li>Green LED blinking - searching for another radio</li>
+	<li>Green LED solid - link is established with another radio</li>
+	<li>Red LED flashing - transmitting data</li>
+	<li>Red LED solid - in firmware update mode</li>
+</ul>
+
+<h1>Interfaces</h1>
 <ul>
 	<li>RF : 2 x RP-SMA connectors</li>
 	<li>Serial: Logic level RS232 (+3.3v nominal, +5v tolerant)</li>
@@ -45,6 +76,17 @@ Interfaces:
 	<li>Connect as follows:</li>
 </ul>
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/RFD900_Physical_pins.jpg"><img class="alignnone size-full wp-image-3594" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/RFD900_Physical_pins.jpg" alt="RFD900_Physical_pins" width="1553" height="571" /></a>
+
+<h1>Configuring using the Mission Planner</h1>
+
+Many users will not need to configure their radios! One case where you might do so is when you use your vehicle with others — in which case you will need to specify different radio channels (Net ID).
+
+<m>Mission Planner</em> supports configuring your radios using a simple GUI interface. For more information see <a href="common-configuring-a-telemetry-radio-using-mission-planner">Configuring a Telemetry Radio using Mission Planner</a>.
+
+<h1>Support for different countries/regions</h1>
+
+It is very important that you configure your radios to comply with your regional/country regulations for frequency, hopping channels and power levels. For information on radio/region frequency ranges and settings, see 
+<a href="common-telemetry-radio-regional-regulations">Telemetry Radio Regional Regulations</a>.
 
 
 <h1>Discussion Forum</h1>

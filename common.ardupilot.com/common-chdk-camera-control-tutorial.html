@@ -457,9 +457,7 @@ For information regarding geotagging images, more information can be found on <a
 
 <strong>Problem</strong>: The tester script runs but does not display any output on the camera screen.
 
-Cause 1: Do you have the APM parameter RC#_FUNCTION=1 for manual override of the RC channel you are using? You can see both the PWM input and output on the Configuration &gt; Failsafes screen in the mission planner
-
-<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM2_JP1.jpg"><img class=" wp-image-292 alignnone" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APM2_JP1.jpg" alt="APM2_JP1" width="151" height="137" /></a>
+Cause 1: Do you have the APM parameter RC#_FUNCTION=1 for manual override of the RC channel you are using? You can see both the PWM input and output on the <strong>Configuration | Failsafes</strong> screen in the Mission Planner.
 
 Cause 2: Is your output rail powered? Even if you are getting the correct PWM signal out on your camera control channel, the output needs 5V DC. You can power the output rail with a jumper on JP1 as shown, which bridges the input power to the output, or by directly running power to the output.
 

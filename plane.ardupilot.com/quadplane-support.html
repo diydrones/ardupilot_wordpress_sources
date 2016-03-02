@@ -11,8 +11,6 @@ END METADATA
 -->
 This article explains how to set up and use a combined fixed wing and quadcopter aircraft, also known as a "QuadPlane".
 
-[warning]QuadPlane support is considered experimental[/warning]
-
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/12/scaled_IMG_20150830_093548.jpg" rel="attachment wp-att-9664"><img class="alignnone size-full wp-image-9664" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2015/12/scaled_IMG_20150830_093548.jpg" alt="scaled_IMG_20150830_093548" width="600" height="450" /></a>
 <h1>Overview</h1>
 A QuadPlane is a combined fixed wing and QuadCopter aircraft. This sort of aircraft brings the benefit of vertical takeoff and landing, significantly greater speed and range of travel, and the ability to hover and perform copter-like tasks at the destination (limited by available power).
@@ -96,7 +94,7 @@ Key parameters are:
 <ul>
 	<li>To enable QuadPlane functionality you need to set the Q_ENABLE parameter to 1 and then refresh the parameter list</li>
 	<li>The Q_THR_MIN_PWM and Q_THR_MAX_PWM parameters used to set the PWM range of the quad motors (this allows them to be different from the range for the forward motor). These need to be set to the range your ESCs expect.</li>
-	<li>You should set <a href="arduplane-parameters/#scheduling_main_loop_rate_sched_loop_rate">SCHED_LOOP_RATE</a> to 400 so the code runs the main loop at 400Hz, which is what the copter code expects.</li>
+	<li>You should set <a href="arduplane-parameters/#scheduling_main_loop_rate_sched_loop_rate">SCHED_LOOP_RATE</a> to 300 so the code runs the main loop at 300Hz, which is a good rate for both fixed wing and quadplane VTOL.</li>
 	<li>The most critical tuning parameters are Q_RT_RLL_P and Q_RT_PIT_P. These default to 0.15 (same as Copter) but you may find significantly higher values are needed for a QuadPlane.</li>
 	<li>The Q_M_SPIN_ARMED parameter is important for getting the right level of motor output when armed in a quad mode</li>
 	<li>It is recommended that you set ARMING_RUDDER to 2 to allow for rudder disarm. Alternatively you could have <a href="manual-mode">MANUAL</a> as one of your available flight modes (as that will shut down the quad motors). Please be careful not to use hard left rudder and zero throttle while flying or you risk disarming your motors.</li>
@@ -182,3 +180,9 @@ Using the joystick module with a USB adapter for your transmitter gives a conven
 If flying at KSFO there is a sample mission available with VTOL takeoff and landing:
 <pre>wp load ../Tools/autotest/ArduPlane-Missions/KSFO-VTOL.txt</pre>
 As usual you can edit the mission using "module load misseditor"
+<h1>Building a QuadPlane</h1>
+Putting together a QuadPlane can be a daunting task. To help with ideas, here are some links to some build logs that provide useful hints:
+<ul>
+	<li>Porter QuadPlane build: <a href="http://diydrones.com/profiles/blogs/building-flying-and-crashing-a-large-quadplane">http://diydrones.com/profiles/blogs/building-flying-and-crashing-a-large-quadplane</a></li>
+	<li>QuadRanger build: <a href="http://px4.io/docs/quadranger-vtol/">http://px4.io/docs/quadranger-vtol/</a></li>
+</ul>
