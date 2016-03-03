@@ -18,10 +18,8 @@ Some suggestions are:
 	<li>Vim on emacs with ctags</li>
 </ul>
 There are a lot of other IDEs available, and many of them are sufficiently customisable that they can handle something like ArduPilot nicely. If you have a favourite and have worked out how to make ArduPilot development a great experience then please consider contributing a wiki page on how to use it.
-
-
-
 <h1>Basic structure</h1>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/ArduPilot_HighLevelArchecture.png" rel="attachment wp-att-6590"><img class="alignnone size-full wp-image-6590" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/12/ArduPilot_HighLevelArchecture.png" alt="ArduPilot_HighLevelArchecture" width="897" height="761" /></a>
 
 The basic structure of ArduPilot is broken up into 5 main parts:
 <ul>
@@ -32,27 +30,15 @@ The basic structure of ArduPilot is broken up into 5 main parts:
 	<li>external support code</li>
 </ul>
 These will be described in detail below, but before moving on make sure you have <a href="/wiki/where-to-get-the-code">cloned all of the git repositories</a> you will need.
-
-
-
 <h2>Vehicle Directories</h2>
-
 The vehicle directories are the top level directories that define the firmware for each vehicle type. Currently there are 4 vehicle types - Plane, Copter, APMrover2 and AntennaTracker.
 
 Along with the *.cpp files, each vehicle directory contains a make.inc file which lists library dependencies. The Makefiles read this to create the -I and -L flags for the build.
 <h2>AP_HAL</h2>
 The AP_HAL layer (Hardware Abstraction Layer) is how we make ArduPilot portable to lots of different platforms. There is a top level AP_HAL in libraries/AP_HAL that defines the interface that the rest of the code has to specific board features, then there is a AP_HAL_XXX subdirectory for each board type, for example AP_HAL_AVR for AVR based boards, AP_HAL_PX4 for PX4 boards and AP_HAL_Linux for Linux based boards.
-
-
-
 <h3>Tools directories</h3>
-
 The tools directories are miscellaneous support directories. For examples, tools/autotest provides the autotest infrastructure behind the <a href="http://autotest.diydrones.com/">autotest.diydrones.com</a> site and tools/Replay provides our log replay utility.
-
-
-
 <h3>External support code</h3>
-
 On some platforms we need external support code to provide additional features or board support. Currently the external trees are:
 <ul>
 	<li><a href="https://github.com/diydrones/PX4NuttX"> PX4NuttX</a> - the core NuttX RTOS used on PX4 boards</li>
@@ -60,13 +46,8 @@ On some platforms we need external support code to provide additional features o
 	<li><a href="https://github.com/diydrones/uavcan">uavcan</a> - the uavcan CANBUS implementation used in ArduPilot</li>
 	<li><a href="https://github.com/mavlink/mavlink">mavlink</a> - the mavlink protocol and code generator</li>
 </ul>
-
 [note]Most of these are imported as <a href="http://dev.ardupilot.com/wiki/git-submodules/">Git Submodules</a> when you build ArduPilot for PX4/Pixhawk.[/note]
-
-
-
 <h1>Build system</h1>
-
 The build system is based around make, but also supports the old arduino IDE for AVR builds. The makefiles are in the <a href="https://github.com/diydrones/ardupilot/tree/master/mk">mk/ directory</a>, and define build rules for each type of supported board
 
 To build a vehicle or other 'sketch' for a particular board target you would type "make TARGET", where TARGET is the board type. The following board types are currently available:
