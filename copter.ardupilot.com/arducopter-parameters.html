@@ -468,6 +468,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -492,6 +493,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -516,6 +518,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -540,6 +543,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -564,6 +568,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -588,6 +593,7 @@ DO NOT EDIT
 <tr><td>15</td><td>AutoTune</td></tr>
 <tr><td>16</td><td>PosHold</td></tr>
 <tr><td>17</td><td>Brake</td></tr>
+<tr><td>18</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -749,6 +755,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -790,6 +797,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -831,6 +839,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -872,6 +881,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -913,6 +923,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -954,6 +965,7 @@ DO NOT EDIT
 <tr><td> 31</td><td>Motor Emergency Stop</td></tr>
 <tr><td> 32</td><td>Motor Interlock</td></tr>
 <tr><td> 33</td><td>Brake</td></tr>
+<tr><td> 37</td><td>Throw</td></tr>
 </table>
 </ul>
 
@@ -1374,6 +1386,17 @@ DO NOT EDIT
 <p>Defines the minimum D gain</p>
 <ul>
 <li>Range: 0.001 0.006</li>
+</ul>
+
+
+<h2>Start motors before throwing is detected (ArduCopter:THROW_MOT_START)</h2>
+
+<p>Used by THROW mode. Controls whether motors will run at the speed set by THR_MIN or will be stopped when armed and waiting for the throw.</p>
+<ul>
+<table><th>Value</th><th>Meaning</th>
+<tr><td>0</td><td>Stopped</td></tr>
+<tr><td>1</td><td>Running</td></tr>
+</table>
 </ul>
 
 
