@@ -244,6 +244,16 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Landing throttle slew rate (ArduPlane:LAND_THR_SLEW)</h2>
+
+<p>This parameter sets the slew rate for the throttle during auto landing. When this is zero the THR_SLEWRATE parameter is used during landing. The value is a percentage throttle change per second, so a value of 20 means to advance the throttle over 5 seconds on landing. Values below 50 are not recommended as it may cause a stall when airspeed is low and you can not throttle up fast enough.</p>
+<ul>
+<li>Range: 0 127</li>
+<li>Increment: 1</li>
+<li>Units: percent</li>
+</ul>
+
+
 <h2>Takeoff flap percentage (ArduPlane:TKOFF_FLAP_PCNT)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>The amount of flaps (as a percentage) to apply in automatic takeoff</p>
@@ -6516,6 +6526,33 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Controller throttle damping when landing (TECS_LAND_TDAMP)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the damping gain for the throttle demand loop during and auto-landing. Same as TECS_THR_DAMP but only in effect during an auto-land. Increase to add damping to correct for oscillations in speed and height. When set to 0 landing throttle damp is controlled by TECS_THR_DAMP.</p>
+<ul>
+<li>Range: 0.1 1.0</li>
+<li>Increment: 0.1</li>
+</ul>
+
+
+<h2>Controller integrator during landing (TECS_LAND_IGAIN)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the integrator gain on the control loop during landing. When set to 0 then TECS_INTEG_GAIN is used. Increase to increase the rate at which speed and height offsets are trimmed out. Typically values lower than TECS_INTEG_GAIN work best</p>
+<ul>
+<li>Range: 0.0 0.5</li>
+<li>Increment: 0.02</li>
+</ul>
+
+
+<h2>Controller integrator during takeoff (TECS_TKOFF_IGAIN)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is the integrator gain on the control loop during takeoff. When set to 0 then TECS_INTEG_GAIN is used. Increase to increase the rate at which speed and height offsets are trimmed out. Typically values higher than TECS_INTEG_GAIN work best</p>
+<ul>
+<li>Range: 0.0 0.5</li>
+<li>Increment: 0.02</li>
+</ul>
+
+
 <h1>MNT Parameters</h1>
 
 
@@ -7143,6 +7180,15 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Maximum allowed power (Watts) (BATT_WATT_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>If battery wattage (voltage * current) exceeds this value then the system will reduce max throttle (THR_MAX, TKOFF_THR_MAX and THR_MIN for reverse thrust) to satisfy this limit. This helps limit high current to low C rated batteries regardless of battery voltage. The max throttle will slowly grow back to THR_MAX (or TKOFF_THR_MAX ) and THR_MIN if demanding the current max and under the watt max. Use 0 to disable.</p>
+<ul>
+<li>Increment: 1</li>
+<li>Units: Watts</li>
+</ul>
+
+
 <h2>Battery monitoring (BATT2_MONITOR)</h2>
 
 <p>Controls enabling monitoring of the battery's voltage and current</p>
@@ -7216,6 +7262,15 @@ DO NOT EDIT
 <ul>
 <li>Increment: 50</li>
 <li>Units: mAh</li>
+</ul>
+
+
+<h2>Maximum allowed current (BATT2_WATT_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>If battery wattage (voltage * current) exceeds this value then the system will reduce max throttle (THR_MAX, TKOFF_THR_MAX and THR_MIN for reverse thrust) to satisfy this limit. This helps limit high current to low C rated batteries regardless of battery voltage. The max throttle will slowly grow back to THR_MAX (or TKOFF_THR_MAX ) and THR_MIN if demanding the current max and under the watt max. Use 0 to disable.</p>
+<ul>
+<li>Increment: 1</li>
+<li>Units: Amps</li>
 </ul>
 
 

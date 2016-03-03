@@ -14,15 +14,17 @@ This article explains how to power the <a href="common-pixhawk-overview">Pixhawk
 
 <h1>Overview</h1>
 
-For most users powering the Pixhawk is as simple as connecting the 6-pin DF13 cable from the <a href="common-3dr-power-module" target="_blank">3DR power module</a> into the Pixhawk's "Power" port as shown below.
+For most users powering the Pixhawk is as simple as connecting a 6-pin DF13 cable from one of the <a href="common-powermodule-landingpage">supported power modules</a> into the Pixhawk's "Power" port as shown below.
 
 [caption id="attachment_2310" align="alignnone" width="358"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/06/pixhawkpower-port.jpg" alt="Pixhawk Power Port" width="358" height="547" class="size-full wp-image-2310" /></a> Pixhawk Power Port[/caption]
 
-This will provide a steady 5V and allow the Pixhawk to measure the current and voltage of the main battery.  The power module can be used with 3S or 4S batteries (i.e. up to 18V) and 90amps of power (most multicopters draw less than 20amps when hovering and rarely consume more than 90amps at full throttle).
+The module will provide a steady ~5V to Pixhawk and allow the Pixhawk to measure the current and/or voltage of the main battery. Depending on the power module you may also have connections to provide backup power and power to supply the servo rail. 
 
-Other voltage/current measurement devices such as an Attopilot can be used in place of the 3DR Power Module.
+The type of power module also determines what size batteries can be used (most multicopters draw less than 20amps when hovering and rarely consume more than 90amps at full throttle).
 
 [warning]Pixhawk does <strong>not</strong> <em>supply</em> power to the servo rail. Powering the servo rails is normally done by an ESC or alternatively a separate source such as a BEC (as shown in the <a href="#pixhawk_poweresc_wiring_overview">wiring overview below</a>).[/warning]
+
+[tip]Some power modules explicitly provide support for powering the servo rail, backup power and support for larger batteries. Using this sort of module means that you don't need to think about most of the wiring issues discussed in the rest of this article.[/tip]
 
 
 <h1>Powering/backup off the servo rail</h1>

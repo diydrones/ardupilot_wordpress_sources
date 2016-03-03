@@ -5673,6 +5673,15 @@ DO NOT EDIT
 </ul>
 
 
+<h2>Maximum allowed power (Watts) (BATT_WATT_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>If battery wattage (voltage * current) exceeds this value then the system will reduce max throttle (THR_MAX, TKOFF_THR_MAX and THR_MIN for reverse thrust) to satisfy this limit. This helps limit high current to low C rated batteries regardless of battery voltage. The max throttle will slowly grow back to THR_MAX (or TKOFF_THR_MAX ) and THR_MIN if demanding the current max and under the watt max. Use 0 to disable.</p>
+<ul>
+<li>Increment: 1</li>
+<li>Units: Watts</li>
+</ul>
+
+
 <h2>Battery monitoring (BATT2_MONITOR)</h2>
 
 <p>Controls enabling monitoring of the battery's voltage and current</p>
@@ -5746,6 +5755,15 @@ DO NOT EDIT
 <ul>
 <li>Increment: 50</li>
 <li>Units: mAh</li>
+</ul>
+
+
+<h2>Maximum allowed current (BATT2_WATT_MAX)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>If battery wattage (voltage * current) exceeds this value then the system will reduce max throttle (THR_MAX, TKOFF_THR_MAX and THR_MIN for reverse thrust) to satisfy this limit. This helps limit high current to low C rated batteries regardless of battery voltage. The max throttle will slowly grow back to THR_MAX (or TKOFF_THR_MAX ) and THR_MIN if demanding the current max and under the watt max. Use 0 to disable.</p>
+<ul>
+<li>Increment: 1</li>
+<li>Units: Amps</li>
 </ul>
 
 
