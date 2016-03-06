@@ -923,13 +923,13 @@ The radius of loiter is set in the <code>WP_LOITER_RAD</code> parameter.
 <h2>MAV_CMD_NAV_RETURN_TO_LAUNCH</h2>
 Supported by: Copter, Plane, Rover.
 
-Return to the <em>home location</em> or the nearest <a title="Rally Point" href="common-mavlink-mission-command-messages-mav_cmd/common-rally-points">Rally Point</a>, if closer. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
+Return to the <em>home location</em> or the nearest <a title="Rally Point" href="common-rally-points">Rally Point</a>, if closer. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
 
 #HW TODO / Questions - Randy: Check that copter still uses RTL_ALT parameter and doesn't try to send information about height in the package.
 
 [site wiki="copter" heading="off"]
 <h3>Copter</h3>
-Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-mavlink-mission-command-messages-mav_cmd/common-rally-points">Rally Point</a> if closer) and then land. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
+Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-rally-points">Rally Point</a> if closer) and then land. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
 
 This is the mission equivalent of the <a href="http://copter.ardupilot.com/wiki/rtl-mode/">RTL flight mode</a>.  The vehicle will first climb to the <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#rtl_altitude_arducopterrtl_alt">RTL_ALT</a> parameter's specified altitude (default is 15m) before returning home.
 
@@ -988,7 +988,7 @@ This command takes no parameters and generally should be the last command in the
 
 [site wiki="plane" heading="off"]
 <h3>Plane</h3>
-Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-mavlink-mission-command-messages-mav_cmd/common-rally-points">Rally Point</a> if closer) and then "Loiter" (circle the point). The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
+Return to the <em>home location</em> (or the nearest <a title="Rally Point" href="common-rally-points">Rally Point</a> if closer) and then "Loiter" (circle the point). The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this).
 
 If the return is to a rally point, the plane will loiter at the position and altitude set in the rally point. If the return is to the home location, then the parameter <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#rtl_altitude_arduplanealt_hold_rtl">ALT_HOLD_RTL</a> is used for the loiter height (default 100m). The radius of the loiter is defined in the parameter <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#waypoint_loiter_radius_arduplanewp_loiter_rad">WP_LOITER_RAD</a>.
 
@@ -2992,7 +2992,7 @@ Mission command to operate EPM gripper.
 <h3>Copter</h3>
 Mission command to operate EPM gripper.
 
-[note]This is supported from AC3.3. The <a href="http://copter.ardupilot.com/wiki/common-electro-permanent-magnet-gripper/">instructions for integrating Copter with gripper</a> are out of date and use DO_SET_SERVO to activate the gripper (April 2015).[/note]
+[note]This is supported from AC3.3. The <a href="common-electro-permanent-magnet-gripper">instructions for integrating Copter with gripper</a> are out of date and use DO_SET_SERVO to activate the gripper (April 2015).[/note]
 
 <b>Command parameters</b>
 <table>
