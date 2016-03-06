@@ -18,7 +18,7 @@ These parts are required:
 <ul>
 	<li>ODROID board (<a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G143703355573">ODROID-C1+</a>, <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G143452239825">ORDOID-XU4</a> or <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G138733896281" target="_blank">ODROID U3</a>)</li>
 	<li><a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G134111972476" target="_blank">5V Power supply</a></li>
-	<li><a href="//www.hardkernel.com/main/products/prdt_info.php?g_code=G138960965859" target="_blank">DC Plug and Cable Assembly</a></li>
+	<li><a href="http//www.hardkernel.com/main/products/prdt_info.php?g_code=G138960965859" target="_blank">DC Plug and Cable Assembly</a></li>
 	<li><a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G138750295761" target="_blank">8GB MicroSD Card</a> OR <a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G138749987644" target="_blank">8GB eMMC Module</a> preloaded with Linux (the EMMC module is about 4x faster which may be useful for image processing)</li>
 	<li><a href="http://store.3drobotics.com/products/ftdi-cable-3-3v" target="_blank">FTDI Cable or </a>USB to Serial interface like <a href="http://www.ebay.com/itm/1pcs-USB-2-0-to-TTL-UART-6PIN-Module-Serial-Converter-CP2102-STC-new-/131205013464" target="_blank">this one</a> from ebay</li>
 </ul>
@@ -35,8 +35,8 @@ These optional items may also be useful:
 </ul>
 <h1>Initial ODROID Setup</h1>
 It is easier to manage the odroid after it has a connection to your network.  We've used the following steps to complete the initial setup of the board:
-<h4>Discovering IP Address</h4>
-<h5>Using Keyboard/Mouse/Monitor</h5>
+<h2>Discovering IP Address</h2>
+<h3>Using Keyboard/Mouse/Monitor</h3>
 <ul>
 	<li>Plug the preloaded eMMC or MicroSD card into the board</li>
 	<li>(Temporarily) attach a mouse and keyboard to the USB ports</li>
@@ -53,7 +53,7 @@ It is easier to manage the odroid after it has a connection to your network.  W
 	<li>Go to the network setup icon in the upper right and join your wifi network</li>
 	<li>Type "ifconfig" to see the IP address your board was assigned</li>
 </ul>
-<h5>Using command line</h5>
+<h3>Using command line</h3>
 You can discover the ip address of devices on your network using a utility called nmap
 <pre>$ sudo nmap -sn 10.0.1.0/24</pre>
 This will return a list of discovered devices on your network for and you will see an entry like
@@ -61,7 +61,7 @@ This will return a list of discovered devices on your network for and you will s
 <pre>Nmap scan report for 10.0.1.17
 Host is up (0.00056s latency).
 MAC Address: B8:27:EB:0A:26:9D (Raspberry Pi Foundation)</pre>
-<h4>Common Setup with known IP Address</h4>
+<h2>Common Setup with known IP Address</h2>
 <ul>
 	<li>From some other computer type "ssh -Y odroid@IPADDRESS" with password odroid.  Confirm you can login and get a ssh shell</li>
 	<li>At an odroid shell type "sudo adduser odroid dialout" - this gives the odroid account access to the serial (pixhawk) port.</li>
