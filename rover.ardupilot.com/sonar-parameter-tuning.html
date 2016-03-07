@@ -15,72 +15,16 @@ This topic explains how to tune the SONAR/RANGEFINDER parameters.
 <h1>Overview</h1>
 
 <ul>
-	<li>One or 2 SONARS may be used. The (2) indicates there are SONAR and SONAR2 versions of each parameter.</li>
-	<li>SONAR Debounce lets you specify the number of returns before triggering an obstacle avoidance event, good for filtering false returns.</li>
-	<li>Maximum and Minimum range of the SONAR can be set.</li>
+	<li>Up to 4 RNGFNDs may be used. </li>
+	<li>Debounce lets you specify the number of returns before triggering an obstacle avoidance event, good for filtering false returns.</li>
+	<li>Maximum and Minimum range of the RNGFND can be set.</li>
 	<li>The SONAR readings can be scaled and adjusted for your use.</li>
 	<li>When an obstacle is detected you can set the correcting steering angle and the time to hold it.</li>
 </ul>
 
-<h1>SONAR parameters</h1>
+<h1>RNGFND parameters</h1>
 
-<table>
-<tbody>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/apmrover2-parameters/#rangefinder_stop_pin_rngfnd2_stop_pin">RNGFND2_STOP_PIN</a>
-</code></td>
-<td>0-100</td>
-<td>The Analog Pin that the SONAR is Connected to.</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#rangefinder_scaling_rngfnd2_scaling">RNGFND2_SCALING</a>
-</code></td>
-<td>Meters per volt units 0.001</td>
-<td>Scaling factor between sonar reading and distance. For the linear and inverted functions this is in meters per volt. For the hyperbolic function the units are Volts.</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_offset_SONAR_OFFSET">SONAR_OFFSET(2)</a>
-</code></td>
-<td>Offset in volts, Increment 0.001</td>
-<td>Offset in volts for zero distance.</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_function_SONAR2_FUNCTION">SONAR_FUNCTION(2)</a>
-</code></td>
-<td>0:Linear 1:Invert 2:Hyper</td>
-<td>Control over what function is used to calculate distance. For a linear function, the distance is (voltage-offset)*scaling. For a inverted function the distance is (offset-voltage)*scaling. For a hyperbolic function the distance is scaling/(voltage-offset). The functions return the distance in meters.</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_minimum_distance_SONAR_MIN_CM">SONAR_MIN_CM(2)</a>
-</code></td>
-<td>Units Centimeters Increment 1</td>
-<td>minimum distance in centimeters that sonar can reliably read</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_maximum_distance_SONAR_MAX_CM">SONAR_MAX_CM(2)</a>
-</code></td>
-<td>Units Centimeters Increment 1</td>
-<td>maximum distance in centimeters that sonar can reliably read</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_enabled_SONAR_ENABLE">SONAR_ENABLE(2)</a>
-</code></td>
-<td>1 = Enable, 0 = Disable</td>
-<td>Set to 1 to enable this SONAR</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_stop_pin_SONAR_STOP_PIN">SONAR_STOP_PIN(2)</a>
-</code></td>
-<td>0=Disable, 1=enable</td>
-<td>Digital pin that enables/disables sonar measurement. A value of -1 means no pin. If this is set, then the pin is set to 1 to enable the sonar and set to 0 to disable it. This can be used to ensure that multiple sonars don’t interfere with each other.</td>
-</tr>
-<tr>
-<td><code><a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_settle_time_SONAR_SETTLE_MS">SONAR_SETTLE_MS(2)</a></code></td>
-<td>Units: Milliseconds Increment: 1</td>
-<td>The time in milliseconds that the sonar reading takes to settle. This is only used when a STOP_PIN is specified. It determines how long we have to wait for the sonar to give a reading after we set the STOP_PIN high. For a sonar with a range of around 7m this would need to be around 50 milliseconds to allow for the sonar pulse to travel to the target and back again.</td>
-</tr>
-</tbody>
-</table>
+The parameters that are relevant to the rangefinder(s) are <a href="apmrover2-parameters/#rngfnd_parameters">listed here</a>.
 
 The parameters are set in the <em>Mission Planner</em>  <strong>CONFIG/TUNING| Basic Tuning</strong> or <strong>CONFIG/TUNING | Standard Params</strong> pages):
 
@@ -88,4 +32,4 @@ The parameters are set in the <em>Mission Planner</em>  <strong>CONFIG/TUNING| B
 
 [caption id="attachment_4388" align="alignnone" width="1025"]<a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2015/06/MissionPlanner_Rover_Basic_Tuning.png"><img src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2015/06/MissionPlanner_Rover_Basic_Tuning.png" alt="Mission Planner: Rover Basic Tuning" width="1025" height="576" class="size-full wp-image-4388" /></a> Mission Planner: Rover Basic Tuning[/caption]
 
-[note]All parameters may be adjusted in the "Advanced Parameter List" in Mission Planner. All the Rover user settable parameters are listed in <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/">APMrover2 Parameters</a>.[/note]
+[note]All parameters may be adjusted in the "Advanced Parameter List" in Mission Planner. All the Rover user settable parameters are listed in <a href="apmrover2-parameters">APMrover2 Parameters</a>.[/note]
