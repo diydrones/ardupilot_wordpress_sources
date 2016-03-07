@@ -15,7 +15,12 @@ This page explains how to connect and configure a Raspberry Pi (RPi) so that it 
 <h1>Connecting the Pixhawk and RPi</h1>
 
 <img class="alignnone size-full wp-image-5534" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2014/02/RaspberryPi_Pixhawk_wiring1.png" alt="RaspberryPi_Pixhawk_wiring" width="1092" height="569" />
-Connect the Pixhawk's TELEM2 port to the RPi's Ground, TX and RX pins as shown in the image above.  The red V+ cable can go to the RPi's +5v pin, which . More details on the individual RPi's pin functions can be found <a href="http://elinux.org/RPi_Low-level_peripherals" target="_blank">here</a>.
+Connect the Pixhawk's TELEM2 port to the RPi's Ground, TX and RX pins as shown in the image above. More details on the individual RPi's pin functions can be found <a href="http://elinux.org/RPi_Low-level_peripherals" target="_blank">here</a>.
+
+The RPi can be powered by connecting the red V+ cable to the +5V pin (as shown above) <strong>or</strong> from USB in (for example, using a separate 5V BEC hooked up to the USB power). 
+[tip]Powering via USB is recommended as it is typically safer - because the input is regulated. If powering via USB, do not also connect the +5V pin as shown (still connect common ground).[/tip]
+
+ 
 <h1>Connecting to RPi with an SSH/Telnet client</h1>
 [note]These steps assume that you have already <a href="http://www.raspberrypi.org/downloads" target="_blank">set-up your RPi</a> so that it is running Raspbian.
 To avoid the requirement to plug a keyboard, mouse and HDMI screen into your RPi it is convenient to be able to connect from your Desktop/Laptop computer to your RPi using an SSH/Telnet client such as <a href="http://www.putty.org/" target="_blank">PuTTY</a>.[/note]
@@ -130,7 +135,7 @@ Whenever the RPi connects to the Pixhawk, three files will be created in the /ho
 
 
 If you wish to connect to the MAVProxy application that has been automatically started you can log into the RPi and type:
-<pre>screen -x</pre>
+<pre>sudo screen -x</pre>
 To learn more about using MAVProxy please read the <a href="http://tridge.github.io/MAVProxy/">MAVProxy documentation</a>.
 
 It is also worth noting that MAVProxy can do a lot more than just provide access to your Pixhawk. By writing python extension modules for MAVProxy you can add sophisticated autonomous behaviour to your vehicle. A MAVProxy module has access to all of the sensor information that your Pixhawk has, and can control all aspects of the flight. To get started with MAVProxy modules please have a look at the <a href="https://github.com/tridge/MAVProxy/tree/master/MAVProxy/modules">existing modules</a> in the MAVProxy source code.
@@ -138,7 +143,7 @@ It is also worth noting that MAVProxy can do a lot more than just provide access
 
 <h1>Installing DroneKit on RPi</h1>
 
-[tip]The most up-to-date instructions for <a href="http://python.dronekit.io/guide/getting_started.html#installing-dronekit">Installing DroneKit on Linux</a> are in the DroneKit-Python documentation. This information is a summary, and might go out of date.[/tip]
+[tip]The most up-to-date instructions for <a href="http://python.dronekit.io/guide/quick_start.html#installation">Installing DroneKit</a>  on Linux are in the DroneKit-Python documentation. This information is a summary, and might go out of date.[/tip]
 
 To install DroneKit-Python dependencies (most of which will already be present from when you installed MAVProxy) and set DroneKit to load when MAVProxy starts:
 <!-- note libxml2-dev libxslt-dev dependencies were added in https://github.com/diydrones/ardupilot-wiki-issue-tracker/issues/166 but have not been tested -->
