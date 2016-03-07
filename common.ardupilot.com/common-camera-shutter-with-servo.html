@@ -21,7 +21,7 @@ This article explains what settings you need to configure for both servos and re
 
 
 <h1>Shutter configuration with Pixhawk</h1>
-Pixhawk has 6 AUX Ports (AUX1-AUX6, referred to as RC9-RC14 in <em>Mission Planner</em>) that can be configured as <a href="common-servo">servos</a>, <a href="common-relay">relays</a>, or <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50_8211_55">digital inputs or outputs</a>. The image and configuration below is for the Pixhawk with RC10/AUX2 connected to camera control hardware and configured as either a servo or relay.
+Pixhawk has 6 AUX Ports (AUX1-AUX6, referred to as RC9-RC14 in <em>Mission Planner</em>) that can be configured as <a href="common-servo">servos</a>, <a href="common-relay">relays</a>, or <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50-55">digital inputs or outputs</a>. The image and configuration below is for the Pixhawk with RC10/AUX2 connected to camera control hardware and configured as either a servo or relay.
 
 [caption id="attachment_2073" align="alignnone" width="300"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview.jpg"><img class="size-medium wp-image-2073" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/03/Pixhawkdetailview-300x199.jpg" alt="Pixhawk Detail View highlighting AUX Ports" width="300" height="199" /></a> Pixhawk Detail View highlighting AUX Ports[/caption]
 
@@ -55,14 +55,14 @@ The actual port used for the shutter is set and configured in the <em>Camera Gim
 
 [note]This functionality was first introduced in Plane 3.5.0. At time of writing it is not yet present in Copter 3.3/Rover 3.5 releases).[/note]
 
-ArduPilot logs TRIG messages when it <em>triggers</em> the camera. You can additionally set up ArduPilot to log CAM messages when the camera has actually fired, by monitoring a <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50_8211_55">digital input pin</a> that has been connected to the camera hot shoe. This more accurately logs the exact time that pictures are recorded.
+ArduPilot logs TRIG messages when it <em>triggers</em> the camera. You can additionally set up ArduPilot to log CAM messages when the camera has actually fired, by monitoring a <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50-55">digital input pin</a> that has been connected to the camera hot shoe. This more accurately logs the exact time that pictures are recorded.
 
 You will need to configure one of the AUX pins as a digital output/input, and connect it to the camera flash hotshoe (a universal camera hot shoe is required). The pin should be held for at least 2 milliseconds for reliable trigger detection.
 
 The main steps are:
 <ol>
 <li>Open <em>Mission Planner</em> and then click on <strong>CONFIG/TUNING | Full Parameters List</strong></li>
-	<li>Set at least two of the AUX pins as digital output/inputs using the BRD_PWM_COUNT parameter, as described in <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50_8211_55">digital outputs</a>. </li>
+	<li>Set at least two of the AUX pins as digital output/inputs using the BRD_PWM_COUNT parameter, as described in <a href="common-pixhawk-overview/#pixhawk_digital_outputs_and_inputs_virtual_pins_50-55">digital outputs</a>. </li>
 	<li>Set <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#camera_feedback_pin_cam_feedback_pin">CAM_FEEDBACK_PIN</a> to the pin number connected to the hotshoe.</li>
 
 	<li>Set <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#camera_feedback_pin_polarity_cam_feedback_pol">CAM_FEEDBACK_POL</a> to indicate whether the feedback pin (hotshoe voltage) goes high or low when the picture is taken.</li>

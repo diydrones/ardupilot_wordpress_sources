@@ -19,8 +19,11 @@ Some commonly used values include:
 	<li>Pitch90 : the flight controller is pointing up at 90 degrees compared to the direction of the antenna</li>
 	<li>Pitch270 : the flight controller is pointing down at 90 degrees compared to the direction of the antenna</li>
 </ul>
+
 <h1>Accelerometer Calibration</h1>
-The <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_accelerometer" target="_blank">accelerometer calibration</a> is the same as for Copter meaning the flight controller board should be connected to the Mission planner and then the Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Accel Calibration routine should be run which involves holding the board in 6 separate orientations positions so that offsets and scaling can be calculated.
+The <a href="http://copter.ardupilot.com/wiki/common-accelerometer-calibration/" target="_blank">accelerometer calibration</a> is the same as for Copter meaning the flight controller board should be connected to the Mission planner and then the <strong>Initial Setup | Mandatory Hardware | Accel Calibration</strong> routine should be run which involves holding the board in 6 separate orientations positions so that offsets and scaling can be calculated.
+
+
 <h1>Setting the Compass orientation</h1>
 If an external GPS+compass module is being used but the arrow on the case could not be aligned so as to point in the same direction as the antenna, the COMPASS_ORIENTATION parameter should be set.
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_CompassOrientation.png"><img class="alignnone size-medium wp-image-2731" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/AntennaTracker_Config_CompassOrientation-300x202.png" alt="AntennaTracker_Config_CompassOrientation" width="300" height="202" /></a>
@@ -30,7 +33,7 @@ Some more commonly used values include:
 	<li>Yaw 270: the arrow is pointing to the left at 90degrees from the antenna. I.e. the arrow is rotated at 90deg counter-clocwise from where the antenna is pointed.</li>
 </ul>
 <h1>Compass Calibration</h1>
-The <a href="http://copter.ardupilot.com/wiki/initial-setup/configuring-hardware/#calibrate_compass" target="_blank">compass calibration</a> can be done using the same method as Copter.  Open the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Compass screen and push the "Live Calibration" button and rotate the board until the mission planner says it has captured enough points to correctly calculate the offsets.
+The <a href="http://copter.ardupilot.com/wiki/common-compass-calibration-in-mission-planner" target="_blank">compass calibration</a> can be done using the same method as Copter.  Open the Mission Planner's Initial Setup &gt;&gt; Mandatory Hardware &gt;&gt; Compass screen and push the "Live Calibration" button and rotate the board until the mission planner says it has captured enough points to correctly calculate the offsets.
 <h1>Setting the servo and range of movement</h1>
 For this section it is best to plug in the battery so that the servos are powered and push the "arming switch" if present.  Connect with the Mission Planner, go to the CONFIG/TUNING &gt;&gt; Extended Tuning page.
 <a href="http://antennatracker.ardupilot.com/wp-content/uploads/sites/9/2014/08/AT_MPExtendedTuning.png" rel="attachment wp-att-122"><img class="alignnone size-large wp-image-122" src="http://antennatracker.ardupilot.com/wp-content/uploads/sites/9/2014/08/AT_MPExtendedTuning-1024x575.png" alt="AT_MPExtendedTuning" width="474" height="266" /></a>
