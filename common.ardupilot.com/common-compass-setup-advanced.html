@@ -31,7 +31,7 @@ Standard configurations for the main autopilot boards are shown in the table bel
 <tr><td>APM2.5 trace cut, external compass used</td><td>External</td><td>Not supported</td></tr>
 </table>
 
-Most users will only need to select their autopilot/compass configuration and perform the <a href="#live_calibration_of_offsets">Live Calibration</a> but details are also given on the less-used [site wiki="copter" inline="on"]<a href="#compassmot_8211_compensation_for_interference_from_the_power_wires_escs_and_motors">CompassMot</a> and[/site] Manual Declination.  Most of this configuration can be performed from the <em>Mission Planner</em>'s <strong>Initial Setup | Mandatory Hardware | Compass</strong> screen.  Other ground stations may have similar features.
+Most users will only need to select their autopilot/compass configuration and perform the <a href="#live_calibration_of_offsets">Live Calibration</a> but details are also given on the less-used [site wiki="copter" inline="on"]<a href="#compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors">CompassMot</a> and[/site] Manual Declination.  Most of this configuration can be performed from the <em>Mission Planner</em>'s <strong>Initial Setup | Mandatory Hardware | Compass</strong> screen.  Other ground stations may have similar features.
 
 [tip]The article is Copter-focused but the instructions are equally applicable to Plane and Rover (except where marked).[/tip]
 
@@ -123,7 +123,7 @@ https://www.youtube.com/watch?v=DmsueBS0J3E
 
 
 [site wiki="copter"]
-<h1>CompassMot - compensation for interference from the power wires, ESCs and motors</h1>
+<h1>CompassMot — compensation for interference from the power wires, ESCs and motors</h1>
 
 This is recommended for vehicles that have only an internal compass and on vehicles where there is significant interference on the compass from the motors, power wires, etc. CompassMot only works well if you have a <a href="wiki/common-powermodule-landingpage/">battery current monitor</a> because the magnetic interference is linear with current drawn.  It is technically possible to set-up CompassMot using throttle but this is not recommended.
 
