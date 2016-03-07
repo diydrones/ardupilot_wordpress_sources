@@ -11,6 +11,8 @@ END METADATA
 -->
 Sonar sensors can provide obstacle avoidance functionality for Rover. This page provides instructions for installing, configuring, and testing single and double sonar setups.
 
+[note]This article is out of date. Sonars are now more generically represented by "Rangefinders" - Rover can support 4. The relevant parameters have morphed from "SONAR" to "RNGFND" and are <a href="apmrover2-parameters/#rngfnd_parameters">the RNGFND parameters here</a>.[/note]
+
 <h1>What you'll need</h1>
 
 Sonar (ultrasonic) sensors allow Rover to detect obstacles and avoid them. Sonar sensors can be more sensitive than IR sensors, making them the preferred option for obstacle avoidance. Normally, a single sonar sensor is used, at the front of the rover. But Rover also supports the use of two sonar sensors, one pointing a bit to the right and the other a bit to the left, to not only detect obstacles but steer away from them.
@@ -107,7 +109,7 @@ The rest of the parameters shown below are appropriate for the recommended MB124
 	<li>SONAR_TURN_ANGLE is the angle, in degrees, the steering will make when the trigger distance is detected. A positive value will cause a right turn and a negative value will cause a left turn when only one sonar is in use.  We typically use 25 degrees for that.</li>
 	<li>SONAR_TURN_TIME is the amount of time that the steering will deviate when the trigger distance is detected. Defaults to 1 sec. We've actually used a smaller value (0.2 seconds) in the below so it doesn't turn away as long (we just want it to veer, not turn around)</li>
 </ul>
-All of these parameters, along with the others not documented here, are fully described in the Parameters List <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Sonar_stop_pin_SONAR_STOP_PIN">here</a>
+All of these parameters, along with the others not documented here, are fully described in <a href="apmrover2-parameters/#rngfnd_parameters">the Parameters List here</a>.
 
 <a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/sonar22.png"><img class="alignnone  wp-image-570" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/sonar22.png" alt="sonar2" width="200" height="85" /></a>
 
