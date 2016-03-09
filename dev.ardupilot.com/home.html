@@ -1,0 +1,107 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: home 
+title: Welcome to the ArduPilot Development Site 
+id: 69 
+menu_order: 0 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+<div class="tip info-box"><div class="info-box-title">The ArduPilot Developer Ecosystem is Evolving!</div><div class="info-box-text"><a href="http://diydrones.com/profiles/blogs/a-new-chapter-in-ardupilot-development" class="external external_icon" rel="nofollow">Find out more here …</a></div></div>
+<a title="http://ardupilot.com" href="http://ardupilot.com">ArduPilot/APM</a> is a open source autopilot system supporting multi-copters, traditional helicopters, fixed wing aircraft and rovers. The source code is developed by a <a title="http://diydrones.com" href="http://diydrones.com">large community of enthusiasts</a>. New developers are always welcome! The best way to start is by joining the <a href="https://groups.google.com/forum/#!forum/drones-discuss">Developer Mailing List</a>, which is open to all and chock-full of daily development goodness. Lurk for a while to get a feel for it, then participate!
+
+
+
+<h1>Why the name?</h1>
+
+The 'Ardu' part of the ArduPilot name comes from Arduino. The original APM1 autopilot board was based around the <a title="http://www.arduino.cc/" href="http://www.arduino.cc/">Arduino</a> development environment. We've since outgrown the Arduino environment and no longer use the Arduino runtime libraries, although we do still support building the ArduPilot for the AVR based APM1 and APM2 boards using a slightly modified version of the Arduino integrated development environment. Because we now support more than just Arduino-compatible hardware (such as PX4) we are moving from "Ardu" prefix names for the software projects to the "APM" prefix (APM:Copter, Plane, Rover, etc), which signifies the cross-platform nature of the current code. A timeline history of ardupilot can be found <a href="wiki/history-of-ardupilot/">here</a>.
+<div id="supported_autopilot_boards"></div>
+
+
+
+<h1>Supported boards</h1>
+
+<a href="supported-autopilot-controller-boards">Supported AutoPilot Controller Boards</a> provides an overview and key links for all the supported controller boards, including <a href="https://store.3drobotics.com/products/3dr-pixhawk" target="_blank">Pixhawk</a>, <a href="http://www.auav.co/product-p/auavx2.htm" target="_blank">Arsov AUAV-X2</a>, <a href="http://erlerobotics.com/docs/Intro.html">Erle-Brain</a>, <a href="http://www.emlid.com/">NAVIO+</a> etc.
+
+The ArduPilot/APM source code is written on top of the <a title="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL" href="https://github.com/diydrones/ardupilot/tree/master/libraries/AP_HAL" target="_blank">AP-HAL</a> hardware abstraction layer, making it possible to port the code to a wide range of autopilot boards. See this <a title="http://diydrones.com/profiles/blogs/lots-of-changes-to-apm-development" href="http://diydrones.com/profiles/blogs/lots-of-changes-to-apm-development" target="_blank">blog post</a> for more information on the move to AP-HAL.
+
+
+
+<h1>Project List</h1>
+
+The ArduPilot (APM) system is made up of (or relies upon) several different projects which are listed below.  Those marked with an asterix (*) are peer projects that have their own owners outside the core ArduPilot dev team.
+<ul>
+	<li>DroneKit (<a href="http://dronekit.io/">site</a>) - APM SDK for apps running on vehicles, mobile devices and/or in the cloud.</li>
+	<li>Plane (<a href="http://plane.ardupilot.com/" target="_blank">wiki</a>, <a href="https://github.com/diydrones/ardupilot" target="_blank">code</a>) - autopilot for planes</li>
+	<li>Copter (<a href="http://copter.ardupilot.com/" target="_blank">wiki</a>, <a href="https://github.com/diydrones/ardupilot" target="_blank">code</a>) - autopilot for multicopters and traditional helicopters</li>
+	<li>Rover (<a href="http://rover.ardupilot.com/" target="_blank">wiki</a>, <a href="https://github.com/diydrones/ardupilot" target="_blank">code</a>) - autopilot for ground vehicles</li>
+	<li>Mission Planner (<a href="http://planner.ardupilot.com/" target="_blank">wiki</a>, <a href="https://github.com/diydrones/MissionPlanner" target="_blank">code</a>) - the most commonly used ground station written in C# for windows but also runs on Linux and MacOS via mono</li>
+	<li>APM Planner 2.0 (<a href="http://planner2.ardupilot.com/" target="_blank">wiki</a>, <a href="https://github.com/diydrones/apm_planner" target="_blank">code</a>) is a ground station specifically for APM written in C++ using the Qt libraries</li>
+	<li>MAVProxy (<a href="http://www.qgroundcontrol.org/mavlink/mavproxy_startpage">wiki</a>) - command line oriented and scriptable ground station (mostly used by developers)</li>
+	<li>MinimOSD (<a href="http://code.google.com/p/arducam-osd/wiki/minimosd" target="_blank">wiki</a>, <a href="http://code.google.com/p/arducam-osd/source/browse/#svn%2Ftrunk%2FArduCAM_OSD" target="_blank">code</a>) - on-screen display of flight data</li>
+	<li>AndroPilot (<a href="https://github.com/geeksville/arduleader/wiki/Andropilot%20Users%20Guide" target="_blank">user guide</a>, <a href="https://github.com/geeksville/arduleader/tree/master/andropilot" target="_blank">code</a>, <a href="https://play.google.com/store/apps/details?id=com.geeksville.andropilot&amp;hl=en" target="_blank">google play</a>) - android ground station</li>
+	<li>DroneAPI (<a title="DroneAPI Tutorial" href="http://dev.ardupilot.com/wiki/droneapi-tutorial/">tutorial</a>, <a title="Droneshare" href="http://www.droneshare.com" target="_blank">droneshare</a>) - A developer API for drone coprocessors and web applications.</li>
+	<li>DroidPlanner2 (<a href="https://github.com/DroidPlanner/droidplanner/wiki" target="_blank">wiki</a>, <a href="https://github.com/DroidPlanner/droidplanner" target="_blank">code</a>, <a href="https://play.google.com/store/apps/details?id=org.droidplanner" target="_blank">google play</a>) - android ground station</li>
+	<li><a title="http://www.qgroundcontrol.org/" href="http://www.qgroundcontrol.org/">QGroundControl</a> is an alternative ground station written in C++ using the Qt libraries</li>
+	<li>PX4 (<a href="http://pixhawk.org/firmware/start" target="_blank">wiki</a>) - designers of the PX4FMU and owners of the underlying libraries upon which Plane/Copter/Rover use when running on the PX4FMU</li>
+	<li>MAVLink (<a href="http://www.qgroundcontrol.org/mavlink/start" target="_blank">wiki</a>) - the protocol for communication between the ground station, flight controller and some periphers including the OSD. A "Dummy's Guide" to working with MAVLink is <a href="http://diydrones.com/group/arducopterusergroup/forum/topics/mavlink-tutorial-for-absolute-dummies-part-i?xg_source=activity" target="_blank">here</a>.</li>
+</ul>
+
+
+<h1>Getting Started with ArduPilot Development</h1>
+
+The main entry points for developing flight controller/antenna tracker and companion computer code are listed below.
+
+[pagelist_navmenu]
+
+
+For topics related to Ground Control Station development see:
+
+<ul>
+	<li><a href="buildin-mission-planner">Building Mission Planner (C#, Windows)</a></li>
+	<li><a href="https://github.com/diydrones/apm_planner/blob/master/README.md">Building APM Planner 2.0 (Qt, C++, Linux, Mac OSX, Windows)</a></li>
+</ul>
+
+
+<h1>RTF vehicles</h1>
+<ul>
+	<li><a href="wiki/solo/">3DR Solo</a></li>
+</ul>
+
+
+
+<h1>How the team works</h1>
+
+<ul>
+	<li><a href="wiki/guidelines-for-contributors-to-the-apm-codebase/">Bringing new members onto the team</a></li>
+	<li>The main developer discussion mailing list is <a title="drones-discuss" href="https://groups.google.com/forum/#!forum/drones-discuss">drones-discuss</a>, and is open to anyone to join</li>
+	<li>The development team is also using <a href="https://gitter.im/" target="_blank">gitter</a> for APM development discussions - <a title="gitter" href="https://gitter.im/diydrones/ardupilot#" target="_blank">https://gitter.im/diydrones/ardupilot#</a></li>
+	<li>We have a <a href="http://dev.ardupilot.com/wiki/ardupilot-mumble-server/">mumble server</a> for real-time voice discussions</li>
+	<li>Our annual developers conference is <a href="http://www.dronecon.org/">DroneCon</a>. See previous years speeches and content <a href="http://www.dronecon.org/">here</a>.</li>
+	<li>The source code for ArduPilot/APM is managed using git on <a title="http://github.com/diydrones/ardupilot" href="http://github.com/diydrones/ardupilot">http://github.com/diydrones/ardupilot</a></li>
+	<li>Pre-compiled firmware for supported autopilot boards is available from <a title="http://firmware.diydrones.com" href="http://firmware.diydrones.com">http://firmware.diydrones.com</a></li>
+	<li>User support is available on the <a href="http://ardupilot.com/forum/viewforum.php?f=25" target="_blank">APM forums</a>.</li>
+	<li>The ArduPilot/APM <a title="http://autotest.diydrones.com/" href="http://autotest.diydrones.com/">automatic test system</a> shows the test status of each commit. It's described <a href="http://diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A703309">here</a>.</li>
+	<li>Bug tracking and open issues are tracked using the <a title="https://github.com/diydrones/ardupilot/issues" href="https://github.com/diydrones/ardupilot/issues">github issues system</a></li>
+	<li>Vehicle onboard parameter documentation for <a href="http://copter.ardupilot.com/wiki/arducopter-parameters/">copter</a>, <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/">plane</a> and <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/">rover</a> is auto-generated from the source code</li>
+	<li><a href="release-procedures">Release Procedures for Copter</a></li>
+	<li><a href="http://planner.ardupilot.com/wiki/common-team/">Current and Past Dev Team members</a></li>
+</ul>
+
+
+
+<h1>Development languages and tools</h1>
+
+The main flight code for ArduPilot is written in C++. Support tools are written in a variety of languages, most commonly in python. Currently the main vehicle code is written as '.pde' files, which come from the Arduino build system. The pde files are preprocessed into a .cpp file as part of the build. The include statements in the pde files also provide implied build rules for what libraries to include and link to.
+
+
+
+<h1>License</h1>
+
+ArduPilot (including Copter, Plane, Rover and MissionPlanner) is released as free software under the <a href="https://github.com/diydrones/ardupilot/blob/master/COPYING.txt">GNU General Public License</a> version 3 or later.  See <a href="wiki/license-gplv3/">License overview wiki page here.</a>
+<h1>Didn't find what you are looking for?</h1>
+If you think of something that should be added to this site, please <a title="https://github.com/diydrones/ardupilot/issues" href="https://github.com/diydrones/ardupilot/issues">open an issue</a> or post a comment on the <a title="https://groups.google.com/forum/#!forum/drones-discuss" href="https://groups.google.com/forum/#!forum/drones-discuss">drones-discuss</a> mailing list.
+
+[tip]The ArduPilot Developer Ecosystem is Evolving! <a href="http://diydrones.com/profiles/blogs/a-new-chapter-in-ardupilot-development" class="external external_icon" rel="nofollow">Find out more here …</a>[/tip]
