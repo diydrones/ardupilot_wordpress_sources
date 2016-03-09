@@ -42,6 +42,15 @@ Once operational aircraft within about 50km should appear on the ground station 
 To test the systems you can compare with flights shown on <a href="https://www.flightradar24.com/" target="_blank">flighradar24.com</a>.
 
 The data is transmitted via the <a href="http://mavlink.org/messages/common#ADSB_VEHICLE" target="_blank">ADSB_VEHICLE message</a>. When received by ArduPilot, it is forwarded on to all MAVLink serial ports meaning that if you have a GCS or companion computer connected it will receive the forwarded packets automatically.
+<h2>Serial Setup</h2>
+If you are using one of the UARTs on your board which default to MAVLink then the default settings will work fine for the Ping. Alternatively you can connect the Ping to one of the other UARTs, such as the GPS UART (if it is unused) or the serial4/5 UART. In that case you will need to configure the uart as MAVLink at a baudrate of 57600.
+
+For example, if you wanted to use the port marked "serial4/5" on a Pixhawk you would set:
+<ul>
+	<li>SERIAL4_PROTOCOL to 1 (meaning MAVLink)</li>
+	<li>SERIAL4_BAUD 57 (meaning 57600)</li>
+</ul>
+You will need to reboot your board after making those changes.
 <h1>Vehicle Database</h1>
 When enabled, the ADS-B library will store information for up to 25 vehicles detected by the ADS-B receiver. Due to some experimental work in other features, such as EKF2, available RAM may be limited. It is important to note that when ADS-B is disabled (ADSB_ENABLE=0) then the memory is released, effectively freeing up about 1KB of RAM. When enabled, the detected vehicle list is checked once per second for potential conflicts.
 <h1>Vehicle detection and behavior</h1>
