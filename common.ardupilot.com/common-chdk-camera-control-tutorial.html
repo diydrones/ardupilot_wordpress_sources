@@ -222,7 +222,7 @@ Testing the CHDK cable will ensure that our camera controls execute as expected 
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/USB_Remote_01.png"><img class="alignnone wp-image-3266" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/USB_Remote_01.png" alt="USB_Remote_01" width="218" height="165" /></a>
 
-To tell CHDK to listen to the cable, we need to set the Enable Remote parameter. On the camera, access the CHDK menu, select <strong>Remote Parameters,</strong> and select <strong>Enable Remote </strong>as shown. This setting must be enabled to allow communication with the CHDK cable.
+To tell CHDK to listen to the cable, we need to set the Enable Remote parameter. On the camera, access the CHDK menu, select <strong>Remote Parameters,</strong> and select <strong>Enable Remote</strong> as shown. This setting must be enabled to allow communication with the CHDK cable.
 
 Connect the CHDK cable to the camera's USB port, and run <strong>3DR_Shoot.bas</strong>. Test the result of each switch position. The resulting behaviors should reflect those listed in the previous step. Observe the USB pulse values output to the camera display, and compare them with the ranges show in the code. If you encounter problems, see the <strong>Advanced Topics</strong>section below for additional testing and troubleshooting information.
 
@@ -240,7 +240,7 @@ For your new command, set <strong>Command</strong> type to <strong>DO_SET_SERVO<
 
 <em>Note: Columns in the Waypoints table accrue different meanings based on the type of command currently selected. These column definitions only become visible when the command is selected as different parameters apply to different types of commands.</em>
 
-Since we're using the APM to control the camera, we need to set the <strong>Servo out function (RC7_FUNCTION) </strong>parameter to <strong>Disabled</strong> (under <strong>Standard Parameters</strong>). Write waypoints and parameters to the APM.
+Since we're using the APM to control the camera, we need to set the <strong>Servo out function (RC7_FUNCTION)</strong> parameter to <strong>Disabled</strong> (under <strong>Standard Parameters</strong>). Write waypoints and parameters to the APM.
 
 Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.bas</strong> prior to launch. Fly your mission according to standard practices and safety procedures.
 
@@ -248,7 +248,7 @@ Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.
 
 <h1>Creating a composite image</h1>
 
-One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas </strong></a>script that we used in the previous section.The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area, we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s <strong>Grid V2</strong> automatic waypoint function.
+One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank">3DR_Shoot.bas</a>script that we used in the previous section.The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area, we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s <strong>Grid V2</strong> automatic waypoint function.
 
 
 
@@ -426,7 +426,7 @@ To verify that your transmitter behaves similarly, you may want to perform a tes
 
 
 <h3>Configuring CHDK cable for Testing</h3>
-Before we can test the CHDK cable, we'll need to choose a channel for camera control and configure the corresponding inputs. Connect your plane's APM to Mission Planner. Go to <strong>Configuration</strong> -&gt; <strong>Radio Calibration </strong>to locate an available channel and its corresponding switch on your RC transmitter. (We'll use channel 7.) Check the PWM outputs for the up, mid, and down positions of the channel. Compare them with the table shown above.
+Before we can test the CHDK cable, we'll need to choose a channel for camera control and configure the corresponding inputs. Connect your plane's APM to Mission Planner. Go to <strong>Configuration | Radio Calibration</strong> to locate an available channel and its corresponding switch on your RC transmitter. (We'll use channel 7.) Check the PWM outputs for the up, mid, and down positions of the channel. Compare them with the table shown above.
 
 Before we disconnect the APM, we need to change an important parameter that you'll be using often. Under <strong>Configuration</strong> -&gt; <strong>Standard Parameters</strong>, scroll about 4/5 of the way down to find the <strong>Servo out function</strong> parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's <strong>Servo out function (RC7_FUNCTION)</strong>.
 
@@ -441,7 +441,7 @@ Once you've chosen your camera control channel, you'll need to connect your CHDK
 
 Testing the CHDK cable will ensure that our camera controls execute as expected and is a great opportunity to test for potential noise created by your equipment setup.
 
-Connect the CHDK cable to the camera's USB port. Turn the camera on, load the <strong>3DRCHDKTester.bas </strong>script (by selecting <strong>Load Script from File</strong> from the main CHDK menu), and press the shutter button to run the test script.
+Connect the CHDK cable to the camera's USB port. Turn the camera on, load the <strong>3DRCHDKTester.bas</strong> script (by selecting <strong>Load Script from File</strong> from the main CHDK menu), and press the shutter button to run the test script.
 
 To perform the test, set each camera control channel position on your RC transmitter and observe the outputs on the display. Verify that these outputs are within the acceptable USB power ranges in the table above. If you encounter problems, you may need to shield your cable to prevent noise.
 

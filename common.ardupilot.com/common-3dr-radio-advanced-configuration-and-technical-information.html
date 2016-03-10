@@ -154,10 +154,8 @@ The radio cannot support arbitrary power levels. It can only support the power l
 <table>
 <tbody>
 <tr>
-<td><strong>Power (dBm)
-</strong></td>
-<td><strong>Power (milliWatts)
-</strong></td>
+<th>Power (dBm)</th>
+<th>Power (milliWatts)</th>
 </tr>
 <tr>
 <td>1</td>
@@ -205,6 +203,7 @@ If you don't know how to calculate it, we've made a tutorial for you here: <a hr
 
 
 <h1>Using the AT command set</h1>
+
 The radios support a variant of the Hayes 'AT' modem command set for configuration.
 
 If you connect with a serial console to a radio at the current serial baud rate, you can tell the radio to enter AT command mode by entering the sequence '+++'. To prevent data being seen as the command sequence there is a guard time required, so make sure you type nothing on the serial link for 1 second before and after you enter the sequence.
@@ -294,12 +293,9 @@ The following table may be helpful matching your local radio regulations to the 
 <table>
 <tbody>
 <tr>
-<td><strong>Radio
-</strong></td>
-<td><strong>Minimum Frequency (MHz)
-</strong></td>
-<td><strong>Maximum Frequency (MHz)
-</strong></td>
+<th>Radio</th>
+<th>Minimum Frequency (MHz)</th>
+<th>Maximum Frequency (MHz)</th>
 </tr>
 <tr>
 <td>433</td>
@@ -332,8 +328,7 @@ You can also set a radio to receive only by setting the <code>DUTY_CYCLE</code> 
 The radio can be configured to use 'low latency mode' to improve performance for things like tablet based joysticks etc...  The two parameters you should set to enable this mode are as follows:
 <ul>
 	<li>Set <code>MAVLINK</code> to 2.  This turns on special checking for the <code>RC_OVERRIDE</code> packets used in joystick control, to allow those packets to always be sent first.  If you are using mavlink (you probably are) there are no downsides for choosing this setting.</li>
-	<li>Change <code>MAX_WINDOW</code> from the default of 131 to 33.  This will ensure that the GCS can send a packet to the vehicle at least once every 33 msecs.  It is worth noting that this will lower the available bandwidth, so if you need absolute maximum bandwidth you are best off with the default of 131.  <strong>Both radios on a channel must have the same value for this parameter, or they will not be able to talk to each other.</strong><strong>
-</strong></li>
+	<li>Change <code>MAX_WINDOW</code> from the default of 131 to 33.  This will ensure that the GCS can send a packet to the vehicle at least once every 33 msecs.  It is worth noting that this will lower the available bandwidth, so if you need absolute maximum bandwidth you are best off with the default of 131.  <strong>Both radios on a channel must have the same value for this parameter, or they will not be able to talk to each other.</strong></li>
 </ul>
 
 
@@ -385,7 +380,7 @@ If that approach doesn't work do the following:
         <ul>
 	  <li>Connect your air radio with FTDI-to-USB cable to your computer USB port &amp; note Com port #
           <ul>
-	    <li>Use <strong>Windows &gt; Device Manager &gt; Ports</strong> to identify com port #</li>
+	    <li>Use <strong>Windows | Device Manager| Ports</strong> to identify com port #</li>
 	    <li>You'll know the FTDI cable is correctly oriented on the air radio when a green LED blinks.</li>
           </ul>
         </li>
@@ -401,7 +396,7 @@ If that approach doesn't work do the following:
 	    <li>In MP radio configuration window, click on <strong>Load Settings</strong> (from <strong>air</strong> radio)</li>
 	    <li>Edit the air radio's settings (including Advanced Options) so they are <strong>exactly</strong> the same as the ground radio's, then click on <strong>Save Settings</strong> (to air radio)</li>
 	    <li>You may not be able to add a value in the Format field, that's OK</li>
-	    <li>In MP, press Configure | SiK Radio | enter exact same settings including advanced &gt; click <strong>Save Settings</strong>.</li>
+	    <li>In MP, press <strong>Configure | SiK Radio</strong> and enter exact same settings including advanced &gt; click <strong>Save Settings</strong>.</li>
            </ul>
 </li>
 	<li>Wait for both radios to connect (solid green LED)</li>
@@ -414,7 +409,7 @@ If that approach doesn't work do the following:
           <ul>
 	    <li>Remove the FTDI to USB cable from APM</li>
 	    <li>Connect the air radio to APM &amp; LIPO</li>
-	    <li>In <strong>MP &gt; Flight Data</strong> tab select the ground radio COM port then click on <strong>Connect</strong></li>
+	    <li>In <strong>MP | Flight Data</strong> tab select the ground radio COM port then click on <strong>Connect</strong></li>
           </ul>
 </li>
 </ol>
