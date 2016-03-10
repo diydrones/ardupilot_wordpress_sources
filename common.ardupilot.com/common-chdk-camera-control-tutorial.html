@@ -63,7 +63,10 @@ One of the easiest and most useful ways to apply CHDK to your mission is to take
 This script will measure time intervals for five minutes and trigger the camera shutter every two seconds. These default parameters work well for us (results in about 150 pictures), but if you would like to modify them (for example, to take a pictures every five seconds), see <a href="http://chdk.wikia.com/wiki/CHDK_scripting" target="_blank">CHDK Wiki's page</a> regarding scripting parameters for UBASIC.
 
 To load the script onto the camera, unlock your SD card (by sliding the switch on the slide of the SD card to the unlock position), connect it to your computer, and open the SD card's file structure. Select the <strong>CHDK</strong> folder followed by the <strong>Scripts</strong> folder. Copy the script file (<strong>DM_interval.bas</strong>) into the <strong>Scripts</strong> folder.
+
+
 <h2>3. Flying with your camera</h2>
+
 Before you're ready for takeoff, you'll need to pack the camera into your vehicle. For best results using plane, position the camera with the lens pointing down in the center of the plane. You may need to modify your plane's body to create a space for the camera. Be sure to set the plane's center of gravity with the camera in place, and keep in mind the safety of the camera in case of failure. Check out our setup for inspiration; we used velcro strips to secure the camera in place.
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/plane-pack.jpg"><img class="alignnone wp-image-2242" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/plane-pack.jpg" alt="Shows camera secured into plane with velcro and hole for lens" width="2585" height="1123" /></a>
@@ -71,7 +74,7 @@ Before you're ready for takeoff, you'll need to pack the camera into your vehicl
 
 <h2>Activating scripts before flight</h2>
 
-Prior to launching your plane, it is necessary to activate the intervalometer script on the camera. Make sure the SD card is locked and loaded into the camera and the camera is turned on. When you're ready to launch your plane (after completing the <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/Plane-Flight-Ops-Checklist-onepage-792x1024.jpg" target="_blank">pre-flight checklist</a>), enter ALT mode by pressing the <strong>Print</strong> or <strong>Play</strong> button on the camera (for more information consult the<a href="http://chdk.wikia.com/wiki/CHDK" target="_blank"> CHDK wiki</a>). Press the <strong>Menu</strong> button to access the main CHDK menu. Select <strong>Load Script from File</strong>; select<strong> <strong>DM_interval.bas</strong>.</strong> Press the <strong>shutter</strong> button to run the script. (You can also use the shutter button to stop the script.) Once you start the script, the camera will automatically begin taking pictures after a delay of five seconds, so be sure to take that into account when launching your plane.
+Prior to launching your plane, it is necessary to activate the intervalometer script on the camera. Make sure the SD card is locked and loaded into the camera and the camera is turned on. When you're ready to launch your plane (after completing the <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/Plane-Flight-Ops-Checklist-onepage-792x1024.jpg" target="_blank">pre-flight checklist</a>), enter ALT mode by pressing the <strong>Print</strong> or <strong>Play</strong> button on the camera (for more information consult the<a href="http://chdk.wikia.com/wiki/CHDK" target="_blank"> CHDK wiki</a>). Press the <strong>Menu</strong> button to access the main CHDK menu. Select <strong>Load Script from File</strong>; select <strong>DM_interval.bas</strong>. Press the <strong>shutter</strong> button to run the script. (You can also use the shutter button to stop the script.) Once you start the script, the camera will automatically begin taking pictures after a delay of five seconds, so be sure to take that into account when launching your plane.
 
 
 <h1>Integrating CHDK with APM</h1>
@@ -126,9 +129,9 @@ Each switch position can be assigned to a script function. This means that you c
 
 
 <h2>Configuring the CHDK cable for use with APM</h2>
-First we need to select an RC channel to assign to CHDK's channel 1. Connect your plane's APM to Mission Planner. Go to <strong>Configuration</strong> -&gt; <strong>Radio Calibration </strong>to locate an available channel and its corresponding three-position switch on your RC transmitter. For this tutorial, we'll use channel 7. (If you decide to use a different channel, substitute your channel wherever we input channel 7.) Don't disconnect your APM yet.
+First we need to select an RC channel to assign to CHDK's channel 1. Connect your plane's APM to Mission Planner. Go to <strong>Configuration | Radio Calibration</strong> to locate an available channel and its corresponding three-position switch on your RC transmitter. For this tutorial, we'll use channel 7. (If you decide to use a different channel, substitute your channel wherever we input channel 7.) Don't disconnect your APM yet.
 
-Before we fly, we'll need to test the integration between this channel and the CHDK cable by manually changing the switch position and observing the result. In order to allow manual control of this channel, we need to change an important parameter in Mission Planner. Under <strong>Configuration</strong> -&gt; <strong>Standard Parameters</strong>, scroll about 4/5 of the way down to find the <strong>Servo out function</strong> parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's <strong>Servo out function (RC7_FUNCTION)</strong>.
+Before we fly, we'll need to test the integration between this channel and the CHDK cable by manually changing the switch position and observing the result. In order to allow manual control of this channel, we need to change an important parameter in Mission Planner. Under <strong>Configuration | Standard Parameters</strong>, scroll about 4/5 of the way down to find the <strong>Servo out function</strong> parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's <strong>Servo out function (RC7_FUNCTION)</strong>.
 
 <em>Set this parameter to <strong>Manual</strong> whenever you want to control your camera using your RC transmitter; set to <strong>Disabled</strong> when you want the APM to control the camera automatically.</em>
 
@@ -231,15 +234,15 @@ Once you have your waypoints configured in Mission Planner as shown below, selec
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/add-command1.png"><img class="alignnone size-full wp-image-2214" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/add-command1.png" alt="Screenshot of Mission Planner showing adding a new command" width="1366" height="728" /></a>
 
-For your new command, set<strong> Command </strong>type to<strong> DO_SET_SERVO</strong>. (This tells the APM that this command means output to a servo.) Set<strong> Ser No </strong>(servo number) to the number of your camera control channel (ex:<strong> 7</strong>). (This tells the APM where to output: for us, servo channel 7 is the CHDK cable.) And set<strong> PWM </strong>to<strong> 1900</strong>. (This value tells the APM what to output: 1,900 milliseconds of pulse width modulation corresponds to the high position under which the shoot command is located). Repeat this process for each waypoint at which you would like to take a picture. The screen below shows a shutter command correctly applied at each of three waypoints.
+For your new command, set <strong>Command</strong> type to <strong>DO_SET_SERVO</strong>. (This tells the APM that this command means output to a servo.) Set <strong>Ser No</strong>(servo number) to the number of your camera control channel (ex:<strong>7</strong>). (This tells the APM where to output: for us, servo channel 7 is the CHDK cable.) And set <strong>PWM</strong> to <strong>1900</strong>. (This value tells the APM what to output: 1,900 milliseconds of pulse width modulation corresponds to the high position under which the shoot command is located). Repeat this process for each waypoint at which you would like to take a picture. The screen below shows a shutter command correctly applied at each of three waypoints.
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/configure-commands-1900.png"><img class="alignnone size-full wp-image-2624" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/configure-commands-1900.png" alt="Screenshot of Mission Planner showing configured commands" width="1366" height="728" /></a>
 
 <em>Note: Columns in the Waypoints table accrue different meanings based on the type of command currently selected. These column definitions only become visible when the command is selected as different parameters apply to different types of commands.</em>
 
-Since we're using the APM to control the camera, we need to set the <strong>Servo out function (RC7_FUNCTION) </strong>parameter to <strong>Disabled </strong>(under <strong>Standard Parameters</strong>). Write waypoints and parameters to the APM.
+Since we're using the APM to control the camera, we need to set the <strong>Servo out function (RC7_FUNCTION) </strong>parameter to <strong>Disabled</strong> (under <strong>Standard Parameters</strong>). Write waypoints and parameters to the APM.
 
-Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.bas </strong>prior to launch. Fly your mission according to standard practices and safety procedures.
+Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.bas</strong> prior to launch. Fly your mission according to standard practices and safety procedures.
 
 
 
@@ -251,7 +254,7 @@ One of our favorite applications of CHDK is creating a map of an area by stitchi
 
 <h2>Setting waypoints with GridV2</h2>
 
-First locate the area you wish to map in Mission Planner. Right-click and select <strong>Draw Polygon </strong>-&gt; <strong>Add Polygon Point</strong>. Add polygon points until you have created a polygon around the area you wish to map. Once you are satisfied with your polygon, right-click and select<strong> Auto WP </strong>-&gt;<strong> GridV2 </strong>as shown below.
+First locate the area you wish to map in Mission Planner. Right-click and select <strong>Draw Polygon| Add Polygon Point</strong>. Add polygon points until you have created a polygon around the area you wish to map. Once you are satisfied with your polygon, right-click and select <strong>Auto WP | GridV2</strong> as shown below.
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/draw-polygon.png"><img class="alignnone size-full wp-image-2380" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/draw-polygon.png" alt="Screenshot of Mission Planner showing a completed polygon and path to gridV2 function" width="1602" height="850" /></a>
 
@@ -259,7 +262,7 @@ Input a relative altitude (100 feet is fine if you are unsure). Input a distance
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png"><img class="alignnone size-full wp-image-2383" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png" alt="Screenshot of Mission Planner showing a grid of waypoints produced with the GridV2 function" width="1600" height="852" /></a>
 
-Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type <strong>DO_SET_SERVO</strong>. For each DO_DIGICAM_CONTROL command, change command type to <strong>DO_SET_SERVO</strong>, set<strong> Ser No</strong> to <strong>7</strong> (or whichever channel you're using), and set<strong> PWM</strong> to <strong>1,100</strong> (to call the <a style="font-style: normal;line-height: 21px;text-decoration: underline" href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas </strong></a>function that takes a picture).
+Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type <strong>DO_SET_SERVO</strong>. For each DO_DIGICAM_CONTROL command, change command type to <strong>DO_SET_SERVO</strong>, set <strong>Ser No</strong> to <strong>7</strong> (or whichever channel you're using), and set <strong>PWM</strong> to <strong>1,100</strong> (to call the <a style="font-style: normal;line-height: 21px;text-decoration: underline" href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas</strong></a> function that takes a picture).
 
 When run, this mission returns a set of images that can be stitched together to create a map of the selected polygon.
 
@@ -438,7 +441,7 @@ Once you've chosen your camera control channel, you'll need to connect your CHDK
 
 Testing the CHDK cable will ensure that our camera controls execute as expected and is a great opportunity to test for potential noise created by your equipment setup.
 
-Connect the CHDK cable to the camera's USB port. Turn the camera on, load the <strong>3DRCHDKTester.bas </strong>script (by selecting<strong> Load Script from File</strong> from the main CHDK menu), and press the shutter button to run the test script.
+Connect the CHDK cable to the camera's USB port. Turn the camera on, load the <strong>3DRCHDKTester.bas </strong>script (by selecting <strong>Load Script from File</strong> from the main CHDK menu), and press the shutter button to run the test script.
 
 To perform the test, set each camera control channel position on your RC transmitter and observe the outputs on the display. Verify that these outputs are within the acceptable USB power ranges in the table above. If you encounter problems, you may need to shield your cable to prevent noise.
 
