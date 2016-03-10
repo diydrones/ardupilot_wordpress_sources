@@ -44,7 +44,8 @@ The sensor should be connected to the Pixhawk's the 4-pin I2C port.  In most ca
 <h1>Mounting to the Frame</h1>
 Mount the flow sensor pointing straight down with the X axis forwards and the Y axis to the right. The <a href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/#flow_sensor_yaw_alignment_flow_orient_yaw">FLOW_ORIENT_YAW</a> parameter can be used to account for other yaw orientations. It is important that the flow sensor be mounted where it does not experience angular angular vibration that could blur the image.
 
-[note]The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW </code> to -9000.[/note]
+[note]The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW</code> to -9000.[/note]
+
 <h1>Setup through the Mission Planner</h1>
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup.png"><img class="alignnone size-large wp-image-2974" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup-1024x575.png" alt="OptFlow_MPSetup" width="584" height="327" /></a>
 
@@ -102,8 +103,11 @@ This check can be disabled by unchecking the "Parameter/Sonar" arming check.
 	<li><code>OF.flowX</code> and <code>OF.flowY</code> should be varying</li>
 	<li><code>OF.bodyX</code> and <code>OF.bodyY</code> should be consistent with IMU.GyrX and IMU.GyrY</li>
 </ol>
+
 <h1>Second Flight (Copter only)</h1>
-[warning] You will need at least 15m of clear space around the vehicle to do this flight safely,[/warning]
+
+[warning]You will need at least 15m of clear space around the vehicle to do this flight safely.[/warning]
+
 <ol>
 	<li>Set the EKF_GPS_TYPE parameter to 3 make the EKF ignore GPS and use optical flow data. [warning]Do not switch from any non-gps mode, eg STABILIZE, ALT_HOLD or ACRO  to a GPS mode, eg LOITER when flying with EKF_GPS_TYPE set to 3. If the optical flow velocity estimates are bad, you will have no warning and the copter could go to maximum roll or pitch when you make the switch. This vulnerability will be fixed in subsequent SW releases.[/warning]</li>
 	<li>Ensure you have LOITER mode and STABILIZE mode available on you transmitter.</li>

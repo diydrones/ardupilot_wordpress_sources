@@ -77,7 +77,7 @@ If you every find yourself in a situation where your PPM encoder has become corr
 	<li>Use a little piece of wire to short circuit the GND and RST pins of the Atmega32U2 in order to reset it.</li>
 	<li>You can find those pins broken out in the chip's ICSP header on the edge of the board: 
 <a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PPMencoder_APM2_jumper_2.jpg"><img class="aligncenter size-full wp-image-1431" alt="PPMencoder_APM2_jumper_2" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/06/PPMencoder_APM2_jumper_2.jpg" width="700" height="425" /></a></li>
-	<li>After reseting you will hear the USB disconnect/connect sound in your Windows computer.</li>
+	<li>After resetting you will hear the USB disconnect/connect sound in your Windows computer.</li>
 	<li>Your board should be in DFU mode now and ready to be programmed.</li>
 </ul>
 
@@ -109,11 +109,14 @@ If you every find yourself in a situation where your PPM encoder has become corr
 <img alt="" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/flip_main_loaded.jpg" />
 <ul>
 	<li><em>Before you upload new firmware you can view the current firmware in the buffer. Some PPM firmware versions will have the version embedded in the code.  Click [Device] [Read] to download the current memory into the buffer and then [Buffer] [Edit] to view. (See Flip manual for details.)  The version may be near the end of the code before all the FF entries.  Here is a sample of the end of the code segment for one version of the PPM firmware.</em>
+<pre>
 01470 98 08 20 03 E8 03 20 03 98 08 20 03 06 09 20 03 .. ... ... ... .
 01480 98 08 20 03 98 08 20 03 98 08 20 03 08 52 41 72 .. ... ... ..RAr
 01490 64 75 50 50 4D 76 32 2E 33 2E 31 36 00 30 20 00 duPPMv2.3.16.0    &lt;--  this is the version number.
 014A0 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ................        &lt;-- this is the area without code
-014B0 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ................</li>
+014B0 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ................
+</pre>
+</li>
 	<li>Now lets load the HEX by clicking on the icon indicated with a red arrow or go to the menu “File-&gt;Load HEX” or just press Ctrl+L.</li>
 	<li>Choose the HEX file you just downloaded and click OK.</li>
 </ul>
