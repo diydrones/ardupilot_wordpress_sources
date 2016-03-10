@@ -10,182 +10,151 @@ post_parent_title:
 END METADATA 
 -->
 This page gives a high-level overview of the available Ground Control Stations (GCS) and provides links so you can make the appropriate choice.
-
 <h1>Overview</h1>
+A ground station is typically a software application, running on a ground-based computer, that communicates with your UAV via <a title="common-Telemetry (landing page)" href="common-telemetry-landingpage">wireless telemetry</a>. It displays real-time data on the UAVs performance and position and can serve as a “virtual cockpit”, showing many of the same instruments that you would have if you were flying a real plane. A GCS can also be used to control a UAV in flight, uploading new mission commands and setting parameters. It is often also use to monitor the live video stream from a UAV’s cameras.
 
-A ground station is typically a software application, running on a ground-based computer, that communicates with your UAV via <a href="common-telemetry-landingpage" title="common-Telemetry (landing page)">wireless telemetry</a>. It displays real-time data on the UAVs performance and position and can serve as a “virtual cockpit”, showing many of the same instruments that you would have if you were flying a real plane. A GCS can also be used to control a UAV in flight, uploading new mission commands and setting parameters. It is often also use to monitor the live video stream from a UAV’s cameras.
-
-There are at least eight different ground control stations (<em>Mission Planner</em>, <em>APM Planner 2</em>, <em>MAVProxy</em>, <em>Tower</em> (DroidPlanner 3), <em>AndroPilot</em>, <em>MAVPilot</em>, <em>iDroneCtrl</em> and <em>QGroundControl</em>) that can be used to communicate with ArduPilot (i.e. <a href="http://copter.ardupilot.com/" title="Copter">Copter</a>, <a href="http://plane.ardupilot.com/" title="Plane">Plane</a>, <a href="http://rover.ardupilot.com/" title="Rover">Rover</a>, <a href="http://antennatracker.ardupilot.com/" title="AntennaTracker">AntennaTracker</a>). 
+There are at least eight different ground control stations (<em>Mission Planner</em>, <em>APM Planner 2</em>, <em>MAVProxy</em>, <em>Tower</em> (DroidPlanner 3), <em>AndroPilot</em>, <em>MAVPilot</em>, <em>iDroneCtrl</em> and <em>QGroundControl</em>) that can be used to communicate with ArduPilot (i.e. <a title="Copter" href="http://copter.ardupilot.com/">Copter</a>, <a title="Plane" href="http://plane.ardupilot.com/">Plane</a>, <a title="Rover" href="http://rover.ardupilot.com/">Rover</a>, <a title="AntennaTracker" href="http://antennatracker.ardupilot.com/">AntennaTracker</a>).
 
 The decision to select a particular GSC often depends on your vehicle and preferred computing platform:
 <ul>
 	<li><strong>Ready-to-fly</strong> users may prefer the portability and ease of use of <em>Tower</em> (Droid Planner 3), or another GCS running on a tablet or phone.</li>
 	<li><strong>DIY/Kit</strong> users and developers often have to access configuration and analysis tools, and would therefore need (at least initially) <em>Mission Planner</em>, <em>APM Planner 2</em> or another more full-featured GCS.</li>
 </ul>
-
 [note]This wiki primarily refers to set-up and configuration using the Mission Planner, because it was created first and is the most full-featured GCS.[/note]
-
-
-
-<h1>Comparison table</h1>
-
-<table>
-<tr><th>Name</th> <th>Description</th> <th>Platform</th> <th>License</th></tr>
-<tr>
-<td><strong>Tower</strong> (DroidPlanner 3)</td> 
-<td>Android GCS for phones and tablets. Intended for end users and enthusiasts.
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/2015-02-09_1544_Tower_DroidPlanner3StructureScan.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/2015-02-09_1544_Tower_DroidPlanner3StructureScan-150x150.png" alt="Tower GCS - Structure Scan" width="150" height="150" class="alignright size-thumbnail wp-image-3965" /></a>
-
-Tower includes features like follow-me, “dronies” (i.e. “selfies” but taken with a drone) and special missions for 3D mapping. 
+<h1>Comparison</h1>
+<h2>Tower</h2>
+Tower (a.k.a. "DroidPlanner 3") is an Android GCS for phones and tablets. It is intended for end users and enthusiasts, and includes features like follow-me, “dronies” (i.e. “selfies” but taken with a drone) and special missions for 3D mapping.
 <ul>
-<li><a href="https://play.google.com/store/apps/details?id=org.droidplanner.android">Download Tower</a> (and <a href="https://play.google.com/store/apps/details?id=org.droidplanner.services.android" title="3DR Services">3DR Services</a>) from Google Play.</li>
-<li><a href="https://github.com/arthurbenemann/droidplanner/wiki/Compatible-Devices" target="_blank">Android compatible hardware list</a></li>
-<li><a href="https://github.com/DroidPlanner/droidplanner/wiki">Wiki</a></li>
-<li><a href="http://ardupilot.com/forum/viewforum.php?f=15">Support Forum</a></li>
-<li><a href="https://github.com/DroidPlanner/droidplanner/issues">Issues List</a></li>
-<li><a href="https://github.com/DroidPlanner/droidplanner">Source Code</a></li>
+	<li><strong>Platform</strong>: Android Phones and Tablets</li>
+	<li><strong>Licence</strong>: <a href="https://github.com/DroidPlanner/droidplanner/blob/develop/LICENSE.md">Open source</a> (GPLv3)</li>
 </ul>
-[note]Legacy versions (<a href="https://play.google.com/store/apps/details?id=org.droidplanner">DroidPlanner 2</a> and <a href="https://play.google.com/store/apps/details?id=com.droidplanner" title="">Droid Planner 1</a>) can also be downloaded from Google Play.[/note]
-
-</td> 
-<td>Android Phones and Tablets</td> 
-<td><a href="https://github.com/DroidPlanner/droidplanner/blob/develop/LICENSE.md">Open source</a> (GPLv3)</td>
-</tr>
-
-<tr>
-<td><strong>Mission Planner</strong></td> 
-<td>
-
-<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/MP-FP-Screen.jpg"><img class="alignright size-thumbnail wp-image-2257" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/MP-FP-Screen.jpg" alt="MP FP Screen" width="150" height="150" /></a> 
-
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/2015-02-09_1544_Tower_DroidPlanner3StructureScan.png"><img class="alignnone wp-image-3965 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/2015-02-09_1544_Tower_DroidPlanner3StructureScan.png" alt="Tower GCS - Structure Scan" width="884" height="660" /></a>
+<ul>
+	<li><a href="https://play.google.com/store/apps/details?id=org.droidplanner.android">Download Tower</a> (and <a title="3DR Services" href="https://play.google.com/store/apps/details?id=org.droidplanner.services.android">3DR Services</a>) from Google Play.</li>
+	<li><a href="https://github.com/arthurbenemann/droidplanner/wiki/Compatible-Devices" target="_blank">Android compatible hardware list</a></li>
+	<li><a href="https://github.com/DroidPlanner/droidplanner/wiki">Wiki</a></li>
+	<li><a href="http://ardupilot.com/forum/viewforum.php?f=15">Support Forum</a></li>
+	<li><a href="https://github.com/DroidPlanner/droidplanner/issues">Issues List</a></li>
+	<li><a href="https://github.com/DroidPlanner/droidplanner">Source Code</a></li>
+</ul>
+[note]Legacy versions (<a href="https://play.google.com/store/apps/details?id=org.droidplanner">DroidPlanner 2</a> and <a title="" href="https://play.google.com/store/apps/details?id=com.droidplanner">Droid Planner 1</a>) can also be downloaded from Google Play.[/note]
+<h2>Mission Planner</h2>
 Full featured and widely used GCS. Intended for both developers and enthusiasts.
-
 <ul>
-<li><a href="http://planner.ardupilot.com/">Wiki</a></li>
-<li><a href="http://ardupilot.com/forum/viewforum.php?f=12">Support Forum</a></li>
-<li><a href="https://github.com/diydrones/MissionPlanner/issues">Issues List</a></li>
-<li><a href="https://github.com/diydrones/MissionPlanner">Source Code</a></li>
-</ul></td> 
-
-<td>Windows, Mac OS X (Using Mono)</td> 
-<td><a href="https://github.com/diydrones/MissionPlanner/blob/master/COPYING.txt">Open source</a> (GPLv3)</td></tr>
-
-<tr>
-<td><strong>APM Planner 2</strong></td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_APMPlanner2.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_APMPlanner2-150x150.png" alt="ChooseAGCS_APMPlanner2" width="150" height="150" class="alignright size-thumbnail wp-image-2922" /></a> The best autopilot for use on MAC and Linux platforms. It has a smaller user base and reduced feature set when compared with Mission Planner. Intended for developers and enthusiasts.
-
-<ul>
-<li><a href="http://planner2.ardupilot.com/">Wiki</a></li>
-<li><a href="http://ardupilot.com/forum/viewforum.php?f=82">Support Forum</a></li>
-<li><a href="https://github.com/diydrones/apm_planner/issues">Issues List</a></li>
-<li><a href="https://github.com/diydrones/apm_planner">Source Code</a></li>
+	<li><strong>Platform</strong>: Windows, Mac OS X (Using Mono)</li>
+	<li><strong>Licence</strong>: <a href="https://github.com/diydrones/MissionPlanner/blob/master/COPYING.txt">Open source</a> (GPLv3)</li>
 </ul>
-</td> 
-<td>Windows, Mac OS X, Linux</td> 
-<td><a href="https://github.com/diydrones/apm_planner/blob/master/license.txt">Open source</a> (GPLv3)</td>
-</tr>
-
-<tr>
-<td><strong>MAVProxy</strong></td> 
-<td><a href="http://dronecode.github.io/MAVProxy/html/_images/mavproxy_linux.jpg"><img class="alignright thumbnail wp-image-2922" src="http://dronecode.github.io/MAVProxy/html/_images/mavproxy_linux.jpg" alt="ChooseAGCS_MAVProxy" width="150" /></a> Linux GCS often used by Plane developers. Primarily a command line interface with graphical modules for map and mission editing. Written in Python, and extensible via python modules.
-
+<img class="alignnone wp-image-2257 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/04/MP-FP-Screen.jpg" alt="MP FP Screen" width="1009" height="598" />
 <ul>
-<li><a href="http://dronecode.github.io/MAVProxy/html/index.html">Getting Started</a></li>
-<li><a href="https://github.com/Dronecode/MAVProxy/issues">Issues List</a></li>
-<li><a href="https://github.com/Dronecode/MAVProxy">Source Code</a></li>
-</ul></td> 
-<td>Linux</td> 
-<td><a href="https://github.com/tridge/MAVProxy/blob/master/COPYING.txt">Open source</a> (GPLv3)</td>
-</tr>
-
-<tr>
-<td><strong>AndroPilot</strong></td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/Andropilot_-_Android_Apps_on_Google_Play.png"><img class="alignright thumbnail wp-image-446" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/Andropilot_-_Android_Apps_on_Google_Play.png" alt="Andropilot_-_Android_Apps_on_Google_Play" width="150" /></a> Android GCS intended for enthusiasts.
+	<li><a href="http://planner.ardupilot.com/">Wiki</a></li>
+	<li><a href="http://ardupilot.com/forum/viewforum.php?f=12">Support Forum</a></li>
+	<li><a href="https://github.com/diydrones/MissionPlanner/issues">Issues List</a></li>
+	<li><a href="https://github.com/diydrones/MissionPlanner">Source Code</a></li>
+</ul>
+&nbsp;
+<h2>APM Planner 2</h2>
+The best autopilot for use on MAC and Linux platforms. It has a smaller user base and reduced feature set when compared with Mission Planner. Intended for developers and enthusiasts.
 <ul>
-<li><a href="https://play.google.com/store/apps/details?id=com.geeksville.andropilot">Downloads (Google Play)</a></li>
-<li><a href="https://github.com/geeksville/arduleader/wiki/Android%20Device%20Compatibility%20List" target="_blank">Android compatible hardware list</a></li>
-<li><a href="https://github.com/geeksville/arduleader/wiki">Wiki</a></li>
-<li><a href="http://ardupilot.com/forum/viewforum.php?f=14">Support Forum</a></li>
-<li><a href="https://github.com/geeksville/arduleader/issues">Issues List</a></li>
-<li><a href="https://github.com/geeksville/arduleader/tree/master/andropilot">Source Code</a></li>
-</ul></td> 
-<td>Android Phones and Tablets</td> 
-<td><a href="https://github.com/geeksville/arduleader/blob/master/LICENSE.md">Open Source</a> (GPLv3)</td>
-</tr>
+	<li><strong>Platform</strong>: Windows, Mac OS X, Linux</li>
+	<li><strong>Licence</strong>: <a href="https://github.com/diydrones/apm_planner/blob/master/license.txt">Open source</a> (GPLv3)</li>
+</ul>
+<img class="alignnone wp-image-2922 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_APMPlanner2.png" alt="ChooseAGCS_APMPlanner2" width="1600" height="852" />
+<ul>
+	<li><a href="http://planner2.ardupilot.com/">Wiki</a></li>
+	<li><a href="http://ardupilot.com/forum/viewforum.php?f=82">Support Forum</a></li>
+	<li><a href="https://github.com/diydrones/apm_planner/issues">Issues List</a></li>
+	<li><a href="https://github.com/diydrones/apm_planner">Source Code</a></li>
+</ul>
+<h2>MAVProxy</h2>
+Linux GCS often used by Plane developers. Primarily a command line interface with graphical modules for map and mission editing. Written in Python, and extensible via python modules.
+<ul>
+	<li><strong>Platform</strong>: Linux</li>
+	<li><strong>Licence</strong>: <a href="https://github.com/tridge/MAVProxy/blob/master/COPYING.txt">Open source</a> (GPLv3)</li>
+</ul>
+<a href="http://dronecode.github.io/MAVProxy/html/_images/mavproxy_linux.jpg"><img class="thumbnail alignnone wp-image-2922 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_APMPlanner2.png" alt="ChooseAGCS_MAVProxy" width="1600" height="852" /></a>
+<ul>
+	<li><a href="http://dronecode.github.io/MAVProxy/html/index.html">Getting Started</a></li>
+	<li><a href="https://github.com/Dronecode/MAVProxy/issues">Issues List</a></li>
+	<li><a href="https://github.com/Dronecode/MAVProxy">Source Code</a></li>
+</ul>
+<h2>AndroPilot</h2>
+Android GCS intended for enthusiasts.
+<ul>
+	<li><strong>Platform</strong>: Android Phones and Tablets</li>
+	<li><strong>Licence</strong>: <a href="https://github.com/geeksville/arduleader/blob/master/LICENSE.md">Open Source</a> (GPLv3)</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/Andropilot_-_Android_Apps_on_Google_Play.png"><img class="thumbnail alignnone wp-image-446 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/Andropilot_-_Android_Apps_on_Google_Play.png" alt="Andropilot_-_Android_Apps_on_Google_Play" width="509" height="816" /></a>
+<ul>
+	<li><a href="https://play.google.com/store/apps/details?id=com.geeksville.andropilot">Downloads (Google Play)</a></li>
+	<li><a href="https://github.com/geeksville/arduleader/wiki/Android%20Device%20Compatibility%20List" target="_blank">Android compatible hardware list</a></li>
+	<li><a href="https://github.com/geeksville/arduleader/wiki">Wiki</a></li>
+	<li><a href="http://ardupilot.com/forum/viewforum.php?f=14">Support Forum</a></li>
+	<li><a href="https://github.com/geeksville/arduleader/issues">Issues List</a></li>
+	<li><a href="https://github.com/geeksville/arduleader/tree/master/andropilot">Source Code</a></li>
+</ul>
+<h2>MAV Pilot</h2>
+&nbsp;
 
-<tr>
-<td><strong>MAV Pilot</strong></td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_MAVPilot.jpg"><img class="alignright thumbnail wp-image-2926" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_MAVPilot.jpg" alt="ChooseAGCS_MAVPilot" width="150" /></a> ArduPilot compatible GCS that runs on iPhone/iPad. Also supports PX4 Flight Stack and ArDrone2.0 with Flight Recorder.
+ArduPilot compatible GCS that runs on iPhone/iPad. Also supports PX4 Flight Stack and ArDrone2.0 with Flight Recorder.
 See website for how-to on how connect it to your autopilot
 <ul>
-<li><a href="http://diydrones.com/profiles/blogs/mav-pilot-v1-0-for-iphone-is-available-in-the-app-store">Release announcement Blog &amp; Discussion</a></li>
-<li><a href="http://www.communistech.com/support/">Support Blog</a></li>
-<li><a href="http://www.communistech.com/forums/">Support Forum</a></li>
-<li><a href="http://appstore.com/communistech">iTunes Store link</a></li>
-</ul></td> 
-<td>iPhone, iPad</td> 
-<td>Proprietary.</td>
-</tr>
-
-<tr>
-<td><strong>Fighting Walrus iDroneCtrl</strong>
-</td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/iDroneLinkOnPhone.jpg"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/iDroneLinkOnPhone-300x123.jpg" alt="iDroneLinkOnPhone" width="150" class="alignright thumbnail wp-image-3094" /></a> iDroneCtrl is a free iOS app from Fighting Walrus, LLC. It uses Fighting Walrus' iDroneLink radio (915 MHz or 433 MHz) along with an iPhone or iPad to talk to your APM-powered UAV.
-
-The $99 iDroneLink can be purchased from <a href="http://fightingwalrus.com/" target="_blank">fightingwalrus.com</a>. 
-<ul>
-<li><a href="https://itunes.apple.com/us/app/idronectrl/id948077202?mt=8&amp;uo=4" target="itunes_store">Downloads (Apple Store)</a></li>
-<li><a href="http://www.fightingwalrus.com/blogs/news">Blog/News</a></li>
-<li><a href="https://github.com/fightingwalrus/iGCS/issues">Issues List/Support</a></li>
-</ul></td> 
-<td>iPhone, iPad</td> 
-<td>Proprietary, Free (previously <a href="https://github.com/fightingwalrus/iGCS">open source</a>).</td>
-</tr>
-
-<tr>
-<td><strong>QGroundControl</strong></td> 
-<td><a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/QGroundControlTabletImage.jpg" rel="attachment wp-att-5705"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/QGroundControlTabletImage-150x150.jpg" alt="QGroundControlTabletImage" width="150" height="150" class="alignright size-thumbnail wp-image-5705" /></a>Developed for our sister autopilot system, the "Native PX4 stack" <em>QGroundControl</em> can connect and display attitude information and parameter lists but is not customised to work with the ArduPilot firmware as much as the other ground stations listed above.
-<ul>
-<li><a href="http://www.qgroundcontrol.org/">Website</a></li>
-<li><a href="https://groups.google.com/forum/#!forum/qgroundcontrol">Support Forum</a></li>
-<li><a href="https://gitter.im/mavlink/qgroundcontrol">Gitter</a></li>
+	<li><strong>Platform</strong>: iPhone, iPad</li>
+	<li><strong>Licence</strong>: Proprietary</li>
 </ul>
-[warning]Januray 2016: Full support for ArduPilot firmware vehicles in QGroundControl is now in beta. This includes full Setup and Configuration, Mission Planning, Flight Display as well as streaming video. Also QGroundControl is now supported on Android tablets.
-
+<img class="thumbnail alignnone wp-image-2926 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/ChooseAGCS_MAVPilot.jpg" alt="ChooseAGCS_MAVPilot" width="640" height="960" />
 <ul>
-<li>The Beta link in here: <a href="http://www.qgroundcontrol.org/apm">www.qgroundcontrol.org/apm</a></li>
-<li>Download link: <a href="http://www.qgroundcontrol.org/downloads">www.qgroundcontrol.org/downloads</a></li>
+	<li><a href="http://diydrones.com/profiles/blogs/mav-pilot-v1-0-for-iphone-is-available-in-the-app-store">Release announcement Blog &amp; Discussion</a></li>
+	<li><a href="http://www.communistech.com/support/">Support Blog</a></li>
+	<li><a href="http://www.communistech.com/forums/">Support Forum</a></li>
+	<li><a href="http://appstore.com/communistech">iTunes Store link</a></li>
+</ul>
+<h2>Fighting Walrus iDroneCtrl</h2>
+iDroneCtrl is a free iOS app from Fighting Walrus, LLC. It uses Fighting Walrus' iDroneLink radio (915 MHz or 433 MHz) along with an iPhone or iPad to talk to your APM-powered UAV.
+<ul>
+	<li><strong>Platform</strong>: iPhone, iPad</li>
+	<li><strong>Licence</strong>: Proprietary, Free (previously <a href="https://github.com/fightingwalrus/iGCS">open source</a>).</li>
+</ul>
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/iDroneLinkOnPhone.jpg"><img class="thumbnail alignnone wp-image-3094 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/08/iDroneLinkOnPhone.jpg" alt="iDroneLinkOnPhone" width="1600" height="656" /></a>
+
+The $99 iDroneLink can be purchased from <a href="http://fightingwalrus.com/" target="_blank">fightingwalrus.com</a>.
+<ul>
+	<li><a href="https://itunes.apple.com/us/app/idronectrl/id948077202?mt=8&amp;uo=4" target="itunes_store">Downloads (Apple Store)</a></li>
+	<li><a href="http://www.fightingwalrus.com/blogs/news">Blog/News</a></li>
+	<li><a href="https://github.com/fightingwalrus/iGCS/issues">Issues List/Support</a></li>
+</ul>
+<h2>QGroundControl</h2>
+Developed for our sister autopilot system, the "Native PX4 stack" <em>QGroundControl</em> can connect and display attitude information and parameter lists but is not customised to work with the ArduPilot firmware as much as the other ground stations listed above.
+<ul>
+	<li><strong>Platform</strong>: Windows, Mac OS X, Linux, Android</li>
+	<li><strong>Licence</strong>: <a href="http://www.qgroundcontrol.org/license">Open Source</a> (GPLv3)</li>
+</ul>
+<img class="alignnone wp-image-5705 size-full" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/10/QGroundControlTabletImage.jpg" alt="QGroundControlTabletImage" width="600" height="600" /><a href="http://www.qgroundcontrol.org/">Website</a>
+<ul>
+	<li><a href="https://groups.google.com/forum/#!forum/qgroundcontrol">Support Forum</a></li>
+	<li><a href="https://gitter.im/mavlink/qgroundcontrol">Gitter</a></li>
+</ul>
+
+[warning]Januray 2016: Full support for ArduPilot firmware vehicles in QGroundControl is now in beta. This includes full Setup and Configuration, Mission Planning, Flight Display as well as streaming video. Also QGroundControl is now supported on Android tablets.
+<ul>
+	<li>The Beta link in here: <a href="http://www.qgroundcontrol.org/apm">www.qgroundcontrol.org/apm</a></li>
+	<li>Download link: <a href="http://www.qgroundcontrol.org/downloads">www.qgroundcontrol.org/downloads</a></li>
 </ul>
 [/warning]
-</td> 
-<td>Windows, Mac OS X, Linux, Android</td> 
-<td><a href="http://www.qgroundcontrol.org/license">Open Source</a> (GPLv3)</td>
-</tr>
 
-
-</table>
-
-
+&nbsp;
 <h1>Additional GSC hardware</h1>
-
 <h2>Android</h2>
-
 For Android devices, you will need:
 <ul>
 	<li>Android based tablet that can act as a USB host. Google Nexus tablet are recommended, and the compatible hardware lists for the different GSCs are listed in the table above.</li>
 	<li><a href="common-3dr-radio-version-2">SiK Telemetry Radio System</a> or similar (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
 	<li>USB OTG cable (typically less than $2 on <a href="http://www.ebay.com/sch/i.html?_trksid=m570.l3201&amp;_nkw=usb+otg+cable&amp;_sacat=0" target="_blank">ebay</a> and <a href="http://www.amazon.com/T-Flash-Adapter-Samsung-GT-i9100-GT-N7000/dp/B005FUNYSA/ref=sr_1_5?ie=UTF8&amp;qid=1376262351&amp;sr=8-5&amp;keywords=android+otg+cable">Amazon</a>).
-<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle.jpg"><img class="alignnone size-medium wp-image-2709" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle-300x168.jpg" alt="AndroidGCS_USB_dongle" width="300" height="168" /></a>
-</li>
+<a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle.jpg"><img class="alignnone size-medium wp-image-2709" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2013/08/AndroidGCS_USB_dongle-300x168.jpg" alt="AndroidGCS_USB_dongle" width="300" height="168" /></a></li>
 </ul>
-
 <h2>Desktop PCs (Windows/Mac/Linux</h2>
 For Desktop devices you will need:
-
 <ul>
 	<li><a href="common-3dr-radio-version-2">SiK Telemetry Radio System</a> or <a href="common-telemetry-landingpage">similar</a> (915 Mhz for US, 433 for Europe) which includes the bidirectional ground and air telemetry units.</li>
 </ul>
-
 <h2>iPhone/iPad</h2>
 The Fighting Walrus iDroneCtrl requires the iDroneLink radio transmitter. This can be purchased from <a href="http://fightingwalrus.com/" target="_blank">fightingwalrus.com</a>.
