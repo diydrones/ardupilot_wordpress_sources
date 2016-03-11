@@ -9,11 +9,13 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-<h3>Navigation Tuning with the L1 Controller</h3>
+<h1>Navigation Tuning with the L1 Controller</h1>
 Starting with Plane 2.72 a new navigation controller called the "L1 controller" was introduced. This controller produces much more accurate flight paths both for waypoints and loiter than the previous crosstrack and PID controller.
 
 Tuning the navigation controller usually involves adjusting one key parameter, called NAVL1_PERIOD. The default is 20, which results in reasonable turns for most R/C airframes. A smaller value for NAVL1_PERIOD will lead to more aggressive navigation (sharper corners). A larger value will lead to gentler navigation. You can additionally adjust the NAVL1_DAMPING and WP_RADIUS for further tuning.
-<h3> Steps to tuning the L1 controller</h3>
+
+
+<h1>Steps to tuning the L1 controller</h1>
 <ul>
 	<li>Make sure you have already tuned the roll and pitch controller, correctly trimmed your plane, and have ensured the plane does not gain or lose altitude in turns</li>
 	<li>Make sure you have setup LIM_ROLL_CD to an appropriate value for the bank angle you are comfortable with your plane flying without stalling. For slow flying electric gliders a value of around 5000 (50 degrees) is a good start. For fast flying aerobatic planes you may wish to use a larger value, such as 6500 (65 degrees).</li>
@@ -23,9 +25,11 @@ Tuning the navigation controller usually involves adjusting one key parameter, c
 	<li>Observe the behaviour of the plane in the turns. If it turns too slowly then reduce NAVL1_PERIOD by 5. If it is "weaving" after a turn then increase NAVL1_PERIOD by 1 or 2</li>
 	<li>If you are tuning for maximum performance, once you have completed the tuning of NAVL1_PERIOD you can increment NAVL1_PERIOD by 1 and then increase NAVL1_DAMPING in increments of 0.05 to get the response you want. Do not decrease NAVL1_PERIOD too much - it is unlikely you will need a value below 0.6.</li>
 </ul>
-<h3>Tuning waypoint transition behaviour</h3>
+<h1>Tuning waypoint transition behaviour</h1>
 To control whether Plane flies through a waypoint, then turns afterwards or turns before the waypoint so that it neatly lines up for the next leg of the mission you should adjust the waypoint radius via the WP_RADIUS parameter. If you want Plane to fly through the waypoint then set the WP_RADIUS to a small number, perhaps 10 meters. If you want Plane to turn before the waypoint so that it lines up with the next leg of the mission then set WP_RADIUS to a larger number. A good starting value is to set it equal to the turn radius your aircraft can easily achieve. This will normally be the same as your loiter radius WP_LOITER.
-<h3>L1 Controller Background &amp; Description</h3>
+
+
+<h1>L1 Controller Background &amp; Description</h1>
 The L1 controller concept is based on the following technical paper:
 <pre>S. Park, J. Deyst, and J. P. How, "A New Nonlinear Guidance Logic for
 Trajectory Tracking," Proceedings of the AIAA Guidance, Navigation and
