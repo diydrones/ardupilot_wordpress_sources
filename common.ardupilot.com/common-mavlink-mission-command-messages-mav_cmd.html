@@ -14,7 +14,7 @@ This article describes the specific set of mission commands and parameters that 
 [warning]This is a WORK IN PROGRESS. It has not been reviewed, and is full of questions/actions (usually preceded by "#HW" or "TODO". The list of what commands are supported in each platform are likely to be correct. The copter-specific documentation is more likely to be correct as it is based on existing copter mission docs. [/warning]
 <!--more-->
 
-
+[copywiki destination="copter,plane,rover,planner"]
 
 <h1>Overview</h1>
 The MAVLink protocol defines a large number of <a title="MAV_CMD" href="https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml#L531">MAV_CMD</a> waypoint command types (sent in a <code>MAVLink_mission_item_message</code>). ArduPilot implements handling for the subset of these commands and command-parameters that are <em>most relevant</em> and meaningful for each of the vehicles. Unsupported commands that are sent to a particular autopilot will simply be dropped.
