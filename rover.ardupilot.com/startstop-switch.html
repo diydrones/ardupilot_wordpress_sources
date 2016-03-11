@@ -22,11 +22,9 @@ For some robotics competitions, RC control is not allowed and the rover must be 
 
 The way this function works is that an APM port is assigned to the Start/Stop switch and APM will wait for that pin to be brought low (connected to ground). When this function is enabled, the Rover code will not send power to the rover's motor in Auto mode until that pin state is detected. So the rover will just stay stationary, waiting for you to flick the switch. Once you do so, it will perform its Auto mission as usual. You can stop the motion at any time by turning the switch back to the off position
 
-Any two-position switch will work, from a toggle (like <a href="https://www.sparkfun.com/products/9276">this one</a>) to a slider as shown.  There should only be two terminals. Wire one to the white wire of a RC servo cable and the other to the black wire as shown below. This way, when the switch is in the "on" position it connects the ground and signal pins.
+Any two-position switch will work, from a toggle (like <a href="https://www.sparkfun.com/products/9276">this one</a>) to a slider as shown. There should only be two terminals. Wire one to the white wire of a RC servo cable and the other to the black wire as shown below. This way, when the switch is in the "on" position it connects the ground and signal pins.
 
 <a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5440.jpg"><img class="alignnone size-full wp-image-578" alt="IMG_5440" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/IMG_5440.jpg" width="2274" height="1180" /></a>
-
-&nbsp;
 
 Plug that connector into any spare APM port, from A0-A8 (the ports above 8 are not digital pins and cannot be used). We typically use A4, since A0-A3 are used by the sonar sensors.
 
@@ -37,15 +35,9 @@ You can enable this switch in the Advanced Parameters List by entering the numbe
 
 <a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/autostart.png"><img class="alignnone size-full wp-image-579" alt="autostart" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/autostart.png" width="1189" height="87" /></a>
 
-&nbsp;
-
-&nbsp;
-
 If you're not using RC at all and can't switch modes manually, you may want to set your APM so that it boots into Auto mode at power-up (the auto-start function only works in Auto mode). You can do that by setting <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Initial_driving_mode_APMrover2INITIAL_MODE">INITIAL_MODE</a> to 10. All the other options for that parameter are listed <a href="http://rover.ardupilot.com/wiki/apmrover2-parameters/#Initial_driving_mode_APMrover2INITIAL_MODE">here</a>.
 
 <a href="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/initialmode.png"><img class="alignnone size-full wp-image-580" alt="initialmode" src="http://rover.ardupilot.com/wp-content/uploads/sites/4/2013/05/initialmode.png" width="1188" height="35" /></a>
-
-&nbsp;
 
 Once this is set up, all you need to do at robotics competitions is power on your rover, wait for GPS lock and when you get the green light, flick the switch. The rover should take it from there!
 
