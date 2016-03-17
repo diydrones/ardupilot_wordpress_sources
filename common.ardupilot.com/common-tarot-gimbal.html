@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-The <a href="http://store.3drobotics.com/products/tarot-t-2d-brushless-gimbal-kit" target="_blank">Tarot 2-Axis Gimbal</a> is the recommended gimbal for the <a href="https://store.3drobotics.com/products/3dr-pixhawk" target="_blank">Pixhawk</a> and <a href="https://store.3drobotics.com/products/apm-2-dot-6-plus-assembled-set-side-entry" target="_blank">APM2</a> due to its low cost and good performance. 
+The <a href="http://store.3drobotics.com/products/tarot-t-2d-brushless-gimbal-kit" target="_blank">Tarot 2-Axis Gimbal</a> is the recommended gimbal for the <a href="common-pixhawk-overview">Pixhawk</a> and <a href="common-apm25-and-26-overview">APM2</a> due to its low cost and good performance. 
 
 Copter, Plane, Rover support passing through a pilot desired roll or pitch angle and also more advanced automated aiming of the camera (i.e. ROI - region-of-interest).
 <!--more-->
@@ -20,7 +20,7 @@ Copter, Plane, Rover support passing through a pilot desired roll or pitch angle
 
 <h1>Gimbal Assembly instructions</h1>
 
-Paper instructions are normally provided with the gimbal but a short user manual can also be found in the "User Manual" directory of the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file which is available in the downloads area.
+Paper instructions are normally provided with the gimbal and a short user manual can also be found in the "User Manual" directory of the <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file.
 
 
 <h1>Connecting the gimbal to the Pixhawk</h1>
@@ -48,9 +48,9 @@ Solid blue <span style="background-color: #0000ff">   <span style="background-
 
 Tarot gimbals purchased from 3DR should come pre-configured to work with Copter but if you have purchased from another source or just wish to change the configuration you should:
 <ol>
-	<li>Use the provided USB dongle to connect the Gimbal board to your computer (Windows only).  If this is the first time you have plugged in the dongle you will likely see a USB device installation window.  After successful installation of the driver a new COM port named "Prolific USB-to-Serial Comm Port" should appear in the Device Manager as shown below.  If drivers cannot be found you may be able to install Windows 7 or Windows XP drivers using one of the .exe files found in the "driver" directory of the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file.
+	<li>Use the provided USB dongle to connect the Gimbal board to your computer (Windows only).  If this is the first time you have plugged in the dongle you will likely see a USB device installation window.  After successful installation of the driver a new COM port named "Prolific USB-to-Serial Comm Port" should appear in the Device Manager as shown below.  If drivers cannot be found you may be able to install Windows 7 or Windows XP drivers using one of the .exe files found in the "driver" directory of the <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file.
 <img class="alignnone size-full wp-image-1769" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Gimbal_Tarot_DeviceManager2.png" alt="Gimbal_Tarot_DeviceManager2" width="453" height="580" /></li>
-	<li>Download and unzip the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file to a convenient place on your computer.</li>
+	<li>Download and unzip the <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip" target="_blank">Tarot Gimbal Firmware v1.5 zip</a> file to a convenient place on your computer.</li>
 	<li>Double click on the <strong>ZYX-BMGC-EN_V1.5.exe</strong> file (found in the above zip) and the configuration UI shown below should appear
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_Gimbal_Config.png"><img src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/02/Tarot_Gimbal_Config.png" alt="Tarot_Gimbal_Config" width="892" height="656" /></a></li>
 	<li>Power the Gimbal by plugging in the battery.</li>
@@ -84,6 +84,7 @@ The channel 6 tuning knob's output can be used to control the pitch angle of the
 </li>
 </ul>
 <a href="http://copter.ardupilot.com/wiki/mission-command-list/#Do-Set-ROI">Do-Set-ROI</a> mission commands and the MP's "Point Camera Here" feature should work if the Tilt Servo Limits and Angle Limits Min and Max values as set as shown above.
+
 The "Servo Limits" holds the minimum and maximum PWM values that will be sent from the APM/Pixhawk to the gimbal (i.e. on RC9 if set-up like above).
 
 The "Angle Limits" are the earth-frame angles (in degrees) that the gimbal can achieve. "0" degrees is straight ahead, "90" degrees is straight up, "-90" degrees is straight down. The Tarot gimbal is capable of pointing straight down (i.e. "-90") to straight ahead (i.e. "0").
@@ -110,7 +111,7 @@ The gimbal must be running firmware version 1.4 or higher. Follow the instructio
 <ol>
 	<li>Connect the gimbal to your computer using the USB dongle. Ensure that the gimbal end is plugged into the "Gimbal Controller Connector" (see diagram in the Connecting the Gimbal to the Pixhawk section above). Leave the gimbal unpowered for now.</li>
 	<li>Start the "ZYX-BMGC-EN_V1.5" configuration application</li>
-	<li>Select <strong>Open Firmware</strong> and select the <em><strong>../Firmware_V1.5/Gimbal Controller Firmware V1.5.bgsf</strong></em> file from the <a href="http://ardupilot.com/downloads/?did=110" target="_blank">Tarot Gimbal Firmware v1.5 zip.</a></li>
+	<li>Select <strong>Open Firmware</strong> and select the <em><strong>../Firmware_V1.5/Gimbal Controller Firmware V1.5.bgsf</strong></em> file from the <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip" target="_blank">Tarot Gimbal Firmware v1.5 zip.</a></li>
 	<li>Select the COM Port that has been assigned to the gimbal, then select "Open COM Port."</li>
 	<li>Select <strong>Start Upgrade</strong>.</li>
 	<li>Connect the battery to power the gimbal. You will see a green progress bar on the screen indicating the status of the update.</li>

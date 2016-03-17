@@ -13,7 +13,10 @@ This article describes the <a href="http://store.3drobotics.com/products/px4flow
 <!--more-->
 
 [warning]The PX4FLOW is supported as an experimental feature starting from Copter 3.3. It is not supported in Plane or Rover.[/warning]
+
+
 <h1>Overview</h1>
+
 The <a href="http://store.3drobotics.com/products/px4flow" target="_blank">PX4FLOW (Optical Flow) Sensor</a> is a specialized high resolution downward pointing camera module that uses the ground texture and visible features and a rangefinder to determine aircraft ground velocity. Although the sensor has plus a built-in Maxbotix LZ-EZ4 sonar to measure height, this has not been reliable enough over a range of surfaces in testing, so its readings are not used and instead a separate <a href="wiki/common-optional-hardware/common-rangefinder-landingpage/">Range Finder</a> such as the <a href="wiki/common-optional-hardware/common-rangefinder-landingpage/common-rangefinder-lidarlite/">Lidar Lite</a> should also be attached to the vehicle.
 
 The built-in 3 axis gyro enables automatic compensation for vehicle tilt and heading relative to the ground.  The PX4-FLOW incorporates the same powerful Cortex M4F Microcontroller as is used in the PX4-FMU.
@@ -23,10 +26,11 @@ More information on this sensor including how to upgrade the sensor's firmware u
 [warning]To use this flow sensor to perform optical flow loiter as seen in the following video, you will need to purchase a separate range finder. Our testing has been performed using the <a title="Pulse Light unit" href="http://pulsedlight3d.com/">Pulsed Light unit</a> [/warning]
 
 https://www.youtube.com/watch?v=LP8kl4hGfMw
+
 <h1>Upgrade the PX4Flow sensor's firmware</h1>
 The PX4Flow firmware must be updated prior to connecting to the Pixhawk:
 <ol>
-	<li>Download and unzip the <a href="http://ardupilot.com/downloads/?did=118" target="_blank">PX4Flow-KLT firmware from the downloads area </a>(<a href="https://github.com/priseborough/px4flow/tree/klt_flow" target="_blank">source code here</a>)</li>
+	<li>Download and unzip the <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/px4flow-klt-06Dec2014.zip" target="_blank">PX4Flow-KLT firmware</a> (<a href="https://github.com/priseborough/px4flow/tree/klt_flow" target="_blank">source code here</a>)</li>
 	<li><a href="http://qgroundcontrol.org/downloads" target="_blank">Download, install and start QGround Control</a></li>
 	<li>Select <em>PX4 Autopilot</em> from the splash screen
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade1.png"><img class="alignnone size-medium wp-image-4953" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/PX4Flow_FirmUpgrade1-300x165.png" alt="PX4Flow_FirmUpgrade1" width="300" height="165" /></a></li>
@@ -47,6 +51,7 @@ Mount the flow sensor pointing straight down with the X axis forwards and the Y
 [note]The default mounting orientation is different to that shown on the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>. If you mount the board as shown in the <a href="http://pixhawk.org/modules/px4flow">ETH PX4FLOW wiki</a>, you will need to set <code>FLOW_ORIENT_YAW</code> to -9000.[/note]
 
 <h1>Setup through the Mission Planner</h1>
+
 <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup.png"><img class="alignnone size-large wp-image-2974" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/OptFlow_MPSetup-1024x575.png" alt="OptFlow_MPSetup" width="584" height="327" /></a>
 
 The sensor can be enabled by connecting with the Mission Planner and then on the <strong>Initial Setup | Optional Hardware | Optical Flow</strong> page check the <strong>Enable</strong> checkbox.  Alternatively the <code>FLOW_ENABLE</code> parameter should be set to "1" through the full parameters list.  The sensor will be initialised once the Pixhawk board is rebooted.
@@ -58,7 +63,7 @@ The raw data from the sensor will eventually be visible on the Mission Planner's
 [warning]Disconnect the sensor I2C connection from your flight computer before you connect it to via USB to your computer, Otherwise the sensor will be trying to power the flight computer and it may not have enough voltage to work properly.[/warning]
 <ol>
 	<li>Remove the lens cap from the sensor</li>
-	<li>We recommend you upgrade to <a href="http://ardupilot.com/downloads/?did=118" target="_blank">this modified PX4FLOW sensor firmware</a>. using QGroundControl. This modified firmware uses a different method to determine the optical flow and provides readings over a wider range of light and distance, but has a smaller maximum flow speed compared to the standard firmware.</li>
+	<li>We recommend you upgrade to <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/px4flow-klt-06Dec2014.zip" target="_blank">this modified PX4FLOW sensor firmware</a>. using QGroundControl. This modified firmware uses a different method to determine the optical flow and provides readings over a wider range of light and distance, but has a smaller maximum flow speed compared to the standard firmware.</li>
 	<li>Reconnect the I2C connection your flight computer  and change the following parameters: <code>FLOW_ENABLE = 1</code> turns on use of the sensor and <code>LOG_BITMASK = 131071</code> turns on pre-arm logging and will help diagnose problems</li>
 	<li>Power up the vehicle (you can power up via the flight computer USB) to start logging and rotate the vehicle with the sensor pointing at the floor.</li>
 	<li>Download the dataflash logs and graph the OF message's data including "Qual", flowX, flowY, bodyX and bodyY values. The quality reading should be greater than 0, and you should see the flow and body rates changing.</li>

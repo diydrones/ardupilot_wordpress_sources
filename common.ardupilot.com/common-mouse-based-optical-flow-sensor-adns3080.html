@@ -43,7 +43,7 @@ To improve position hold accuracy in GPS denied environments Copter-3.2.1 for AP
 <ul>
 <ul>
 <ul>
-	<li>If using an APM2, you can <a href="http://ardupilot.com/downloads/?did=94" target="_blank">download the hex file from the downloads area</a> and then upload to your APM2 using the Mission Planner's INITIAL SETUP &gt; Install Firmware &gt; Load custom firmware link</li>
+	<li>If using an APM2, you can <a href="http://firmware.ardupilot.org/downloads/wiki/advanced_user_tools/AP_OpticalFlow_test.hex" target="_blank">download the hex file from here</a> and then upload to your APM2 using the Mission Planner's <strong>INITIAL SETUP | Install Firmware | Load custom firmware</strong> link</li>
 	<li>If using an APM1 you must open the <a href="https://raw.github.com/diydrones/ardupilot/860f4b260552297253a28b83a7f108302b84b97e/libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde" target="_blank">AP_OpticalFlow_test.pde </a>sketch in the arduino IDE, compile and upload to your APM1</li>
 </ul>
 </ul>
@@ -55,7 +55,10 @@ To improve position hold accuracy in GPS denied environments Copter-3.2.1 for AP
 	<li>type 'c' to ensure that the sensor is responding to the APM</li>
 	<li>type 'm' and move the camera back and forth and check that x,y values change. If they do not change, modify the focus of the lens by turning it left or right.</li>
 </ul>
+
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/OpticalFlow_test.jpg" alt="" />
+
+
 <h1>Capturing an image from the sensor</h1>
 In order to check that you have the lens properly focused you can capture an image directly from the sensor and display it using a simpler viewer written in Python.
 
@@ -73,22 +76,29 @@ In order to check that you have the lens properly focused you can capture an ima
 </ol>
 Note 1: After capturing images, you will need to reset the sensor (i.e. plug/unplug it) to restore it to the normal motion capture mode.
 
-Note 2: you should see the the AP_OpticalFlow_ADNS3080's menu and any errors appear in the Python Shell
+Note 2: you should see the the AP_OpticalFlow_ADNS3080's menu and any errors appear in the Python Shell.
+
+
 <h1>How it works</h1>
+
 The mouse sensor returns the average movement (in the x and y directions) of surface features that it sees. A single pixel move will not cause the sensor to return "1". It will return a higher value around 5. This value is referred to as the <strong>scaler </strong>below. In the example below, the value returned would be about 1.6 ( (-5+5+5) / 3)
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/SurfaceFeatures.png" alt="" />
 
 <strong>Sensor's x and y values can be converted to real distances based on altitude</strong>
 
-In order to convert values from the sensor to real distances moved, we need to take into account the altitude. This is necessary because as you can see from the two pictures below, if we have two quads moving the same distance, but one at a low altitude, the other at a higher altitude, the lower quad will see surface features appear to move further and this will result in a higher optical flow values<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/AltitudesEffectOnSensorValues.png" alt="" />
+In order to convert values from the sensor to real distances moved, we need to take into account the altitude. This is necessary because as you can see from the two pictures below, if we have two quads moving the same distance, but one at a low altitude, the other at a higher altitude, the lower quad will see surface features appear to move further and this will result in a higher optical flow values
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/AltitudesEffectOnSensorValues.png" alt="" />
 
 <img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/distanceMovedFormula.png" alt="" />
 
 <strong>We compensate for vehicle roll and pitch changes
 </strong>
 
-Change in the vehicle's roll and pitch will also cause changes in the x and y values returned by the sensor. Unlike the lateral movement calculations these are not dependent upon the distance of the visible objects. In the picture below you can see that as the quad has rolled 10 degrees but both flowers have moved from the center of the camera's view in the 1st pic to the edge of the view in the 2nd pic.<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/RotationEffectOnSensorValues.png" alt="" />
+Change in the vehicle's roll and pitch will also cause changes in the x and y values returned by the sensor. Unlike the lateral movement calculations these are not dependent upon the distance of the visible objects. In the picture below you can see that as the quad has rolled 10 degrees but both flowers have moved from the center of the camera's view in the 1st pic to the edge of the view in the 2nd pic.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/RotationEffectOnSensorValues.png" alt="" />
 
 The expected change in sensor values can be calculated directly from the change in roll and pitch given the formula below. We subtract these expected changes from the real values returned by the sensor.
 
@@ -103,10 +113,8 @@ Once we have the x/y movements we can integrate these values over time with the 
 </ul>
 <h1>Acknowledgements:</h1>
 <ol>
-	<li><a href="http://www.diydrones.com/profile/MarkoKleineBerkenbusch">Marko Klein Berkenbusch's </a><a href="http://www.diydrones.com/profiles/blogs/quad-position-hold-with-mouse">position hold with mouse sensor
+	<li><a href="http://www.diydrones.com/profile/MarkoKleineBerkenbusch">Marko Klein Berkenbusch's</a> <a href="http://www.diydrones.com/profiles/blogs/quad-position-hold-with-mouse">position hold with mouse sensor
 </a></li>
-	<li>research paper re <a href="http://www.araa.asn.au/acra/acra2007/papers/paper181final.pdf">optical flow for position hold
-</a></li>
-	<li>research paper re <a href="http://www.mecatronica.eesc.usp.br/wiki/upload/0/0a/2006_Thesis_Remote_Terrain_Navigation_for_Unmanned_Air_Vehicles.pdf">optical flow for object avoidance
-</a></li>
+	<li>research paper re <a href="http://www.araa.asn.au/acra/acra2007/papers/paper181final.pdf">optical flow for position hold</a></li>
+	<li>research paper re <a href="http://www.mecatronica.eesc.usp.br/wiki/upload/0/0a/2006_Thesis_Remote_Terrain_Navigation_for_Unmanned_Air_Vehicles.pdf">optical flow for object avoidance</a></li>
 </ol>
