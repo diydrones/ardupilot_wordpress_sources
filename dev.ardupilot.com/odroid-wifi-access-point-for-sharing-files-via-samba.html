@@ -22,22 +22,25 @@ All the instructions below can be implemented by connecting a keyboard, mouse an
 
 <h1>Install all the required packages</h1>
 Becomes super user:
-<p style="padding-left: 30px"><code>sudo -s</code></p>
+<pre>sudo -s</pre>
 Install hostapd, samba and all the other required packages:
-<p style="padding-left: 30px"><code>apt-get install hostapd samba samba-common python-glade2 system-config-samba isc-dhcp-server</code></p>
+<pre>apt-get install hostapd samba samba-common python-glade2 system-config-samba isc-dhcp-server</pre>
 
 <h1>Setting up the Access Point</h1>
 After first ensuring the wifi dongle is plugged into the Odroid,
 
 Find the name of your wifi dongle by typing <code>ifconfig</code> (normally it will be "<strong>wlan0</strong>" or "<strong>wlan2</strong>")
 <p style="padding-left: 30px"><a href="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/01/Odroid_FindWifiDongle.png"><img class="alignnone size-medium wp-image-4869" src="http://dev.ardupilot.com/wp-content/uploads/sites/6/2015/01/Odroid_FindWifiDongle-278x300.png" alt="Odroid_FindWifiDongle" width="278" height="300" /></a></p>
+
 Check the wifi dongle supports "AP" mode:
-<p style="padding-left: 30px"><code>iw list</code></p>
+<pre>iw list</pre>
 A huge list of information will be displayed, you are looking for a section called "Supported interface modes:" followed by "* AP".  If you cannot find this then these instructions will not work and you should try with another dongle.
-<p style="padding-left: 30px"><code>Supported interface modes:
+<pre>
+Supported interface modes:
 * IBSS
 * managed
-* AP </code></p>
+* AP 
+</pre>
 Use your favourite editor (nano or vi perhaps) to edit the <code>/etc/network/interfaces</code> fileand add an entry for your wifi dongle.  Note you should replace "wlan2" if your dongle has a different name:
 <code>auto <strong>wlan2</strong>
 iface <strong>wlan2</strong> inet static
@@ -45,8 +48,11 @@ address 192.168.100.1
 netmask 255.255.255.0</code>
 
 Edit the <code>/etc/hostapd/hostapd.conf</code> file and ensure it looks like below
-<p style="padding-left: 30px"><code>vi /etc/hostapd/hostapd.conf</code></p>
-<p style="padding-left: 60px"><code>interface=wlan2   &lt;-- change "wlan2" to name of wifi dongle found above
+<pre>
+vi /etc/hostapd/hostapd.conf
+</pre>
+<pre>
+interface=wlan2   <-- change "wlan2" to name of wifi dongle found above
 driver=nl80211
 ssid=MyDrone
 hw_mode=g
@@ -55,27 +61,32 @@ macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
-wpa_passphrase=MyDrone12   &lt;-- password for clients to access the wifi access point
+wpa_passphrase=MyDrone12   <-- password for clients to access the wifi access point
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
-rsn_pairwise=CCMP</code></p>
+rsn_pairwise=CCMP
+</pre>
+
 Try starting hostapd:
-<p style="padding-left: 30px"><code>hostapd /etc/hostapd/hostapd.conf</code></p>
-If this fails try replacing the /usr/sbin/hostapd and hostapd_cli files with the version found in <a href="http://ardupilot.com/downloads/?did=119" target="_blank">the downloads area</a>. You will also need to install the libnl-dev package:
-<p style="padding-left: 30px"><code>apt-get install libnl-dev</code></p>
+<pre>hostapd /etc/hostapd/hostapd.conf</pre>
+If this fails try replacing the /usr/sbin/hostapd and hostapd_cli files with the version found in <a href="http://firmware.diydrones.com/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip" target="_blank">the downloads area</a>. 
+You will also need to install the libnl-dev package:
+<pre>apt-get install libnl-dev</pre>
+
 To make the hostapd service run whenever the odroid is started edit the /etc/init.d/hostapd file and ensure the line below appears:
-<p style="padding-left: 30px"><code>DAEMON_CONF=/etc/hostapd/hostapd.conf</code></p>
-
-
-
+<pre>DAEMON_CONF=/etc/hostapd/hostapd.conf</pre>
 
 <h1>Setting up Samba</h1>
 Create directories you wish to share:
-<p style="padding-left: 30px"><code>mkdir -p /mydrone
-mkdir -p /mydrone/images</code></p>
+<pre>mkdir -p /mydrone
+mkdir -p /mydrone/images
+</pre>
+
 Edit the samba config file (if not present create a new file):
-<p style="padding-left: 30px"><code>vi /etc/samba/smb.conf</code></p>
-<p style="padding-left: 60px"><code>[global]
+<pre>vi /etc/samba/smb.conf</pre>
+
+<pre>
+[global]
 workgroup = MyDroneGroup
 server string = Drone Server
 netbios name = mydrone
@@ -88,15 +99,21 @@ path = /mydrone/images
 browsable = yes
 writable = yes
 guest ok = yes
-read only = no</code></p>
+read only = no
+</pre>
 The this config will create a "images" share with no restriction on clients adding or deleting files.
 
 
 
 <h1>Setting up DHCP</h1>
 Edit the /etc/dhcp/dhcpd.conf file and ensure it has all the lines listed below added/uncommented:
-<p style="padding-left: 30px"><code>vi /etc/dhcp/dhcpd.conf</code></p>
-<p style="padding-left: 60px"><code># option definitions common to all supported networks...
+
+<pre>
+vi /etc/dhcp/dhcpd.conf
+</pre>
+
+
+<pre># option definitions common to all supported networks...
 option domain-name "mydrone.local";
 option domain-name-servers dns.mydrone.local
 default-lease-time 600;
@@ -106,19 +123,23 @@ log-facility local7;
 subnet 192.168.100.0 netmask 255.255.255.0 {
 range 192.168.100.100 192.168.100.200;    &lt;-- clients will get IP addresses in this range
 }
-</code></p>
+</pre>
+
 Add all possible client IP addresses to the <code>/etc/hosts</code> file:
-<p style="padding-left: 30px"><code>vi /etc/hosts</code></p>
-<p style="padding-left: 60px"><code>127.0.0.1 localhost
+<pre>vi /etc/hosts</pre>
+
+<pre>
+127.0.0.1 localhost
 192.168.100.1 odroid-pc odroid
 192.168.100.100 client100
 192.168.100.101 client101
 192.168.100.102 client102
 ....
 192.168.100.200 client200
-</code></p>
+</pre>
+
 Adding all the client IP address can be accomplished more quickly with the following command:
-<p style="padding-left: 30px"><code>(for i in $(seq 100 200); do echo 192.168.100.$i client$i; done) &gt;&gt; /etc/hosts</code></p>
+<pre>(for i in $(seq 100 200); do echo 192.168.100.$i client$i; done) &gt;&gt; /etc/hosts</pre>
 Restart the Odroid and with any luck an AP will be created and you will be able to connect as shown below.
 
 
