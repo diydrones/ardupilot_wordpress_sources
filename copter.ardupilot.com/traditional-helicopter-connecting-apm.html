@@ -11,8 +11,10 @@ END METADATA
 -->
 <h1>Transmitter programming versus APM programming</h1>
 The APM does a lot of processing internally to fly your heli while the Tx stick inputs are only <i>pilot requests</i> which the APM uses to figure out what to do with the servos. Putting radio mixes into the APM, or trying to run an ESC manually goes against the whole idea that the APM <strong>is in control</strong>. You can use some <strong>expo</strong> , or possibly dual-rates, in your Tx but that's it, everything else must be done inside the APM.
+
+
 <h1>Basic configuration of your receiver and servos</h1>
-The basic radio set-up is very similar to the <a href="http://copter.ardupilot.com/wiki/assembly-instructions/">Multirotors</a>. Although you will be flying a helicopter, the setup is easier if you do not use your RC transmitter in helicopter mode. Instead, setup your radio in normal airplane mode. Some radios call this "Acro" or "Fixed wing" mode. The Copter electronics and software takes care of all needed swash plate mixing.
+The basic radio set-up is very similar to the <a href="assembly-instructions">Multirotors</a>. Although you will be flying a helicopter, the setup is easier if you do not use your RC transmitter in helicopter mode. Instead, setup your radio in normal airplane mode. Some radios call this "Acro" or "Fixed wing" mode. The Copter electronics and software takes care of all needed swash plate mixing.
 
 Differences compared to the Multirotor set-up are:
 <ul>
@@ -89,7 +91,7 @@ The diagram below might be useful in trying to understand how to connect your pa
 If you can, it’s best to use an 8 channel receiver because the APM2.5 has 8 input channels all of which have important functions.
 <h2>APM Channel 5 (Rx Ch5): Aux 1</h2>
 If you don't understand what <strong>Mission Planner</strong> is then this section may be worth returning to once you have that software loaded and you've familiarised yourself with it.
-Everything you need to know about downloading Mission Planner for use with your Apm2.5+ can be found <a href="http://copter.ardupilot.com/wiki/common-install-mission-planner/" rel="nofollow">(Here!)</a>.
+Everything you need to know about downloading Mission Planner for use with your Apm2.5+ can be <a href="common-install-mission-planner" rel="nofollow">found here!</a>.
 
 Ch 5 should be set up using a 3 position switch with possible mixing added later to get more than three outputs and this is used to select the mode you want to fly. There are 12 modes from 0 to 11.
 
@@ -97,15 +99,20 @@ Ch 5 should be set up using a 3 position switch with possible mixing added later
 
 Please note that of_loiter is for the optical flow sensor. Don't use it if you don't have one.
 
-You set the modes you want using Channel 5 on your Tx and can find much more information on this <a href="http://copter.ardupilot.com/wiki/flight-modes/" rel="nofollow">(Here!)</a>.
+You set the modes you want using Channel 5 on your Tx and can find much more information on this <a href="flight-modes" rel="nofollow">here!</a>.
+
+
 <h2>APM Channel 6 and 7 (Rx Ch7 and 8): Aux 2 and Aux 3</h2>
 Please refer back to the layout diagram above to remind yourself of the wiring of Rx Ch7 and Ch8 to APM channel 6 and 7.
 
 In Mission Planner go to Configuration Tab&gt;Standard Params&gt;Copter Config and you will see at the bottom-middle of the screen a <strong>Ch6 Opt</strong>and a <strong>Ch7 Opt</strong> pull down menu. It is best to set Ch7 in your Tx up with a knob or slider. You can then choose a parameter you want to test over a range from the drop down menu and set the Min and Max values just below the Ch6 Opt drop down to the extreme values of the parameter range you want to test.
 
-Ch8 in your Tx should be set up with a two position switch and you can activate the function in the drop down menu of the <strong>Ch7 Opt</strong> with this switch. Have a look at the Mission Planner options for Ch7 <a href="http://copter.ardupilot.com/wiki/channel-7-and-8-options/">(Here!)</a>
+Ch8 in your Tx should be set up with a two position switch and you can activate the function in the drop down menu of the <strong>Ch7 Opt</strong> with this switch. Have a look at the Mission Planner options for Ch7 <a href="channel-7-and-8-options">here!</a>
+
 <h2>Rotor Speed Control (RSC) using Output Channel 8 on APM2.5</h2>
-To use the APM to control the rotor speed (ie.throttle/ESC), all you have to do is send whatever throttle signal you want in on Ch8(in) and then plug the throttle servo or ESC into Ch8(out) on the APM. Ch8 throttle control is important because it forces you to arm the APM before you can fly. Without arming, the motor will not start nor will the collective servos work. So Ch8 is used for switching the motor/collective on and off something like a throttle-hold. See a detailed explanation of the RSC set up <a href="http://copter.ardupilot.com/wiki/traditional-helicopter-configuration/" rel="nofollow">(Here!)</a> which is part of the Configuration section of this Wiki.
+To use the APM to control the rotor speed (ie.throttle/ESC), all you have to do is send whatever throttle signal you want in on Ch8(in) and then plug the throttle servo or ESC into Ch8(out) on the APM. Ch8 throttle control is important because it forces you to arm the APM before you can fly. Without arming, the motor will not start nor will the collective servos work. So Ch8 is used for switching the motor/collective on and off something like a throttle-hold. See a detailed explanation of the RSC set up <a href="traditional-helicopter-configuration" rel="nofollow">here!</a> which is part of the Configuration section of this Wiki.
+
+
 <h1>Updating the PPM encoder on the APM2.5+</h1>
 If you are using an 8 channel Rx it is important to have the latest version of the APM PPM encoder firmware iinstalled on the APM board. If you are having difficulties with it, information on upgrading the PPM encoder can be found on the Copter wiki.
 <table>
