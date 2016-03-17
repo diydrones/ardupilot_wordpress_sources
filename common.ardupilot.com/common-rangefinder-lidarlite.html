@@ -9,7 +9,7 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors.html" target="_blank">these distributors</a> and then technical info can be found <a href="http://lidarlite.com/docs/v2/" target="_blank">here</a>.
+The <a href="http://pulsedlight3d.com/" target="_blank">PulsedLight LIDAR-Lite</a> rangefinder is a low-cost optical distance measurement solution with a 40m range under most operating conditions, low power consumption, and small form factor.  This sensor can be purchased from <a href="http://pulsedlight3d.com/pages/distributors.html" target="_blank">these distributors</a> and then technical info can be found <a href="http://pulsedlight3d.com/products/lidar-lite-v2-blue-label.html" target="_blank">here</a>.
 <!-- more -->
 
 [note]This rangefinder is only supported on the Pixhawk and for the following vehicle platform versions (or later): Copter 3.3, Plane 3.3, and Rover 2.49. ArduPilot transparently supports both LIDAR-Lite v1 and v2.[/note]
@@ -50,7 +50,7 @@ There is no known workaround for this issue. Detailed traces of the issue have b
 <h1>Connecting to the Pixhawk via I2C</h1>
 [warning]If you have a LIDAR-Lite that has a manufacture date label prior to February 2015 there are I2C interface communications issues that will cause unreliable operation of the sensor with Pixhawk and <em>will cause your vehicle to crash</em>. When using these versions of LIDAR-Lite please use the PWM alternative listed below for best results.[/warning]
 
-The cable is configured with a 6-position Molex CLIK Mate connector on one end and tinned leads on the opposite end.  You will need to solder the tinned ends to a modified <a href="http://store.3drobotics.com/products/df13-4-position-connector-10-cm-1-2-3-4" target="_blank">DF13 4-pin I2C cable</a> as shown below.
+The cable is configured with a 6-position Molex CLIK Mate connector on one end and tinned leads on the opposite end.  You will need to solder the tinned ends to a modified <a href="http://store.jdrones.com/cable_df13_4pin_15cm_p/cbldf13p4c15.htm" target="_blank">DF13 4-pin I2C cable</a> as shown below.
 
 The power to the rangefinder should be supplied from a separate external BEC as shown in the diagram below.
 
@@ -127,7 +127,10 @@ The use of pin 54 for the PWM signal is required, and only FMU AUX5 (pin 54) can
 	<li>By default, on Copter if you have the LIDAR enabled, it will check LIDAR range on startup. To pass the check, lift the vehicle up at least 50cm.  Don't tip it over too much because the check is a bit sensitive, it needs to see a range of between 50cm ~ 2m but nothing longer than 2m.  If it sees a range longer than that, it'll never pass unless you reboot the board (nicer solution to this coming soon!).  The check can be disabled by setting ARMING_CHECK to Skip Param/Sonar.</li>
 </ol>
 <h2>Optional Power Saving</h2>
-When using the PWM driver you can optionally set <code>RNGFND_PWRRNG</code> to a terrain height in meters above which the Lidar will be disabled to save power. When the terrain data indicates that the vehicle is above that height the <code>RNGFND_STOP_PIN</code> will be used to disable the Lidar. This saves around 100mA of current. Your GCS must <a href="common-terrain-following/">provide terrain data</a> for this to work.
+When using the PWM driver you can optionally set <code>RNGFND_PWRRNG</code> to a terrain height in meters above which the Lidar will be disabled to save power. When the terrain data indicates that the vehicle is above that height the <code>RNGFND_STOP_PIN</code> will be used to disable the Lidar. This saves around 100mA of current.
+[site wiki="plane,copter"]Your GCS must <a href="common-terrain-following">provide terrain data</a> for this to work.[/site]
+
+
 <h1>Setup in Mission Planner</h1>
 To configure Copter, Plane or Rover to use the LIDAR-Lite, please first connect with the Mission Planner and then open the <strong>Config/Tuning | Full Parameter List</strong> page and set: <code>RNGFND_TYPE</code> to “3" if using an APM2, or "4" if using a PX4 or Pixhawk.
 

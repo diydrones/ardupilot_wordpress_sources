@@ -25,7 +25,7 @@ The IR-LOCK sensor can be connected directly to Pixhawk via an <a href="http://i
 
 [caption id="attachment_15319" align="alignnone" width="1788"]<a href="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png"><img class="size-full wp-image-15319" src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2015/08/PrecLand_IRLockToPixhawk.png" alt="IRLock sensor/Pixhawk Wiring" width="1788" height="986" /></a> IRLock sensor/Pixhawk Wiring[/caption]
 <h1>Building the firmware</h1>
-Since precision landing is not yet a default feature, you must use a <a href="https://irlock.readme.io/docs/download-links" target="_blank">pre-compiled firmware</a> provided by IR-LOCK, or the <a href="http://dev.ardupilot.com/wiki/building-the-code/" target="_blank">firmware must be re-built</a> with the precision landing feature enabled. If you are re-building, make sure that <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/APM_Config.h#L41" target="_blank">this line</a> in APM_Config.h is uncommented to look like below.
+Since precision landing is not yet a default feature, you must use a <a href="https://irlock.readme.io/docs/ac33-precision-landing-firmware" target="_blank">pre-compiled firmware</a> provided by IR-LOCK, or the <a href="http://dev.ardupilot.com/wiki/building-the-code/" target="_blank">firmware must be re-built</a> with the precision landing feature enabled. If you are re-building, make sure that <a href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/APM_Config.h#L41" target="_blank">this line</a> in APM_Config.h is uncommented to look like below.
 <code>#define PRECISION_LANDING ENABLED</code>
 
 <h1>Mounting to the frame</h1>

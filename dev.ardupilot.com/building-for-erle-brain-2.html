@@ -10,7 +10,7 @@ post_parent_title:
 END METADATA 
 -->
 These instructions explain how to build ArduPilot on board the Erle-Brain 2.<!--more-->
-[note]Alternatively you can follow <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Software/APM/Setup.html" target="_blank">Erle-Robotics's instructions</a> on how to build from source on your PC.[/note]
+[note]Alternatively you can follow <a href="http://erlerobotics.com/docs/" target="_blank">Erle-Robotics's instructions</a> on how to build from source on your PC.[/note]
 
 <h2>Connection and setup</h2>
 Give Erle-Brain Internet access by plugging the Ethernet wire into the RJ-45 connector.
@@ -18,7 +18,7 @@ Give Erle-Brain Internet access by plugging the Ethernet wire into the RJ-45 con
 Connect to Erle-Brain 2:
 <pre><code class=" hljs perl">$ ssh erle<span class="hljs-variable">@erle</span>-brain-<span class="hljs-number">2</span>.<span class="hljs-keyword">local
 </span></code></pre>
-[tip] More info about connection methods in manufacturers <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Getting_started/Connecting_to_Erle-Brain_2/Ethernet_ZeroConf.html" target="_blank">documentation</a>[/tip]
+[tip]Other connection methods are discussed in the manufacturers <a href="http://erlerobotics.com/docs/" target="_blank">documentation</a>[/tip]
 
 Clone the source:
 <pre>#Move to home
@@ -44,7 +44,7 @@ sudo cp ArduCopter.elf ~/</pre>
 
 [tip]The service mentioned above, launches <strong>ArduCopter</strong> by default, using a bridge for sending telemetry data and GPS placed in <strong>ttyAMA0</strong> by default
 &nbsp;
-You can find additional information about the default launch process and launch configuration options at <a href="http://erlerobotics.com/docs/Artificial_Brains/Erle-Brain_2/Software/APM/Setup.html" target="_blank">this link</a>[/tip]
+You can find additional information about the default launch process and launch configuration options in the <a href="http://erlerobotics.com/docs/" target="_blank">documentation</a>.[/tip]
 
 [tip]If you are unable to copy the executable it may be because the destination file is locked. This is because the autopilot is already running.  Use the following command to stop the running service:
 <pre><code class=" hljs ">systemctl stop apm.service</code></pre>

@@ -18,14 +18,14 @@ If you're having trouble with magnetic noise affecting your compass onboard the 
 <h1>Step-by-step instructions</h1>
 
 <ol>
-	<li>Purchase a <a href="https://store.3drobotics.com/products/hmc5883l-triple-axis-magnetometer">HMC5883L magnetometer breakout board</a>. Make sure the 3DR board is set to use 3.3volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts).  You will have to modify the 3DR board because it is shipped from 3DR with the 5 volt jumper set, as shown below.
+	<li>Purchase a <a href="http://store.jdrones.com/APM2_6_Compass_HMC5883_p/jdmagnet001.htm">HMC5883L magnetometer breakout board</a>. Make sure the 3DR board is set to use 3.3volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts).  You will have to modify the 3DR board because it is shipped from 3DR with the 5 volt jumper set, as shown below.
 <img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/Mag_HMC5843_jumper1.jpg" />
 </li>
 
 	<li>Looking at the below picture, cut the jumper trace in the middle of the APM 2.5 board.  This disables the SDA line to the board’s internal compass, rendering it inert.
 <img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/APMCompassModification1.jpg" /></li>
 
-	<li>The APM 2.5 I2C connector needs a 4 pin DF13 connector (like <a href="https://store.3drobotics.com/products/df13-4-position-connector-10-cm">this one</a>). Cut off one and and strip and tin the four wires.</li>
+	<li>The APM 2.5 I2C connector needs a 4 pin DF13 connector (like <a href="http://store.jdrones.com/cable_df13_4pin_15cm_p/cbldf13p4c15.htm">this one</a>). Cut off one and and strip and tin the four wires.</li>
 
 	<li>Connect the DF13’s 4 wires to the compass breakout board. Note that the wires will not be one to one.  Pin 1 on the DF13 connector will not go to pin 1 of the compass board.  The standard 3DR cable has one red wire and three black wires.  Substitute your wire colors accordingly.  Solder the wires as follows:  
 <ul>

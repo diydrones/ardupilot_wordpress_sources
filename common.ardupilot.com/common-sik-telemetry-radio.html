@@ -1,0 +1,125 @@
+<!-- 
+START METADATA - Only title should be translated 
+slug: common-sik-telemetry-radio 
+title: common-SiK Telemetry Radio 
+id: 2453 
+menu_order: 10 
+post_parent_id: 0 
+post_parent_stub:  
+post_parent_title:  
+END METADATA 
+-->
+A <em>SiK Telemetry Radio</em> is one of the easiest ways to setup a telemetry connection between your APM/Pixhawk and a ground station. This article provides a basic user guide for how to connect and configure your radio.
+<!--more-->
+
+[caption id="attachment_4013" align="alignnone" width="420"]<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/3DR_Radio_Version2.jpg"><img class="size-full wp-image-4013" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/3DR_Radio_Version2.jpg" alt="3DR Radio v2" width="420" height="264" /></a> 3DR Radio v2 (a consumer implementation of SiK Radio)[/caption]
+
+[note]This page was previously named <em>3DR Radio (version 2)</em> for 3DRobotics' trusted high quality implementation of SiK radio. As this radio is no longer available from 3DR, the page has been renamed to reflect the underlying open source radio platform.[/note]
+<h1>Overview</h1>
+A <a href="https://github.com/Dronecode/SiK">SiK Telemetry Radio</a> is a small, light and inexpensive open source radio platform that typically allows ranges of better than 300m "out of the box" (the range can be extended to several kilometres with the use of a patch antenna on the ground). The radio uses <a href="https://github.com/tridge/SiK" target="_blank">open source firmware</a> which has been specially designed to work well with MAVLink packets and to be integrated with the Mission Planner, Copter, Rover and Plane.
+
+The radios can be either 915Mhz or 433Mhz and you should purchase the model which is <a href="common-telemetry-radio-regional-regulations">appropriate for your country/region</a>.
+
+As the platform is open source, implementation can be purchased from many different sources, including:
+<ul>
+	<li><a href="http://store.jdrones.com/jD_SiK_Radio_Telemetry_radio_p/rfsik20set.htm">jD-SiK Telemetry Set</a> (jDrones)</li>
+	<li><a href="http://www.hobbyking.com/hobbyking/store/__55560__HKPilot_Transceiver_Telemetry_Radio_Set_V2_915Mhz_.html">HKPilot Transceiver Telemetry Radio Set V2 (915Mhz)</a> (Hobby King)</li>
+	<li><s>3DR Telemetry Radio (version 2) (3DRobotics)</s> - 3DR has stopped manufacturing this product.</li>
+</ul>
+[tip]If you're looking for an alternative, the <a href="common-rfd900">RFD900 Radio Modem</a> is highly recommended by many community members (The SiK platform was based on the RFD900 and both platforms have continued to evolve). It is available at a similar price point from quality manufacturers and supports a significantly better range. [/tip]
+<h1>Features</h1>
+The main features of the SiK Radio are listed below (see the <a title="common-3DR Radio — Advanced Configuration" href="common-3dr-radio-advanced-configuration-and-technical-information">Advanced Configuration</a> for more information):
+<ul>
+	<li>Very small size</li>
+	<li>Light weight (under 4 grams without antenna)</li>
+	<li>Available in 900MHz or 433MHz (v2 only) variants</li>
+	<li>Receiver sensitivity to -121 dBm</li>
+	<li>Transmit power up to 20dBm (100mW)</li>
+	<li>Transparent serial link</li>
+	<li>Air data rates up to 250kbps</li>
+	<li>MAVLink protocol framing and status reporting</li>
+	<li>Frequency hopping spread spectrum (FHSS)</li>
+	<li>Adaptive time division multiplexing (TDM)</li>
+	<li>Support for LBT and AFA</li>
+	<li>Configurable duty cycle</li>
+	<li>Built-in error correcting code (can correct up to 25% data bit errors)</li>
+	<li>Demonstrated range of several kilometres with a small omni antenna</li>
+	<li>Can be used with a bi-directional amplifier for even more range</li>
+	<li>Open source firmware</li>
+	<li>AT commands for radio configuration</li>
+	<li>RT commands for remote radio configuration</li>
+	<li>Adaptive flow control when used with APM</li>
+	<li>Based on HM-TRP radio modules, with Si1000 8051 micro-controller and Si4432 radio module</li>
+</ul>
+<h1>Status LEDs</h1>
+The radios have 2 status LEDs, one red and one green. The meaning of the different LED states is:
+<ul>
+	<li>Green LED blinking - searching for another radio</li>
+	<li>Green LED solid - link is established with another radio</li>
+	<li>Red LED flashing - transmitting data</li>
+	<li>Red LED solid - in firmware update mode</li>
+</ul>
+<h1>Connecting the radios</h1>
+The radio has interchangeable air and ground modules, meaning that you use them as a pair but it does not matter which one goes on the vehicle and which remains on the ground.
+
+The radio has a micro-USB port, and a DF13 six-position port. The following sections explain how to connect these to flight controllers and ground stations.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2.jpg"><img class="alignnone wp-image-1450" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3DR-Radio-V2-300x155.jpg" alt="3DR Radio V2" width="300" height="155" /></a> <a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout.jpg"><img class="alignnone wp-image-1453" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2013/06/3dr-radio-pinout-1024x382.jpg" alt="3dr radio pinout" width="584" height="217" /></a>
+<h2>Connecting to Pixhawk</h2>
+Use the <a href="http://www.unmannedtechshop.co.uk/df13-6-position-to-5-position-connector-15-cm/" target="_blank">6 pin DF13 connector</a> that should have come with the radio to connect the radio to your Pixhawk's "Telem 1" ("Telem 2" or "Serial 4/5" can also be used but the default recommendation is "Telem1").
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Pixhawk.png"><img class="alignnone size-medium wp-image-2478" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Pixhawk-300x252.png" alt="Telemetry_3DR_Radio_Pixhawk" width="300" height="252" /></a>
+<h2>Connecting to APM2.x</h2>
+Use the <a href="http://www.unmannedtechshop.co.uk/df13-6-position-to-5-position-connector-15-cm/" target="_blank">6-to-5 pin DF13</a> connector to connect the radio to your APM2's Telem port. Because of the limited number of serial ports on the APM2.x, the telemetry radio cannot be used while the board is also plugged in with the micro USB port.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2.png"><img class="alignnone size-medium wp-image-2484" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_APM2-300x181.png" alt="Telemetry_3DR_Radio_APM2" width="300" height="181" /></a>
+<h2>Connecting to a PC</h2>
+Connecting the radio to your Windows PC is as simple as connecting the micro USB cable (which should have been included with the radio) to your PC. The necessary drivers should be installed automatically and the radio will appear as a new "USB Serial Port" in the Windows Device Manager under Ports (COM &amp; LPT). The Mission Planner's COM Port selection drop-down should also contain the same new COM port.
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP.png"><img class="alignnone size-medium wp-image-2476" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3drRadio_DeviceManagerAndMP-300x123.png" alt="Telemetry_3drRadio_DeviceManagerAndMP" width="300" height="123" /></a>
+
+To connect the radios:
+<ul>
+	<li>Select the new COM port, set the baud rate drop down (which appears between the COM port and Connect buttons) to 57600.</li>
+	<li>Press the <strong>Connect</strong> button and if the two radios connect successfully you should be able to lean your vehicle left and right and see it's attitude update on the MP's Flight Data screen's artificial horizon.</li>
+</ul>
+<h2>Connecting to an Android tablet</h2>
+Connecting the radio to an Android tablet using the L shaped micro USB cable (which should have been included with the radio). Then follow the directions in your <a title="common-Choosing a Ground Station" href="common-choosing-a-ground-station">preferred Ground Station app</a>.
+
+<a href="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Tablet.png"><img class="alignnone size-medium wp-image-2487" src="http://planner.ardupilot.com/wp-content/uploads/sites/5/2014/08/Telemetry_3DR_Radio_Tablet-300x181.png" alt="Telemetry_3DR_Radio_Tablet" width="300" height="181" /></a>
+
+<h1>Configuring using the Mission Planner</h1>
+
+Many users will not need to configure their radios! One case where you might do so is when you use your vehicle with others — in which case you will need to specify different radio channels (Net ID).
+
+<m>Mission Planner</em> supports configuring your radios using a simple GUI interface. For more information see <a href="common-configuring-a-telemetry-radio-using-mission-planner">Configuring a Telemetry Radio using Mission Planner</a>.
+
+
+
+<h1>Expected range</h1>
+Typical range achieved with the radios using standard configuration and antenna is around 500m, but the range varies a lot depending on noise sources and antenna setup.
+<h2>Diagnosing range issues</h2>
+The first thing you should do when diagnosing range issues is the "one meter test". Setup the two radios one meter apart and look at the local and remote RSSI. You should get a value of over 190 for a standard SiK radio. If you don't then your antennas may be faulty or your radios may have been damaged. If you have ever run the radios without an antenna attached them the radio may have been damaged.
+
+If that test passes then have a look at your local and remote RSSI and noise from a flight. See the <a href="common-3dr-radio-advanced-configuration-and-technical-information/#diagnosing_range_problems">advanced setup page</a> for detailed information on diagnosing range issues using telemetry logs.
+
+
+<h1>Improving the range</h1>
+The range can be improved by:
+<ul>
+	<li>Using a small "patch antenna" on the ground like <a href="http://www.readymaderc.com/store/index.php?main_page=product_info&amp;cPath=11_45_47&amp;products_id=51" target="_blank">this flat patch antenna</a> or this <a href="http://www.readymaderc.com/store/index.php?main_page=product_info&amp;cPath=11_45_47&amp;products_id=296" target="_blank">Yagi antenna</a> perhaps mounted on an <a href="http://antennatracker.ardupilot.com/">Antenna Tracker</a></li>
+	<li>Replace at least one of the two radios with a higher powered <a href="common-rfd900">RFD900</a></li>
+	<li>Reduce the <code>AirRate</code> parameter which will increase range but at the expense of the rate of the data transfer.</li>
+</ul>
+The graph below shows the ground and remote receiver strength vs distance from home (in meters) for a test flight of a <em>3DR Radio</em> (SiK implementation) on a SkyFun plane. The ground based radio was attached to a 3.5dB flat patch antenna. The SkyFun had a small 'wire' antenna. The graph shows the vehicle reached a distance of nearly 3km and the link was completely maintained throughout the flight.
+
+<img src="http://copter.ardupilot.com/wp-content/uploads/sites/2/2012/12/3DR-915-txpower2-64kbps-ECC.png" alt="" />
+
+Although anecdotal, another user provided a Tlog showing a good link kept while the vehicle was 4.5km from the base station, using default radio settings for a 3DR 900 radio. The plane used a small omni antenna, and a 8dB patch antenna on the ground station.
+
+
+<h1>Support for different countries/regions</h1>
+It is very important that you configure your radios to comply with your regional/country regulations for frequency, hopping channels and power levels. For information on radio -> region frequency ranges and settings, see 
+<a href="common-telemetry-radio-regional-regulations">Telemetry Radio Regional Regulations</a>.
+
+<h1>3DR Radio Discussion Forum</h1>
+The best place to get involved with the development or tuning of these radios is the <a href="http://ardupilot.com/forum/viewforum.php?f=22" target="_blank">SiK Radios forum</a>. Join in on the forum to help make these radios even better!
