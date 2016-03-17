@@ -58,7 +58,7 @@ Follow this link to the <a href="http://zenoshrdlu.com/stick/stick.html" target=
 
 CHDK allows you to automate your camera's functionality by running scripts off an SD card. CHDK scripts can be written in both <a href="http://en.wikipedia.org/wiki/UBASIC" target="_blank">UBASIC </a>and <a href="http://en.wikipedia.org/wiki/Lua_(programming_language)" target="_blank">Lua</a>: simple, easy-to-use programming languages. For this tutorial, we'll use UBASIC scripts with file extension <strong>.bas</strong>. <em>UBASIC script files must carry the extension <strong>.bas</strong> to function.</em>
 
-One of the easiest and most useful ways to apply CHDK to your mission is to take pictures automatically at intervals during flight. We'll do this by adding an <a href="http://en.wikipedia.org/wiki/Intervalometer" target="_blank">intervalometer</a> script to the SD card. Our friends at <a href="http://dronemapper.com/" target="_blank">Drone Mapper</a> have created a great CHDK intervalometer script that can be found in Drone Mapper's <a href="https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf" target="_blank">CHDK documentation</a> or <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/DM-Intervalometer.txt" target="_blank">viewed by clicking here</a>. Copy the intervalometer script into a text editor and save the file as <strong>DM_interval.bas</strong>.
+One of the easiest and most useful ways to apply CHDK to your mission is to take pictures automatically at intervals during flight. We'll do this by adding an <a href="http://en.wikipedia.org/wiki/Intervalometer" target="_blank">intervalometer</a> script to the SD card. Our friends at <a href="http://dronemapper.com/" target="_blank">Drone Mapper</a> have created a great CHDK intervalometer script that can be found in Drone Mapper's <a href="https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf" target="_blank">CHDK documentation</a> or <a href="http://firmware.ardupilot.org/downloads/wiki/other_files/DM-Intervalometer.txt" target="_blank">viewed by clicking here</a>. Copy the intervalometer script into a text editor and save the file as <strong>DM_interval.bas</strong>.
 
 This script will measure time intervals for five minutes and trigger the camera shutter every two seconds. These default parameters work well for us (results in about 150 pictures), but if you would like to modify them (for example, to take a pictures every five seconds), see <a href="http://chdk.wikia.com/wiki/CHDK_scripting" target="_blank">CHDK Wiki's page</a> regarding scripting parameters for UBASIC.
 
@@ -211,7 +211,7 @@ When channel 7 is set to the mid position, CHDK will set zoom to 30 (stowed posi
 
 When channel 7 is set to the down position, CHDK will set zoom to 100 (extended position).
 
-<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank">Click here to view the above script</a>, copy into a text editor, and save as <strong>3DR_Shoot.bas</strong>. Now that you're familiar with how the script works, you can easily change the commands of each function. For example, you can add a <strong>shoot</strong> command to <strong>ch1down</strong> or change one of the zoom level parameters. If you're utilizing the channel two functions, you can easily add commands to those functions in the same format shown above.
+<a href="http://firmware.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt" target="_blank">Click here to view the above script</a>, copy into a text editor, and save as <strong>3DR_Shoot.bas</strong>. Now that you're familiar with how the script works, you can easily change the commands of each function. For example, you can add a <strong>shoot</strong> command to <strong>ch1down</strong> or change one of the zoom level parameters. If you're utilizing the channel two functions, you can easily add commands to those functions in the same format shown above.
 
 Add the script file to the SD card as described in the previous section.
 
@@ -248,7 +248,7 @@ Ensure that your camera and APM are connected correctly. Run <strong>3DR_Shoot.
 
 <h1>Creating a composite image</h1>
 
-One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank">3DR_Shoot.bas</a>script that we used in the previous section.The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area, we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s <strong>Grid V2</strong> automatic waypoint function.
+One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same <a href="http://firmware.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt" target="_blank">3DR_Shoot.bas</a>script that we used in the previous section.The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area, we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s <strong>Grid V2</strong> automatic waypoint function.
 
 
 
@@ -262,7 +262,7 @@ Input a relative altitude (100 feet is fine if you are unsure). Input a distance
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png"><img class="alignnone size-full wp-image-2383" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/gridV2.png" alt="Screenshot of Mission Planner showing a grid of waypoints produced with the GridV2 function" width="1600" height="852" /></a>
 
-Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type <strong>DO_SET_SERVO</strong>. For each DO_DIGICAM_CONTROL command, change command type to <strong>DO_SET_SERVO</strong>, set <strong>Ser No</strong> to <strong>7</strong> (or whichever channel you're using), and set <strong>PWM</strong> to <strong>1,100</strong> (to call the <a style="font-style: normal;line-height: 21px;text-decoration: underline" href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DR_Shoot.txt" target="_blank"><strong>3DR_Shoot.bas</strong></a> function that takes a picture).
+Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type <strong>DO_SET_SERVO</strong>. For each DO_DIGICAM_CONTROL command, change command type to <strong>DO_SET_SERVO</strong>, set <strong>Ser No</strong> to <strong>7</strong> (or whichever channel you're using), and set <strong>PWM</strong> to <strong>1,100</strong> (to call the <a ref="http://firmware.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt" target="_blank">3DR_Shoot.bas</a> function that takes a picture).
 
 When run, this mission returns a set of images that can be stitched together to create a map of the selected polygon.
 
@@ -422,7 +422,7 @@ CHDK cables work by translating pulse width modulation (PWM) output by the APM i
 </tr>
 </tbody>
 </table>
-To verify that your transmitter behaves similarly, you may want to perform a test to ensure that a valid USB power value is returned for each switch position. View the<a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/05/3DRCHDKTester.txt" target="_blank"> 3DR CHDK Tester script here</a>. Copy the contents into a text editor and save as <strong>3DRCHDKTester.bas</strong>. Load into your (unlocked) SD card by copying the file into the <strong>Scripts</strong> folder (in the <strong>CHDK</strong> folder).
+To verify that your transmitter behaves similarly, you may want to perform a test to ensure that a valid USB power value is returned for each switch position. View the <a href="http://firmware.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt" target="_blank">3DR CHDK Tester script here</a>. Copy the contents into a text editor and save as <strong>3DRCHDKTester.bas</strong>. Load into your (unlocked) SD card by copying the file into the <strong>Scripts</strong> folder (in the <strong>CHDK</strong> folder).
 
 
 <h3>Configuring CHDK cable for Testing</h3>

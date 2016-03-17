@@ -29,6 +29,14 @@ DO NOT EDIT
 <h1>APMrover2 Parameters</h1>
 
 
+<h2>Software Type (APMrover2:SYSID_SW_TYPE)</h2><em>Note: This parameter is for advanced users</em><br>
+
+<p>This is used by the ground station to recognise the software type (eg ArduPlane vs ArduCopter)</p>
+<ul>
+<li>ReadOnly: True</li>
+</ul>
+
+
 <h2>Log bitmask (APMrover2:LOG_BITMASK)</h2><em>Note: This parameter is for advanced users</em><br>
 
 <p>Two byte bitmap of log types to enable in dataflash</p>
@@ -2381,8 +2389,10 @@ DO NOT EDIT
 
 <p>calibrated ground pressure in Pascals</p>
 <ul>
-<li>Units: pascals</li>
+<li>ReadOnly: True</li>
+<li>Volatile: True</li>
 <li>Increment: 1</li>
+<li>Units: pascals</li>
 </ul>
 
 
@@ -2390,8 +2400,10 @@ DO NOT EDIT
 
 <p>calibrated ground temperature in degrees Celsius</p>
 <ul>
-<li>Units: degrees celsius</li>
+<li>ReadOnly: True</li>
+<li>Volatile: True</li>
 <li>Increment: 1</li>
+<li>Units: degrees celsius</li>
 </ul>
 
 
@@ -4927,6 +4939,24 @@ DO NOT EDIT
 <ul>
 <li>Range: 0.25 3.0</li>
 <li>Units: m/s/s</li>
+</ul>
+
+
+<h2>Minimum arming voltage on the first battery (ARMING_MIN_VOLT)</h2>
+
+<p>The minimum voltage on the first battery to arm, 0 disabes the check</p>
+<ul>
+<li>Increment: 0.1 </li>
+<li>Units: Volts</li>
+</ul>
+
+
+<h2>Minimum arming voltage on the second battery (ARMING_MIN_VOLT2)</h2>
+
+<p>The minimum voltage on the first battery to arm, 0 disabes the check</p>
+<ul>
+<li>Increment: 0.1 </li>
+<li>Units: Volts</li>
 </ul>
 
 
