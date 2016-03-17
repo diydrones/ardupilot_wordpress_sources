@@ -13,9 +13,9 @@ Analyzing flight logs can help you diagnose problems with your missions. This ca
 
 DIY Drones member Vishnu posted these logs of his X8 plane using APM code 2.73. He described an issue with auto take off where his throttle was maintaining 100% despite being set to 75%.
 <ul>
-	<li>5/26/2013 tlog file (803 KB) - Download from original blog post <a href="http://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198" target="_blank"><strong>here</strong></a>.</li>
-	<li><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/x8throttleslewrate100.param" target="_blank">x8 throttle slew rate 100 param file</a></li>
-	<li><a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/Jakkur-Auto-take-off-and-land.txt" target="_blank">Jakkur Auto take off and land text file</a></li>
+	<li>5/26/2013 tlog file (803 KB) - Downloaded from original blog post <a href="http://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198" target="_blank"><strong>here</strong></a>.</li>
+	<li><a href="http://firmware.ardupilot.org/downloads/wiki/other_files/x8throttleslewrate100.param" target="_blank">x8 throttle slew rate 100 param file</a></li>
+	<li><a href="http://firmware.ardupilot.org/downloads/wiki/other_files/Jakkur-Auto-take-off-and-land.txt" target="_blank">Jakkur Auto take off and land text file</a></li>
 </ul>
 By analyzing this data using <strong><a href="http://qgroundcontrol.org/mavlink/mavproxy_startpage#mavgraphpy" target="_blank">Mavgraph</a></strong>, Tridge was able to provide the following insight.
 
@@ -38,10 +38,12 @@ In the takeoff nav_roll is small, as its flight is straight ahead. It then goes 
 
 The reason for this is the RLL2SRV_* parameters you have chosen:
 
+<pre>
 RLL2SRV_D       0.000000
 RLL2SRV_I       0.000000
 RLL2SRV_IMAX    500.000000
 RLL2SRV_P       0.400000
+</pre>
 
 You have specified zero I term and a quite small P term for an aircraft like the X8. Let's have a look at the servo values that APM ended up using with those settings:
 
@@ -69,5 +71,3 @@ Your airspeed also doesn't look well calibrated:
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/airspeed.png"><img class="size-full wp-image-3162" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/06/airspeed.png" alt="airspeed" width="1212" height="612" /></a>
 
 Have you checked your sensor for leaks? It is aligned correctly and clear of the airframe? The airspeed and ground speed should match on average when you loiter. You may need to adjust ARSPD_RATIO to be a bit larger.
-
-Cheers, Tridge"

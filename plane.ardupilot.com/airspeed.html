@@ -11,7 +11,7 @@ END METADATA
 -->
 Plane supports the use of an airspeed sensor, which can help in windy condition, slow flight and autonomous landings. It is not recommended for most new users, however, as it does require additional tuning and adds one more layer of control to set up.
 <!-- more -->
-The following sections explain how to wire sensors to the flight controller. After you install an airspeed sensor don't forget to <a href="http://plane.ardupilot.com/wiki/calibrating-an-airspeed-sensor/">calibrate it</a>!
+The following sections explain how to wire sensors to the flight controller. After you install an airspeed sensor don't forget to <a href="calibrating-an-airspeed-sensor">calibrate it</a>!
 
 <img src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/BR-0004-03-2T1.jpg" alt="" /> <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png"><img class="wp-image-5953" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png" alt="full assembly" width="100" height="222" /></a>
 
@@ -22,7 +22,7 @@ A digital airspeed sensor is available for Pixhawk from <a href="https://store.3
 
 <a href="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png"><img class="wp-image-5953" src="http://plane.ardupilot.com/wp-content/uploads/sites/3/2013/02/full-assembly.png" alt="full assembly" width="100" height="222" /></a>
 
-To enable the digital airspeed sensor, connect Pixhawk to Mission Planner (or APM Planner for OS X), and select the <strong>Advanced Parameter List</strong> under the Configuration tab. Locate the <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#airspeed_pin_arspd_pin">ARSPD_PIN</a> parameter and set to <strong>65</strong>. Select <strong>Write Params</strong> to apply. Ensure that you have also enabled the airspeed sensor in the setup section (<strong>Mission Planner | Hardware | Optional Hardware | Airspeed</strong>) as discussed below.
+To enable the digital airspeed sensor, connect Pixhawk to Mission Planner (or APM Planner for OS X), and select the <strong>Advanced Parameter List</strong> under the Configuration tab. Locate the <a href="arduplane-parameters/#airspeed_pin_arspd_pin">ARSPD_PIN</a> parameter and set to <strong>65</strong>. Select <strong>Write Params</strong> to apply. Ensure that you have also enabled the airspeed sensor in the setup section (<strong>Mission Planner | Hardware | Optional Hardware | Airspeed</strong>) as discussed below.
 
 
 <h1>Analog Airspeed sensor</h1>
@@ -130,5 +130,5 @@ The airspeed reading scale factor is adjusted using the ARSPD_RATIO parameter. P
 	<li>Set to 65 on the PX4 for an EagleTree I2C airspeed sensor. After you have selected the pin, select the "Update Parameters" tab and close <em>Mission Planner</em>.</li>
 </ul>
 </li>
-	<li><strong>Additional information on setting the Airspeed sensor pin can be found <a href="http://plane.ardupilot.com/wiki/arduplane-parameters/#Airspeed_pin_ARSPD_PIN">(Here!)</a></strong></li>
+	<li>Additional information on setting the Airspeed sensor pin can be <a href="arduplane-parameters/#Airspeed_pin_ARSPD_PIN">found here</a></li>
 </ul>

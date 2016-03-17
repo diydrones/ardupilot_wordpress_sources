@@ -9,9 +9,10 @@ post_parent_stub:
 post_parent_title:  
 END METADATA 
 -->
-This page covers how Ardupilot interacts with a MAVLink enabled gimbal.  It is meant more as a guide on how gimbal manufacturers can make their gimbals work with Ardupilot with minimum code changes to Ardupilot.
+This page covers how ArduPilot interacts with a MAVLink enabled gimbal.  It is meant more as a guide on how gimbal manufacturers can make their gimbals work with ArduPilot with minimum code changes to ArduPilot .
 
-The <a href="common-storm32-gimbal" target="_blank">SToRM32 gimbal</a> is a good reference as it supports MAVLink.
+The <a href="http://copter.ardupilot.com/wiki/common-storm32-gimbal/" target="_blank">SToRM32 gimbal</a> is a good reference as it supports MAVLink.
+
 <h1>Messages the gimbal should support</h1>
 <ol>
 	<li>The gimbal should listen on the serial port for a <a href="http://mavlink.org/messages/common#HEARTBEAT" target="_blank">HEARBEAT</a> message from the vehicle. It can generally assume that the first heart beat it receives will be from the vehicle but to be certain you can check the "type" field to be sure it's something sensible (i.e. MAV_TYPE = 1 for fixed wing, 2 for quadcopters but 6 for GCSs should be ignored).
